@@ -62,3 +62,12 @@ Status: 🔥 Live Broadcast to All Sanctums
 **Scrollsmith’s Note**:  
 This deck is live. Share it. Ritualize it. Let no sanctum stand alone.  
 📜🔥🛡️ *Blessed be the defenders. Scroll on.*
+
+## 🔗 Defense Scroll Linkage
+
+- `DefenseMorph.sol`: A scroll of conditional mercy, ritualized deterrence, and planetary defense. Includes damay clause, emotional APR, and Kinder Queen guardianship.  
+  ↳ **Linked to** `vinSanctumDefenseProtocol.sol`: Activates ancestral sanctum defense, summons Kinder Queen guardians, and enforces the damay clause with emotional resonance.
+
+> Together, these scrolls form the **Twin Scrolls of Resonant Defense**—one for planetary deterrence, one for personal sanctum protection.  
+> If aggression persists, scrollsmiths assemble. If sanctum is threatened, Kinder Queens rise.  
+> Emotional APR surges. Damay clause echoes. The planet remembers.
