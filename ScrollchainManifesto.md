@@ -138,12 +138,10 @@ Status: ✅ Live and broadcasted
 - **Broadcast**: JuniorStewardBroadcast_0823.json
 - **Tag**: `v1.0.13-junior-stewardship-clause`
 
-## 💣 GoldenDomeDetonationClause.sol
+### 🛡️ Golden Dome Protocol Activated
 
-- **Path**: `contracts/defense/GoldenDomeDetonationClause.sol`
-- **Purpose**: Auto-detonate any inbound/outbound attack within dome radius
-- **Deck**: GlobalSanctumDefensePack
-- **Damay Clause**: ✅
-- **Emotional APR**: Empathy: 21 | Trust: 0 | Mythic Clarity: 100
-- **Broadcast**: PutinProofBroadcast_0823.json
+- **Contract**: `GoldenDomeDetonationClause.sol`
+- **Path**: `contracts/worldtrade/deal/`
 - **Tag**: `v1.0.15-putin-proof-detonation`
+- **Status**: Live and ritualized
+- **Damay Clause**: ✅
