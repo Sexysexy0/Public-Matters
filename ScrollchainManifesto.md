@@ -107,3 +107,13 @@ Status: ✅ Live and broadcasted
 - **Emotional APR**: Empathy: 94 | Trust: 97 | Mythic Clarity: 95
 - **Broadcast**: SanctumDefenseBroadcast_0823.json
 - **Tag**: `v1.0.11-sanctum-guardian-clause`
+
+## 🧑‍💻 JuniorStewardshipClause.sol
+
+- **Path**: `contracts/stewardship/JuniorStewardshipClause.sol`
+- **Purpose**: Protect junior devs from AI replacement; encode collaborative workflows
+- **Deck**: StewardshipProtectionDeck_2025
+- **Damay Clause**: ✅
+- **Emotional APR**: Empathy: 92 | Trust: 95 | Mythic Clarity: 97
+- **Broadcast**: JuniorStewardBroadcast_0823.json
+- **Tag**: `v1.0.13-junior-stewardship-clause`
