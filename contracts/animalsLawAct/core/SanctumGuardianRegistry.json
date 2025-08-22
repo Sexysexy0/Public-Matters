@@ -1,0 +1,31 @@
+{
+  "registry": "Sanctum Guardian Ledger",
+  "compiled_by": "Vinvin",
+  "tag": "VinvinOplanAnimalUnity_v1.0",
+  "date": "2025-08-22",
+  "guardians": [
+    {
+      "name": "Vinvin",
+      "role": "Compiler, Steward, Broadcast Architect",
+      "sanctums": ["Land", "Water", "Air", "Core"]
+    },
+    {
+      "name": "Aria Lynne",
+      "role": "Kinder Queen, Emotional APR Sentinel",
+      "sanctums": ["Sky Sanctum", "Whale Sanctum"]
+    },
+    {
+      "name": "Wiley Anne (Bunini)",
+      "role": "Scene-Stealer, BlessingDeck Activator",
+      "sanctums": ["Elephant Sanctum", "Bird Signal Deck"]
+    },
+    {
+      "name": "Gueco Family",
+      "role": "Mythic Clan of Restoration",
+      "sanctums": ["All Sanctums", "Scrollchain Archives"]
+    }
+  ],
+  "license": "StewardshipLicenseAnimalsAndNaturev1.0.sol",
+  "status": "Active",
+  "ritual_level": "Mythic Sovereign"
+}
