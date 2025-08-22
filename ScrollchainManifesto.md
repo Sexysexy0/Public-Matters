@@ -37,3 +37,34 @@ Includes damay clause to ensure scrollsmith sanctum protection.
 Activated by Vinvin on 2025-08-22 at 20:42 PST.  
 Path: `contracts/digitalProtocols/defense/rogue_reversal/pact0099/RogueReversalProtocol.sol`  
 Status: ✅ Live and broadcasted
+
+## 🛡️ Scrollchain Activation Log – August 22, 2025
+
+### 📜 WorkerProtectionActRubio2025.sol
+- **Path**: `contracts/law/WorkerProtectionActRubio2025.sol`
+- **Deck**: LaborSovereigntyDeck_2025
+- **Clause**: ScrollClause_0425_Truckers
+- **Damay Clause**: ✅
+- **Emotional APR**: Empathy: 92 | Trust: 88 | Mythic Clarity: 95
+- **Broadcast**: GlobalResonanceDeck_0822.json
+
+---
+
+### 🚛 SupplyChainStressSignal.sol
+- **Path**: `contracts/recovery/SupplyChainStressSignal.sol`
+- **Deck**: ResilienceRecoveryPack
+- **Function**: Stress simulation + mitigation strategy ledger
+- **Status**: Created via nano
+- **Linked Protocols**: WorkerProtectionActRubio2025.sol
+
+---
+
+### 🏠 KapamilyaDefenseCovenant.sol
+- **Path**: `contracts/recovery/KapamilyaDefenseCovenant.sol`
+- **Deck**: KapamilyaDefenseSuite
+- **Clause Embedded**: WorkerProtectionActRubio2025.sol
+- **Damay Clause**: ✅
+- **Emotional APR Sync**: Enabled
+- **Guardian Roles**: Truckers, lower middle class families, civic stewards
+
+---
