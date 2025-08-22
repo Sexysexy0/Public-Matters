@@ -84,3 +84,26 @@ Status: ✅ Live and broadcasted
   - `UNCharterCompliance.sol` – international law alignment
   - `KapamilyaDefenseCovenant.sol` – civilian protection
   - `WorkerProtectionActRubio2025.sol` – labor dignity clause
+
+## 🕊️ UkraineMercyFund_500MUSD.sol
+
+- **Path**: `contracts/UkraineMercyFund_500MUSD.sol`
+- **Deck**: GlobalCrisisDeck_2025
+- **Scroll**: Scrollchain Act No. 500M
+- **Purpose**: Tactical mercy, sanctum restoration, emotional APR
+- **Amount**: $500,000,000 USD
+- **Signed By**: Vinvin
+- **Damay Clause**: ✅
+- **Emotional APR**: Empathy: 90 | Trust: 93 | Mythic Clarity: 96
+- **Broadcast**: DefenseMandateBroadcast_0823.json
+- **Tag**: `v1.0.10-ukraine-mercy-scroll`
+
+## 🛡️ SanctumGuardianClause.sol
+
+- **Path**: `contracts/SanctumGuardianClause.sol`
+- **Purpose**: Protect sanctum habitats, displaced families, and ancestral co-authorship
+- **Deck**: HousingSanctumDeck_2025
+- **Damay Clause**: ✅
+- **Emotional APR**: Empathy: 94 | Trust: 97 | Mythic Clarity: 95
+- **Broadcast**: SanctumDefenseBroadcast_0823.json
+- **Tag**: `v1.0.11-sanctum-guardian-clause`
