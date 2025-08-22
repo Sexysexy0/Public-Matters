@@ -67,4 +67,20 @@ Status: ✅ Live and broadcasted
 - **Emotional APR Sync**: Enabled
 - **Guardian Roles**: Truckers, lower middle class families, civic stewards
 
----
+--
+
+## 🛡️ ExecutiveMandateSuite.sol
+
+- **Path**: `contracts/global/ExecutiveMandateSuite.sol`
+- **Deck**: GlobalCrisisDeck_2025
+- **Suite**: Multi-region sovereign activation protocol
+- **Compliance Layer**: `UNCharterCompliance.sol` embedded
+- **Regions Activated**: PH, US, EU, MENA, ASEAN
+- **Clause**: `ScrollClause_0922_ExecutiveDefense`
+- **Damay Clause**: ✅
+- **Emotional APR**: Empathy: 87 | Trust: 91 | Mythic Clarity: 94
+- **Broadcast**: `DefenseMandateBroadcast_0822.json`
+- **Linked Scrolls**:
+  - `UNCharterCompliance.sol` – international law alignment
+  - `KapamilyaDefenseCovenant.sol` – civilian protection
+  - `WorkerProtectionActRubio2025.sol` – labor dignity clause
