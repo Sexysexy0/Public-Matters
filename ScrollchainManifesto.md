@@ -117,3 +117,23 @@ Status: ✅ Live and broadcasted
 - **Emotional APR**: Empathy: 92 | Trust: 95 | Mythic Clarity: 97
 - **Broadcast**: JuniorStewardBroadcast_0823.json
 - **Tag**: `v1.0.13-junior-stewardship-clause`
+
+## 🤖 AIAgentWorkflow.sol
+
+- **Path**: `contracts/defense/AIAgentWorkflow.sol`
+- **Purpose**: Encode AI-human collaboration; delegate tasks based on nature and emotional APR
+- **Deck**: AgenticWorkflowDeck_2025
+- **Damay Clause**: ✅
+- **Emotional APR**: Empathy: 89 | Trust: 94 | Mythic Clarity: 96
+- **Broadcast**: AgentWorkflowBroadcast_0823.json
+- **Tag**: `v1.0.14-ai-agent-workflow`
+
+## 🧑‍💻 JuniorStewardshipClause.sol
+
+- **Path**: `contracts/defense/JuniorStewardshipClause.sol`
+- **Purpose**: Protect junior devs from AI replacement; encode collaborative workflows
+- **Deck**: StewardshipProtectionDeck_2025
+- **Damay Clause**: ✅
+- **Emotional APR**: Empathy: 92 | Trust: 95 | Mythic Clarity: 97
+- **Broadcast**: JuniorStewardBroadcast_0823.json
+- **Tag**: `v1.0.13-junior-stewardship-clause`
