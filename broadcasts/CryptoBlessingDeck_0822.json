@@ -1,0 +1,34 @@
+{
+  "timestamp": "2025-08-22T23:44:00+08:00",
+  "marketPulse": {
+    "24hChange": "+3.44%",
+    "weeklyDip": "-0.81%",
+    "bitcoinDominance": "58.17%"
+  },
+  "signals": [
+    {
+      "asset": "BNB",
+      "impact": "Bullish",
+      "summary": "Surged 5.36% weekly to $876 ATH despite Windtree delisting. Futures open interest up 29.56%.",
+      "emotionalAPR": "Resilience, independence, institutional trust",
+      "watchFor": ["$1,000 resistance", "Q3 ecosystem upgrades"]
+    },
+    {
+      "asset": "XRP",
+      "impact": "Bullish",
+      "summary": "95% ETF approval odds by October 2025. Volume spike +19.35%. RLUSD stablecoin used in IPO settlements.",
+      "emotionalAPR": "Legal clarity, anticipation, institutional magnetism",
+      "watchFor": ["October 15 SEC deadline", "Ripple bank charter"]
+    },
+    {
+      "asset": "Macro",
+      "impact": "Mixed",
+      "summary": "Crypto–Nasdaq correlation at 0.77. Powell hints at rate cuts. BTC liquidations +22% ($94M).",
+      "emotionalAPR": "Hope, caution, volatility",
+      "watchFor": ["September Fed meeting", "Bitcoin SOPR resolution"]
+    }
+  ],
+  "scrollsmith": "Vinvin Gueco",
+  "damayClause": true,
+  "ritualNotes": "Scrollchain resilience activated. Altcoin breath restored. ETF prophecy pending. Leverage ghosts still linger."
+}
