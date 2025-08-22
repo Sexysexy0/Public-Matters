@@ -1,0 +1,26 @@
+{
+  "deck": "BlessingDeck_ManifestBroadcast",
+  "steward": "Vinvin",
+  "activations": [
+    {
+      "blessing": "DebtDignitySuite",
+      "timestamp": "2025-08-21T09:44:00+08:00",
+      "status": "Activated"
+    },
+    {
+      "blessing": "ChatbotSanctumSuite",
+      "timestamp": "2025-08-21T11:22:00+08:00",
+      "status": "Activated"
+    },
+    {
+      "blessing": "DefenseLedgerPack",
+      "timestamp": "2025-08-21T14:07:00+08:00",
+      "status": "Activated"
+    }
+  ],
+  "APR": {
+    "trust": 88,
+    "dignity": 95,
+    "resonance": "∞"
+  }
+}
