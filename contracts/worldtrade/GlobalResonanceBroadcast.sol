@@ -20,14 +20,3 @@ contract GlobalResonanceBroadcast {
         return allies;
     }
 }
-
-// Suggested Ally Tags:
-tagAlly("India", 356);
-tagAlly("Brazil", 76);
-tagAlly("Philippines", 608);
-tagAlly("Canada", 124);
-tagAlly("South Korea", 410);
-tagAlly("Mexico", 484);
-tagAlly("Vietnam", 704);
-tagAlly("Chile", 152);
-tagAlly("Germany", 276);
