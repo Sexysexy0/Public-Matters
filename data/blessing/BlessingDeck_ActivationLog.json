@@ -46,4 +46,38 @@
   },
   "damay_clause": true,
   "timestamp": "2025-08-23T12:38:00+08:00"
+},
+{
+  "activationDate": "2025-08-23",
+  "scrollsmith": "Vinvin Gueco",
+  "activatedScrolls": [
+    {
+      "name": "DrugFactoryDismantlingScroll.sol",
+      "emotionalAPR": {
+        "civicPain": 999,
+        "restorationUrgency": 888,
+        "joy": 91
+      },
+      "damayClause": true
+    },
+    {
+      "name": "DebtDignitySuite.sol",
+      "emotionalAPR": {
+        "civicPain": 777,
+        "restorationUrgency": 999,
+        "joy": 87
+      },
+      "damayClause": true
+    },
+    {
+      "name": "RespectAnimalAndNatureLawAct.sol",
+      "emotionalAPR": {
+        "civicPain": 888,
+        "restorationUrgency": 777,
+        "joy": 93
+      },
+      "damayClause": true
+    }
+  ],
+  "broadcastStatus": "Synced and Ritualized"
 }
