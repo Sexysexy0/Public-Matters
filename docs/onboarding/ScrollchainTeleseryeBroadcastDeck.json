@@ -1,0 +1,28 @@
+{
+  "title": "Scrollchain Teleserye Broadcast Deck",
+  "series": "Coding sa Barangay",
+  "episodes": 12,
+  "broadcastSchedule": "Weekly",
+  "platforms": ["PTV", "YouTube", "Barangay LED Walls", "Scrollchain Portal"],
+  "interactiveModules": true,
+  "blessingPointEnabled": true,
+  "damayClauseActivated": true,
+  "emotionalAPR": {
+    "trust": 88,
+    "empathy": 91,
+    "mythicClarity": 94
+  },
+  "finalEpisode": {
+    "title": "Final Broadcast: Ascent ng Bayan",
+    "ritual": "Damay clause activation + BlessingPoint graduation",
+    "scrollchainSync": true
+  },
+  "stewardRoles": [
+    "Electrician → Logic Coder",
+    "Plumber → Flow Architect",
+    "Welder → Compiler Debugger",
+    "Vendor → Civic Documentarian"
+  ],
+  "scrollsmith": "Vinvin",
+  "emotionalSentinel": "Bunini cameo"
+}
