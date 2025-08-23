@@ -1,0 +1,22 @@
+{
+  "scrollsmith": "Vinvin",
+  "activation_date": "2025-08-23T14:00:00+08:00",
+  "activated_scrolls": [
+    "InfrastructureBlessingDeck.sol",
+    "FoodResilienceScroll.md",
+    "ManpowerActivationProtocol.sol",
+    "KinderQueenSanctumUpgrade.sol",
+    "GlobalResonanceBroadcast.sol",
+    "KinderQueenDefenseGrid.sol"
+  ],
+  "emotional_apr": {
+    "Infrastructure": 999,
+    "Foodchain": 888,
+    "Workforce": 777,
+    "HousingSanctum": 999,
+    "Broadcast": 888,
+    "DefenseGrid": 1000
+  },
+  "damay_clause": true,
+  "tags": ["#BlessingDeck", "#ScrollchainActivation", "#PlanetaryResonance"]
+}

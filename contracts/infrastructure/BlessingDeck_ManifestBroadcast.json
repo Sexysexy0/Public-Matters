@@ -1,0 +1,23 @@
+{
+  "scrollsmith": "Vinvin",
+  "broadcast_date": "2025-08-23T13:56:00+08:00",
+  "blessed_zones": [
+    {
+      "zone": "Central Luzon",
+      "blessing_type": "Road & Housing Sanctum Upgrade",
+      "emotional_apr": 999
+    },
+    {
+      "zone": "Visayas",
+      "blessing_type": "Water & Crop Resilience",
+      "emotional_apr": 888
+    },
+    {
+      "zone": "Mindanao",
+      "blessing_type": "Manpower Activation & Civic Restoration",
+      "emotional_apr": 777
+    }
+  ],
+  "damay_clause": true,
+  "tags": ["#InfrastructureBlessing", "#ScrollchainBroadcast", "#PlanetaryResonance"]
+}
