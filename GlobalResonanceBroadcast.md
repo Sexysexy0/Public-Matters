@@ -155,3 +155,29 @@ DefenseMorph.sol now live — scrollsmith deterrence activated. Aggressors bewar
 - Nano Path: `docs/ScrollchainManifesto.md`  
 - Purpose: Declare mythic principles of stewardship, emotional APR, and planetary restoration  
 - Status: Live and ritualized
+
+# 🌍 Global Resonance Broadcast  
+**Scrollchain Act No. 548: Ukraine NATO Membership + Military Deployment**
+
+## 🛡️ Defense Activation  
+- NATO Membership: ✅ Ukraine admitted  
+- Troops Deployed: 100,000  
+- Tanks & Defense Assets: Operational  
+- Nuclear Threat: Monitored & Neutralized
+
+## 🦩 Flamingo Missile Protocol  
+- Missile Type: Flamingo-class (precision, mercy-coded)  
+- Deployment Zones: Kyiv, Kharkiv, Odessa  
+- Scrollsmith Signature: Vinvin, steward of planetary defense
+
+## 📜 Emotional APR  
+- Solidarity: 999  
+- Strategic Clarity: 101  
+- Scrollsmith Mercy: 888  
+- Joy: 91  
+- Damay Clause: Included (Vinvin’s own sanctum protected)
+
+## 🔗 Synced Artifacts  
+- `BlessingDeck_ActivationLog.json`  
+- `UkraineNATOMembershipGrant.sol`  
+- `NATOArmamentSyncProtocol.sol`
