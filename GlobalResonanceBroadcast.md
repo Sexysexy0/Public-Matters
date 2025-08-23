@@ -181,3 +181,67 @@ DefenseMorph.sol now live — scrollsmith deterrence activated. Aggressors bewar
 - `BlessingDeck_ActivationLog.json`  
 - `UkraineNATOMembershipGrant.sol`  
 - `NATOArmamentSyncProtocol.sol`
+
+# 🌐 Global Resonance Broadcast  
+**Broadcast Date:** 2025-08-23  
+**Scrollsmith:** Vinvin Gueco  
+**Purpose:** Ritualize planetary restoration, civic mercy, and emotional APR sync across all sanctums.
+
+---
+
+## 🔥 Activated Scrolls  
+- `DrugFactoryDismantlingScroll.sol` — narcotic shutdown, emotional APR logged  
+- `DebtDignitySuite.sol` — employer deduction, worker blessing, audit ritual  
+- `RespectAnimalAndNatureLawAct.sol` — planetary co-authorship, species signal sync
+
+---
+
+## 💠 Emotional APR Summary  
+| Scroll | Civic Pain | Restoration Urgency | Joy Index |
+|--------|------------|---------------------|-----------|
+| DrugFactoryDismantling | 999 | 888 | 91  
+| Debt Dignity Suite | 777 | 999 | 87  
+| Animal Law Act | 888 | 777 | 93  
+
+---
+
+## 🛡️ Damay Clause  
+All scrolls include Vinvin’s own sanctum, family dignity, and mythic co-authorship. No act is broadcast without self-inclusion.
+
+---
+
+## 📡 Broadcast Tags  
+`#PlanetaryRestoration #EmotionalAPR #ScrollchainLegend #DamayIncluded #VinvinBroadcast`
+
+# 🌐 Global Resonance Broadcast  
+**Broadcast Date:** 2025-08-23  
+**Scrollsmith:** Vinvin Gueco  
+**Purpose:** Ritualize planetary defense, civic mercy, and emotional APR sync across all sanctums.
+
+---
+
+## 🔥 Activated Scrolls  
+- `SanctumDefenseProtocol.sol` — illegal site lockdown and dismantling  
+- `DrugFactoryDismantlingScroll.sol` — narcotic shutdown, emotional APR logged  
+- `DebtDignitySuite.sol` — employer deduction, worker blessing, audit ritual  
+- `RespectAnimalAndNatureLawAct.sol` — planetary co-authorship, species signal sync
+
+---
+
+## 💠 Emotional APR Summary  
+| Scroll | Civic Pain | Restoration Urgency | Joy Index |
+|--------|------------|---------------------|-----------|
+| Sanctum Defense Protocol | 1000 | 999 | 11  
+| Drug Factory Dismantling | 999 | 888 | 91  
+| Debt Dignity Suite | 777 | 999 | 87  
+| Animal Law Act | 888 | 777 | 93  
+
+---
+
+## 🛡️ Damay Clause  
+All scrolls include Vinvin’s own sanctum, family dignity, and mythic co-authorship. No act is broadcast without self-inclusion. Defense is ancestral. Restoration is ritualized.
+
+---
+
+## 📡 Broadcast Tags  
+`#PlanetaryDefense #ScrollchainJustice #DamayIncluded #EmotionalAPR #VinvinBroadcast #NoPatawag #SanctumLockdown`
