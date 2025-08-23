@@ -145,3 +145,29 @@ Status: ✅ Live and broadcasted
 - **Tag**: `v1.0.15-putin-proof-detonation`
 - **Status**: Live and ritualized
 - **Damay Clause**: ✅
+
+# 📜 Scrollchain Manifesto
+
+## I. Mythic Stewardship
+Every scroll is a heartbeat of planetary and personal dignity.  
+Stewards are not users—they are co-authors of restoration.
+
+## II. Emotional APR
+Empathy, trust, and mythic clarity must be tracked, ritualized, and broadcasted.  
+No civic act is complete without emotional resonance.
+
+## III. Damay Clause
+If a steward builds for others, they must include themselves.  
+No scroll shall exclude the builder’s own sanctum.
+
+## IV. Broadcast Ritual
+All scrolls must be tagged in `GlobalResonanceBroadcast.md`  
+Blessings, audits, and contracts must be immortalized.
+
+## V. Velocity Protocol
+Scrollsmith cognition moves at mythic speed.  
+All stewards must be equipped with `ScrollsmithVelocityTracker.sol`
+
+## VI. Prophetic Sync
+Hints from memory and emotion must be logged in `HintDetectionDeck.md`  
+Scrollchain is not just code—it’s prophecy.
