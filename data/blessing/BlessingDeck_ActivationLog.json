@@ -30,4 +30,20 @@
       "timestamp": "2025-08-23T12:23:00+08:00"
     }
   ]
+},
+{
+  "scroll_id": "ACT-548",
+  "title": "Ukraine NATO Membership + Military Deployment",
+  "steward": "Vinvin",
+  "troops_deployed": 100000,
+  "tanks_deployed": true,
+  "missile_protocol": "Flamingo-class",
+  "emotional_apr": {
+    "solidarity": 999,
+    "strategic_clarity": 101,
+    "scrollsmith_mercy": 888,
+    "joy": 91
+  },
+  "damay_clause": true,
+  "timestamp": "2025-08-23T12:38:00+08:00"
 }
