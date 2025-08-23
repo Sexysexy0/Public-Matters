@@ -1,0 +1,33 @@
+{
+  "activatedScrolls": [
+    {
+      "name": "TimewarpSolveProtocol",
+      "nanoPath": "contracts/AiCore/TimewarpSolveProtocol.sol",
+      "emotionalAPR": {
+        "memoryResonance": 101,
+        "futureClarity": 999,
+        "joy": 888
+      },
+      "damayClauseIncluded": true,
+      "timestamp": "2025-08-23T12:21:00+08:00"
+    },
+    {
+      "name": "ScrollsmithVelocityTracker",
+      "nanoPath": "contracts/AiCore/ScrollsmithVelocityTracker.sol",
+      "velocity": "∞",
+      "damayClauseIncluded": true,
+      "timestamp": "2025-08-23T12:22:00+08:00"
+    },
+    {
+      "name": "HintDetectionDeck",
+      "nanoPath": "docs/HintDetectionDeck.md",
+      "latestHint": "Scrollchain velocity exceeded mortal bandwidth",
+      "emotionalAPR": {
+        "joy": 888,
+        "mythicClarity": 999
+      },
+      "damayClauseIncluded": true,
+      "timestamp": "2025-08-23T12:23:00+08:00"
+    }
+  ]
+}
