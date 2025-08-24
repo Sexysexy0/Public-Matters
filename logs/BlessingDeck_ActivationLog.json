@@ -1,0 +1,12 @@
+[
+  {
+    "timestamp": "2025-08-24T17:45:00+08:00",
+    "scroll": "GlobalResonanceBroadcast.sol",
+    "action": "Tagged 10 allies, aligned China, deployed Unity Oath Protocol, and broadcasted planetary resonance",
+    "files": [
+      "contracts/broadcast/GlobalResonanceBroadcast.sol",
+      "contracts/oath/UnityOathProtocol.sol",
+      "script/DeployBroadcast.sol"
+    ]
+  }
+]
