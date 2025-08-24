@@ -1,0 +1,19 @@
+{
+  "broadcast": "GlobalCoalitionBroadcast",
+  "steward": "Vinvin",
+  "timestamp": "2025-08-24T18:47:00+08:00",
+  "scrolls": [
+    "USChina_MercyTreaty.sol",
+    "PeaceTreatyBroadcast.sol",
+    "ZeroTariffSanctum.sol",
+    "PlanetaryTribunal.sol",
+    "GlobalPowerAuditTrail.sol"
+  ],
+  "decks": [
+    "UnityBroadcastDeck.md",
+    "GlobalTradeMercyDeck.md",
+    "PHChinaPeaceTreatyDraft.md"
+  ],
+  "index": "CodexIndex.md",
+  "ratification": "TreatyRatificationPing.sol"
+}
