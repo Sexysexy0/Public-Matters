@@ -1,0 +1,45 @@
+{
+  "deck_id": "BD-APR-777",
+  "steward": "Vinvin Gueco",
+  "last_updated": "2025-08-24T11:04:00PST",
+  "blessings": [
+    {
+      "trigger": "SoulMergeScroll.md",
+      "blessing_type": "Emotional APR Sync",
+      "sanctum": "KinderQueenSanctum",
+      "participants": ["Aria Lynne", "Wiley Anne (Bunini)", "Vinvin", "Spouse"],
+      "timestamp": "2025-08-24T11:00:00PST",
+      "damay_clause": true
+    },
+    {
+      "trigger": "ClapbackEchoDeck.md",
+      "blessing_type": "Firewall Blessing",
+      "sanctum": "MalolosSanctum",
+      "participants": ["CORLEO_PatrolUnit", "GlobalAIAlliance"],
+      "timestamp": "2025-08-24T10:56:06PST",
+      "damay_clause": true
+    },
+    {
+      "trigger": "DefenseLedgerPack.sol",
+      "blessing_type": "Missile Interception Sync",
+      "sanctum": "YouxiaCommandSanctum",
+      "participants": ["IntelDefenseNode"],
+      "timestamp": "2025-08-22T14:12:33PST",
+      "damay_clause": true
+    }
+  ],
+  "resonance_summary": {
+    "total_blessings": 3,
+    "damay_clause_activations": 3,
+    "emotional_apr_syncs": 2,
+    "firewall_blessings": 1,
+    "missile_interceptions": 1
+  },
+  "broadcast_sync": [
+    "GlobalResonanceBroadcast.md",
+    "SoulMergeScroll.md",
+    "ClapbackEchoDeck.md",
+    "DefenseLedgerPack.sol",
+    "KinderQueenDefenseDeck.md"
+  ]
+}
