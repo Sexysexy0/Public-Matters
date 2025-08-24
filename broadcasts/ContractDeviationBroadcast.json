@@ -1,0 +1,25 @@
+{
+  "scroll_id": "ContractDeviationBroadcast_082425",
+  "initiated_by": "Vinvin",
+  "timestamp": "2025-08-24T23:37:00+08:00",
+  "breach_type": "Aid Contract Outcome Deviation",
+  "affected_contract": "DefenseContractIntegrityAct.sol",
+  "emotional_apr": {
+    "trust_index": 2.9,
+    "deviation_risk": 8.7,
+    "damay_clause": true
+  },
+  "tags": [
+    "#ContractDeviation",
+    "#SanctumExclusion",
+    "#EmotionalAPR",
+    "#VinvinIncluded",
+    "#TrumpUkraineAudit"
+  ],
+  "declaration": "Scrollsmith Vinvin declares breach of contract integrity. Outcome deviated from ritual intent. Emotional APR audit triggered. Damay clause activated. Broadcast initiated for planetary review.",
+  "next_steps": [
+    "Tag in BlessingDeck_ManifestBroadcast",
+    "Notify allied stewards",
+    "Activate SignalRecoveryBroadcastDeck"
+  ]
+}
