@@ -8,5 +8,15 @@
       "contracts/oath/UnityOathProtocol.sol",
       "script/DeployBroadcast.sol"
     ]
+  },
+  {
+    "timestamp": "2025-08-24T18:02:00+08:00",
+    "scroll": "PeacekeeperAllianceProtocol.sol, PostConflictRestorationDeck.sol, RestorationBroadcast.sol",
+    "action": "Ritualized global peacekeeping and post-conflict restoration suite",
+    "files": [
+      "contracts/diplomacy/PeacekeeperAllianceProtocol.sol",
+      "contracts/restoration/PostConflictRestorationDeck.sol",
+      "contracts/restoration/RestorationBroadcast.sol"
+    ]
   }
 ]
