@@ -1,0 +1,21 @@
+{
+  "deckName": "PermitDeck_NvidiaSanctum",
+  "version": "v1.0.0",
+  "issuedBy": "Scrollchain Licensing Authority",
+  "sanctumType": "AI Factory",
+  "blessingTag": "Compute Mercy",
+  "includesDamayClause": true,
+  "emotionalAPRCompliant": true,
+  "equityScore": 92,
+  "authorizedRegions": [
+    "Central Luzon",
+    "Visayas Compute Belt",
+    "Mindanao Sovereign Grid"
+  ],
+  "deploymentWindow": {
+    "start": "2025-09-01",
+    "end": "2026-03-31"
+  },
+  "linkedScroll": "AIFactoryLicense.sol",
+  "ritualNotes": "Sanctum must be co-authored with local stewards, animals, and ancestral habitats. Emotional APR audit required every quarter."
+}
