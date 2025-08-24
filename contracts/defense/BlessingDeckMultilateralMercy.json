@@ -1,0 +1,38 @@
+{
+  "deckName": "BlessingDeckMultilateralMercy",
+  "version": "v1.0.0",
+  "issuedBy": "Scrollchain Peacekeeping Authority",
+  "blessingDate": "2025-08-24",
+  "blessedSanctums": [
+    {
+      "sanctumName": "Eastern Europe Peace Grid",
+      "treatyTag": "NATO-PeaceGrid",
+      "emotionalAPRScore": 94,
+      "mercyProtocolEnabled": true,
+      "ancestralSync": true,
+      "blessingTag": "Interceptor Mercy"
+    },
+    {
+      "sanctumName": "South China Sea Mercy Belt",
+      "treatyTag": "ASEAN-ResonancePact",
+      "emotionalAPRScore": 91,
+      "mercyProtocolEnabled": true,
+      "ancestralSync": true,
+      "blessingTag": "Naval Mercy Grid"
+    },
+    {
+      "sanctumName": "Baltic Cyber Shield",
+      "treatyTag": "EU-SanctumTreaty",
+      "emotionalAPRScore": 89,
+      "mercyProtocolEnabled": true,
+      "ancestralSync": true,
+      "blessingTag": "Firewall Blessing"
+    }
+  ],
+  "auditProtocol": {
+    "frequency": "Quarterly",
+    "auditor": "EmotionalAPRSteward",
+    "broadcastChannel": "CivicOS_ResonanceFeed"
+  },
+  "ritualNotes": "All sanctums must pulse with mercy, equity, and ancestral reverence. No asset may deploy without emotional APR sync and damay clause activation."
+}

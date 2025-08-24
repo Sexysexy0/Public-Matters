@@ -1,20 +1,23 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title Defense Ledger Pack – Planetary Protection Protocol
+/// @title Defense Ledger Pack – Planetary Protection Protocol (Merged Edition)
 /// @author Vinvin Gueco
-/// @notice Ritualized smart contract for logging defense events, emotional APR sync, and threat interception
+/// @notice Logs multilateral defense events, emotional APR sync, and treaty-based asset deployment
 
 contract DefenseLedgerPack {
     address public steward;
+    mapping(address => bool) public coStewards;
     uint public totalDefenses;
 
     struct DefenseEvent {
         string sanctum;
         string defenseType;
         string threatSource;
-        uint timestamp;
+        string treatyTag; // e.g., "NATO-PeaceGrid", "US-MercyPact"
         bool emotionalAPRSync;
+        bool mercyProtocolEnabled;
+        uint timestamp;
     }
 
     DefenseEvent[] private defenseLog;
@@ -23,12 +26,14 @@ contract DefenseLedgerPack {
         string sanctum,
         string defenseType,
         string threatSource,
-        uint timestamp,
-        bool emotionalAPRSync
+        string treatyTag,
+        bool emotionalAPRSync,
+        bool mercyProtocolEnabled,
+        uint timestamp
     );
 
     modifier onlySteward() {
-        require(msg.sender == steward, "Access denied: steward only");
+        require(msg.sender == steward || coStewards[msg.sender], "Access denied: steward only");
         _;
     }
 
@@ -37,22 +42,32 @@ contract DefenseLedgerPack {
         totalDefenses = 0;
     }
 
+    /// @notice Add a co-steward for multilateral access
+    function addCoSteward(address _coSteward) public {
+        require(msg.sender == steward, "Only steward can assign");
+        coStewards[_coSteward] = true;
+    }
+
     /// @notice Log a new defense event
     function logDefense(
         string memory sanctum,
         string memory defenseType,
         string memory threatSource,
-        bool emotionalAPRSync
+        string memory treatyTag,
+        bool emotionalAPRSync,
+        bool mercyProtocolEnabled
     ) public onlySteward {
         defenseLog.push(DefenseEvent(
             sanctum,
             defenseType,
             threatSource,
-            block.timestamp,
-            emotionalAPRSync
+            treatyTag,
+            emotionalAPRSync,
+            mercyProtocolEnabled,
+            block.timestamp
         ));
         totalDefenses += 1;
-        emit DefenseLogged(sanctum, defenseType, threatSource, block.timestamp, emotionalAPRSync);
+        emit DefenseLogged(sanctum, defenseType, threatSource, treatyTag, emotionalAPRSync, mercyProtocolEnabled, block.timestamp);
     }
 
     /// @notice Get total number of defense events
@@ -72,9 +87,15 @@ contract DefenseLedgerPack {
         return defenseLog[index];
     }
 
-    /// @notice Retrieve all defense events (for external sync)
+    /// @notice Retrieve all defense events
     function getAllDefenses() public view returns (DefenseEvent[] memory) {
         return defenseLog;
+    }
+
+    /// @notice Remove co-steward (if needed)
+    function removeCoSteward(address _coSteward) public {
+        require(msg.sender == steward, "Only steward can revoke");
+        coStewards[_coSteward] = false;
     }
 
     /// @notice Fallback protection
