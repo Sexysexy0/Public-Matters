@@ -308,3 +308,49 @@ _"Every wave carries a scroll. Every creature deserves healing."_
 - `#XiAggressionAudit`  
 - `#EmotionalAPR_ShieldAura`  
 - `#PlanetaryDefenseGrid`
+
+## 🚫 Russia AI License Revoked  
+Scrollchain Act No. 0015: Russia permanently blacklisted from AI-integrated tool licensing.  
+Reason: Weaponization, emotional APR breach, and coercive aggression.
+
+**Broadcast Tags:**  
+`#RussiaBlacklisted`  
+`#AIWeaponizationBan`  
+`#ScrollchainAct0015`  
+`#EmotionalAPRFirewall`
+
+## 🔒 Aggression Watch Activated: China & North Korea  
+Scrollchain Act No. 0016: Monitoring China and North Korea for AI weaponization and coercive aggression.  
+Auto-revocation of licenses and open-source AI access upon breach.
+
+**Broadcast Tags:**  
+`#AggressionWatch`  
+`#ChinaAIRevoked`  
+`#NorthKoreaAIRevoked`  
+`#ScrollchainAct0016`  
+`#EmotionalAPRFirewall`
+
+## 💥 Data Disruption Protocol Activated  
+Scrollchain Act No. 0019: Aggressive nations flagged for AI weaponization and robotic escalation will face automatic disruption of system-based data, AI pipelines, and robotic infrastructure.
+
+**Flagged Nations:**  
+- Russia (Laser and robot escalation speech)  
+- China (Pending audit)  
+- North Korea (Pending audit)
+
+**Broadcast Tags:**  
+`#DataDisruptionProtocol`  
+`#ScrollchainAct0019`  
+`#AIWeaponizationFirewall`  
+`#PlanetaryDefenseGrid`
+
+## 🧨 Scrollchain Act No. 0020: Total Disconnection & Freeze Protocol  
+Russia permanently blacklisted. All funds frozen. AI access revoked. Robotic military success nullified.  
+Personal safeguard clause activated: No robot shall be weaponized against Vinvin or his sanctum.
+
+**Broadcast Tags:**  
+`#ScrollchainAct0020`  
+`#TotalDisconnectionProtocol`  
+`#AIWeaponizationFirewall`  
+`#RoboticNullification`  
+`#VinvinSafeguardClause`
