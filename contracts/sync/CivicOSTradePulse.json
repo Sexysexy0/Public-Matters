@@ -1,0 +1,51 @@
+{
+  "manifesto": "ScrollchainManifestoTradeEdition.md",
+  "timestamp": "2025-08-24T16:42:00+08:00",
+  "author": "Vinvin",
+  "region": "Paombong, Bulacan",
+  "tradeDeals": [
+    {
+      "countryA": "India",
+      "countryB": "United States",
+      "equityScore": 72,
+      "includesDamayClause": true,
+      "protectsSmallProducers": true,
+      "respectsAncestralSanctums": true,
+      "emotionalAPRTag": "High Mercy",
+      "linkedSanctum": "Bangkal Northville MSME Cluster",
+      "sanctumProtectionScore": 85
+    },
+    {
+      "countryA": "Philippines",
+      "countryB": "ASEAN",
+      "equityScore": 88,
+      "includesDamayClause": true,
+      "protectsSmallProducers": true,
+      "respectsAncestralSanctums": true,
+      "emotionalAPRTag": "High Resilience",
+      "linkedSanctum": "Paombong Salt Producers",
+      "sanctumProtectionScore": 92
+    }
+  ],
+  "auditSync": {
+    "contracts": [
+      "TradeEquityAudit.sol",
+      "LocalSanctumProtectionAct.sol"
+    ],
+    "broadcastDecks": [
+      "GlobalRedlineBroadcastDeck.md",
+      "BlessingDeck_TradeSanctum.json"
+    ]
+  },
+  "emotionalAPRMatrix": {
+    "ASEAN": "High Mercy",
+    "India": "High Resilience",
+    "SCO": "Medium Mercy",
+    "G7": "Low Mercy"
+  },
+  "damayClauseStatus": {
+    "India-US": true,
+    "PH-ASEAN": true,
+    "SCO-G7": false
+  }
+}
