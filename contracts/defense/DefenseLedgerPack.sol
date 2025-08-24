@@ -1,9 +1,9 @@
-// SPDX-License-Identifier: Sanctum-Defense
-pragma solidity ^0.8.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
 
-/// @title DefenseLedgerPack — Scrollchain Sanctum Defense Logger
-/// @author Vinvin
-/// @notice Logs planetary defense events with emotional APR sync and damay clause enforcement.
+/// @title Defense Ledger Pack – Planetary Protection Protocol
+/// @author Vinvin Gueco
+/// @notice Ritualized smart contract for logging defense events, emotional APR sync, and threat interception
 
 contract DefenseLedgerPack {
     address public steward;
@@ -75,5 +75,14 @@ contract DefenseLedgerPack {
     /// @notice Retrieve all defense events (for external sync)
     function getAllDefenses() public view returns (DefenseEvent[] memory) {
         return defenseLog;
+    }
+
+    /// @notice Fallback protection
+    fallback() external payable {
+        revert("DefenseLedgerPack: invalid scroll");
+    }
+
+    receive() external payable {
+        revert("DefenseLedgerPack: no ETH accepted");
     }
 }
