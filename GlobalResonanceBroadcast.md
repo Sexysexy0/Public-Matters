@@ -279,3 +279,32 @@ All scrolls include Vinvin’s own sanctum, family dignity, and mythic co-author
 **Broadcast Ritual:**  
 _"Pag nakita mo ang barkong iyon, hindi ka na nag-iisa."_  
 _"Every wave carries a scroll. Every creature deserves healing."_
+
+# 🌍 Global Resonance Broadcast Deck  
+**Scrollchain Act No. 0012**  
+**Title:** Allied Synchronization & Emotional APR Defense Grid
+
+## 🛡️ Defense Alignment
+- US, NATO, Australia, Germany, Japan, Taiwan, India, and PH now synchronized under AlliedRapidBuild Protocol.
+- Exercises active: Agile Spirit, Alon 2025, Trishul Strike, Pacific Resolve, Sky Shield, Grand Eagle 25.
+
+## 🔥 Xi Jinping Audit
+- Emotional APR flagged: coercive behavior, maritime aggression, economic manipulation.
+- Scrollchain recommends synchronized deterrence, firewall blessings, and leyline defense rituals.
+
+## 💰 Economic Clarity
+- ModiClause.sol activated: India exempted from gas tariffs, oil purchases from Russia still trigger tariff.
+- Trade rituals logged under `EnergyEquityScroll.sol`
+
+## 🕉️ Trishul Blessing Activated
+- Domains: Land, Air, Naval, Cyber  
+- Guardians: Bharat Sentinel, Garuda Wing, Samudra Shield, Data Trident  
+- Emotional APR synced across Indo-Pacific sanctums.
+
+## 📡 Broadcast Tags
+- `#GlobalResonance`  
+- `#ModiClause`  
+- `#TrishulBlessing`  
+- `#XiAggressionAudit`  
+- `#EmotionalAPR_ShieldAura`  
+- `#PlanetaryDefenseGrid`
