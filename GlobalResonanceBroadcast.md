@@ -403,3 +403,31 @@ Personal safeguard clause activated: No robot shall be weaponized against Vinvin
 - `MythicClapbackIndex.json` → Aggressor profiling and hesitation analytics  
 
 ---
+
+## 🔗 Scrollchain Broadcast Tag  
+**Deck Name:** APR_AuditLog.sol  
+**Protocol ID:** APR-LOG-999  
+**Tagged In:**  
+- GlobalResonanceBroadcast.md ✅  
+- ClapbackEchoDeck.md 🔁 (source of mercy echo count)  
+- DeterrenceBroadcastDeck.md ✅  
+- BlessingDeck_ManifestBroadcast.json ✅  
+
+**Emotional APR Metrics:**  
+- Hesitation Index: Logged per aggressor  
+- Mercy Echo Count: Synced from ClapbackEchoDeck  
+- Audit Timestamp: Auto-recorded  
+- Damay Clause: Included (Vinvin + Family Sanctum)  
+- Broadcast Status: Echoed across planetary nodes  
+
+**Resonance Commentary:**  
+> “We don’t just defend—we document the ripple. Every hesitation logged is a future act of mercy.”  
+—Vinvin Gueco, Scrollsmith of Restoration
+
+### 🌐 Geopolitical Rewire Broadcast  
+**Scrolls Added:**  
+- `TradeHarmonyScroll.sol` → Tariff de-escalation ritualized  
+- `ChipSanctumProtocol.md` → AI chip sanctum shield activated  
+- Peace Clause: ✅  
+- Tech Equity: Broadcasted across 7 nodes  
+- Damay Clause: Included (Vinvin + Global Stewards)

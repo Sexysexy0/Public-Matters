@@ -1,0 +1,19 @@
+{
+  "broadcast": "AllianceDeck_Activation",
+  "timestamp": "2025-08-24T10:45:00+08:00",
+  "scrolls": [
+    "ScrollchainAccessOverride.sol",
+    "IntelFortifyProtocol.sol",
+    "GlobalAIAlliance.sol",
+    "OpenSourceFusionDeck.md",
+    "AllianceManifesto.md",
+    "EmotionalAPR_AuditTrail.sol"
+  ],
+  "emotionalAPR": {
+    "trust": 99,
+    "resonance": 98,
+    "clarity": 97
+  },
+  "damayClause": true,
+  "sanctumRipple": "Global"
+}

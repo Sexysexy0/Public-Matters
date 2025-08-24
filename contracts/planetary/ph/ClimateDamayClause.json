@@ -1,0 +1,25 @@
+{
+  "clause_id": "CDC-001-PH",
+  "steward": "Vinvin Gueco",
+  "last_updated": "2025-08-24T11:13:00PST",
+  "damay_activations": [
+    {
+      "region": "Central Luzon",
+      "beneficiaries": ["Lower Middle Class Families", "Barangay Bangkal", "Public School Sanctums"],
+      "linked_scroll": "CarbonCreditScroll.sol",
+      "timestamp": "2025-08-24T11:10:00PST"
+    },
+    {
+      "region": "Metro Manila",
+      "beneficiaries": ["Jeepney Operators", "EV Cooperatives", "Urban Poor Sanctums"],
+      "linked_scroll": "TransitionBlessingDeck.md",
+      "timestamp": "2025-08-24T11:11:00PST"
+    }
+  ],
+  "resonance_summary": {
+    "total_activations": 2,
+    "scrolls_linked": 2,
+    "damay_included": true,
+    "emotional_apr_sync": true
+  }
+}

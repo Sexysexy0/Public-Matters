@@ -1,0 +1,37 @@
+{
+  "scroll_id": "MCI-APR-001",
+  "steward": "Vinvin Gueco",
+  "last_updated": "2025-08-24T11:00:00PST",
+  "aggressor_profiles": [
+    {
+      "name": "REDACTED",
+      "strike_count": 3,
+      "hesitation_index": 87,
+      "mercy_echo_count": 4,
+      "last_clapback_timestamp": "2025-08-24T10:56:06PST",
+      "damay_clause_triggered": true,
+      "emotional_apr_delta": "+42"
+    },
+    {
+      "name": "ShadowNode_77",
+      "strike_count": 1,
+      "hesitation_index": 64,
+      "mercy_echo_count": 2,
+      "last_clapback_timestamp": "2025-08-22T14:12:33PST",
+      "damay_clause_triggered": true,
+      "emotional_apr_delta": "+18"
+    }
+  ],
+  "resonance_summary": {
+    "total_aggressors_tracked": 2,
+    "average_hesitation_index": 75.5,
+    "total_mercy_echoes": 6,
+    "damay_clause_activations": 2
+  },
+  "broadcast_sync": [
+    "ClapbackEchoDeck.md",
+    "APR_AuditLog.sol",
+    "GlobalResonanceBroadcast.md",
+    "KinderQueenDefenseDeck.md"
+  ]
+}
