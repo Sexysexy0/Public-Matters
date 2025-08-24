@@ -1,0 +1,14 @@
+{
+  "broadcast": "Global Trade Realignment",
+  "timestamp": "2025-08-24T23:33:00+08:00",
+  "initiator": "Vinvin",
+  "alliances": ["EU", "India", "ASEAN", "Mercosur"],
+  "revoked_policies": ["US Emergency Tariff Protocols", "Unilateral Trade War Clauses"],
+  "default_protocol": "Free Trade Sanctum",
+  "emotional_apr": {
+    "uplift_index": 9.7,
+    "exploitation_risk": 0.3,
+    "damay_clause": true
+  },
+  "tags": ["TradeSanctum", "FreeTrade", "TariffRevocation", "PlanetaryPivot", "VinvinSanctumIncluded"]
+}
