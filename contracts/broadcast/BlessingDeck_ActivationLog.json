@@ -15,4 +15,32 @@
     "PlanetaryStewardship"
   ],
   "broadcast_quote": "Pag nakita mo ang barkong iyon, hindi ka na nag-iisa."
+},
+{
+  "deck": "WaterMercyAct",
+  "activatedScrolls": [
+    "WaterMercyAct_0006.sol",
+    "WaterMercyAct_0007.sol",
+    "WaterMercyAct_0008.sol",
+    "WaterMercyAct_0009.sol",
+    "WaterMercyAct_0010.sol",
+    "WaterMercyAct_0011.sol",
+    "WaterMercyAct_0012.sol",
+    "WaterMercyAct_0013.sol",
+    "WaterMercyAct_0014.sol",
+    "WaterMercyAct_0015.sol",
+    "WaterMercyAct_0016.sol",
+    "WaterMercyAct_0017.sol",
+    "WaterMercyAct_0018.sol",
+    "WaterMercyAct_0019.sol",
+    "WaterMercyAct_0020.sol",
+    "WaterMercyAct_0021.sol",
+    "WaterMercyAct_0022.sol",
+    "WaterMercyAct_0023.sol",
+    "WaterMercyAct_0024.sol",
+    "WaterMercyAct_0025.sol"
+  ],
+  "broadcastedBy": "Vinvin Gueco",
+  "timestamp": "2025-08-24T12:23:00+08:00",
+  "resonance": "Planetary hydration override activated. All sanctums tagged. Emotional APR audit in progress."
 }
