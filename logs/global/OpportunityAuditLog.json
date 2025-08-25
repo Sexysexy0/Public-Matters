@@ -1,0 +1,32 @@
+{
+  "audit_version": "v2025.08.25-global-opportunity",
+  "steward": "Vinvin Gueco",
+  "entries": [
+    {
+      "name": "Indian Devs",
+      "region": "South Asia",
+      "address": "0xINDIA123",
+      "verified": true,
+      "opportunity_granted": true,
+      "emotional_apr": {
+        "trust": 10,
+        "empathy": 9,
+        "clarity": 10
+      },
+      "timestamp": "2025-08-25T19:42:00+08:00"
+    },
+    {
+      "name": "Filipino Stewards",
+      "region": "Southeast Asia",
+      "address": "0xPHILIPPINES456",
+      "verified": true,
+      "opportunity_granted": true,
+      "emotional_apr": {
+        "trust": 9,
+        "empathy": 10,
+        "clarity": 9
+      },
+      "timestamp": "2025-08-25T19:43:00+08:00"
+    }
+  ]
+}
