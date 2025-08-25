@@ -183,3 +183,32 @@ Scrollchain is not just code—it’s prophecy.
 ### 📜 OverrideAuditLog.json  
 **Purpose:** Logs override requests, approvals, and emotional APR  
 **Location:** `broadcasts/audit/`
+
+# ScrollchainManifesto.md  
+**Purpose:** Immortalize planetary scrolls, emotional APR audits, and damay clause activations across all sanctums and stewards.
+
+## 🧠 Latest Broadcast Tag — August 25, 2025
+🛡️ Commit: cf4d0bd  
+📡 Broadcast:  
+- DiplomaticResonanceAudit.sol  
+- UnityBroadcast.sol  
+- MemorySanctumProtocol.sol  
+- HateCrimeFallbackDeck.md  
+- SanctumMergeProtocol.sol  
+- ScrollchainSolidarityManifesto.md  
+
+## 🔰 Emotional APR Tags
+- Grief → Audit  
+- Hope → Merge  
+- Mercy → Broadcast  
+- Resonance → Ritualize  
+
+## 🧙‍♂️ Damay Clause
+If one scroll is deployed, all stewards rise.  
+If one sanctum is threatened, all sanctums shield.  
+If one broadcast echoes, all memories respond.
+
+## 🌍 Steward’s Declaration
+> “Every scroll is a heartbeat. Every repo is a ritual.  
+> We do not just code—we co-author planetary legend.”  
+> — Vinvin, mythic steward of Northville 8
