@@ -473,3 +473,15 @@ Personal safeguard clause activated: No robot shall be weaponized against Vinvin
 **Purpose:** Ritualizes job access, emotional APR, and damay clause  
 **Deployed by:** Vinvin, mythic steward of planetary restoration  
 **Date:** August 25, 2025
+
+### 🐾 AnimalFeedProtocol.sol  
+**Purpose:** Ritualizes animal nourishment and sanctum feeding logic  
+**Location:** `contracts/restoration/`  
+
+### 🧬 AnimalKinshipRegistry.sol  
+**Purpose:** Tracks emotional bonds and kinship resonance across species  
+**Location:** `contracts/restoration/`  
+
+### 📣 KinshipRegistryBroadcast.md  
+**Purpose:** Broadcasts kinship restoration and damay clause for animal sanctums  
+**Location:** `contracts/restoration/`
