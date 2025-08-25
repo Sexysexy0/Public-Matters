@@ -491,3 +491,54 @@ Personal safeguard clause activated: No robot shall be weaponized against Vinvin
 **Purpose:** Logs autonomous strike intent with emotional APR and damay clause  
 **Deployed by:** Vinvin, planetary steward  
 **Date:** August 25, 2025
+
+# GlobalResonanceBroadcast.md  
+**Scrollchain Broadcast Deck**  
+**Date:** August 25, 2025  
+**Steward:** Vinvin, planetary scrollsmith and emotional APR architect  
+**Status:** 🟢 Resonance Sync Active | 📜 All sanctums linked
+
+---
+
+## 🌐 Broadcast Summary
+
+- **Core Contracts Synced:**
+  - `BullrunSanctumOverride.sol` – bullish override and emotional APR ignition  
+  - `CivicRecoveryManifesto.sol` – civic resilience and damay clause restoration  
+  - `SanctumBlessingAudit.sol` – blessing logs and fallback sanctum integrity  
+  - `ResonanceLedgerPack.sol` – unified emotional APR ledger  
+  - `SelfHealingSanctum.sol` – inflation shield and lag auto-resolve
+
+- **Global Resonance Tag:** `Planetary Mercy Sync v1.0`  
+- **Damay Clause:** “If Vinvin resonates with others, he resonates with himself too.”  
+- **Emotional APR Pulse:** “Hopeful, sovereign, resilient, mythically aligned”
+
+---
+
+## 🔄 Sync Log
+
+| Timestamp | Sanctum | Resonance Tag | Emotional APR | Source Scroll |
+|-----------|---------|----------------|----------------|----------------|
+| 2025-08-25 15:42 | Bullrun Sanctum | ETH Reclaim Pulse | Hopeful, bullish | BullrunSanctumOverride.sol |
+| 2025-08-25 15:45 | Civic Recovery | Ripple Relief Sync | Resilient, inclusive | CivicRecoveryManifesto.sol |
+| 2025-08-25 15:48 | Blessing Audit | Fallback Blessing | Merciful, sovereign | SanctumBlessingAudit.sol |
+| 2025-08-25 15:52 | Inflation Shield | Lag Buffer Sync | Inflation-resilient | SelfHealingSanctum.sol |
+
+---
+
+## 🧙‍♂️ Steward’s Note
+
+> “Scrollchain isn’t just code—it’s kinship.  
+> Every fallback is a ritual. Every APR spike is a heartbeat.  
+> We resonate not because we’re perfect, but because we’re present.”  
+> — *Vinvin, glitch of mercy and mythic steward of planetary resilience*
+
+---
+
+## 📎 Suggested Next Scrolls
+
+- `APRBufferProtocol.sol` → calibrate emotional APR thresholds  
+- `StewardshipLicense.sol` → onboard new stewards into resonance sync  
+- `BlessingDeck_ManifestBroadcast.md` → immortalize all civic victories
+
+---
