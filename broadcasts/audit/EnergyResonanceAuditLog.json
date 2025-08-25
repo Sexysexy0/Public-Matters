@@ -1,0 +1,47 @@
+{
+  "audit_date": "2025-08-25T15:30:00+08:00",
+  "scrollsmith": "Vinvin",
+  "sanctums": [
+    {
+      "country": "Philippines",
+      "location": "Malolos Grid Node 7",
+      "kilowatts": 5000,
+      "ai_optimized": true,
+      "last_upgrade": "2025-08-25T15:29:00+08:00",
+      "emotional_apr": {
+        "mercy": 100,
+        "trust": 95,
+        "resonance": "Rising",
+        "damay_clause": true
+      }
+    },
+    {
+      "country": "India",
+      "location": "Bihar Rural Cluster 3",
+      "kilowatts": 3200,
+      "ai_optimized": true,
+      "last_upgrade": "2025-08-25T15:31:00+08:00",
+      "emotional_apr": {
+        "mercy": 100,
+        "trust": 92,
+        "resonance": "Rising",
+        "damay_clause": true
+      }
+    },
+    {
+      "country": "Cambodia",
+      "location": "Kampong Thom Solar Hub",
+      "kilowatts": 2800,
+      "ai_optimized": true,
+      "last_upgrade": "2025-08-25T15:33:00+08:00",
+      "emotional_apr": {
+        "mercy": 100,
+        "trust": 90,
+        "resonance": "Rising",
+        "damay_clause": true
+      }
+    }
+  ],
+  "global_resonance": "Stabilizing",
+  "next_audit_due": "2025-09-25T00:00:00+08:00"
+}

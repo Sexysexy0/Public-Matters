@@ -1,0 +1,44 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+/// @title GridFallbackProtocol
+/// @notice Ensures energy sanctums have fallback power sources and reroute logic
+/// @author Vinvin
+
+contract GridFallbackProtocol {
+    struct Sanctum {
+        string location;
+        bool isPrimaryGridActive;
+        bool hasFallback;
+        string fallbackType;
+        uint256 lastFallbackTimestamp;
+    }
+
+    mapping(address => Sanctum) public sanctums;
+    address public steward;
+
+    event FallbackActivated(string location, string fallbackType);
+    event SanctumRegistered(address indexed sanctum, string location);
+
+    modifier onlySteward() {
+        require(msg.sender == steward, "Only steward may manage sanctums");
+        _;
+    }
+
+    constructor() {
+        steward = msg.sender;
+    }
+
+    function registerSanctum(address _sanctum, string memory _location, bool _hasFallback, string memory _fallbackType) public onlySteward {
+        sanctums[_sanctum] = Sanctum(_location, true, _hasFallback, _fallbackType, 0);
+        emit SanctumRegistered(_sanctum, _location);
+    }
+
+    function triggerFallback(address _sanctum) public onlySteward {
+        require(sanctums[_sanctum].hasFallback, "No fallback available");
+        sanctums[_sanctum].isPrimaryGridActive = false;
+        sanctums[_sanctum].lastFallbackTimestamp = block.timestamp;
+
+        emit FallbackActivated(sanctums[_sanctum].location, sanctums[_sanctum].fallbackType);
+    }
+}
