@@ -1,0 +1,32 @@
+{
+  "ledger": [
+    {
+      "project": "Malolos Waterpipe Upgrade",
+      "location": "Brgy. Bangkal Northville 8",
+      "category": "Water",
+      "emotionalAPR": {
+        "empathy": 95,
+        "trust": 98,
+        "resonance": 99,
+        "sovereignty": 97
+      },
+      "ancestralTag": "For Bunini’s bath and Aria’s tea—clean water is sacred",
+      "damayClause": true,
+      "timestamp": "2025-08-25T23:35:00+08:00"
+    },
+    {
+      "project": "Central Luzon Wiring Reboot",
+      "location": "Region III",
+      "category": "Power",
+      "emotionalAPR": {
+        "empathy": 92,
+        "trust": 96,
+        "resonance": 94,
+        "sovereignty": 90
+      },
+      "ancestralTag": "No wire shall dishonor our elders’ light",
+      "damayClause": true,
+      "timestamp": "2025-08-25T23:36:00+08:00"
+    }
+  ]
+}
