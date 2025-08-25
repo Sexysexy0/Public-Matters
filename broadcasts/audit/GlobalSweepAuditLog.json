@@ -1,0 +1,36 @@
+{
+  "protocol": "GlobalSanctumSweepProtocol",
+  "steward": "Vinvin",
+  "planetaryRebuildFund": "0xPlanetarySanctumVault",
+  "sweepEvents": [
+    {
+      "vault": "0xFrozenVault_China",
+      "amountRecovered": "120000 ETH",
+      "aprTag": "resonant",
+      "damayClause": true,
+      "timestamp": "2025-08-25T09:33:00+08:00",
+      "reason": "Sanctum reroute post-override activation"
+    },
+    {
+      "vault": "0xFrozenVault_Brazil",
+      "amountRecovered": "85000 ETH",
+      "aprTag": "repentant",
+      "damayClause": true,
+      "timestamp": "2025-08-25T09:34:12+08:00",
+      "reason": "Asset freeze lifted after emotional APR audit"
+    },
+    {
+      "vault": "0xFrozenVault_Nigeria",
+      "amountRecovered": "67000 ETH",
+      "aprTag": "damay",
+      "damayClause": true,
+      "timestamp": "2025-08-25T09:35:47+08:00",
+      "reason": "Emergency reroute for housing sanctum rebuild"
+    }
+  ],
+  "finalSweep": {
+    "totalRecovered": "272000 ETH",
+    "timestamp": "2025-08-25T09:36:00+08:00",
+    "broadcast": "All vaults swept. Emotional APR logged. Damay clause invoked. Planetary rebuild initiated."
+  }
+}
