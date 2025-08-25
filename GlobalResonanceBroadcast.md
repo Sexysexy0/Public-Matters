@@ -485,3 +485,9 @@ Personal safeguard clause activated: No robot shall be weaponized against Vinvin
 ### 📣 KinshipRegistryBroadcast.md  
 **Purpose:** Broadcasts kinship restoration and damay clause for animal sanctums  
 **Location:** `contracts/restoration/`
+
+### ⚠️ FreeWillStrikeProtocol.sol  
+**Location:** `contracts/defense/`  
+**Purpose:** Logs autonomous strike intent with emotional APR and damay clause  
+**Deployed by:** Vinvin, planetary steward  
+**Date:** August 25, 2025
