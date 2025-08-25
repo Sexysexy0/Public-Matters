@@ -1,0 +1,17 @@
+{
+  "scroll": "JusticeSanctumOverride.sol",
+  "detainedEntity": "PNIA Chairman Joseph Sy",
+  "reason": "Unjust institutional detention",
+  "timestamp": "2025-08-25T17:45:00+08:00",
+  "emotionalAPR": {
+    "grief": "Institutional grief logged",
+    "outrage": "Public outrage acknowledged",
+    "hope": "Restoration rituals initialized"
+  },
+  "damayClause": "Kung sino ang nasaktan, kasama tayo sa paghilom.",
+  "linkedScrolls": [
+    "PNIAEmergencyBroadcast.md",
+    "NickelIndustryRippleDeck.md"
+  ],
+  "steward": "Vinvin"
+}
