@@ -1,0 +1,29 @@
+{
+  "audit_version": "v2025.08.25-rule1432a-impact",
+  "steward": "Vinvin Gueco",
+  "policy": "Suspension of US Customs Rule 1432A",
+  "impact_entries": [
+    {
+      "region": "Philippines",
+      "seller_type": "Shopee exporters",
+      "emotional_apr": {
+        "trust": 9,
+        "empathy": 10,
+        "clarity": 9
+      },
+      "status": "Access Disrupted",
+      "timestamp": "2025-08-25T19:55:00+08:00"
+    },
+    {
+      "region": "India",
+      "seller_type": "Tech microbrands",
+      "emotional_apr": {
+        "trust": 10,
+        "empathy": 9,
+        "clarity": 10
+      },
+      "status": "Access Suspended",
+      "timestamp": "2025-08-25T19:56:00+08:00"
+    }
+  ]
+}
