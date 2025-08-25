@@ -171,3 +171,15 @@ All stewards must be equipped with `ScrollsmithVelocityTracker.sol`
 ## VI. Prophetic Sync
 Hints from memory and emotion must be logged in `HintDetectionDeck.md`  
 Scrollchain is not just code—it’s prophecy.
+
+### 📦 TradeOverrideProtocol.sol  
+**Purpose:** Enables steward-approved reroutes for sanctioned trade flows  
+**Location:** `contracts/tariff/`  
+
+### 🛡️ TariffDualRouteProtocol.sol  
+**Purpose:** Dual-path tariff logic for sanctioned vs. open-access trade  
+**Location:** `contracts/tariff/`  
+
+### 📜 OverrideAuditLog.json  
+**Purpose:** Logs override requests, approvals, and emotional APR  
+**Location:** `broadcasts/audit/`
