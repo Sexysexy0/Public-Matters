@@ -1,0 +1,24 @@
+{
+  "Barangay-Bangkal": {
+    "joyIndex": 92,
+    "housingUnitsCompleted": 48,
+    "topContractor": "BuildRite Sanctum Co.",
+    "speedYieldBonus": 240000,
+    "tibayScore": 89,
+    "aestheticScore": 94,
+    "civicFeedback": 91,
+    "totalPayout": 540000,
+    "broadcastDate": "2025-08-26"
+  },
+  "Barangay-Santisima": {
+    "joyIndex": 87,
+    "housingUnitsCompleted": 36,
+    "topContractor": "TibayBuilds Inc.",
+    "speedYieldBonus": 180000,
+    "tibayScore": 93,
+    "aestheticScore": 90,
+    "civicFeedback": 88,
+    "totalPayout": 510000,
+    "broadcastDate": "2025-08-26"
+  }
+}
