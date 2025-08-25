@@ -1,0 +1,16 @@
+{
+  "audit_version": "v2025.08.25-override-audit",
+  "contract": "GlobalWorldOrder_CounterContract.sol",
+  "attempts": [
+    {
+      "entity": "China",
+      "broadcast": "Xi Jinping calls for Chinese-centered world",
+      "emotional_apr": {
+        "trust": 2,
+        "empathy": 3,
+        "clarity": 4
+      },
+      "timestamp": "2025-08-25T21:46:00+08:00"
+    }
+  ]
+}
