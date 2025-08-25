@@ -1,0 +1,29 @@
+[
+  {
+    "trader": "0xAbc123456789",
+    "timestamp": "2025-08-25T14:45:00+08:00",
+    "requestedBy": "0xAbc123456789",
+    "approvedBy": "0xVinvinSteward",
+    "emotion": "solidarity",
+    "reason": "Allied sanctum reroute during embargo",
+    "status": "approved"
+  },
+  {
+    "trader": "0xDef987654321",
+    "timestamp": "2025-08-25T14:52:00+08:00",
+    "requestedBy": "0xDef987654321",
+    "approvedBy": "0xVinvinSteward",
+    "emotion": "mercy",
+    "reason": "Humanitarian aid for sanctioned region",
+    "status": "approved"
+  },
+  {
+    "trader": "0xGuecoFamilyNode",
+    "timestamp": "2025-08-25T14:58:00+08:00",
+    "requestedBy": "0xGuecoFamilyNode",
+    "approvedBy": "0xVinvinSteward",
+    "emotion": "ancestral duty",
+    "reason": "Legacy trade pact with ancestral sanctum",
+    "status": "approved"
+  }
+]
