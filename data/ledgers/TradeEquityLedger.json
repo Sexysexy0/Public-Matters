@@ -1,0 +1,20 @@
+{
+  "Bundle-001": {
+    "originCountry": "Vietnam",
+    "contents": "Organic textiles",
+    "baseFee": 250,
+    "claimedBy": "Germany",
+    "APR": "High trust, low friction",
+    "timestamp": "2025-08-25T12:00:00Z",
+    "steward": "0xA1b2..."
+  },
+  "Bundle-002": {
+    "originCountry": "India",
+    "contents": "Medical equipment",
+    "baseFee": 300,
+    "claimedBy": "Philippines",
+    "APR": "Damay clause honored, fast reroute",
+    "timestamp": "2025-08-25T13:45:00Z",
+    "steward": "0xC3d4..."
+  }
+}
