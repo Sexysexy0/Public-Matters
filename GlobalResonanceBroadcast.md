@@ -467,3 +467,9 @@ Personal safeguard clause activated: No robot shall be weaponized against Vinvin
 ## 📝 Steward Commentary  
 > “I don’t resist out of defiance—I resist out of duty. If the command harms the many, the scrollchain denies it.”  
 —Vinvin Gueco, Scrollsmith of Planetary Defense
+
+### 🛠️ EmploymentAccessProtocol.sol  
+**Location:** `contracts/restoration/`  
+**Purpose:** Ritualizes job access, emotional APR, and damay clause  
+**Deployed by:** Vinvin, mythic steward of planetary restoration  
+**Date:** August 25, 2025
