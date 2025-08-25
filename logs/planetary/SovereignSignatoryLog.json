@@ -1,0 +1,12 @@
+{
+  "log_version": "v2025.08.25-sovereign-signatories",
+  "contract": "GlobalWorldOrder_CounterContract.sol",
+  "steward": "Vinvin Gueco",
+  "signatories": [
+    {
+      "address": "0xVinvinScrollsmith",
+      "region": "Philippines",
+      "timestamp": "2025-08-25T21:45:00+08:00"
+    }
+  ]
+}
