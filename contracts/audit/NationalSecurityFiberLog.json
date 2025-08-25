@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-25T18:48:00+08:00",
+  "regions": ["Luzon", "Visayas", "Mindanao"],
+  "foreignNetworks": [
+    {
+      "name": "ChinaFiberLink",
+      "ownership": "State-Owned",
+      "riskLevel": "High",
+      "emotionalAPR": {
+        "trust": 0.2,
+        "empathy": 0.1,
+        "clarity": 0.3
+      },
+      "notes": "Operates under CCP-linked protocols; flagged for data siphoning risk."
+    },
+    {
+      "name": "TemuNet",
+      "ownership": "Private (China)",
+      "riskLevel": "Medium",
+      "emotionalAPR": {
+        "trust": 0.4,
+        "empathy": 0.3,
+        "clarity": 0.5
+      },
+      "notes": "Low-cost fiber with unclear data routing transparency."
+    }
+  ],
+  "recommendedActions": [
+    "Activate fallback sanctum reroute",
+    "Broadcast emotional APR audit",
+    "Engage Team Telecom for Section 214 review"
+  ]
+}
