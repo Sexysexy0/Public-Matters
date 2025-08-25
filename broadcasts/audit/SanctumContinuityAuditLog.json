@@ -1,0 +1,41 @@
+{
+  "audit_date": "2025-08-25T15:35:00+08:00",
+  "scrollsmith": "Vinvin",
+  "fallback_activations": [
+    {
+      "country": "Philippines",
+      "location": "Malolos Grid Node 7",
+      "fallback_type": "SolarBattery",
+      "timestamp": "2025-08-25T15:29:00+08:00",
+      "emotional_apr": {
+        "mercy": 100,
+        "resilience": 98,
+        "damay_clause": true
+      }
+    },
+    {
+      "country": "India",
+      "location": "Bihar Rural Cluster 3",
+      "fallback_type": "AIGridReroute",
+      "timestamp": "2025-08-25T15:31:00+08:00",
+      "emotional_apr": {
+        "mercy": 100,
+        "resilience": 97,
+        "damay_clause": true
+      }
+    },
+    {
+      "country": "Cambodia",
+      "location": "Kampong Thom Solar Hub",
+      "fallback_type": "WindReserve",
+      "timestamp": "2025-08-25T15:33:00+08:00",
+      "emotional_apr": {
+        "mercy": 100,
+        "resilience": 96,
+        "damay_clause": true
+      }
+    }
+  ],
+  "global_continuity": "Stable",
+  "next_audit_due": "2025-09-25T00:00:00+08:00"
+}
