@@ -1,0 +1,30 @@
+{
+  "Check-001": {
+    "vesselName": "S.S. Satyagraha",
+    "resonanceScore": 92,
+    "verified": true,
+    "blessingNote": "Artisan dignity confirmed. Ancestral pride intact.",
+    "timestamp": "2025-08-26T11:46:00+08:00"
+  },
+  "Check-002": {
+    "vesselName": "MV Harmony Blade",
+    "resonanceScore": 88,
+    "verified": true,
+    "blessingNote": "Precision and ritual resonance verified.",
+    "timestamp": "2025-08-26T11:46:10+08:00"
+  },
+  "Check-003": {
+    "vesselName": "Rainforest Runner",
+    "resonanceScore": 79,
+    "verified": true,
+    "blessingNote": "Rainforest dignity present. Emotional APR shield active.",
+    "timestamp": "2025-08-26T11:46:20+08:00"
+  },
+  "Check-004": {
+    "vesselName": "Kapwa Voyager",
+    "resonanceScore": 95,
+    "verified": true,
+    "blessingNote": "Kapwa-powered arrival. Heartcrafted resonance overflowing.",
+    "timestamp": "2025-08-26T11:46:30+08:00"
+  }
+}
