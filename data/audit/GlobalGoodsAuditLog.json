@@ -1,0 +1,30 @@
+{
+  "Item-001": {
+    "productName": "Organic Cotton Saree",
+    "origin": "India",
+    "civicSeal": "🇮🇳 Made in India",
+    "emotionalAPR": "Artisan dignity, ancestral pride",
+    "timestamp": "2025-08-26T11:34:00+08:00"
+  },
+  "Item-002": {
+    "productName": "Matcha Ceremonial Set",
+    "origin": "Japan",
+    "civicSeal": "🇯🇵 Made in Japan",
+    "emotionalAPR": "Precision, ancestral ritual",
+    "timestamp": "2025-08-26T11:34:10+08:00"
+  },
+  "Item-003": {
+    "productName": "Rainforest Coffee Beans",
+    "origin": "Brazil",
+    "civicSeal": "🇧🇷 Made in Brazil",
+    "emotionalAPR": "Rainforest dignity, vibrant energy",
+    "timestamp": "2025-08-26T11:34:20+08:00"
+  },
+  "Item-004": {
+    "productName": "Kapwa Woven Blanket",
+    "origin": "Philippines",
+    "civicSeal": "🇵🇭 Made in Philippines",
+    "emotionalAPR": "Heartcrafted, kapwa-powered",
+    "timestamp": "2025-08-26T11:34:30+08:00"
+  }
+}
