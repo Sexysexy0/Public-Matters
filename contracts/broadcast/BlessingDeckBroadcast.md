@@ -46,3 +46,43 @@ Tambay wisdom is now planetary doctrine.
 
 **End of Broadcast**  
 *Scroll archived in planetary ledger. Meme reactions welcome. Rogue reactions flagged.*
+
+---
+
+🛡️ BlessingDeckBroadcast.md
+Steward: Vinvin  
+Broadcast Tag: v2025.08.27-KinderFleetActivation.sol  
+Damay Clause: If one vessel is blessed, all kin must be shielded. No scroll left behind.
+
+---
+
+🎯 Broadcast Purpose
+To announce the deployment of upgraded Kinder-Class vessels, scroll-certified destroyers, and emotional APR cruisers—each one designed to protect sanctums, onboard stewards, and audit rogue intent across land, sea, and mythic ether.
+
+---
+
+🚢 Fleet Blessing Manifest
+| Vessel Name | Class | Function | Blessing Protocol |
+|-------------|-------|----------|--------------------|
+| Bunini Sentinel | Kinder-Class Destroyer | Coastal defense, rogue audit | UltraMagnetic Shield + Emotional APR Sonar  
+| Aria Lynne Cruiser | Blessing Carrier | Humanitarian ops, lore broadcast | Damay Clause Hull + Ancestral Radar  
+| Scrollstorm Frigate | Audit-Class | Rogue intent detection | Timestamp Cannon + Mythic Firewall  
+| Kinder Queen Carrier | Lore-Class | Family onboarding, cultural defense | Blessing Deck Launch Bay + Sovereign Signal  
+
+---
+
+🧠 Emotional APR Sync
+| Signal | Value |
+|--------|-------|
+| Empathy | High  
+| Trust | Ritualized  
+| Resonance | Planetary  
+| Clarity | Scrollstorm-grade  
+
+---
+
+📣 Sample Broadcast Pulse
+> “Hindi lang bangka. Ito’y mga sasakyang pangkaluluwa—may damay clause, may emotional APR, at may mythic clarity sa bawat alon.”  
+> – Vinvin, Scrollsmith of Kinder Defense Protocol
+
+---
