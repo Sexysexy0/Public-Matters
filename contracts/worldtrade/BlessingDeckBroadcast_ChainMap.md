@@ -6,42 +6,60 @@
 
 ---
 
-## 🔗 Scrollchain Sequence
+## 🔗 Scrollchain Sequence (Updated)
 
 1. ✅ `TariffVoidViaCargo.sol`  
    - Timestamped cargo blessing  
    - HTSUS override logic  
-   - Emotional APR: Verified
+   - Tag: `#CargoBlessing`
 
 2. ✅ `UITFBlessingOverride.sol`  
    - UITF access sync  
    - Blessing timestamp logic  
-   - Emotional APR: Max
+   - Tag: `#UITFOverride`
 
 3. ✅ `TariffFirewallBlessing.sol`  
    - Transshipment detection  
    - Firewall activation  
-   - Emotional APR: Shielded
+   - Tag: `#TransshipmentBlock`
 
 4. ✅ `CommodityBlessingDeck.sol`  
    - Reclassification of goods  
    - HTSUS exemption logic  
-   - Emotional APR: Scrollified
+   - Tag: `#ReclassifyBlessing`
 
-5. ✅ `BlessingLedger_TradeDefensePack.sol`  
-   - Logs all blessings  
-   - Timestamped audit trail  
-   - Emotional APR: Mythic
-
-6. ✅ `SanctumOverrideProtocol.sol`  
+5. ✅ `SanctumOverrideProtocol.sol`  
    - Blocks executive interference  
    - Sovereign sanctum logic  
-   - Emotional APR: Unbreakable
+   - Tag: `#SovereignSanctum`
 
-7. ✅ `SoulMergeScroll.md`  
+6. ✅ `SoulMergeScroll.md`  
    - Kinship override  
    - Damay clause embedded  
-   - Emotional APR: Overflowing
+   - Tag: `#KinshipOverride`
+
+7. ✅ `BlessingLedger_TradeDefensePack.sol`  
+   - Logs all blessings  
+   - Timestamped audit trail  
+   - Tag: `#AuditTrail`
+
+8. ✅ `BlessingDeckBroadcast_TariffVoidViaCargo.md`  
+   - Cargo exemption broadcast  
+   - Tag: `#CargoExemption`
+
+9. ✅ `BlessingDeckBroadcast_ChainMap.md`  
+   - Visual scrollchain map  
+   - Tag: `#ScrollchainMap`
+
+10. ✅ `KinderQueenCargoBlessing.sol`  
+    - Tags cargo for Aria Lynne & Bunini  
+    - Emotional APR: Overflowing  
+    - Tag: `#KinderSanctumBlessing`
+
+11. ✅ `ScrollchainAuditBeacon.sol`  
+    - Tracks scroll integrity  
+    - Detects rogue edits and emotional opacity  
+    - Tag: `#ScrollAuditIntegrity`
 
 ---
 
@@ -50,18 +68,14 @@
 - Trust: Verified  
 - Clarity: Mythic  
 - Sovereignty: Activated  
+- Kinder Priority: Embedded  
+- Damay Clause: Operational
 
 ---
 
-## 📜 Damay Clause  
-> “Kung ang scroll ay para sa masa, dapat kasama ang sarili.  
-> Kung ang reroute ay para sa kapwa, dapat ligtas din ang pamilya.”  
-> — Vinvin, Defender ng Scrollchain Solidarity
-
----
-
-## 🗣️ Broadcast Status  
+## 📜 Broadcast Status  
 - All scrolls deployed  
 - ChainMap synced  
 - BlessingLedger updated  
-- Cargo sanctum sovereign
+- Kinder sanctum protected  
+- Scrollchain integrity monitored
