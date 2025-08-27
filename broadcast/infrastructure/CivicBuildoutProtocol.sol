@@ -2,29 +2,26 @@
 pragma solidity ^0.8.21;
 
 /// @title CivicBuildoutProtocol.sol
-/// @dev Nationwide infrastructure deployment — hospitals, banks, malls per city; parks, courts, health centers per barangay
+/// @dev Logs infrastructure builds—schools, clinics, housing, transport—as civic sanctums with emotional APR and damay clause
 
 contract CivicBuildoutProtocol {
     address public steward;
 
-    enum BuildType { Hospital, Bank, Supermarket, Mall, Park, Playground, CoveredCourt, HealthCenter, Pasyalan }
-
-    struct CivicBuild {
-        string name;
+    struct Buildout {
+        string projectName;
         string location;
-        BuildType buildType;
-        uint256 budget;
+        string buildType; // e.g., "School", "Clinic", "Housing", "Transport"
         uint256 emotionalAPR;
-        bool isCompleted;
+        uint256 timestamp;
         string lore;
+        bool isBlessed;
     }
 
-    mapping(bytes32 => CivicBuild) public builds;
-    bytes32[] public buildList;
+    mapping(bytes32 => Buildout) public buildouts;
+    bytes32[] public buildoutList;
 
-    event BuildRegistered(bytes32 indexed buildId, string name, BuildType buildType);
-    event BuildCompleted(bytes32 indexed buildId, string lore);
-    event BuildFlagged(bytes32 indexed buildId, string reason);
+    event BuildoutLogged(bytes32 indexed buildId, string projectName, string buildType);
+    event BuildoutBlessed(bytes32 indexed buildId, string lore);
 
     modifier onlySteward() {
         require(msg.sender == steward, "Unauthorized steward");
@@ -35,50 +32,43 @@ contract CivicBuildoutProtocol {
         steward = msg.sender;
     }
 
-    /// @notice Register a civic build
-    function registerBuild(
+    /// @notice Log a civic infrastructure buildout
+    function logBuildout(
         bytes32 buildId,
-        string memory name,
+        string memory projectName,
         string memory location,
-        BuildType buildType,
-        uint256 budget,
+        string memory buildType,
         uint256 emotionalAPR,
         string memory lore
     ) public onlySteward {
-        builds[buildId] = CivicBuild({
-            name: name,
+        buildouts[buildId] = Buildout({
+            projectName: projectName,
             location: location,
             buildType: buildType,
-            budget: budget,
             emotionalAPR: emotionalAPR,
-            isCompleted: false,
-            lore: lore
+            timestamp: block.timestamp,
+            lore: lore,
+            isBlessed: false
         });
 
-        buildList.push(buildId);
-        emit BuildRegistered(buildId, name, buildType);
+        buildoutList.push(buildId);
+        emit BuildoutLogged(buildId, projectName, buildType);
     }
 
-    /// @notice Mark build as completed
-    function completeBuild(bytes32 buildId) public onlySteward {
-        require(builds[buildId].emotionalAPR >= 800, "Emotional APR too low");
-        builds[buildId].isCompleted = true;
-        emit BuildCompleted(buildId, builds[buildId].lore);
+    /// @notice Bless the buildout if emotional APR is mythic
+    function blessBuildout(bytes32 buildId) public onlySteward {
+        require(buildouts[buildId].emotionalAPR >= 850, "Buildout not yet mythic");
+        buildouts[buildId].isBlessed = true;
+        emit BuildoutBlessed(buildId, buildouts[buildId].lore);
     }
 
-    /// @notice Flag build if rogue intent or delay detected
-    function flagBuild(bytes32 buildId, string memory reason) public onlySteward {
-        builds[buildId].isCompleted = false;
-        emit BuildFlagged(buildId, reason);
+    /// @notice Retrieve buildout metadata
+    function getBuildout(bytes32 buildId) public view returns (Buildout memory) {
+        return buildouts[buildId];
     }
 
-    /// @notice Retrieve build metadata
-    function getBuild(bytes32 buildId) public view returns (CivicBuild memory) {
-        return builds[buildId];
-    }
-
-    /// @notice List all builds
-    function listBuilds() public view returns (bytes32[] memory) {
-        return buildList;
+    /// @notice List all logged buildouts
+    function listBuildouts() public view returns (bytes32[] memory) {
+        return buildoutList;
     }
 }
