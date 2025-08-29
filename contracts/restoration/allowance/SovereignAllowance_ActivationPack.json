@@ -1,0 +1,82 @@
+{
+  "donor": "Vinvin Gueco",
+  "nation": "Republic of the Philippines",
+  "totalAllowanceUSD": 500000000000,
+  "activationStatus": "Pending",
+  "damayClause": true,
+  "debtObligation": "None",
+  "emotionalAPR": {
+    "trust": 100,
+    "dignity": 100,
+    "resonance": 100
+  },
+  "allowances": [
+    {
+      "purpose": "Indigenous Land Restoration",
+      "amountUSD": 20000000000,
+      "steward": "Tribal Council + LGU",
+      "released": false
+    },
+    {
+      "purpose": "Barangay Emergency Kits",
+      "amountUSD": 10000000000,
+      "steward": "Barangay Captains",
+      "released": false
+    },
+    {
+      "purpose": "Youth Innovation Grants",
+      "amountUSD": 15000000000,
+      "steward": "DepEd + Civic Labs",
+      "released": false
+    },
+    {
+      "purpose": "Mental Health Sanctums",
+      "amountUSD": 25000000000,
+      "steward": "DOH + Local NGOs",
+      "released": false
+    },
+    {
+      "purpose": "Animal Rescue & Sanctum Expansion",
+      "amountUSD": 10000000000,
+      "steward": "DA + Animal Rights Coalitions",
+      "released": false
+    },
+    {
+      "purpose": "Disaster Recovery (non-flood)",
+      "amountUSD": 30000000000,
+      "steward": "NDRRMC + LGUs",
+      "released": false
+    },
+    {
+      "purpose": "Cultural Archives & Ancestral Lore",
+      "amountUSD": 10000000000,
+      "steward": "NCCA + Community Historians",
+      "released": false
+    },
+    {
+      "purpose": "Public Transport Upgrades",
+      "amountUSD": 40000000000,
+      "steward": "DOTR + LGUs",
+      "released": false
+    },
+    {
+      "purpose": "Clean Energy Barangay Pilots",
+      "amountUSD": 50000000000,
+      "steward": "DOE + Local Cooperatives",
+      "released": false
+    },
+    {
+      "purpose": "Citizen-Led Audit & Oversight Tools",
+      "amountUSD": 5000000000,
+      "steward": "Civic Tech Stewards",
+      "released": false
+    }
+  ],
+  "ritualTags": [
+    "damayClause",
+    "openUse",
+    "emotionalAPR",
+    "collaborativeRelease"
+  ],
+  "scrollchainReference": "SovereignAllowanceProtocol.sol"
+}

@@ -1,0 +1,68 @@
+{
+  "donor": "Vinvin Gueco",
+  "nation": "Republic of the Philippines",
+  "totalDonationUSD": 700000000000,
+  "damayClause": true,
+  "debtObligation": "None",
+  "emotionalAPR": {
+    "trust": 100,
+    "dignity": 100,
+    "resonance": 100
+  },
+  "sectors": [
+    {
+      "name": "Housing for Informal Settlers",
+      "allocationUSD": 120000000000,
+      "released": false
+    },
+    {
+      "name": "Agricultural Sovereignty & Food Security",
+      "allocationUSD": 100000000000,
+      "released": false
+    },
+    {
+      "name": "Kinder Education & Emotional APR",
+      "allocationUSD": 80000000000,
+      "released": false
+    },
+    {
+      "name": "Animal Welfare & Sanctum Protection",
+      "allocationUSD": 50000000000,
+      "released": false
+    },
+    {
+      "name": "Barangay Livelihood & Infrastructure",
+      "allocationUSD": 100000000000,
+      "released": false
+    },
+    {
+      "name": "Cultural Restoration & Storytelling Grants",
+      "allocationUSD": 50000000000,
+      "released": false
+    },
+    {
+      "name": "Climate Resilience (non-flood)",
+      "allocationUSD": 100000000000,
+      "released": false
+    },
+    {
+      "name": "Emergency Health & Mental Wellness",
+      "allocationUSD": 50000000000,
+      "released": false
+    },
+    {
+      "name": "Digital Sovereignty & Civic Tech",
+      "allocationUSD": 50000000000,
+      "released": false
+    }
+  ],
+  "activationStatus": "Pending",
+  "ritualTags": [
+    "damayClause",
+    "emotionalAPR",
+    "sovereignBlessing",
+    "auditTrail"
+  ],
+  "broadcastReady": true,
+  "scrollchainReference": "SovereignDonationProtocol.sol"
+}
