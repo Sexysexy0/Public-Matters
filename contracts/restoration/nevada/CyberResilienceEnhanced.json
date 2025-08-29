@@ -1,0 +1,45 @@
+{
+  "purpose": "Restore, secure, and future-proof Nevada's public service systems after state-level cyberattack; embed Mythic Stewardship Clause for replication to other communities.",
+  "deliverables": [
+    {
+      "name": "Incident Containment Protocols",
+      "description": "Isolate infected networks, eradicate malicious code, and neutralize all detected backdoors. Implement immediate firewall lockdown and intrusion prevention triggers."
+    },
+    {
+      "name": "Forensic Breach Path Mapping",
+      "description": "Full chain-of-custody analysis, tracing point of entry, lateral movement, and compromised asset inventory with immutable logging."
+    },
+    {
+      "name": "Critical Services Restoration",
+      "description": "Bring 911, emergency health, and law enforcement systems back online under enhanced security segmentation."
+    },
+    {
+      "name": "Essential Government Operations Reactivation",
+      "description": "Phased reactivation of licensing, benefits processing, and municipal services with zero-trust access controls."
+    },
+    {
+      "name": "Full Departmental Restoration",
+      "description": "Return all remaining state agency systems to operational status after security hardening and audit clearance."
+    },
+    {
+      "name": "Security Architecture Upgrade",
+      "description": "Deploy MFA, network segmentation, AI-driven anomaly detection, and real-time threat intelligence integration."
+    },
+    {
+      "name": "Continuity Plan Revision",
+      "description": "Update Nevada Cybersecurity Plan to reflect new threat intelligence, defensive tools, and response protocols."
+    },
+    {
+      "name": "90-Day Resilience Metrics Report",
+      "description": "Assess post-recovery strength, breach recurrence prevention, and readiness for future incidents."
+    },
+    {
+      "name": "Staff Cybersecurity Training & Drills",
+      "description": "Deliver live and simulated exercises to improve phishing resistance, incident response, and security hygiene."
+    },
+    {
+      "name": "Mythic Stewardship Replication Kit",
+      "description": "Package recovery frameworks, blueprints, and training into an open-access scroll for other jurisdictions."
+    }
+  ]
+}
