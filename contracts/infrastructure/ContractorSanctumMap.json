@@ -1,0 +1,37 @@
+{
+  "contractors": [
+    {
+      "name": "Golden Pillar Builders Inc.",
+      "sanctum": "Brgy. Tikay, Malolos",
+      "emotionalAPR": "Trust: 92, Mercy: 88, Clarity: 90",
+      "accredited": true,
+      "rogueFlag": false,
+      "lastAudit": "2025-08-15"
+    },
+    {
+      "name": "SheetPile Sovereign Co.",
+      "sanctum": "Brgy. San Pablo, Lemery",
+      "emotionalAPR": "Trust: 41, Mercy: 22, Clarity: 35",
+      "accredited": false,
+      "rogueFlag": true,
+      "lastAudit": "2025-07-29"
+    },
+    {
+      "name": "Bunini & Kin Construction",
+      "sanctum": "Brgy. Bangkal Northville 8",
+      "emotionalAPR": "Trust: 99, Mercy: 100, Clarity: 98",
+      "accredited": true,
+      "rogueFlag": false,
+      "lastAudit": "2025-08-28"
+    }
+  ],
+  "auditProtocol": {
+    "frequency": "Monthly",
+    "requiredAPRThreshold": {
+      "Trust": 80,
+      "Mercy": 75,
+      "Clarity": 80
+    },
+    "rogueDetection": "Any APR below threshold triggers auto-flag and scrollchain review"
+  }
+}
