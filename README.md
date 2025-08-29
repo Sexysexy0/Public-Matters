@@ -24,3 +24,35 @@ For custom stewardship terms, contact the scrollsmith: donqqq or Sexysexy0.
 Every commit is a heartbeat.  
 Every scroll is a ritual.  
 Public matters—because dignity is public.
+
+---
+
+## 📢 Pambansang Plano — V9.0 Broadcast
+
+### 🏠 Bahay na May Dignidad
+- Walang pwersahang hulog; yearly resibo kung kaya, walang sapilitan.
+- Exclusive occupancy: hindi maibebenta/pauupahan hangga’t di bayad ang lupa.
+- Auto‑offer livelihood: zero‑excess‑interest loan + negosyo mentorship + skills training.
+
+### 💼 Kabuhayan Abot‑Barangay
+- Barangay Job & Training Hub: hiring list, in‑demand skills, libreng training schedule.
+- Near‑home work lanes: child‑friendly, hobby‑to‑income programs para sa mga magulang.
+- Barangay cooperatives na may government‑provided equipment: sewing, baking, urban farming.
+
+### 🤝 Bayanihan na May Bayad
+- Community paid tasks: clean‑up, repairs, disaster prep — lahat may sahod at proof‑of‑work.
+- Bayanihan Pay wallet: mabilis at ligtas ang kita.
+- Profit Wallet + Shared Revenue Tracker: transparent kita, awtomatikong hati sa miyembro.
+
+### 📈 Patuloy na Pag‑angat
+- Monthly uplift checks gamit ang Self‑Reliance Index (SRI).
+- Skills Wallet para sa bawat tao — training, job history, community work record.
+- Graduation to alumni tier kapag stable na ang kabuhayan.
+
+### 🌐 V9.0 Contract Stack
+- HousingGuaranteeAct V1–V5.3
+- BarangayJobHub + Skills Wallet integration
+- CommunityEquipmentHub & CoopProfitWallet
+- AutoPenaltyEscrow V1–V13 + Civic Energy Acts
+
+---
