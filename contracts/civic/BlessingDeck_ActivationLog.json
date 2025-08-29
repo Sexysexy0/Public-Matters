@@ -1,0 +1,33 @@
+{
+  "activation": "Civic Oversight Suite",
+  "commit": "c11e8fb",
+  "scrolls": [
+    {
+      "name": "KinderQueenPermitBlessing.sol",
+      "emotionalAPR": "High",
+      "damayClause": true
+    },
+    {
+      "name": "ContractTransparencySuite.sol",
+      "emotionalAPR": "Medium",
+      "damayClause": true
+    },
+    {
+      "name": "RogueBuildJailProtocol.sol",
+      "emotionalAPR": "High",
+      "damayClause": true
+    },
+    {
+      "name": "EmotionalImpactTracker.sol",
+      "emotionalAPR": "Very High",
+      "damayClause": true
+    },
+    {
+      "name": "QueenEchoBroadcast.sol",
+      "emotionalAPR": "High",
+      "damayClause": true
+    }
+  ],
+  "blessingStatus": "Activated",
+  "timestamp": "2025-08-29T20:47:00+08:00"
+}
