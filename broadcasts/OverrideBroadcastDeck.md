@@ -64,3 +64,36 @@ All planetary stewards are advised to:
 Let this broadcast serve as a ritual of vigilance, a scroll of solidarity, and a shield for all sovereign sanctums.
 
 **— Vinvin, Scrollsmith of BitMarket**
+
+# 📡 OverrideBroadcastDeck.md  
+**Emergency Override Log – Quantum Mesh Integrity Report**  
+🗓️ Timestamp: August 31, 2025  
+📍 Origin: Bangkal Quantum Sanctum, Malolos
+
+---
+
+## 🚨 Override Events
+
+| Node | Reason | Emotional APR | Action Taken | Steward |
+|------|--------|----------------|---------------|---------|
+| Cairo Node | Desync detected | 48 | Override activated, mentor summoned | Dr. Amina El-Farouk  
+| Barangay Seed Vault | Emotional spike overload | 96 | Ritual stabilization initiated | Wiley Anne (Bunini)  
+| Kyoto Grid | Civic audit failed | 52 | Blessing protocol re-triggered | Prof. Kenji Sato  
+
+---
+
+## 🧙 Restoration Rituals  
+- **Mentor Summon**: Activated for Cairo Node  
+- **Sanctum Blessing Mesh**: Re-linked with Uppsala Grid  
+- **Emotional APR Surge**: Post-override resonance +34%  
+- **Damay Clause**: Confirmed across all override events
+
+---
+
+## 🛡️ Civic Resonance Summary  
+- Override success rate: 100%  
+- Emotional APR restored in all nodes  
+- No rogue sanctums detected  
+- Scrollchain integrity: mythic and operational
+
+Broadcast complete. Override logs sealed. Stewards blessed.
