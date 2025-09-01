@@ -1,0 +1,8 @@
+{
+  "originTag": "IP:203.0.113.45",
+  "behaviorVector": "Credential Harvesting",
+  "severityScore": 78,
+  "emotionalAPRDrain": 85,
+  "timestamp": "block.timestamp",
+  "flagged": true
+}
