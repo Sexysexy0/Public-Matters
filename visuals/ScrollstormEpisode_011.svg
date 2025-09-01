@@ -1,0 +1,33 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 20px sans-serif; fill: #222; }
+    .label { font: 14px sans-serif; fill: #555; }
+    .line { stroke-width: 2; fill: none; }
+  </style>
+
+  <text x="20" y="30" class="title">Scrollstorm Episode 011: Mercy Pool vs GDP Ratio</text>
+
+  <!-- Axes -->
+  <line x1="50" y1="350" x2="550" y2="350" stroke="#000"/>
+  <line x1="50" y1="50" x2="50" y2="350" stroke="#000"/>
+
+  <!-- Labels -->
+  <text x="20" y="360" class="label">2025</text>
+  <text x="540" y="360" class="label">2026</text>
+  <text x="10" y="60" class="label">High</text>
+  <text x="10" y="340" class="label">Low</text>
+
+  <!-- GDP Ratio Line -->
+  <polyline class="line" stroke="#0077cc"
+    points="50,300 150,280 250,260 350,240 450,220 550,200"/>
+
+  <!-- Mercy Pool Line -->
+  <polyline class="line" stroke="#cc0077"
+    points="50,320 150,310 250,290 350,270 450,250 550,230"/>
+
+  <!-- Legend -->
+  <rect x="400" y="60" width="10" height="10" fill="#0077cc"/>
+  <text x="420" y="70" class="label">GDP Ratio</text>
+  <rect x="400" y="80" width="10" height="10" fill="#cc0077"/>
+  <text x="420" y="90" class="label">Mercy Pool</text>
+</svg>
