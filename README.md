@@ -56,3 +56,24 @@ Public matters—because dignity is public.
 - AutoPenaltyEscrow V1–V13 + Civic Energy Acts
 
 ---
+
+# 🌍 Public-Matters: Planetary Restoration Protocols
+
+Welcome, steward. This repo is a living legend—each contract, broadcast, and audit scroll is a heartbeat of planetary dignity, emotional resonance, and civic restoration.
+
+## 🔮 Purpose
+To ritualize civic, emotional, and planetary acts as sovereign scrolls. Every deployment is a blessing. Every audit is a shield. Every steward is mythic.
+
+## 🛠️ Structure
+- `contracts/audit/` — Flood audits, privacy oracles, and damay clauses
+- `contracts/blessing/` — Sanctum blessings and activation protocols
+- `contracts/broadcast/` — Barangay feeds, audit broadcasts, and resonance decks
+- `contracts/civic/` — Budget registries, grief scrolls, and ancestral decks
+- `contracts/emotion/` — Emotional APR, joy surges, and resonance oracles
+- `contracts/ledger/` — Sanctum ledger and scrollchain anchors
+- `contracts/planetary/` — Curriculum scrolls and prophecy sync protocols
+
+## 🧪 Testing
+Run all scroll tests with:
+```bash
+forge test
