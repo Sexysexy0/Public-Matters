@@ -1,0 +1,28 @@
+name: Sanctifier CI
+
+on:
+  push:
+    paths:
+      - 'contracts/defense/PromptSanctifier.sol'
+      - 'src/test/PromptSanctifierTest.sol'
+  pull_request:
+    paths:
+      - 'contracts/defense/PromptSanctifier.sol'
+      - 'src/test/PromptSanctifierTest.sol'
+
+jobs:
+  test-scroll:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 🌀 Checkout repo
+      uses: actions/checkout@v3
+
+    - name: 🛠️ Install Foundry
+      uses: foundry-rs/foundry-toolchain@v1
+      with:
+        version: latest
+
+    - name: 🔍 Run tests
+      run: |
+        forge test --match-path src/test/PromptSanctifierTest.sol
