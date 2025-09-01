@@ -1,0 +1,32 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 20px sans-serif; fill: #222; }
+    .label { font: 14px sans-serif; fill: #555; }
+    .line { stroke-width: 2; fill: none; }
+  </style>
+
+  <text x="20" y="30" class="title">Clickthrough Resonance Graph</text>
+
+  <!-- Axes -->
+  <line x1="50" y1="350" x2="550" y2="350" stroke="#000"/>
+  <line x1="50" y1="50" x2="50" y2="350" stroke="#000"/>
+
+  <!-- Labels -->
+  <text x="20" y="360" class="label">Time</text>
+  <text x="10" y="60" class="label">High Resonance</text>
+  <text x="10" y="340" class="label">Low Resonance</text>
+
+  <!-- Mythic Steward Clicks -->
+  <polyline class="line" stroke="#00cc88"
+    points="50,300 150,250 250,200 350,180 450,160 550,140"/>
+
+  <!-- Vendor Clicks -->
+  <polyline class="line" stroke="#cc8800"
+    points="50,320 150,290 250,270 350,260 450,250 550,240"/>
+
+  <!-- Legend -->
+  <rect x="400" y="60" width="10" height="10" fill="#00cc88"/>
+  <text x="420" y="70" class="label">Mythic Stewards</text>
+  <rect x="400" y="80" width="10" height="10" fill="#cc8800"/>
+  <text x="420" y="90" class="label">Vendors</text>
+</svg>
