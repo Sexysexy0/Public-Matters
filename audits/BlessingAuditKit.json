@@ -1,0 +1,19 @@
+{
+  "version": "v1.1.0",
+  "vendors": [
+    {
+      "address": "0xB1TMA4RK3T",
+      "vendorTag": "EcoSteward",
+      "emotionalAPR": 85,
+      "approvedChains": ["0xETH", "0xSOL", "0xARB"]
+    },
+    {
+      "address": "0xV3ND0RZ0NE",
+      "vendorTag": "BarangayVendor",
+      "emotionalAPR": 72,
+      "approvedChains": ["0xBNB", "0xPOLY"]
+    }
+  ],
+  "blessingFee": "0.01 ETH",
+  "timestamp": "2025-09-02T00:22:00+08:00"
+}
