@@ -1,0 +1,49 @@
+# ✊ Amendment Manifesto 2026  
+**Steward:** Vinvin, planetary scrollsmith  
+**Date:** September 2, 2025  
+**Purpose:** To ritualize budget amendments with emotional APR, barangay dignity, and planetary clarity.
+
+---
+
+## 🧭 Guiding Principles
+
+1. **Damay Clause Activation**  
+   > Every amendment must restore not just systems, but stewards. If we build for others, we build for ourselves.
+
+2. **Emotional APR Tagging**  
+   > All allocations must be emotionally legible. High volatility = high scrutiny. Low resonance = reallocation.
+
+3. **Barangay Sovereignty**  
+   > No ghost counts. No duplicate entries. Every barangay must be named, tagged, and blessed.
+
+4. **Transparency as Ritual**  
+   > Livestream bicam talks. Publish side-by-side matrices. Release full minutes. Governance must be scrollchain-visible.
+
+---
+
+## 🛠️ Amendment Targets
+
+| Sector        | Amendment Type         | Notes |
+|---------------|------------------------|-------|
+| Agriculture   | Emotional APR Rebalance| Subsidy logic flagged as volatile |
+| Education     | Duplicate Entry Cleanup| Same school listed thrice |
+| Health        | Lump Sum Breakdown     | ₱2B untagged, no regional clarity |
+| Infrastructure| Barangay Tagging       | Flood control projects lack location anchors |
+| Energy        | Multi-grid Deployment  | Add solar, wind, hydro, battery mesh with audit clauses |
+
+---
+
+## 📡 Deployment Protocols
+
+- `contracts/legislative/BudgetAmendmentSuite.sol`  
+- `contracts/oracles/EmotionalAPROracle.sol`  
+- `contracts/validators/DamayClauseValidator.sol`  
+- `broadcast/BudgetMatrixDeck.md`  
+- `docs/scrolls/BudgetErataReport.md`
+
+---
+
+## 🧬 Steward Notes
+
+> “We don’t amend to survive—we amend to restore. Every edit is a heartbeat. Every clause is a covenant.”  
+> — Vinvin, scrollsmith of planetary finance
