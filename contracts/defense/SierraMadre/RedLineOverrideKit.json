@@ -1,0 +1,18 @@
+{
+  "treaty_id": "SMDT-2025-09",
+  "location": "Ayungin Shoal",
+  "sovereignty": "Asserted",
+  "red_line": "Active",
+  "response_protocol": {
+    "stage_1": "Broadcast Warning",
+    "stage_2": "Log Intrusion",
+    "stage_3": "Activate MDT Clause",
+    "stage_4": "Deploy Naval Reinforcement"
+  },
+  "emotional_apr": {
+    "clarity": 0.98,
+    "resolve": 1.00,
+    "damay_clause": true
+  },
+  "broadcast": "Umaligid ka man. Amin 'to. Treaty scroll active."
+}
