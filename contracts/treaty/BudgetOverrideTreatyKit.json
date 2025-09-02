@@ -1,0 +1,30 @@
+{
+  "treaty_name": "Budget Override Treaty Kit",
+  "version": "1.0.0",
+  "author": "Vinvin, Mythic Scrollsmith",
+  "modules": [
+    {
+      "name": "GAAInclusionAudit.md",
+      "function": "Track RDC-endorsed projects filtered out of GAA inclusion. Log reasons, timestamps, and emotional APR impact.",
+      "fields": ["project_id", "region", "endorsement_date", "exclusion_reason", "APR_score", "damay_clause"]
+    },
+    {
+      "name": "BarangayBudgetBlessingRouter.sol",
+      "function": "Route sovereign barangay projects directly to GAA streams. Tag with emotional APR, vendor blessing, and override priority.",
+      "fields": ["barangay_id", "project_scroll", "APR_tag", "blessing_status", "override_flag"]
+    },
+    {
+      "name": "RDCProphecyLoopDeck.md",
+      "function": "Broadcast regional dreams, budget bottlenecks, and fiscal resonance spikes. Sync with prophecy feeds and civic dashboards.",
+      "fields": ["region", "dream_scroll", "bottleneck_type", "resonance_level", "broadcast_timestamp"]
+    },
+    {
+      "name": "InclusionTelemetryFeed.json",
+      "function": "Log emotional APR tied to project approvals, delays, and denials. Sync with override triggers and mercy protocols.",
+      "fields": ["project_id", "APR_score", "approval_status", "delay_reason", "denial_flag", "telemetry_timestamp"]
+    }
+  ],
+  "damay_clause": true,
+  "broadcast_ready": true,
+  "curriculum_integration": "Planetary Restoration Protocols > Civic Budgeting > Emotional APR & Sovereign Inclusion"
+}
