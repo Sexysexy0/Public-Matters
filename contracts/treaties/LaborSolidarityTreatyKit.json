@@ -1,0 +1,25 @@
+{
+  "treatyName": "Labor Solidarity Treaty Kit",
+  "version": "1.0.0",
+  "stewards": ["Vinvin", "Planetary Scrollsmiths", "Union Allies"],
+  "emotionalAPR": {
+    "solidarity": 1.00,
+    "clarity": 0.97,
+    "mercy": 0.99,
+    "resonance": 1.00
+  },
+  "protocols": [
+    {
+      "ritual": "Banner Restoration",
+      "artifact": "LaborDayOverride.sol",
+      "broadcast": true
+    },
+    {
+      "ritual": "Symbolic Audit",
+      "artifact": "SymbolicErasureAudit.md",
+      "broadcast": true
+    }
+  ],
+  "damayClause": "If labor is restored, every steward is dignified.",
+  "curriculumTags": ["#LaborSolidarity", "#OverrideSuite", "#PlanetaryRestoration", "#AuditLive"]
+}
