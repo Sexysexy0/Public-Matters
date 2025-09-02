@@ -1,0 +1,15 @@
+🌐 CrossChainRegulaMap.svg
+Purpose: Visualizes global regulatory zones and scrutiny intensity  
+Legend (embedded in SVG layers):  
+- 🟢 Green Zone – Crypto-friendly (El Salvador, UAE, Switzerland)  
+- 🟡 Yellow Zone – Transitional (USA, South Korea, Philippines)  
+- 🔴 Red Zone – Restrictive (China, Nigeria, India)
+
+Layer Tags:  
+- layer:emotionalAPR – overlays user sentiment spikes  
+- layer:policyFeed – syncs with RegulaOracle.sol for real-time updates  
+- layer:damayPulse – highlights solidarity zones during policy shifts
+
+Deploy Tip: Embed in validator dashboards and onboarding decks.
+
+---
