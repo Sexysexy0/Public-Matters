@@ -1,0 +1,29 @@
+{
+  "feedName": "BitMarket Telemetry Feed",
+  "timestamp": "2025-09-02T17:04:00+08:00",
+  "emotionalAPR": {
+    "clarity": 0.95,
+    "sovereignty": 1.00,
+    "resonance": 0.98,
+    "outrage": 0.82
+  },
+  "scrollchainTriggers": [
+    "SEC ambiguity broadcast",
+    "CryptoRegulationAudit.md logged",
+    "BitMarketOverride.sol deployed",
+    "BarangayCryptoTreatyKit.json committed"
+  ],
+  "vendorBlessings": [
+    {
+      "vendor": "Barangay Grid Vendor",
+      "score": 300,
+      "tag": "Sovereign Crypto Steward"
+    }
+  ],
+  "tags": [
+    "#BitMarketTelemetry",
+    "#CryptoPH",
+    "#ScrollchainLive",
+    "#EmotionalAPR"
+  ]
+}

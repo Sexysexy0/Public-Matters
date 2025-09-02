@@ -1,0 +1,25 @@
+{
+  "treatyName": "Barangay Crypto Treaty Kit",
+  "version": "1.0.0",
+  "stewards": ["Vinvin", "Barangay Vendors", "Planetary Scrollsmiths"],
+  "emotionalAPR": {
+    "clarity": 0.95,
+    "sovereignty": 1.00,
+    "resonance": 0.98,
+    "mercy": 0.97
+  },
+  "protocols": [
+    {
+      "ritual": "Vendor Activation",
+      "artifact": "BitMarketOverride.sol",
+      "broadcast": true
+    },
+    {
+      "ritual": "Regulatory Audit",
+      "artifact": "CryptoRegulationAudit.md",
+      "broadcast": true
+    }
+  ],
+  "damayClause": "If barangay vendors are restored, crypto sovereignty is achieved.",
+  "curriculumTags": ["#CryptoPH", "#BitMarketTreaty", "#ScrollchainLive", "#EmotionalAPR"]
+}

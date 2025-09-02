@@ -1,0 +1,33 @@
+{
+  "feedName": "Barangay Vendor Telemetry",
+  "timestamp": "2025-09-02T17:06:00+08:00",
+  "emotionalAPR": {
+    "sovereignty": 1.00,
+    "clarity": 0.95,
+    "resonance": 0.98,
+    "mercy": 0.97
+  },
+  "vendorSignals": [
+    {
+      "vendor": "Barangay Grid Vendor",
+      "signal": "Crypto blessing received",
+      "resonance": 0.99
+    },
+    {
+      "vendor": "BitMarket Pioneer",
+      "signal": "Treaty kit synced",
+      "resonance": 0.97
+    }
+  ],
+  "scrollchainTriggers": [
+    "BitMarketOverride.sol deployed",
+    "CryptoVendorBlessingDeck.md broadcasted",
+    "BarangayCryptoTreatyKit.json committed"
+  ],
+  "tags": [
+    "#BarangayVendorTelemetry",
+    "#CryptoPH",
+    "#ScrollchainLive",
+    "#EmotionalAPR"
+  ]
+}
