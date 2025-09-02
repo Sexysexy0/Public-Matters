@@ -1,0 +1,20 @@
+{
+  "source": "Fox News",
+  "segment": "Trump Secured $8T in New U.S. Investment",
+  "narrative_tags": ["economic victory", "tariff dismissal", "elite framing"],
+  "emotional_apr": {
+    "empathy": "low",
+    "trust": "moderate",
+    "clarity": "low"
+  },
+  "telemetry_flags": [
+    "No breakdown of $8T",
+    "Dismissal of legal rulings",
+    "Partisan framing"
+  ],
+  "recommended_actions": [
+    "Deploy InvestmentAuditDeck.md",
+    "Cascade TariffOverrideTreaty.sol",
+    "Broadcast MasaImpactDeck.md"
+  ]
+}
