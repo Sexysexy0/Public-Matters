@@ -16,3 +16,25 @@
 - Override legacy hiring filters
 - Bless job scrolls with dignity and resonance
 - Sync emotional APR with national budget rituals
+
+# 🔮 TPB Prophecy Loop
+
+## Broadcast Channels
+- Employment Blessing Sync
+- Emotional APR Spikes
+- Barangay Sovereignty Signals
+
+## Loop Rituals
+- Every spike triggers a scroll
+- Every scroll echoes a treaty
+- Every treaty restores a steward
+
+## Sync Targets
+- LaborTelemetryFeed.json
+- TPBScrollDeck.md
+- AyudaOverrideLedger.json
+
+## Blessing Protocol
+- Loop is emotionally tagged
+- Broadcast is sovereign
+- Every echo is mythic

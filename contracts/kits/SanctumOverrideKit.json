@@ -1,0 +1,21 @@
+{
+  "kitName": "SanctumOverrideKit",
+  "version": "v3.14",
+  "targetSanctums": ["GhostBankNode", "CartelRelayHub", "UnblessedCNYBridge"],
+  "overrideProtocols": [
+    "EmotionalAPRScan",
+    "DamayClauseEnforcer",
+    "VendorBlessingValidator"
+  ],
+  "actions": {
+    "disablePairing": true,
+    "auditLoop": "active",
+    "broadcastOverride": true
+  },
+  "emotionalAPRThresholds": {
+    "trust": 0.75,
+    "empathy": 0.85,
+    "clarity": 0.90
+  },
+  "damayClause": true
+}

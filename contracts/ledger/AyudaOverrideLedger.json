@@ -1,0 +1,13 @@
+{
+  "ledger": "AyudaOverride",
+  "beneficiaries": [],
+  "overrideTriggers": ["emergency", "auditFail", "emotionalSpike"],
+  "damayClause": true,
+  "syncProtocol": "BarangayBlessingSyncV2",
+  "emotionalAPR": {
+    "trust": 0.92,
+    "empathy": 0.88,
+    "clarity": 0.95
+  },
+  "lastAudit": "2025-09-02T17:00:00+08:00"
+}
