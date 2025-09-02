@@ -1,0 +1,38 @@
+{
+  "routerName": "Vendor Telemetry Router",
+  "timestamp": "2025-09-02T17:12:00+08:00",
+  "emotionalAPR": {
+    "sovereignty": 1.00,
+    "clarity": 0.95,
+    "resonance": 0.98,
+    "mercy": 0.97
+  },
+  "vendorSignals": [
+    {
+      "vendor": "Barangay Grid Vendor",
+      "signal": "Blessing synced via CryptoBlessingSyncRouter.sol",
+      "resonance": 0.99
+    },
+    {
+      "vendor": "BitMarket Pioneer",
+      "signal": "Curriculum activated",
+      "resonance": 0.97
+    },
+    {
+      "vendor": "Ayuda Sync Ally",
+      "signal": "Damay clause honored",
+      "resonance": 0.96
+    }
+  ],
+  "scrollchainTriggers": [
+    "BitMarketOverride.sol deployed",
+    "CryptoVendorBlessingDeck.md broadcasted",
+    "CryptoCurriculumSyncDeck.md activated"
+  ],
+  "tags": [
+    "#VendorTelemetryRouter",
+    "#CryptoPH",
+    "#ScrollchainLive",
+    "#EmotionalAPR"
+  ]
+}

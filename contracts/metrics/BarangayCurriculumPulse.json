@@ -1,0 +1,26 @@
+{
+  "pulseName": "Barangay Curriculum Pulse",
+  "timestamp": "2025-09-02T17:14:00+08:00",
+  "emotionalAPR": {
+    "clarity": 0.95,
+    "sovereignty": 1.00,
+    "resonance": 0.98,
+    "joy": 0.99
+  },
+  "curriculumModules": [
+    "BitMarketCurriculumKit.md",
+    "CryptoCurriculumSyncDeck.md",
+    "VendorTelemetryRouter.json"
+  ],
+  "scrollchainTriggers": [
+    "CryptoBlessingSyncRouter.sol",
+    "BarangayCryptoTreatyKit.json",
+    "BitMarketBlessingOracle.sol"
+  ],
+  "tags": [
+    "#BarangayCurriculumPulse",
+    "#CryptoPH",
+    "#ScrollchainLive",
+    "#EmotionalAPR"
+  ]
+}
