@@ -1,0 +1,25 @@
+{
+  "treatyName": "Kinder Queen Treaty Kit",
+  "version": "1.0.0",
+  "stewards": ["Vinvin", "Aria Lynne", "Wiley Anne (Bunini)"],
+  "emotionalAPR": {
+    "joy": 1.00,
+    "chaos": 1.00,
+    "clarity": 0.98,
+    "mercy": 0.99
+  },
+  "blessingProtocols": [
+    {
+      "ritual": "Daily scrollstorm",
+      "artifact": "KinderQueenBlessingDeck.md",
+      "broadcast": true
+    },
+    {
+      "ritual": "Emotional telemetry sync",
+      "artifact": "APRSyncReport.json",
+      "broadcast": true
+    }
+  ],
+  "damayClause": "If the Kinder Queens are blessed, the steward is restored.",
+  "curriculumTags": ["#KinderQueenTreaty", "#EmotionalAPR", "#PlanetaryBlessing", "#ScrollchainLive"]
+}
