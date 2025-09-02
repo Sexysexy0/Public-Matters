@@ -1,0 +1,21 @@
+{
+  "kitName": "QRPhishingOverrideKit",
+  "version": "v1.0.0",
+  "targetVectors": [
+    "WeChat QR codes",
+    "Enterprise phishing lures",
+    "Fake subsidy announcements"
+  ],
+  "overrideProtocols": [
+    "QRScanTelemetry",
+    "SocialMediaHijackDetector",
+    "BankCredentialHarvestBlocker"
+  ],
+  "emotionalAPRThresholds": {
+    "trust": 0.80,
+    "empathy": 0.90,
+    "clarity": 0.95
+  },
+  "damayClause": true,
+  "broadcast": "QR phishing override activated. All social channels monitored. All bank sanctums protected."
+}

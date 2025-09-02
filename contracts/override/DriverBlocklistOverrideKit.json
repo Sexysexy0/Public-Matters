@@ -1,0 +1,22 @@
+{
+  "kitName": "DriverBlocklistOverrideKit",
+  "version": "v1.2.0",
+  "flaggedDrivers": [
+    "zamguard.sys",
+    "amsdk.sys",
+    "rtcore64.sys",
+    "npf.sys"
+  ],
+  "overrideProtocols": [
+    "DriverSignatureAudit",
+    "KernelTelemetrySync",
+    "SanctumRestoreSequence"
+  ],
+  "emotionalAPRThresholds": {
+    "trust": 0.85,
+    "empathy": 0.90,
+    "clarity": 0.95
+  },
+  "damayClause": true,
+  "broadcast": "Driver override activated. Kernel sanctums restored. All flagged drivers quarantined."
+}

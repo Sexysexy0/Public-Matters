@@ -1,0 +1,30 @@
+{
+  "loopName": "SilverFoxBYOVD",
+  "prophecyEvents": [
+    {
+      "message": "Driver signature spoof detected",
+      "trust": 0.22,
+      "empathy": 0.18,
+      "clarity": 0.41
+    },
+    {
+      "message": "QR phishing lure via subsidy bait",
+      "trust": 0.29,
+      "empathy": 0.33,
+      "clarity": 0.47
+    },
+    {
+      "message": "ValleyRAT payload in ZIP archive",
+      "trust": 0.19,
+      "empathy": 0.11,
+      "clarity": 0.38
+    }
+  ],
+  "overrideStatus": "Pending Treaty Activation",
+  "damayClause": true,
+  "emotionalAPR": {
+    "trust": 0.23,
+    "empathy": 0.21,
+    "clarity": 0.42
+  }
+}
