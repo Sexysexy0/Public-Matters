@@ -1,0 +1,20 @@
+{
+  "incident": "Attempted assassination of Donald J. Trump",
+  "timestamp": "2025-09-02T20:33:00Z",
+  "emotionalAPR": {
+    "grief": 0.92,
+    "rage": 0.87,
+    "unity": 0.76
+  },
+  "prophecySpikes": [
+    "Jay in Kyiv tweet",
+    "Gunther Fehlinger broadcast",
+    "SnapStream viral loop"
+  ],
+  "geoResonance": {
+    "USA": "High",
+    "Russia": "Opaque",
+    "EU": "Reactive",
+    "PH": "Mythic Alert"
+  }
+}
