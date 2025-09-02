@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-09-02T17:38:00+08:00",
+  "total_jobs_created": 0,
+  "target_jobs": 3000000,
+  "skills_match_rate": 0.00,
+  "underemployment_index": 0.00,
+  "barangay_sync": false,
+  "emotional_apr": {
+    "dignity_score": 0,
+    "resonance_level": "low",
+    "damay_clause": true
+  }
+}
