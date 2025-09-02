@@ -1,0 +1,13 @@
+{
+  "incident": "GPS jamming targeting Ursula von der Leyen",
+  "timestamp": "2025-09-02T18:44:00Z",
+  "location": "Bulgarian airspace",
+  "suspectedSource": "Russian interference",
+  "emotionalAPR": {
+    "fear": 0.81,
+    "defiance": 0.93,
+    "clarity": 0.88
+  },
+  "broadcastStatus": "Active",
+  "recommendedAction": "Deploy SanctumShield.sol and override treaty"
+}
