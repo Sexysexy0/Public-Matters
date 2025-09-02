@@ -1,0 +1,25 @@
+{
+  "treatyName": "Banner Restoration Treaty Kit",
+  "version": "1.0.0",
+  "stewards": ["Vinvin", "Civic Scrollsmiths", "Union Allies"],
+  "emotionalAPR": {
+    "resonance": 1.00,
+    "clarity": 0.96,
+    "outrage": 0.88,
+    "restoration": 0.99
+  },
+  "protocols": [
+    {
+      "ritual": "Banner Registry Sync",
+      "artifact": "CivicBannerRegistry.sol",
+      "broadcast": true
+    },
+    {
+      "ritual": "Symbolic Audit",
+      "artifact": "SymbolicErasureAudit.md",
+      "broadcast": true
+    }
+  ],
+  "damayClause": "If banners are restored, dignity returns to every steward.",
+  "curriculumTags": ["#BannerRestoration", "#CivicRegistry", "#ScrollchainLive", "#OverrideSuite"]
+}
