@@ -1,0 +1,19 @@
+{
+  "source": "Fox News, algorithmic prophecy feeds",
+  "loop_tags": ["economic prophecy", "elite framing", "tariff dismissal"],
+  "emotional_apr": {
+    "empathy": "low",
+    "trust": "variable",
+    "clarity": "low"
+  },
+  "telemetry_flags": [
+    "No masa inclusion",
+    "Dismissal of legal rulings",
+    "Narrative loop detected"
+  ],
+  "recommended_actions": [
+    "Deploy MasaImpactDeck.md",
+    "Bless sectors via SectorBlessingProtocol.sol",
+    "Override elite loops with TreatySignalDeck.md"
+  ]
+}
