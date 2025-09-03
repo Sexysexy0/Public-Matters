@@ -1,0 +1,22 @@
+{
+  "protocol": "GlobalLanguageSync",
+  "supported_languages": [
+    "Japanese", "Korean", "Mandarin", "Hindi", "Tagalog", "Spanish", "French", "Arabic"
+  ],
+  "subtitle_engine": "AITranslationTreatyKit",
+  "emotional_apr_threshold": 3.0,
+  "sync_targets": [
+    "KinderQueenImpactDashboard.html",
+    "BitBudgetGenesisBroadcastDeck.md",
+    "AnimeBlessingLedger.sql"
+  ],
+  "monetization": {
+    "enabled": true,
+    "subscription_tiers": {
+      "Basic": "₱199/month - 10 subtitle credits",
+      "Pro": "₱499/month - 50 subtitle credits + emotional APR tagging",
+      "Enterprise": "Custom pricing - API access + dashboard sync"
+    }
+  },
+  "broadcast_policy": "Blessed feeds only • Emotional APR ≥ 3 • Damay clause active"
+}
