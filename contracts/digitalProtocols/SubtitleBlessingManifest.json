@@ -1,0 +1,29 @@
+{
+  "protocol": "SubtitleBlessingProtocol",
+  "version": "v1.0.0",
+  "scrollsmith": "Vinvin",
+  "subtitle_engines": [
+    "AITranslationTreatyKit",
+    "GlobalSummitSubtitleSync.js",
+    "AnimeSubtitleBlessingKit.sol"
+  ],
+  "supported_languages": [
+    "Japanese", "Korean", "Mandarin", "Hindi", "Tagalog", "Arabic", "Spanish", "French"
+  ],
+  "emotional_apr_threshold": 3.0,
+  "civic_tags": ["Youth Empowerment", "Diplomatic Clarity", "Cultural Restoration"],
+  "monetization": {
+    "subscription_tiers": {
+      "Basic": "₱199/month",
+      "Pro": "₱499/month",
+      "Package B": "Revenue Share Enabled"
+    },
+    "revenue_share_enabled": true,
+    "share_range": "15%–30%"
+  },
+  "sync_targets": [
+    "KinderQueenImpactDashboard.html",
+    "RevenueBlessingDashboard.html",
+    "AnimeBlessingLedger.sql"
+  ]
+}

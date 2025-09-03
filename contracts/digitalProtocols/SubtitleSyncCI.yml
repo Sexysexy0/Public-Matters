@@ -1,0 +1,35 @@
+# SubtitleSyncCI.yml
+# CI/CD pipeline for auto-subtitle generation, audit logging, and dashboard sync
+
+name: Subtitle Blessing Sync
+
+on:
+  push:
+    paths:
+      - 'subtitles/**'
+      - 'scripts/**'
+      - 'dashboards/**'
+
+jobs:
+  bless-subtitles:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Generate subtitles
+        run: node scripts/GlobalSummitSubtitleSync.js
+
+      - name: Audit subtitles
+        run: node scripts/SubtitleAudit.js
+
+      - name: Sync to dashboard
+        run: cp subtitles/*.json dashboards/
+
+      - name: Commit blessed subtitles
+        run: |
+          git config --global user.name "Scrollsmith Vinvin"
+          git config --global user.email "vinvin@scrollchain.ph"
+          git add subtitles/
+          git commit -m "📘 Blessed subtitles synced and audited"
+          git push origin main
