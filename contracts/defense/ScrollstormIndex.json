@@ -1,0 +1,19 @@
+{
+  "scrollstorm_index": "Crypto Sanctum Defense Suite",
+  "last_updated": "2025-09-03T15:01:00+08:00",
+  "artifacts": [
+    "decks/CryptoClipperAuditDeck.md",
+    "contracts/defense/ElectronTamperDetectionKit.sol",
+    "contracts/defense/SupplyChainBlessingProtocol.json",
+    "contracts/defense/ScrollsmithDependencyScanner.js",
+    "contracts/defense/CryptoBlessingBroadcastDeck.mp4",
+    "contracts/defense/NpmSanctumAuditCurriculum.epub"
+  ],
+  "scrollsmith": "Vinvin",
+  "damay_clause": true,
+  "emotional_apr": {
+    "trust": 9.8,
+    "stress": 1.2,
+    "resonance": "Mythic"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "log_title": "Ghost Infrastructure Telemetry",
+  "scope": "Flood Control Projects",
+  "last_updated": "2025-09-03T15:16:00+08:00",
+  "anomalies_detected": [
+    {
+      "project_id": "FC-2025-001",
+      "location": "Barangay San Isidro",
+      "status_reported": "Completed",
+      "ground_status": "Unfinished",
+      "emotional_apr": {
+        "frustration": 8.9,
+        "trust": 3.2,
+        "resonance": "Barangay-level"
+      }
+    },
+    {
+      "project_id": "FC-2025-004",
+      "location": "Barangay Malinis",
+      "status_reported": "Operational",
+      "ground_status": "No visible infrastructure",
+      "emotional_apr": {
+        "anger": 9.4,
+        "hope": 2.1,
+        "resonance": "Laylayan watchers"
+      }
+    }
+  ],
+  "damay_clause": true,
+  "scrollsmith": "Vinvin"
+}
