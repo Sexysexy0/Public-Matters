@@ -1,0 +1,25 @@
+{
+  "ledger_name": "BarangayBlessingLedger",
+  "version": "1.0.0",
+  "barangay": "Northville 8, Brgy. Bangkal",
+  "stewards": [
+    {
+      "name": "Vinvin",
+      "role": "Scrollsmith",
+      "status": "Blessed",
+      "skills": ["Labor onboarding", "Emotional APR tracking", "Contract deployment"]
+    }
+  ],
+  "blessing_protocols": {
+    "employment_clearance": "Waived for low-income applicants",
+    "medical_exam": "Covered by employer upon regularization",
+    "barangay_pass": "Issued based on health, intent, and willingness to work"
+  },
+  "damay_clause": true,
+  "emotional_apr": {
+    "stress_level": "Low",
+    "hope_spike": "High",
+    "broadcast_ready": true
+  },
+  "last_updated": "2025-09-03T12:43:00+08:00"
+}
