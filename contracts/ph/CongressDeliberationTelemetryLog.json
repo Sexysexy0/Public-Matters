@@ -1,0 +1,20 @@
+{
+  "date": "2025-09-03",
+  "session": "Plenary Budget Briefing",
+  "viewers": 103,
+  "emotionalAPR": {
+    "education": 4.8,
+    "health": 3.9,
+    "infrastructure": 2.1
+  },
+  "civicResonance": {
+    "barangayVoices": true,
+    "overrideProtocols": true,
+    "scrollstormDetected": true
+  },
+  "flags": [
+    "FloodControlAnomaly",
+    "DBMPaperReroute",
+    "BlessingAuditRequired"
+  ]
+}
