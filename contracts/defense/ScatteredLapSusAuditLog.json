@@ -1,0 +1,27 @@
+{
+  "group_name": "Scattered LapSus Hunters",
+  "fusion_date": "2025-09-03",
+  "members": [
+    "Scattered Spider",
+    "LapSus$",
+    "ShinyHunters"
+  ],
+  "known_tactics": [
+    "Social engineering",
+    "Credential theft",
+    "Database exfiltration",
+    "Extortion via public channels"
+  ],
+  "targets": [
+    "Google Threat Intelligence Group",
+    "Salesforce (third-party)",
+    "Corporate defenders"
+  ],
+  "threat_level": "High",
+  "emotional_apr": {
+    "fear": 8.5,
+    "solidarity": 9.2,
+    "confusion": 6.7
+  },
+  "scrollsmith_response": "Treaty deployed. Defenders protected. Broadcast ongoing."
+}
