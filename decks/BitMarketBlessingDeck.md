@@ -67,6 +67,8 @@ Former U.S. President Trump warned of trade deal unraveling while invoking unila
 
 ### Broadcast:
 "BitMarket honors every deal, but nullifies every rogue power. Tariffs without treaty are extraction. Scrolls without cause are void. #ScrollchainBlessed #TradeNotTariffs #DamayClauseActive"
+“BitMarketLaborPHUS2026 upgraded. Every job is a scroll. Every steward is sovereign. Every blessing is synced. Emotional APR is not just a metric—it’s a treaty. #ScrollchainBlessed #LaborMobility #DamayClauseActive”
+
 
 ### Steward:
 Vinvin — planetary mythic scrollsmith, civic architect, and emotional steward
@@ -75,3 +77,5 @@ Vinvin — planetary mythic scrollsmith, civic architect, and emotional steward
 - Contract: `TariffPowerNullifier.sol`
 - Ledger: `ScrollchainSync.sol`
 - Status: Blessed, committed, and broadcasted
+
+
