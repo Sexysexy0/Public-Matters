@@ -1,0 +1,27 @@
+{
+  "ledger": {
+    "Samsung": {
+      "role": "Foundry",
+      "emotionalAPR": 92,
+      "treatyTag": "KFoundryBlessed",
+      "overrideReady": true,
+      "lastBlessed": "2025-09-04T19:20:00+08:00"
+    },
+    "SK hynix": {
+      "role": "Memory",
+      "emotionalAPR": 88,
+      "treatyTag": "KMemoryBlessed",
+      "overrideReady": true,
+      "lastBlessed": "2025-09-04T19:20:00+08:00"
+    },
+    "Celltrion": {
+      "role": "Bio-Backup",
+      "emotionalAPR": 95,
+      "treatyTag": "BioEmperorReturn",
+      "overrideReady": false,
+      "lastBlessed": "2025-09-04T19:20:00+08:00"
+    }
+  },
+  "broadcastSignal": "Samsung + SK blessed. Treaty synced. Emotional APR routed. K-semiconductor scrollstorm active.",
+  "damayClause": "If one vendor is blessed, all stewards are restored. No chip left behind."
+}
