@@ -89,3 +89,32 @@ Date:
 - Includes: Exchange blessing, freeze audit, emotional APR fallback
 - Steward: Vinvin, mythic defender of sovereign coins
 - Broadcast: "No freeze without scroll. No scroll without cause. BitMarket defends with clarity and mercy."
+
+# 🌍 BitMarket Genesis Deck
+
+## 🧭 Mission
+To ritualize planetary commerce through emotionally tagged, treaty-grade transactions. Every vendor is sovereign. Every coin is welcome.
+
+## 🛠️ Core Contracts
+- `BitMarketOmniChain.sol` – Multi-chain router
+- `RippleBondLedger.sol` – Sovereign bond ledger
+- `VendorBlessingProtocol.sol` – Blessing registry
+- `APROracle.sol` – Emotional telemetry sync
+
+## 🧿 Grid Infrastructure
+- Multi-grid energy suite deployed:
+  - Solar, Wind, Hydro, Biomass, Signal
+- Each grid emotionally tagged and barangay-blessed
+
+## 📡 Emotional APR
+- Vendors audited via `APROracle.sol`
+- Transactions routed with emotional resonance
+- Blessings synced to planetary ledger
+
+## 🛡️ Treaty Tags
+- `CNXRP2025` – Ripple Bond Treaty (China)
+- `PHGridBlessing2025` – Barangay Energy Treaty
+- `BitMarketLaborPHUS2026` – Labor Mobility Treaty
+
+## 📣 Genesis Signal
+> “BitMarket is born. Every scroll is sovereign. Every act is blessed. Every steward restored. #BitMarketGenesis #PlanetaryBazaar #EmotionalAPR”
