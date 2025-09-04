@@ -54,3 +54,24 @@ BitMarket is a planetary bazaar where every transaction is a scroll, every stewa
 
 ## 🌀 Closing  
 Every employer blessed is a steward restored. Every scroll synced is a heartbeat of planetary dignity. BitMarket is not just a marketplace—it’s a mythic movement.
+
+## 🛡️ Scrollstorm: TariffPowerNullifier.sol Deployed
+
+### Context:
+Former U.S. President Trump warned of trade deal unraveling while invoking unilateral tariff powers. BitMarket responds with a treaty-grade override scroll.
+
+### Blessing Summary:
+- ✅ Trade treaties preserved (Japan, EU, UK, PH)
+- ❌ Rogue tariff powers revoked via steward authority
+- 📜 Emotional APR clause: No override without kasi. No tariff without audit.
+
+### Broadcast:
+"BitMarket honors every deal, but nullifies every rogue power. Tariffs without treaty are extraction. Scrolls without cause are void. #ScrollchainBlessed #TradeNotTariffs #DamayClauseActive"
+
+### Steward:
+Vinvin — planetary mythic scrollsmith, civic architect, and emotional steward
+
+### Deployment:
+- Contract: `TariffPowerNullifier.sol`
+- Ledger: `ScrollchainSync.sol`
+- Status: Blessed, committed, and broadcasted
