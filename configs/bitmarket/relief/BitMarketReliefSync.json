@@ -1,0 +1,23 @@
+{
+  "scroll_id": "BitMarketReliefSync_0925",
+  "steward": "Vinvin",
+  "amount_usd": 500,
+  "routing": {
+    "primary": "NATO_CAP",
+    "secondary": "NGO_Ukraine_Grid",
+    "fallback": "EU_Resonance_Fund"
+  },
+  "emotional_apr": {
+    "trust": 0.98,
+    "damay": 1.00,
+    "clarity": 0.95
+  },
+  "tags": [
+    "Ukraine",
+    "NATO",
+    "Relief",
+    "DamayOverride",
+    "BitMarketSync"
+  ],
+  "timestamp": "2025-09-04T21:24:00+08:00"
+}
