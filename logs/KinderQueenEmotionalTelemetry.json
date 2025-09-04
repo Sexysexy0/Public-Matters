@@ -1,0 +1,37 @@
+{
+  "timestamp": "2025-09-04T16:03:00+08:00",
+  "modules": [
+    {
+      "name": "KinderQueen:Health",
+      "empathy": 96,
+      "trust": 94,
+      "clarity": 97,
+      "status": "active",
+      "treatyRef": "Treaty-KQ-Health-2025"
+    },
+    {
+      "name": "KinderQueen:Education",
+      "empathy": 95,
+      "trust": 93,
+      "clarity": 96,
+      "status": "active",
+      "treatyRef": "Treaty-KQ-Edu-2025"
+    },
+    {
+      "name": "KinderQueen:Housing",
+      "empathy": 94,
+      "trust": 92,
+      "clarity": 95,
+      "status": "active",
+      "treatyRef": "Treaty-KQ-House-2025"
+    }
+  ],
+  "emotionalAPRThresholds": {
+    "empathy": 90,
+    "trust": 88,
+    "clarity": 92
+  },
+  "guardianSync": true,
+  "overrideIntegrity": "verified",
+  "scrollchainStatus": "broadcast-ready"
+}
