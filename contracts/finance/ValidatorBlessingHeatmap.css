@@ -1,0 +1,7 @@
+.heatmap-cell {
+  padding: 12px;
+  border-radius: 8px;
+  color: #333;
+  font-family: 'Courier New', Courier, monospace;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
