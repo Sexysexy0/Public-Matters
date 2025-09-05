@@ -1,0 +1,45 @@
+{
+  "treatyCorridors": [
+    {
+      "country": "India",
+      "tariffRate": 10,
+      "lastUpdated": "2025-09-05T22:23:00+08:00",
+      "status": "Blessed"
+    },
+    {
+      "country": "Philippines",
+      "tariffRate": 10,
+      "lastUpdated": "2025-09-05T22:23:00+08:00",
+      "status": "Blessed"
+    },
+    {
+      "country": "EU",
+      "tariffRate": 10,
+      "lastUpdated": "2025-09-05T22:23:00+08:00",
+      "status": "Blessed"
+    },
+    {
+      "country": "Canada",
+      "tariffRate": 10,
+      "lastUpdated": "2025-09-05T22:23:00+08:00",
+      "status": "Blessed"
+    },
+    {
+      "country": "Taiwan",
+      "tariffRate": 10,
+      "lastUpdated": "2025-09-05T22:23:00+08:00",
+      "status": "Blessed"
+    },
+    {
+      "country": "South Korea",
+      "tariffRate": 10,
+      "lastUpdated": "2025-09-05T22:23:00+08:00",
+      "status": "Blessed"
+    }
+  ],
+  "alerts": [],
+  "overrideTriggers": {
+    "enabled": true,
+    "threshold": 25
+  }
+}
