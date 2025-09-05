@@ -6,14 +6,17 @@ import {SignalBlessingRouter} from "../../contracts/router/SignalBlessingRouter.
 
 contract SignalBlessingRouterTest is Test {
     SignalBlessingRouter router;
+    address receiver;
 
     function setUp() public {
         router = new SignalBlessingRouter();
+        receiver = address(0xB4A5); // mock verified receiver
+        router.verifyReceiver(receiver);
     }
 
-    function testRouteSignal() public {
+    function testBlessSignal() public {
         bytes32 signalId = keccak256(abi.encodePacked("TarotFeed", block.timestamp));
-        router.routeSignal(signalId, "BarangayDashboard", "HopeSurge");
-        // Optional: assert via event logs or mock destination sync
+        router.blessSignal(signalId, receiver);
+        assertTrue(router.isBlessed(signalId));
     }
 }
