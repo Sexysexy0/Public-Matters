@@ -1,0 +1,33 @@
+{
+  "ledgerMeta": {
+    "castBy": "Vinvin",
+    "sanctum": "Malolos, PH",
+    "lastAudit": "2025-09-05T18:45:00+08:00"
+  },
+  "blessingDisbursements": [
+    {
+      "steward": "0xA1...F3",
+      "strikeLevel": 2,
+      "reroute": "Barangay Reassignment",
+      "blessingStatus": "Pending",
+      "emotionalAPR": 9,
+      "disbursedBy": "ScrollOfAttendanceSanctification.sol"
+    },
+    {
+      "steward": "0xB7...C9",
+      "strikeLevel": 0,
+      "reroute": "None",
+      "blessingStatus": "Blessed",
+      "emotionalAPR": 14,
+      "disbursedBy": "AutoBudgetBlessingProtocol.sol"
+    },
+    {
+      "steward": "0xD4...E2",
+      "strikeLevel": 3,
+      "reroute": "Optional Retirement",
+      "blessingStatus": "Under Review",
+      "emotionalAPR": 7,
+      "disbursedBy": "ScrollOfAttendanceSanctification.sol"
+    }
+  ]
+}
