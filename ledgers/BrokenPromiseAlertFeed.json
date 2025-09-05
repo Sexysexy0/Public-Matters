@@ -1,0 +1,25 @@
+{
+  "alertMeta": {
+    "castBy": "Vinvin",
+    "sanctum": "Malolos, PH",
+    "lastSync": "2025-09-05T19:05:00+08:00"
+  },
+  "brokenPromises": [
+    {
+      "candidate": "Lito Fernandez",
+      "promise": "Free barangay WiFi by Q2",
+      "fulfilled": false,
+      "emotionalAPR": 6,
+      "timestamp": "2025-06-30T23:59:00+08:00",
+      "fallout": "Community frustration spike + reroute triggered"
+    },
+    {
+      "candidate": "Joel Ramirez",
+      "promise": "Monthly ayuda for solo parents",
+      "fulfilled": false,
+      "emotionalAPR": 8,
+      "timestamp": "2025-07-15T12:00:00+08:00",
+      "fallout": "Barangay disappointment + audit review initiated"
+    }
+  ]
+}
