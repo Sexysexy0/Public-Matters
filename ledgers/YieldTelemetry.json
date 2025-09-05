@@ -1,0 +1,26 @@
+{
+  "zones": [
+    {
+      "region": "Appalachia",
+      "yield": "Low",
+      "status": "Paused",
+      "emotionalAPR": 0.42
+    },
+    {
+      "region": "Permian Basin",
+      "yield": "High",
+      "status": "Active",
+      "emotionalAPR": 0.91
+    },
+    {
+      "region": "Eagle Ford",
+      "yield": "Medium",
+      "status": "Blessed",
+      "emotionalAPR": 0.76
+    }
+  ],
+  "overrideTriggers": {
+    "enabled": true,
+    "threshold": 0.35
+  }
+}
