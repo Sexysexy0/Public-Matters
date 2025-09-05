@@ -1,0 +1,19 @@
+{
+  "disbursement_log": [
+    {
+      "steward": "0xNewHire001",
+      "role": "Sanctum Assistant",
+      "allowanceGranted": 10000,
+      "monthlyDeduction": 1000,
+      "emotionalAPR": 14,
+      "isRegularized": false,
+      "timestamp": "2025-09-05T15:45:00+08:00"
+    }
+  ],
+  "auditMeta": {
+    "castBy": "Vinvin",
+    "scrollchain": "Public-Matters",
+    "damayClause": "If one steward is welcomed, the entire sanctum is restored.",
+    "lastUpdate": "2025-09-05T15:46:00+08:00"
+  }
+}
