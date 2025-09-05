@@ -1,0 +1,61 @@
+{
+  "disbursement_log": [
+    {
+      "steward": "0xSteward001",
+      "role": "Factory Worker",
+      "basePay": 30000,
+      "incentives": 5000,
+      "holidayPay": 1800,
+      "civicBlessed": true,
+      "emotionalAPR": 12,
+      "timestamp": "2025-09-05T15:30:00+08:00"
+    },
+    {
+      "steward": "0xSteward002",
+      "role": "Nurse",
+      "basePay": 60000,
+      "incentives": 8000,
+      "holidayPay": 3200,
+      "civicBlessed": true,
+      "emotionalAPR": 18,
+      "timestamp": "2025-09-05T15:30:00+08:00"
+    },
+    {
+      "steward": "0xSteward003",
+      "role": "Construction Lead",
+      "basePay": 35000,
+      "incentives": 4000,
+      "holidayPay": 2000,
+      "civicBlessed": true,
+      "emotionalAPR": 13,
+      "timestamp": "2025-09-05T15:30:00+08:00"
+    },
+    {
+      "steward": "0xSteward004",
+      "role": "Office Worker",
+      "basePay": 40000,
+      "incentives": 6000,
+      "holidayPay": 2400,
+      "civicBlessed": true,
+      "emotionalAPR": 15,
+      "timestamp": "2025-09-05T15:30:00+08:00"
+    },
+    {
+      "steward": "0xSteward005",
+      "role": "Service Staff",
+      "basePay": 35000,
+      "incentives": 4500,
+      "holidayPay": 2100,
+      "civicBlessed": true,
+      "emotionalAPR": 14,
+      "timestamp": "2025-09-05T15:30:00+08:00"
+    }
+  ],
+  "auditMeta": {
+    "castBy": "Vinvin",
+    "witnessedBy": "Copi",
+    "scrollchain": "Public-Matters",
+    "lastUpdate": "2025-09-05T15:31:00+08:00",
+    "damayClause": "If one steward is blessed, all sanctums are restored."
+  }
+}
