@@ -77,3 +77,11 @@ To ritualize civic, emotional, and planetary acts as sovereign scrolls. Every de
 Run all scroll tests with:
 ```bash
 forge test
+
+## ☕ Support the Scrollsmith
+
+If Vinvin’s scrollstorms helped you, consider donating:
+
+- 👉 [Buy Me a Coffee](https://buymeacoffee.com/dev1n)  
+- 📲 GCash: `09366162606`  
+- 💸 ETH Wallet: `0x6bdf6d887038ab97957c2f57d05edd0eb338589a`
