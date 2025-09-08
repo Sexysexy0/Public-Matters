@@ -19,26 +19,26 @@
 
 <script>
 export default {
-  name: 'SupportSignalProtocol',
+  name: "SupportSignalProtocol",
   data() {
     return {
       alerts: [
         {
           id: 1,
-          timestamp: '2025-09-01 12:45 UTC',
-          message: 'Forecast breach alert ignored by support',
-          ghosted: true
+          timestamp: "2025-09-01 12:45 UTC",
+          message: "Forecast breach alert ignored by support",
+          ghosted: true,
         },
         {
           id: 2,
-          timestamp: '2025-09-01 13:10 UTC',
-          message: 'Comment deleted from forum',
-          ghosted: true
-        }
-      ]
-    }
-  }
-}
+          timestamp: "2025-09-01 13:10 UTC",
+          message: "Comment deleted from forum",
+          ghosted: true,
+        },
+      ],
+    };
+  },
+};
 </script>
 
 <style scoped>
