@@ -30,25 +30,47 @@ export default {
   data() {
     return {
       pepEvents: [
-        { id: 1, region: "Ilocos", festival: "Empanada Fiesta", apr: "🌞 High", visitors: 12000, resonance: 92 },
-        { id: 2, region: "Bicol", festival: "Pili Festival", apr: "🌿 Moderate", visitors: 8500, resonance: 78 },
-        { id: 3, region: "Visayas", festival: "Sinulog", apr: "🔥 Surge", visitors: 30000, resonance: 98 }
-      ]
+        {
+          id: 1,
+          region: "Ilocos",
+          festival: "Empanada Fiesta",
+          apr: "🌞 High",
+          visitors: 12000,
+          resonance: 92,
+        },
+        {
+          id: 2,
+          region: "Bicol",
+          festival: "Pili Festival",
+          apr: "🌿 Moderate",
+          visitors: 8500,
+          resonance: 78,
+        },
+        {
+          id: 3,
+          region: "Visayas",
+          festival: "Sinulog",
+          apr: "🔥 Surge",
+          visitors: 30000,
+          resonance: 98,
+        },
+      ],
     };
-  }
+  },
 };
 </script>
 
 <style scoped>
 .pep-dashboard {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   padding: 2rem;
 }
 table {
   width: 100%;
   border-collapse: collapse;
 }
-th, td {
+th,
+td {
   padding: 0.75rem;
   border: 1px solid #ccc;
   text-align: center;

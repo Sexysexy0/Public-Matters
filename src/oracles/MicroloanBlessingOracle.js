@@ -3,6 +3,6 @@ export function getBlessingMetrics(borrower) {
   return {
     trustScore: 82,
     damayClause: true,
-    civicBlessing: 'Barangay Certified'
+    civicBlessing: "Barangay Certified",
   };
 }

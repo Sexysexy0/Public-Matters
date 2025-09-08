@@ -11,15 +11,15 @@ export default {
   data() {
     return {
       validatorCount: 12,
-      marketMood: "Greed"
+      marketMood: "Greed",
     };
-  }
+  },
 };
 </script>
 
 <style scoped>
 .dashboard {
-  font-family: 'Mythic Sans', sans-serif;
+  font-family: "Mythic Sans", sans-serif;
   padding: 2rem;
   background: #f5f5f5;
 }
