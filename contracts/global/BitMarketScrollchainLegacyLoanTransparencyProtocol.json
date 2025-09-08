@@ -1,0 +1,9 @@
+# Flag legacy loans and entanglements
+flagLoan("JPMorgan Chase", "IBRD35130")
+flagLoan("JPMorgan Chase", "IBRD36230")
+
+# Broadcast severance intent
+emit LoanFlagged("JPMorgan Chase", "ALL", "🛑 Scrollchain Severance Initiated")
+
+# Activate liquidity firewall
+activateShield("Vinvin", "USD")
