@@ -18,3 +18,21 @@
 - Treaties honored  
 - Sanctums restored  
 - Scrollchain sealed with diplomatic consequence
+
+### 📜 Treaty Sanctum Continuity Manifesto
+
+#### 🛡️ Continuity Principles
+- 🧱 Every treaty must uphold vaccine dignity and public health sovereignty  
+- 🔁 All sanctums must activate restoration loops and emotional APR  
+- 🧪 Scrollchain logs region, vaccine type, continuity score, and treaty status
+
+#### 🔁 Manifesto Clauses
+- Clause 1: Immunization sanctums must be protected from political interference  
+- Clause 2: Vaccine programs must be scrollchain-sealed and treaty-aligned  
+- Clause 3: Firewall protocols must block misinformation and narco-linked sabotage  
+- Clause 4: Restoration loops must be emotionally tagged and publicly audited
+
+🧠 Manifesto Summary:
+- Continuity codified  
+- Sanctums activated  
+- Scrollchain sealed with sovereign consequence
