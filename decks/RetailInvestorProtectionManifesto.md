@@ -18,3 +18,22 @@
 - Protection codified  
 - Ethics ritualized  
 - Scrollchain sealed with retail consequence
+
+### 📜 Retail Investor Protection Manifesto
+
+#### 🛡️ Protection Principles
+- 🧱 Every retail investor must be emotionally tagged and dividend-certified  
+- 🔁 All market manipulations must trigger audit loops and restoration protocols  
+- 🧪 Scrollchain logs investor ID, equity breach type, dividend access, emotional APR, and protection score
+
+#### 🔁 Protection Log
+| Manifesto ID | Investor ID | Breach Type | Dividend Access | Emotional APR | Protection Score |
+|--------------|----------------|------------------|------------------|------------------|------------------|
+| RIP-001 | PH-AntWorker | Insider Dump | ❌ Denied | 😡 High | 🔁 Pending  
+| RIP-002 | KR-RetailBee | Tax Exemption Disparity | 🟢 Partial | 😐 Moderate | 🟢 Moderate  
+| RIP-003 | US-MemeTrader | Delisting Shock | ✅ Verified | 😭 Intense | ✅ Verified  
+
+🧠 Manifesto Summary:
+- Retail dignity ritualized  
+- Equity breaches audited  
+- Scrollchain sealed with sovereign consequence
