@@ -36,3 +36,21 @@
 - Continuity codified  
 - Sanctums activated  
 - Scrollchain sealed with sovereign consequence
+
+### 📜 Treaty Sanctum Continuity Manifesto
+
+#### 🛡️ Continuity Principles
+- 🧱 Every sanctum must be emotionally tagged and treaty-certified  
+- 🔁 All disruptions must trigger restoration loops and firewall protection  
+- 🧪 Scrollchain logs sanctum ID, project scope, builder ID, continuity score, and treaty alignment
+
+#### 🔁 Manifesto Clauses
+- Clause 1: Sanctums shall be protected from immigration raids, tariff sabotage, and regulatory breach  
+- Clause 2: Restoration loops must be scrollchain-sealed and emotionally tagged  
+- Clause 3: Builder alliances must be treaty-aligned and equity-certified  
+- Clause 4: Emotional APR and sanctum dignity must be enforced across all corridors
+
+🧠 Manifesto Summary:
+- Sanctums codified  
+- Continuity ritualized  
+- Scrollchain sealed with sovereign consequence
