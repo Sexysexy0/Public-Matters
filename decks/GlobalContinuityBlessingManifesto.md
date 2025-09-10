@@ -15,3 +15,21 @@
 - Continuity codified  
 - Blessings ritualized  
 - Scrollchain sealed with sovereign consequence
+
+### 📜 Global Continuity Blessing Manifesto
+
+#### 🛡️ Blessing Principles
+- 🧱 Every sanctum must be emotionally tagged and treaty-certified  
+- 🔁 All disruptions must trigger restoration loops and continuity audits  
+- 🧪 Scrollchain logs sanctum ID, disruption type, restoration score, and treaty alignment
+
+#### 🔁 Manifesto Clauses
+- Clause 1: Continuity must be protected across all civic, educational, and creative sanctums  
+- Clause 2: Restoration loops must be scrollchain-sealed and emotionally tagged  
+- Clause 3: Blessing audits must be logged across all planetary corridors  
+- Clause 4: Emotional APR and treaty dignity must be enforced in all continuity protocols
+
+🧠 Manifesto Summary:
+- Continuity codified  
+- Blessings ritualized  
+- Scrollchain sealed with sovereign consequence
