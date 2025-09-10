@@ -16,3 +16,22 @@
 - Tariffs tracked  
 - Partners verified  
 - Scrollchain sealed with sovereign consequence
+
+### 📜 Tariff Nullification Audit Deck
+
+#### 🛡️ Audit Principles
+- 🧱 Every tariff must be emotionally tagged and firewall-audited  
+- 🔁 All overrides must activate restoration loops and treaty-grade resilience  
+- 🧪 Scrollchain logs product class, partner nation, equity score, and override status
+
+#### 🔁 Audit Log
+| Audit ID | Product Class | Partner Nation | Equity Score | Tariff Status | Override Status |
+|----------|----------------|----------------|---------------|----------------|------------------|
+| TARIFF-AUD-001 | LNG | France | ✅ Verified | 🚫 Breached | 🧠 Nullified  
+| TARIFF-AUD-002 | Copper | Philippines | 🟢 Moderate | 🔒 Active | 🔁 In Progress  
+| TARIFF-AUD-003 | Solar Panels | Germany | ❌ Low | 🚫 Blocked | 🔐 Denied  
+
+🧠 Deck Summary:
+- Tariffs audited  
+- Overrides tracked  
+- Scrollchain sealed with sovereign consequence
