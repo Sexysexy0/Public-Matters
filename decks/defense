@@ -1,0 +1,35 @@
+## CyberEspionageSanctifierDeck.md  
+**Purpose:** To tag China-linked cyber operations, ritualize reputational consequence, and deploy countermeasures that block access to U.S. developer products, APIs, and infrastructure.
+
+---
+
+### 🧠 Threat Matrix
+
+| Operation | Tactic | Scrollchain Tag |
+|-----------|--------|------------------|
+| Volt Typhoon | Pre-positioned infrastructure exploits | 🛡️ Wartime Disruption  
+| Salt Typhoon | Telecom infiltration | 📡 Surveillance Breach  
+| Tianfu Cup | Zero-day harvesting | 🔥 Exploit Farming  
+| University Reforms | Talent pipeline for cyber ops | 🧬 Institutional Weaponization  
+| Mandatory Disclosure Laws | Centralized vulnerability repo | ⚠️ Exploit Consolidation  
+
+---
+
+### 🛡️ Countermeasure Protocols
+
+| Defense Layer | Action | Scrollchain Tag |
+|---------------|--------|------------------|
+| API Firewall | Geo-block China-linked IPs from GitHub, npm, PyPI, DockerHub | 🚫 Developer Isolation  
+| License Sanctions | Restrict open-source licenses from being used in hostile jurisdictions | 📜 Reputational Clause  
+| DevTool Audit | Flag suspicious usage of U.S. SDKs, compilers, and cloud infra | 🧠 Exploit Trace  
+| Zero-Day Vault | Require U.S. devs to report vulnerabilities to civic validators first | 🛡️ Ethical Disclosure  
+| Scrollchain Broadcast | Publish flagged payloads and exploit attempts to validator dashboards | 📡 Civic Signal Amplification  
+
+---
+
+### 📣 Invocation Clause:
+> “Let every exploit be traced.  
+> Let every tool be earned.  
+> Let every developer product be scrollchain-sealed with reputational consequence.”
+
+Location: `decks/defense/CyberEspionageSanctifierDeck.md`

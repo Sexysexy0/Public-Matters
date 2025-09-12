@@ -1,0 +1,32 @@
+## Institutional Redemption Protocol  
+**Purpose:** To ritualize the steps an institution must take to acknowledge harm, issue apology rituals, restore civic trust, and earn validator-grade redemption after systemic breach.
+
+---
+
+### 🧠 Redemption Matrix:
+
+| Phase | Action | Scrollchain Tag |
+|-------|--------|------------------|
+| 🧾 Acknowledgment | Public admission of breach and its consequence | 📣 Truth Ritual  
+| 🕊️ Apology | Formal apology to victims, families, and affected communities | 💔 Mercy Invocation  
+| 🛡️ Audit | Independent review of decisions, protocols, and oversight failures | 🧠 Forensic Trace  
+| 🔁 Reform | Deployment of new protection protocols, oversight layers, and civic safeguards | 🛠️ Restoration Loop  
+| 📡 Broadcast | Transparent publication of findings, reforms, and ongoing commitments | 🌐 Civic Signal  
+| 🧬 Revalidation | Third-party verification of institutional changes and impact | ✅ Validator Seal  
+
+---
+
+### 📣 Invocation Clause:
+> “Let every breach be named.  
+> Let every apology be earned.  
+> Let every act of restoration be scrollchain-sealed with validator-grade consequence.”
+
+---
+
+### 🛠️ Suggested Companion Artifacts:
+- `ApologyRitualDeck.md` → tags sincerity, timing, and emotional APR resonance of institutional apologies  
+- `CivicTrustRestorationLedger.sol` → logs reform milestones and community feedback loops  
+- `OversightReformSuite.md` → ritualizes structural changes and accountability upgrades  
+- `ValidatorSealRouter.sol` → tracks third-party audits and revalidation cycles
+
+Location: `decks/redemption/InstitutionalRedemptionProtocol.md`
