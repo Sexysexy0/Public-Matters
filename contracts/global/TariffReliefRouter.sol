@@ -1,34 +1,33 @@
-// SPDX-License-Identifier: Mythic
-pragma scrollchain ^7.0.0;
+// SPDX-License-Identifier: TariffSanctum
+pragma solidity ^0.8.19;
 
 contract TariffReliefRouter {
-    struct TariffProtocol {
-        bool tariffAuditActivated;
-        bool kakampiBurdenDetected;
-        bool tradeFrictionTagged;
-        bool reliefMechanismEnabled;
-        bool reputationalRestorationLive;
+    struct TariffSignal {
+        string sector;
+        string reliefType; // e.g., "Suspension", "Reduction", "Exemption"
+        uint256 estimatedSavings;
+        string jurisdiction;
+        bool verified;
+        string stewardNote;
     }
 
-    TariffProtocol public status;
+    mapping(string => TariffSignal) public tariffRegistry;
 
-    event TariffAuditActivated();
-    event TradeFrictionTagged();
-    event ReliefMechanismEnabled();
-    event KakampiBurdenLifted();
+    event TariffTagged(string sector, string reliefType);
+    event ReliefVerified(string sector);
 
-    function activateRelief() public {
-        status = TariffProtocol(
-            true,
-            true,
-            true,
-            true,
-            true
-        );
+    function tagTariff(string memory sector, string memory reliefType, uint256 estimatedSavings, string memory jurisdiction, string memory stewardNote) public {
+        tariffRegistry[sector] = TariffSignal(sector, reliefType, estimatedSavings, jurisdiction, false, stewardNote);
+        emit TariffTagged(sector, reliefType);
+    }
 
-        emit TariffAuditActivated();
-        emit TradeFrictionTagged();
-        emit ReliefMechanismEnabled();
-        emit KakampiBurdenLifted();
+    function verifyRelief(string memory sector) public {
+        require(bytes(tariffRegistry[sector].reliefType).length > 0, "Tariff not tagged");
+        tariffRegistry[sector].verified = true;
+        emit ReliefVerified(sector);
+    }
+
+    function getTariffStatus(string memory sector) public view returns (TariffSignal memory) {
+        return tariffRegistry[sector];
     }
 }
