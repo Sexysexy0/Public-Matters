@@ -2,30 +2,52 @@
 pragma solidity ^0.8.19;
 
 contract CustomsBlessingRouter {
-    struct CustomsSignal {
-        string borderName;
-        string partnerCountry;
-        bool blessed;
-        string stewardNote;
+    address public steward;
+
+    struct ClearanceEvent {
+        string product;
+        string origin;
+        string destination;
+        string customsHub; // e.g. "Rotterdam", "Manila", "Houston"
+        string blessingTag; // e.g. "Humanitarian", "Diaspora Corridor", "Treaty Exempt"
+        bool cleared;
+        uint256 timestamp;
     }
 
-    mapping(string => CustomsSignal) public customsRegistry;
+    ClearanceEvent[] public events;
 
-    event CustomsTagged(string borderName, string partnerCountry);
-    event CustomsBlessed(string borderName);
+    event ClearanceLogged(string product, string origin, string destination, string customsHub, string blessingTag, uint256 timestamp);
+    event ClearanceVerified(uint256 index, address verifier);
 
-    function tagCustoms(string memory borderName, string memory partnerCountry, string memory stewardNote) public {
-        customsRegistry[borderName] = CustomsSignal(borderName, partnerCountry, false, stewardNote);
-        emit CustomsTagged(borderName, partnerCountry);
+    constructor() {
+        steward = msg.sender;
     }
 
-    function blessCustoms(string memory borderName) public {
-        require(bytes(customsRegistry[borderName].partnerCountry).length > 0, "Customs not tagged");
-        customsRegistry[borderName].blessed = true;
-        emit CustomsBlessed(borderName);
+    function logClearance(
+        string memory product,
+        string memory origin,
+        string memory destination,
+        string memory customsHub,
+        string memory blessingTag
+    ) public {
+        events.push(ClearanceEvent(product, origin, destination, customsHub, blessingTag, false, block.timestamp));
+        emit ClearanceLogged(product, origin, destination, customsHub, blessingTag, block.timestamp);
     }
 
-    function getCustomsStatus(string memory borderName) public view returns (CustomsSignal memory) {
-        return customsRegistry[borderName];
+    function verifyClearance(uint256 index) public {
+        require(index < events.length, "Invalid index");
+        events[index].cleared = true;
+        emit ClearanceVerified(index, msg.sender);
+    }
+
+    function getClearance(uint256 index) public view returns (
+        string memory, string memory, string memory, string memory, string memory, bool, uint256
+    ) {
+        ClearanceEvent memory e = events[index];
+        return (e.product, e.origin, e.destination, e.customsHub, e.blessingTag, e.cleared, e.timestamp);
+    }
+
+    function totalClearances() public view returns (uint256) {
+        return events.length;
     }
 }
