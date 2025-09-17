@@ -1,9 +1,9 @@
-// SPDX-License-Identifier: ArabNATOProtocol
+// SPDX-License-Identifier: DefenseSanctum
 pragma solidity ^0.8.19;
 
 contract DefenseSanctumTreaty {
     address public steward;
-    string public allianceName = "Arab-Islamic NATO";
+    string public allianceName = "Arab-Islamic Defense Pact";
     uint256 public ratifiedAt;
 
     struct MemberState {
