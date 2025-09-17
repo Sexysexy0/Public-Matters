@@ -2,32 +2,48 @@
 pragma solidity ^0.8.19;
 
 contract InnovationEquityRouter {
-    struct InnovationSignal {
-        string projectID;
-        string innovationType;
-        string kpiMetric;
-        uint256 equityWeight;
-        bool longTermAligned;
-        string stewardNote;
+    address public steward;
+
+    struct EquityRecord {
+        string nationTag; // e.g. "USA", "China", "India", "Philippines"
+        string techDomain; // e.g. "AI", "Quantum", "Biotech", "Semiconductors"
+        string accessLevel; // e.g. "Dominant", "Marginalized", "Emerging"
+        bool verified;
+        uint256 timestamp;
     }
 
-    mapping(string => InnovationSignal) public innovationRegistry;
+    EquityRecord[] public records;
 
-    event ProjectTagged(string projectID, string innovationType);
-    event AlignmentVerified(string projectID);
+    event EquityLogged(string nationTag, string techDomain, string accessLevel, uint256 timestamp);
+    event EquityVerified(uint256 index, address verifier);
 
-    function tagProject(string memory projectID, string memory innovationType, string memory kpiMetric, uint256 equityWeight, bool longTermAligned, string memory stewardNote) public {
-        innovationRegistry[projectID] = InnovationSignal(projectID, innovationType, kpiMetric, equityWeight, longTermAligned, stewardNote);
-        emit ProjectTagged(projectID, innovationType);
+    constructor() {
+        steward = msg.sender;
     }
 
-    function verifyAlignment(string memory projectID) public {
-        require(bytes(innovationRegistry[projectID].innovationType).length > 0, "Project not tagged");
-        innovationRegistry[projectID].longTermAligned = true;
-        emit AlignmentVerified(projectID);
+    function logEquity(
+        string memory nationTag,
+        string memory techDomain,
+        string memory accessLevel
+    ) public {
+        records.push(EquityRecord(nationTag, techDomain, accessLevel, false, block.timestamp));
+        emit EquityLogged(nationTag, techDomain, accessLevel, block.timestamp);
     }
 
-    function getInnovationStatus(string memory projectID) public view returns (InnovationSignal memory) {
-        return innovationRegistry[projectID];
+    function verifyEquity(uint256 index) public {
+        require(index < records.length, "Invalid index");
+        records[index].verified = true;
+        emit EquityVerified(index, msg.sender);
+    }
+
+    function getEquity(uint256 index) public view returns (
+        string memory, string memory, string memory, bool, uint256
+    ) {
+        EquityRecord memory e = records[index];
+        return (e.nationTag, e.techDomain, e.accessLevel, e.verified, e.timestamp);
+    }
+
+    function totalEquityRecords() public view returns (uint256) {
+        return records.length;
     }
 }
