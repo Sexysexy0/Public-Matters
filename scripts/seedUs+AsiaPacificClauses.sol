@@ -71,5 +71,30 @@ contract SeedGlobalZeroTariffClauses {
             AllianceEquityLock.ClauseState.Active
         );
 
+        alliance.addClause(
+            "AI & Critical Technology Workforce Covenant",
+            "https://your-repo-url/decks/global/AICriticalTechWorkforceCovenant.md",
+            AllianceEquityLock.ClauseState.Active
+
+        );
+       
+        alliance.addClause(
+           "Annex AIW‑1: Skill Tier Map",
+           "https://your-repo-url/decks/global/Annex_AIW-1.md",
+           AllianceEquityLock.ClauseState.Active
+        );
+        
+        alliance.addClause(
+          "Annex AIW‑2: Corridor Deployment Protocol",
+          "https://your-repo-url/decks/global/Annex_AIW-2.md",
+          AllianceEquityLock.ClauseState.Active
+
+        );
+
+        alliance.addClause(
+          "Annex AIW‑3: PWD Inclusion Rituals",
+          "https://your-repo-url/decks/global/Annex_AIW-3.md",
+          AllianceEquityLock.ClauseState.Active
+        );
     }
 }
