@@ -64,5 +64,12 @@ contract SeedGlobalZeroTariffClauses {
             "https://your-repo-url/decks/global/SteelAndAluminiumReliefClause.md",
             AllianceEquityLock.ClauseState.Active
         );
+        
+        alliance.addClause(
+            "Deficit Discipline Covenant",
+            "https://your-repo-url/decks/global/DeficitDisciplineCovenant.md",
+            AllianceEquityLock.ClauseState.Active
+        );
+
     }
 }
