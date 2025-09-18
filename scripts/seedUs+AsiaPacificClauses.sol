@@ -179,5 +179,11 @@ contract SeedGlobalZeroTariffClauses {
          "https://your-repo-url/decks/global/Annex_SMCP-4.md",
          AllianceEquityLock.ClauseState.Active
        );
+
+       alliance.addClause(
+        "Annex SMCP‑5: Civic Treasury Activation Clause",
+        "https://your-repo-url/decks/global/Annex_SMCP-5.md",
+        AllianceEquityLock.ClauseState.Active
+       );
     }
 }
