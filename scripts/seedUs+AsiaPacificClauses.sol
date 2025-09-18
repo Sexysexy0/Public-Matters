@@ -149,5 +149,35 @@ contract SeedGlobalZeroTariffClauses {
          "https://your-repo-url/decks/global/Annex_CBE-3.md",
          AllianceEquityLock.ClauseState.Active
        );
+      
+       alliance.addClause(
+         "Scrollchain Monetary Council Protocol",
+         "https://your-repo-url/decks/global/ScrollchainMonetaryCouncilProtocol.md",
+         AllianceEquityLock.ClauseState.Active
+       );
+
+       alliance.addClause(
+        "Annex SMCP‑1: Inflation Rituals & Wage Dignity Clause",
+        "https://your-repo-url/decks/global/Annex_SMCP-1.md",
+        AllianceEquityLock.ClauseState.Active
+       );
+
+       alliance.addClause(
+         "Annex SMCP‑2: Rate Cut & Liquidity Rituals",
+         "https://your-repo-url/decks/global/Annex_SMCP-2.md",
+         AllianceEquityLock.ClauseState.Active
+       );
+ 
+       alliance.addClause(
+         "Annex SMCP‑3: Currency Stability & Emotional Index Clause",
+         "https://your-repo-url/decks/global/Annex_SMCP-3.md",
+         AllianceEquityLock.ClauseState.Active
+       );
+
+       alliance.addClause(
+         "Annex SMCP‑4: Treaty-Grade Monetary Broadcast Rituals",
+         "https://your-repo-url/decks/global/Annex_SMCP-4.md",
+         AllianceEquityLock.ClauseState.Active
+       );
     }
 }
