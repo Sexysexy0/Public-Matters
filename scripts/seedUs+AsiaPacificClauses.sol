@@ -239,5 +239,11 @@ contract SeedGlobalZeroTariffClauses {
         "https://your-repo-url/decks/global/Annex_DFD-1.md",
         AllianceEquityLock.ClauseState.Active
       );
+
+      alliance.addClause(
+        "Annex DFD‑3: VC Corridor Breach & Partner Restoration Clause",
+        "https://your-repo-url/decks/global/Annex_DFD-3.md",
+        AllianceEquityLock.ClauseState.Active
+      );
     }
 }
