@@ -191,5 +191,47 @@ contract SeedGlobalZeroTariffClauses {
          "https://your-repo-url/decks/global/ColombiaSovereignDefenseDeck.md",
          AllianceEquityLock.ClauseState.Active
        );
+
+       alliance.addClause(
+         "Trilateral Free Trade Activation Deck",
+         "https://your-repo-url/decks/global/TrilateralFreeTradeActivationDeck.md",
+         AllianceEquityLock.ClauseState.Active
+       );
+
+       alliance.addClause(
+         "Annex TFTA‑1: Military Logistics & Corridor Equity Clause",
+         "https://your-repo-url/decks/global/Annex_TFTA-1.md",
+         AllianceEquityLock.ClauseState.Active
+       );
+
+       alliance.addClause(
+         "Annex TFTA‑2: Digital Trade & Scrollchain Customs Protocol",
+         "https://your-repo-url/decks/global/Annex_TFTA-2.md",
+         AllianceEquityLock.ClauseState.Active
+       );
+
+       alliance.addClause(
+         "Annex TFTA‑3: Emotional Safety & Broadcast Rituals",
+         "https://your-repo-url/decks/global/Annex_TFTA-3.md",
+         AllianceEquityLock.ClauseState.Active
+       );
+
+       alliance.addClause(
+         "Annex TFTA‑4: Treaty Blessing & Corridor Voting Protocol",
+         "https://your-repo-url/decks/global/Annex_TFTA-4.md",
+         AllianceEquityLock.ClauseState.Active
+       );
+
+       alliance.addClause(
+        "Annex TFTA‑5: Prosperity Loop Deployment & Emotional Index Tracker",
+        "https://your-repo-url/decks/global/Annex_TFTA-5.md",
+        AllianceEquityLock.ClauseState.Active
+       );
+
+       alliance.addClause(
+        "Annex TFTA‑6: Freelancer Protection & Litigation Deterrence Clause",
+        "https://your-repo-url/decks/global/Annex_TFTA-6.md",
+        AllianceEquityLock.ClauseState.Active
+      );
     }
 }
