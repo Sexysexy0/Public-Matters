@@ -1,33 +1,42 @@
-// SPDX-License-Identifier: BlessingSanctum
+// SPDX-License-Identifier: TradeBlessing
 pragma solidity ^0.8.19;
 
 contract TradeBlessingRouter {
-    struct BlessingSignal {
-        address partnerID;
-        string partnerName;
-        string tradeCommodity;
-        string blessingType; // e.g., "Tariff Forgiveness", "Export Revival", "Protocol Harmony"
-        bool treatyAligned;
-        string stewardNote;
+    address public steward;
+
+    struct TradeSignal {
+        string corridorName; // e.g. "USMCA Corridor", "NAFTA Legacy Route"
+        string blessingType; // "Tariff Forgiveness", "Clause Restoration", "Crate Equity"
+        string treatyTag;
+        bool verified;
+        uint256 timestamp;
     }
 
-    mapping(address => BlessingSignal) public blessingRegistry;
+    TradeSignal[] public signals;
 
-    event BlessingTagged(address partnerID, string blessingType);
-    event TreatyAligned(address partnerID);
+    event TradeLogged(string corridorName, string blessingType, string treatyTag, uint256 timestamp);
+    event TradeVerified(uint256 index, address verifier);
 
-    function tagBlessing(address partnerID, string memory partnerName, string memory tradeCommodity, string memory blessingType, bool treatyAligned, string memory stewardNote) public {
-        blessingRegistry[partnerID] = BlessingSignal(partnerID, partnerName, tradeCommodity, blessingType, treatyAligned, stewardNote);
-        emit BlessingTagged(partnerID, blessingType);
+    constructor() {
+        steward = msg.sender;
     }
 
-    function alignTreaty(address partnerID) public {
-        require(bytes(blessingRegistry[partnerID].partnerName).length > 0, "Partner not tagged");
-        blessingRegistry[partnerID].treatyAligned = true;
-        emit TreatyAligned(partnerID);
+    function logTrade(
+        string memory corridorName,
+        string memory blessingType,
+        string memory treatyTag
+    ) public {
+        signals.push(TradeSignal(corridorName, blessingType, treatyTag, false, block.timestamp));
+        emit TradeLogged(corridorName, blessingType, treatyTag, block.timestamp);
     }
 
-    function getBlessingStatus(address partnerID) public view returns (BlessingSignal memory) {
-        return blessingRegistry[partnerID];
+    function verifyTrade(uint256 index) public {
+        require(index < signals.length, "Invalid index");
+        signals[index].verified = true;
+        emit TradeVerified(index, msg.sender);
+    }
+
+    function totalTradeSignals() public view returns (uint256) {
+        return signals.length;
     }
 }

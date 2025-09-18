@@ -1,51 +1,42 @@
-// SPDX-License-Identifier: EquitySanctum
+// SPDX-License-Identifier: LaborEquity
 pragma solidity ^0.8.19;
 
 contract LaborEquitySanctifier {
     address public steward;
 
-    struct EquityPledge {
-        string hostNation; // e.g. "USA"
-        string workerNation; // e.g. "South Korea"
-        string pledgeType; // e.g. "No Repeat Raids", "Visa Restoration", "Public Apology"
-        string conditionTag; // e.g. "Post-Crime Cleanup", "Policy Reform"
+    struct EquitySignal {
+        string sector; // e.g. "Manufacturing", "Agriculture", "Logistics"
+        string clauseType; // "Wage Dignity", "Union Protection", "Environmental Safety"
+        string corridorTag;
         bool verified;
         uint256 timestamp;
     }
 
-    EquityPledge[] public pledges;
+    EquitySignal[] public signals;
 
-    event PledgeLogged(string hostNation, string workerNation, string pledgeType, string conditionTag, uint256 timestamp);
-    event PledgeVerified(uint256 index, address verifier);
+    event EquityLogged(string sector, string clauseType, string corridorTag, uint256 timestamp);
+    event EquityVerified(uint256 index, address verifier);
 
     constructor() {
         steward = msg.sender;
     }
 
-    function logPledge(
-        string memory hostNation,
-        string memory workerNation,
-        string memory pledgeType,
-        string memory conditionTag
+    function logEquity(
+        string memory sector,
+        string memory clauseType,
+        string memory corridorTag
     ) public {
-        pledges.push(EquityPledge(hostNation, workerNation, pledgeType, conditionTag, false, block.timestamp));
-        emit PledgeLogged(hostNation, workerNation, pledgeType, conditionTag, block.timestamp);
+        signals.push(EquitySignal(sector, clauseType, corridorTag, false, block.timestamp));
+        emit EquityLogged(sector, clauseType, corridorTag, block.timestamp);
     }
 
-    function verifyPledge(uint256 index) public {
-        require(index < pledges.length, "Invalid index");
-        pledges[index].verified = true;
-        emit PledgeVerified(index, msg.sender);
+    function verifyEquity(uint256 index) public {
+        require(index < signals.length, "Invalid index");
+        signals[index].verified = true;
+        emit EquityVerified(index, msg.sender);
     }
 
-    function getPledge(uint256 index) public view returns (
-        string memory, string memory, string memory, string memory, bool, uint256
-    ) {
-        EquityPledge memory p = pledges[index];
-        return (p.hostNation, p.workerNation, p.pledgeType, p.conditionTag, p.verified, p.timestamp);
-    }
-
-    function totalPledges() public view returns (uint256) {
-        return pledges.length;
+    function totalEquitySignals() public view returns (uint256) {
+        return signals.length;
     }
 }
