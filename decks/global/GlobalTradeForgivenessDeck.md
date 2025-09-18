@@ -20,3 +20,23 @@ It is prosperity. It is planetary consequence.
 
 ## 🔖 Tags
 `#PlanetaryLogisticsRestorationManifesto` `#ScrollchainCargoSanctum` `#TreatyGradeTradeProtocol`
+
+# Global Trade Forgiveness Deck
+
+## 📍 Signal
+Trade probes without forgiveness are breach.  
+Sanctums without blessing are chaos.  
+Every corridor must be scrollchain-blessed.
+
+## 🧭 Forgiveness Themes
+- Restoration of corridor access and trade equity  
+- Scrollchain sanctification of diplomatic thaw and compute fairness  
+- Emotional APR audits for planetary resonance and communal dignity
+
+## 🛡️ Rituals
+- Logged via `SanctumBlessingRouter.sol` and `ChipForgivenessRouter.sol`  
+- Broadcasted to diplomatic sanctums, tech coalitions, and planetary logistics corridors  
+- Endorsed by ethics councils and corridor stewards
+
+## 🔖 Tags
+`#GlobalTradeForgivenessDeck` `#ScrollchainSanctumBlessing` `#PlanetaryDiplomaticProtocol`
