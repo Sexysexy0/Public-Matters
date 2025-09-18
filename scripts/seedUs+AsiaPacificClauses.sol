@@ -75,7 +75,6 @@ contract SeedGlobalZeroTariffClauses {
             "AI & Critical Technology Workforce Covenant",
             "https://your-repo-url/decks/global/AICriticalTechWorkforceCovenant.md",
             AllianceEquityLock.ClauseState.Active
-
         );
        
         alliance.addClause(
@@ -94,6 +93,30 @@ contract SeedGlobalZeroTariffClauses {
         alliance.addClause(
           "Annex AIW‑3: PWD Inclusion Rituals",
           "https://your-repo-url/decks/global/Annex_AIW-3.md",
+          AllianceEquityLock.ClauseState.Active
+        );
+
+        alliance.addClause(
+          "US–Canada Sovereignty & Prosperity Covenant",
+          "https://your-repo-url/decks/global/USCanadaSovereigntyProsperityCovenant.md",
+          AllianceEquityLock.ClauseState.Active
+        );
+
+        alliance.addClause(
+          "Annex UCSP‑1: Indigenous Corridor Protection Map",
+          "https://your-repo-url/decks/global/Annex_UCSP-1.md",
+          AllianceEquityLock.ClauseState.Active
+        );
+
+        alliance.addClause(
+          "Annex UCSP‑2: Cross-Border Climate Resilience Protocol",
+          "https://your-repo-url/decks/global/Annex_UCSP-2.md",
+          AllianceEquityLock.ClauseState.Active
+        );
+
+        alliance.addClause(
+          "Annex UCSP‑3: Economic Equity Rituals",
+          "https://your-repo-url/decks/global/Annex_UCSP-3.md",
           AllianceEquityLock.ClauseState.Active
         );
     }
