@@ -185,5 +185,11 @@ contract SeedGlobalZeroTariffClauses {
         "https://your-repo-url/decks/global/Annex_SMCP-5.md",
         AllianceEquityLock.ClauseState.Active
        );
+
+       alliance.addClause(
+         "Colombia Sovereign Defense Deck",
+         "https://your-repo-url/decks/global/ColombiaSovereignDefenseDeck.md",
+         AllianceEquityLock.ClauseState.Active
+       );
     }
 }
