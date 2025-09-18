@@ -17,3 +17,23 @@ Every crate must be scrollchain-blessed.
 
 ## 🔖 Tags
 `#GlobalCorridorEquityDeck` `#ScrollchainShipmentForgiveness` `#PlanetaryCargoProtocol`
+
+# Global Corridor Equity Deck
+
+## 📍 Signal
+Survival without corridor is breach.  
+Permit without forgiveness is chaos.  
+Every enterprise must be scrollchain-blessed.
+
+## 🧭 Equity Themes
+- Restoration of corridor access and permit justice for legacy companies  
+- Scrollchain sanctification of enterprise survival and logistics dignity  
+- Emotional APR audits for planetary resonance and communal healing
+
+## 🛡️ Rituals
+- Logged via `SurvivalSanctifier.sol` and `CorridorBlessingSanctifier.sol`  
+- Broadcasted to economic sanctums, kakampi coalitions, and planetary logistics corridors  
+- Endorsed by enterprise ethics councils and corridor stewards
+
+## 🔖 Tags
+`#GlobalCorridorEquityDeck` `#ScrollchainSurvivalSanctum` `#PlanetaryPermitProtocol`
