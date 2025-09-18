@@ -119,5 +119,35 @@ contract SeedGlobalZeroTariffClauses {
           "https://your-repo-url/decks/global/Annex_UCSP-3.md",
           AllianceEquityLock.ClauseState.Active
         );
+
+        alliance.addClause(
+         "Annex UCSP‑4: Diplomatic Interrupt Protocol",
+         "https://your-repo-url/decks/global/Annex_UCSP-4.md",
+         AllianceEquityLock.ClauseState.Active
+       );
+
+        alliance.addClause(
+         "Crypto–Bank Equity Covenant",
+         "https://your-repo-url/decks/global/CryptoBankEquityCovenant.md",
+         AllianceEquityLock.ClauseState.Active
+       );
+
+       alliance.addClause(
+         "Annex CBE‑1: Stablecoin Custody Rituals",
+         "https://your-repo-url/decks/global/Annex_CBE-1.md",
+         AllianceEquityLock.ClauseState.Active
+       );
+  
+       alliance.addClause(
+         "Annex CBE‑2: Algorithmic Asset Ban Clause",
+         "https://your-repo-url/decks/global/Annex_CBE-2.md",
+         AllianceEquityLock.ClauseState.Active
+       );
+
+       alliance.addClause(
+         "Annex CBE‑3: PWD Wallet Inclusion Protocol",
+         "https://your-repo-url/decks/global/Annex_CBE-3.md",
+         AllianceEquityLock.ClauseState.Active
+       );
     }
 }
