@@ -5,9 +5,9 @@ contract FairTradeSanctifier {
     address public steward;
 
     struct TradeSignal {
-        string partnerNation; // e.g. "United States"
-        string sector;        // e.g. "Energy", "Agriculture"
-        string equityTag;     // e.g. "ZeroTariff #ZT1"
+        string partnerNation;
+        string sector;        // e.g., "Energy", "Finance", "Logistics"
+        string equityTag;     // e.g., "ZeroTariff #ZT1"
         bool verified;
         uint256 timestamp;
     }
