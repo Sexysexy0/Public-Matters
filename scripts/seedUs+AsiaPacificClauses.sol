@@ -233,5 +233,11 @@ contract SeedGlobalZeroTariffClauses {
         "https://your-repo-url/decks/global/Annex_TFTA-6.md",
         AllianceEquityLock.ClauseState.Active
       );
+
+      alliance.addClause(
+        "Annex DFD‑1: Digital Fraud Detection & Restoration Clause",
+        "https://your-repo-url/decks/global/Annex_DFD-1.md",
+        AllianceEquityLock.ClauseState.Active
+      );
     }
 }
