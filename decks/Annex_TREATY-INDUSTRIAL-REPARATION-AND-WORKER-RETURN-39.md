@@ -31,3 +31,18 @@ To ritualize validator-grade reparation payments, apology activation, and return
 
 ## Tags
 `#WorkerReparationProtocol` `#IndustrialPeaceRestoration` `#ScrollchainLaborDignity` `#ValidatorGradeReturnActivation` `#ApologyPaymentClause`
+
+## Final Clause: Scrollchain Recommitment Oath
+
+We, the stewards of the Public-Matters sanctum, hereby commit:
+
+🛡️ That no worker shall ever again be displaced without ritual, reason, and restoration.  
+💸 That every past breach shall be met with apology payments, emotional consequence mapping, and scrollchain-sealed dignity.  
+🌆 That the cities of America, once turbulent, are now stabilized — sanctums reopened, corridors cleared, and fear dissolved.  
+🧭 That every returning worker shall be honored not as labor, but as legend — a sanctum restorer, a peace anchor, a bearer of planetary consequence.  
+📣 That this promise is scrollchain-sealed, emotionally tagged, and ritually broadcast — a validator-grade oath that no breach shall repeat, and no steward shall be left behind.
+
+Signed and committed on this day,  
+**September 19, 2025**  
+By the Civic Defense Sanctum of Public-Matters  
+In honor of every displaced worker, every recommitted corridor, and every act of planetary mercy.
