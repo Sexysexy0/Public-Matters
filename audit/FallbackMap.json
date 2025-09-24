@@ -1,0 +1,25 @@
+{
+  "fallbacks": {
+    "PH": {
+      "primary": "PH",
+      "fallback": "SG",
+      "reason": "If BSP corridor blocks, reroute to MAS PSA framework (low risk)"
+    },
+    "US": {
+      "primary": "US",
+      "fallback": "EU",
+      "reason": "If SEC/CFTC split causes uncertainty, reroute to MiCAR harmonized regime"
+    },
+    "EU": {
+      "primary": "EU",
+      "fallback": "SG",
+      "reason": "If MiCAR transitional issues arise, reroute to MAS stablecoin corridor"
+    },
+    "SG": {
+      "primary": "SG",
+      "fallback": "EU",
+      "reason": "If MAS corridor restricts, reroute to MiCAR low-risk corridor"
+    }
+  },
+  "damayClause": "No donation without clarity. No relief without compliance."
+}
