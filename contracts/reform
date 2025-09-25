@@ -1,0 +1,71 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.21;
+
+/// @title CannabisDeschedulingProtocol
+/// @notice Simulates federal descheduling of cannabis with emotional consequence tagging
+/// @dev Anchors civic restoration, livelihood activation, and planetary dignity
+
+contract CannabisDeschedulingProtocol {
+    address public steward;
+    mapping(address => bool) public reformers;
+
+    modifier onlySteward() {
+        require(msg.sender == steward, "Not steward");
+        _;
+    }
+
+    modifier onlyReformer() {
+        require(reformers[msg.sender] || msg.sender == steward, "Not reformer");
+        _;
+    }
+
+    enum ReformStatus {
+        Proposed,
+        Descheduled,
+        Rejected,
+        BreachFlagged
+    }
+
+    struct ReformEvent {
+        uint256 id;
+        string title;
+        string agency; // e.g., "DEA", "Congress", "Executive"
+        ReformStatus status;
+        string emotionalTag;
+        uint256 timestamp;
+    }
+
+    uint256 public nextEventId = 1;
+    mapping(uint256 => ReformEvent) public events;
+
+    event ReformerSet(address indexed account, bool status);
+    event DeschedulingLogged(uint256 indexed id, string title, string agency, string emotionalTag);
+
+    constructor() {
+        steward = msg.sender;
+        reformers[msg.sender] = true;
+        emit ReformerSet(msg.sender, true);
+    }
+
+    function setReformer(address account, bool status) external onlySteward {
+        reformers[account] = status;
+        emit ReformerSet(account, status);
+    }
+
+    function logDescheduling(string calldata title, string calldata agency, string calldata emotionalTag) external onlyReformer returns (uint256 id) {
+        id = nextEventId++;
+        events[id] = ReformEvent({
+            id: id,
+            title: title,
+            agency: agency,
+            status: ReformStatus.Descheduled,
+            emotionalTag: emotionalTag,
+            timestamp: block.timestamp
+        });
+        emit DeschedulingLogged(id, title, agency, emotionalTag);
+    }
+
+    function getEvent(uint256 id) external view returns (ReformEvent memory) {
+        return events[id];
+    }
+}
