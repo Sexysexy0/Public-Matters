@@ -8,7 +8,7 @@ contract DAOToLeadershipEquityGridIV {
     address public admin;
 
     struct Leadership {
-        string program;     // youth council, civic training, wage equity advocacy
+        string program;     // youth council, civic training, wage equity, fair transport pricing
         string status;      // equitable, pending, ghost
         uint256 timestamp;
     }
@@ -29,10 +29,5 @@ contract DAOToLeadershipEquityGridIV {
     function logLeadership(string memory program, string memory status) public onlyAdmin {
         programs.push(Leadership(program, status, block.timestamp));
         emit LeadershipLogged(program, status);
-    }
-
-    function getLeadership(uint256 index) public view returns (string memory program, string memory status, uint256 timestamp) {
-        Leadership memory l = programs[index];
-        return (l.program, l.status, l.timestamp);
     }
 }

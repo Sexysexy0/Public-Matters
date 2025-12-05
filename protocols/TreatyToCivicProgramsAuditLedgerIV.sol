@@ -8,7 +8,7 @@ contract TreatyToCivicProgramsAuditLedgerIV {
     address public admin;
 
     struct CivicProgram {
-        string initiative;   // wage hike advocacy, education equity, climate youth action
+        string initiative;   // wage hike advocacy, education equity, climate youth action, transport pricing fairness
         string status;       // audited, pending, ghost
         uint256 timestamp;
     }
@@ -29,10 +29,5 @@ contract TreatyToCivicProgramsAuditLedgerIV {
     function logProgram(string memory initiative, string memory status) public onlyAdmin {
         initiatives.push(CivicProgram(initiative, status, block.timestamp));
         emit CivicProgramLogged(initiative, status);
-    }
-
-    function getProgram(uint256 index) public view returns (string memory initiative, string memory status, uint256 timestamp) {
-        CivicProgram memory c = initiatives[index];
-        return (c.initiative, c.status, c.timestamp);
     }
 }
