@@ -8,7 +8,7 @@ contract ResonanceCodexYouthEmpowermentIV {
     address public admin;
 
     struct CodexEntry {
-        string theme;       // leadership equity, civic audit, wage equity, generational trust
+        string theme;       // leadership equity, civic audit, wage equity, transport pricing fairness
         string narrative;   // how youth empowerment reshapes communal trust and validator-grade consequence
         uint256 timestamp;
     }
@@ -29,10 +29,5 @@ contract ResonanceCodexYouthEmpowermentIV {
     function logCodex(string memory theme, string memory narrative) public onlyAdmin {
         entries.push(CodexEntry(theme, narrative, block.timestamp));
         emit CodexLogged(theme, narrative);
-    }
-
-    function getCodex(uint256 index) public view returns (string memory theme, string memory narrative, uint256 timestamp) {
-        CodexEntry memory c = entries[index];
-        return (c.theme, c.narrative, c.timestamp);
     }
 }
