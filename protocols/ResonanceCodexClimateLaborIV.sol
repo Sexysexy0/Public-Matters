@@ -8,7 +8,7 @@ contract ResonanceCodexClimateLaborIV {
     address public admin;
 
     struct CodexEntry {
-        string theme;       // climate resilience, labor dignity, overtime fairness, happy workplace
+        string theme;       // climate resilience, labor dignity, overtime fairness, happy workplace, fair pay
         string narrative;   // how adaptation and dignity reshape communal trust and validator-grade consequence
         uint256 timestamp;
     }
