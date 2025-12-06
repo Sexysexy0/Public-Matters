@@ -8,7 +8,7 @@ contract TreatyToLaborDignityLedgerIV {
     address public admin;
 
     struct Labor {
-        string initiative;   // overtime fairness, safe warehouse, happy workplace
+        string initiative;   // overtime fairness, safe warehouse, happy workplace, fair pay for heavy work
         string status;       // dignified, pending, ghost
         uint256 timestamp;
     }

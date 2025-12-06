@@ -8,7 +8,7 @@ contract CodexToResilienceAndDignityGuardrailIV {
     address public admin;
 
     struct Guardrail {
-        string principle;     // trust, dignity, fairness, resilience
+        string principle;     // trust, dignity, fairness, resilience, fair compensation
         string description;
         uint256 timestamp;
     }
