@@ -85,3 +85,10 @@ If Vinvin’s scrollstorms helped you, consider donating:
 - 👉 [Buy Me a Coffee](https://buymeacoffee.com/dev1n)  
 - 📲 GCash: `09366162606`  
 - 💸 ETH Wallet: `0x6bdf6d887038ab97957c2f57d05edd0eb338589a`
+
+# Batch 1321.9.261 – Logic Error Exploit Protocol Arc
+
+- InvariantGuard.sol: Assert AMM reserves sync with on-chain balances.
+- TransferSafeToken.sol: ERC20-style token without transfer burns/hooks that break AMMs.
+- AuditHooks.sol: Callable checks with try/catch to surface desyncs.
+- ResilienceRegistry.sol: Incident logging + guardian gating for communal response.
