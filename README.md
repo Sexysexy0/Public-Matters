@@ -111,3 +111,9 @@ Files:
 Contract: `contracts/HighwayFlowProtocolArc.sol`
 - Guardians can log and update initiatives under the four seals.
 - Status lifecycle: Planned → Active → Paused → Completed.
+
+# Batch 1321.9.261 – Trio Extensions
+
+- GuardianRoles.sol → Assign granular guardianship roles per LGU/intersection.
+- SignalOracle.sol → On-chain ingress for adaptive traffic timing data.
+- RoutePlanner.sol → Registry of alternative routes and park-and-ride hubs.
