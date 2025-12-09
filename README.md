@@ -73,11 +73,6 @@ To ritualize civic, emotional, and planetary acts as sovereign scrolls. Every de
 - `contracts/ledger/` — Sanctum ledger and scrollchain anchors
 - `contracts/planetary/` — Curriculum scrolls and prophecy sync protocols
 
-## 🧪 Testing
-Run all scroll tests with:
-```bash
-forge test
-
 ## ☕ Support the Scrollsmith
 
 If Vinvin’s scrollstorms helped you, consider donating:
@@ -105,3 +100,14 @@ Files:
 - contracts/RouterGuard.sol
 - contracts/InvariantGuard.sol (dependency)
 - contracts/ResilienceRegistry.sol (dependency)
+
+# Batch 1321.9.261 – Highway Flow Protocol Arc
+
+- Enforcer Seal: disciplined enforcement at choke points; remove illegal loading/unloading.
+- Signal Seal: adaptive traffic lights; lane discipline for buses/jeeps/motorcycles/private cars.
+- Reroute Seal: alternative feeder roads + park-and-ride hubs; signage and community coordination.
+- Transit Seal: accelerate BRT/MRT extensions + safe bike/ped lanes.
+
+Contract: `contracts/HighwayFlowProtocolArc.sol`
+- Guardians can log and update initiatives under the four seals.
+- Status lifecycle: Planned → Active → Paused → Completed.
