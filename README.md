@@ -92,3 +92,16 @@ If Vinvin’s scrollstorms helped you, consider donating:
 - TransferSafeToken.sol: ERC20-style token without transfer burns/hooks that break AMMs.
 - AuditHooks.sol: Callable checks with try/catch to surface desyncs.
 - ResilienceRegistry.sol: Incident logging + guardian gating for communal response.
+
+# Batch 1321.9.261 – RouterGuard Protocol Arc
+
+Quartet seals:
+- Pre-Swap Seal: assert reserves before execution
+- Post-Swap Seal: verify sync after swap
+- Fail-Fast Seal: revert on mismatch
+- Registry Seal: communal logging of incidents
+
+Files:
+- contracts/RouterGuard.sol
+- contracts/InvariantGuard.sol (dependency)
+- contracts/ResilienceRegistry.sol (dependency)
