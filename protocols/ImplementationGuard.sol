@@ -1,34 +1,36 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// ImplementationGuard: block "expiry due to inaction" via readiness checks
+// ImplementationGuard: ensure projects don't expire due to inaction
 contract ImplementationGuard {
+    struct Status {
+        bool budgetReady;
+        bool designReady;
+        bool auditReady;
+        bool goSignal;
+    }
+
+    mapping(bytes32 => Status) public projectStatus;
     address public steward;
 
-    // readiness signals
-    mapping(bytes32 => bool) public okBudget;     // keccak256(project) -> budget ready
-    mapping(bytes32 => bool) public okMilestones; // keccak256(project) -> milestones aligned
-    mapping(bytes32 => bool) public okAudits;     // keccak256(project) -> audits verified
-
-    mapping(bytes32 => bool) public goSignal;     // final GO to implement
-
-    event ReadySet(bytes32 indexed projectKey, bool budget, bool milestones, bool audits);
+    event StatusUpdated(bytes32 indexed projectKey, bool budget, bool design, bool audit);
     event Go(bytes32 indexed projectKey);
 
     constructor() { steward = msg.sender; }
 
-    function setReady(bytes32 projectKey, bool budget, bool milestones, bool audits) external {
+    function setStatus(bytes32 projectKey, bool budget, bool design, bool audit) external {
         require(msg.sender == steward, "Only steward");
-        okBudget[projectKey] = budget;
-        okMilestones[projectKey] = milestones;
-        okAudits[projectKey] = audits;
-        emit ReadySet(projectKey, budget, milestones, audits);
+        projectStatus[projectKey].budgetReady = budget;
+        projectStatus[projectKey].designReady = design;
+        projectStatus[projectKey].auditReady = audit;
+        emit StatusUpdated(projectKey, budget, design, audit);
     }
 
     function triggerGo(bytes32 projectKey) external {
         require(msg.sender == steward, "Only steward");
-        require(okBudget[projectKey] && okMilestones[projectKey] && okAudits[projectKey], "Not ready");
-        goSignal[projectKey] = true;
+        Status storage s = projectStatus[projectKey];
+        require(s.budgetReady && s.designReady && s.auditReady, "Not ready");
+        s.goSignal = true;
         emit Go(projectKey);
     }
 }
