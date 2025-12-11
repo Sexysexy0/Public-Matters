@@ -2,8 +2,6 @@
 pragma solidity ^0.8.0;
 
 // Voting Power Delegation Protocol Arc
-// Prototype contract for proxy voting via smart contracts
-
 contract VotingPowerDelegation {
     struct Vote {
         uint256 proposalId;
@@ -19,43 +17,36 @@ contract VotingPowerDelegation {
 
     address public steward;
 
+    event Delegated(address indexed from, address indexed to);
+    event Voted(uint256 indexed proposalId, address indexed voter, bool choice, uint256 weight);
+
     constructor() {
         steward = msg.sender;
-        votingWeight[steward] = 100; // initial validator-grade weight
+        votingWeight[steward] = 100;
     }
 
-    // Assign voting weight to an address
     function setVotingWeight(address _voter, uint256 _weight) external {
-        require(msg.sender == steward, "Only steward can assign weight");
+        require(msg.sender == steward, "Only steward");
         votingWeight[_voter] = _weight;
     }
 
-    // Delegate voting power
     function delegate(address _to) external {
         delegates[msg.sender] = _to;
+        emit Delegated(msg.sender, _to);
     }
 
-    // Cast a vote (direct or delegated)
     function castVote(uint256 _proposalId, bool _choice) external {
-        address voter = msg.sender;
-        if (delegates[voter] != address(0)) {
-            voter = delegates[voter];
-        }
+        address voter = delegates[msg.sender] == address(0) ? msg.sender : delegates[msg.sender];
         uint256 weight = votingWeight[voter];
-        proposalVotes[_proposalId].push(
-            Vote(_proposalId, voter, weight, _choice, block.timestamp)
-        );
+        proposalVotes[_proposalId].push(Vote(_proposalId, voter, weight, _choice, block.timestamp));
+        emit Voted(_proposalId, voter, _choice, weight);
     }
 
-    // Tally votes for a proposal
     function tally(uint256 _proposalId) external view returns (uint256 yes, uint256 no) {
         Vote[] memory votes = proposalVotes[_proposalId];
         for (uint256 i = 0; i < votes.length; i++) {
-            if (votes[i].choice) {
-                yes += votes[i].weight;
-            } else {
-                no += votes[i].weight;
-            }
+            if (votes[i].choice) yes += votes[i].weight;
+            else no += votes[i].weight;
         }
     }
 }
