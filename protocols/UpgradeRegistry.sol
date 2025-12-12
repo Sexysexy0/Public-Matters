@@ -1,13 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// UpgradeRegistry: record systems upgraded to latest patched versions
+// UpgradeRegistry: record upgrades or new acquisitions (Block 70/72, Block 80)
 contract UpgradeRegistry {
     struct Upgrade {
         uint256 id;
-        string system;      // e.g., "Vercel app", "API gateway"
-        string version;     // patched version
-        address upgrader;
+        string model;
+        string block;       // e.g., "Block 70", "Block 80"
+        string features;    // radar, EW suite, etc.
+        uint256 cost;       // USD millions
         uint256 timestamp;
     }
 
@@ -15,7 +16,7 @@ contract UpgradeRegistry {
     mapping(uint256 => Upgrade) public upgrades;
     mapping(address => bool) public stewards;
 
-    event UpgradeLogged(uint256 indexed id, string system, string version);
+    event UpgradeLogged(uint256 indexed id, string model, string block);
 
     constructor() { stewards[msg.sender] = true; }
 
@@ -24,10 +25,10 @@ contract UpgradeRegistry {
         stewards[s] = true;
     }
 
-    function logUpgrade(string calldata system, string calldata version) external {
+    function logUpgrade(string calldata model, string calldata block, string calldata features, uint256 cost) external {
         require(stewards[msg.sender], "Only steward");
-        upgrades[nextId] = Upgrade(nextId, system, version, msg.sender, block.timestamp);
-        emit UpgradeLogged(nextId, system, version);
+        upgrades[nextId] = Upgrade(nextId, model, block, features, cost, block.timestamp);
+        emit UpgradeLogged(nextId, model, block);
         nextId++;
     }
 }
