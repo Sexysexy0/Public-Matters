@@ -1,13 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// ImpactGuard: record social and environmental impacts of container factories
+// ImpactGuard: record social and economic impacts of redevelopment
 contract ImpactGuard {
     struct Impact {
         uint256 id;
-        string category;   // "Jobs", "Carbon Reduction", "Housing Units"
-        string description;
+        string zone;
+        string category;   // "Jobs", "Housing Units", "Carbon Reduction"
         uint256 value;
+        string description;
         uint256 timestamp;
     }
 
@@ -15,7 +16,7 @@ contract ImpactGuard {
     mapping(uint256 => Impact) public impacts;
     mapping(address => bool) public stewards;
 
-    event ImpactLogged(uint256 indexed id, string category, uint256 value);
+    event ImpactLogged(uint256 indexed id, string zone, string category, uint256 value);
 
     constructor() { stewards[msg.sender] = true; }
 
@@ -24,10 +25,10 @@ contract ImpactGuard {
         stewards[s] = true;
     }
 
-    function logImpact(string calldata category, string calldata description, uint256 value) external {
+    function logImpact(string calldata zone, string calldata category, uint256 value, string calldata description) external {
         require(stewards[msg.sender], "Only steward");
-        impacts[nextId] = Impact(nextId, category, description, value, block.timestamp);
-        emit ImpactLogged(nextId, category, value);
+        impacts[nextId] = Impact(nextId, zone, category, value, description, block.timestamp);
+        emit ImpactLogged(nextId, zone, category, value);
         nextId++;
     }
 }
