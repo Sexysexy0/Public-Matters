@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// ContributionLedger: record flexible contributions
+// ContributionLedger: record mandatory monthly contributions
 contract ContributionLedger {
     struct Contribution {
         uint256 id;
-        address contributor;
+        string contributor; // "Employee", "Employer"
         uint256 amount;
+        bool onTime;
         uint256 timestamp;
     }
 
@@ -14,7 +15,7 @@ contract ContributionLedger {
     mapping(uint256 => Contribution) public contributions;
     mapping(address => bool) public stewards;
 
-    event ContributionLogged(uint256 indexed id, address contributor, uint256 amount);
+    event ContributionLogged(uint256 indexed id, string contributor, uint256 amount, bool onTime);
 
     constructor() { stewards[msg.sender] = true; }
 
@@ -23,10 +24,10 @@ contract ContributionLedger {
         stewards[s] = true;
     }
 
-    function logContribution(address contributor, uint256 amount) external {
+    function logContribution(string calldata contributor, uint256 amount, bool onTime) external {
         require(stewards[msg.sender], "Only steward");
-        contributions[nextId] = Contribution(nextId, contributor, amount, block.timestamp);
-        emit ContributionLogged(nextId, contributor, amount);
+        contributions[nextId] = Contribution(nextId, contributor, amount, onTime, block.timestamp);
+        emit ContributionLogged(nextId, contributor, amount, onTime);
         nextId++;
     }
 }
