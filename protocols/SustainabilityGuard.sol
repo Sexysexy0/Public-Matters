@@ -1,21 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// SustainabilityGuard: record funding and sustainability measures
+// SustainabilityGuard: record recycling and environmental measures
 contract SustainabilityGuard {
-    struct Fund {
+    struct Measure {
         uint256 id;
-        string source;      // "Government", "Employer", "Community"
-        uint256 amount;
-        string allocation;  // "Premium Subsidy", "Hospital Support"
+        string action;     // "Recycle Steel", "Carbon Offset"
+        string description;
+        uint256 impact;    // estimated CO2 reduction
         uint256 timestamp;
     }
 
     uint256 public nextId;
-    mapping(uint256 => Fund) public funds;
+    mapping(uint256 => Measure) public measures;
     mapping(address => bool) public stewards;
 
-    event FundLogged(uint256 indexed id, string source, uint256 amount, string allocation);
+    event MeasureLogged(uint256 indexed id, string action, uint256 impact);
 
     constructor() { stewards[msg.sender] = true; }
 
@@ -24,10 +24,10 @@ contract SustainabilityGuard {
         stewards[s] = true;
     }
 
-    function logFund(string calldata source, uint256 amount, string calldata allocation) external {
+    function logMeasure(string calldata action, string calldata description, uint256 impact) external {
         require(stewards[msg.sender], "Only steward");
-        funds[nextId] = Fund(nextId, source, amount, allocation, block.timestamp);
-        emit FundLogged(nextId, source, amount, allocation);
+        measures[nextId] = Measure(nextId, action, description, impact, block.timestamp);
+        emit MeasureLogged(nextId, action, impact);
         nextId++;
     }
 }
