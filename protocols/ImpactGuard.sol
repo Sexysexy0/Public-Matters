@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// ImpactGuard: record geopolitical and economic impacts of oil seizures
+// ImpactGuard: record impacts of doctrine + proxy rivalry
 contract ImpactGuard {
     struct Impact {
         uint256 id;
-        string category;   // "Revenue Loss", "Diplomatic Fallout", "Military Escalation"
+        string category;   // "Migration", "Energy Markets", "Military Escalation"
         uint256 value;
         string description;
         uint256 timestamp;
