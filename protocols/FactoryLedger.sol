@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// FactoryLedger: record container processing factories
+// FactoryLedger: record local spare parts factories
 contract FactoryLedger {
     struct Factory {
         uint256 id;
         string name;
         string location;
-        string specialization; // "Remodel", "Processing", "Modification"
+        string specialization; // "Engine", "Body", "Accessories"
         bool active;
         uint256 timestamp;
     }
