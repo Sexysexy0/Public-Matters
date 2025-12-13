@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// ImpactGuard: record social and economic impacts of checkpoint reforms
+// ImpactGuard: record geopolitical and economic impacts of oil seizures
 contract ImpactGuard {
     struct Impact {
         uint256 id;
-        string category;   // "Commuter Relief", "Security Efficiency", "Economic Flow"
+        string category;   // "Revenue Loss", "Diplomatic Fallout", "Military Escalation"
         uint256 value;
         string description;
         uint256 timestamp;
