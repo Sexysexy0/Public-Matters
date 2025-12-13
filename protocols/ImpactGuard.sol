@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// ImpactGuard: record social and economic impacts of spare parts manufacturing
+// ImpactGuard: record social and economic impacts of checkpoint reforms
 contract ImpactGuard {
     struct Impact {
         uint256 id;
-        string category;   // "Jobs", "Exports", "Customization Culture"
+        string category;   // "Commuter Relief", "Security Efficiency", "Economic Flow"
         uint256 value;
         string description;
         uint256 timestamp;
