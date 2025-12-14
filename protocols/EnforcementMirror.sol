@@ -1,37 +1,33 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// Enforcement Mirror Arc: record selective enforcement actions
+// EnforcementMirror: record law enforcement actions
 contract EnforcementMirror {
     struct Action {
         uint256 id;
-        string caseName;
-        string actionTaken;
-        address actor;
+        string agency;      // "PNP", "NBI"
+        string operation;   // "Rescue", "Arrest"
+        string outcome;     // "Successful", "Ongoing"
         uint256 timestamp;
     }
 
     uint256 public nextId;
     mapping(uint256 => Action) public actions;
-    mapping(address => bool) public validators;
-    address public steward;
+    mapping(address => bool) public stewards;
 
-    event ActionLogged(uint256 indexed id, string caseName, string actionTaken);
+    event ActionLogged(uint256 indexed id, string agency, string operation, string outcome);
 
-    constructor() {
-        steward = msg.sender;
-        validators[steward] = true;
+    constructor() { stewards[msg.sender] = true; }
+
+    function addSteward(address s) external {
+        require(stewards[msg.sender], "Only steward");
+        stewards[s] = true;
     }
 
-    function addValidator(address _validator) external {
-        require(msg.sender == steward, "Only steward");
-        validators[_validator] = true;
-    }
-
-    function logAction(string calldata _caseName, string calldata _actionTaken) external {
-        require(validators[msg.sender], "Not validator");
-        actions[nextId] = Action(nextId, _caseName, _actionTaken, msg.sender, block.timestamp);
-        emit ActionLogged(nextId, _caseName, _actionTaken);
+    function logAction(string calldata agency, string calldata operation, string calldata outcome) external {
+        require(stewards[msg.sender], "Only steward");
+        actions[nextId] = Action(nextId, agency, operation, outcome, block.timestamp);
+        emit ActionLogged(nextId, agency, operation, outcome);
         nextId++;
     }
 }
