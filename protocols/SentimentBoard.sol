@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// SentimentBoard: capture communal sentiment about taxes vs aid
+// SentimentBoard: capture community vibes about crypto events
 contract SentimentBoard {
     struct Sentiment {
         uint256 id;
-        string citizen;
-        string feeling;     // "Frustrated", "Angry", "Hopeless"
+        string community;   // "Traders", "DeFi Users", "Investors"
+        string feeling;     // "Bullish", "Bearish", "Concerned"
         string message;
         uint256 timestamp;
     }
@@ -15,7 +15,7 @@ contract SentimentBoard {
     mapping(uint256 => Sentiment) public sentiments;
     mapping(address => bool) public stewards;
 
-    event SentimentLogged(uint256 indexed id, string citizen, string feeling);
+    event SentimentLogged(uint256 indexed id, string community, string feeling);
 
     constructor() { stewards[msg.sender] = true; }
 
@@ -24,10 +24,10 @@ contract SentimentBoard {
         stewards[s] = true;
     }
 
-    function logSentiment(string calldata citizen, string calldata feeling, string calldata message) external {
+    function logSentiment(string calldata community, string calldata feeling, string calldata message) external {
         require(stewards[msg.sender], "Only steward");
-        sentiments[nextId] = Sentiment(nextId, citizen, feeling, message, block.timestamp);
-        emit SentimentLogged(nextId, citizen, feeling);
+        sentiments[nextId] = Sentiment(nextId, community, feeling, message, block.timestamp);
+        emit SentimentLogged(nextId, community, feeling);
         nextId++;
     }
 }
