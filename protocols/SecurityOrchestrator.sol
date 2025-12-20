@@ -1,71 +1,62 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// SecurityOrchestrator: link victims, suspects, enforcement actions, and community sentiments
+// SecurityOrchestrator: link worker identities, remote anomalies, and infiltration findings
 contract SecurityOrchestrator {
     address public steward;
 
-    address public victimLedger;
-    address public suspectRegistry;
-    address public enforcementMirror;
-    address public communitySentiment;
+    address public workerIdentityLedger;
+    address public remoteControlRegistry;
+    address public infiltrationMirror;
 
     event SecurityCycleEvaluated(
-        uint256 victimId,
-        uint256 suspectId,
-        uint256 actionId,
-        uint256 sentimentId,
+        uint256 workerId,
+        uint256 anomalyId,
+        uint256 infiltrationId,
         string classification
     );
 
     constructor(
-        address _victimLedger,
-        address _suspectRegistry,
-        address _enforcementMirror,
-        address _communitySentiment
+        address _workerIdentityLedger,
+        address _remoteControlRegistry,
+        address _infiltrationMirror
     ) {
         steward = msg.sender;
-        victimLedger = _victimLedger;
-        suspectRegistry = _suspectRegistry;
-        enforcementMirror = _enforcementMirror;
-        communitySentiment = _communitySentiment;
+        workerIdentityLedger = _workerIdentityLedger;
+        remoteControlRegistry = _remoteControlRegistry;
+        infiltrationMirror = _infiltrationMirror;
     }
 
     function updateContractAddresses(
-        address _victimLedger,
-        address _suspectRegistry,
-        address _enforcementMirror,
-        address _communitySentiment
+        address _workerIdentityLedger,
+        address _remoteControlRegistry,
+        address _infiltrationMirror
     ) external {
         require(msg.sender == steward, "Only steward");
-        victimLedger = _victimLedger;
-        suspectRegistry = _suspectRegistry;
-        enforcementMirror = _enforcementMirror;
-        communitySentiment = _communitySentiment;
+        workerIdentityLedger = _workerIdentityLedger;
+        remoteControlRegistry = _remoteControlRegistry;
+        infiltrationMirror = _infiltrationMirror;
     }
 
     // Evaluate security cycle by linking IDs from each ledger
     function evaluateCycle(
-        uint256 victimId,
-        uint256 suspectId,
-        uint256 actionId,
-        uint256 sentimentId
+        uint256 workerId,
+        uint256 anomalyId,
+        uint256 infiltrationId
     ) external {
         require(msg.sender == steward, "Only steward");
 
         string memory classification;
-        if (sentimentId > 0) {
-            classification = "Community Sentiment Recorded";
-        } else if (actionId > 0) {
-            classification = "Enforcement Action Logged";
-        } else if (suspectId > 0) {
-            classification = "Suspect Arrest Logged";
-        } else if (victimId > 0) {
-            classification = "Victim Rescue Logged";
+        if (infiltrationId > 0) {
+            classification = "Infiltration Finding Recorded";
+        } else if (anomalyId > 0) {
+            classification = "Remote Anomaly Logged";
+        } else if (workerId > 0) {
+            classification = "Worker Identity Logged";
         } else {
             classification = "No Record";
         }
 
-        emit SecurityCycleEvaluated(victimId, suspectId, actionId, sentimentId, classification);
+        emit SecurityCycleEvaluated(workerId, anomalyId, infiltrationId, classification);
     }
 }
