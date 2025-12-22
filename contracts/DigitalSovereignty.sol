@@ -4,43 +4,35 @@ pragma solidity ^0.8.20;
 
 /**
  * @title DigitalSovereignty
- * @notice Protocols for data ownership, privacy, and communal control of digital assets.
+ * @notice Ledger for communal sovereignty in digital domains.
  */
 contract DigitalSovereignty {
     address public admin;
 
-    struct Asset {
-        string name;
-        string owner;
-        bool repairable;
-        string note;
+    struct Policy {
+        string name;        // "DataCommons", "CyberDefense"
+        string description;
+        string status;      // "Active", "Draft"
         uint256 timestamp;
     }
 
-    Asset[] public assets;
+    Policy[] public policies;
 
-    event AssetRegistered(string name, string owner, bool repairable, string note, uint256 timestamp);
+    event PolicyLogged(string name, string description, string status, uint256 timestamp);
 
-    modifier onlyAdmin() {
-        require(msg.sender == admin, "Not admin");
-        _;
+    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
+
+    constructor() { admin = msg.sender; }
+
+    function logPolicy(string calldata name, string calldata description, string calldata status) external onlyAdmin {
+        policies.push(Policy(name, description, status, block.timestamp));
+        emit PolicyLogged(name, description, status, block.timestamp);
     }
 
-    constructor() {
-        admin = msg.sender;
-    }
+    function totalPolicies() external view returns (uint256) { return policies.length; }
 
-    function registerAsset(string calldata name, string calldata owner, bool repairable, string calldata note) external onlyAdmin {
-        assets.push(Asset(name, owner, repairable, note, block.timestamp));
-        emit AssetRegistered(name, owner, repairable, note, block.timestamp);
-    }
-
-    function totalAssets() external view returns (uint256) {
-        return assets.length;
-    }
-
-    function getAsset(uint256 id) external view returns (Asset memory) {
-        require(id < assets.length, "Invalid id");
-        return assets[id];
+    function getPolicy(uint256 id) external view returns (Policy memory) {
+        require(id < policies.length, "Invalid id");
+        return policies[id];
     }
 }
