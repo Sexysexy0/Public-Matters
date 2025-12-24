@@ -4,41 +4,35 @@ pragma solidity ^0.8.20;
 
 /**
  * @title TransparencyCommons
- * @notice Communal transparency ledger for media and public narratives.
+ * @notice Logs communal transparency initiatives in media and governance.
  */
 contract TransparencyCommons {
     address public admin;
 
-    struct Entry {
-        string subject;
-        string detail;
+    struct Initiative {
+        string name;        // "OpenDataPortal", "FactCheckHub"
+        string description;
+        string status;      // "Active", "Pending"
         uint256 timestamp;
     }
 
-    Entry[] public entries;
+    Initiative[] public initiatives;
 
-    event EntryLogged(string subject, string detail, uint256 timestamp);
+    event InitiativeLogged(string name, string description, string status, uint256 timestamp);
 
-    modifier onlyAdmin() {
-        require(msg.sender == admin, "Not admin");
-        _;
+    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
+
+    constructor() { admin = msg.sender; }
+
+    function logInitiative(string calldata name, string calldata description, string calldata status) external onlyAdmin {
+        initiatives.push(Initiative(name, description, status, block.timestamp));
+        emit InitiativeLogged(name, description, status, block.timestamp);
     }
 
-    constructor() {
-        admin = msg.sender;
-    }
+    function totalInitiatives() external view returns (uint256) { return initiatives.length; }
 
-    function logEntry(string calldata subject, string calldata detail) external onlyAdmin {
-        entries.push(Entry(subject, detail, block.timestamp));
-        emit EntryLogged(subject, detail, block.timestamp);
-    }
-
-    function totalEntries() external view returns (uint256) {
-        return entries.length;
-    }
-
-    function getEntry(uint256 id) external view returns (Entry memory) {
-        require(id < entries.length, "Invalid id");
-        return entries[id];
+    function getInitiative(uint256 id) external view returns (Initiative memory) {
+        require(id < initiatives.length, "Invalid id");
+        return initiatives[id];
     }
 }
