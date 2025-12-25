@@ -4,13 +4,13 @@ pragma solidity ^0.8.20;
 
 /**
  * @title UniversalLearning
- * @notice Logs communal access to education for all learners.
+ * @notice Logs communal access to universal education programs.
  */
 contract UniversalLearning {
     address public admin;
 
     struct Program {
-        string name;        // "BasicEducation", "DigitalLiteracy"
+        string name;        // "CommunitySchool", "OpenLearningHub"
         string level;       // "Primary", "Secondary", "Tertiary"
         string status;      // "Active", "Pending"
         uint256 timestamp;
