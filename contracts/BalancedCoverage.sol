@@ -4,29 +4,28 @@ pragma solidity ^0.8.20;
 
 /**
  * @title BalancedCoverage
- * @notice Logs media reports and communal equity in coverage balance.
+ * @notice Logs efforts to ensure balanced and reliable media coverage.
  */
 contract BalancedCoverage {
     address public admin;
 
     struct Report {
-        string outlet;      // "NewsSiteX", "ChannelY"
         string topic;       // "Politics", "Economy", "Health"
-        string verdict;     // "Balanced", "Biased"
+        string status;      // "Balanced", "Biased"
         uint256 timestamp;
     }
 
     Report[] public reports;
 
-    event ReportLogged(string outlet, string topic, string verdict, uint256 timestamp);
+    event ReportLogged(string topic, string status, uint256 timestamp);
 
     modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
 
     constructor() { admin = msg.sender; }
 
-    function logReport(string calldata outlet, string calldata topic, string calldata verdict) external onlyAdmin {
-        reports.push(Report(outlet, topic, verdict, block.timestamp));
-        emit ReportLogged(outlet, topic, verdict, block.timestamp);
+    function logReport(string calldata topic, string calldata status) external onlyAdmin {
+        reports.push(Report(topic, status, block.timestamp));
+        emit ReportLogged(topic, status, block.timestamp);
     }
 
     function totalReports() external view returns (uint256) { return reports.length; }

@@ -4,13 +4,13 @@ pragma solidity ^0.8.20;
 
 /**
  * @title MediaDignityProtocol
- * @notice Ensures validator-grade dignity in media accountability systems.
+ * @notice Ensures validator-grade dignity in media systems.
  */
 contract MediaDignityProtocol {
     address public admin;
 
     struct Rule {
-        string name;        // "NoDisinformation", "EquityInCoverage"
+        string name;        // "Transparency", "Accountability", "NoDisinformation"
         string description;
         string status;      // "Implemented", "Pending"
         uint256 timestamp;
