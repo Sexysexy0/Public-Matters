@@ -4,35 +4,34 @@ pragma solidity ^0.8.20;
 
 /**
  * @title BiasAudit
- * @notice Communal audit of bias levels in media coverage.
+ * @notice Tracks audits of media bias and transparency.
  */
 contract BiasAudit {
     address public admin;
 
-    struct BiasRecord {
-        string outlet;
-        string category;   // "Political", "Economic", "Social"
-        string rating;     // "Low", "Medium", "High"
+    struct Audit {
+        string outlet;      // "NewspaperX", "TVStationY"
+        string bias;        // "Left", "Right", "Neutral"
         uint256 timestamp;
     }
 
-    BiasRecord[] public biasRecords;
+    Audit[] public audits;
 
-    event BiasLogged(string outlet, string category, string rating, uint256 timestamp);
+    event AuditLogged(string outlet, string bias, uint256 timestamp);
 
     modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
 
     constructor() { admin = msg.sender; }
 
-    function logBias(string calldata outlet, string calldata category, string calldata rating) external onlyAdmin {
-        biasRecords.push(BiasRecord(outlet, category, rating, block.timestamp));
-        emit BiasLogged(outlet, category, rating, block.timestamp);
+    function logAudit(string calldata outlet, string calldata bias) external onlyAdmin {
+        audits.push(Audit(outlet, bias, block.timestamp));
+        emit AuditLogged(outlet, bias, block.timestamp);
     }
 
-    function totalBiasRecords() external view returns (uint256) { return biasRecords.length; }
+    function totalAudits() external view returns (uint256) { return audits.length; }
 
-    function getBiasRecord(uint256 id) external view returns (BiasRecord memory) {
-        require(id < biasRecords.length, "Invalid id");
-        return biasRecords[id];
+    function getAudit(uint256 id) external view returns (Audit memory) {
+        require(id < audits.length, "Invalid id");
+        return audits[id];
     }
 }
