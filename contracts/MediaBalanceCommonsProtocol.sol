@@ -1,17 +1,12 @@
-// contracts/MediaBalanceCommonsProtocol.sol
 pragma solidity ^0.8.20;
 
-/**
- * @title MediaBalanceCommonsProtocol
- * @notice Validator-grade contract to log news accountability arcs, balanced coverage, and solution-driven outputs.
- */
 contract MediaBalanceCommonsProtocol {
     address public admin;
 
     struct Report {
-        string outlet;       // e.g. "TV station", "online news site"
-        string topic;        // e.g. "health", "education", "climate"
-        string balance;      // "Balanced", "Biased", "Solution-driven"
+        string outlet;       // e.g. TV station, online site
+        string topic;        // e.g. health, politics, economy
+        string balance;      // Balanced, Biased, Solution-driven
         uint256 timestamp;
     }
 
