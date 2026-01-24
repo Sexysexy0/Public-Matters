@@ -2,13 +2,27 @@ pragma solidity ^0.8.20;
 
 contract CommunityResilienceProtocol {
     address public admin;
-    struct Program { string project; string benefit; uint256 timestamp; }
-    Program[] public programs;
-    event ProgramLogged(string project, string benefit, uint256 timestamp);
-    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
+
+    struct Resilience {
+        string city;         // e.g. Minneapolis, New York
+        string action;       // e.g. observation shifts, recruitment, solidarity
+        string outcome;      // e.g. sustained protests, defense networks
+        uint256 timestamp;
+    }
+
+    Resilience[] public resiliences;
+
+    event ResilienceLogged(string city, string action, string outcome, uint256 timestamp);
+
     constructor() { admin = msg.sender; }
-    function logProgram(string calldata project, string calldata benefit) external onlyAdmin {
-        programs.push(Program(project, benefit, block.timestamp));
-        emit ProgramLogged(project, benefit, block.timestamp);
+    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
+
+    function logResilience(string calldata city, string calldata action, string calldata outcome) external onlyAdmin {
+        resiliences.push(Resilience(city, action, outcome, block.timestamp));
+        emit ResilienceLogged(city, action, outcome, block.timestamp);
+    }
+
+    function totalResiliences() external view returns (uint256) {
+        return resiliences.length;
     }
 }
