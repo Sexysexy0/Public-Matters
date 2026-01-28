@@ -3,26 +3,26 @@ pragma solidity ^0.8.20;
 contract EnvironmentalJusticeProtocol {
     address public admin;
 
-    struct Case {
-        string project;      // e.g. mining, deforestation, pollution
-        string impact;       // e.g. violated, mitigated, pending
+    struct Justice {
+        string threat;       // e.g. water, farms, ancestral land
+        string action;       // e.g. protest, human barricade
+        string consequence;  // e.g. arrests, silencing
         uint256 timestamp;
     }
 
-    Case[] public cases;
+    Justice[] public justices;
 
-    event CaseLogged(string project, string impact, uint256 timestamp);
-
-    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
+    event JusticeLogged(string threat, string action, string consequence, uint256 timestamp);
 
     constructor() { admin = msg.sender; }
+    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
 
-    function logCase(string calldata project, string calldata impact) external onlyAdmin {
-        cases.push(Case(project, impact, block.timestamp));
-        emit CaseLogged(project, impact, block.timestamp);
+    function logJustice(string calldata threat, string calldata action, string calldata consequence) external onlyAdmin {
+        justices.push(Justice(threat, action, consequence, block.timestamp));
+        emit JusticeLogged(threat, action, consequence, block.timestamp);
     }
 
-    function totalCases() external view returns (uint256) {
-        return cases.length;
+    function totalJustices() external view returns (uint256) {
+        return justices.length;
     }
 }
