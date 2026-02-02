@@ -22,6 +22,6 @@ contract AdoptionCatalystProtocol {
     }
 
     function declareAdoption() public {
-        emit AdoptionDeclared("Adoption Catalyst Protocol: Education and onboarding arcs expanding crypto communities.");
+        emit AdoptionDeclared("Adoption Catalyst Protocol: education and onboarding arcs expanding crypto communities.");
     }
 }
