@@ -2,26 +2,26 @@
 pragma solidity ^0.8.0;
 
 contract PlanetaryResilienceProtocol {
-    struct Project {
+    struct Initiative {
         uint256 id;
-        string initiative;   // e.g. "Carbon Neutrality", "Water Security"
-        address initiator;
+        string theme;   // e.g. "Climate Action", "Universal Housing"
+        string description;
         uint256 timestamp;
     }
 
-    uint256 public projectCount;
-    mapping(uint256 => Project) public projects;
+    uint256 public initiativeCount;
+    mapping(uint256 => Initiative) public initiatives;
 
-    event ProjectLogged(uint256 id, string initiative, address initiator, uint256 timestamp);
+    event InitiativeLogged(uint256 id, string theme, string description, uint256 timestamp);
     event PlanetDeclared(string message);
 
-    function logProject(string memory initiative) public {
-        projectCount++;
-        projects[projectCount] = Project(projectCount, initiative, msg.sender, block.timestamp);
-        emit ProjectLogged(projectCount, initiative, msg.sender, block.timestamp);
+    function logInitiative(string memory theme, string memory description) public {
+        initiativeCount++;
+        initiatives[initiativeCount] = Initiative(initiativeCount, theme, description, block.timestamp);
+        emit InitiativeLogged(initiativeCount, theme, description, block.timestamp);
     }
 
     function declarePlanet() public {
-        emit PlanetDeclared("Planetary Resilience Protocol: sustainability arcs encoded into communal legacy.");
+        emit PlanetDeclared("Planetary Resilience Protocol: foresight arcs encoded into communal trust.");
     }
 }
