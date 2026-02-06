@@ -2,43 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract InvestorProtectionDAO {
-    struct Proposal {
+    struct Case {
         uint256 id;
-        string measure;   // e.g. "Insurance Pool", "Transparency Mandate"
+        string issue;   // e.g. "Fraud", "Market Manipulation"
+        string resolution; // e.g. "Compensation", "Regulatory Action"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool enacted;
+        bool resolved;
     }
 
-    uint256 public proposalCount;
-    mapping(uint256 => Proposal) public proposals;
+    uint256 public caseCount;
+    mapping(uint256 => Case) public cases;
 
-    event ProposalCreated(uint256 id, string measure);
-    event ProposalVoted(uint256 id, string measure, bool support);
-    event ProposalEnacted(uint256 id, string measure);
+    event CaseCreated(uint256 id, string issue, string resolution);
+    event CaseVoted(uint256 id, string issue, bool support);
+    event CaseResolved(uint256 id, string issue);
     event ProtectionDeclared(string message);
 
-    function createProposal(string memory measure) public {
-        proposalCount++;
-        proposals[proposalCount] = Proposal(proposalCount, measure, 0, 0, false);
-        emit ProposalCreated(proposalCount, measure);
+    function createCase(string memory issue, string memory resolution) public {
+        caseCount++;
+        cases[caseCount] = Case(caseCount, issue, resolution, 0, 0, false);
+        emit CaseCreated(caseCount, issue, resolution);
     }
 
-    function voteProposal(uint256 id, bool support) public {
+    function voteCase(uint256 id, bool support) public {
         if (support) {
-            proposals[id].votesFor++;
+            cases[id].votesFor++;
         } else {
-            proposals[id].votesAgainst++;
+            cases[id].votesAgainst++;
         }
-        emit ProposalVoted(id, proposals[id].measure, support);
+        emit CaseVoted(id, cases[id].issue, support);
     }
 
-    function enactProposal(uint256 id) public {
-        Proposal storage p = proposals[id];
-        require(!p.enacted, "Already enacted");
-        require(p.votesFor > p.votesAgainst, "Not enough support");
-        p.enacted = true;
-        emit ProposalEnacted(p.id, p.measure);
+    function resolveCase(uint256 id) public {
+        Case storage c = cases[id];
+        require(!c.resolved, "Already resolved");
+        require(c.votesFor > c.votesAgainst, "Not enough support");
+        c.resolved = true;
+        emit CaseResolved(c.id, c.issue);
     }
 
     function declareProtection() public {
