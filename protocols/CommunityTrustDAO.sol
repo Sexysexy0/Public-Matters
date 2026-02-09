@@ -2,46 +2,47 @@
 pragma solidity ^0.8.0;
 
 contract CommunityTrustDAO {
-    struct Initiative {
+    struct Trust {
         uint256 id;
-        string focus;   // e.g. "Transparency Reports", "Public Oversight"
+        string group;   // e.g. "Believers", "Creators"
+        string status;  // e.g. "Trusted", "Distrusted"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool enacted;
+        bool resolved;
     }
 
-    uint256 public initiativeCount;
-    mapping(uint256 => Initiative) public initiatives;
+    uint256 public trustCount;
+    mapping(uint256 => Trust) public trusts;
 
-    event InitiativeCreated(uint256 id, string focus);
-    event InitiativeVoted(uint256 id, string focus, bool support);
-    event InitiativeEnacted(uint256 id, string focus);
-    event TrustDeclared(string message);
+    event TrustCreated(uint256 id, string group, string status);
+    event TrustVoted(uint256 id, string group, bool support);
+    event TrustResolved(uint256 id, string group);
+    event CommunityDeclared(string message);
 
-    function createInitiative(string memory focus) public {
-        initiativeCount++;
-        initiatives[initiativeCount] = Initiative(initiativeCount, focus, 0, 0, false);
-        emit InitiativeCreated(initiativeCount, focus);
+    function createTrust(string memory group, string memory status) public {
+        trustCount++;
+        trusts[trustCount] = Trust(trustCount, group, status, 0, 0, false);
+        emit TrustCreated(trustCount, group, status);
     }
 
-    function voteInitiative(uint256 id, bool support) public {
+    function voteTrust(uint256 id, bool support) public {
         if (support) {
-            initiatives[id].votesFor++;
+            trusts[id].votesFor++;
         } else {
-            initiatives[id].votesAgainst++;
+            trusts[id].votesAgainst++;
         }
-        emit InitiativeVoted(id, initiatives[id].focus, support);
+        emit TrustVoted(id, trusts[id].group, support);
     }
 
-    function enactInitiative(uint256 id) public {
-        Initiative storage i = initiatives[id];
-        require(!i.enacted, "Already enacted");
-        require(i.votesFor > i.votesAgainst, "Not enough support");
-        i.enacted = true;
-        emit InitiativeEnacted(i.id, i.focus);
+    function resolveTrust(uint256 id) public {
+        Trust storage t = trusts[id];
+        require(!t.resolved, "Already resolved");
+        require(t.votesFor > t.votesAgainst, "Not enough support");
+        t.resolved = true;
+        emit TrustResolved(t.id, t.group);
     }
 
-    function declareTrust() public {
-        emit TrustDeclared("Community Trust DAO: safeguard arcs encoded into communal consequence.");
+    function declareCommunity() public {
+        emit CommunityDeclared("Community Trust DAO: safeguard arcs encoded into communal consequence.");
     }
 }
