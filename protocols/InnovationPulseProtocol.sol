@@ -2,26 +2,26 @@
 pragma solidity ^0.8.0;
 
 contract InnovationPulseProtocol {
-    struct Signal {
+    struct Pulse {
         uint256 id;
-        string focus;   // e.g. "GenAI Deployment", "Climate Tech"
-        uint256 intensity;
+        string domain;   // e.g. "AI", "Finance", "Entertainment"
+        string signal;   // e.g. "Breakthrough", "Disruption"
         uint256 timestamp;
     }
 
-    uint256 public signalCount;
-    mapping(uint256 => Signal) public signals;
+    uint256 public pulseCount;
+    mapping(uint256 => Pulse) public pulses;
 
-    event SignalLogged(uint256 id, string focus, uint256 intensity, uint256 timestamp);
+    event PulseLogged(uint256 id, string domain, string signal, uint256 timestamp);
     event InnovationDeclared(string message);
 
-    function logSignal(string memory focus, uint256 intensity) public {
-        signalCount++;
-        signals[signalCount] = Signal(signalCount, focus, intensity, block.timestamp);
-        emit SignalLogged(signalCount, focus, intensity, block.timestamp);
+    function logPulse(string memory domain, string memory signal) public {
+        pulseCount++;
+        pulses[pulseCount] = Pulse(pulseCount, domain, signal, block.timestamp);
+        emit PulseLogged(pulseCount, domain, signal, block.timestamp);
     }
 
     function declareInnovation() public {
-        emit InnovationDeclared("Innovation Pulse Protocol: creative arcs encoded into communal dignity.");
+        emit InnovationDeclared("Innovation Pulse Protocol: validator-grade safeguards encoded into communal dignity.");
     }
 }
