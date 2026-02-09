@@ -2,27 +2,26 @@
 pragma solidity ^0.8.0;
 
 contract DebtFlowProtocol {
-    struct Flow {
+    struct Borrow {
         uint256 id;
-        string holder;   // e.g. "Japan", "China", "US Investors"
-        string asset;    // e.g. "Treasuries", "Bonds"
-        int256 amount;   // inflow/outflow
+        string source;   // e.g. "Treasury", "Bond Market"
+        uint256 amount;  // e.g. 2000000000
         uint256 timestamp;
     }
 
-    uint256 public flowCount;
-    mapping(uint256 => Flow) public flows;
+    uint256 public borrowCount;
+    mapping(uint256 => Borrow) public borrows;
 
-    event FlowLogged(uint256 id, string holder, string asset, int256 amount, uint256 timestamp);
+    event BorrowLogged(uint256 id, string source, uint256 amount, uint256 timestamp);
     event DebtDeclared(string message);
 
-    function logFlow(string memory holder, string memory asset, int256 amount) public {
-        flowCount++;
-        flows[flowCount] = Flow(flowCount, holder, asset, amount, block.timestamp);
-        emit FlowLogged(flowCount, holder, asset, amount, block.timestamp);
+    function logBorrow(string memory source, uint256 amount) public {
+        borrowCount++;
+        borrows[borrowCount] = Borrow(borrowCount, source, amount, block.timestamp);
+        emit BorrowLogged(borrowCount, source, amount, block.timestamp);
     }
 
     function declareDebt() public {
-        emit DebtDeclared("Debt Flow Protocol: validator-grade frameworks encoded into communal trust.");
+        emit DebtDeclared("Debt Flow Protocol: validator-grade safeguards encoded into communal dignity.");
     }
 }
