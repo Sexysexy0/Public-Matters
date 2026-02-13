@@ -2,23 +2,23 @@
 pragma solidity ^0.8.0;
 
 contract TrustResonanceProtocol {
-    struct Trust {
+    struct Signal {
         uint256 id;
-        string entity;   // e.g. "Bithumb", "Exchange"
-        string measure;  // e.g. "Compensation", "Transparency"
+        string measure;   // e.g. "Transparency", "Watermarking"
+        string effect;    // e.g. "User Confidence", "Traceability"
         uint256 timestamp;
     }
 
-    uint256 public trustCount;
-    mapping(uint256 => Trust) public trusts;
+    uint256 public signalCount;
+    mapping(uint256 => Signal) public signals;
 
-    event TrustLogged(uint256 id, string entity, string measure, uint256 timestamp);
+    event SignalLogged(uint256 id, string measure, string effect, uint256 timestamp);
     event TrustDeclared(string message);
 
-    function logTrust(string memory entity, string memory measure) public {
-        trustCount++;
-        trusts[trustCount] = Trust(trustCount, entity, measure, block.timestamp);
-        emit TrustLogged(trustCount, entity, measure, block.timestamp);
+    function logSignal(string memory measure, string memory effect) public {
+        signalCount++;
+        signals[signalCount] = Signal(signalCount, measure, effect, block.timestamp);
+        emit SignalLogged(signalCount, measure, effect, block.timestamp);
     }
 
     function declareTrust() public {
