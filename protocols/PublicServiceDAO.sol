@@ -2,46 +2,47 @@
 pragma solidity ^0.8.0;
 
 contract PublicServiceDAO {
-    struct Project {
+    struct Audit {
         uint256 id;
-        string focus;   // e.g. "Healthcare", "Education", "Infrastructure"
+        string agency;   // e.g. "SSS", "FDA"
+        string issue;    // e.g. "Red Tape", "Slow Processing"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool enacted;
+        bool resolved;
     }
 
-    uint256 public projectCount;
-    mapping(uint256 => Project) public projects;
+    uint256 public auditCount;
+    mapping(uint256 => Audit) public audits;
 
-    event ProjectCreated(uint256 id, string focus);
-    event ProjectVoted(uint256 id, string focus, bool support);
-    event ProjectEnacted(uint256 id, string focus);
+    event AuditCreated(uint256 id, string agency, string issue);
+    event AuditVoted(uint256 id, string agency, bool support);
+    event AuditResolved(uint256 id, string agency);
     event ServiceDeclared(string message);
 
-    function createProject(string memory focus) public {
-        projectCount++;
-        projects[projectCount] = Project(projectCount, focus, 0, 0, false);
-        emit ProjectCreated(projectCount, focus);
+    function createAudit(string memory agency, string memory issue) public {
+        auditCount++;
+        audits[auditCount] = Audit(auditCount, agency, issue, 0, 0, false);
+        emit AuditCreated(auditCount, agency, issue);
     }
 
-    function voteProject(uint256 id, bool support) public {
+    function voteAudit(uint256 id, bool support) public {
         if (support) {
-            projects[id].votesFor++;
+            audits[id].votesFor++;
         } else {
-            projects[id].votesAgainst++;
+            audits[id].votesAgainst++;
         }
-        emit ProjectVoted(id, projects[id].focus, support);
+        emit AuditVoted(id, audits[id].agency, support);
     }
 
-    function enactProject(uint256 id) public {
-        Project storage p = projects[id];
-        require(!p.enacted, "Already enacted");
-        require(p.votesFor > p.votesAgainst, "Not enough support");
-        p.enacted = true;
-        emit ProjectEnacted(p.id, p.focus);
+    function resolveAudit(uint256 id) public {
+        Audit storage a = audits[id];
+        require(!a.resolved, "Already resolved");
+        require(a.votesFor > a.votesAgainst, "Not enough support");
+        a.resolved = true;
+        emit AuditResolved(a.id, a.agency);
     }
 
     function declareService() public {
-        emit ServiceDeclared("Public Service DAO: communal arcs encoded into resilience consequence.");
+        emit ServiceDeclared("Public Service DAO: safeguard arcs encoded into communal consequence.");
     }
 }
