@@ -2,23 +2,23 @@
 pragma solidity ^0.8.0;
 
 contract TransparencyProtocol {
-    struct Record {
+    struct Disclosure {
         uint256 id;
-        string domain;   // e.g. "Election", "Finance"
-        string status;   // e.g. "Open", "Closed"
+        string product;   // e.g. "Subscription Service"
+        string detail;    // e.g. "Cancellation Policy", "Lifetime Cost"
         uint256 timestamp;
     }
 
-    uint256 public recordCount;
-    mapping(uint256 => Record) public records;
+    uint256 public disclosureCount;
+    mapping(uint256 => Disclosure) public disclosures;
 
-    event RecordLogged(uint256 id, string domain, string status, uint256 timestamp);
+    event DisclosureLogged(uint256 id, string product, string detail, uint256 timestamp);
     event TransparencyDeclared(string message);
 
-    function logRecord(string memory domain, string memory status) public {
-        recordCount++;
-        records[recordCount] = Record(recordCount, domain, status, block.timestamp);
-        emit RecordLogged(recordCount, domain, status, block.timestamp);
+    function logDisclosure(string memory product, string memory detail) public {
+        disclosureCount++;
+        disclosures[disclosureCount] = Disclosure(disclosureCount, product, detail, block.timestamp);
+        emit DisclosureLogged(disclosureCount, product, detail, block.timestamp);
     }
 
     function declareTransparency() public {
