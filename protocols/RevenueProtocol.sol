@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract RevenueProtocol {
-    struct Collection {
+    struct Stream {
         uint256 id;
-        string agency;   // e.g. "BIR", "BOC"
-        string type;     // e.g. "Tax", "Customs Duty"
-        uint256 amount;
+        string source;   // e.g. "Customs Duties"
+        uint256 amount;  // e.g. 1000000
+        string status;   // e.g. "Collected", "Pending"
         uint256 timestamp;
     }
 
-    uint256 public collectionCount;
-    mapping(uint256 => Collection) public collections;
+    uint256 public streamCount;
+    mapping(uint256 => Stream) public streams;
 
-    event CollectionLogged(uint256 id, string agency, string type, uint256 amount, uint256 timestamp);
+    event StreamLogged(uint256 id, string source, uint256 amount, string status, uint256 timestamp);
     event RevenueDeclared(string message);
 
-    function logCollection(string memory agency, string memory type, uint256 amount) public {
-        collectionCount++;
-        collections[collectionCount] = Collection(collectionCount, agency, type, amount, block.timestamp);
-        emit CollectionLogged(collectionCount, agency, type, amount, block.timestamp);
+    function logStream(string memory source, uint256 amount, string memory status) public {
+        streamCount++;
+        streams[streamCount] = Stream(streamCount, source, amount, status, block.timestamp);
+        emit StreamLogged(streamCount, source, amount, status, block.timestamp);
     }
 
     function declareRevenue() public {
