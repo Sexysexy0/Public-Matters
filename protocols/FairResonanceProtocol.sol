@@ -2,26 +2,27 @@
 pragma solidity ^0.8.0;
 
 contract FairResonanceProtocol {
-    struct Claim {
+    struct Forward {
         uint256 id;
-        string issue;   // e.g. "Rate fairness"
-        string resolution; // e.g. "Adjusted rates"
+        string applicant;   // e.g. "Applicant A"
+        string employer;    // e.g. "Company X"
+        string outcome;     // e.g. "Delivered to Employer"
         uint256 timestamp;
     }
 
-    uint256 public claimCount;
-    mapping(uint256 => Claim) public claims;
+    uint256 public forwardCount;
+    mapping(uint256 => Forward) public forwards;
 
-    event ClaimLogged(uint256 id, string issue, string resolution, uint256 timestamp);
-    event FairnessDeclared(string message);
+    event ForwardLogged(uint256 id, string applicant, string employer, string outcome, uint256 timestamp);
+    event FairDeclared(string message);
 
-    function logClaim(string memory issue, string memory resolution) public {
-        claimCount++;
-        claims[claimCount] = Claim(claimCount, issue, resolution, block.timestamp);
-        emit ClaimLogged(claimCount, issue, resolution, block.timestamp);
+    function logForward(string memory applicant, string memory employer, string memory outcome) public {
+        forwardCount++;
+        forwards[forwardCount] = Forward(forwardCount, applicant, employer, outcome, block.timestamp);
+        emit ForwardLogged(forwardCount, applicant, employer, outcome, block.timestamp);
     }
 
-    function declareFairness() public {
-        emit FairnessDeclared("Fair Resonance Protocol: validator-grade frameworks encoded into communal trust.");
+    function declareFair() public {
+        emit FairDeclared("Fair Resonance Protocol: validator-grade frameworks encoded into communal trust.");
     }
 }
