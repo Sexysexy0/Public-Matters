@@ -2,23 +2,23 @@
 pragma solidity ^0.8.0;
 
 contract JusticeResonanceProtocol {
-    struct Case {
+    struct Action {
         uint256 id;
-        string grievance; // e.g. "Rate hike"
-        string outcome;   // e.g. "Resolved in favor of citizens"
+        string worker;    // e.g. "Worker A"
+        string resolution; // e.g. "Wages Paid"
         uint256 timestamp;
     }
 
-    uint256 public caseCount;
-    mapping(uint256 => Case) public cases;
+    uint256 public actionCount;
+    mapping(uint256 => Action) public actions;
 
-    event CaseLogged(uint256 id, string grievance, string outcome, uint256 timestamp);
+    event ActionLogged(uint256 id, string worker, string resolution, uint256 timestamp);
     event JusticeDeclared(string message);
 
-    function logCase(string memory grievance, string memory outcome) public {
-        caseCount++;
-        cases[caseCount] = Case(caseCount, grievance, outcome, block.timestamp);
-        emit CaseLogged(caseCount, grievance, outcome, block.timestamp);
+    function logAction(string memory worker, string memory resolution) public {
+        actionCount++;
+        actions[actionCount] = Action(actionCount, worker, resolution, block.timestamp);
+        emit ActionLogged(actionCount, worker, resolution, block.timestamp);
     }
 
     function declareJustice() public {
