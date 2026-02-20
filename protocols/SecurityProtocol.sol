@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract SecurityProtocol {
-    struct Vulnerability {
+    struct Alert {
         uint256 id;
-        string system;   // e.g. "DepEd HRMS"
-        string type;     // e.g. "Unrestricted File Upload"
-        string status;   // e.g. "Detected", "Patched"
+        string system;    // e.g. "Payment Gateway"
+        string issue;     // e.g. "Unauthorized Access"
+        string status;    // e.g. "Resolved", "Pending"
         uint256 timestamp;
     }
 
-    uint256 public vulnCount;
-    mapping(uint256 => Vulnerability) public vulnerabilities;
+    uint256 public alertCount;
+    mapping(uint256 => Alert) public alerts;
 
-    event VulnerabilityLogged(uint256 id, string system, string type, string status, uint256 timestamp);
+    event AlertLogged(uint256 id, string system, string issue, string status, uint256 timestamp);
     event SecurityDeclared(string message);
 
-    function logVulnerability(string memory system, string memory type, string memory status) public {
-        vulnCount++;
-        vulnerabilities[vulnCount] = Vulnerability(vulnCount, system, type, status, block.timestamp);
-        emit VulnerabilityLogged(vulnCount, system, type, status, block.timestamp);
+    function logAlert(string memory system, string memory issue, string memory status) public {
+        alertCount++;
+        alerts[alertCount] = Alert(alertCount, system, issue, status, block.timestamp);
+        emit AlertLogged(alertCount, system, issue, status, block.timestamp);
     }
 
     function declareSecurity() public {

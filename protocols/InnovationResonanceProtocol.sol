@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract InnovationResonanceProtocol {
     struct Project {
         uint256 id;
-        string name;     // e.g. "AI Safety Dashboard"
+        string name;     // e.g. "AI Helper System"
         string outcome;  // e.g. "Prototype Delivered"
         uint256 timestamp;
     }
