@@ -2,46 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract TradeDAO {
-    struct Trade {
+    struct Proposal {
         uint256 id;
-        string country;   // e.g. "China"
-        string partner;   // e.g. "United States"
-        uint256 value;    // e.g. 3500000000000
-        bool balanced;
+        string focus;     // e.g. "Fair Tariff Policy"
+        string proposer;  // e.g. "Economic Council"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool resolved;
+        bool ratified;
     }
 
-    uint256 public tradeCount;
-    mapping(uint256 => Trade) public trades;
+    uint256 public proposalCount;
+    mapping(uint256 => Proposal) public proposals;
 
-    event TradeCreated(uint256 id, string country, string partner, uint256 value, bool balanced);
-    event TradeVoted(uint256 id, string country, bool support);
-    event TradeResolved(uint256 id, string country);
+    event ProposalCreated(uint256 id, string focus, string proposer);
+    event ProposalVoted(uint256 id, string focus, bool support);
+    event ProposalRatified(uint256 id, string focus);
     event TradeDeclared(string message);
 
-    function createTrade(string memory country, string memory partner, uint256 value, bool balanced) public {
-        tradeCount++;
-        trades[tradeCount] = Trade(tradeCount, country, partner, value, balanced, 0, 0, false);
-        emit TradeCreated(tradeCount, country, partner, value, balanced);
+    function createProposal(string memory focus, string memory proposer) public {
+        proposalCount++;
+        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
+        emit ProposalCreated(proposalCount, focus, proposer);
     }
 
-    function voteTrade(uint256 id, bool support) public {
+    function voteProposal(uint256 id, bool support) public {
         if (support) {
-            trades[id].votesFor++;
+            proposals[id].votesFor++;
         } else {
-            trades[id].votesAgainst++;
+            proposals[id].votesAgainst++;
         }
-        emit TradeVoted(id, trades[id].country, support);
+        emit ProposalVoted(id, proposals[id].focus, support);
     }
 
-    function resolveTrade(uint256 id) public {
-        Trade storage t = trades[id];
-        require(!t.resolved, "Already resolved");
-        require(t.votesFor > t.votesAgainst, "Not enough support");
-        t.resolved = true;
-        emit TradeResolved(t.id, t.country);
+    function ratifyProposal(uint256 id) public {
+        Proposal storage p = proposals[id];
+        require(!p.ratified, "Already ratified");
+        require(p.votesFor > p.votesAgainst, "Not enough support");
+        p.ratified = true;
+        emit ProposalRatified(p.id, p.focus);
     }
 
     function declareTrade() public {
