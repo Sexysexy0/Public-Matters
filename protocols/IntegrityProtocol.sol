@@ -2,23 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract IntegrityProtocol {
-    struct Record {
+    struct Report {
         uint256 id;
-        string subject;   // e.g. "Bitcoin Governance", "Investor Conduct"
-        string verdict;   // e.g. "Clean", "Compromised"
+        string entity;    // e.g. "Company A"
+        string issue;     // e.g. "Data Transparency"
+        string status;    // e.g. "Pending", "Resolved"
         uint256 timestamp;
     }
 
-    uint256 public recordCount;
-    mapping(uint256 => Record) public records;
+    uint256 public reportCount;
+    mapping(uint256 => Report) public reports;
 
-    event RecordLogged(uint256 id, string subject, string verdict, uint256 timestamp);
+    event ReportLogged(uint256 id, string entity, string issue, string status, uint256 timestamp);
     event IntegrityDeclared(string message);
 
-    function logRecord(string memory subject, string memory verdict) public {
-        recordCount++;
-        records[recordCount] = Record(recordCount, subject, verdict, block.timestamp);
-        emit RecordLogged(recordCount, subject, verdict, block.timestamp);
+    function logReport(string memory entity, string memory issue, string memory status) public {
+        reportCount++;
+        reports[reportCount] = Report(reportCount, entity, issue, status, block.timestamp);
+        emit ReportLogged(reportCount, entity, issue, status, block.timestamp);
     }
 
     function declareIntegrity() public {
