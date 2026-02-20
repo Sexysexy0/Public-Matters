@@ -2,26 +2,27 @@
 pragma solidity ^0.8.0;
 
 contract GlobalResonanceProtocol {
-    struct Metric {
+    struct Action {
         uint256 id;
-        string factor;   // e.g. "Correlation with S&P500", "Gold Hedge"
-        uint256 strength;
+        string region;    // e.g. "Asia-Pacific"
+        string initiative; // e.g. "Wage Justice Campaign"
+        string outcome;   // e.g. "Implemented"
         uint256 timestamp;
     }
 
-    uint256 public metricCount;
-    mapping(uint256 => Metric) public metrics;
+    uint256 public actionCount;
+    mapping(uint256 => Action) public actions;
 
-    event MetricLogged(uint256 id, string factor, uint256 strength, uint256 timestamp);
-    event ResonanceDeclared(string message);
+    event ActionLogged(uint256 id, string region, string initiative, string outcome, uint256 timestamp);
+    event GlobalDeclared(string message);
 
-    function logMetric(string memory factor, uint256 strength) public {
-        metricCount++;
-        metrics[metricCount] = Metric(metricCount, factor, strength, block.timestamp);
-        emit MetricLogged(metricCount, factor, strength, block.timestamp);
+    function logAction(string memory region, string memory initiative, string memory outcome) public {
+        actionCount++;
+        actions[actionCount] = Action(actionCount, region, initiative, outcome, block.timestamp);
+        emit ActionLogged(actionCount, region, initiative, outcome, block.timestamp);
     }
 
-    function declareResonance() public {
-        emit ResonanceDeclared("Global Resonance Protocol: correlation arcs encoded into communal trust.");
+    function declareGlobal() public {
+        emit GlobalDeclared("Global Resonance Protocol: validator-grade frameworks encoded into communal trust.");
     }
 }

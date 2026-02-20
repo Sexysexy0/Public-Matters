@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract TransparencyDAO {
-    struct Audit {
+    struct Proposal {
         uint256 id;
-        string institution;   // e.g. "Ministry of Finance", "Public Works"
-        string finding;       // e.g. "Transparent", "Opaque"
+        string focus;     // e.g. "Public Wage Reports"
+        string proposer;  // e.g. "Community Advocate"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool published;
+        bool ratified;
     }
 
-    uint256 public auditCount;
-    mapping(uint256 => Audit) public audits;
+    uint256 public proposalCount;
+    mapping(uint256 => Proposal) public proposals;
 
-    event AuditCreated(uint256 id, string institution, string finding);
-    event AuditVoted(uint256 id, string institution, bool support);
-    event AuditPublished(uint256 id, string institution);
+    event ProposalCreated(uint256 id, string focus, string proposer);
+    event ProposalVoted(uint256 id, string focus, bool support);
+    event ProposalRatified(uint256 id, string focus);
     event TransparencyDeclared(string message);
 
-    function createAudit(string memory institution, string memory finding) public {
-        auditCount++;
-        audits[auditCount] = Audit(auditCount, institution, finding, 0, 0, false);
-        emit AuditCreated(auditCount, institution, finding);
+    function createProposal(string memory focus, string memory proposer) public {
+        proposalCount++;
+        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
+        emit ProposalCreated(proposalCount, focus, proposer);
     }
 
-    function voteAudit(uint256 id, bool support) public {
+    function voteProposal(uint256 id, bool support) public {
         if (support) {
-            audits[id].votesFor++;
+            proposals[id].votesFor++;
         } else {
-            audits[id].votesAgainst++;
+            proposals[id].votesAgainst++;
         }
-        emit AuditVoted(id, audits[id].institution, support);
+        emit ProposalVoted(id, proposals[id].focus, support);
     }
 
-    function publishAudit(uint256 id) public {
-        Audit storage a = audits[id];
-        require(!a.published, "Already published");
-        require(a.votesFor > a.votesAgainst, "Not enough support");
-        a.published = true;
-        emit AuditPublished(a.id, a.institution);
+    function ratifyProposal(uint256 id) public {
+        Proposal storage p = proposals[id];
+        require(!p.ratified, "Already ratified");
+        require(p.votesFor > p.votesAgainst, "Not enough support");
+        p.ratified = true;
+        emit ProposalRatified(p.id, p.focus);
     }
 
     function declareTransparency() public {
