@@ -2,23 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract ResilienceResonanceProtocol {
-    struct Recovery {
+    struct Measure {
         uint256 id;
-        string system;   // e.g. "Government HRMS"
-        string measure;  // e.g. "Patch Applied", "Monitoring Enabled"
+        string sector;    // e.g. "Manufacturing"
+        string initiative; // e.g. "Boost Productivity"
+        string outcome;   // e.g. "Implemented"
         uint256 timestamp;
     }
 
-    uint256 public recoveryCount;
-    mapping(uint256 => Recovery) public recoveries;
+    uint256 public measureCount;
+    mapping(uint256 => Measure) public measures;
 
-    event RecoveryLogged(uint256 id, string system, string measure, uint256 timestamp);
+    event MeasureLogged(uint256 id, string sector, string initiative, string outcome, uint256 timestamp);
     event ResilienceDeclared(string message);
 
-    function logRecovery(string memory system, string memory measure) public {
-        recoveryCount++;
-        recoveries[recoveryCount] = Recovery(recoveryCount, system, measure, block.timestamp);
-        emit RecoveryLogged(recoveryCount, system, measure, block.timestamp);
+    function logMeasure(string memory sector, string memory initiative, string memory outcome) public {
+        measureCount++;
+        measures[measureCount] = Measure(measureCount, sector, initiative, outcome, block.timestamp);
+        emit MeasureLogged(measureCount, sector, initiative, outcome, block.timestamp);
     }
 
     function declareResilience() public {
