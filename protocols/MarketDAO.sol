@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract MarketDAO {
-    struct Regulation {
+    struct Proposal {
         uint256 id;
-        string sector;   // e.g. "Energy"
-        string measure;  // e.g. "Price Cap"
+        string focus;     // e.g. "Exchange Transparency"
+        string proposer;  // e.g. "Trader Council"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
     }
 
-    uint256 public regulationCount;
-    mapping(uint256 => Regulation) public regulations;
+    uint256 public proposalCount;
+    mapping(uint256 => Proposal) public proposals;
 
-    event RegulationCreated(uint256 id, string sector, string measure);
-    event RegulationVoted(uint256 id, string sector, bool support);
-    event RegulationRatified(uint256 id, string sector);
+    event ProposalCreated(uint256 id, string focus, string proposer);
+    event ProposalVoted(uint256 id, string focus, bool support);
+    event ProposalRatified(uint256 id, string focus);
     event MarketDeclared(string message);
 
-    function createRegulation(string memory sector, string memory measure) public {
-        regulationCount++;
-        regulations[regulationCount] = Regulation(regulationCount, sector, measure, 0, 0, false);
-        emit RegulationCreated(regulationCount, sector, measure);
+    function createProposal(string memory focus, string memory proposer) public {
+        proposalCount++;
+        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
+        emit ProposalCreated(proposalCount, focus, proposer);
     }
 
-    function voteRegulation(uint256 id, bool support) public {
+    function voteProposal(uint256 id, bool support) public {
         if (support) {
-            regulations[id].votesFor++;
+            proposals[id].votesFor++;
         } else {
-            regulations[id].votesAgainst++;
+            proposals[id].votesAgainst++;
         }
-        emit RegulationVoted(id, regulations[id].sector, support);
+        emit ProposalVoted(id, proposals[id].focus, support);
     }
 
-    function ratifyRegulation(uint256 id) public {
-        Regulation storage r = regulations[id];
-        require(!r.ratified, "Already ratified");
-        require(r.votesFor > r.votesAgainst, "Not enough support");
-        r.ratified = true;
-        emit RegulationRatified(r.id, r.sector);
+    function ratifyProposal(uint256 id) public {
+        Proposal storage p = proposals[id];
+        require(!p.ratified, "Already ratified");
+        require(p.votesFor > p.votesAgainst, "Not enough support");
+        p.ratified = true;
+        emit ProposalRatified(p.id, p.focus);
     }
 
     function declareMarket() public {
