@@ -2,23 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract ResilienceProtocol {
-    struct Event {
+    struct Measure {
         uint256 id;
-        string challenge;   // e.g. "Market Downturn"
-        string response;    // e.g. "Reinvest in Human Talent"
+        string sector;    // e.g. "Evacuation Facility"
+        string initiative; // e.g. "Roof Reinforcement"
+        string status;    // e.g. "Ongoing", "Completed"
         uint256 timestamp;
     }
 
-    uint256 public eventCount;
-    mapping(uint256 => Event) public events;
+    uint256 public measureCount;
+    mapping(uint256 => Measure) public measures;
 
-    event EventLogged(uint256 id, string challenge, string response, uint256 timestamp);
+    event MeasureLogged(uint256 id, string sector, string initiative, string status, uint256 timestamp);
     event ResilienceDeclared(string message);
 
-    function logEvent(string memory challenge, string memory response) public {
-        eventCount++;
-        events[eventCount] = Event(eventCount, challenge, response, block.timestamp);
-        emit EventLogged(eventCount, challenge, response, block.timestamp);
+    function logMeasure(string memory sector, string memory initiative, string memory status) public {
+        measureCount++;
+        measures[measureCount] = Measure(measureCount, sector, initiative, status, block.timestamp);
+        emit MeasureLogged(measureCount, sector, initiative, status, block.timestamp);
     }
 
     function declareResilience() public {
