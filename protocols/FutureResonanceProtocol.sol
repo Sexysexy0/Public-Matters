@@ -2,23 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract FutureResonanceProtocol {
-    struct Signal {
+    struct Vision {
         uint256 id;
-        string theme;   // e.g. "Workforce", "Markets", "Faith"
-        string outlook; // e.g. "Optimistic", "Fragile"
+        string domain;    // e.g. "AI in Education"
+        string initiative; // e.g. "Adaptive Learning Systems"
+        string outcome;   // e.g. "Scaled Nationwide"
         uint256 timestamp;
     }
 
-    uint256 public signalCount;
-    mapping(uint256 => Signal) public signals;
+    uint256 public visionCount;
+    mapping(uint256 => Vision) public visions;
 
-    event SignalLogged(uint256 id, string theme, string outlook, uint256 timestamp);
+    event VisionLogged(uint256 id, string domain, string initiative, string outcome, uint256 timestamp);
     event FutureDeclared(string message);
 
-    function logSignal(string memory theme, string memory outlook) public {
-        signalCount++;
-        signals[signalCount] = Signal(signalCount, theme, outlook, block.timestamp);
-        emit SignalLogged(signalCount, theme, outlook, block.timestamp);
+    function logVision(string memory domain, string memory initiative, string memory outcome) public {
+        visionCount++;
+        visions[visionCount] = Vision(visionCount, domain, initiative, outcome, block.timestamp);
+        emit VisionLogged(visionCount, domain, initiative, outcome, block.timestamp);
     }
 
     function declareFuture() public {
