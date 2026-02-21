@@ -2,23 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract LegacyResonanceProtocol {
-    struct Legacy {
+    struct Debt {
         uint256 id;
-        string name;     // e.g. "Family Housing Program"
-        string impact;   // e.g. "Validator-grade communal dignity"
+        string system;    // e.g. "Legacy ERP"
+        string issue;     // e.g. "Data Silos"
+        string resolution; // e.g. "Migrated to Cloud"
         uint256 timestamp;
     }
 
-    uint256 public legacyCount;
-    mapping(uint256 => Legacy) public legacies;
+    uint256 public debtCount;
+    mapping(uint256 => Debt) public debts;
 
-    event LegacyLogged(uint256 id, string name, string impact, uint256 timestamp);
+    event DebtLogged(uint256 id, string system, string issue, string resolution, uint256 timestamp);
     event LegacyDeclared(string message);
 
-    function logLegacy(string memory name, string memory impact) public {
-        legacyCount++;
-        legacies[legacyCount] = Legacy(legacyCount, name, impact, block.timestamp);
-        emit LegacyLogged(legacyCount, name, impact, block.timestamp);
+    function logDebt(string memory system, string memory issue, string memory resolution) public {
+        debtCount++;
+        debts[debtCount] = Debt(debtCount, system, issue, resolution, block.timestamp);
+        emit DebtLogged(debtCount, system, issue, resolution, block.timestamp);
     }
 
     function declareLegacy() public {
