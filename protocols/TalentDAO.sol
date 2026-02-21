@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract TalentDAO {
-    struct Initiative {
+    struct Motion {
         uint256 id;
-        string focus;     // e.g. "Upskilling Juniors"
-        string proposer;  // e.g. "HR Council"
+        string issue;    // e.g. "Upskill Workforce"
+        string proposer; // e.g. "Training Council"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
     }
 
-    uint256 public initiativeCount;
-    mapping(uint256 => Initiative) public initiatives;
+    uint256 public motionCount;
+    mapping(uint256 => Motion) public motions;
 
-    event InitiativeCreated(uint256 id, string focus, string proposer);
-    event InitiativeVoted(uint256 id, string focus, bool support);
-    event InitiativeRatified(uint256 id, string focus);
+    event MotionCreated(uint256 id, string issue, string proposer);
+    event MotionVoted(uint256 id, string issue, bool support);
+    event MotionRatified(uint256 id, string issue);
     event TalentDeclared(string message);
 
-    function createInitiative(string memory focus, string memory proposer) public {
-        initiativeCount++;
-        initiatives[initiativeCount] = Initiative(initiativeCount, focus, proposer, 0, 0, false);
-        emit InitiativeCreated(initiativeCount, focus, proposer);
+    function createMotion(string memory issue, string memory proposer) public {
+        motionCount++;
+        motions[motionCount] = Motion(motionCount, issue, proposer, 0, 0, false);
+        emit MotionCreated(motionCount, issue, proposer);
     }
 
-    function voteInitiative(uint256 id, bool support) public {
+    function voteMotion(uint256 id, bool support) public {
         if (support) {
-            initiatives[id].votesFor++;
+            motions[id].votesFor++;
         } else {
-            initiatives[id].votesAgainst++;
+            motions[id].votesAgainst++;
         }
-        emit InitiativeVoted(id, initiatives[id].focus, support);
+        emit MotionVoted(id, motions[id].issue, support);
     }
 
-    function ratifyInitiative(uint256 id) public {
-        Initiative storage i = initiatives[id];
-        require(!i.ratified, "Already ratified");
-        require(i.votesFor > i.votesAgainst, "Not enough support");
-        i.ratified = true;
-        emit InitiativeRatified(i.id, i.focus);
+    function ratifyMotion(uint256 id) public {
+        Motion storage m = motions[id];
+        require(!m.ratified, "Already ratified");
+        require(m.votesFor > m.votesAgainst, "Not enough support");
+        m.ratified = true;
+        emit MotionRatified(m.id, m.issue);
     }
 
     function declareTalent() public {
