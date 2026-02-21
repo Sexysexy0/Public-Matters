@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract FinanceDAO {
     struct Proposal {
         uint256 id;
-        string focus;     // e.g. "Credit Flow Reform"
+        string focus;     // e.g. "Property Tax Reform"
         string proposer;  // e.g. "Economic Council"
         uint256 votesFor;
         uint256 votesAgainst;

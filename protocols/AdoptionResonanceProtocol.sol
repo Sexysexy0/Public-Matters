@@ -2,23 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract AdoptionResonanceProtocol {
-    struct Adoption {
+    struct Case {
         uint256 id;
-        string entity;   // e.g. "JPMorgan", "Bank of America"
-        string role;     // e.g. "Custody", "Credit Extension"
+        string domain;    // e.g. "Lightning Network"
+        string initiative; // e.g. "Daily Payments"
+        string outcome;   // e.g. "Surpassed $1B Volume"
         uint256 timestamp;
     }
 
-    uint256 public adoptionCount;
-    mapping(uint256 => Adoption) public adoptions;
+    uint256 public caseCount;
+    mapping(uint256 => Case) public cases;
 
-    event AdoptionLogged(uint256 id, string entity, string role, uint256 timestamp);
+    event CaseLogged(uint256 id, string domain, string initiative, string outcome, uint256 timestamp);
     event AdoptionDeclared(string message);
 
-    function logAdoption(string memory entity, string memory role) public {
-        adoptionCount++;
-        adoptions[adoptionCount] = Adoption(adoptionCount, entity, role, block.timestamp);
-        emit AdoptionLogged(adoptionCount, entity, role, block.timestamp);
+    function logCase(string memory domain, string memory initiative, string memory outcome) public {
+        caseCount++;
+        cases[caseCount] = Case(caseCount, domain, initiative, outcome, block.timestamp);
+        emit CaseLogged(caseCount, domain, initiative, outcome, block.timestamp);
     }
 
     function declareAdoption() public {
