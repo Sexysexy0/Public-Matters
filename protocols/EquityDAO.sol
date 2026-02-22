@@ -2,45 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract EquityDAO {
-    struct Buyout {
+    struct Proposal {
         uint256 id;
-        string firm;     // e.g. "Blackstone"
-        string target;   // e.g. "PNM"
-        uint256 value;   // e.g. 11500000000
+        string focus;     // e.g. "Equal Court Assignments"
+        string proposer;  // e.g. "Players Council"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool resolved;
+        bool ratified;
     }
 
-    uint256 public buyoutCount;
-    mapping(uint256 => Buyout) public buyouts;
+    uint256 public proposalCount;
+    mapping(uint256 => Proposal) public proposals;
 
-    event BuyoutCreated(uint256 id, string firm, string target, uint256 value);
-    event BuyoutVoted(uint256 id, string firm, bool support);
-    event BuyoutResolved(uint256 id, string firm);
+    event ProposalCreated(uint256 id, string focus, string proposer);
+    event ProposalVoted(uint256 id, string focus, bool support);
+    event ProposalRatified(uint256 id, string focus);
     event EquityDeclared(string message);
 
-    function createBuyout(string memory firm, string memory target, uint256 value) public {
-        buyoutCount++;
-        buyouts[buyoutCount] = Buyout(buyoutCount, firm, target, value, 0, 0, false);
-        emit BuyoutCreated(buyoutCount, firm, target, value);
+    function createProposal(string memory focus, string memory proposer) public {
+        proposalCount++;
+        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
+        emit ProposalCreated(proposalCount, focus, proposer);
     }
 
-    function voteBuyout(uint256 id, bool support) public {
+    function voteProposal(uint256 id, bool support) public {
         if (support) {
-            buyouts[id].votesFor++;
+            proposals[id].votesFor++;
         } else {
-            buyouts[id].votesAgainst++;
+            proposals[id].votesAgainst++;
         }
-        emit BuyoutVoted(id, buyouts[id].firm, support);
+        emit ProposalVoted(id, proposals[id].focus, support);
     }
 
-    function resolveBuyout(uint256 id) public {
-        Buyout storage b = buyouts[id];
-        require(!b.resolved, "Already resolved");
-        require(b.votesFor > b.votesAgainst, "Not enough support");
-        b.resolved = true;
-        emit BuyoutResolved(b.id, b.firm);
+    function ratifyProposal(uint256 id) public {
+        Proposal storage p = proposals[id];
+        require(!p.ratified, "Already ratified");
+        require(p.votesFor > p.votesAgainst, "Not enough support");
+        p.ratified = true;
+        emit ProposalRatified(p.id, p.focus);
     }
 
     function declareEquity() public {
