@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract HarmonyResonanceProtocol {
-    struct Accord {
+    struct Initiative {
         uint256 id;
-        string domain;   // e.g. "Currency", "Trade"
-        string actors;   // e.g. "China, US"
-        string outcome;  // e.g. "Stability Achieved"
+        string participants; // e.g. "Muslims & Christians"
+        string theme;        // e.g. "Interfaith Dialogue"
+        string outcome;      // e.g. "Mutual Respect"
         uint256 timestamp;
     }
 
-    uint256 public accordCount;
-    mapping(uint256 => Accord) public accords;
+    uint256 public initiativeCount;
+    mapping(uint256 => Initiative) public initiatives;
 
-    event AccordLogged(uint256 id, string domain, string actors, string outcome, uint256 timestamp);
+    event InitiativeLogged(uint256 id, string participants, string theme, string outcome, uint256 timestamp);
     event HarmonyDeclared(string message);
 
-    function logAccord(string memory domain, string memory actors, string memory outcome) public {
-        accordCount++;
-        accords[accordCount] = Accord(accordCount, domain, actors, outcome, block.timestamp);
-        emit AccordLogged(accordCount, domain, actors, outcome, block.timestamp);
+    function logInitiative(string memory participants, string memory theme, string memory outcome) public {
+        initiativeCount++;
+        initiatives[initiativeCount] = Initiative(initiativeCount, participants, theme, outcome, block.timestamp);
+        emit InitiativeLogged(initiativeCount, participants, theme, outcome, block.timestamp);
     }
 
     function declareHarmony() public {

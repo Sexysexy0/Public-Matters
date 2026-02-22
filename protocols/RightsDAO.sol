@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract RightsDAO {
-    struct Claim {
+    struct Proposal {
         uint256 id;
-        string person;   // e.g. "OFW", "Detained Citizen"
-        string right;    // e.g. "Fair Trial", "Freedom from Exploitation"
+        string focus;     // e.g. "Religious Freedom"
+        string proposer;  // e.g. "Community Council"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool resolved;
+        bool ratified;
     }
 
-    uint256 public claimCount;
-    mapping(uint256 => Claim) public claims;
+    uint256 public proposalCount;
+    mapping(uint256 => Proposal) public proposals;
 
-    event ClaimCreated(uint256 id, string person, string right);
-    event ClaimVoted(uint256 id, string person, bool support);
-    event ClaimResolved(uint256 id, string person);
+    event ProposalCreated(uint256 id, string focus, string proposer);
+    event ProposalVoted(uint256 id, string focus, bool support);
+    event ProposalRatified(uint256 id, string focus);
     event RightsDeclared(string message);
 
-    function createClaim(string memory person, string memory right) public {
-        claimCount++;
-        claims[claimCount] = Claim(claimCount, person, right, 0, 0, false);
-        emit ClaimCreated(claimCount, person, right);
+    function createProposal(string memory focus, string memory proposer) public {
+        proposalCount++;
+        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
+        emit ProposalCreated(proposalCount, focus, proposer);
     }
 
-    function voteClaim(uint256 id, bool support) public {
+    function voteProposal(uint256 id, bool support) public {
         if (support) {
-            claims[id].votesFor++;
+            proposals[id].votesFor++;
         } else {
-            claims[id].votesAgainst++;
+            proposals[id].votesAgainst++;
         }
-        emit ClaimVoted(id, claims[id].person, support);
+        emit ProposalVoted(id, proposals[id].focus, support);
     }
 
-    function resolveClaim(uint256 id) public {
-        Claim storage c = claims[id];
-        require(!c.resolved, "Already resolved");
-        require(c.votesFor > c.votesAgainst, "Not enough support");
-        c.resolved = true;
-        emit ClaimResolved(c.id, c.person);
+    function ratifyProposal(uint256 id) public {
+        Proposal storage p = proposals[id];
+        require(!p.ratified, "Already ratified");
+        require(p.votesFor > p.votesAgainst, "Not enough support");
+        p.ratified = true;
+        emit ProposalRatified(p.id, p.focus);
     }
 
     function declareRights() public {
