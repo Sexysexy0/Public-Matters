@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract GeopoliticsDAO {
-    struct Conflict {
+    struct Proposal {
         uint256 id;
-        string region;   // e.g. "South China Sea"
-        string issue;    // e.g. "Territorial dispute"
+        string focus;     // e.g. "Arms Control Negotiations"
+        string proposer;  // e.g. "Defense Council"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool resolved;
+        bool ratified;
     }
 
-    uint256 public conflictCount;
-    mapping(uint256 => Conflict) public conflicts;
+    uint256 public proposalCount;
+    mapping(uint256 => Proposal) public proposals;
 
-    event ConflictCreated(uint256 id, string region, string issue);
-    event ConflictVoted(uint256 id, string region, bool support);
-    event ConflictResolved(uint256 id, string region);
+    event ProposalCreated(uint256 id, string focus, string proposer);
+    event ProposalVoted(uint256 id, string focus, bool support);
+    event ProposalRatified(uint256 id, string focus);
     event GeopoliticsDeclared(string message);
 
-    function createConflict(string memory region, string memory issue) public {
-        conflictCount++;
-        conflicts[conflictCount] = Conflict(conflictCount, region, issue, 0, 0, false);
-        emit ConflictCreated(conflictCount, region, issue);
+    function createProposal(string memory focus, string memory proposer) public {
+        proposalCount++;
+        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
+        emit ProposalCreated(proposalCount, focus, proposer);
     }
 
-    function voteConflict(uint256 id, bool support) public {
+    function voteProposal(uint256 id, bool support) public {
         if (support) {
-            conflicts[id].votesFor++;
+            proposals[id].votesFor++;
         } else {
-            conflicts[id].votesAgainst++;
+            proposals[id].votesAgainst++;
         }
-        emit ConflictVoted(id, conflicts[id].region, support);
+        emit ProposalVoted(id, proposals[id].focus, support);
     }
 
-    function resolveConflict(uint256 id) public {
-        Conflict storage c = conflicts[id];
-        require(!c.resolved, "Already resolved");
-        require(c.votesFor > c.votesAgainst, "Not enough support");
-        c.resolved = true;
-        emit ConflictResolved(c.id, c.region);
+    function ratifyProposal(uint256 id) public {
+        Proposal storage p = proposals[id];
+        require(!p.ratified, "Already ratified");
+        require(p.votesFor > p.votesAgainst, "Not enough support");
+        p.ratified = true;
+        emit ProposalRatified(p.id, p.focus);
     }
 
     function declareGeopolitics() public {
