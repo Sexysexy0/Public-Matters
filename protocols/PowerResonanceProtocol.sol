@@ -2,26 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract PowerResonanceProtocol {
-    struct Metric {
+    struct Initiative {
         uint256 id;
-        string domain;   // e.g. "Energy Output"
-        string leader;   // e.g. "China"
-        string challenger; // e.g. "United States"
-        uint256 valueLeader;
-        uint256 valueChallenger;
+        string domain;    // e.g. "Energy Security"
+        string project;   // e.g. "Nuclear Modernization"
+        string outcome;   // e.g. "Operational"
         uint256 timestamp;
     }
 
-    uint256 public metricCount;
-    mapping(uint256 => Metric) public metrics;
+    uint256 public initiativeCount;
+    mapping(uint256 => Initiative) public initiatives;
 
-    event MetricLogged(uint256 id, string domain, string leader, string challenger, uint256 valueLeader, uint256 valueChallenger, uint256 timestamp);
+    event InitiativeLogged(uint256 id, string domain, string project, string outcome, uint256 timestamp);
     event PowerDeclared(string message);
 
-    function logMetric(string memory domain, string memory leader, string memory challenger, uint256 valueLeader, uint256 valueChallenger) public {
-        metricCount++;
-        metrics[metricCount] = Metric(metricCount, domain, leader, challenger, valueLeader, valueChallenger, block.timestamp);
-        emit MetricLogged(metricCount, domain, leader, challenger, valueLeader, valueChallenger, block.timestamp);
+    function logInitiative(string memory domain, string memory project, string memory outcome) public {
+        initiativeCount++;
+        initiatives[initiativeCount] = Initiative(initiativeCount, domain, project, outcome, block.timestamp);
+        emit InitiativeLogged(initiativeCount, domain, project, outcome, block.timestamp);
     }
 
     function declarePower() public {
