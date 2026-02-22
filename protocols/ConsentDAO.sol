@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract ConsentDAO {
-    struct Consent {
+    struct Proposal {
         uint256 id;
-        string subject;   // e.g. "Digital Clone", "Posthumous Posting"
-        string status;    // e.g. "Granted", "Revoked"
+        string focus;     // e.g. "AI Training Consent"
+        string proposer;  // e.g. "Artist Council"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool resolved;
+        bool ratified;
     }
 
-    uint256 public consentCount;
-    mapping(uint256 => Consent) public consents;
+    uint256 public proposalCount;
+    mapping(uint256 => Proposal) public proposals;
 
-    event ConsentCreated(uint256 id, string subject, string status);
-    event ConsentVoted(uint256 id, string subject, bool support);
-    event ConsentResolved(uint256 id, string subject);
+    event ProposalCreated(uint256 id, string focus, string proposer);
+    event ProposalVoted(uint256 id, string focus, bool support);
+    event ProposalRatified(uint256 id, string focus);
     event ConsentDeclared(string message);
 
-    function createConsent(string memory subject, string memory status) public {
-        consentCount++;
-        consents[consentCount] = Consent(consentCount, subject, status, 0, 0, false);
-        emit ConsentCreated(consentCount, subject, status);
+    function createProposal(string memory focus, string memory proposer) public {
+        proposalCount++;
+        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
+        emit ProposalCreated(proposalCount, focus, proposer);
     }
 
-    function voteConsent(uint256 id, bool support) public {
+    function voteProposal(uint256 id, bool support) public {
         if (support) {
-            consents[id].votesFor++;
+            proposals[id].votesFor++;
         } else {
-            consents[id].votesAgainst++;
+            proposals[id].votesAgainst++;
         }
-        emit ConsentVoted(id, consents[id].subject, support);
+        emit ProposalVoted(id, proposals[id].focus, support);
     }
 
-    function resolveConsent(uint256 id) public {
-        Consent storage c = consents[id];
-        require(!c.resolved, "Already resolved");
-        require(c.votesFor > c.votesAgainst, "Not enough support");
-        c.resolved = true;
-        emit ConsentResolved(c.id, c.subject);
+    function ratifyProposal(uint256 id) public {
+        Proposal storage p = proposals[id];
+        require(!p.ratified, "Already ratified");
+        require(p.votesFor > p.votesAgainst, "Not enough support");
+        p.ratified = true;
+        emit ProposalRatified(p.id, p.focus);
     }
 
     function declareConsent() public {
