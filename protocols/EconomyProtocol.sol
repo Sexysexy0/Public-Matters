@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract EconomyProtocol {
-    struct Indicator {
+    struct Initiative {
         uint256 id;
-        string metric;    // e.g. "GDP Growth"
-        string value;     // e.g. "3.2%"
-        string status;    // e.g. "Stable", "Declining"
+        string domain;    // e.g. "Fiscal Policy"
+        string program;   // e.g. "Infrastructure Spending"
+        string status;    // e.g. "Active", "Pending"
         uint256 timestamp;
     }
 
-    uint256 public indicatorCount;
-    mapping(uint256 => Indicator) public indicators;
+    uint256 public initiativeCount;
+    mapping(uint256 => Initiative) public initiatives;
 
-    event IndicatorLogged(uint256 id, string metric, string value, string status, uint256 timestamp);
+    event InitiativeLogged(uint256 id, string domain, string program, string status, uint256 timestamp);
     event EconomyDeclared(string message);
 
-    function logIndicator(string memory metric, string memory value, string memory status) public {
-        indicatorCount++;
-        indicators[indicatorCount] = Indicator(indicatorCount, metric, value, status, block.timestamp);
-        emit IndicatorLogged(indicatorCount, metric, value, status, block.timestamp);
+    function logInitiative(string memory domain, string memory program, string memory status) public {
+        initiativeCount++;
+        initiatives[initiativeCount] = Initiative(initiativeCount, domain, program, status, block.timestamp);
+        emit InitiativeLogged(initiativeCount, domain, program, status, block.timestamp);
     }
 
     function declareEconomy() public {

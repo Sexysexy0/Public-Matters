@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract TradeDAO {
-    struct Proposal {
+    struct Agreement {
         uint256 id;
-        string focus;     // e.g. "Fair Tariff Policy"
-        string proposer;  // e.g. "Economic Council"
+        string partner;   // e.g. "EU"
+        string focus;     // e.g. "Diversified Trade Pact"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
     }
 
-    uint256 public proposalCount;
-    mapping(uint256 => Proposal) public proposals;
+    uint256 public agreementCount;
+    mapping(uint256 => Agreement) public agreements;
 
-    event ProposalCreated(uint256 id, string focus, string proposer);
-    event ProposalVoted(uint256 id, string focus, bool support);
-    event ProposalRatified(uint256 id, string focus);
+    event AgreementCreated(uint256 id, string partner, string focus);
+    event AgreementVoted(uint256 id, string partner, bool support);
+    event AgreementRatified(uint256 id, string partner);
     event TradeDeclared(string message);
 
-    function createProposal(string memory focus, string memory proposer) public {
-        proposalCount++;
-        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
-        emit ProposalCreated(proposalCount, focus, proposer);
+    function createAgreement(string memory partner, string memory focus) public {
+        agreementCount++;
+        agreements[agreementCount] = Agreement(agreementCount, partner, focus, 0, 0, false);
+        emit AgreementCreated(agreementCount, partner, focus);
     }
 
-    function voteProposal(uint256 id, bool support) public {
+    function voteAgreement(uint256 id, bool support) public {
         if (support) {
-            proposals[id].votesFor++;
+            agreements[id].votesFor++;
         } else {
-            proposals[id].votesAgainst++;
+            agreements[id].votesAgainst++;
         }
-        emit ProposalVoted(id, proposals[id].focus, support);
+        emit AgreementVoted(id, agreements[id].partner, support);
     }
 
-    function ratifyProposal(uint256 id) public {
-        Proposal storage p = proposals[id];
-        require(!p.ratified, "Already ratified");
-        require(p.votesFor > p.votesAgainst, "Not enough support");
-        p.ratified = true;
-        emit ProposalRatified(p.id, p.focus);
+    function ratifyAgreement(uint256 id) public {
+        Agreement storage a = agreements[id];
+        require(!a.ratified, "Already ratified");
+        require(a.votesFor > a.votesAgainst, "Not enough support");
+        a.ratified = true;
+        emit AgreementRatified(a.id, a.partner);
     }
 
     function declareTrade() public {
