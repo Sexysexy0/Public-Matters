@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract InnovationDAO {
     struct Proposal {
         uint256 id;
-        string focus;     // e.g. "AI Helper System"
+        string focus;     // e.g. "Digitalization of Permits"
         string proposer;  // e.g. "Tech Council"
         uint256 votesFor;
         uint256 votesAgainst;
