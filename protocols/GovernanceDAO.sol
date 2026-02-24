@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract GovernanceDAO {
-    struct Reform {
+    struct Proposal {
         uint256 id;
-        string proposal;   // e.g. "Abolish BIR & BOC"
-        string alternative; // e.g. "National Revenue Authority"
+        string focus;     // e.g. "Digitalization of Permits"
+        string proposer;  // e.g. "Administrative Council"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool resolved;
+        bool ratified;
     }
 
-    uint256 public reformCount;
-    mapping(uint256 => Reform) public reforms;
+    uint256 public proposalCount;
+    mapping(uint256 => Proposal) public proposals;
 
-    event ReformCreated(uint256 id, string proposal, string alternative);
-    event ReformVoted(uint256 id, string proposal, bool support);
-    event ReformResolved(uint256 id, string proposal);
+    event ProposalCreated(uint256 id, string focus, string proposer);
+    event ProposalVoted(uint256 id, string focus, bool support);
+    event ProposalRatified(uint256 id, string focus);
     event GovernanceDeclared(string message);
 
-    function createReform(string memory proposal, string memory alternative) public {
-        reformCount++;
-        reforms[reformCount] = Reform(reformCount, proposal, alternative, 0, 0, false);
-        emit ReformCreated(reformCount, proposal, alternative);
+    function createProposal(string memory focus, string memory proposer) public {
+        proposalCount++;
+        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
+        emit ProposalCreated(proposalCount, focus, proposer);
     }
 
-    function voteReform(uint256 id, bool support) public {
+    function voteProposal(uint256 id, bool support) public {
         if (support) {
-            reforms[id].votesFor++;
+            proposals[id].votesFor++;
         } else {
-            reforms[id].votesAgainst++;
+            proposals[id].votesAgainst++;
         }
-        emit ReformVoted(id, reforms[id].proposal, support);
+        emit ProposalVoted(id, proposals[id].focus, support);
     }
 
-    function resolveReform(uint256 id) public {
-        Reform storage r = reforms[id];
-        require(!r.resolved, "Already resolved");
-        require(r.votesFor > r.votesAgainst, "Not enough support");
-        r.resolved = true;
-        emit ReformResolved(r.id, r.proposal);
+    function ratifyProposal(uint256 id) public {
+        Proposal storage p = proposals[id];
+        require(!p.ratified, "Already ratified");
+        require(p.votesFor > p.votesAgainst, "Not enough support");
+        p.ratified = true;
+        emit ProposalRatified(p.id, p.focus);
     }
 
     function declareGovernance() public {
