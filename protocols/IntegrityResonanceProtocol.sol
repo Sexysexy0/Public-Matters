@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract IntegrityResonanceProtocol {
-    struct Case {
+    struct Audit {
         uint256 id;
-        string domain;    // e.g. "Music Industry"
-        string initiative; // e.g. "AI Content Labeling"
-        string outcome;   // e.g. "Implemented"
+        string domain;    // e.g. "Defense Partnerships"
+        string initiative; // e.g. "Transparency in AI Use"
+        string outcome;   // e.g. "Compliant", "Non-Compliant"
         uint256 timestamp;
     }
 
-    uint256 public caseCount;
-    mapping(uint256 => Case) public cases;
+    uint256 public auditCount;
+    mapping(uint256 => Audit) public audits;
 
-    event CaseLogged(uint256 id, string domain, string initiative, string outcome, uint256 timestamp);
+    event AuditLogged(uint256 id, string domain, string initiative, string outcome, uint256 timestamp);
     event IntegrityDeclared(string message);
 
-    function logCase(string memory domain, string memory initiative, string memory outcome) public {
-        caseCount++;
-        cases[caseCount] = Case(caseCount, domain, initiative, outcome, block.timestamp);
-        emit CaseLogged(caseCount, domain, initiative, outcome, block.timestamp);
+    function logAudit(string memory domain, string memory initiative, string memory outcome) public {
+        auditCount++;
+        audits[auditCount] = Audit(auditCount, domain, initiative, outcome, block.timestamp);
+        emit AuditLogged(auditCount, domain, initiative, outcome, block.timestamp);
     }
 
     function declareIntegrity() public {

@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract AllianceDAO {
-    struct Alliance {
+    struct Pact {
         uint256 id;
-        string members;   // e.g. "US, Japan, EU"
-        string purpose;   // e.g. "Currency coordination"
+        string partner;   // e.g. "Palantir"
+        string focus;     // e.g. "Defense Collaboration"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
     }
 
-    uint256 public allianceCount;
-    mapping(uint256 => Alliance) public alliances;
+    uint256 public pactCount;
+    mapping(uint256 => Pact) public pacts;
 
-    event AllianceCreated(uint256 id, string members, string purpose);
-    event AllianceVoted(uint256 id, string members, bool support);
-    event AllianceRatified(uint256 id, string members);
+    event PactCreated(uint256 id, string partner, string focus);
+    event PactVoted(uint256 id, string partner, bool support);
+    event PactRatified(uint256 id, string partner);
     event AllianceDeclared(string message);
 
-    function createAlliance(string memory members, string memory purpose) public {
-        allianceCount++;
-        alliances[allianceCount] = Alliance(allianceCount, members, purpose, 0, 0, false);
-        emit AllianceCreated(allianceCount, members, purpose);
+    function createPact(string memory partner, string memory focus) public {
+        pactCount++;
+        pacts[pactCount] = Pact(pactCount, partner, focus, 0, 0, false);
+        emit PactCreated(pactCount, partner, focus);
     }
 
-    function voteAlliance(uint256 id, bool support) public {
+    function votePact(uint256 id, bool support) public {
         if (support) {
-            alliances[id].votesFor++;
+            pacts[id].votesFor++;
         } else {
-            alliances[id].votesAgainst++;
+            pacts[id].votesAgainst++;
         }
-        emit AllianceVoted(id, alliances[id].members, support);
+        emit PactVoted(id, pacts[id].partner, support);
     }
 
-    function ratifyAlliance(uint256 id) public {
-        Alliance storage a = alliances[id];
-        require(!a.ratified, "Already ratified");
-        require(a.votesFor > a.votesAgainst, "Not enough support");
-        a.ratified = true;
-        emit AllianceRatified(a.id, a.members);
+    function ratifyPact(uint256 id) public {
+        Pact storage p = pacts[id];
+        require(!p.ratified, "Already ratified");
+        require(p.votesFor > p.votesAgainst, "Not enough support");
+        p.ratified = true;
+        emit PactRatified(p.id, p.partner);
     }
 
     function declareAlliance() public {
