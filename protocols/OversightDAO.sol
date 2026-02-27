@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract OversightDAO {
-    struct Oversight {
+    struct Audit {
         uint256 id;
-        string area;   // e.g. "Ballots", "Spending"
-        string status; // e.g. "Reviewed", "Pending"
+        string subject;   // e.g. "Senate Oversight"
+        string detail;    // e.g. "ICC Case Monitoring"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool resolved;
+        bool ratified;
     }
 
-    uint256 public oversightCount;
-    mapping(uint256 => Oversight) public oversights;
+    uint256 public auditCount;
+    mapping(uint256 => Audit) public audits;
 
-    event OversightCreated(uint256 id, string area, string status);
-    event OversightVoted(uint256 id, string area, bool support);
-    event OversightResolved(uint256 id, string area);
+    event AuditCreated(uint256 id, string subject, string detail);
+    event AuditVoted(uint256 id, string subject, bool support);
+    event AuditRatified(uint256 id, string subject);
     event OversightDeclared(string message);
 
-    function createOversight(string memory area, string memory status) public {
-        oversightCount++;
-        oversights[oversightCount] = Oversight(oversightCount, area, status, 0, 0, false);
-        emit OversightCreated(oversightCount, area, status);
+    function createAudit(string memory subject, string memory detail) public {
+        auditCount++;
+        audits[auditCount] = Audit(auditCount, subject, detail, 0, 0, false);
+        emit AuditCreated(auditCount, subject, detail);
     }
 
-    function voteOversight(uint256 id, bool support) public {
+    function voteAudit(uint256 id, bool support) public {
         if (support) {
-            oversights[id].votesFor++;
+            audits[id].votesFor++;
         } else {
-            oversights[id].votesAgainst++;
+            audits[id].votesAgainst++;
         }
-        emit OversightVoted(id, oversights[id].area, support);
+        emit AuditVoted(id, audits[id].subject, support);
     }
 
-    function resolveOversight(uint256 id) public {
-        Oversight storage o = oversights[id];
-        require(!o.resolved, "Already resolved");
-        require(o.votesFor > o.votesAgainst, "Not enough support");
-        o.resolved = true;
-        emit OversightResolved(o.id, o.area);
+    function ratifyAudit(uint256 id) public {
+        Audit storage a = audits[id];
+        require(!a.ratified, "Already ratified");
+        require(a.votesFor > a.votesAgainst, "Not enough support");
+        a.ratified = true;
+        emit AuditRatified(a.id, a.subject);
     }
 
     function declareOversight() public {
