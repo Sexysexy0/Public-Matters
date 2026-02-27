@@ -2,47 +2,47 @@
 pragma solidity ^0.8.0;
 
 contract SupplyChainDAO {
-    struct Audit {
+    struct Link {
         uint256 id;
-        string supplier;   // e.g. "PepsiCo"
-        string issue;      // e.g. "Price Manipulation", "Favoritism"
+        string sector;    // e.g. "Logistics"
+        string detail;    // e.g. "Diesel trucks delivering goods"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool resolved;
+        bool ratified;
     }
 
-    uint256 public auditCount;
-    mapping(uint256 => Audit) public audits;
+    uint256 public linkCount;
+    mapping(uint256 => Link) public links;
 
-    event AuditCreated(uint256 id, string supplier, string issue);
-    event AuditVoted(uint256 id, string supplier, bool support);
-    event AuditResolved(uint256 id, string supplier);
-    event SupplyDeclared(string message);
+    event LinkCreated(uint256 id, string sector, string detail);
+    event LinkVoted(uint256 id, string sector, bool support);
+    event LinkRatified(uint256 id, string sector);
+    event SupplyChainDeclared(string message);
 
-    function createAudit(string memory supplier, string memory issue) public {
-        auditCount++;
-        audits[auditCount] = Audit(auditCount, supplier, issue, 0, 0, false);
-        emit AuditCreated(auditCount, supplier, issue);
+    function createLink(string memory sector, string memory detail) public {
+        linkCount++;
+        links[linkCount] = Link(linkCount, sector, detail, 0, 0, false);
+        emit LinkCreated(linkCount, sector, detail);
     }
 
-    function voteAudit(uint256 id, bool support) public {
+    function voteLink(uint256 id, bool support) public {
         if (support) {
-            audits[id].votesFor++;
+            links[id].votesFor++;
         } else {
-            audits[id].votesAgainst++;
+            links[id].votesAgainst++;
         }
-        emit AuditVoted(id, audits[id].supplier, support);
+        emit LinkVoted(id, links[id].sector, support);
     }
 
-    function resolveAudit(uint256 id) public {
-        Audit storage a = audits[id];
-        require(!a.resolved, "Already resolved");
-        require(a.votesFor > a.votesAgainst, "Not enough support");
-        a.resolved = true;
-        emit AuditResolved(a.id, a.supplier);
+    function ratifyLink(uint256 id) public {
+        Link storage l = links[id];
+        require(!l.ratified, "Already ratified");
+        require(l.votesFor > l.votesAgainst, "Not enough support");
+        l.ratified = true;
+        emit LinkRatified(l.id, l.sector);
     }
 
-    function declareSupply() public {
-        emit SupplyDeclared("Supply Chain DAO: safeguard arcs encoded into communal consequence.");
+    function declareSupplyChain() public {
+        emit SupplyChainDeclared("SupplyChain DAO: safeguard arcs encoded into communal consequence.");
     }
 }
