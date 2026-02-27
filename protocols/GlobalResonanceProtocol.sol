@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract GlobalResonanceProtocol {
-    struct Action {
+    struct Initiative {
         uint256 id;
-        string region;    // e.g. "Asia-Pacific"
-        string initiative; // e.g. "Wage Justice Campaign"
-        string outcome;   // e.g. "Implemented"
+        string domain;    // e.g. "International Justice"
+        string detail;    // e.g. "ICC Collaboration"
+        string outcome;   // e.g. "Resonant", "Pending"
         uint256 timestamp;
     }
 
-    uint256 public actionCount;
-    mapping(uint256 => Action) public actions;
+    uint256 public initiativeCount;
+    mapping(uint256 => Initiative) public initiatives;
 
-    event ActionLogged(uint256 id, string region, string initiative, string outcome, uint256 timestamp);
+    event InitiativeLogged(uint256 id, string domain, string detail, string outcome, uint256 timestamp);
     event GlobalDeclared(string message);
 
-    function logAction(string memory region, string memory initiative, string memory outcome) public {
-        actionCount++;
-        actions[actionCount] = Action(actionCount, region, initiative, outcome, block.timestamp);
-        emit ActionLogged(actionCount, region, initiative, outcome, block.timestamp);
+    function logInitiative(string memory domain, string memory detail, string memory outcome) public {
+        initiativeCount++;
+        initiatives[initiativeCount] = Initiative(initiativeCount, domain, detail, outcome, block.timestamp);
+        emit InitiativeLogged(initiativeCount, domain, detail, outcome, block.timestamp);
     }
 
     function declareGlobal() public {
