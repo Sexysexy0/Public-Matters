@@ -4,22 +4,22 @@ pragma solidity ^0.8.0;
 contract AgricultureProtocol {
     struct Crop {
         uint256 id;
-        string name;       // e.g. "Rice"
-        string category;   // e.g. "Staple Food"
-        string status;     // e.g. "Export Ready", "Pending"
+        string domain;    // e.g. "Rice Farming"
+        string description; // e.g. "Diesel-powered irrigation"
+        string status;    // e.g. "Stable", "Affected"
         uint256 timestamp;
     }
 
     uint256 public cropCount;
     mapping(uint256 => Crop) public crops;
 
-    event CropLogged(uint256 id, string name, string category, string status, uint256 timestamp);
+    event CropLogged(uint256 id, string domain, string description, string status, uint256 timestamp);
     event AgricultureDeclared(string message);
 
-    function logCrop(string memory name, string memory category, string memory status) public {
+    function logCrop(string memory domain, string memory description, string memory status) public {
         cropCount++;
-        crops[cropCount] = Crop(cropCount, name, category, status, block.timestamp);
-        emit CropLogged(cropCount, name, category, status, block.timestamp);
+        crops[cropCount] = Crop(cropCount, domain, description, status, block.timestamp);
+        emit CropLogged(cropCount, domain, description, status, block.timestamp);
     }
 
     function declareAgriculture() public {

@@ -2,23 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract MarketResonanceProtocol {
-    struct Resonance {
+    struct Trend {
         uint256 id;
-        string sector;   // e.g. "IT Services", "SaaS", "Finance"
-        string signal;   // e.g. "Bullish", "Bearish"
+        string domain;    // e.g. "Consumer Goods"
+        string detail;    // e.g. "Diesel price drop lowers market prices"
+        string outcome;   // e.g. "Affordable", "Inflated"
         uint256 timestamp;
     }
 
-    uint256 public resonanceCount;
-    mapping(uint256 => Resonance) public resonances;
+    uint256 public trendCount;
+    mapping(uint256 => Trend) public trends;
 
-    event ResonanceLogged(uint256 id, string sector, string signal, uint256 timestamp);
+    event TrendLogged(uint256 id, string domain, string detail, string outcome, uint256 timestamp);
     event MarketDeclared(string message);
 
-    function logResonance(string memory sector, string memory signal) public {
-        resonanceCount++;
-        resonances[resonanceCount] = Resonance(resonanceCount, sector, signal, block.timestamp);
-        emit ResonanceLogged(resonanceCount, sector, signal, block.timestamp);
+    function logTrend(string memory domain, string memory detail, string memory outcome) public {
+        trendCount++;
+        trends[trendCount] = Trend(trendCount, domain, detail, outcome, block.timestamp);
+        emit TrendLogged(trendCount, domain, detail, outcome, block.timestamp);
     }
 
     function declareMarket() public {
