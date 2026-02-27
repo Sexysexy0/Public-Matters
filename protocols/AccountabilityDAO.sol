@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract AccountabilityDAO {
-    struct Case {
+    struct Review {
         uint256 id;
-        string official;   // e.g. "Agency Head"
-        string issue;      // e.g. "Corruption Allegation"
+        string subject;   // e.g. "Senate Oversight"
+        string detail;    // e.g. "ICC Compliance"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool resolved;
+        bool ratified;
     }
 
-    uint256 public caseCount;
-    mapping(uint256 => Case) public cases;
+    uint256 public reviewCount;
+    mapping(uint256 => Review) public reviews;
 
-    event CaseCreated(uint256 id, string official, string issue);
-    event CaseVoted(uint256 id, string official, bool support);
-    event CaseResolved(uint256 id, string official);
+    event ReviewCreated(uint256 id, string subject, string detail);
+    event ReviewVoted(uint256 id, string subject, bool support);
+    event ReviewRatified(uint256 id, string subject);
     event AccountabilityDeclared(string message);
 
-    function createCase(string memory official, string memory issue) public {
-        caseCount++;
-        cases[caseCount] = Case(caseCount, official, issue, 0, 0, false);
-        emit CaseCreated(caseCount, official, issue);
+    function createReview(string memory subject, string memory detail) public {
+        reviewCount++;
+        reviews[reviewCount] = Review(reviewCount, subject, detail, 0, 0, false);
+        emit ReviewCreated(reviewCount, subject, detail);
     }
 
-    function voteCase(uint256 id, bool support) public {
+    function voteReview(uint256 id, bool support) public {
         if (support) {
-            cases[id].votesFor++;
+            reviews[id].votesFor++;
         } else {
-            cases[id].votesAgainst++;
+            reviews[id].votesAgainst++;
         }
-        emit CaseVoted(id, cases[id].official, support);
+        emit ReviewVoted(id, reviews[id].subject, support);
     }
 
-    function resolveCase(uint256 id) public {
-        Case storage c = cases[id];
-        require(!c.resolved, "Already resolved");
-        require(c.votesFor > c.votesAgainst, "Not enough support");
-        c.resolved = true;
-        emit CaseResolved(c.id, c.official);
+    function ratifyReview(uint256 id) public {
+        Review storage r = reviews[id];
+        require(!r.ratified, "Already ratified");
+        require(r.votesFor > r.votesAgainst, "Not enough support");
+        r.ratified = true;
+        emit ReviewRatified(r.id, r.subject);
     }
 
     function declareAccountability() public {
