@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract FreedomDAO {
     struct Proposal {
         uint256 id;
-        string focus;     // e.g. "Religious Freedom Policy"
-        string proposer;  // e.g. "Community Council"
+        string focus;     // e.g. "DIY Modding"
+        string proposer;  // e.g. "Community Developer"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
