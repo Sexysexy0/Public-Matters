@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract JusticeDAO {
-    struct Motion {
+    struct Case {
         uint256 id;
-        string issue;    // e.g. "Fair Wage Enforcement"
-        string proposer; // e.g. "Community Advocate"
+        string focus;     // e.g. "EJK Victims"
+        string proposer;  // e.g. "OPCV Counsel"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
     }
 
-    uint256 public motionCount;
-    mapping(uint256 => Motion) public motions;
+    uint256 public caseCount;
+    mapping(uint256 => Case) public cases;
 
-    event MotionCreated(uint256 id, string issue, string proposer);
-    event MotionVoted(uint256 id, string issue, bool support);
-    event MotionRatified(uint256 id, string issue);
+    event CaseCreated(uint256 id, string focus, string proposer);
+    event CaseVoted(uint256 id, string focus, bool support);
+    event CaseRatified(uint256 id, string focus);
     event JusticeDeclared(string message);
 
-    function createMotion(string memory issue, string memory proposer) public {
-        motionCount++;
-        motions[motionCount] = Motion(motionCount, issue, proposer, 0, 0, false);
-        emit MotionCreated(motionCount, issue, proposer);
+    function createCase(string memory focus, string memory proposer) public {
+        caseCount++;
+        cases[caseCount] = Case(caseCount, focus, proposer, 0, 0, false);
+        emit CaseCreated(caseCount, focus, proposer);
     }
 
-    function voteMotion(uint256 id, bool support) public {
+    function voteCase(uint256 id, bool support) public {
         if (support) {
-            motions[id].votesFor++;
+            cases[id].votesFor++;
         } else {
-            motions[id].votesAgainst++;
+            cases[id].votesAgainst++;
         }
-        emit MotionVoted(id, motions[id].issue, support);
+        emit CaseVoted(id, cases[id].focus, support);
     }
 
-    function ratifyMotion(uint256 id) public {
-        Motion storage m = motions[id];
-        require(!m.ratified, "Already ratified");
-        require(m.votesFor > m.votesAgainst, "Not enough support");
-        m.ratified = true;
-        emit MotionRatified(m.id, m.issue);
+    function ratifyCase(uint256 id) public {
+        Case storage c = cases[id];
+        require(!c.ratified, "Already ratified");
+        require(c.votesFor > c.votesAgainst, "Not enough support");
+        c.ratified = true;
+        emit CaseRatified(c.id, c.focus);
     }
 
     function declareJustice() public {
