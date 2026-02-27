@@ -2,23 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract InnovationResonanceProtocol {
-    struct Project {
+    struct Idea {
         uint256 id;
-        string name;     // e.g. "AI Helper System"
-        string outcome;  // e.g. "Prototype Delivered"
+        string domain;    // e.g. "App Development"
+        string detail;    // e.g. "Free Sharing"
+        string outcome;   // e.g. "Adopted", "Pending"
         uint256 timestamp;
     }
 
-    uint256 public projectCount;
-    mapping(uint256 => Project) public projects;
+    uint256 public ideaCount;
+    mapping(uint256 => Idea) public ideas;
 
-    event ProjectLogged(uint256 id, string name, string outcome, uint256 timestamp);
+    event IdeaLogged(uint256 id, string domain, string detail, string outcome, uint256 timestamp);
     event InnovationDeclared(string message);
 
-    function logProject(string memory name, string memory outcome) public {
-        projectCount++;
-        projects[projectCount] = Project(projectCount, name, outcome, block.timestamp);
-        emit ProjectLogged(projectCount, name, outcome, block.timestamp);
+    function logIdea(string memory domain, string memory detail, string memory outcome) public {
+        ideaCount++;
+        ideas[ideaCount] = Idea(ideaCount, domain, detail, outcome, block.timestamp);
+        emit IdeaLogged(ideaCount, domain, detail, outcome, block.timestamp);
     }
 
     function declareInnovation() public {
