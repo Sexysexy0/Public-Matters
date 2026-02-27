@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract GrowthDAO {
-    struct Strategy {
+    struct Initiative {
         uint256 id;
-        string focus;     // e.g. "Upskill Workforce"
-        string proposer;  // e.g. "Leadership Council"
+        string sector;    // e.g. "Agriculture Exports"
+        string project;   // e.g. "Made in PH Testing Abroad"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
     }
 
-    uint256 public strategyCount;
-    mapping(uint256 => Strategy) public strategies;
+    uint256 public initiativeCount;
+    mapping(uint256 => Initiative) public initiatives;
 
-    event StrategyCreated(uint256 id, string focus, string proposer);
-    event StrategyVoted(uint256 id, string focus, bool support);
-    event StrategyRatified(uint256 id, string focus);
+    event InitiativeCreated(uint256 id, string sector, string project);
+    event InitiativeVoted(uint256 id, string sector, bool support);
+    event InitiativeRatified(uint256 id, string sector);
     event GrowthDeclared(string message);
 
-    function createStrategy(string memory focus, string memory proposer) public {
-        strategyCount++;
-        strategies[strategyCount] = Strategy(strategyCount, focus, proposer, 0, 0, false);
-        emit StrategyCreated(strategyCount, focus, proposer);
+    function createInitiative(string memory sector, string memory project) public {
+        initiativeCount++;
+        initiatives[initiativeCount] = Initiative(initiativeCount, sector, project, 0, 0, false);
+        emit InitiativeCreated(initiativeCount, sector, project);
     }
 
-    function voteStrategy(uint256 id, bool support) public {
+    function voteInitiative(uint256 id, bool support) public {
         if (support) {
-            strategies[id].votesFor++;
+            initiatives[id].votesFor++;
         } else {
-            strategies[id].votesAgainst++;
+            initiatives[id].votesAgainst++;
         }
-        emit StrategyVoted(id, strategies[id].focus, support);
+        emit InitiativeVoted(id, initiatives[id].sector, support);
     }
 
-    function ratifyStrategy(uint256 id) public {
-        Strategy storage s = strategies[id];
-        require(!s.ratified, "Already ratified");
-        require(s.votesFor > s.votesAgainst, "Not enough support");
-        s.ratified = true;
-        emit StrategyRatified(s.id, s.focus);
+    function ratifyInitiative(uint256 id) public {
+        Initiative storage i = initiatives[id];
+        require(!i.ratified, "Already ratified");
+        require(i.votesFor > i.votesAgainst, "Not enough support");
+        i.ratified = true;
+        emit InitiativeRatified(i.id, i.sector);
     }
 
     function declareGrowth() public {
