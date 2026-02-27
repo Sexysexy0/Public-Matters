@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract TradeDAO {
     struct Agreement {
         uint256 id;
-        string partner;   // e.g. "EU"
-        string focus;     // e.g. "Diversified Trade Pact"
+        string partner;   // e.g. "Japan"
+        string product;   // e.g. "Philippine Bananas"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
@@ -14,15 +14,15 @@ contract TradeDAO {
     uint256 public agreementCount;
     mapping(uint256 => Agreement) public agreements;
 
-    event AgreementCreated(uint256 id, string partner, string focus);
+    event AgreementCreated(uint256 id, string partner, string product);
     event AgreementVoted(uint256 id, string partner, bool support);
     event AgreementRatified(uint256 id, string partner);
     event TradeDeclared(string message);
 
-    function createAgreement(string memory partner, string memory focus) public {
+    function createAgreement(string memory partner, string memory product) public {
         agreementCount++;
-        agreements[agreementCount] = Agreement(agreementCount, partner, focus, 0, 0, false);
-        emit AgreementCreated(agreementCount, partner, focus);
+        agreements[agreementCount] = Agreement(agreementCount, partner, product, 0, 0, false);
+        emit AgreementCreated(agreementCount, partner, product);
     }
 
     function voteAgreement(uint256 id, bool support) public {
