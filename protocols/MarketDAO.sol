@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract MarketDAO {
-    struct Proposal {
+    struct Deal {
         uint256 id;
-        string focus;     // e.g. "Exchange Transparency"
-        string proposer;  // e.g. "Trader Council"
+        string partner;   // e.g. "Singapore"
+        string product;   // e.g. "Philippine Mangoes"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
     }
 
-    uint256 public proposalCount;
-    mapping(uint256 => Proposal) public proposals;
+    uint256 public dealCount;
+    mapping(uint256 => Deal) public deals;
 
-    event ProposalCreated(uint256 id, string focus, string proposer);
-    event ProposalVoted(uint256 id, string focus, bool support);
-    event ProposalRatified(uint256 id, string focus);
+    event DealCreated(uint256 id, string partner, string product);
+    event DealVoted(uint256 id, string partner, bool support);
+    event DealRatified(uint256 id, string partner);
     event MarketDeclared(string message);
 
-    function createProposal(string memory focus, string memory proposer) public {
-        proposalCount++;
-        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
-        emit ProposalCreated(proposalCount, focus, proposer);
+    function createDeal(string memory partner, string memory product) public {
+        dealCount++;
+        deals[dealCount] = Deal(dealCount, partner, product, 0, 0, false);
+        emit DealCreated(dealCount, partner, product);
     }
 
-    function voteProposal(uint256 id, bool support) public {
+    function voteDeal(uint256 id, bool support) public {
         if (support) {
-            proposals[id].votesFor++;
+            deals[id].votesFor++;
         } else {
-            proposals[id].votesAgainst++;
+            deals[id].votesAgainst++;
         }
-        emit ProposalVoted(id, proposals[id].focus, support);
+        emit DealVoted(id, deals[id].partner, support);
     }
 
-    function ratifyProposal(uint256 id) public {
-        Proposal storage p = proposals[id];
-        require(!p.ratified, "Already ratified");
-        require(p.votesFor > p.votesAgainst, "Not enough support");
-        p.ratified = true;
-        emit ProposalRatified(p.id, p.focus);
+    function ratifyDeal(uint256 id) public {
+        Deal storage d = deals[id];
+        require(!d.ratified, "Already ratified");
+        require(d.votesFor > d.votesAgainst, "Not enough support");
+        d.ratified = true;
+        emit DealRatified(d.id, d.partner);
     }
 
     function declareMarket() public {
