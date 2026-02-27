@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract IntegrityResonanceProtocol {
     struct Audit {
         uint256 id;
-        string domain;    // e.g. "Defense Partnerships"
-        string initiative; // e.g. "Transparency in AI Use"
+        string domain;    // e.g. "Judicial Process"
+        string initiative; // e.g. "Transparency Review"
         string outcome;   // e.g. "Compliant", "Non-Compliant"
         uint256 timestamp;
     }
