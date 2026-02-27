@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract TrustResonanceProtocol {
     struct Pact {
         uint256 id;
-        string domain;    // e.g. "International Cooperation"
-        string detail;    // e.g. "ICC Trust Building"
+        string domain;    // e.g. "AI Safety"
+        string detail;    // e.g. "Transparent Evaluation"
         string outcome;   // e.g. "Trusted", "Pending"
         uint256 timestamp;
     }
