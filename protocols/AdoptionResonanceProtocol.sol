@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract AdoptionResonanceProtocol {
-    struct Case {
+    struct Campaign {
         uint256 id;
-        string domain;    // e.g. "Lightning Network"
-        string initiative; // e.g. "Daily Payments"
-        string outcome;   // e.g. "Surpassed $1B Volume"
+        string domain;    // e.g. "Global Market"
+        string detail;    // e.g. "Promote PHCoin Adoption"
+        string outcome;   // e.g. "Adopted", "Pending"
         uint256 timestamp;
     }
 
-    uint256 public caseCount;
-    mapping(uint256 => Case) public cases;
+    uint256 public campaignCount;
+    mapping(uint256 => Campaign) public campaigns;
 
-    event CaseLogged(uint256 id, string domain, string initiative, string outcome, uint256 timestamp);
+    event CampaignLogged(uint256 id, string domain, string detail, string outcome, uint256 timestamp);
     event AdoptionDeclared(string message);
 
-    function logCase(string memory domain, string memory initiative, string memory outcome) public {
-        caseCount++;
-        cases[caseCount] = Case(caseCount, domain, initiative, outcome, block.timestamp);
-        emit CaseLogged(caseCount, domain, initiative, outcome, block.timestamp);
+    function logCampaign(string memory domain, string memory detail, string memory outcome) public {
+        campaignCount++;
+        campaigns[campaignCount] = Campaign(campaignCount, domain, detail, outcome, block.timestamp);
+        emit CampaignLogged(campaignCount, domain, detail, outcome, block.timestamp);
     }
 
     function declareAdoption() public {
