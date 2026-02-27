@@ -1,11 +1,11 @@
-// InvestorDAO.sol
+tt// InvestorDAO.sol
 pragma solidity ^0.8.0;
 
 contract InvestorDAO {
     struct Proposal {
         uint256 id;
-        string focus;     // e.g. "Exchange Risk Mitigation"
-        string proposer;  // e.g. "Investor Council"
+        string asset;     // e.g. "BTC"
+        string strategy;  // e.g. "Long-term Hold"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
@@ -14,15 +14,15 @@ contract InvestorDAO {
     uint256 public proposalCount;
     mapping(uint256 => Proposal) public proposals;
 
-    event ProposalCreated(uint256 id, string focus, string proposer);
-    event ProposalVoted(uint256 id, string focus, bool support);
-    event ProposalRatified(uint256 id, string focus);
+    event ProposalCreated(uint256 id, string asset, string strategy);
+    event ProposalVoted(uint256 id, string asset, bool support);
+    event ProposalRatified(uint256 id, string asset);
     event InvestorDeclared(string message);
 
-    function createProposal(string memory focus, string memory proposer) public {
+    function createProposal(string memory asset, string memory strategy) public {
         proposalCount++;
-        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
-        emit ProposalCreated(proposalCount, focus, proposer);
+        proposals[proposalCount] = Proposal(proposalCount, asset, strategy, 0, 0, false);
+        emit ProposalCreated(proposalCount, asset, strategy);
     }
 
     function voteProposal(uint256 id, bool support) public {
@@ -31,7 +31,7 @@ contract InvestorDAO {
         } else {
             proposals[id].votesAgainst++;
         }
-        emit ProposalVoted(id, proposals[id].focus, support);
+        emit ProposalVoted(id, proposals[id].asset, support);
     }
 
     function ratifyProposal(uint256 id) public {
@@ -39,7 +39,7 @@ contract InvestorDAO {
         require(!p.ratified, "Already ratified");
         require(p.votesFor > p.votesAgainst, "Not enough support");
         p.ratified = true;
-        emit ProposalRatified(p.id, p.focus);
+        emit ProposalRatified(p.id, p.asset);
     }
 
     function declareInvestor() public {
