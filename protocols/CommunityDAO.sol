@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract CommunityDAO {
     struct Proposal {
         uint256 id;
-        string focus;     // e.g. "Community Kitchen Upgrade"
-        string proposer;  // e.g. "Barangay Council"
+        string focus;     // e.g. "DIY Tutorials"
+        string proposer;  // e.g. "Android Enthusiast"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
