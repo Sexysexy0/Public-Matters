@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract CreativityDAO {
-    struct Proposal {
+    struct Idea {
         uint256 id;
-        string focus;     // e.g. "Arts Integration"
-        string proposer;  // e.g. "Teachers Council"
+        string title;     // e.g. "Custom Kernel"
+        string creator;   // e.g. "Community Dev"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
     }
 
-    uint256 public proposalCount;
-    mapping(uint256 => Proposal) public proposals;
+    uint256 public ideaCount;
+    mapping(uint256 => Idea) public ideas;
 
-    event ProposalCreated(uint256 id, string focus, string proposer);
-    event ProposalVoted(uint256 id, string focus, bool support);
-    event ProposalRatified(uint256 id, string focus);
+    event IdeaCreated(uint256 id, string title, string creator);
+    event IdeaVoted(uint256 id, string title, bool support);
+    event IdeaRatified(uint256 id, string title);
     event CreativityDeclared(string message);
 
-    function createProposal(string memory focus, string memory proposer) public {
-        proposalCount++;
-        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
-        emit ProposalCreated(proposalCount, focus, proposer);
+    function createIdea(string memory title, string memory creator) public {
+        ideaCount++;
+        ideas[ideaCount] = Idea(ideaCount, title, creator, 0, 0, false);
+        emit IdeaCreated(ideaCount, title, creator);
     }
 
-    function voteProposal(uint256 id, bool support) public {
+    function voteIdea(uint256 id, bool support) public {
         if (support) {
-            proposals[id].votesFor++;
+            ideas[id].votesFor++;
         } else {
-            proposals[id].votesAgainst++;
+            ideas[id].votesAgainst++;
         }
-        emit ProposalVoted(id, proposals[id].focus, support);
+        emit IdeaVoted(id, ideas[id].title, support);
     }
 
-    function ratifyProposal(uint256 id) public {
-        Proposal storage p = proposals[id];
-        require(!p.ratified, "Already ratified");
-        require(p.votesFor > p.votesAgainst, "Not enough support");
-        p.ratified = true;
-        emit ProposalRatified(p.id, p.focus);
+    function ratifyIdea(uint256 id) public {
+        Idea storage i = ideas[id];
+        require(!i.ratified, "Already ratified");
+        require(i.votesFor > i.votesAgainst, "Not enough support");
+        i.ratified = true;
+        emit IdeaRatified(i.id, i.title);
     }
 
     function declareCreativity() public {
