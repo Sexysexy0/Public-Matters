@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract GovernanceDAO {
-    struct Proposal {
+    struct Policy {
         uint256 id;
-        string focus;     // e.g. "Digitalization of Permits"
-        string proposer;  // e.g. "Administrative Council"
+        string subject;   // e.g. "Safety Oversight"
+        string detail;    // e.g. "ASL-4 Risk Management"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
     }
 
-    uint256 public proposalCount;
-    mapping(uint256 => Proposal) public proposals;
+    uint256 public policyCount;
+    mapping(uint256 => Policy) public policies;
 
-    event ProposalCreated(uint256 id, string focus, string proposer);
-    event ProposalVoted(uint256 id, string focus, bool support);
-    event ProposalRatified(uint256 id, string focus);
+    event PolicyCreated(uint256 id, string subject, string detail);
+    event PolicyVoted(uint256 id, string subject, bool support);
+    event PolicyRatified(uint256 id, string subject);
     event GovernanceDeclared(string message);
 
-    function createProposal(string memory focus, string memory proposer) public {
-        proposalCount++;
-        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
-        emit ProposalCreated(proposalCount, focus, proposer);
+    function createPolicy(string memory subject, string memory detail) public {
+        policyCount++;
+        policies[policyCount] = Policy(policyCount, subject, detail, 0, 0, false);
+        emit PolicyCreated(policyCount, subject, detail);
     }
 
-    function voteProposal(uint256 id, bool support) public {
+    function votePolicy(uint256 id, bool support) public {
         if (support) {
-            proposals[id].votesFor++;
+            policies[id].votesFor++;
         } else {
-            proposals[id].votesAgainst++;
+            policies[id].votesAgainst++;
         }
-        emit ProposalVoted(id, proposals[id].focus, support);
+        emit PolicyVoted(id, policies[id].subject, support);
     }
 
-    function ratifyProposal(uint256 id) public {
-        Proposal storage p = proposals[id];
+    function ratifyPolicy(uint256 id) public {
+        Policy storage p = policies[id];
         require(!p.ratified, "Already ratified");
         require(p.votesFor > p.votesAgainst, "Not enough support");
         p.ratified = true;
-        emit ProposalRatified(p.id, p.focus);
+        emit PolicyRatified(p.id, p.subject);
     }
 
     function declareGovernance() public {
