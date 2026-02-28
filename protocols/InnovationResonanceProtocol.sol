@@ -4,9 +4,9 @@ pragma solidity ^0.8.0;
 contract InnovationResonanceProtocol {
     struct Idea {
         uint256 id;
-        string domain;    // e.g. "App Development"
-        string detail;    // e.g. "Free Sharing"
-        string outcome;   // e.g. "Adopted", "Pending"
+        string domain;    // e.g. "Music Tech"
+        string detail;    // e.g. "AI ghostwriter collab with artist"
+        string outcome;   // e.g. "Innovative", "Pending"
         uint256 timestamp;
     }
 
