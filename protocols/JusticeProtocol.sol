@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract JusticeProtocol {
-    struct Case {
+    struct Reform {
         uint256 id;
-        string name;       // e.g. "ICC Investigation"
-        string description; // e.g. "Human Rights Accountability"
-        string status;     // e.g. "Active", "Closed"
+        string domain;    // e.g. "Tax Policy"
+        string description; // e.g. "Progressive taxation for equity"
+        string status;    // e.g. "Active", "Pending"
         uint256 timestamp;
     }
 
-    uint256 public caseCount;
-    mapping(uint256 => Case) public cases;
+    uint256 public reformCount;
+    mapping(uint256 => Reform) public reforms;
 
-    event CaseLogged(uint256 id, string name, string description, string status, uint256 timestamp);
+    event ReformLogged(uint256 id, string domain, string description, string status, uint256 timestamp);
     event JusticeDeclared(string message);
 
-    function logCase(string memory name, string memory description, string memory status) public {
-        caseCount++;
-        cases[caseCount] = Case(caseCount, name, description, status, block.timestamp);
-        emit CaseLogged(caseCount, name, description, status, block.timestamp);
+    function logReform(string memory domain, string memory description, string memory status) public {
+        reformCount++;
+        reforms[reformCount] = Reform(reformCount, domain, description, status, block.timestamp);
+        emit ReformLogged(reformCount, domain, description, status, block.timestamp);
     }
 
     function declareJustice() public {
