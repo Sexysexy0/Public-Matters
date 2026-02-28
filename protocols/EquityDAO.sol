@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract EquityDAO {
-    struct Proposal {
+    struct Initiative {
         uint256 id;
-        string focus;     // e.g. "Equal Court Assignments"
-        string proposer;  // e.g. "Players Council"
+        string sector;    // e.g. "Healthcare"
+        string detail;    // e.g. "Affordable care for low-income families"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
     }
 
-    uint256 public proposalCount;
-    mapping(uint256 => Proposal) public proposals;
+    uint256 public initiativeCount;
+    mapping(uint256 => Initiative) public initiatives;
 
-    event ProposalCreated(uint256 id, string focus, string proposer);
-    event ProposalVoted(uint256 id, string focus, bool support);
-    event ProposalRatified(uint256 id, string focus);
+    event InitiativeCreated(uint256 id, string sector, string detail);
+    event InitiativeVoted(uint256 id, string sector, bool support);
+    event InitiativeRatified(uint256 id, string sector);
     event EquityDeclared(string message);
 
-    function createProposal(string memory focus, string memory proposer) public {
-        proposalCount++;
-        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
-        emit ProposalCreated(proposalCount, focus, proposer);
+    function createInitiative(string memory sector, string memory detail) public {
+        initiativeCount++;
+        initiatives[initiativeCount] = Initiative(initiativeCount, sector, detail, 0, 0, false);
+        emit InitiativeCreated(initiativeCount, sector, detail);
     }
 
-    function voteProposal(uint256 id, bool support) public {
+    function voteInitiative(uint256 id, bool support) public {
         if (support) {
-            proposals[id].votesFor++;
+            initiatives[id].votesFor++;
         } else {
-            proposals[id].votesAgainst++;
+            initiatives[id].votesAgainst++;
         }
-        emit ProposalVoted(id, proposals[id].focus, support);
+        emit InitiativeVoted(id, initiatives[id].sector, support);
     }
 
-    function ratifyProposal(uint256 id) public {
-        Proposal storage p = proposals[id];
-        require(!p.ratified, "Already ratified");
-        require(p.votesFor > p.votesAgainst, "Not enough support");
-        p.ratified = true;
-        emit ProposalRatified(p.id, p.focus);
+    function ratifyInitiative(uint256 id) public {
+        Initiative storage i = initiatives[id];
+        require(!i.ratified, "Already ratified");
+        require(i.votesFor > i.votesAgainst, "Not enough support");
+        i.ratified = true;
+        emit InitiativeRatified(i.id, i.sector);
     }
 
     function declareEquity() public {
