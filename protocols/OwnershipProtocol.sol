@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract OwnershipProtocol {
-    struct Purchase {
+    struct Song {
         uint256 id;
-        string buyer;    // e.g. "Cash Customer"
-        string item;     // e.g. "Software License", "Printer"
-        bool owned;      // true = permanent ownership
+        string artist;    // e.g. "Justin Bieber"
+        string title;     // e.g. "AI Ghostwriter Collab"
+        string status;    // e.g. "Owned", "Pending"
         uint256 timestamp;
     }
 
-    uint256 public purchaseCount;
-    mapping(uint256 => Purchase) public purchases;
+    uint256 public songCount;
+    mapping(uint256 => Song) public songs;
 
-    event PurchaseLogged(uint256 id, string buyer, string item, bool owned, uint256 timestamp);
+    event SongLogged(uint256 id, string artist, string title, string status, uint256 timestamp);
     event OwnershipDeclared(string message);
 
-    function logPurchase(string memory buyer, string memory item, bool owned) public {
-        purchaseCount++;
-        purchases[purchaseCount] = Purchase(purchaseCount, buyer, item, owned, block.timestamp);
-        emit PurchaseLogged(purchaseCount, buyer, item, owned, block.timestamp);
+    function logSong(string memory artist, string memory title, string memory status) public {
+        songCount++;
+        songs[songCount] = Song(songCount, artist, title, status, block.timestamp);
+        emit SongLogged(songCount, artist, title, status, block.timestamp);
     }
 
     function declareOwnership() public {
