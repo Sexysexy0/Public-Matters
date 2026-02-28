@@ -2,23 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract AIResonanceProtocol {
-    struct Safeguard {
+    struct Model {
         uint256 id;
-        string measure;   // e.g. "Rate Limiting", "Watermarking"
-        string effect;    // e.g. "Prevent Extraction", "Trace Outputs"
+        string domain;    // e.g. "COBOL Translation"
+        string detail;    // e.g. "AI model translating COBOL to Java"
+        string outcome;   // e.g. "Effective", "Pending"
         uint256 timestamp;
     }
 
-    uint256 public safeguardCount;
-    mapping(uint256 => Safeguard) public safeguards;
+    uint256 public modelCount;
+    mapping(uint256 => Model) public models;
 
-    event SafeguardLogged(uint256 id, string measure, string effect, uint256 timestamp);
+    event ModelLogged(uint256 id, string domain, string detail, string outcome, uint256 timestamp);
     event AIDeclared(string message);
 
-    function logSafeguard(string memory measure, string memory effect) public {
-        safeguardCount++;
-        safeguards[safeguardCount] = Safeguard(safeguardCount, measure, effect, block.timestamp);
-        emit SafeguardLogged(safeguardCount, measure, effect, block.timestamp);
+    function logModel(string memory domain, string memory detail, string memory outcome) public {
+        modelCount++;
+        models[modelCount] = Model(modelCount, domain, detail, outcome, block.timestamp);
+        emit ModelLogged(modelCount, domain, detail, outcome, block.timestamp);
     }
 
     function declareAI() public {
