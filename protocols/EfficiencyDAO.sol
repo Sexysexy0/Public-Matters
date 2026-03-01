@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract EfficiencyDAO {
-    struct Proposal {
+    struct Process {
         uint256 id;
-        string focus;     // e.g. "Streamlined Permits"
-        string proposer;  // e.g. "Business Council"
+        string domain;    // e.g. "Operating System"
+        string detail;    // e.g. "Streamlined, no bloatware"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
     }
 
-    uint256 public proposalCount;
-    mapping(uint256 => Proposal) public proposals;
+    uint256 public processCount;
+    mapping(uint256 => Process) public processes;
 
-    event ProposalCreated(uint256 id, string focus, string proposer);
-    event ProposalVoted(uint256 id, string focus, bool support);
-    event ProposalRatified(uint256 id, string focus);
+    event ProcessCreated(uint256 id, string domain, string detail);
+    event ProcessVoted(uint256 id, string domain, bool support);
+    event ProcessRatified(uint256 id, string domain);
     event EfficiencyDeclared(string message);
 
-    function createProposal(string memory focus, string memory proposer) public {
-        proposalCount++;
-        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
-        emit ProposalCreated(proposalCount, focus, proposer);
+    function createProcess(string memory domain, string memory detail) public {
+        processCount++;
+        processes[processCount] = Process(processCount, domain, detail, 0, 0, false);
+        emit ProcessCreated(processCount, domain, detail);
     }
 
-    function voteProposal(uint256 id, bool support) public {
+    function voteProcess(uint256 id, bool support) public {
         if (support) {
-            proposals[id].votesFor++;
+            processes[id].votesFor++;
         } else {
-            proposals[id].votesAgainst++;
+            processes[id].votesAgainst++;
         }
-        emit ProposalVoted(id, proposals[id].focus, support);
+        emit ProcessVoted(id, processes[id].domain, support);
     }
 
-    function ratifyProposal(uint256 id) public {
-        Proposal storage p = proposals[id];
+    function ratifyProcess(uint256 id) public {
+        Process storage p = processes[id];
         require(!p.ratified, "Already ratified");
         require(p.votesFor > p.votesAgainst, "Not enough support");
         p.ratified = true;
-        emit ProposalRatified(p.id, p.focus);
+        emit ProcessRatified(p.id, p.domain);
     }
 
     function declareEfficiency() public {
