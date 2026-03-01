@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract SustainabilityResonanceProtocol {
-    struct Pact {
+    struct Initiative {
         uint256 id;
-        string domain;    // e.g. "Resource Use"
-        string detail;    // e.g. "Ban mining in fertile lands"
-        string outcome;   // e.g. "Sustainable", "Unsustainable"
+        string domain;    // e.g. "System Design"
+        string detail;    // e.g. "Energy-efficient, long-term viability"
+        string outcome;   // e.g. "Ratified", "Pending"
         uint256 timestamp;
     }
 
-    uint256 public pactCount;
-    mapping(uint256 => Pact) public pacts;
+    uint256 public initiativeCount;
+    mapping(uint256 => Initiative) public initiatives;
 
-    event PactLogged(uint256 id, string domain, string detail, string outcome, uint256 timestamp);
+    event InitiativeLogged(uint256 id, string domain, string detail, string outcome, uint256 timestamp);
     event SustainabilityDeclared(string message);
 
-    function logPact(string memory domain, string memory detail, string memory outcome) public {
-        pactCount++;
-        pacts[pactCount] = Pact(pactCount, domain, detail, outcome, block.timestamp);
-        emit PactLogged(pactCount, domain, detail, outcome, block.timestamp);
+    function logInitiative(string memory domain, string memory detail, string memory outcome) public {
+        initiativeCount++;
+        initiatives[initiativeCount] = Initiative(initiativeCount, domain, detail, outcome, block.timestamp);
+        emit InitiativeLogged(initiativeCount, domain, detail, outcome, block.timestamp);
     }
 
     function declareSustainability() public {
