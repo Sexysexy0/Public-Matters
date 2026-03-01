@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract ComplianceDAO {
-    struct Rule {
+    struct Standard {
         uint256 id;
-        string regulation; // e.g. "KYC", "AML"
-        string status;     // e.g. "Compliant", "Non-Compliant"
+        string domain;    // e.g. "Licensing"
+        string detail;    // e.g. "Ensure MIT/Apache 2.0 compliance"
         uint256 votesFor;
         uint256 votesAgainst;
-        bool resolved;
+        bool ratified;
     }
 
-    uint256 public ruleCount;
-    mapping(uint256 => Rule) public rules;
+    uint256 public standardCount;
+    mapping(uint256 => Standard) public standards;
 
-    event RuleCreated(uint256 id, string regulation, string status);
-    event RuleVoted(uint256 id, string regulation, bool support);
-    event RuleResolved(uint256 id, string regulation);
+    event StandardCreated(uint256 id, string domain, string detail);
+    event StandardVoted(uint256 id, string domain, bool support);
+    event StandardRatified(uint256 id, string domain);
     event ComplianceDeclared(string message);
 
-    function createRule(string memory regulation, string memory status) public {
-        ruleCount++;
-        rules[ruleCount] = Rule(ruleCount, regulation, status, 0, 0, false);
-        emit RuleCreated(ruleCount, regulation, status);
+    function createStandard(string memory domain, string memory detail) public {
+        standardCount++;
+        standards[standardCount] = Standard(standardCount, domain, detail, 0, 0, false);
+        emit StandardCreated(standardCount, domain, detail);
     }
 
-    function voteRule(uint256 id, bool support) public {
+    function voteStandard(uint256 id, bool support) public {
         if (support) {
-            rules[id].votesFor++;
+            standards[id].votesFor++;
         } else {
-            rules[id].votesAgainst++;
+            standards[id].votesAgainst++;
         }
-        emit RuleVoted(id, rules[id].regulation, support);
+        emit StandardVoted(id, standards[id].domain, support);
     }
 
-    function resolveRule(uint256 id) public {
-        Rule storage r = rules[id];
-        require(!r.resolved, "Already resolved");
-        require(r.votesFor > r.votesAgainst, "Not enough support");
-        r.resolved = true;
-        emit RuleResolved(r.id, r.regulation);
+    function ratifyStandard(uint256 id) public {
+        Standard storage s = standards[id];
+        require(!s.ratified, "Already ratified");
+        require(s.votesFor > s.votesAgainst, "Not enough support");
+        s.ratified = true;
+        emit StandardRatified(s.id, s.domain);
     }
 
     function declareCompliance() public {

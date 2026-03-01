@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract SecurityProtocol {
-    struct Alert {
+    struct Threat {
         uint256 id;
-        string domain;    // e.g. "Cyber Defense"
-        string issue;     // e.g. "Data Breach"
-        string status;    // e.g. "Mitigated", "Escalated"
+        string domain;       // e.g. "Open Source Project"
+        string description;  // e.g. "Patch vulnerabilities"
+        string status;       // e.g. "Mitigated", "Pending"
         uint256 timestamp;
     }
 
-    uint256 public alertCount;
-    mapping(uint256 => Alert) public alerts;
+    uint256 public threatCount;
+    mapping(uint256 => Threat) public threats;
 
-    event AlertLogged(uint256 id, string domain, string issue, string status, uint256 timestamp);
+    event ThreatLogged(uint256 id, string domain, string description, string status, uint256 timestamp);
     event SecurityDeclared(string message);
 
-    function logAlert(string memory domain, string memory issue, string memory status) public {
-        alertCount++;
-        alerts[alertCount] = Alert(alertCount, domain, issue, status, block.timestamp);
-        emit AlertLogged(alertCount, domain, issue, status, block.timestamp);
+    function logThreat(string memory domain, string memory description, string memory status) public {
+        threatCount++;
+        threats[threatCount] = Threat(threatCount, domain, description, status, block.timestamp);
+        emit ThreatLogged(threatCount, domain, description, status, block.timestamp);
     }
 
     function declareSecurity() public {
