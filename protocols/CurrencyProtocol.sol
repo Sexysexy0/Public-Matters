@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract CurrencyProtocol {
-    struct Exchange {
+    struct Rate {
         uint256 id;
-        string base;    // e.g. "USD"
-        string quote;   // e.g. "CNY"
-        uint256 rate;   // e.g. 7
+        string domain;       // e.g. "Exchange Rate"
+        string description;  // e.g. "USD strength vs local currency"
+        string status;       // e.g. "Strong", "Weak"
         uint256 timestamp;
     }
 
-    uint256 public exchangeCount;
-    mapping(uint256 => Exchange) public exchanges;
+    uint256 public rateCount;
+    mapping(uint256 => Rate) public rates;
 
-    event ExchangeLogged(uint256 id, string base, string quote, uint256 rate, uint256 timestamp);
+    event RateLogged(uint256 id, string domain, string description, string status, uint256 timestamp);
     event CurrencyDeclared(string message);
 
-    function logExchange(string memory base, string memory quote, uint256 rate) public {
-        exchangeCount++;
-        exchanges[exchangeCount] = Exchange(exchangeCount, base, quote, rate, block.timestamp);
-        emit ExchangeLogged(exchangeCount, base, quote, rate, block.timestamp);
+    function logRate(string memory domain, string memory description, string memory status) public {
+        rateCount++;
+        rates[rateCount] = Rate(rateCount, domain, description, status, block.timestamp);
+        emit RateLogged(rateCount, domain, description, status, block.timestamp);
     }
 
     function declareCurrency() public {
