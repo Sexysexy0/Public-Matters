@@ -2,44 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract CommunityDAO {
-    struct Proposal {
+    struct Link {
         uint256 id;
-        string focus;     // e.g. "DIY Tutorials"
-        string proposer;  // e.g. "Android Enthusiast"
+        string domain;    // e.g. "Chat Rooms"
+        string detail;    // e.g. "Organic connections and discovery"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
     }
 
-    uint256 public proposalCount;
-    mapping(uint256 => Proposal) public proposals;
+    uint256 public linkCount;
+    mapping(uint256 => Link) public links;
 
-    event ProposalCreated(uint256 id, string focus, string proposer);
-    event ProposalVoted(uint256 id, string focus, bool support);
-    event ProposalRatified(uint256 id, string focus);
+    event LinkCreated(uint256 id, string domain, string detail);
+    event LinkVoted(uint256 id, string domain, bool support);
+    event LinkRatified(uint256 id, string domain);
     event CommunityDeclared(string message);
 
-    function createProposal(string memory focus, string memory proposer) public {
-        proposalCount++;
-        proposals[proposalCount] = Proposal(proposalCount, focus, proposer, 0, 0, false);
-        emit ProposalCreated(proposalCount, focus, proposer);
+    function createLink(string memory domain, string memory detail) public {
+        linkCount++;
+        links[linkCount] = Link(linkCount, domain, detail, 0, 0, false);
+        emit LinkCreated(linkCount, domain, detail);
     }
 
-    function voteProposal(uint256 id, bool support) public {
+    function voteLink(uint256 id, bool support) public {
         if (support) {
-            proposals[id].votesFor++;
+            links[id].votesFor++;
         } else {
-            proposals[id].votesAgainst++;
+            links[id].votesAgainst++;
         }
-        emit ProposalVoted(id, proposals[id].focus, support);
+        emit LinkVoted(id, links[id].domain, support);
     }
 
-    function ratifyProposal(uint256 id) public {
-        Proposal storage p = proposals[id];
-        require(!p.ratified, "Already ratified");
-        require(p.votesFor > p.votesAgainst, "Not enough support");
-        p.ratified = true;
-        emit ProposalRatified(p.id, p.focus);
+    function ratifyLink(uint256 id) public {
+        Link storage l = links[id];
+        require(!l.ratified, "Already ratified");
+        require(l.votesFor > l.votesAgainst, "Not enough support");
+        l.ratified = true;
+        emit LinkRatified(l.id, l.domain);
     }
 
     function declareCommunity() public {

@@ -2,27 +2,27 @@
 pragma solidity ^0.8.0;
 
 contract FreedomResonanceProtocol {
-    struct Release {
+    struct Choice {
         uint256 id;
-        string detainee;   // e.g. "Immigrant A"
-        string basis;      // e.g. "No criminal record"
-        string outcome;    // e.g. "Released on bond"
+        string domain;    // e.g. "Personal Websites"
+        string detail;    // e.g. "Full control over design and content"
+        string outcome;   // e.g. "Empowered", "Pending"
         uint256 timestamp;
     }
 
-    uint256 public releaseCount;
-    mapping(uint256 => Release) public releases;
+    uint256 public choiceCount;
+    mapping(uint256 => Choice) public choices;
 
-    event ReleaseLogged(uint256 id, string detainee, string basis, string outcome, uint256 timestamp);
+    event ChoiceLogged(uint256 id, string domain, string detail, string outcome, uint256 timestamp);
     event FreedomDeclared(string message);
 
-    function logRelease(string memory detainee, string memory basis, string memory outcome) public {
-        releaseCount++;
-        releases[releaseCount] = Release(releaseCount, detainee, basis, outcome, block.timestamp);
-        emit ReleaseLogged(releaseCount, detainee, basis, outcome, block.timestamp);
+    function logChoice(string memory domain, string memory detail, string memory outcome) public {
+        choiceCount++;
+        choices[choiceCount] = Choice(choiceCount, domain, detail, outcome, block.timestamp);
+        emit ChoiceLogged(choiceCount, domain, detail, outcome, block.timestamp);
     }
 
     function declareFreedom() public {
         emit FreedomDeclared("Freedom Resonance Protocol: validator-grade frameworks encoded into communal trust.");
     }
-
+}
