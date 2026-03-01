@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract EquityResonanceProtocol {
-    struct Equity {
+    struct Measure {
         uint256 id;
-        string domain;   // e.g. "Energy Access"
-        string measure;  // e.g. "Fair Pricing"
-        string outcome;  // e.g. "Rates Adjusted"
+        string domain;    // e.g. "Accessibility"
+        string detail;    // e.g. "Ensure affordability for all"
+        string outcome;   // e.g. "Ratified", "Pending"
         uint256 timestamp;
     }
 
-    uint256 public equityCount;
-    mapping(uint256 => Equity) public equities;
+    uint256 public measureCount;
+    mapping(uint256 => Measure) public measures;
 
-    event EquityLogged(uint256 id, string domain, string measure, string outcome, uint256 timestamp);
+    event MeasureLogged(uint256 id, string domain, string detail, string outcome, uint256 timestamp);
     event EquityDeclared(string message);
 
-    function logEquity(string memory domain, string memory measure, string memory outcome) public {
-        equityCount++;
-        equities[equityCount] = Equity(equityCount, domain, measure, outcome, block.timestamp);
-        emit EquityLogged(equityCount, domain, measure, outcome, block.timestamp);
+    function logMeasure(string memory domain, string memory detail, string memory outcome) public {
+        measureCount++;
+        measures[measureCount] = Measure(measureCount, domain, detail, outcome, block.timestamp);
+        emit MeasureLogged(measureCount, domain, detail, outcome, block.timestamp);
     }
 
     function declareEquity() public {
