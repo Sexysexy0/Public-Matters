@@ -2,45 +2,44 @@
 pragma solidity ^0.8.0;
 
 contract FundingDAO {
-    struct Grant {
+    struct Stream {
         uint256 id;
-        string source;    // e.g. "Private Business"
-        string purpose;   // e.g. "Government Payroll"
-        uint256 amount;
+        string domain;    // e.g. "Hybrid Monetization"
+        string detail;    // e.g. "Sponsors, consulting, SaaS"
         uint256 votesFor;
         uint256 votesAgainst;
         bool ratified;
     }
 
-    uint256 public grantCount;
-    mapping(uint256 => Grant) public grants;
+    uint256 public streamCount;
+    mapping(uint256 => Stream) public streams;
 
-    event GrantCreated(uint256 id, string source, string purpose, uint256 amount);
-    event GrantVoted(uint256 id, string source, bool support);
-    event GrantRatified(uint256 id, string source);
+    event StreamCreated(uint256 id, string domain, string detail);
+    event StreamVoted(uint256 id, string domain, bool support);
+    event StreamRatified(uint256 id, string domain);
     event FundingDeclared(string message);
 
-    function createGrant(string memory source, string memory purpose, uint256 amount) public {
-        grantCount++;
-        grants[grantCount] = Grant(grantCount, source, purpose, amount, 0, 0, false);
-        emit GrantCreated(grantCount, source, purpose, amount);
+    function createStream(string memory domain, string memory detail) public {
+        streamCount++;
+        streams[streamCount] = Stream(streamCount, domain, detail, 0, 0, false);
+        emit StreamCreated(streamCount, domain, detail);
     }
 
-    function voteGrant(uint256 id, bool support) public {
+    function voteStream(uint256 id, bool support) public {
         if (support) {
-            grants[id].votesFor++;
+            streams[id].votesFor++;
         } else {
-            grants[id].votesAgainst++;
+            streams[id].votesAgainst++;
         }
-        emit GrantVoted(id, grants[id].source, support);
+        emit StreamVoted(id, streams[id].domain, support);
     }
 
-    function ratifyGrant(uint256 id) public {
-        Grant storage g = grants[id];
-        require(!g.ratified, "Already ratified");
-        require(g.votesFor > g.votesAgainst, "Not enough support");
-        g.ratified = true;
-        emit GrantRatified(g.id, g.source);
+    function ratifyStream(uint256 id) public {
+        Stream storage s = streams[id];
+        require(!s.ratified, "Already ratified");
+        require(s.votesFor > s.votesAgainst, "Not enough support");
+        s.ratified = true;
+        emit StreamRatified(s.id, s.domain);
     }
 
     function declareFunding() public {
