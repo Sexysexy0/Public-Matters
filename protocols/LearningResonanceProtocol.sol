@@ -2,24 +2,24 @@
 pragma solidity ^0.8.0;
 
 contract LearningResonanceProtocol {
-    struct Lesson {
+    struct Path {
         uint256 id;
-        string domain;    // e.g. "DIY Android"
-        string detail;    // e.g. "Bootloader Unlock Guide"
-        string outcome;   // e.g. "Mastered", "Pending"
+        string domain;    // e.g. "Developer Growth"
+        string detail;    // e.g. "Rebuild AI-generated features from scratch"
+        string outcome;   // e.g. "Irreplaceable Skills", "Replaceable"
         uint256 timestamp;
     }
 
-    uint256 public lessonCount;
-    mapping(uint256 => Lesson) public lessons;
+    uint256 public pathCount;
+    mapping(uint256 => Path) public paths;
 
-    event LessonLogged(uint256 id, string domain, string detail, string outcome, uint256 timestamp);
+    event PathLogged(uint256 id, string domain, string detail, string outcome, uint256 timestamp);
     event LearningDeclared(string message);
 
-    function logLesson(string memory domain, string memory detail, string memory outcome) public {
-        lessonCount++;
-        lessons[lessonCount] = Lesson(lessonCount, domain, detail, outcome, block.timestamp);
-        emit LessonLogged(lessonCount, domain, detail, outcome, block.timestamp);
+    function logPath(string memory domain, string memory detail, string memory outcome) public {
+        pathCount++;
+        paths[pathCount] = Path(pathCount, domain, detail, outcome, block.timestamp);
+        emit PathLogged(pathCount, domain, detail, outcome, block.timestamp);
     }
 
     function declareLearning() public {
