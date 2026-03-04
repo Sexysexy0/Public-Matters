@@ -1,45 +1,23 @@
-// contracts/PrivacyProtocol.sol
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+// PrivacyProtocol.sol
+pragma solidity ^0.8.0;
 
-/**
- * @title PrivacyProtocol
- * @notice Validator-grade privacy and communal control of sensitive data.
- */
 contract PrivacyProtocol {
-    address public admin;
-
-    struct PrivacySeal {
-        string dataTag;
-        bool encrypted;
-        string note;
+    struct Rule {
+        uint256 id;
+        string domain;       // e.g. "User Data"
+        string description;  // e.g. "Encrypt personal info"
+        bool enforced;
         uint256 timestamp;
     }
 
-    PrivacySeal[] public seals;
+    uint256 public ruleCount;
+    mapping(uint256 => Rule) public rules;
 
-    event PrivacyLogged(string dataTag, bool encrypted, string note, uint256 timestamp);
+    event RuleEnforced(uint256 id, string domain, string description);
 
-    modifier onlyAdmin() {
-        require(msg.sender == admin, "Not admin");
-        _;
-    }
-
-    constructor() {
-        admin = msg.sender;
-    }
-
-    function logPrivacy(string calldata dataTag, bool encrypted, string calldata note) external onlyAdmin {
-        seals.push(PrivacySeal(dataTag, encrypted, note, block.timestamp));
-        emit PrivacyLogged(dataTag, encrypted, note, block.timestamp);
-    }
-
-    function totalSeals() external view returns (uint256) {
-        return seals.length;
-    }
-
-    function getSeal(uint256 id) external view returns (PrivacySeal memory) {
-        require(id < seals.length, "Invalid id");
-        return seals[id];
+    function enforceRule(string memory domain, string memory description) public {
+        ruleCount++;
+        rules[ruleCount] = Rule(ruleCount, domain, description, true, block.timestamp);
+        emit RuleEnforced(ruleCount, domain, description);
     }
 }
