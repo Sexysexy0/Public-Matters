@@ -1,38 +1,22 @@
-// contracts/AccountabilityProtocol.sol
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+// AccountabilityProtocol.sol
+pragma solidity ^0.8.0;
 
-/**
- * @title AccountabilityProtocol
- * @notice Ensures validator-grade dignity in governance accountability.
- */
 contract AccountabilityProtocol {
-    address public admin;
-
-    struct Rule {
-        string name;        // "Transparency", "CommunityOversight", "SecureSeats"
-        string description;
-        string status;      // "Implemented", "Pending"
+    struct Mechanism {
+        uint256 id;
+        string system;     // e.g. "Independent Judiciary"
+        string safeguard;  // e.g. "Strengthen rule of law and anti-impunity"
         uint256 timestamp;
     }
 
-    Rule[] public rules;
+    uint256 public mechanismCount;
+    mapping(uint256 => Mechanism) public mechanisms;
 
-    event RuleLogged(string name, string description, string status, uint256 timestamp);
+    event MechanismLogged(uint256 id, string system, string safeguard);
 
-    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
-
-    constructor() { admin = msg.sender; }
-
-    function logRule(string calldata name, string calldata description, string calldata status) external onlyAdmin {
-        rules.push(Rule(name, description, status, block.timestamp));
-        emit RuleLogged(name, description, status, block.timestamp);
-    }
-
-    function totalRules() external view returns (uint256) { return rules.length; }
-
-    function getRule(uint256 id) external view returns (Rule memory) {
-        require(id < rules.length, "Invalid id");
-        return rules[id];
+    function logMechanism(string memory system, string memory safeguard) public {
+        mechanismCount++;
+        mechanisms[mechanismCount] = Mechanism(mechanismCount, system, safeguard, block.timestamp);
+        emit MechanismLogged(mechanismCount, system, safeguard);
     }
 }
