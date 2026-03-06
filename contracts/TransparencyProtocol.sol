@@ -1,28 +1,22 @@
-pragma solidity ^0.8.20;
+// TransparencyProtocol.sol
+pragma solidity ^0.8.0;
 
 contract TransparencyProtocol {
-    address public admin;
-
-    struct Transparency {
-        string actor;        // e.g. AI company, watchdog
-        string measure;      // e.g. source disclosure, audit trail
-        string effect;       // e.g. trust, accountability
+    struct Record {
+        uint256 id;
+        string session;   // e.g. "House Plenary Debate"
+        string detail;    // e.g. "Vote count published"
         uint256 timestamp;
     }
 
-    Transparency[] public transparencies;
+    uint256 public recordCount;
+    mapping(uint256 => Record) public records;
 
-    event TransparencyLogged(string actor, string measure, string effect, uint256 timestamp);
+    event RecordLogged(uint256 id, string session, string detail);
 
-    constructor() { admin = msg.sender; }
-    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
-
-    function logTransparency(string calldata actor, string calldata measure, string calldata effect) external onlyAdmin {
-        transparencies.push(Transparency(actor, measure, effect, block.timestamp));
-        emit TransparencyLogged(actor, measure, effect, block.timestamp);
-    }
-
-    function totalTransparencies() external view returns (uint256) {
-        return transparencies.length;
+    function logRecord(string memory session, string memory detail) public {
+        recordCount++;
+        records[recordCount] = Record(recordCount, session, detail, block.timestamp);
+        emit RecordLogged(recordCount, session, detail);
     }
 }
