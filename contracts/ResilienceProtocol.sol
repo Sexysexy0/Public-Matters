@@ -1,38 +1,22 @@
-// contracts/ResilienceProtocol.sol
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+// ResilienceProtocol.sol
+pragma solidity ^0.8.0;
 
-/**
- * @title ResilienceProtocol
- * @notice Logs resilience measures for cyber systems and communal trust.
- */
 contract ResilienceProtocol {
-    address public admin;
-
-    struct Measure {
-        string name;        // "BackupSystems", "DisasterRecovery", "Redundancy"
-        string description;
-        string status;      // "Active", "Pending"
+    struct Strategy {
+        uint256 id;
+        string challenge;  // e.g. "Inflation Shock"
+        string safeguard;  // e.g. "Prepare for crises with adaptive measures"
         uint256 timestamp;
     }
 
-    Measure[] public measures;
+    uint256 public strategyCount;
+    mapping(uint256 => Strategy) public strategies;
 
-    event MeasureLogged(string name, string description, string status, uint256 timestamp);
+    event StrategyLogged(uint256 id, string challenge, string safeguard);
 
-    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
-
-    constructor() { admin = msg.sender; }
-
-    function logMeasure(string calldata name, string calldata description, string calldata status) external onlyAdmin {
-        measures.push(Measure(name, description, status, block.timestamp));
-        emit MeasureLogged(name, description, status, block.timestamp);
-    }
-
-    function totalMeasures() external view returns (uint256) { return measures.length; }
-
-    function getMeasure(uint256 id) external view returns (Measure memory) {
-        require(id < measures.length, "Invalid id");
-        return measures[id];
+    function logStrategy(string memory challenge, string memory safeguard) public {
+        strategyCount++;
+        strategies[strategyCount] = Strategy(strategyCount, challenge, safeguard, block.timestamp);
+        emit StrategyLogged(strategyCount, challenge, safeguard);
     }
 }
