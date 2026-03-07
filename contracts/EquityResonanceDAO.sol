@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract EquityResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Progressive Relief Scheme"
-        string resonance;  // e.g. "Balance tax relief with fairness"
+        string program;    // e.g. "Scholarship Expansion Initiative"
+        string resonance;  // e.g. "Align schooling with fairness and opportunity"
         bool active;
     }
 
