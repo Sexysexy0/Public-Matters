@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract SecuritySafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Cyber Defense Upgrade"
-        string measure;    // e.g. "Strengthen defenses against foreign interference"
+        string mechanism;  // e.g. "Arms Control Treaty"
+        string measure;    // e.g. "Prevent arms races and unchecked militarization"
         uint256 timestamp;
     }
 
