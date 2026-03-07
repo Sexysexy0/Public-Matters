@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract TransparencyResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Public Access Portal"
-        string resonance;  // e.g. "Ensure proceedings and findings are open to citizens"
+        string program;    // e.g. "Ethical Journalism Campaign"
+        string resonance;  // e.g. "Align journalism with accountability and ethics"
         bool active;
     }
 
