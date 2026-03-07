@@ -1,28 +1,22 @@
-pragma solidity ^0.8.20;
+// PoliticalAccountabilityProtocol.sol
+pragma solidity ^0.8.0;
 
 contract PoliticalAccountabilityProtocol {
-    address public admin;
-
-    struct Accountability {
-        string leader;       // e.g. Senator Camille Villar
-        string mandate;      // e.g. Committee on Environment
-        string expectation;  // e.g. hearings, representation
+    struct Rule {
+        uint256 id;
+        string safeguard;  // e.g. "Ensure leaders uphold ethical standards"
+        string mechanism;  // e.g. "Independent Political Oversight Council"
         uint256 timestamp;
     }
 
-    Accountability[] public accountabilities;
+    uint256 public ruleCount;
+    mapping(uint256 => Rule) public rules;
 
-    event AccountabilityLogged(string leader, string mandate, string expectation, uint256 timestamp);
+    event RuleLogged(uint256 id, string safeguard, string mechanism);
 
-    constructor() { admin = msg.sender; }
-    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
-
-    function logAccountability(string calldata leader, string calldata mandate, string calldata expectation) external onlyAdmin {
-        accountabilities.push(Accountability(leader, mandate, expectation, block.timestamp));
-        emit AccountabilityLogged(leader, mandate, expectation, block.timestamp);
-    }
-
-    function totalAccountabilities() external view returns (uint256) {
-        return accountabilities.length;
+    function logRule(string memory safeguard, string memory mechanism) public {
+        ruleCount++;
+        rules[ruleCount] = Rule(ruleCount, safeguard, mechanism, block.timestamp);
+        emit RuleLogged(ruleCount, safeguard, mechanism);
     }
 }
