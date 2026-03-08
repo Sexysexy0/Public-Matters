@@ -4,19 +4,19 @@ pragma solidity ^0.8.0;
 contract RightsSafeguards {
     struct Safeguard {
         uint256 id;
-        string right;      // e.g. "Freedom of Speech"
-        string measure;    // e.g. "Protect fundamental human rights in AI systems"
+        string mechanism;  // e.g. "Anti-Discrimination Charter"
+        string measure;    // e.g. "Protect individuals from discrimination and abuse"
         uint256 timestamp;
     }
 
     uint256 public safeguardCount;
     mapping(uint256 => Safeguard) public safeguards;
 
-    event SafeguardLogged(uint256 id, string right, string measure);
+    event SafeguardLogged(uint256 id, string mechanism, string measure);
 
-    function logSafeguard(string memory right, string memory measure) public {
+    function logSafeguard(string memory mechanism, string memory measure) public {
         safeguardCount++;
-        safeguards[safeguardCount] = Safeguard(safeguardCount, right, measure, block.timestamp);
-        emit SafeguardLogged(safeguardCount, right, measure);
+        safeguards[safeguardCount] = Safeguard(safeguardCount, mechanism, measure, block.timestamp);
+        emit SafeguardLogged(safeguardCount, mechanism, measure);
     }
 }
