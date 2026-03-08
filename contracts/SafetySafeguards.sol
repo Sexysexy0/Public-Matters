@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract SafetySafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Community Child Watch"
-        string measure;    // e.g. "Strengthen child protection systems"
+        string mechanism;  // e.g. "Neighborhood Watch Charter"
+        string measure;    // e.g. "Protect communities from harmful organizations and exploitation"
         uint256 timestamp;
     }
 
