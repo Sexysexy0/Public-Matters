@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract EconomicAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in fiscal and monetary policy"
+        string safeguard;  // e.g. "Ensure transparency in economic governance"
         string mechanism;  // e.g. "Independent Economic Oversight Council"
         uint256 timestamp;
     }
