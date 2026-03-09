@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract EnergySafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Strategic Oil Reserve"
-        string measure;    // e.g. "Protect economies from oil shocks and supply disruptions"
+        string mechanism;  // e.g. "Energy Security Charter"
+        string measure;    // e.g. "Protect energy supply and sustainability"
         uint256 timestamp;
     }
 
