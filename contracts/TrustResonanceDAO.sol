@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract TrustResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Family-Community Youth Program"
-        string resonance;  // e.g. "Align youth programs with family and community values"
+        string program;    // e.g. "Transparent Workforce Program"
+        string resonance;  // e.g. "Align corporate governance with employee trust"
         bool active;
     }
 
