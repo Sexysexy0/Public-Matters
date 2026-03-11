@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract EmploymentSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Fair Severance Charter"
-        string measure;    // e.g. "Protect employees with consistent severance packages"
+        string mechanism;  // e.g. "Fair Transition Charter"
+        string measure;    // e.g. "Protect workers from sudden AI-driven layoffs"
         uint256 timestamp;
     }
 
