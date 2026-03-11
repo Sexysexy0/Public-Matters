@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract LearningSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Universal Access Program"
+        string mechanism;  // e.g. "Universal Access Charter"
         string measure;    // e.g. "Protect access to quality education for all"
         uint256 timestamp;
     }
