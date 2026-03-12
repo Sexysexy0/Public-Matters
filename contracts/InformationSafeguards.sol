@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract InformationSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Fact-Checking Network"
-        string measure;    // e.g. "Protect truth from misinformation and manipulation"
+        string mechanism;  // e.g. "Truth in Media Charter"
+        string measure;    // e.g. "Protect integrity of information and journalism"
         uint256 timestamp;
     }
 
