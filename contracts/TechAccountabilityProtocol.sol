@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract TechAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in digital governance"
-        string mechanism;  // e.g. "Independent Ethics Oversight Board"
+        string safeguard;  // e.g. "Ensure transparency in tech governance"
+        string mechanism;  // e.g. "Independent Technology Oversight Council"
         uint256 timestamp;
     }
 
