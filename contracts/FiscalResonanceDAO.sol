@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract FiscalResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Revenue Protection Program"
-        string resonance;  // e.g. "Balance emergency relief with fiscal responsibility"
+        string program;    // e.g. "Local Government Debt Management Program"
+        string resonance;  // e.g. "Align fiscal policy with sustainable property stabilization"
         bool active;
     }
 

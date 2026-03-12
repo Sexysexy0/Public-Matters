@@ -1,11 +1,11 @@
-// AISafeguards.sol
+// PropertySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract AISafeguards {
+contract PropertySafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "OpenClaw Security Charter"
-        string measure;    // e.g. "Protect organizations from uncontrolled AI agent actions"
+        string mechanism;  // e.g. "Idle Land Bond Charter"
+        string measure;    // e.g. "Stabilize property sector via special-purpose bonds"
         uint256 timestamp;
     }
 
