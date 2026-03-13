@@ -2,21 +2,21 @@
 pragma solidity ^0.8.0;
 
 contract LeadershipAccountabilityProtocol {
-    struct Action {
+    struct Rule {
         uint256 id;
-        string leader;     // e.g. "Senior Deputy Minority Leader"
-        string decision;   // e.g. "Removed due to dissent"
+        string safeguard;  // e.g. "Track ROI of international assignments"
+        string mechanism;  // e.g. "Leadership Metrics Dashboard"
         uint256 timestamp;
     }
 
-    uint256 public actionCount;
-    mapping(uint256 => Action) public actions;
+    uint256 public ruleCount;
+    mapping(uint256 => Rule) public rules;
 
-    event ActionLogged(uint256 id, string leader, string decision);
+    event RuleLogged(uint256 id, string safeguard, string mechanism);
 
-    function logAction(string memory leader, string memory decision) public {
-        actionCount++;
-        actions[actionCount] = Action(actionCount, leader, decision, block.timestamp);
-        emit ActionLogged(actionCount, leader, decision);
+    function logRule(string memory safeguard, string memory mechanism) public {
+        ruleCount++;
+        rules[ruleCount] = Rule(ruleCount, safeguard, mechanism, block.timestamp);
+        emit RuleLogged(ruleCount, safeguard, mechanism);
     }
 }
