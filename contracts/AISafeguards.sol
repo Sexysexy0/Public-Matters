@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract AISafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "OpenClaw Security Charter"
-        string measure;    // e.g. "Protect organizations from uncontrolled AI agent actions"
+        string mechanism;  // e.g. "AI-Creative Integrity Charter"
+        string measure;    // e.g. "Protect creative jobs from automation risks"
         uint256 timestamp;
     }
 
