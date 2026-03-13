@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract VigilanceResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "National Security Vigilance Program"
-        string resonance;  // e.g. "Align defense operations with vigilance and resilience"
+        string program;    // e.g. "AI Safety Vigilance Program"
+        string resonance;  // e.g. "Align AI systems with ethical safeguards"
         bool active;
     }
 
