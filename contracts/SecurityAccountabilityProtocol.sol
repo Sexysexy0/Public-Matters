@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract SecurityAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in geopolitical security decisions"
+        string safeguard;  // e.g. "Ensure transparency in national security governance"
         string mechanism;  // e.g. "Independent Security Oversight Council"
         uint256 timestamp;
     }
