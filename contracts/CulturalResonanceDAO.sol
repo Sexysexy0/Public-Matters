@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract CulturalResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Lyrics Context Translation Project"
-        string resonance;  // e.g. "Align subtitles with cultural nuance and meaning"
+        string program;    // e.g. "Global Audience Engagement Program"
+        string resonance;  // e.g. "Align entertainment with diverse cultural communities worldwide"
         bool active;
     }
 
