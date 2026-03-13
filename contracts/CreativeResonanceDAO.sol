@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract CreativeResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Independent Film Empowerment Program"
-        string resonance;  // e.g. "Align Hollywood with bold storytelling and resilience"
+        string program;    // e.g. "Influencer-Hollywood Hybrid Storytelling Program"
+        string resonance;  // e.g. "Align cinematic spectacle with influencer authenticity"
         bool active;
     }
 
