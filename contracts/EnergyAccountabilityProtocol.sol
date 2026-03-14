@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract EnergyAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in energy governance"
+        string safeguard;  // e.g. "Ensure transparency in off-grid energy revival"
         string mechanism;  // e.g. "Independent Energy Oversight Council"
         uint256 timestamp;
     }
