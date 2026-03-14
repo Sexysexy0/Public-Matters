@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract CommunityAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in local governance and protection measures"
-        string mechanism;  // e.g. "Independent Community Oversight Council"
+        string safeguard;  // e.g. "Ensure transparency in responding to public outcry"
+        string mechanism;  // e.g. "Citizen Oversight Council with audit powers"
         uint256 timestamp;
     }
 
