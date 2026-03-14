@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract SecurityResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Human Rights in Defense Policy"
-        string resonance;  // e.g. "Balance national defense with human rights"
+        string program;    // e.g. "Global Energy Cooperation Program"
+        string resonance;  // e.g. "Align energy governance with sustainability and cooperation"
         bool active;
     }
 
