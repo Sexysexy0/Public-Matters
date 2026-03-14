@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract VotingSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Biometric Voter Verification"
-        string measure;    // e.g. "Secure, fair, and transparent elections"
+        string mechanism;  // e.g. "Ballot Integrity Check"
+        string measure;    // e.g. "Prevent fraud and protect votes"
         uint256 timestamp;
     }
 
