@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract JusticeResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Community Justice Empowerment Program"
-        string resonance;  // e.g. "Align governance with dignity and fairness"
+        string program;    // e.g. "Treason Accountability Program"
+        string resonance;  // e.g. "Align justice with rule of law"
         bool active;
     }
 
