@@ -5,7 +5,7 @@ contract DigitalAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in digital governance"
-        string mechanism;  // e.g. "Independent Digital Rights Oversight Council"
+        string mechanism;  // e.g. "Independent Digital Oversight Council"
         uint256 timestamp;
     }
 

@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract InnovationResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "AI-Human Creative Collaboration Program"
-        string resonance;  // e.g. "Align AI tools with human creativity"
+        string program;    // e.g. "Digital Empowerment Program"
+        string resonance;  // e.g. "Align digital services with user empowerment"
         bool active;
     }
 

@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract DigitalSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Firewall & Intrusion Detection System"
-        string measure;    // e.g. "Protect systems from cyberattacks and espionage"
+        string mechanism;  // e.g. "Data Privacy Charter"
+        string measure;    // e.g. "Protect user data and digital rights"
         uint256 timestamp;
     }
 
