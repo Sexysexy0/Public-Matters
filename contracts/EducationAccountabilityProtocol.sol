@@ -19,4 +19,4 @@ contract EducationAccountabilityProtocol {
         rules[ruleCount] = Rule(ruleCount, safeguard, mechanism, block.timestamp);
         emit RuleLogged(ruleCount, safeguard, mechanism);
     }
-}y
+}
