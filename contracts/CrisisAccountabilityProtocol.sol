@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract CrisisAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in emergency powers"
-        string mechanism;  // e.g. "Independent Oversight Committee"
+        string safeguard;  // e.g. "Ensure transparent crisis communication"
+        string mechanism;  // e.g. "Independent Crisis Oversight Council"
         uint256 timestamp;
     }
 
