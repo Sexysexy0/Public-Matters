@@ -2,21 +2,21 @@
 pragma solidity ^0.8.0;
 
 contract ResourceAccountabilityProtocol {
-    struct Audit {
+    struct Rule {
         uint256 id;
-        string resource;   // e.g. "Hospital Budget"
-        string safeguard;  // e.g. "Ensure fair and transparent use of health funds"
+        string safeguard;  // e.g. "Ensure transparency in global resource governance"
+        string mechanism;  // e.g. "Independent Resource Oversight Council"
         uint256 timestamp;
     }
 
-    uint256 public auditCount;
-    mapping(uint256 => Audit) public audits;
+    uint256 public ruleCount;
+    mapping(uint256 => Rule) public rules;
 
-    event AuditLogged(uint256 id, string resource, string safeguard);
+    event RuleLogged(uint256 id, string safeguard, string mechanism);
 
-    function logAudit(string memory resource, string memory safeguard) public {
-        auditCount++;
-        audits[auditCount] = Audit(auditCount, resource, safeguard, block.timestamp);
-        emit AuditLogged(auditCount, resource, safeguard);
+    function logRule(string memory safeguard, string memory mechanism) public {
+        ruleCount++;
+        rules[ruleCount] = Rule(ruleCount, safeguard, mechanism, block.timestamp);
+        emit RuleLogged(ruleCount, safeguard, mechanism);
     }
 }
