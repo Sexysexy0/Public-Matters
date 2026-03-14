@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract PoliticalAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure leaders uphold ethical standards"
-        string mechanism;  // e.g. "Independent Political Oversight Council"
+        string safeguard;  // e.g. "Ensure politicians face prosecution for crimes"
+        string mechanism;  // e.g. "Sandiganbayan and Impeachment Oversight"
         uint256 timestamp;
     }
 
