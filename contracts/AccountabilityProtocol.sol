@@ -2,21 +2,21 @@
 pragma solidity ^0.8.0;
 
 contract AccountabilityProtocol {
-    struct Rule {
+    struct Action {
         uint256 id;
-        string safeguard;  // e.g. "Ensure leaders honor the social contract"
-        string mechanism;  // e.g. "Citizen Oversight Committee"
+        string safeguard;  // e.g. "Frame news as context, not panic"
+        string mechanism;  // e.g. "Team briefing with risk matrix"
         uint256 timestamp;
     }
 
-    uint256 public ruleCount;
-    mapping(uint256 => Rule) public rules;
+    uint256 public actionCount;
+    mapping(uint256 => Action) public actions;
 
-    event RuleLogged(uint256 id, string safeguard, string mechanism);
+    event ActionLogged(uint256 id, string safeguard, string mechanism);
 
-    function logRule(string memory safeguard, string memory mechanism) public {
-        ruleCount++;
-        rules[ruleCount] = Rule(ruleCount, safeguard, mechanism, block.timestamp);
-        emit RuleLogged(ruleCount, safeguard, mechanism);
+    function logAction(string memory safeguard, string memory mechanism) public {
+        actionCount++;
+        actions[actionCount] = Action(actionCount, safeguard, mechanism, block.timestamp);
+        emit ActionLogged(actionCount, safeguard, mechanism);
     }
 }
