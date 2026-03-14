@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract CrisisSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Emergency Fuel Tax Charter"
-        string measure;    // e.g. "Allow temporary authority to adjust excise tax"
+        string mechanism;  // e.g. "Emergency Communication Filter"
+        string measure;    // e.g. "Prevent panic and misinformation"
         uint256 timestamp;
     }
 
