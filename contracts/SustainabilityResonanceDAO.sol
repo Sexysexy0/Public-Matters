@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract SustainabilityResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Green Energy Transition Program"
-        string resonance;  // e.g. "Align policy with ecological balance and sustainability"
+        string program;    // e.g. "Renewable Energy Transition Program"
+        string resonance;  // e.g. "Align governance with climate justice and sustainability"
         bool active;
     }
 
