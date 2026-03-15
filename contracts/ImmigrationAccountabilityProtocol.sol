@@ -1,28 +1,22 @@
-pragma solidity ^0.8.20;
+// ImmigrationAccountabilityProtocol.sol
+pragma solidity ^0.8.0;
 
 contract ImmigrationAccountabilityProtocol {
-    address public admin;
-
-    struct Accountability {
-        string agency;       // e.g. Bureau of Immigration
-        string complaint;    // e.g. arbitrary offloading
-        string demand;       // e.g. transparency, reform
+    struct Rule {
+        uint256 id;
+        string safeguard;  // e.g. "Ensure transparency in immigration enforcement"
+        string mechanism;  // e.g. "Independent Immigration Oversight Council"
         uint256 timestamp;
     }
 
-    Accountability[] public accountabilities;
+    uint256 public ruleCount;
+    mapping(uint256 => Rule) public rules;
 
-    event AccountabilityLogged(string agency, string complaint, string demand, uint256 timestamp);
+    event RuleLogged(uint256 id, string safeguard, string mechanism);
 
-    constructor() { admin = msg.sender; }
-    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
-
-    function logAccountability(string calldata agency, string calldata complaint, string calldata demand) external onlyAdmin {
-        accountabilities.push(Accountability(agency, complaint, demand, block.timestamp));
-        emit AccountabilityLogged(agency, complaint, demand, block.timestamp);
-    }
-
-    function totalAccountabilities() external view returns (uint256) {
-        return accountabilities.length;
+    function logRule(string memory safeguard, string memory mechanism) public {
+        ruleCount++;
+        rules[ruleCount] = Rule(ruleCount, safeguard, mechanism, block.timestamp);
+        emit RuleLogged(ruleCount, safeguard, mechanism);
     }
 }
