@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract RightsSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Human Rights Protection Charter"
-        string measure;    // e.g. "Safeguard vulnerable communities from abuses"
+        string mechanism;  // e.g. "Label Accuracy Enforcement"
+        string measure;    // e.g. "Protect consumers from misleading ingredient claims"
         uint256 timestamp;
     }
 
