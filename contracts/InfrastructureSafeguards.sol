@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract InfrastructureSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Project Integrity Charter"
-        string measure;    // e.g. "Protect infrastructure projects from corruption and inefficiency"
+        string mechanism;  // e.g. "Drainage System Upgrade"
+        string measure;    // e.g. "Protect cities from flooding"
         uint256 timestamp;
     }
 
