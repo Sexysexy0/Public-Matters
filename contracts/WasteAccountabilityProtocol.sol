@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract WasteAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in waste collection and disposal"
-        string mechanism;  // e.g. "Independent Solid Waste Oversight Council"
+        string safeguard;  // e.g. "Ensure transparency in waste-to-energy governance"
+        string mechanism;  // e.g. "Independent Environmental Oversight Council"
         uint256 timestamp;
     }
 

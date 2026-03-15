@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract EnvironmentalSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Natural Resource Protection Charter"
-        string measure;    // e.g. "Protect ecosystems and biodiversity"
+        string mechanism;  // e.g. "Waste-to-Energy Plant Oversight"
+        string measure;    // e.g. "Ensure eco-friendly processing of solid waste"
         uint256 timestamp;
     }
 
