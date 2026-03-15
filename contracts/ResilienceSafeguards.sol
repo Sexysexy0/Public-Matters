@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract ResilienceSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Media Worker Protection Charter"
-        string measure;    // e.g. "Safeguard jobs and creative industries from collapse"
+        string mechanism;  // e.g. "Flood Control Infrastructure"
+        string measure;    // e.g. "Protect communities from climate risks"
         uint256 timestamp;
     }
 
