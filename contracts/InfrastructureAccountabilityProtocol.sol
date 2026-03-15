@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract InfrastructureAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in infrastructure implementation"
+        string safeguard;  // e.g. "Ensure transparency in infrastructure projects"
         string mechanism;  // e.g. "Independent Infrastructure Oversight Council"
         uint256 timestamp;
     }
