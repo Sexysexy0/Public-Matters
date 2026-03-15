@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract ConsumerAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in consumer governance"
-        string mechanism;  // e.g. "Independent Consumer Oversight Council"
+        string safeguard;  // e.g. "Ensure corporations answer to consumer demands"
+        string mechanism;  // e.g. "Independent Consumer Rights Oversight Council"
         uint256 timestamp;
     }
 
