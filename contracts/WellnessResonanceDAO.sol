@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract WellnessResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Community Wellness Campaign"
-        string resonance;  // e.g. "Align healthcare with dignity and compassion"
+        string program;    // e.g. "Community Health Program"
+        string resonance;  // e.g. "Align governance with public wellness"
         bool active;
     }
 

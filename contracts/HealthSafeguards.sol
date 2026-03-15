@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract HealthSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Universal Healthcare Access"
-        string measure;    // e.g. "Protect access to safe and affordable care"
+        string mechanism;  // e.g. "Hospital Capacity Upgrade"
+        string measure;    // e.g. "Ensure communities have access to healthcare"
         uint256 timestamp;
     }
 
