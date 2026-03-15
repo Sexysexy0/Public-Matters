@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract WaterAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in water governance"
+        string safeguard;  // e.g. "Ensure transparency in water masterplan governance"
         string mechanism;  // e.g. "Independent Water Oversight Council"
         uint256 timestamp;
     }
