@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract EthicsSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Responsible AI Development"
-        string measure;    // e.g. "Ensure fairness, transparency, and non-discrimination"
+        string mechanism;  // e.g. "Universal Moral Standards"
+        string measure;    // e.g. "Ensure ethical compliance across governance systems"
         uint256 timestamp;
     }
 
