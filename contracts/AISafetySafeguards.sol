@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract AISafetySafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "AI Misuse Prevention Charter"
-        string measure;    // e.g. "Block harmful queries and prevent weaponization"
+        string mechanism;  // e.g. "Prevent Misuse of AI Systems"
+        string measure;    // e.g. "Ensure AI deployment follows strict safety guidelines"
         uint256 timestamp;
     }
 
