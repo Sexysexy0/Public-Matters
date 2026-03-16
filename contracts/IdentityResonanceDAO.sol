@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract IdentityResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Cultural Continuity Campaign"
-        string resonance;  // e.g. "Align culture with dignity and continuity"
+        string program;    // e.g. "Cultural Continuity Program"
+        string resonance;  // e.g. "Align governance with cultural identity and values"
         bool active;
     }
 

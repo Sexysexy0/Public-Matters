@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract HeritageSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Preserve Ancient Records"
-        string measure;    // e.g. "Protect manuscripts and charters of Masonry"
+        string mechanism;  // e.g. "Protect Monuments and Traditions"
+        string measure;    // e.g. "Preserve cultural sites and intangible heritage"
         uint256 timestamp;
     }
 
