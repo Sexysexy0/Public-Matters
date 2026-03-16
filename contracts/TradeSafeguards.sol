@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract TradeSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Fair Commerce Charter"
-        string measure;    // e.g. "Protect equitable trade practices across markets"
+        string mechanism;  // e.g. "Fair Trade Standards"
+        string measure;    // e.g. "Prevent exploitation in global trade agreements"
         uint256 timestamp;
     }
 

@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract TradeAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in trade governance"
-        string mechanism;  // e.g. "Independent Trade Oversight Council"
+        string safeguard;  // e.g. "Ensure transparency in trade agreements"
+        string mechanism;  // e.g. "Independent Global Trade Oversight Council"
         uint256 timestamp;
     }
 
