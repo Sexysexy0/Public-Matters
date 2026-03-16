@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract SpiritualAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in spiritual leadership"
-        string mechanism;  // e.g. "Independent Ritual Oversight Council"
+        string safeguard;  // e.g. "Ensure transparency in spiritual stewardship"
+        string mechanism;  // e.g. "Independent Spiritual Oversight Council"
         uint256 timestamp;
     }
 
