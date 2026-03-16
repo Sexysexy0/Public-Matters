@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract KnowledgeAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in knowledge stewardship"
+        string safeguard;  // e.g. "Ensure transparency in knowledge sharing"
         string mechanism;  // e.g. "Independent Knowledge Oversight Council"
         uint256 timestamp;
     }
