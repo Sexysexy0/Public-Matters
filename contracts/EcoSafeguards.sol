@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract EcoSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Protected Forest Zones"
-        string measure;    // e.g. "Protect ecosystems and biodiversity"
+        string mechanism;  // e.g. "Replanting Mandate"
+        string measure;    // e.g. "Require replanting for every tree cut"
         uint256 timestamp;
     }
 
