@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract WisdomResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Knowledge Continuity Program"
-        string resonance;  // e.g. "Align governance with historical wisdom and continuity"
+        string program;    // e.g. "Philosophical Continuity Program"
+        string resonance;  // e.g. "Align governance with timeless wisdom"
         bool active;
     }
 
