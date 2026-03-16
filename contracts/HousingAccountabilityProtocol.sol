@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract HousingAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure resale of corporate-owned homes at purchase price"
+        string safeguard;  // e.g. "Ensure transparency in housing policy"
         string mechanism;  // e.g. "Independent Housing Oversight Council"
         uint256 timestamp;
     }
