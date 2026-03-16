@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract CompassionResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Fatherhood Responsibility Campaign"
-        string resonance;  // e.g. "Mobilize communities to protect children"
+        string program;    // e.g. "Community Care Program"
+        string resonance;  // e.g. "Align governance with compassion and welfare"
         bool active;
     }
 
