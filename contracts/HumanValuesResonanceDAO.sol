@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract HumanValuesResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Ethical AI Charter"
-        string resonance;  // e.g. "Align innovation with dignity and compassion"
+        string program;    // e.g. "Ethical Governance Program"
+        string resonance;  // e.g. "Align governance with humanity’s values and truth"
         bool active;
     }
 
