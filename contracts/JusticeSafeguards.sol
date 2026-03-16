@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract JusticeSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Fair Wage Enforcement"
-        string measure;    // e.g. "Protect workers from exploitation"
+        string mechanism;  // e.g. "Fair Lending Practices"
+        string measure;    // e.g. "Ensure equitable access to credit for all"
         uint256 timestamp;
     }
 
