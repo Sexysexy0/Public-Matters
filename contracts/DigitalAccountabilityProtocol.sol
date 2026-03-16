@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract DigitalAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure corporations are answerable for data handling"
-        string mechanism;  // e.g. "Independent Digital Privacy Oversight Council"
+        string safeguard;  // e.g. "Ensure transparency in tech practices"
+        string mechanism;  // e.g. "Independent Digital Ethics Oversight Council"
         uint256 timestamp;
     }
 

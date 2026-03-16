@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract IntegrityResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Digital Respect Campaign"
-        string resonance;  // e.g. "Align digital behavior with fairness and respect"
+        string program;    // e.g. "Privacy Protection Program"
+        string resonance;  // e.g. "Align digital governance with human values and integrity"
         bool active;
     }
 
