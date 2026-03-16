@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract BalanceResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Global Cooperation Framework"
-        string resonance;  // e.g. "Align global power with fairness and cooperation"
+        string program;    // e.g. "Global Cooperation Program"
+        string resonance;  // e.g. "Align governance with balanced trade and cooperation"
         bool active;
     }
 
