@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract AIAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in AI governance"
+        string safeguard;  // e.g. "Ensure transparency in AI deployment"
         string mechanism;  // e.g. "Independent AI Oversight Council"
         uint256 timestamp;
     }
