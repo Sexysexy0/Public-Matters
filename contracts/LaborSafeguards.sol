@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract LaborSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Digital Worker Rights Charter"
-        string measure;    // e.g. "Protect gig workers and creators online"
+        string mechanism;  // e.g. "Union Rights Protection"
+        string measure;    // e.g. "Ensure workers have collective bargaining power"
         uint256 timestamp;
     }
 
