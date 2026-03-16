@@ -2,21 +2,21 @@
 pragma solidity ^0.8.0;
 
 contract ClimateSafeguards {
-    struct Measure {
+    struct Safeguard {
         uint256 id;
-        string action;     // e.g. "Reduce carbon emissions"
-        string safeguard;  // e.g. "Protect ecosystems from degradation"
+        string mechanism;  // e.g. "Carbon Emission Reduction"
+        string measure;    // e.g. "Transition to renewable energy sources"
         uint256 timestamp;
     }
 
-    uint256 public measureCount;
-    mapping(uint256 => Measure) public measures;
+    uint256 public safeguardCount;
+    mapping(uint256 => Safeguard) public safeguards;
 
-    event MeasureLogged(uint256 id, string action, string safeguard);
+    event SafeguardLogged(uint256 id, string mechanism, string measure);
 
-    function logMeasure(string memory action, string memory safeguard) public {
-        measureCount++;
-        measures[measureCount] = Measure(measureCount, action, safeguard, block.timestamp);
-        emit MeasureLogged(measureCount, action, safeguard);
+    function logSafeguard(string memory mechanism, string memory measure) public {
+        safeguardCount++;
+        safeguards[safeguardCount] = Safeguard(safeguardCount, mechanism, measure, block.timestamp);
+        emit SafeguardLogged(safeguardCount, mechanism, measure);
     }
 }
