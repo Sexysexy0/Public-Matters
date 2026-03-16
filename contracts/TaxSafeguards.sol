@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract TaxSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Revenue Protection Charter"
-        string measure;    // e.g. "Ensure fair and sustainable taxation"
+        string mechanism;  // e.g. "Abolish Property Tax"
+        string measure;    // e.g. "Protect homeowners from perpetual tax burden"
         uint256 timestamp;
     }
 

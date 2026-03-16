@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract TaxAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in tax adjustments"
-        string mechanism;  // e.g. "Independent Fiscal Oversight Council"
+        string safeguard;  // e.g. "Ensure transparency in fiscal policy"
+        string mechanism;  // e.g. "Independent Tax Oversight Council"
         uint256 timestamp;
     }
 
