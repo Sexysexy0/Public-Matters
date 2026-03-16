@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract EquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Fair Wage Policy"
-        string measure;    // e.g. "Protect workers and ensure fair wages"
+        string mechanism;  // e.g. "Community Share Allocation"
+        string measure;    // e.g. "Distribute equity to government/community annually"
         uint256 timestamp;
     }
 
