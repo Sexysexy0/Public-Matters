@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract FinanceAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in government spending"
-        string mechanism;  // e.g. "Independent Fiscal Oversight Council"
+        string safeguard;  // e.g. "Ensure transparency in private credit exposure"
+        string mechanism;  // e.g. "Independent Financial Oversight Council"
         uint256 timestamp;
     }
 

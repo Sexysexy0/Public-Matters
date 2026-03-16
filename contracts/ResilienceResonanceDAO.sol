@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract ResilienceResonanceDAO {
     struct Initiative {
         uint256 id;
-        string program;    // e.g. "Climate Justice Program"
-        string resonance;  // e.g. "Align governance with resilience and sustainability"
+        string program;    // e.g. "Systemic Risk Monitoring Program"
+        string resonance;  // e.g. "Align financial governance with resilience and stability"
         bool active;
     }
 
