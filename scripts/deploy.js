@@ -2,26 +2,19 @@ async function main() {
   const [deployer] = await ethers.getSigners();
   console.log("Deploying contracts with account:", deployer.address);
 
-  const Skill = await ethers.getContractFactory("HumanSkillRegistry");
-  const skill = await Skill.deploy();
-  console.log("HumanSkillRegistry deployed at:", skill.address);
+  const HempDAO = await ethers.getContractFactory("HempAccessDAO");
+  const hempDAO = await HempDAO.deploy();
+  console.log("HempAccessDAO deployed at:", hempDAO.address);
 
-  const MediaDAO = await ethers.getContractFactory("AlgorithmicMediaDAO");
-  const mediaDAO = await MediaDAO.deploy();
-  console.log("AlgorithmicMediaDAO deployed at:", mediaDAO.address);
+  const PatientNFT = await ethers.getContractFactory("PatientRightsNFT");
+  const patientNFT = await PatientNFT.deploy();
+  console.log("PatientRightsNFT deployed at:", patientNFT.address);
 
-  const Vault = await ethers.getContractFactory("AIUtilityVault");
+  const Vault = await ethers.getContractFactory("MarketTransparencyVault");
   const vault = await Vault.deploy();
-  console.log("AIUtilityVault deployed at:", vault.address);
-
-  const Registry = await ethers.getContractFactory("ContractRegistry");
-  const registry = await Registry.deploy();
-  console.log("ContractRegistry deployed at:", registry.address);
-
-  await registry.register("HumanSkillRegistry", skill.address);
-  await registry.register("AlgorithmicMediaDAO", mediaDAO.address);
-  await registry.register("AIUtilityVault", vault.address);
+  console.log("MarketTransparencyVault deployed at:", vault.address);
 }
+
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
