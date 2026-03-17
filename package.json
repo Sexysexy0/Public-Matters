@@ -1,0 +1,36 @@
+{
+  "name": "public-matters",
+  "version": "1.0.0",
+  "description": "📡 Public-Matters",
+  "type": "module",
+  "main": "hardhat.config.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "npx hardhat test",
+    "deploy": "npx hardhat run scripts/deploy.js --network sepolia"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sexysexy0/Public-Matters.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sexysexy0/Public-Matters/issues"
+  },
+  "homepage": "https://github.com/Sexysexy0/Public-Matters#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^3.0.0",
+    "@nomiclabs/hardhat-ethers": "^1.0.0",
+    "chai": "^6.2.2",
+    "hardhat": "^3.1.12"
+  },
+  "dependencies": {
+    "ethers": "^5.8.0"
+  }
+}
