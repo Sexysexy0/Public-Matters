@@ -10,9 +10,9 @@ contract AIUtilityVault {
 
     receive() external payable {}
 
-    function fundAI(uint amount) public {
+    function fundAI(uint amount, address to) public {
         require(msg.sender == owner, "Only owner can fund");
-        payable(owner).transfer(amount);
+        payable(to).transfer(amount);
     }
 
     function balance() public view returns (uint) {
