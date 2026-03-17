@@ -1,12 +1,12 @@
 const { expect } = require("chai");
 
-describe("HumanSkillRegistry", function () {
-  it("Should register a skill", async function () {
-    const [owner] = await ethers.getSigners();
-    const Skill = await ethers.getContractFactory("HumanSkillRegistry");
-    const skill = await Skill.deploy();
-    await skill.registerSkill("Plumber");
-    const skills = await skill.getSkills(owner.address);
-    expect(skills.length).to.equal(1);
+describe("HempAccessDAO", function () {
+  it("Should create and vote on proposal", async function () {
+    const DAO = await ethers.getContractFactory("HempAccessDAO");
+    const dao = await DAO.deploy();
+    await dao.createProposal("Allow patient access");
+    await dao.vote(0, true);
+    const result = await dao.execute(0);
+    expect(result).to.equal("Proposal PASSED");
   });
 });
