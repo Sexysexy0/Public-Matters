@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract GlobalEquityGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Implement fair trade and inclusive digital economy policies"
+        string topic;       // e.g. "Implement fair trade frameworks for developing nations"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
