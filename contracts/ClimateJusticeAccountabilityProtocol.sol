@@ -5,7 +5,7 @@ contract ClimateJusticeAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Climate Justice"
-        string mechanism;   // e.g. "Mandate transparent reporting of emissions, renewable adoption, and community impact"
+        string mechanism;   // e.g. "Mandate transparent reporting of emissions, climate finance, and equity in global climate agreements"
         uint256 timestamp;
     }
 
