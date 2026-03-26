@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract GlobalEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Protect Global Fairness"
-        string measure;     // e.g. "Mandate equitable access to digital and economic opportunities"
+        string principle;   // e.g. "Protect Fair Resource Distribution"
+        string measure;     // e.g. "Mandate equitable allocation of global resources and prevent exploitative monopolies"
         uint256 timestamp;
     }
 
