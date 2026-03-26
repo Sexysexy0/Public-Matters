@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract GovernanceAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in workforce reductions"
-        string mechanism;  // e.g. "Independent Corporate Oversight Council"
+        string safeguard;   // e.g. "Ensure Accountability in Governance"
+        string mechanism;   // e.g. "Mandate transparent reporting of legislative pay and essential service funding status"
         uint256 timestamp;
     }
 
