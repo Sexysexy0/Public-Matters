@@ -5,7 +5,7 @@ contract EnergyResilienceAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Energy Resilience"
-        string mechanism;   // e.g. "Mandate transparent reporting of energy diversification, fuel reserves, and sustainability measures"
+        string mechanism;   // e.g. "Mandate transparent reporting of energy diversification, reserve management, and compliance with sustainability standards"
         uint256 timestamp;
     }
 

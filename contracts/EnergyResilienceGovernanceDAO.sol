@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract EnergyResilienceGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Implement renewable energy expansion to stabilize domestic supply"
+        string topic;       // e.g. "Expand renewable energy programs and strengthen national energy reserves"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;

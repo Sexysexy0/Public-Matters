@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract EnergyResilienceSafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Protect National Fuel Security"
-        string measure;     // e.g. "Mandate diversified energy sources to reduce dependency on imports"
+        string principle;   // e.g. "Protect Long-Term Energy Security"
+        string measure;     // e.g. "Mandate diversified energy sources and transparent reporting of resilience strategies"
         uint256 timestamp;
     }
 
