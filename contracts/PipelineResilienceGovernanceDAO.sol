@@ -1,22 +1,35 @@
-// PipelineResilienceAccountabilityProtocol.sol
+// PipelineResilienceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract PipelineResilienceAccountabilityProtocol {
-    struct Rule {
+contract PipelineResilienceGovernanceDAO {
+    struct Proposal {
         uint256 id;
-        string safeguard;   // e.g. "Ensure Accountability in Pipeline Resilience"
-        string mechanism;   // e.g. "Mandate transparent reporting of CI/CD failures, audits of automation, and compliance with resilience standards"
-        uint256 timestamp;
+        string topic;       // e.g. "Ensure pipeline governance balances automation with trust and resilience"
+        uint256 votesFor;
+        uint256 votesAgainst;
+        bool active;
     }
 
-    uint256 public ruleCount;
-    mapping(uint256 => Rule) public rules;
+    uint256 public proposalCount;
+    mapping(uint256 => Proposal) public proposals;
 
-    event RuleLogged(uint256 id, string safeguard, string mechanism);
+    event ProposalCreated(uint256 id, string topic);
+    event Voted(uint256 id, string side);
 
-    function logRule(string memory safeguard, string memory mechanism) public {
-        ruleCount++;
-        rules[ruleCount] = Rule(ruleCount, safeguard, mechanism, block.timestamp);
-        emit RuleLogged(ruleCount, safeguard, mechanism);
+    function createProposal(string memory topic) public {
+        proposalCount++;
+        proposals[proposalCount] = Proposal(proposalCount, topic, 0, 0, true);
+        emit ProposalCreated(proposalCount, topic);
+    }
+
+    function vote(uint256 id, bool support) public {
+        require(proposals[id].active, "Proposal not active");
+        if (support) {
+            proposals[id].votesFor++;
+            emit Voted(id, "For");
+        } else {
+            proposals[id].votesAgainst++;
+            emit Voted(id, "Against");
+        }
     }
 }
