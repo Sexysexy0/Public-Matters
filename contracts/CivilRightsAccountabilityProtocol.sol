@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract CivilRightsAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in civil rights enforcement"
-        string mechanism;  // e.g. "Independent Civil Rights Oversight Council"
+        string safeguard;   // e.g. "Ensure Accountability in Civil Rights"
+        string mechanism;   // e.g. "Mandate audits of rights violations, enforce compliance with equality laws, and penalize abuses"
         uint256 timestamp;
     }
 
