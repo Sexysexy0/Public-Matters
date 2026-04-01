@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract CyberAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in code reviews"
-        string mechanism;  // e.g. "Independent Cybersecurity Oversight Council"
+        string safeguard;   // e.g. "Ensure Accountability in Cyber Regulation"
+        string mechanism;   // e.g. "Mandate audits of cyber policies, enforce compliance with rights safeguards, penalize abusive surveillance"
         uint256 timestamp;
     }
 
