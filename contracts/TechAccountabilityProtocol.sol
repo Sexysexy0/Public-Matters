@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract TechAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;   // e.g. "Ensure Accountability in Tech Platforms"
-        string mechanism;   // e.g. "Mandate transparent reporting of design risks, user protection measures, and compliance with safety standards"
+        string safeguard;   // e.g. "Ensure Accountability in Tech Transparency"
+        string mechanism;   // e.g. "Mandate audits of public communication, enforce compliance with safeguards, penalize spread of misinformation"
         uint256 timestamp;
     }
 
