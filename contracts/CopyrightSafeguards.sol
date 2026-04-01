@@ -4,19 +4,19 @@ pragma solidity ^0.8.0;
 contract CopyrightSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Author Rights Charter"
-        string measure;    // e.g. "Protect books and creative works from unauthorized AI use"
+        string principle;   // e.g. "Protect Creator Rights"
+        string measure;     // e.g. "Mandate fair licensing, enforce DMCA compliance, and safeguard against unauthorized distribution"
         uint256 timestamp;
     }
 
     uint256 public safeguardCount;
     mapping(uint256 => Safeguard) public safeguards;
 
-    event SafeguardLogged(uint256 id, string mechanism, string measure);
+    event SafeguardLogged(uint256 id, string principle, string measure);
 
-    function logSafeguard(string memory mechanism, string memory measure) public {
+    function logSafeguard(string memory principle, string memory measure) public {
         safeguardCount++;
-        safeguards[safeguardCount] = Safeguard(safeguardCount, mechanism, measure, block.timestamp);
-        emit SafeguardLogged(safeguardCount, mechanism, measure);
+        safeguards[safeguardCount] = Safeguard(safeguardCount, principle, measure, block.timestamp);
+        emit SafeguardLogged(safeguardCount, principle, measure);
     }
 }
