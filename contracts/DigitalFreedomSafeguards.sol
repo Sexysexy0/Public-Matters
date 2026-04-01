@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract DigitalFreedomSafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Protect Online Rights"
-        string measure;     // e.g. "Mandate balanced regulation without outright bans"
+        string principle;   // e.g. "Protect User Rights in App Regulation"
+        string measure;     // e.g. "Mandate transparency in app bans, prohibit arbitrary restrictions, safeguard creative economies"
         uint256 timestamp;
     }
 
