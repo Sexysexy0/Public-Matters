@@ -5,7 +5,7 @@ contract CivilRightsAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Civil Rights"
-        string mechanism;   // e.g. "Mandate audits of rights violations, enforce compliance with equality laws, and penalize abuses"
+        string mechanism;   // e.g. "Mandate audits of justice governance, enforce compliance with safeguards, penalize violations of civil liberties"
         uint256 timestamp;
     }
 
