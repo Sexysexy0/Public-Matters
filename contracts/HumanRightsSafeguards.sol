@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract HumanRightsSafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Protect Universal Human Rights"
-        string measure;     // e.g. "Mandate recognition and enforcement of fundamental freedoms and dignity for all people"
+        string principle;   // e.g. "Protect Human Rights"
+        string measure;     // e.g. "Mandate respect for civil liberties, enforce transparency in justice systems, safeguard against abuse of power"
         uint256 timestamp;
     }
 
