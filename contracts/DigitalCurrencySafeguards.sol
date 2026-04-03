@@ -5,7 +5,7 @@ contract DigitalCurrencySafeguards {
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect Financial Privacy"
-        string measure;     // e.g. "Mandate transparency in digital euro design, enforce privacy-preserving audits, safeguard civil liberties"
+        string measure;     // e.g. "Mandate transparency in programmable money, enforce privacy audits, safeguard civil liberty"
         uint256 timestamp;
     }
 

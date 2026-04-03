@@ -5,7 +5,7 @@ contract DigitalCurrencyAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Digital Currency"
-        string mechanism;   // e.g. "Mandate audits of programmable euro, enforce compliance with safeguards, penalize misuse of surveillance powers"
+        string mechanism;   // e.g. "Mandate audits of programmable money governance, enforce compliance with safeguards, penalize violations of financial privacy"
         uint256 timestamp;
     }
 
