@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract HumanRightsAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;   // e.g. "Ensure Accountability in Human Rights"
-        string mechanism;   // e.g. "Mandate transparent reporting of rights violations, remedies, and compliance with international standards"
+        string safeguard;   // e.g. "Ensure Accountability in Human Rights Resistance"
+        string mechanism;   // e.g. "Mandate audits of resistance governance, enforce compliance with safeguards, penalize abuses of power"
         uint256 timestamp;
     }
 
