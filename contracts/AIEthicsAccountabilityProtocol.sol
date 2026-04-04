@@ -5,7 +5,7 @@ contract AIEthicsAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in AI Ethics"
-        string mechanism;   // e.g. "Mandate audits of algorithmic governance, enforce compliance with safeguards, penalize unethical AI practices"
+        string mechanism;   // e.g. "Mandate independent audits, enforce compliance with safeguards, penalize unethical AI deployments"
         uint256 timestamp;
     }
 
