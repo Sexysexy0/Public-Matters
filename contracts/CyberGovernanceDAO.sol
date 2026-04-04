@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract CyberGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Balance security with freedom in cyber governance"
+        string topic;       // e.g. "Balance innovation with security in cyber governance"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
