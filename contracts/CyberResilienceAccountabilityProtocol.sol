@@ -5,7 +5,7 @@ contract CyberResilienceAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Cybersecurity"
-        string mechanism;   // e.g. "Mandate audits of cyber governance, enforce compliance with safeguards, penalize breaches and negligence"
+        string mechanism;   // e.g. "Mandate audits of digital systems, enforce compliance with asset safeguards, penalize negligent practices"
         uint256 timestamp;
     }
 
