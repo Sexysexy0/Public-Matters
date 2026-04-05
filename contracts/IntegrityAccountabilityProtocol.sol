@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract IntegrityAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Require resignation for non-performance"
-        string mechanism;  // e.g. "Sanction or removal process"
+        string safeguard;   // e.g. "Ensure Accountability in Truth"
+        string mechanism;   // e.g. "Mandate self-audit of speech, enforce alignment with conscience, penalize deceptive practices"
         uint256 timestamp;
     }
 
