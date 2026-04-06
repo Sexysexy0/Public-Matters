@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract ClimateGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Balance innovation with sustainability in climate governance"
+        string topic;       // e.g. "Transition to renewable energy by 2030"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
