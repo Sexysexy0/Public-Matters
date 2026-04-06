@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract InvestmentAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Prevent speculative bubbles from tax incentives"
-        string mechanism;  // e.g. "Independent Market Oversight"
+        string safeguard;   // e.g. "Ensure Accountability in Investment Reform"
+        string mechanism;   // e.g. "Mandate audits of FDI inflows, enforce compliance, penalize concealment of ownership structures"
         uint256 timestamp;
     }
 
