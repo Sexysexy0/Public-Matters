@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract WorkCultureSafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Protect Labor Dignity"
-        string measure;     // e.g. "Mandate humane work hours, enforce workplace audits, safeguard against exploitative practices"
+        string principle;   // e.g. "Dignified Work"
+        string measure;     // e.g. "Mandate fair wages, protect family time, safeguard against exploitative commute and rising costs"
         uint256 timestamp;
     }
 
