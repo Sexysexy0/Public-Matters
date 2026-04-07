@@ -5,7 +5,7 @@ contract EquityOptionsAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Equity Options"
-        string mechanism;   // e.g. "Mandate audits of option conversions, enforce compliance with family choice safeguards, penalize fraudulent registrations"
+        string mechanism;   // e.g. "Mandate audits of OPC activation, enforce compliance with family-share distribution, penalize dormant authority"
         uint256 timestamp;
     }
 
