@@ -5,7 +5,7 @@ contract TradeEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Trade Equity"
-        string mechanism;   // e.g. "Mandate PH-led audits of trade deals, enforce compliance with fair pricing, penalize sovereignty-eroding practices"
+        string mechanism;   // e.g. "Mandate audits of trade agreements, enforce compliance with fair trade standards, penalize exploitative contracts"
         uint256 timestamp;
     }
 
