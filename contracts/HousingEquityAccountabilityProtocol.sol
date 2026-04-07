@@ -5,7 +5,7 @@ contract HousingEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Housing Equity"
-        string mechanism;   // e.g. "Mandate audits of housing allocations, enforce compliance with family choice safeguards, penalize fraudulent claims"
+        string mechanism;   // e.g. "Mandate audits of housing programs, enforce compliance with shelter standards, penalize exploitative landlords"
         uint256 timestamp;
     }
 
