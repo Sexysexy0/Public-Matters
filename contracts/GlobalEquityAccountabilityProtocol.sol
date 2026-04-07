@@ -5,7 +5,7 @@ contract GlobalEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Global Equity"
-        string mechanism;   // e.g. "Mandate transparent reporting of wealth distribution, trade justice, and equity compliance"
+        string mechanism;   // e.g. "Mandate audits of redistribution programs, enforce compliance with equity standards, penalize exploitative global contracts"
         uint256 timestamp;
     }
 
