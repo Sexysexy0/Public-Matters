@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract EnergyTransitionSafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Protect Renewable Energy Transition"
-        string measure;     // e.g. "Mandate accelerated adoption of solar, wind, and geothermal to reduce oil dependence"
+        string principle;   // e.g. "Renewable Shift"
+        string measure;     // e.g. "Mandate equitable access to clean energy, safeguard against fossil fuel lock-in"
         uint256 timestamp;
     }
 

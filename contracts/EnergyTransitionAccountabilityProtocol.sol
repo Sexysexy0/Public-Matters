@@ -5,7 +5,7 @@ contract EnergyTransitionAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Energy Transition"
-        string mechanism;   // e.g. "Mandate audits of renewable projects, enforce compliance with affordability safeguards, penalize fossil overdependence"
+        string mechanism;   // e.g. "Mandate audits of emissions, enforce compliance with renewable targets, penalize greenwashing"
         uint256 timestamp;
     }
 
