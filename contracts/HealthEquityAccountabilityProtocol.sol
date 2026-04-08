@@ -5,7 +5,7 @@ contract HealthEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Health Equity"
-        string mechanism;   // e.g. "Mandate transparent reporting of access gaps, equity initiatives, and compliance with fairness standards"
+        string mechanism;   // e.g. "Mandate audits of healthcare delivery, enforce compliance with patient rights, penalize inequitable practices"
         uint256 timestamp;
     }
 
