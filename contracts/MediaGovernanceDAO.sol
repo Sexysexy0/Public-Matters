@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract MediaGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Implement community-driven oversight of media practices"
+        string topic;       // e.g. "Implement community-driven oversight of media ownership and creative freedom"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
