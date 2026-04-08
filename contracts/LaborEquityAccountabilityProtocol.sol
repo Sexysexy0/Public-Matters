@@ -1,11 +1,11 @@
-// LaborEquityAccountabilityProtocol.sol
+ // LaborEquityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
 contract LaborEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Labor Equity"
-        string mechanism;   // e.g. "Mandate audits of collective bargaining outcomes, enforce compliance, penalize anti-union practices"
+        string mechanism;   // e.g. "Mandate audits of workplace practices, enforce compliance with labor laws, penalize exploitative employers"
         uint256 timestamp;
     }
 
