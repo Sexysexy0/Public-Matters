@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract EnergyGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Transition national grid to 50% renewables by 2035"
+        string topic;       // e.g. "Implement decentralized renewable energy grids and equitable pricing"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
