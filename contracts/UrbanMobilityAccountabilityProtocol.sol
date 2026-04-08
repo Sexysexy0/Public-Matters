@@ -5,7 +5,7 @@ contract UrbanMobilityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Urban Mobility"
-        string mechanism;   // e.g. "Mandate transparent reporting of smart transport adoption, commuter accessibility, and innovation outcomes"
+        string mechanism;   // e.g. "Mandate audits of city walkways, enforce compliance with safety standards, penalize neglect of pedestrian infrastructure"
         uint256 timestamp;
     }
 

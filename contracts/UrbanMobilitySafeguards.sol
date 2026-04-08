@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract UrbanMobilitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Protect Smart Urban Mobility"
-        string measure;     // e.g. "Mandate integration of digital systems for commuter tracking and sustainable transport"
+        string principle;   // e.g. "Pedestrian Safety"
+        string measure;     // e.g. "Mandate sidewalks, crossings, shade, and safe walkways for commuters"
         uint256 timestamp;
     }
 
