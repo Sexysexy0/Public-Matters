@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract ResourceEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Fair Resource Distribution"
-        string measure;     // e.g. "Mandate equitable access to natural resources, safeguard against exploitative extraction"
+        string principle;   // e.g. "Communal Resource Distribution"
+        string measure;     // e.g. "Mandate fair allocation, safeguard against hoarding, enforce equitable access to scarce resources"
         uint256 timestamp;
     }
 
