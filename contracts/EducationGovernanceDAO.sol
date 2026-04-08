@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract EducationGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Integrate equity-focused curriculum reforms"
+        string topic;       // e.g. "Expand equitable access to digital learning tools"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
