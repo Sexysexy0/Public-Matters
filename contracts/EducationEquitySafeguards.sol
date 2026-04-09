@@ -5,7 +5,7 @@ contract EducationEquitySafeguards {
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Inclusive Education"
-        string measure;     // e.g. "Mandate equal access, safeguard against exclusion, enforce equitable distribution of learning resources"
+        string measure;     // e.g. "Mandate universal access, safeguard against exclusion, enforce equitable distribution of learning resources"
         uint256 timestamp;
     }
 
