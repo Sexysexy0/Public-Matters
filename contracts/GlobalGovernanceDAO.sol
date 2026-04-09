@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract GlobalGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Implement participatory global equity redistribution frameworks"
+        string topic;       // e.g. "Implement community-driven oversight of global cooperation and equitable governance policies"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
