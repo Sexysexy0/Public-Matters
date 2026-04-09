@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract JusticeGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Implement community oversight of law enforcement practices"
+        string topic;       // e.g. "Implement community-driven oversight of courts and equitable legal systems"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
