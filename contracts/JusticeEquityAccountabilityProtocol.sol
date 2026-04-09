@@ -5,7 +5,7 @@ contract JusticeEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Justice Equity"
-        string mechanism;   // e.g. "Mandate audits of law enforcement, enforce compliance with civil rights, penalize systemic abuse"
+        string mechanism;   // e.g. "Mandate audits of legal systems, enforce compliance with civil rights standards, penalize discriminatory practices"
         uint256 timestamp;
     }
 
