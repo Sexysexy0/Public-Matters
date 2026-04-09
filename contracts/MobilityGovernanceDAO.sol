@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract MobilityGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Allocate funds for sustainable commuter routes"
+        string topic;       // e.g. "Implement community-driven oversight of transit systems and equitable mobility policies"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;

@@ -5,7 +5,7 @@ contract MobilityEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Mobility Equity"
-        string mechanism;   // e.g. "Mandate audits of commuter services, enforce compliance with safety standards, penalize inequitable practices"
+        string mechanism;   // e.g. "Mandate audits of transit operators, enforce compliance with accessibility standards, penalize exploitative fare practices"
         uint256 timestamp;
     }
 
