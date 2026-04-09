@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract EducationEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Student Access"
-        string measure;     // e.g. "Mandate equitable access to schools, safeguard against exclusion and resource disparity"
+        string principle;   // e.g. "Inclusive Education"
+        string measure;     // e.g. "Mandate equal access, safeguard against exclusion, enforce equitable distribution of learning resources"
         uint256 timestamp;
     }
 
