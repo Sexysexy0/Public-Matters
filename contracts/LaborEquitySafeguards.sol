@@ -5,7 +5,7 @@ contract LaborEquitySafeguards {
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Workers' Rights"
-        string measure;     // e.g. "Mandate fair wages, safeguard against exploitation, enforce equitable workplace standards"
+        string measure;     // e.g. "Mandate fair wages, safeguard against exploitation, enforce equitable access to employment"
         uint256 timestamp;
     }
 
