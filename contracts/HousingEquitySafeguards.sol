@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract HousingEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Dignified Housing"
-        string measure;     // e.g. "Mandate affordable housing, safeguard against eviction abuse, enforce equitable shelter distribution"
+        string principle;   // e.g. "Affordable Housing"
+        string measure;     // e.g. "Mandate fair rent, safeguard against eviction, enforce equitable access to shelter"
         uint256 timestamp;
     }
 
