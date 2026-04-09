@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract PatentEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Innovation Rights"
+        string principle;   // e.g. "Intellectual Property Rights"
         string measure;     // e.g. "Mandate fair licensing, safeguard against patent trolling, enforce equitable access to inventions"
         uint256 timestamp;
     }
