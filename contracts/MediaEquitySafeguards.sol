@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract MediaEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Press Freedom & Creative Risk"
+        string principle;   // e.g. "Press Freedom"
         string measure;     // e.g. "Mandate editorial independence, safeguard against censorship, enforce equitable access to information"
         uint256 timestamp;
     }
