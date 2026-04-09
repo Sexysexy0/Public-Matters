@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract CERNGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Debunk conspiracy theories with open science communication"
+        string topic;       // e.g. "Implement community-driven oversight of global science governance and equitable research access"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
