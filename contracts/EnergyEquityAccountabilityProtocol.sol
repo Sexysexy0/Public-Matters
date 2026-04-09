@@ -5,7 +5,7 @@ contract EnergyEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Energy Equity"
-        string mechanism;   // e.g. "Mandate audits of energy utilities, enforce compliance with sustainability standards, penalize exploitative practices"
+        string mechanism;   // e.g. "Mandate audits of energy projects, enforce compliance with sustainability standards, penalize exploitative energy practices"
         uint256 timestamp;
     }
 

@@ -5,7 +5,7 @@ contract EnergyEquitySafeguards {
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Renewable Energy Access"
-        string measure;     // e.g. "Mandate clean energy adoption, safeguard against monopolies, enforce equitable distribution of power resources"
+        string measure;     // e.g. "Mandate clean energy adoption, safeguard against monopolies, enforce equitable access to sustainable power"
         uint256 timestamp;
     }
 
