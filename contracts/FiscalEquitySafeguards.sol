@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract FiscalEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Equitable Tax Relief"
-        string measure;     // e.g. "Mandate VAT reduction on essentials, enforce oil price stabilization, protect vulnerable households"
+        string principle;   // e.g. "Budget Reallocation for Worker Welfare"
+        string measure;     // e.g. "Redirect subsidy funds to wage increases, enforce equitable distribution, protect fiscal sustainability"
         uint256 timestamp;
     }
 
