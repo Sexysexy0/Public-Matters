@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract FiscalGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Implement congressional oversight of unprogrammed fund usage"
+        string topic;       // e.g. "Oversight of VAT policy and oil price regulation"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
