@@ -5,7 +5,7 @@ contract ClimateEquitySafeguards {
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Environmental Justice"
-        string measure;     // e.g. "Mandate carbon reduction, safeguard against pollution, enforce equitable climate resilience"
+        string measure;     // e.g. "Mandate carbon audits, enforce renewable adoption, protect vulnerable communities from climate risks"
         uint256 timestamp;
     }
 
