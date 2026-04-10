@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract CommunityEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;   // e.g. "Ensure Accountability in Community Equity"
-        string mechanism;   // e.g. "Mandate audits of communal allocations, enforce compliance, penalize misuse of collective resources"
+        string safeguard;   // e.g. "Accountability in Community Enforcement"
+        string mechanism;   // e.g. "Audit barangay ticketing, enforce transparency in enforcement zones, penalize arbitrary intrusion into private spaces"
         uint256 timestamp;
     }
 

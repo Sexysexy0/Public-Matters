@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract CommunityEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Local Empowerment"
-        string measure;     // e.g. "Mandate fair distribution of communal resources, safeguard against elite capture"
+        string principle;   // e.g. "Neighborhood Rights and Dignity"
+        string measure;     // e.g. "Protect workers in alleys, limit enforcement to public thoroughfares, uphold community dignity"
         uint256 timestamp;
     }
 
