@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract HousingGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Implement community-driven oversight of housing policies and equitable distribution"
+        string topic;       // e.g. "Oversight of urban housing governance and land use"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;

@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract HousingEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;   // e.g. "Ensure Accountability in Housing Equity"
-        string mechanism;   // e.g. "Mandate audits of housing projects, enforce compliance with fair rent standards, penalize exploitative landlords"
+        string safeguard;   // e.g. "Accountability in Housing Governance"
+        string mechanism;   // e.g. "Audit land use policies, enforce transparency in housing projects, penalize displacement practices"
         uint256 timestamp;
     }
 
