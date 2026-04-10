@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract JusticeEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;   // e.g. "Accountability in Legal Enforcement"
-        string mechanism;   // e.g. "Audit enforcement actions, enforce transparency in due process, penalize arbitrary or abusive practices"
+        string safeguard;   // e.g. "Accountability in Judicial Governance"
+        string mechanism;   // e.g. "Audit court decisions, enforce transparency in trials, penalize corruption and abuse of power"
         uint256 timestamp;
     }
 
