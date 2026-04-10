@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract TransparencyEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Open Data and Public Access"
-        string measure;     // e.g. "Mandate disclosure of government records, enforce open datasets, protect citizen access to information"
+        string principle;   // e.g. "Open Data Protection"
+        string measure;     // e.g. "Mandate public access to governance records, enforce disclosure standards, protect whistleblowers"
         uint256 timestamp;
     }
 
