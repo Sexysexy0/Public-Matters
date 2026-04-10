@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract HumanRightsGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Implement stronger protections for freedom of speech and assembly"
+        string topic;       // e.g. "Oversight of global governance and universal rights enforcement"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
