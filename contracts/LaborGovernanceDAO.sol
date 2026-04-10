@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract LaborGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Implement community-driven oversight of labor policies and workplace fairness"
+        string topic;       // e.g. "Oversight of labor governance and workers’ rights"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
