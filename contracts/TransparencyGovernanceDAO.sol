@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract TransparencyGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Citizen oversight of budget triggers and SARO releases"
+        string topic;       // e.g. "Oversight of information governance and open data policies"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
