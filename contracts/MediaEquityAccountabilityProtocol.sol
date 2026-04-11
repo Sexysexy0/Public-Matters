@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract MediaEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;   // e.g. "Accountability in Media Coverage"
-        string mechanism;   // e.g. "Audit hype-driven reporting, enforce transparency in editorial decisions, penalize disinformation campaigns"
+        string safeguard;   // e.g. "Accountability in Media Governance"
+        string mechanism;   // e.g. "Audit influence networks, enforce transparency in media ownership, penalize exploitative disinformation practices"
         uint256 timestamp;
     }
 

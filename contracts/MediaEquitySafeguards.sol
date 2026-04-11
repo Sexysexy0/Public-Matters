@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract MediaEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Fair Coverage"
-        string measure;     // e.g. "Mandate balanced reporting, protect against disinformation, enforce equitable airtime for marginalized voices"
+        string principle;   // e.g. "Independent Voices"
+        string measure;     // e.g. "Mandate press freedom, prohibit censorship, protect dignity in media expression"
         uint256 timestamp;
     }
 
