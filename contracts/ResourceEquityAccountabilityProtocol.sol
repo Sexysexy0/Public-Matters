@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract ResourceEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;   // e.g. "Ensure Accountability in Resource Equity"
-        string mechanism;   // e.g. "Mandate audits of resource distribution, enforce compliance with sustainability standards, penalize exploitative practices"
+        string safeguard;   // e.g. "Accountability in Resource Governance"
+        string mechanism;   // e.g. "Audit export bans, enforce transparency in refining investments, penalize exploitative extraction practices"
         uint256 timestamp;
     }
 

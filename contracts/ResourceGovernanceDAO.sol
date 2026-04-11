@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract ResourceGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Implement community-driven oversight of resource allocation and sustainability policies"
+        string topic;       // e.g. "Oversight of resource governance and industrialization strategy"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
