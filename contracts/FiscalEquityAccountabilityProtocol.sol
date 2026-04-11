@@ -5,7 +5,7 @@ contract FiscalEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Fiscal Governance"
-        string mechanism;   // e.g. "Audit tax collection, enforce transparency in fiscal policies, penalize exploitative revenue practices"
+        string mechanism;   // e.g. "Audit revenue collection, enforce transparency in budget allocation, penalize exploitative fiscal practices"
         uint256 timestamp;
     }
 
