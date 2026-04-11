@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract EnergyEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;   // e.g. "Ensure Accountability in Energy Equity"
-        string mechanism;   // e.g. "Mandate audits of energy projects, enforce compliance with sustainability standards, penalize exploitative energy practices"
+        string safeguard;   // e.g. "Accountability in Energy Governance"
+        string mechanism;   // e.g. "Audit energy pricing, enforce transparency in consumption policies, penalize exploitative practices"
         uint256 timestamp;
     }
 
