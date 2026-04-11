@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract CorporateGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Balance profit with communal consequence in corporate governance"
+        string topic;       // e.g. "Oversight of corporate governance and communal consequence"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
