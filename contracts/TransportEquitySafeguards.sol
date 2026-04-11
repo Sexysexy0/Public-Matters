@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract TransportEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Mobility Fairness"
-        string measure;     // e.g. "Mandate equitable EV adoption, safeguard against transport exclusion, enforce access to clean mobility"
+        string principle;   // e.g. "Driver Dignity"
+        string measure;     // e.g. "Mandate fair fare adjustments, prohibit exploitative fuel burdens, protect commuter access to routes"
         uint256 timestamp;
     }
 

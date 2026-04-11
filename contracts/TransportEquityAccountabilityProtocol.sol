@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract TransportEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;   // e.g. "Ensure Accountability in Transport Equity"
-        string mechanism;   // e.g. "Mandate audits of EV adoption, enforce compliance with transport fairness, penalize exclusionary practices"
+        string safeguard;   // e.g. "Accountability in Transport Governance"
+        string mechanism;   // e.g. "Audit fare adjustments, enforce transparency in fuel subsidies, penalize exploitative commuter practices"
         uint256 timestamp;
     }
 
