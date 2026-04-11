@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract JusticeEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Legal Fairness"
-        string measure;     // e.g. "Mandate equal access to justice, protect against corruption, enforce impartiality in courts"
+        string principle;   // e.g. "Human Rights Protection"
+        string measure;     // e.g. "Mandate equal access to justice, prohibit arbitrary rulings, safeguard marginalized communities"
         uint256 timestamp;
     }
 
@@ -16,4 +16,7 @@ contract JusticeEquitySafeguards {
 
     function logSafeguard(string memory principle, string memory measure) public {
         safeguardCount++;
-        safeguards[safeguardCount] = Safeguard(saf
+        safeguards[safeguardCount] = Safeguard(safeguardCount, principle, measure, block.timestamp);
+        emit SafeguardLogged(safeguardCount, principle, measure);
+    }
+}
