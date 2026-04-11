@@ -5,7 +5,7 @@ contract LaborEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Labor Governance"
-        string mechanism;   // e.g. "Audit workplace practices, enforce compliance with labor standards, penalize exploitative employers"
+        string mechanism;   // e.g. "Audit wage policies, enforce transparency in subsidies, penalize exploitative labor practices"
         uint256 timestamp;
     }
 
