@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract FiscalEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;   // e.g. "Accountability in Fiscal Reallocation"
-        string mechanism;   // e.g. "Audit subsidy budgets, enforce transparency in wage conversion, penalize misuse of public funds"
+        string safeguard;   // e.g. "Accountability in Fiscal Governance"
+        string mechanism;   // e.g. "Audit tax collection, enforce transparency in fiscal policies, penalize exploitative revenue practices"
         uint256 timestamp;
     }
 
