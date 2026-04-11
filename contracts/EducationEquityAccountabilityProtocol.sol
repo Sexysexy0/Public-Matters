@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract EducationEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;   // e.g. "Ensure Accountability in Education Equity"
-        string mechanism;   // e.g. "Mandate audits of schools, enforce compliance with inclusion standards, penalize exploitative practices in education"
+        string safeguard;   // e.g. "Accountability in Education Governance"
+        string mechanism;   // e.g. "Audit tuition policies, enforce transparency in curriculum, penalize exploitative academic practices"
         uint256 timestamp;
     }
 
