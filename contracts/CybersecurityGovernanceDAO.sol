@@ -1,10 +1,10 @@
-// CybersecurityGovernanceDAO.sol
+ // CybersecurityGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
 contract CybersecurityGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Ensure corporate cybersecurity aligns with governance integrity and transparency"
+        string topic;       // e.g. "Oversight of software security governance and exploit prevention"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
