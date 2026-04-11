@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract LaborEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Worker Dignity"
-        string measure;     // e.g. "Mandate permanent wage hikes, prohibit exploitative subsidies, protect collective bargaining rights"
+        string principle;   // e.g. "Worker Rights"
+        string measure;     // e.g. "Mandate fair wages, prohibit exploitative contracts, protect dignity in workplace conditions"
         uint256 timestamp;
     }
 
