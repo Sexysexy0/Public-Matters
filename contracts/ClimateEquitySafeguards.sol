@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract ClimateEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Environmental Justice"
-        string measure;     // e.g. "Mandate carbon audits, enforce renewable adoption, protect vulnerable communities from climate risks"
+        string principle;   // e.g. "Community Resilience"
+        string measure;     // e.g. "Mandate disaster preparedness, prohibit exploitative climate practices, protect dignity in adaptation"
         uint256 timestamp;
     }
 
