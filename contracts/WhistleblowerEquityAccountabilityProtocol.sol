@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract WhistleblowerEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;   // e.g. "Accountability in Whistleblower Justice"
-        string mechanism;   // e.g. "Audit retaliation cases, enforce transparency in fraud exposure, penalize systemic suppression of whistleblowers"
+        string safeguard;   // e.g. "Accountability in Whistleblower Governance"
+        string mechanism;   // e.g. "Audit whistleblower cases, enforce transparency in institutional responses, penalize retaliation against truth-tellers"
         uint256 timestamp;
     }
 

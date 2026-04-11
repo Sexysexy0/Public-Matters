@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract WhistleblowerEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Whistleblower Protection"
-        string measure;     // e.g. "Mandate legal shields, enforce financial rewards, ensure security support for fraud exposers"
+        string principle;   // e.g. "Truth-Telling Protection"
+        string measure;     // e.g. "Mandate anonymity safeguards, prohibit retaliation, protect whistleblowers exposing corruption or abuse"
         uint256 timestamp;
     }
 
