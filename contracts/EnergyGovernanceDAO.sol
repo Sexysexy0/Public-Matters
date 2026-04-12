@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract EnergyGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Oversight of energy governance and renewable safeguards"
+        string topic;       // e.g. "Oversight of energy governance and sovereignty safeguards"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
