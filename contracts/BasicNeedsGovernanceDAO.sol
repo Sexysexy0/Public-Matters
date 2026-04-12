@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract BasicNeedsGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Oversight of food, water, energy, and transport governance upgrades"
+        string topic;       // e.g. "Oversight of basic needs governance and food security safeguards"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
