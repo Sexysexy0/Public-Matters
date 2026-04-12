@@ -5,7 +5,7 @@ contract FiscalEquitySafeguards {
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Fair Taxation"
-        string measure;     // e.g. "Mandate equitable tax policies, prohibit exploitative levies, protect dignity in fiscal systems"
+        string measure;     // e.g. "Mandate equitable tax thresholds, prohibit exploitative excise, protect dignity in citizen revenue"
         uint256 timestamp;
     }
 
