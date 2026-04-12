@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract BasicNeedsEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Energy Sovereignty"
-        string measure;     // e.g. "Mandate local refining, expand renewables, protect dignity in energy access"
+        string principle;   // e.g. "Food Security"
+        string measure;     // e.g. "Mandate fair distribution, prohibit exploitative hoarding, protect dignity in basic needs access"
         uint256 timestamp;
     }
 

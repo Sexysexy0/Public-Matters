@@ -5,7 +5,7 @@ contract BasicNeedsEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Basic Needs Governance"
-        string mechanism;   // e.g. "Audit refining capacity, enforce transparency in food storage, penalize exploitative water/transport practices"
+        string mechanism;   // e.g. "Audit food supply chains, enforce transparency in distribution, penalize exploitative practices"
         uint256 timestamp;
     }
 
