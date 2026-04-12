@@ -5,7 +5,7 @@ contract ClimateSafeguards {
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Climate Resilience"
-        string measure;     // e.g. "Mandate adaptation programs, prohibit exploitative emissions, protect dignity in community survival"
+        string measure;     // e.g. "Mandate renewable energy, prohibit exploitative emissions, protect dignity in citizen survival"
         uint256 timestamp;
     }
 

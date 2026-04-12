@@ -5,7 +5,7 @@ contract ClimateAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Climate Governance"
-        string mechanism;   // e.g. "Audit adaptation funds, enforce transparency in climate projects, penalize exploitative resource practices"
+        string mechanism;   // e.g. "Audit carbon emissions, enforce transparency in climate policies, penalize exploitative resource practices"
         uint256 timestamp;
     }
 
