@@ -5,7 +5,7 @@ contract CybersecurityEquitySafeguards {
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Developer Trust"
-        string measure;     // e.g. "Mandate secure defaults, prohibit exploitative repo practices, protect dignity in open-source collaboration"
+        string measure;     // e.g. "Mandate secure coding practices, prohibit exploitative surveillance, protect dignity in digital rights"
         uint256 timestamp;
     }
 
