@@ -5,7 +5,7 @@ contract TransportEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Transport Governance"
-        string mechanism;   // e.g. "Audit fare systems, enforce transparency in infrastructure projects, penalize exploitative transport practices"
+        string mechanism;   // e.g. "Audit fare systems, enforce transparency in transport projects, penalize exploitative mobility practices"
         uint256 timestamp;
     }
 
