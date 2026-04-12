@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract LaborAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in labor practices"
-        string mechanism;  // e.g. "Independent Labor Oversight Council"
+        string safeguard;   // e.g. "Accountability in Labor Governance"
+        string mechanism;   // e.g. "Audit politician salaries, enforce transparency in wage rebalancing, redirect funds to subsidies"
         uint256 timestamp;
     }
 
