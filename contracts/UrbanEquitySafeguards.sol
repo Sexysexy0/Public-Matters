@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract UrbanEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Community Rights"
-        string measure;     // e.g. "Mandate fair zoning, prohibit displacement without consent, protect heritage and local livelihoods"
+        string principle;   // e.g. "Sustainable Cities"
+        string measure;     // e.g. "Mandate green zoning, prohibit exploitative demolitions, protect dignity in community spaces"
         uint256 timestamp;
     }
 

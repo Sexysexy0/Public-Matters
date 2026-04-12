@@ -5,7 +5,7 @@ contract UrbanEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Urban Governance"
-        string mechanism;   // e.g. "Audit zoning decisions, enforce transparency in city planning, penalize exploitative development practices"
+        string mechanism;   // e.g. "Audit zoning laws, enforce transparency in development projects, penalize exploitative urban practices"
         uint256 timestamp;
     }
 
