@@ -5,7 +5,7 @@ contract EducationEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Education Governance"
-        string mechanism;   // e.g. "Audit tuition policies, enforce transparency in curriculum, penalize exploitative academic practices"
+        string mechanism;   // e.g. "Audit school programs, enforce transparency in education budgets, penalize exploitative inequality practices"
         uint256 timestamp;
     }
 
