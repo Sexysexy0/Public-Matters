@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract HumanitarianGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Oversight of relief governance and dignity in aid"
+        string topic;       // e.g. "Oversight of humanitarian governance and aid safeguards"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;

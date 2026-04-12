@@ -5,7 +5,7 @@ contract HumanitarianEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Humanitarian Governance"
-        string mechanism;   // e.g. "Audit relief distribution, enforce transparency in aid logistics, penalize corruption in humanitarian programs"
+        string mechanism;   // e.g. "Audit relief funds, enforce transparency in aid delivery, penalize exploitative humanitarian practices"
         uint256 timestamp;
     }
 
