@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract MediaGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Oversight of media governance and truth safeguards"
+        string topic;       // e.g. "Oversight of media governance and press freedom safeguards"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
