@@ -5,7 +5,7 @@ contract AgricultureEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Agriculture Governance"
-        string mechanism;   // e.g. "Audit cold storage use, enforce transparency in pricing, penalize exploitative middlemen practices"
+        string mechanism;   // e.g. "Audit farmer subsidies, enforce transparency in food supply chains, penalize exploitative agribusiness practices"
         uint256 timestamp;
     }
 

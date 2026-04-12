@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract AgricultureGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Oversight of agricultural governance and farmer equity"
+        string topic;       // e.g. "Oversight of agriculture governance and food sovereignty safeguards"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
