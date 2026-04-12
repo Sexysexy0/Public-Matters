@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract ResourceAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in global resource governance"
-        string mechanism;  // e.g. "Independent Resource Oversight Council"
+        string safeguard;   // e.g. "Accountability in Resource Governance"
+        string mechanism;   // e.g. "Audit extraction projects, enforce transparency in resource use, penalize exploitative practices"
         uint256 timestamp;
     }
 
