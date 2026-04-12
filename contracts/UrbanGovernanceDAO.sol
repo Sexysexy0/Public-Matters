@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract UrbanGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Oversight of urban development and community rights"
+        string topic;       // e.g. "Oversight of urban governance and sustainable development"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
