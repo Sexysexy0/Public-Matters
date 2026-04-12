@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract TechGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Oversight of software governance and monetization practices"
+        string topic;       // e.g. "Oversight of tech governance and innovation safeguards"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
