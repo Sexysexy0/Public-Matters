@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract FiscalEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Taxpayer Fairness"
-        string measure;     // e.g. "Mandate transparency in taxation, prohibit hidden fees, protect dignity in fiscal collection"
+        string principle;   // e.g. "Fair Taxation"
+        string measure;     // e.g. "Mandate equitable tax policies, prohibit exploitative levies, protect dignity in fiscal systems"
         uint256 timestamp;
     }
 
