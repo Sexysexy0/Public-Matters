@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract EducationAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure transparency in education systems"
-        string mechanism;  // e.g. "Independent Education Oversight Council"
+        string safeguard;   // e.g. "Accountability in Education Governance"
+        string mechanism;   // e.g. "Audit school budgets, enforce transparency in tuition, penalize exploitative practices"
         uint256 timestamp;
     }
 
