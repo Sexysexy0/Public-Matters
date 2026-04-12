@@ -4,19 +4,19 @@ pragma solidity ^0.8.0;
 contract ResilienceSafeguards {
     struct Safeguard {
         uint256 id;
-        string mechanism;  // e.g. "Flood Control Infrastructure"
-        string measure;    // e.g. "Protect communities from climate risks"
+        string principle;   // e.g. "Climate & Disaster Resilience"
+        string measure;     // e.g. "Mandate disaster preparedness, prohibit exploitative land use, protect dignity in food security"
         uint256 timestamp;
     }
 
     uint256 public safeguardCount;
     mapping(uint256 => Safeguard) public safeguards;
 
-    event SafeguardLogged(uint256 id, string mechanism, string measure);
+    event SafeguardLogged(uint256 id, string principle, string measure);
 
-    function logSafeguard(string memory mechanism, string memory measure) public {
+    function logSafeguard(string memory principle, string memory measure) public {
         safeguardCount++;
-        safeguards[safeguardCount] = Safeguard(safeguardCount, mechanism, measure, block.timestamp);
-        emit SafeguardLogged(safeguardCount, mechanism, measure);
+        safeguards[safeguardCount] = Safeguard(safeguardCount, principle, measure, block.timestamp);
+        emit SafeguardLogged(safeguardCount, principle, measure);
     }
 }
