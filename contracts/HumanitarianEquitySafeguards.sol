@@ -5,7 +5,7 @@ contract HumanitarianEquitySafeguards {
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Humanitarian Dignity"
-        string measure;     // e.g. "Mandate fair distribution of aid, prohibit exploitative relief, protect vulnerable communities during crises"
+        string measure;     // e.g. "Mandate fair aid distribution, prohibit exploitative relief, protect dignity in humanitarian response"
         uint256 timestamp;
     }
 
