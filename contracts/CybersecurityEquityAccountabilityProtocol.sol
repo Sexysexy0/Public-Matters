@@ -5,7 +5,7 @@ contract CybersecurityEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Cybersecurity Governance"
-        string mechanism;   // e.g. "Audit IDE defaults, enforce transparency in repo trust settings, penalize exploitative code injection practices"
+        string mechanism;   // e.g. "Audit code repositories, enforce transparency in digital policies, penalize exploitative cyber practices"
         uint256 timestamp;
     }
 
