@@ -5,7 +5,7 @@ contract ResourceEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Resource Governance"
-        string mechanism;   // e.g. "Audit export bans, enforce transparency in refining investments, penalize exploitative extraction practices"
+        string mechanism;   // e.g. "Audit extraction practices, enforce transparency in resource projects, penalize exploitative industrial sabotage"
         uint256 timestamp;
     }
 
