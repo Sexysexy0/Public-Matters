@@ -1,10 +1,10 @@
-// FiscalGovernanceDAO.sol
+// CurrencyGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract FiscalGovernanceDAO {
+contract CurrencyGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Oversight of fiscal governance and taxation rollback"
+        string topic;       // e.g. "Oversight of peso stability and monetary governance"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
