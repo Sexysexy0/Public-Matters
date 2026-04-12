@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract FaithEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Spiritual Dignity"
-        string measure;     // e.g. "Mandate freedom of worship, prohibit exploitative prophecy claims, protect dignity in faith practice"
+        string principle;   // e.g. "Religious Dignity"
+        string measure;     // e.g. "Mandate respect for faith institutions, prohibit exploitative political threats, protect sacred trust"
         uint256 timestamp;
     }
 
