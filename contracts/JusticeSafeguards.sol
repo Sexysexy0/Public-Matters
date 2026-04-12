@@ -5,7 +5,7 @@ contract JusticeSafeguards {
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Fair Justice"
-        string measure;     // e.g. "Mandate equal protection, prohibit exploitative rulings, protect dignity in citizen rights"
+        string measure;     // e.g. "Mandate equal access to courts, prohibit exploitative legal fees, protect citizen rights"
         uint256 timestamp;
     }
 
