@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract AgricultureEquitySafeguards {
     struct Safeguard {
         uint256 id;
-        string principle;   // e.g. "Farmer Rights"
-        string measure;     // e.g. "Mandate cold storage hubs, prohibit exploitative pricing, protect dignity in agricultural trade"
+        string principle;   // e.g. "Food Sovereignty"
+        string measure;     // e.g. "Mandate fair farmer support, prohibit exploitative contracts, protect dignity in food production"
         uint256 timestamp;
     }
 
