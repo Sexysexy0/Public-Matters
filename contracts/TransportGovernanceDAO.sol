@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract TransportGovernanceDAO {
     struct Proposal {
         uint256 id;
-        string topic;       // e.g. "Oversight of transport governance and sustainable mobility"
+        string topic;       // e.g. "Oversight of transport governance and sustainable mobility safeguards"
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
