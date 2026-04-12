@@ -5,7 +5,7 @@ contract TransparencyEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Transparency Governance"
-        string mechanism;   // e.g. "Audit disclosure practices, enforce transparency in decision-making, penalize secrecy that undermines public trust"
+        string mechanism;   // e.g. "Audit disclosure compliance, enforce transparency in contracts, penalize exploitative secrecy practices"
         uint256 timestamp;
     }
 
