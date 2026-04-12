@@ -4,8 +4,8 @@ pragma solidity ^0.8.0;
 contract JusticeAccountabilityProtocol {
     struct Rule {
         uint256 id;
-        string safeguard;  // e.g. "Ensure oversight in law enforcement and prosecution"
-        string mechanism;  // e.g. "Independent Justice Oversight Council"
+        string safeguard;   // e.g. "Accountability in Justice Governance"
+        string mechanism;   // e.g. "Audit court rulings, enforce transparency in legal processes, penalize exploitative judicial practices"
         uint256 timestamp;
     }
 
