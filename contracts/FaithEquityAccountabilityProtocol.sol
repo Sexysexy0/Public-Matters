@@ -5,7 +5,7 @@ contract FaithEquityAccountabilityProtocol {
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Faith Governance"
-        string mechanism;   // e.g. "Audit prophecy claims, enforce transparency in spiritual leadership, penalize exploitative religious practices"
+        string mechanism;   // e.g. "Audit political interactions with faith institutions, enforce transparency in religious diplomacy, penalize exploitative threats"
         uint256 timestamp;
     }
 
