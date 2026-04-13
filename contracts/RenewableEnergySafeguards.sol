@@ -2,21 +2,23 @@
 pragma solidity ^0.8.0;
 
 contract RenewableEnergySafeguards {
-    struct Safeguard {
-        uint256 id;
-        string principle;   // e.g. "Protect Environmental Investment"
-        string measure;     // e.g. "Mandate renewable adoption, enforce ecological audits, safeguard planetary survival"
-        uint256 timestamp;
+    struct TechGrant {
+        address operator;
+        string conversionType; // e.g., "Diesel to Electric"
+        uint256 creditBalance;
+        bool inspectionPassed;
     }
 
-    uint256 public safeguardCount;
-    mapping(uint256 => Safeguard) public safeguards;
+    mapping(address => TechGrant) public grants;
 
-    event SafeguardLogged(uint256 id, string principle, string measure);
+    function issueEnergyCredits(address _operator, string memory _type) public {
+        // Initial credits locked until inspection
+        grants[_operator] = TechGrant(_operator, _type, 5000, false);
+    }
 
-    function logSafeguard(string memory principle, string memory measure) public {
-        safeguardCount++;
-        safeguards[safeguardCount] = Safeguard(safeguardCount, principle, measure, block.timestamp);
-        emit SafeguardLogged(safeguardCount, principle, measure);
+    function verifyConversion(address _operator) public {
+        // Only an authorized inspector can trigger this
+        grants[_operator].inspectionPassed = true;
+        grants[_operator].creditBalance += 5000; // Bonus for completion
     }
 }
