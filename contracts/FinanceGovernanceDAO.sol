@@ -2,34 +2,23 @@
 pragma solidity ^0.8.0;
 
 contract FinanceGovernanceDAO {
-    struct Proposal {
+    struct PolicyProposal {
         uint256 id;
-        string topic;       // e.g. "Implement community-driven oversight of fiscal policies and equitable wealth distribution"
-        uint256 votesFor;
-        uint256 votesAgainst;
-        bool active;
+        string description; // e.g. "Redirect funds to Free Energy R&D"
+        uint256 communitySupport;
+        bool vetoedByPrivateInterests; // Logic prevents this from being true
     }
 
+    mapping(uint256 => PolicyProposal) public policyDockets;
     uint256 public proposalCount;
-    mapping(uint256 => Proposal) public proposals;
 
-    event ProposalCreated(uint256 id, string topic);
-    event Voted(uint256 id, string side);
-
-    function createProposal(string memory topic) public {
+    function proposePolicy(string memory _desc) public {
         proposalCount++;
-        proposals[proposalCount] = Proposal(proposalCount, topic, 0, 0, true);
-        emit ProposalCreated(proposalCount, topic);
+        policyDockets[proposalCount] = PolicyProposal(proposalCount, _desc, 0, false);
     }
 
-    function vote(uint256 id, bool support) public {
-        require(proposals[id].active, "Proposal not active");
-        if (support) {
-            proposals[id].votesFor++;
-            emit Voted(id, "For");
-        } else {
-            proposals[id].votesAgainst++;
-            emit Voted(id, "Against");
-        }
+    function voteForPublicInterest(uint256 _id) public {
+        // Direct participation in monetary governance
+        policyDockets[_id].communitySupport++;
     }
 }
