@@ -1,28 +1,25 @@
-pragma solidity ^0.8.20;
+// LogisticsEfficiencyProtocol.sol
+pragma solidity ^0.8.0;
 
 contract LogisticsEfficiencyProtocol {
-    address public admin;
-
-    struct Efficiency {
-        string sector;       // e.g. trucking, shipping
-        string driver;       // e.g. lower diesel cost
-        string outcome;      // e.g. faster, cheaper delivery
-        uint256 timestamp;
+    struct Shipment {
+        uint256 id;
+        uint256 startTime;
+        uint256 deadline;
+        bool isPerished;
+        bool delivered;
     }
 
-    Efficiency[] public efficiencies;
+    mapping(uint256 => Shipment) public trackers;
 
-    event EfficiencyLogged(string sector, string driver, string outcome, uint256 timestamp);
-
-    constructor() { admin = msg.sender; }
-    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
-
-    function logEfficiency(string calldata sector, string calldata driver, string calldata outcome) external onlyAdmin {
-        efficiencies.push(Efficiency(sector, driver, outcome, block.timestamp));
-        emit EfficiencyLogged(sector, driver, outcome, block.timestamp);
+    function startShipment(uint256 _id, uint256 _hoursToDeliver) public {
+        trackers[_id] = Shipment(_id, block.timestamp, block.timestamp + (_hoursToDeliver * 1 hours), false, false);
     }
 
-    function totalEfficiencies() external view returns (uint256) {
-        return efficiencies.length;
+    function checkSLA(uint256 _id) public {
+        if (block.timestamp > trackers[_id].deadline && !trackers[_id].delivered) {
+            trackers[_id].isPerished = true;
+            // Logic: Trigger automated penalty or price markdown event
+        }
     }
 }
