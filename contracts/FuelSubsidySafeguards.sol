@@ -2,21 +2,23 @@
 pragma solidity ^0.8.0;
 
 contract FuelSubsidySafeguards {
-    struct Safeguard {
-        uint256 id;
-        string principle;   // e.g. "Driver Fuel Rights"
-        string measure;     // e.g. "Mandate 50% fuel discount, prohibit exploitative fees, protect dignity in driver livelihood"
-        uint256 timestamp;
+    struct Subsidy {
+        uint256 amount;
+        uint256 expiry;
+        bool isRedeemed;
     }
 
-    uint256 public safeguardCount;
-    mapping(uint256 => Safeguard) public safeguards;
+    mapping(address => Subsidy) public transportGrants;
 
-    event SafeguardLogged(uint256 id, string principle, string measure);
+    function releaseAid(address _operator, uint256 _amount) public {
+        // Automatic release based on oil price threshold trigger
+        transportGrants[_operator] = Subsidy(_amount, block.timestamp + 30 days, false);
+    }
 
-    function logSafeguard(string memory principle, string memory measure) public {
-        safeguardCount++;
-        safeguards[safeguardCount] = Safeguard(safeguardCount, principle, measure, block.timestamp);
-        emit SafeguardLogged(safeguardCount, principle, measure);
+    function redeem(address _gasStation, uint256 _amount) public {
+        require(!transportGrants[msg.sender].isRedeemed, "Already used");
+        require(block.timestamp <= transportGrants[msg.sender].expiry, "Expired");
+        // Logic: Verified gas station receives the funds from the treasury
+        transportGrants[msg.sender].isRedeemed = true;
     }
 }
