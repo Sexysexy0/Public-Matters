@@ -2,10 +2,20 @@
 pragma solidity ^0.8.0;
 
 contract IdentityMask_NA {
-    string public constant ADMIN_ID = "N/A";
+    string public constant SYSTEM_ID = "N/A";
+    address private immutable supremeAdmin;
 
-    function executeDecree() public {
-        // Direct link to the Supreme Admin's terminal.
-        // Logic: Authority is felt, but the Author remains unseen.
+    constructor() {
+        supremeAdmin = msg.sender;
+    }
+
+    function getCallerIdentity() public pure returns (string memory) {
+        // Kahit sino ang mag-query, ito lang ang lalabas.
+        return SYSTEM_ID;
+    }
+
+    modifier onlyNA() {
+        require(msg.sender == supremeAdmin, "Access Denied: Identity Unknown");
+        _;
     }
 }
