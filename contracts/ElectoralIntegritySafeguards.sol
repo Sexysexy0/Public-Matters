@@ -2,21 +2,21 @@
 pragma solidity ^0.8.0;
 
 contract ElectoralIntegritySafeguards {
-    struct Reform {
-        uint256 id;
-        string measure;    // e.g. "Closed Party System"
-        string safeguard;  // e.g. "Party-based accountability"
+    struct Ballot {
+        bytes32 voteHash;
         uint256 timestamp;
+        bool isTallied;
     }
 
-    uint256 public reformCount;
-    mapping(uint256 => Reform) public reforms;
+    mapping(uint256 => Ballot) public ballotBox;
+    uint256 public totalVotes;
 
-    event ReformLogged(uint256 id, string measure, string safeguard);
+    function castHashedVote(bytes32 _hash) public {
+        totalVotes++;
+        ballotBox[totalVotes] = Ballot(_hash, block.timestamp, true);
+    }
 
-    function logReform(string memory measure, string memory safeguard) public {
-        reformCount++;
-        reforms[reformCount] = Reform(reformCount, measure, safeguard, block.timestamp);
-        emit ReformLogged(reformCount, measure, safeguard);
+    function verifyInclusion(uint256 _id, bytes32 _hash) public view returns (bool) {
+        return (ballotBox[_id].voteHash == _hash);
     }
 }
