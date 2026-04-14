@@ -24,13 +24,12 @@
     "url": "https://github.com/Sexysexy0/Public-Matters/issues"
   },
   "homepage": "https://github.com/Sexysexy0/Public-Matters#readme",
-  "devDependencies": {
-    "@nomicfoundation/hardhat-chai-matchers": "^3.0.0",
-    "@nomiclabs/hardhat-ethers": "^1.0.0",
-    "chai": "^6.2.2",
-    "hardhat": "^3.1.12"
-  },
   "dependencies": {
-    "ethers": "^5.8.0"
+    "chai": "^4.5.0",
+    "ethers": "^6.16.0"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^1.0.0",
+    "hardhat": "^3.3.0"
   }
 }
