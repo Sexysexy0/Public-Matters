@@ -1,11 +1,11 @@
-// EcoMaterialStandard.sol
-// Logic: Carbon-Negative Infrastructure
+// SovereignTaxOnHemp.sol
+// Logic: Wealth Redistribution to Farmers
 pragma solidity ^0.8.0;
 
-contract EcoMaterialStandard {
-    function calculateCarbonCredit(uint256 _hempVolume) public pure returns (uint256) {
-        // Goal: Eco-Friendly Sovereignty.
-        // For every ton of hemp used in construction, provide tax credits to the builder.
-        return _hempVolume * 15; // 15 points per ton
+contract SovereignTaxOnHemp {
+    function calculateTax(uint256 _marketPrice) public pure returns (uint256) {
+        // Goal: Sustainable Revenue.
+        // 10% Sovereign Tax to be reinvested in local irrigation and tech.
+        return (_marketPrice * 10) / 100;
     }
 }
