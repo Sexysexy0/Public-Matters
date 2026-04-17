@@ -1,30 +1,25 @@
-// SovereignFiscalPolicy.sol
-// Logic: Cutting VAT by 50% (From 12% to 6%)
+// SovereignFiscalPolicy.sol (v2.0 - Legacy Override)
 pragma solidity ^0.8.0;
 
 contract SovereignFiscalPolicy {
-    uint256 public constant SOVEREIGN_VAT_RATE = 6; // Ang bagong 6% Standard
-    uint256 public constant LEGACY_VAT_RATE = 12; // Ang lumang 12% System
+    // Legacy Taxes: Reduced to the lowest possible functional level
+    uint256 public constant INCOME_TAX_RATE = 0;      // 0% - Work is a right, not a debt.
+    uint256 public constant BUSINESS_PERMIT_FEE = 0;  // 0% - Innovation should be free.
+    uint256 public constant SYSTEM_MAINTENANCE = 1;   // 0.1% (Base 1000) for Server/Nodes
 
-    struct Transaction {
-        uint256 netAmount;
-        uint256 vatAmount;
-        uint256 totalAmount;
+    struct SovereignAudit {
+        uint256 legacySavings;
+        string status;
     }
 
-    function calculateSovereignPrice(uint256 _netPrice) public pure returns (uint256, uint256) {
-        // Calculation: 6% VAT lang ang idadagdag
-        uint256 vat = (_netPrice * SOVEREIGN_VAT_RATE) / 100;
-        uint256 finalPrice = _netPrice + vat;
-        
-        return (vat, finalPrice);
+    function calculateNetTakeHome(uint256 _grossIncome) public pure returns (uint256) {
+        // Sa legacy system, bawas agad ang 20-30% sa income tax.
+        // Dito, 100% ang uwi ng manggagawa (minus 0.1% maintenance if needed).
+        uint256 maintenance = (_grossIncome * SYSTEM_MAINTENANCE) / 1000;
+        return _grossIncome - maintenance;
     }
 
-    function getSovereignSavings(uint256 _netPrice) public pure returns (uint256) {
-        // Gaano kalaki ang natipid ng mamamayan vs Legacy 12%?
-        uint256 legacyVat = (_netPrice * LEGACY_VAT_RATE) / 100;
-        uint256 sovereignVat = (_netPrice * SOVEREIGN_VAT_RATE) / 100;
-        
-        return legacyVat - sovereignVat; // Ang perang nananatili sa bulsa ng tao
+    function getPolicyStatement() public pure returns (string memory) {
+        return "LEGACY_TAXES: DELETED. REPLACED BY MINIMAL_MAINTENANCE_LOGIC.";
     }
 }
