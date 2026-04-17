@@ -2,21 +2,10 @@
 pragma solidity ^0.8.0;
 
 contract CommunityTrustProtocol {
-    struct Assurance {
-        uint256 id;
-        string principle; // e.g. "No disturbance to communities"
-        string outcome;   // e.g. "Public trust preserved"
-        uint256 timestamp;
-    }
+    mapping(address => uint256) public reputation; // Based on actual community help
 
-    uint256 public assuranceCount;
-    mapping(uint256 => Assurance) public assurances;
-
-    event AssuranceLogged(uint256 id, string principle, string outcome);
-
-    function logAssurance(string memory principle, string memory outcome) public {
-        assuranceCount++;
-        assurances[assuranceCount] = Assurance(assuranceCount, principle, outcome, block.timestamp);
-        emit AssuranceLogged(assuranceCount, principle, outcome);
+    function logGoodDeed(address _neighbor) public {
+        // Verified by 3 other humans in person
+        // Focuses on "Bayanihan" rather than digital transactions
     }
 }
