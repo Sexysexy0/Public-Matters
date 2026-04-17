@@ -1,38 +1,11 @@
-// contracts/SafetyShield.sol
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.0;
 
-/**
- * @title SafetyShield
- * @notice Logs communal safety measures against AI misuse.
- */
 contract SafetyShield {
-    address public admin;
+    event SafetyAlert(string facility, string issue);
 
-    struct Measure {
-        string name;        // "BiasCheck", "TransparencyReport"
-        string description;
-        string status;      // "Implemented", "Pending"
-        uint256 timestamp;
-    }
-
-    Measure[] public measures;
-
-    event MeasureLogged(string name, string description, string status, uint256 timestamp);
-
-    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
-
-    constructor() { admin = msg.sender; }
-
-    function logMeasure(string calldata name, string calldata description, string calldata status) external onlyAdmin {
-        measures.push(Measure(name, description, status, block.timestamp));
-        emit MeasureLogged(name, description, status, block.timestamp);
-    }
-
-    function totalMeasures() external view returns (uint256) { return measures.length; }
-
-    function getMeasure(uint256 id) external view returns (Measure memory) {
-        require(id < measures.length, "Invalid id");
-        return measures[id];
+    function detectRisk(string memory facility, bool risk) public {
+        if (risk) {
+            emit SafetyAlert(facility, "Nuclear risk detected – safety safeguard required");
+        }
     }
 }
