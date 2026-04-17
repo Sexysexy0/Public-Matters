@@ -1,25 +1,26 @@
-// SovereignFiscalPolicy.sol (v2.0 - Legacy Override)
+// SovereignFiscalPolicy.sol (v4.0 - The Abrea Reform)
 pragma solidity ^0.8.0;
 
 contract SovereignFiscalPolicy {
-    // Legacy Taxes: Reduced to the lowest possible functional level
-    uint256 public constant INCOME_TAX_RATE = 0;      // 0% - Work is a right, not a debt.
-    uint256 public constant BUSINESS_PERMIT_FEE = 0;  // 0% - Innovation should be free.
-    uint256 public constant SYSTEM_MAINTENANCE = 1;   // 0.1% (Base 1000) for Server/Nodes
+    // 1 Million Pesos Tax-Free Threshold (in base units)
+    uint256 public constant TAX_FREE_THRESHOLD = 1000000; 
+    
+    // Fuel Addiction Override
+    bool public constant EXCISE_TAX_ACTIVE = false; // Permanently Disabled
 
-    struct SovereignAudit {
-        uint256 legacySavings;
-        string status;
+    function calculateFinalTakeHome(uint256 _annualIncome) public pure returns (uint256) {
+        // Mon Abrea Proposal: Unang 1M ay Tax-Free.
+        if (_annualIncome <= TAX_FREE_THRESHOLD) {
+            return _annualIncome; // 100% Take Home. No Penalties.
+        }
+        
+        // Only income ABOVE 1M is subject to a minimal 1% Maintenance Fee.
+        uint256 taxableAmount = _annualIncome - TAX_FREE_THRESHOLD;
+        uint256 maintenanceFee = (taxableAmount * 1) / 100;
+        return _annualIncome - maintenanceFee;
     }
 
-    function calculateNetTakeHome(uint256 _grossIncome) public pure returns (uint256) {
-        // Sa legacy system, bawas agad ang 20-30% sa income tax.
-        // Dito, 100% ang uwi ng manggagawa (minus 0.1% maintenance if needed).
-        uint256 maintenance = (_grossIncome * SYSTEM_MAINTENANCE) / 1000;
-        return _grossIncome - maintenance;
-    }
-
-    function getPolicyStatement() public pure returns (string memory) {
-        return "LEGACY_TAXES: DELETED. REPLACED BY MINIMAL_MAINTENANCE_LOGIC.";
+    function getAbreaReflection() public pure returns (string memory) {
+        return "STATUS: HARDWORK_NOT_PENALIZED | FUEL_ADDICTION_CURED";
     }
 }
