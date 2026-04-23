@@ -1,0 +1,13 @@
+{
+  "mod_bridge": "Create_Aeronautics_V1",
+  "physics_overrides": {
+    "world_gravity": 1.0,
+    "air_density_gradient": "dynamic",
+    "max_flight_altitude": 1024,
+    "fuel_consumption_rate": 0.8
+  },
+  "compatibility": {
+    "distant_horizons_rendering": "high_priority",
+    "collision_logic": "per_block_precise"
+  }
+}
