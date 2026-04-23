@@ -1,0 +1,16 @@
+{
+  "weather_system": "Dynamic_Pywel_V3",
+  "altitude_triggers": {
+    "y_high": 400,
+    "effect": "permanent_blizzard",
+    "visibility_reduction": 0.8
+  },
+  "biome_events": {
+    "desert_plateau": "sandstorm_heavy",
+    "tropical_valley": "monsoon_rain"
+  },
+  "particles": {
+    "enabled": true,
+    "type": "custom_fog_density"
+  }
+}
