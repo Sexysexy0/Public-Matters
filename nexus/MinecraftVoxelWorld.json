@@ -1,0 +1,22 @@
+{
+  "map_name": "Pywel_Prototype_V1",
+  "mechanics": {
+    "echo_stones": {
+      "on_use": "execute_at_player",
+      "effects": [
+        {"action": "set_biome", "target": "ice_spikes", "radius": 50},
+        {"action": "particle", "type": "end_rod", "count": 100}
+      ]
+    },
+    "magical_curiosities": {
+      "teleport_compass": {
+        "description": "Points to the nearest Hidden Dragon Nest",
+        "rarity": "Legendary"
+      }
+    }
+  },
+  "freemium_gate": {
+    "area": "Sky_Castle_Toothless",
+    "required_item": "dragon_scale_token"
+  }
+}
