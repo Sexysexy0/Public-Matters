@@ -1,0 +1,13 @@
+{
+  "mod_engine": "Terrain_Diffusion_V1",
+  "world_settings": {
+    "scale_multiplier": 6,
+    "max_elevation": 1024,
+    "geological_continuity": "enabled",
+    "training_data_bias": "pywel_highlands_dataset"
+  },
+  "visuals": {
+    "distant_horizons_sync": true,
+    "voxy_enabled": true
+  }
+}
