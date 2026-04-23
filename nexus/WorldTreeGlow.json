@@ -1,0 +1,13 @@
+{
+  "landmark_name": "The Great Tree of Souls",
+  "location": "Aetheria Center",
+  "visuals": {
+    "bioluminescence": "adaptive",
+    "particle_emission": "star_shards",
+    "height_limit": 500
+  },
+  "mechanics": {
+    "save_sync_point": true,
+    "global_buff_area": "100_blocks_radius"
+  }
+}
