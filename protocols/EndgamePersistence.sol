@@ -2,8 +2,11 @@
 pragma solidity ^0.8.20;
 
 contract EndgamePersistence {
-    // [Goal: Perpetual growth in the Sovereign sandbox]
-    function triggerRematch(string memory _oldChallenge) external pure returns (string memory) {
-        return string(abi.encodePacked("REMATCH_READY: Facing ", _oldChallenge, " with 2026-level mastery."));
+    // [Goal: Implement world-reset mechanics for infinite gameplay]
+    function toggleReBlockade(bool _worldCleared) external pure returns (string memory) {
+        if (_worldCleared) {
+            return "EVENT: Enemies have reclaimed the outposts. New legendary bounties active!";
+        }
+        return "STABLE: Complete the main story first.";
     }
 }
