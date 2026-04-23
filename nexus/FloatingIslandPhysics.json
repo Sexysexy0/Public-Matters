@@ -1,0 +1,13 @@
+{
+  "hub_name": "Aetheria: Capital of Pywel",
+  "coordinates": {"x": 0, "y": 800, "z": 0},
+  "physics": {
+    "levitation_constant": 9.8,
+    "cloud_density": "high",
+    "collision_buffer": "smooth"
+  },
+  "sky_docks": {
+    "capacity": 50,
+    "support": ["Windrose_Galleons", "Kryptonian_Flyers"]
+  }
+}
