@@ -1,9 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/**
+ * @title UnifiedCommand
+ * @dev Prevents internal strategic fragmentation within the Sovereign's organization.
+ */
 contract UnifiedCommand {
-    // [Goal: Control the Fleet without leaving the Mission]
-    function sendPing(string memory _unit, string memory _task) external pure returns (string memory) {
-        return string(abi.encodePacked("COMMAND_SENT: ", _unit, " is executing ", _task, " remotely."));
+    address public supremeCommander;
+
+    constructor() {
+        supremeCommander = msg.sender; // [Vin as the sole decision-maker]
+    }
+
+    modifier onlyCommander() {
+        require(msg.sender == supremeCommander, "ERROR: Fragmented authority detected. Access denied.");
+        _;
     }
 }
