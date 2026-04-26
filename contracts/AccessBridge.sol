@@ -2,11 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AccessBridge {
-    event AccessRecord(address recipient, string game, string status);
+    event AccessRecord(string eventName, string discountType);
 
-    function logAccess(address _recipient, string memory _game, string memory _status) external {
-        emit AccessRecord(_recipient, _game, _status);
-        // BRIDGE: Access permissions logged for governance.
+    function logAccessDiscount(string memory eventName, string memory discountType) external {
+        emit AccessRecord(eventName, discountType);
+        // BRIDGE: Community discounts logged to safeguard affordability and inclusive access.
     }
 }
-
