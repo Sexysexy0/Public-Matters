@@ -2,11 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ConsumerEquityShield {
-    event EquitySeal(string game, uint256 discountRate, string status);
+    event EquitySeal(string company, string action);
 
-    function logDiscountDay(string memory game, uint256 discountRate) external {
-        string memory status = discountRate >= 80 ? "Lucky Deep Discount" : "Standard Discount";
-        emit EquitySeal(game, discountRate, status);
-        // RULE: Discounts safeguarded for consumer affordability.
+    function logConsumerEvent(string memory company, string memory action) external {
+        emit EquitySeal(company, action);
+        // RULE: Consumer equity safeguarded against anti-consumer pricing and unfair refund practices.
     }
 }
