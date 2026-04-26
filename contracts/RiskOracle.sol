@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract RiskOracle {
-    event RiskRecord(string processor, string sector, string status);
+    event RiskRecord(string jurisdiction, string riskLevel);
 
-    function logRisk(string memory processor, string memory sector, string memory status) external {
-        emit RiskRecord(processor, sector, status);
-        // ORACLE: Risk appetite monitored to safeguard against unfair debanking and censorship.
+    function logRisk(string memory jurisdiction, string memory riskLevel) external {
+        emit RiskRecord(jurisdiction, riskLevel);
+        // ORACLE: Systemic risks monitored to safeguard global financial stability.
     }
 }
