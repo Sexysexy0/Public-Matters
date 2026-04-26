@@ -2,11 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract TransparencyLedger {
-    event TransparencyAlert(address claimant, uint256 id, string issue);
+    event TransparencySeal(string country, string policy);
 
-    function checkDelay(address _claimant, uint256 _id, uint256 _daysElapsed) external {
-        if (_daysElapsed > 7) {
-            emit TransparencyAlert(_claimant, _id, "Delay detected – safeguard breach");
-        }
+    function logPolicy(string memory _country, string memory _policy) external {
+        emit TransparencySeal(_country, _policy);
+        // LEDGER: Global cannabis policy transparency encoded.
     }
 }
