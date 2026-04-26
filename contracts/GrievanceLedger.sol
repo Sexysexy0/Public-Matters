@@ -1,11 +1,11 @@
-pragma solidity ^0.8.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
 
 contract GrievanceLedger {
-    event GrievanceAlert(string issue, string detail);
+    event GrievanceSeal(string barangay, string complaint);
 
-    function logGrievance(string memory issue, bool unresolved) public {
-        if (unresolved) {
-            emit GrievanceAlert(issue, "Unresolved grievance – transparency safeguard required");
-        }
+    function logGrievance(string memory _barangay, string memory _complaint) external {
+        emit GrievanceSeal(_barangay, _complaint);
+        // RULE: Barangay grievances logged for dignified resolution.
     }
 }
