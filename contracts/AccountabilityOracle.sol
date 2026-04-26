@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AccountabilityOracle {
-    event AccountabilityRecord(string barangay, string status);
+    event AccountabilityRecord(string company, string violation);
 
-    function logAccountability(string memory _barangay, string memory _status) external {
-        emit AccountabilityRecord(_barangay, _status);
-        // ORACLE: Grievance handling monitored for governance audit.
+    function logViolation(string memory company, string memory violation) external {
+        emit AccountabilityRecord(company, violation);
+        // ORACLE: Corporate accountability monitored for worker protection.
     }
 }
