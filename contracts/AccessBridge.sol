@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AccessBridge {
-    event AccessRecord(string eventName, string discountType);
+    event AccessRecord(string provider, string subsidyType);
 
-    function logAccessDiscount(string memory eventName, string memory discountType) external {
-        emit AccessRecord(eventName, discountType);
-        // BRIDGE: Community discounts logged to safeguard affordability and inclusive access.
+    function logHealthcareSubsidy(string memory provider, string memory subsidyType) external {
+        emit AccessRecord(provider, subsidyType);
+        // BRIDGE: Healthcare subsidies logged to safeguard affordability and inclusive access.
     }
 }
