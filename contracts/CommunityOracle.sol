@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CommunityOracle {
-    event CommunityRecord(string project, string adoptionLevel);
+    event CommunityRecord(string theme, string status);
 
-    function logCommunityAdoption(string memory project, string memory adoptionLevel) external {
-        emit CommunityRecord(project, adoptionLevel);
-        // ORACLE: Community adoption monitored to safeguard inclusive growth of Source 2 ecosystem.
+    function logCommunityImpact(string memory theme, string memory status) external {
+        emit CommunityRecord(theme, status);
+        // ORACLE: Community impact monitored to safeguard cultural footprint and prevent narrative decay.
     }
 }
