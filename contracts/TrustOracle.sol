@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract TrustOracle {
-    event TrustRecord(string metric, string status);
+    event TrustRecord(string platform, string status);
 
-    function logTrustMetric(string memory _metric, string memory _status) external {
-        emit TrustRecord(_metric, _status);
-        // ORACLE: Player trust levels monitored for governance.
+    function logTrustEquity(string memory platform, string memory status) external {
+        emit TrustRecord(platform, status);
+        // ORACLE: Consumer trust monitored to safeguard against fake news and exploitative practices.
     }
 }
