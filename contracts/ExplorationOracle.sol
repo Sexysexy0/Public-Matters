@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ExplorationOracle {
-    event ImmersionRecord(string element, string effect);
+    event ExplorationSeal(string region, string status);
 
-    function logImmersion(string memory _element, string memory _effect) external {
-        emit ImmersionRecord(_element, _effect);
-        // ORACLE: Exploration depth and immersion preserved.
+    function logExploration(string memory region, string memory status) external {
+        emit ExplorationSeal(region, status);
+        // RULE: Exploration safeguarded to ensure curiosity-driven discovery and fog-of-war immersion.
     }
 }
