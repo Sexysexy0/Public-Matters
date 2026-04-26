@@ -6,6 +6,6 @@ contract FairnessOracle {
 
     function logFairness(string memory _issue, string memory _status) external {
         emit FairnessRecord(_issue, _status);
-        // ORACLE: Fairness of tax relief monitored for governance.
+        // ORACLE: Distribution fairness monitored for governance.
     }
 }
