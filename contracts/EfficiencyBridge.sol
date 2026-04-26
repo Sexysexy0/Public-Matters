@@ -6,6 +6,6 @@ contract EfficiencyBridge {
 
     function logEfficiency(string memory device, string memory metric) external {
         emit EfficiencyRecord(device, metric);
-        // BRIDGE: Efficiency logged to ensure sustainable innovation.
+        // BRIDGE: Efficiency metrics logged to safeguard usability and performance across handheld devices.
     }
 }
