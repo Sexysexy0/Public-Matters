@@ -2,11 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract IndieEquityShield {
-    event IndieSeal(string game, string status);
+    event EquitySeal(string game, string achievement);
 
-    function logIndieRelease(string memory game, bool affordable) external {
-        string memory status = affordable ? "Accessible Indie" : "Overpriced Indie";
-        emit IndieSeal(game, status);
-        // RULE: Indie games safeguarded for affordability and accessibility.
+    function logIndieSuccess(string memory game, string memory achievement) external {
+        emit EquitySeal(game, achievement);
+        // RULE: Indie success safeguarded to ensure fair recognition and accountability against AAA arrogance.
     }
 }
