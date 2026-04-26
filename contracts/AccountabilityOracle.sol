@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AccountabilityOracle {
-    event AccountabilityRecord(string violation, string perpetrator, string status);
+    event AccountabilityRecord(string publisher, string sanction);
 
-    function logViolation(string memory violation, string memory perpetrator) external {
-        emit AccountabilityRecord(violation, perpetrator, "Violation Logged");
-        // ORACLE: War crimes monitored for accountability.
+    function logSanction(string memory publisher, string memory sanction) external {
+        emit AccountabilityRecord(publisher, sanction);
+        // ORACLE: Sanctions monitored to deter deliberate overpricing.
     }
 }
