@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract LeakDefenseOracle {
-    event LeakRecord(string source, string impact);
+    event LeakRecord(string project, string status);
 
-    function logLeak(string memory source, string memory impact) external {
-        emit LeakRecord(source, impact);
-        // ORACLE: Leaks monitored to safeguard narrative control and dignified hype management.
+    function logLeakDefense(string memory project, string memory status) external {
+        emit LeakRecord(project, status);
+        // ORACLE: Leak defense monitored to safeguard hype dignity and prevent premature content exposure.
     }
 }
