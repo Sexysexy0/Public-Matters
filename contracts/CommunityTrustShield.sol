@@ -1,11 +1,11 @@
-pragma solidity ^0.8.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
 
 contract CommunityTrustShield {
-    event TrustAlert(string issue, string detail);
+    event TrustSeal(string creator, string content);
 
-    function detectTrustRisk(string memory issue, bool risk) public {
-        if (risk) {
-            emit TrustAlert(issue, "Trust erosion detected – safeguard required");
-        }
+    function logCommunityContent(string memory creator, string memory content) external {
+        emit TrustSeal(creator, content);
+        // RULE: Streamer-driven authenticity safeguarded to ensure unbiased and inclusive community discourse.
     }
 }
