@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract InnovationOracle {
-    event InnovationRecord(string product, string adoptionStatus);
+    event InnovationRecord(string project, string impact);
 
-    function logAdoption(string memory product, string memory adoptionStatus) external {
-        emit InnovationRecord(product, adoptionStatus);
-        // ORACLE: Adoption monitored to stabilize innovation ecosystem.
+    function logInnovation(string memory project, string memory impact) external {
+        emit InnovationRecord(project, impact);
+        // ORACLE: Indie innovation monitored to safeguard creative adoption of Source 2.
     }
 }
