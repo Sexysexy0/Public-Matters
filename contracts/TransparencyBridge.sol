@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract TransparencyBridge {
-    event TransparencyRecord(string modder, string visibility);
+    event TransparencyRecord(string caseName, string status);
 
-    function logVisibility(string memory modder, string memory visibility) external {
-        emit TransparencyRecord(modder, visibility);
-        // BRIDGE: Visibility logged to safeguard recognition of modder contributions.
+    function logRefundCase(string memory caseName, string memory status) external {
+        emit TransparencyRecord(caseName, status);
+        // BRIDGE: Refund transparency logged to safeguard consumer rights against corporate maneuvers.
     }
 }
