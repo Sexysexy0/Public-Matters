@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract InnovationPipelineShield {
-    event PipelineSeal(string project, string stage);
+    event InnovationSeal(string studio, string project);
 
-    function logInnovationCycle(string memory project, string memory stage) external {
-        emit PipelineSeal(project, stage);
-        // RULE: Innovation pipelines safeguarded to ensure long-term creativity and sustainable evolution.
+    function logInnovation(string memory studio, string memory project) external {
+        emit InnovationSeal(studio, project);
+        // RULE: Innovation safeguarded to ensure creative risk-taking and new IP development.
     }
 }

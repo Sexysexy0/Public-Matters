@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CreativeOracle {
-    event CreativeRecord(string game, string innovation);
+    event CreativeRecord(string sector, string status);
 
-    function logInnovation(string memory game, string memory innovation) external {
-        emit CreativeRecord(game, innovation);
-        // ORACLE: Creative innovation monitored to safeguard player-friendly ecosystems.
+    function logCreativePipeline(string memory sector, string memory status) external {
+        emit CreativeRecord(sector, status);
+        // ORACLE: Creative pipelines monitored to safeguard innovation and prevent stagnation.
     }
 }
