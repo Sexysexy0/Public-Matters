@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CommunityOracle {
-    event CommunityRecord(address player, string feedback);
+    event CommunityRecord(string group, string issue);
 
-    function logFeedback(address player, string memory feedback) external {
-        emit CommunityRecord(player, feedback);
-        // ORACLE: Community feedback monitored for equity and inclusion.
+    function logCommunity(string memory group, string memory issue) external {
+        emit CommunityRecord(group, issue);
+        // ORACLE: Community safeguarded from corporate inflation.
     }
 }
