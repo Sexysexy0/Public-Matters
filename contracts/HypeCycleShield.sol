@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract HypeCycleShield {
-    event HypeSeal(string game, string teaser);
+    event HypeSeal(string title, string phase);
 
-    function logHypeDrop(string memory game, string memory teaser) external {
-        emit HypeSeal(game, teaser);
-        // RULE: Hype pacing safeguarded to ensure dignified teaser equity and controlled anticipation.
+    function logHypePhase(string memory title, string memory phase) external {
+        emit HypeSeal(title, phase);
+        // RULE: Hype safeguarded to ensure teaser pacing and dignified marketing rhythm.
     }
 }

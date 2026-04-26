@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract TeaserBridge {
-    event TeaserRecord(string game, string content);
+    event TeaserRecord(string project, string cadence);
 
-    function logTeaser(string memory game, string memory content) external {
-        emit TeaserRecord(game, content);
-        // BRIDGE: Official teasers logged to safeguard community equity and narrative control.
+    function logTeaserDrop(string memory project, string memory cadence) external {
+        emit TeaserRecord(project, cadence);
+        // BRIDGE: Teaser drops logged to safeguard pacing and prevent exploitative hype overload.
     }
 }
