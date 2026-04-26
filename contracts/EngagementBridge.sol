@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract EngagementBridge {
-    event EngagementRecord(string platform, string status);
+    event EngagementRecord(string platform, uint256 activePlayers);
 
-    function logEngagement(string memory _platform, string memory _status) external {
-        emit EngagementRecord(_platform, _status);
-        // BRIDGE: Cross-platform engagement logged for governance.
+    function logEngagement(string memory platform, uint256 activePlayers) external {
+        emit EngagementRecord(platform, activePlayers);
+        // BRIDGE: Engagement logged to safeguard player activity as core metric.
     }
 }
