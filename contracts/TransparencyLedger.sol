@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract TransparencyLedger {
-    event TransparencySeal(string country, string policy);
+    event LedgerRecord(address worker, uint256 basePay, uint256 extraPay, string status);
 
-    function logPolicy(string memory _country, string memory _policy) external {
-        emit TransparencySeal(_country, _policy);
-        // LEDGER: Global cannabis policy transparency encoded.
+    function logPayment(address worker, uint256 basePay, uint256 extraPay) external {
+        emit LedgerRecord(worker, basePay, extraPay, "Released");
+        // RULE: All payments logged transparently, immutable record for worker rights.
     }
 }
