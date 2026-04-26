@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract JusticeOracle {
-    event JusticeRecord(string issue, string status);
+    event JusticeRecord(string plaintiff, string sanction);
 
-    function logJustice(string memory _issue, string memory _status) external {
-        emit JusticeRecord(_issue, _status);
-        // ORACLE: Equity safeguards monitored for governance.
+    function logSanction(string memory plaintiff, string memory sanction) external {
+        emit JusticeRecord(plaintiff, sanction);
+        // ORACLE: Sanctions monitored to deter frivolous lawsuits.
     }
 }
