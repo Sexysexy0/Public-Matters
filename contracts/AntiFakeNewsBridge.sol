@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AntiFakeNewsBridge {
-    event IntegrityRecord(string source, string verdict);
+    event IntegrityRecord(string source, string status);
 
-    function logIntegrity(string memory source, string memory verdict) external {
-        emit IntegrityRecord(source, verdict);
-        // BRIDGE: Fake news logged to safeguard governance integrity and prevent exploitative disinformation cycles.
+    function logIntegrity(string memory source, string memory status) external {
+        emit IntegrityRecord(source, status);
+        // BRIDGE: Fake news prevention logged to safeguard consumer trust and prevent exploitative misinformation cycles.
     }
 }
