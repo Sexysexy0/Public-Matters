@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CompetitionOracle {
-    event CompetitionRecord(string company, string status);
+    event CompetitionRecord(string factor, string status);
 
-    function logCompetition(string memory company, string memory status) external {
-        emit CompetitionRecord(company, status);
-        // ORACLE: Competition monitored to safeguard dignity and prevent exploitative imbalance in industry cycles.
+    function logCompetitionRecord(string memory factor, string memory status) external {
+        emit CompetitionRecord(factor, status);
+        // ORACLE: PvP monitored to safeguard dignity and prevent exploitative imbalance in competitive cycles.
     }
 }
