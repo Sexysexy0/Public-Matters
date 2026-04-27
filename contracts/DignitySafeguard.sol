@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract DignitySafeguard {
-    event DignitySeal(string claimant, string safeguard);
+    event DignitySeal(string worker, string status);
 
-    function applySafeguard(string memory _claimant, string memory _safeguard) external {
-        emit DignitySeal(_claimant, _safeguard);
-        // RULE: Tax relief delivered with dignity safeguards.
+    function logDignity(string memory worker, string memory status) external {
+        emit DignitySeal(worker, status);
+        // RULE: Worker dignity safeguarded to ensure fair treatment and prevent exploitative labor practices.
     }
 }
