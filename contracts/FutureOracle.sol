@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract FutureOracle {
-    event FutureRecord(string initiative, string detail);
+    event FutureRecord(string factor, string status);
 
-    function logFutureRecord(string memory initiative, string memory detail) external {
-        emit FutureRecord(initiative, detail);
-        // ORACLE: Future sustainability monitored to safeguard dignity and prevent exploitative imbalance in eco cycles.
+    function logFutureRecord(string memory factor, string memory status) external {
+        emit FutureRecord(factor, status);
+        // ORACLE: Future monitored to safeguard dignity and prevent exploitative imbalance in innovation cycles.
     }
 }
