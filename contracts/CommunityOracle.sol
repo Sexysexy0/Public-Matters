@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CommunityOracle {
-    event CommunityRecord(string theme, string status);
+    event CommunityRecord(string vibe, string impact);
 
-    function logCommunityImpact(string memory theme, string memory status) external {
-        emit CommunityRecord(theme, status);
-        // ORACLE: Community impact monitored to safeguard cultural footprint and prevent narrative decay.
+    function logCommunityVibe(string memory vibe, string memory impact) external {
+        emit CommunityRecord(vibe, impact);
+        // ORACLE: Community vibe monitored to safeguard authenticity and prevent exploitative cultural appropriation.
     }
 }
