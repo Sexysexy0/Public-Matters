@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AffordabilityShield {
-    event AffordabilitySeal(string product, string status);
+    event AffordabilitySeal(string item, string measure);
 
-    function logAffordability(string memory product, string memory status) external {
-        emit AffordabilitySeal(product, status);
-        // RULE: Affordability safeguarded to ensure automatic price drops and dignified consumer equity.
+    function logAffordability(string memory item, string memory measure) external {
+        emit AffordabilitySeal(item, measure);
+        // SHIELD: Affordability safeguarded to ensure households can access essentials without exploitative burden.
     }
 }
