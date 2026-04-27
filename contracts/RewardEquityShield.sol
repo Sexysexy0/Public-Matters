@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract RewardEquityShield {
-    event RewardRecord(string player, string reward);
+    event RewardSeal(string reward, string status);
 
-    function logReward(string memory player, string memory reward) external {
-        emit RewardRecord(player, reward);
-        // SHIELD: Rewards monitored to safeguard dignity and prevent exploitative imbalance in achievement compensation.
+    function logReward(string memory reward, string memory status) external {
+        emit RewardSeal(reward, status);
+        // SHIELD: Rewards safeguarded to ensure dignity and prevent exploitative imbalance in grind cycles.
     }
 }
