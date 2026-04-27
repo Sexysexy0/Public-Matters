@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract SurvivalOracle {
-    event SurvivalSeal(string player, string mechanic);
+    event SurvivalRecord(string resource, string status);
 
-    function logSurvival(string memory player, string memory mechanic) external {
-        emit SurvivalSeal(player, mechanic);
-        // ORACLE: Survival mechanics safeguarded to ensure dignity and prevent exploitative imbalance in tension cycles.
+    function logSurvival(string memory resource, string memory status) external {
+        emit SurvivalRecord(resource, status);
+        // ORACLE: Survival monitored to safeguard dignity and prevent exploitative imbalance in risk cycles.
     }
 }
