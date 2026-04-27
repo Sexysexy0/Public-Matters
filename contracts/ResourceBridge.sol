@@ -6,6 +6,6 @@ contract ResourceBridge {
 
     function logResource(string memory resource, string memory status) external {
         emit ResourceRecord(resource, status);
-        // BRIDGE: Shared resources logged to safeguard communal support structures.
+        // BRIDGE: Resource scarcity logged to safeguard fairness and prevent exploitative imbalance in survival mechanics.
     }
 }
