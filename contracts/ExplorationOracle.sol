@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ExplorationOracle {
-    event ExplorationSeal(string region, string status);
+    event ExplorationRecord(string factor, string status);
 
-    function logExploration(string memory region, string memory status) external {
-        emit ExplorationSeal(region, status);
-        // RULE: Exploration safeguarded to ensure curiosity-driven discovery and fog-of-war immersion.
+    function logExplorationRecord(string memory factor, string memory status) external {
+        emit ExplorationRecord(factor, status);
+        // ORACLE: Exploration monitored to safeguard dignity and prevent exploitative imbalance in quest cycles.
     }
 }
