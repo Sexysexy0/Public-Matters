@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AccessibilityOracle {
-    event AccessibilityRecord(string cycle, string status);
+    event AccessibilitySeal(string feature, string status);
 
-    function logCycle(string memory cycle, string memory status) external {
-        emit AccessibilityRecord(cycle, status);
-        // ORACLE: Discount cycles monitored to ensure equitable access for all consumers.
+    function logAccessibility(string memory feature, string memory status) external {
+        emit AccessibilitySeal(feature, status);
+        // RULE: Accessibility safeguarded to ensure inclusive layouts and dignified player experience.
     }
 }
