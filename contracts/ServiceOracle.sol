@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ServiceOracle {
-    event ServiceRecord(string service, string feedback);
+    event ServiceRecord(string promise, string status);
 
-    function logFeedback(string memory service, string memory feedback) external {
-        emit ServiceRecord(service, feedback);
-        // ORACLE: Public service feedback monitored for continuous improvement.
+    function logService(string memory promise, string memory status) external {
+        emit ServiceRecord(promise, status);
+        // ORACLE: Public service monitored to safeguard dignity and prevent exploitative imbalance in governance cycles.
     }
 }
