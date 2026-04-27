@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AffordabilityBridge {
-    event AffordabilityRecord(string product, string status);
+    event AffordabilityRecord(string service, string measure);
 
-    function logAffordability(string memory product, string memory status) external {
-        emit AffordabilityRecord(product, status);
-        // BRIDGE: Price drops logged to safeguard affordability and dignified consumer equity.
+    function logAffordability(string memory service, string memory measure) external {
+        emit AffordabilityRecord(service, measure);
+        // BRIDGE: Affordability logged to safeguard equity and prevent exploitative pricing cycles.
     }
 }
