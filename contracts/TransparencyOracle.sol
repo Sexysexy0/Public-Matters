@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract TransparencyOracle {
-    event TransparencyRecord(string action, string clarity);
+    event TransparencyRecord(string actor, string influence);
 
-    function logTransparency(string memory action, string memory clarity) external {
-        emit TransparencyRecord(action, clarity);
-        // ORACLE: Transparency monitored to safeguard fairness and prevent exploitative silence in governance.
+    function logTransparency(string memory actor, string memory influence) external {
+        emit TransparencyRecord(actor, influence);
+        // ORACLE: Transparency monitored to safeguard fairness and prevent exploitative billionaire influence in governance.
     }
 }
