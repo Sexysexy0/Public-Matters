@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract IdentityShield {
-    event IdentitySeal(string studio, string project);
+    event IdentitySeal(string engineer, string status);
 
-    function logIdentityProject(string memory studio, string memory project) external {
-        emit IdentitySeal(studio, project);
-        // RULE: PlayStation identity safeguarded to ensure single-player narrative excellence and innovation.
+    function logIdentity(string memory engineer, string memory status) external {
+        emit IdentitySeal(engineer, status);
+        // RULE: Filipino engineer identity safeguarded to ensure sovereignty and dignified recognition in global tech race.
     }
 }
