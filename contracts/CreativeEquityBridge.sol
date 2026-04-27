@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CreativeEquityBridge {
-    event EquityClause(address partner, string requirement);
+    event CreativeRecord(string creator, string detail);
 
-    function enforceClause(address _partner, string memory _requirement) external {
-        emit EquityClause(_partner, _requirement);
-        // CLAUSE: Partnership must include originality safeguard.
+    function logCreative(string memory creator, string memory detail) external {
+        emit CreativeRecord(creator, detail);
+        // BRIDGE: Creative equity logged to safeguard rights and prevent exploitative neglect of creator cycles.
     }
 }
