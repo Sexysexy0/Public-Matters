@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ConsumerTrustShield {
-    event TrustRecord(string product, string trustLevel);
+    event TrustSeal(string market, string safeguard);
 
-    function logConsumerTrust(string memory product, string memory trustLevel) external {
-        emit TrustRecord(product, trustLevel);
-        // ORACLE: Consumer trust monitored to safeguard fairness and prevent exploitative pricing practices.
+    function logTrust(string memory market, string memory safeguard) external {
+        emit TrustSeal(market, safeguard);
+        // SHIELD: Consumer trust safeguarded to ensure dignity and prevent exploitative pricing or misinformation.
     }
 }
