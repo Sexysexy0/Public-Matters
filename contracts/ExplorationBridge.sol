@@ -6,6 +6,6 @@ contract ExplorationBridge {
 
     function logExploration(string memory player, string memory discovery) external {
         emit ExplorationRecord(player, discovery);
-        // BRIDGE: Exploration logged to safeguard curiosity-driven gameplay and prevent exploitative gating of content.
+        // BRIDGE: Exploration logged to safeguard organic discovery and prevent exploitative gating of curiosity-driven gameplay.
     }
 }
