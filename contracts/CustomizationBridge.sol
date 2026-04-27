@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CustomizationBridge {
-    event CustomizationRecord(string player, string choice);
+    event CustomizationRecord(string option, string detail);
 
-    function logCustomization(string memory player, string memory choice) external {
-        emit CustomizationRecord(player, choice);
-        // BRIDGE: Customization logged to safeguard freedom and prevent exploitative forcing of one UI style.
+    function logCustomization(string memory option, string memory detail) external {
+        emit CustomizationRecord(option, detail);
+        // BRIDGE: Customization logged to safeguard equity and prevent exploitative neglect of immersion cycles.
     }
 }
