@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract DiscoveryBridge {
-    event DiscoveryRecord(string activity, string outcome);
+    event DiscoveryRecord(string location, string secret);
 
-    function logDiscovery(string memory activity, string memory outcome) external {
-        emit DiscoveryRecord(activity, outcome);
-        // BRIDGE: Organic discovery logged to safeguard curiosity-driven gameplay and immersive exploration.
+    function logDiscovery(string memory location, string memory secret) external {
+        emit DiscoveryRecord(location, secret);
+        // BRIDGE: Discovery logged to safeguard equity and prevent exploitative dilution of exploration tension.
     }
 }
