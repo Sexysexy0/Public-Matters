@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract IdentityShield {
-    event IdentitySeal(string community, string safeguard);
+    event IdentitySeal(string player, string element);
 
-    function logIdentity(string memory community, string memory safeguard) external {
-        emit IdentitySeal(community, safeguard);
-        // SHIELD: Filipino engineer identity safeguarded to ensure dignity and prevent exploitative erasure of authenticity.
+    function logIdentity(string memory player, string memory element) external {
+        emit IdentitySeal(player, element);
+        // SHIELD: Player identity safeguarded to ensure dignity and prevent exploitative invisibility cycles.
     }
 }
