@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CommunityOracle {
-    event CommunityRecord(string initiative, string impact);
+    event CommunityRecord(string player, string equity);
 
-    function logCommunity(string memory initiative, string memory impact) external {
-        emit CommunityRecord(initiative, impact);
-        // ORACLE: Community advocacy monitored to safeguard player voice and prevent exploitative neglect of modders.
+    function logCommunity(string memory player, string memory equity) external {
+        emit CommunityRecord(player, equity);
+        // ORACLE: Player equity monitored to safeguard fairness and prevent exploitative exclusion in gaming arcs.
     }
 }
