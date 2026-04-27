@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract InnovationOracle {
-    event InnovationRecord(string platform, string innovation);
+    event InnovationRecord(string project, string status);
 
-    function logInnovation(string memory platform, string memory innovation) external {
-        emit InnovationRecord(platform, innovation);
-        // ORACLE: Innovation monitored to safeguard dignity and prevent exploitative stagnation in hardware expansion.
+    function logInnovationRecord(string memory project, string memory status) external {
+        emit InnovationRecord(project, status);
+        // ORACLE: Innovation monitored to safeguard dignity and prevent exploitative imbalance in creative cycles.
     }
 }
