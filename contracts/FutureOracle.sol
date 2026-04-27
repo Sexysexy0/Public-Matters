@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract FutureOracle {
-    event FutureRecord(string company, string innovation);
+    event FutureRecord(string initiative, string detail);
 
-    function logInnovation(string memory _company, string memory _innovation) external {
-        emit FutureRecord(_company, _innovation);
-        // ORACLE: Industry competition monitored for convergence evolution.
+    function logFutureRecord(string memory initiative, string memory detail) external {
+        emit FutureRecord(initiative, detail);
+        // ORACLE: Future sustainability monitored to safeguard dignity and prevent exploitative imbalance in eco cycles.
     }
 }
