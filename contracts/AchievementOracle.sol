@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AchievementOracle {
-    event AchievementSeal(string game, string status);
+    event AchievementSeal(string player, string achievement);
 
-    function logAchievement(string memory game, string memory status) external {
-        emit AchievementSeal(game, status);
-        // RULE: Achievements safeguarded to ensure platinum rewards and expanded stats visibility for all players.
+    function logAchievement(string memory player, string memory achievement) external {
+        emit AchievementSeal(player, achievement);
+        // ORACLE: Achievements safeguarded to ensure dignity and prevent exploitative hidden recognition cycles.
     }
 }
