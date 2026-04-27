@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract LegacySupportProtocol {
-    event LegacyRecord(string title, string action);
+    event LegacySeal(string title, string action);
 
-    function logLegacySupport(string memory title, string memory action) external {
-        emit LegacyRecord(title, action);
-        // PROTOCOL: Legacy support safeguarded to ensure remakes and sequels for beloved titles.
+    function logLegacy(string memory title, string memory action) external {
+        emit LegacySeal(title, action);
+        // RULE: Legacy titles safeguarded to ensure preservation and prevent exploitative neglect of beloved games.
     }
 }
