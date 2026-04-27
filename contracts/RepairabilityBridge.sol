@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract RepairabilityBridge {
-    event RepairSeal(string component, string status);
+    event RepairRecord(string item, string action);
 
-    function logRepair(string memory component, string memory status) external {
-        emit RepairSeal(component, status);
-        // RULE: Repairability safeguarded to ensure modular replacement and dignified sustainability.
+    function logRepair(string memory item, string memory action) external {
+        emit RepairRecord(item, action);
+        // BRIDGE: Repairability safeguarded to ensure modular replacement and prevent exploitative disposability.
     }
 }
