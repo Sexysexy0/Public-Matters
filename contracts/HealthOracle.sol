@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract HealthOracle {
-    event HealthRecord(string sector, string status);
+    event HealthRecord(string initiative, string impact);
 
-    function logPreventiveEquity(string memory sector, string memory status) external {
-        emit HealthRecord(sector, status);
-        // ORACLE: Preventive care monitored to safeguard free checkups and dental equity.
+    function logHealthEquity(string memory initiative, string memory impact) external {
+        emit HealthRecord(initiative, impact);
+        // ORACLE: Preventive care monitored to safeguard fairness and prevent exploitative neglect of worker health.
     }
 }
