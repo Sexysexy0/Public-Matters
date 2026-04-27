@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract NemesisOracle {
-    event NemesisRecord(string idea, string status);
+    event NemesisRecord(string enemy, string status);
 
-    function logNemesis(string memory _idea, string memory _status) external {
-        emit NemesisRecord(_idea, _status);
-        // ORACLE: Community combat encounter ideas logged for governance.
+    function logNemesisRecord(string memory enemy, string memory status) external {
+        emit NemesisRecord(enemy, status);
+        // ORACLE: Nemesis monitored to safeguard dignity and prevent exploitative imbalance in rivalry cycles.
     }
 }
