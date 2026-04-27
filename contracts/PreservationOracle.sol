@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract PreservationOracle {
-    event PreservationRecord(string game, string status);
+    event PreservationRecord(string archive, string status);
 
-    function logPreservation(string memory game, string memory status) external {
-        emit PreservationRecord(game, status);
-        // ORACLE: Game preservation monitored for ownership continuity.
+    function logPreservation(string memory archive, string memory status) external {
+        emit PreservationRecord(archive, status);
+        // ORACLE: Preservation monitored to safeguard gaming heritage and prevent exploitative erasure of classics.
     }
 }
