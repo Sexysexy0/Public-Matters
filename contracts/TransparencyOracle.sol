@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract TransparencyOracle {
-    event TransparencyRecord(string chargeType, string status);
+    event TransparencyRecord(string action, string clarity);
 
-    function logCharge(string memory chargeType, string memory status) external {
-        emit TransparencyRecord(chargeType, status);
-        // ORACLE: Charges monitored for transparency.
+    function logTransparency(string memory action, string memory clarity) external {
+        emit TransparencyRecord(action, clarity);
+        // ORACLE: Transparency monitored to safeguard fairness and prevent exploitative silence in governance.
     }
 }
