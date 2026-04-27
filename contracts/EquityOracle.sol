@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract EquityOracle {
-    event EquityRecord(string sector, string status);
+    event EquityRecord(string sector, string fairness);
 
-    function logAffordabilityEquity(string memory sector, string memory status) external {
-        emit EquityRecord(sector, status);
-        // ORACLE: Affordability monitored to safeguard pricing justice and prevent exclusionary practices.
+    function logEquity(string memory sector, string memory fairness) external {
+        emit EquityRecord(sector, fairness);
+        // ORACLE: Buyer equity monitored to safeguard fairness and prevent exploitative consumer practices.
     }
 }
