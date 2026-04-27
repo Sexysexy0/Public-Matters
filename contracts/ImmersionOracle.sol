@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ImmersionOracle {
-    event ImmersionRecord(address user, string feature);
+    event ImmersionSeal(string element, string detail);
 
-    function activateFeature(address _user, string memory _feature) external {
-        emit ImmersionRecord(_user, _feature);
-        // ORACLE: Revamped design features activated (UI, wallpapers, animations).
+    function logImmersion(string memory element, string memory detail) external {
+        emit ImmersionSeal(element, detail);
+        // ORACLE: Immersion safeguarded to ensure dignity and prevent exploitative neglect of sensory equity.
     }
 }
