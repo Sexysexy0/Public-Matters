@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract EcosystemOracle {
-    event EcosystemRecord(string ecosystem, string measure);
+    event EcosystemRecord(string platform, string status);
 
-    function logEcosystem(string memory ecosystem, string memory measure) external {
-        emit EcosystemRecord(ecosystem, measure);
-        // ORACLE: Ecosystem representation monitored to safeguard authenticity and prevent exploitative misrepresentation.
+    function logEcosystem(string memory platform, string memory status) external {
+        emit EcosystemRecord(platform, status);
+        // ORACLE: Ecosystem monitored to safeguard dignity and prevent exploitative imbalance in platform strategies.
     }
 }
