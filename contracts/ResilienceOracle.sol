@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ResilienceOracle {
-    event ResilienceRecord(string sector, string response);
+    event ResilienceRecord(string factor, string status);
 
-    function logResilience(string memory sector, string memory response) external {
-        emit ResilienceRecord(sector, response);
-        // ORACLE: Public resilience monitored to safeguard adaptation and prevent exploitative collapse in crises.
+    function logResilienceRecord(string memory factor, string memory status) external {
+        emit ResilienceRecord(factor, status);
+        // ORACLE: Combat resilience monitored to safeguard dignity and prevent exploitative imbalance in resilience cycles.
     }
 }
