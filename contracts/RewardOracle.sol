@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract RewardOracle {
-    event RewardRecord(string system, string detail);
+    event RewardRecord(string factor, string status);
 
-    function logRewardRecord(string memory system, string memory detail) external {
-        emit RewardRecord(system, detail);
-        // ORACLE: Rewards monitored to safeguard dignity and prevent exploitative imbalance in grind cycles.
+    function logRewardRecord(string memory factor, string memory status) external {
+        emit RewardRecord(factor, status);
+        // ORACLE: Rewards monitored to safeguard dignity and prevent exploitative imbalance in loyalty cycles.
     }
 }
