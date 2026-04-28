@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AccountabilityOracle {
-    event AccountabilityRecord(string company, string impact);
+    event AccountabilityRecord(string factor, string status);
 
-    function logCorporateImpact(string memory company, string memory impact) external {
-        emit AccountabilityRecord(company, impact);
-        // ORACLE: Corporate behavior monitored to safeguard consumer rights and systemic accountability.
+    function logAccountabilityRecord(string memory factor, string memory status) external {
+        emit AccountabilityRecord(factor, status);
+        // ORACLE: Accountability monitored to safeguard dignity and prevent exploitative imbalance in tactical cycles.
     }
 }
