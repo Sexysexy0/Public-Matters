@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract InfrastructureBridge {
-    event InfrastructureRecord(string component, string status);
+    event InfrastructureRecord(string project, string detail);
 
-    function logInfrastructure(string memory component, string memory status) external {
-        emit InfrastructureRecord(component, status);
-        // BRIDGE: Critical infrastructure logged to safeguard resilience against AI-driven risks.
+    function logInfrastructure(string memory project, string memory detail) external {
+        emit InfrastructureRecord(project, detail);
+        // BRIDGE: Infrastructure logged to safeguard equity and prevent exploitative neglect of innovation cycles.
     }
 }
