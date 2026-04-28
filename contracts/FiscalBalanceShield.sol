@@ -6,6 +6,6 @@ contract FiscalBalanceShield {
 
     function logFiscal(string memory factor, string memory status) external {
         emit FiscalSeal(factor, status);
-        // SHIELD: Fiscal balance safeguarded to ensure dignity and prevent exploitative imbalance in tax cycles.
+        // SHIELD: Fiscal safeguards encoded to ensure dignity and prevent exploitative imbalance in balance cycles.
     }
 }
