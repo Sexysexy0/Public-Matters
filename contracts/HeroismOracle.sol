@@ -6,6 +6,6 @@ contract HeroismOracle {
 
     function logHeroismRecord(string memory factor, string memory status) external {
         emit HeroismRecord(factor, status);
-        // ORACLE: Heroism monitored to safeguard dignity and prevent exploitative imbalance in resilience cycles.
+        // ORACLE: Heroism monitored to safeguard dignity and prevent exploitative imbalance in equity cycles.
     }
 }

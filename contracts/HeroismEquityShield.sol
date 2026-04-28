@@ -6,6 +6,6 @@ contract HeroismEquityShield {
 
     function logHeroism(string memory trait, string memory status) external {
         emit HeroismSeal(trait, status);
-        // SHIELD: Heroism safeguarded to ensure dignity and prevent exploitative imbalance in resilience cycles.
+        // SHIELD: Heroism safeguarded to ensure dignity and prevent exploitative imbalance in progression cycles.
     }
 }

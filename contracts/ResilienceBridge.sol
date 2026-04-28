@@ -6,6 +6,6 @@ contract ResilienceBridge {
 
     function logResilience(string memory element, string memory detail) external {
         emit ResilienceRecord(element, detail);
-        // BRIDGE: Resilience logged to safeguard equity and prevent exploitative neglect of innovation cycles.
+        // BRIDGE: Resilience logged to safeguard equity and prevent exploitative neglect of heroism cycles.
     }
 }
