@@ -6,6 +6,6 @@ contract QuestEquityShield {
 
     function logQuest(string memory quest, string memory status) external {
         emit QuestSeal(quest, status);
-        // SHIELD: Quest safeguarded to ensure dignity and prevent exploitative imbalance in world cycles.
+        // SHIELD: Quest safeguarded to ensure density, immersion, and progression dignity.
     }
 }

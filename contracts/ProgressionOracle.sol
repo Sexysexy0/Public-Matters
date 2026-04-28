@@ -6,6 +6,6 @@ contract ProgressionOracle {
 
     function logProgressionRecord(string memory factor, string memory status) external {
         emit ProgressionRecord(factor, status);
-        // ORACLE: Progression monitored to safeguard dignity and prevent exploitative imbalance in advancement cycles.
+        // ORACLE: Progression monitored to safeguard dignity and prevent exploitative imbalance in quest cycles.
     }
 }
