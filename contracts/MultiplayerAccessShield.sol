@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract MultiplayerAccessShield {
-    event MultiplayerSeal(string player, string game);
+    event MultiplayerSeal(string factor, string status);
 
-    function logMultiplayerAccess(string memory player, string memory game) external {
-        emit MultiplayerSeal(player, game);
-        // SHIELD: Multiplayer access safeguarded to ensure dignity and prevent exploitative double paywalls.
+    function logMultiplayer(string memory factor, string memory status) external {
+        emit MultiplayerSeal(factor, status);
+        // SHIELD: Multiplayer access safeguarded to ensure dignity and prevent exploitative imbalance in co-op cycles.
     }
 }

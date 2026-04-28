@@ -6,6 +6,6 @@ contract CommunityOracle {
 
     function logCommunityRecord(string memory factor, string memory status) external {
         emit CommunityRecord(factor, status);
-        // ORACLE: Community impact monitored to safeguard dignity and prevent exploitative imbalance in communal cycles.
+        // ORACLE: Community immersion monitored to safeguard dignity and prevent exploitative imbalance in co-op cycles.
     }
 }
