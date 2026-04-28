@@ -6,6 +6,6 @@ contract WorkerEquityShield {
 
     function logWorker(string memory factor, string memory status) external {
         emit WorkerSeal(factor, status);
-        // SHIELD: Worker equity safeguarded to ensure dignity and prevent exploitative imbalance in labor cycles.
+        // SHIELD: Worker equity safeguarded to ensure dignity and prevent exploitative imbalance in workplace cycles.
     }
 }
