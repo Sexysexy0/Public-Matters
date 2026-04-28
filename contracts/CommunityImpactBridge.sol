@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CommunityImpactBridge {
-    event ImpactRecord(string project, string detail);
+    event ImpactSeal(string factor, string status);
 
-    function logImpact(string memory project, string memory detail) external {
-        emit ImpactRecord(project, detail);
-        // BRIDGE: Community impact logged to safeguard equity and prevent exploitative neglect of audit cycles.
+    function logImpact(string memory factor, string memory status) external {
+        emit ImpactSeal(factor, status);
+        // BRIDGE: Community impact safeguarded to ensure dignity and prevent exploitative imbalance in governance cycles.
     }
 }
