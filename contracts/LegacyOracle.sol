@@ -6,6 +6,6 @@ contract LegacyOracle {
 
     function logLegacyRecord(string memory factor, string memory status) external {
         emit LegacyRecord(factor, status);
-        // ORACLE: Legacy monitored to safeguard dignity and prevent exploitative imbalance in franchise cycles.
+        // ORACLE: Legacy monitored to safeguard dignity and prevent exploitative imbalance in preservation cycles.
     }
 }
