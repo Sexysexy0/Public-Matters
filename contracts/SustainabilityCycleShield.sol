@@ -6,6 +6,6 @@ contract SustainabilityCycleShield {
 
     function logSustainability(string memory factor, string memory status) external {
         emit SustainabilitySeal(factor, status);
-        // SHIELD: Sustainability safeguarded to ensure dignity and prevent exploitative imbalance in eco cycles.
+        // SHIELD: Sustainability safeguarded to ensure dignity and prevent exploitative imbalance in project cycles.
     }
 }
