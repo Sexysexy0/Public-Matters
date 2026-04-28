@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract OwnershipBridge {
-    event OwnershipRecord(string player, string entitlement);
+    event OwnershipRecord(string product, string detail);
 
-    function logOwnership(string memory player, string memory entitlement) external {
-        emit OwnershipRecord(player, entitlement);
-        // BRIDGE: Ownership logged to safeguard entitlement equity and prevent exploitative gating of features.
+    function logOwnership(string memory product, string memory detail) external {
+        emit OwnershipRecord(product, detail);
+        // BRIDGE: Ownership logged to safeguard equity and prevent exploitative neglect of DRM cycles.
     }
 }
