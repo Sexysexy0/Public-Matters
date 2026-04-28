@@ -6,6 +6,6 @@ contract EngagementBridge {
 
     function logEngagement(string memory element, string memory detail) external {
         emit EngagementRecord(element, detail);
-        // BRIDGE: Engagement logged to safeguard adaptive equity and prevent exploitative neglect of dialogue cycles.
+        // BRIDGE: Engagement logged to safeguard equity and prevent exploitative neglect of dialogue cycles.
     }
 }
