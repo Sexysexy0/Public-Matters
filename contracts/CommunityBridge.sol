@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CommunityBridge {
-    event CommunityRecord(string category, string choice);
+    event CommunityRecord(string group, string detail);
 
-    function logCommunityChoice(string memory category, string memory choice) external {
-        emit CommunityRecord(category, choice);
-        // BRIDGE: Community participation logged to safeguard inclusive gaming rituals.
+    function logCommunity(string memory group, string memory detail) external {
+        emit CommunityRecord(group, detail);
+        // BRIDGE: Community logged to safeguard equity and prevent exploitative neglect of guild cycles.
     }
 }
