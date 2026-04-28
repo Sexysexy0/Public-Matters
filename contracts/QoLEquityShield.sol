@@ -6,6 +6,6 @@ contract QoLEquityShield {
 
     function logQoL(string memory feature, string memory status) external {
         emit QoLSeal(feature, status);
-        // SHIELD: QoL safeguarded to ensure dignity and prevent exploitative imbalance in MMO cycles.
+        // SHIELD: QoL safeguarded to ensure dignity and prevent exploitative imbalance in accessibility cycles.
     }
 }
