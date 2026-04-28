@@ -6,6 +6,6 @@ contract GuildOracle {
 
     function logGuildRecord(string memory factor, string memory status) external {
         emit GuildRecord(factor, status);
-        // ORACLE: Guild monitored to safeguard dignity and prevent exploitative imbalance in community cycles.
+        // ORACLE: Guild monitored to safeguard dignity and prevent exploitative imbalance in cooperative cycles.
     }
 }
