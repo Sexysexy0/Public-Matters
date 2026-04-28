@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ImmersionOracle {
-    event ImmersionSeal(string element, string detail);
+    event ImmersionRecord(string factor, string status);
 
-    function logImmersion(string memory element, string memory detail) external {
-        emit ImmersionSeal(element, detail);
-        // ORACLE: Immersion safeguarded to ensure dignity and prevent exploitative neglect of sensory equity.
+    function logImmersionRecord(string memory factor, string memory status) external {
+        emit ImmersionRecord(factor, status);
+        // ORACLE: Immersion monitored to safeguard dignity and prevent exploitative imbalance in exploration cycles.
     }
 }
