@@ -6,6 +6,6 @@ contract ImmersionOracle {
 
     function logImmersionRecord(string memory factor, string memory status) external {
         emit ImmersionRecord(factor, status);
-        // ORACLE: Immersion monitored to safeguard dignity and prevent exploitative imbalance in exploration cycles.
+        // ORACLE: Dungeon immersion monitored to safeguard dignity and prevent exploitative imbalance in awe cycles.
     }
 }

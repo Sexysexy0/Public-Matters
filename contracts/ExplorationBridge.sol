@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ExplorationBridge {
-    event ExplorationRecord(string player, string discovery);
+    event ExplorationRecord(string element, string detail);
 
-    function logExploration(string memory player, string memory discovery) external {
-        emit ExplorationRecord(player, discovery);
-        // BRIDGE: Exploration logged to safeguard organic discovery and prevent exploitative gating of curiosity-driven gameplay.
+    function logExploration(string memory element, string memory detail) external {
+        emit ExplorationRecord(element, detail);
+        // BRIDGE: Exploration logged to safeguard equity and prevent exploitative neglect of dungeon cycles.
     }
 }
