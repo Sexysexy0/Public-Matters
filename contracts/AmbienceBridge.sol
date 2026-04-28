@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AmbienceBridge {
-    event AmbienceRecord(string track, string style);
+    event AmbienceRecord(string feature, string detail);
 
-    function logAmbience(string memory track, string memory style) external {
-        emit AmbienceRecord(track, style);
-        // BRIDGE: Ambience logged to safeguard equity and prevent exploitative monotony in sensory cycles.
+    function logAmbience(string memory feature, string memory detail) external {
+        emit AmbienceRecord(feature, detail);
+        // BRIDGE: Ambience logged to safeguard equity and prevent exploitative neglect of immersion cycles.
     }
 }
