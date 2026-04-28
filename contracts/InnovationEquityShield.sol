@@ -6,6 +6,6 @@ contract InnovationEquityShield {
 
     function logInnovation(string memory factor, string memory status) external {
         emit InnovationSeal(factor, status);
-        // SHIELD: Innovation safeguarded to ensure dignity and prevent exploitative imbalance in creative cycles.
+        // SHIELD: Innovation safeguarded to ensure dignity and prevent exploitative imbalance in adaptation cycles.
     }
 }
