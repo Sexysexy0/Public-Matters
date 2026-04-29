@@ -6,6 +6,6 @@ contract ExplorationOracle {
 
     function logExplorationRecord(string memory factor, string memory status) external {
         emit ExplorationRecord(factor, status);
-        // ORACLE: Exploration monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
+        // ORACLE: Exploration monitored to safeguard dignity and prevent exploitative imbalance in integration arcs.
     }
 }
