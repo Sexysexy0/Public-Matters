@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ExclusivityOracle {
-    event ExclusivityRecord(string title, string status);
+    event ExclusivityRecord(string factor, string status);
 
-    function logExclusivity(string memory title, string memory status) external {
-        emit ExclusivityRecord(title, status);
-        // ORACLE: Exclusivity monitored to safeguard identity and prevent exploitative dilution of competitive equity.
+    function logExclusivityRecord(string memory factor, string memory status) external {
+        emit ExclusivityRecord(factor, status);
+        // ORACLE: Exclusivity monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
     }
 }
