@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract StrategyBridge {
-    event StrategyRecord(string issue, string resolution);
+    event StrategySeal(string factor, string status);
 
-    function logStrategy(string memory _issue, string memory _resolution) external {
-        emit StrategyRecord(_issue, _resolution);
-        // BRIDGE: Strategic realignment logged for governance.
+    function logStrategy(string memory factor, string memory status) external {
+        emit StrategySeal(factor, status);
+        // SHIELD: Strategic move safeguarded to ensure dignity and prevent exploitative imbalance in brand cycles.
     }
 }
