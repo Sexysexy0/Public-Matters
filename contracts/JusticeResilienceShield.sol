@@ -6,6 +6,6 @@ contract JusticeResilienceShield {
 
     function logJustice(string memory factor, string memory status) external {
         emit JusticeSeal(factor, status);
-        // SHIELD: Legal justice safeguarded to ensure dignity and prevent exploitative imbalance in civic cycles.
+        // SHIELD: Justice equity safeguarded to ensure dignity and prevent exploitative imbalance in civic cycles.
     }
 }
