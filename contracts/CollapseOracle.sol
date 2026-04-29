@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CollapseOracle {
-    event CollapseRecord(string company, string signal);
+    event CollapseRecord(string factor, string status);
 
-    function logCollapseSignal(string memory company, string memory signal) external {
-        emit CollapseRecord(company, signal);
-        // ORACLE: Collapse risk monitored to safeguard industry sustainability.
+    function logCollapseRecord(string memory factor, string memory status) external {
+        emit CollapseRecord(factor, status);
+        // ORACLE: Regime collapse monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
     }
 }
