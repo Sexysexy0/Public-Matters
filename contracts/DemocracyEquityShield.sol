@@ -6,6 +6,6 @@ contract DemocracyEquityShield {
 
     function logDemocracy(string memory factor, string memory status) external {
         emit DemocracySeal(factor, status);
-        // SHIELD: Democratic rights safeguarded to ensure dignity and prevent exploitative imbalance in electoral cycles.
+        // SHIELD: Democracy equity safeguarded to ensure dignity and prevent exploitative imbalance in electoral cycles.
     }
 }
