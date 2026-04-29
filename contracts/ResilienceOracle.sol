@@ -6,6 +6,6 @@ contract ResilienceOracle {
 
     function logResilienceRecord(string memory factor, string memory status) external {
         emit ResilienceRecord(factor, status);
-        // ORACLE: Combat resilience monitored to safeguard dignity and prevent exploitative imbalance in resilience cycles.
+        // ORACLE: Innovation monitored to safeguard dignity and prevent exploitative imbalance in adaptive cycles.
     }
 }
