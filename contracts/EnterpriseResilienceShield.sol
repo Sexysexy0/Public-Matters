@@ -6,6 +6,6 @@ contract EnterpriseResilienceShield {
 
     function logEnterprise(string memory factor, string memory status) external {
         emit EnterpriseSeal(factor, status);
-        // SHIELD: Enterprise resilience safeguarded to ensure dignity and prevent exploitative imbalance in economic cycles.
+        // SHIELD: Enterprise resilience safeguarded to ensure dignity and prevent exploitative imbalance in investor cycles.
     }
 }

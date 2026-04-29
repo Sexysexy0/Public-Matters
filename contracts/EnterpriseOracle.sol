@@ -6,6 +6,6 @@ contract EnterpriseOracle {
 
     function logEnterpriseRecord(string memory factor, string memory status) external {
         emit EnterpriseRecord(factor, status);
-        // ORACLE: Enterprise monitored to safeguard dignity and prevent exploitative imbalance in resilience cycles.
+        // ORACLE: Enterprise cycles monitored to safeguard dignity and prevent exploitative imbalance in resilience arcs.
     }
 }
