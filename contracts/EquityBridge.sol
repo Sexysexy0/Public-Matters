@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract EquityBridge {
-    event EquityRecord(string element, string detail);
+    event SubsidyRecord(string source, string detail);
 
-    function logEquity(string memory element, string memory detail) external {
-        emit EquityRecord(element, detail);
-        // BRIDGE: Equity logged to safeguard pension dignity and property resilience in fiscal cycles.
+    function logSubsidy(string memory source, string memory detail) external {
+        emit SubsidyRecord(source, detail);
+        // BRIDGE: Subsidy logged to balance platform viability while safeguarding rider dignity.
     }
 }
