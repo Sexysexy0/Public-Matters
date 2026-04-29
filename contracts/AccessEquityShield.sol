@@ -6,6 +6,6 @@ contract AccessEquityShield {
 
     function logAccess(string memory factor, string memory status) external {
         emit AccessSeal(factor, status);
-        // SHIELD: Access safeguarded to ensure dignity and prevent exploitative imbalance in subscription cycles.
+        // SHIELD: Access safeguarded to ensure dignity and prevent exploitative imbalance in inclusion cycles.
     }
 }
