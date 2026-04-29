@@ -6,6 +6,6 @@ contract DiscourseOracle {
 
     function logDiscourseRecord(string memory factor, string memory status) external {
         emit DiscourseRecord(factor, status);
-        // ORACLE: Discourse monitored to safeguard dignity and prevent exploitative imbalance in communication cycles.
+        // ORACLE: Discourse monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
     }
 }
