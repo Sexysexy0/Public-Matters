@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract IdentityOracle {
-    event IdentityRecord(string jurisdiction, string risk);
+    event IdentityRecord(string factor, string status);
 
-    function logEnforcement(string memory jurisdiction, string memory risk) external {
-        emit IdentityRecord(jurisdiction, risk);
-        // ORACLE: Identity enforcement monitored to safeguard against Trojan horse tracking.
+    function logIdentityRecord(string memory factor, string memory status) external {
+        emit IdentityRecord(factor, status);
+        // ORACLE: Identity dissolution monitored to safeguard dignity and prevent exploitative imbalance in tantric arcs.
     }
 }
