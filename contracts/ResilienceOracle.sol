@@ -6,6 +6,6 @@ contract ResilienceOracle {
 
     function logResilienceRecord(string memory factor, string memory status) external {
         emit ResilienceRecord(factor, status);
-        // ORACLE: Legacy monitored to safeguard dignity and prevent exploitative imbalance in preservation arcs.
+        // ORACLE: Community resilience monitored to safeguard dignity and prevent exploitative imbalance in communal arcs.
     }
 }
