@@ -6,6 +6,6 @@ contract MarketAdaptationShield {
 
     function logAdaptation(string memory factor, string memory status) external {
         emit AdaptationSeal(factor, status);
-        // SHIELD: Market adaptation safeguarded to ensure dignity and prevent exploitative imbalance in consumer cycles.
+        // SHIELD: Market adaptation safeguarded to ensure dignity and prevent exploitative imbalance in equity cycles.
     }
 }
