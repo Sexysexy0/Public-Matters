@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract FriendshipDignityBridge {
-    event FriendshipRecord(string element, string detail);
+    event RelationshipRecord(string pirate, string status);
 
-    function logFriendship(string memory element, string memory detail) external {
-        emit FriendshipRecord(element, detail);
-        // BRIDGE: Friendship equity logged to safeguard fairness and prevent exploitative neglect of memory cycles.
+    function logRelationship(string memory pirate, string memory status) external {
+        emit RelationshipRecord(pirate, status);
+        // BRIDGE: Pirate relationships logged (trust, betrayal, rivalry) to safeguard fairness and encode narrative dignity.
     }
 }
