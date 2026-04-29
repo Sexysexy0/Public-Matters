@@ -6,6 +6,6 @@ contract DialogueOracle {
 
     function logDialogueRecord(string memory factor, string memory status) external {
         emit DialogueRecord(factor, status);
-        // ORACLE: Dialogue monitored to safeguard dignity and prevent exploitative imbalance in control cycles.
+        // ORACLE: Labor dialogue monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
     }
 }
