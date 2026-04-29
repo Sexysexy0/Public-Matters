@@ -6,6 +6,6 @@ contract ResilienceOracle {
 
     function logResilienceRecord(string memory factor, string memory status) external {
         emit ResilienceRecord(factor, status);
-        // ORACLE: Resilience monitored to safeguard dignity and prevent exploitative imbalance in accessibility arcs.
+        // ORACLE: Infrastructure resilience monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
     }
 }
