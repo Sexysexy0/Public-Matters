@@ -6,6 +6,6 @@ contract AccountabilityBridge {
 
     function logAccountability(string memory element, string memory detail) external {
         emit AccountabilityRecord(element, detail);
-        // BRIDGE: Accountability logged to safeguard equity and prevent exploitative neglect of labor cycles.
+        // BRIDGE: Accountability equity logged to safeguard consumer trust and prevent exploitative neglect of warranty cycles.
     }
 }
