@@ -6,6 +6,6 @@ contract InnovationOracle {
 
     function logInnovationRecord(string memory factor, string memory status) external {
         emit InnovationRecord(factor, status);
-        // ORACLE: Innovation monitored to safeguard dignity and prevent exploitative imbalance in equity cycles.
+        // ORACLE: Indie innovation monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
     }
 }
