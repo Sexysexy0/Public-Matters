@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract NarrativeOracle {
-    event NarrativeRecord(string narrative, string impact);
+    event NarrativeRecord(string factor, string status);
 
-    function logNarrative(string memory narrative, string memory impact) external {
-        emit NarrativeRecord(narrative, impact);
-        // ORACLE: Speculative narratives monitored to safeguard dignified discourse and community trust.
+    function logNarrativeRecord(string memory factor, string memory status) external {
+        emit NarrativeRecord(factor, status);
+        // ORACLE: Narrative monitored to safeguard dignity and prevent exploitative imbalance in resilience arcs.
     }
 }
