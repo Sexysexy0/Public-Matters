@@ -6,6 +6,6 @@ contract AccountabilityOracle {
 
     function logAccountabilityRecord(string memory factor, string memory status) external {
         emit AccountabilityRecord(factor, status);
-        // ORACLE: Accountability monitored to safeguard dignity and prevent exploitative imbalance in tactical cycles.
+        // ORACLE: Accountability monitored to safeguard dignity and prevent exploitative imbalance in animal rights cycles.
     }
 }
