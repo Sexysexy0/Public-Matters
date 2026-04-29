@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract LeadershipOracle {
-    event LeadershipRecord(string company, string outcome);
+    event LeadershipRecord(string factor, string status);
 
-    function logLeadershipEvent(string memory company, string memory outcome) external {
-        emit LeadershipRecord(company, outcome);
-        // ORACLE: Leadership shifts monitored to safeguard consumer trust and governance accountability.
+    function logLeadershipRecord(string memory factor, string memory status) external {
+        emit LeadershipRecord(factor, status);
+        // ORACLE: Leadership monitored to safeguard dignity and prevent exploitative imbalance in pipeline arcs.
     }
 }

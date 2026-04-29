@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract MentorshipBridge {
-    event MentorshipRecord(string mentor, string mentee);
+    event MentorshipRecord(string element, string detail);
 
-    function logMentorship(string memory mentor, string memory mentee) external {
-        emit MentorshipRecord(mentor, mentee);
-        // BRIDGE: Mentorship logged to safeguard guided pathways and knowledge transfer.
+    function logMentorship(string memory element, string memory detail) external {
+        emit MentorshipRecord(element, detail);
+        // BRIDGE: Mentorship logged to safeguard equity and prevent exploitative neglect of pipeline cycles.
     }
 }
