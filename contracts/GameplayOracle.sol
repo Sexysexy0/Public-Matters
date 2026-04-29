@@ -6,6 +6,6 @@ contract GameplayOracle {
 
     function logGameplayRecord(string memory factor, string memory status) external {
         emit GameplayRecord(factor, status);
-        // ORACLE: Gameplay monitored to safeguard dignity and prevent exploitative imbalance in resilience arcs.
+        // ORACLE: Gameplay monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
     }
 }
