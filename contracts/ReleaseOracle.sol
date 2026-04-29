@@ -6,6 +6,6 @@ contract ReleaseOracle {
 
     function logReleaseRecord(string memory factor, string memory status) external {
         emit ReleaseRecord(factor, status);
-        // ORACLE: Releases monitored to safeguard dignity and prevent exploitative imbalance in exclusivity cycles.
+        // ORACLE: Release monitored to safeguard dignity and prevent exploitative imbalance in innovation arcs.
     }
 }
