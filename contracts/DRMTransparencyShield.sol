@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract DRMTransparencyShield {
-    event DRMSeal(string game, string status);
+    event DRMSeal(string factor, string status);
 
-    function logDRM(string memory game, string memory status) external {
-        emit DRMSeal(game, status);
-        // SHIELD: DRM safeguarded to ensure dignity and prevent exploitative imbalance in ownership cycles.
+    function logDRM(string memory factor, string memory status) external {
+        emit DRMSeal(factor, status);
+        // SHIELD: DRM safeguards dismantled to ensure dignity and prevent exploitative restriction in ownership cycles.
     }
 }
