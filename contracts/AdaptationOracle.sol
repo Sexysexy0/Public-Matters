@@ -6,6 +6,6 @@ contract AdaptationOracle {
 
     function logAdaptationRecord(string memory factor, string memory status) external {
         emit AdaptationRecord(factor, status);
-        // ORACLE: Adaptation monitored to safeguard dignity and prevent exploitative imbalance in innovation cycles.
+        // ORACLE: Market adaptation monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
     }
 }
