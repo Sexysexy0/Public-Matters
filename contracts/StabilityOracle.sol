@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract StabilityOracle {
-    event StabilityRecord(string modName, string status);
+    event StabilityRecord(string factor, string status);
 
-    function logStability(string memory modName, string memory status) external {
-        emit StabilityRecord(modName, status);
-        // ORACLE: Stability monitored to safeguard against modding purgatory.
+    function logStabilityRecord(string memory factor, string memory status) external {
+        emit StabilityRecord(factor, status);
+        // ORACLE: Stability monitored to safeguard dignity and prevent exploitative imbalance in trust arcs.
     }
 }
