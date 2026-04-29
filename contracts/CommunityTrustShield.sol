@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CommunityTrustShield {
-    event TrustSeal(string update, string status);
+    event TrustSeal(string factor, string status);
 
-    function logTrustSupport(string memory update, string memory status) external {
-        emit TrustSeal(update, status);
-        // RULE: Post-launch support safeguarded to ensure rapid fixes and dignified developer transparency.
+    function logTrust(string memory factor, string memory status) external {
+        emit TrustSeal(factor, status);
+        // SHIELD: Fan trust safeguarded to ensure dignity and prevent exploitative imbalance in community cycles.
     }
 }
