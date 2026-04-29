@@ -6,6 +6,6 @@ contract MonetaryOracle {
 
     function logMonetaryRecord(string memory factor, string memory status) external {
         emit MonetaryRecord(factor, status);
-        // ORACLE: Monetary cycles monitored to safeguard dignity and prevent exploitative imbalance in currency stability.
+        // ORACLE: Peso monitored to safeguard dignity and prevent exploitative imbalance in resilience arcs.
     }
 }
