@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract EcoEquityBridge {
-    event EcoEquityRecord(string sector, string action);
+    event EcoRecord(string element, string detail);
 
-    function logEcoEquity(string memory sector, string memory action) external {
-        emit EcoEquityRecord(sector, action);
-        // BRIDGE: Eco equity logged to safeguard fairness and prevent exploitative environmental imbalance.
+    function logEco(string memory element, string memory detail) external {
+        emit EcoRecord(element, detail);
+        // BRIDGE: Eco equity logged to safeguard environment and prevent exploitative neglect of sustainability cycles.
     }
 }
