@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract TrustBridge {
-    event TrustRecord(string institution, string status);
+    event TrustRecord(string element, string detail);
 
-    function logTrust(string memory institution, string memory status) external {
-        emit TrustRecord(institution, status);
-        // BRIDGE: Public trust logged to safeguard confidence and prevent exploitative erosion of legitimacy.
+    function logTrust(string memory element, string memory detail) external {
+        emit TrustRecord(element, detail);
+        // BRIDGE: Trust logged to safeguard equity and prevent exploitative neglect of consumer cycles.
     }
 }
