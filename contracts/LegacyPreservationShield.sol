@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract LegacyPreservationShield {
-    event PreservationSeal(string trait, string status);
+    event LegacySeal(string factor, string status);
 
-    function logPreservation(string memory trait, string memory status) external {
-        emit PreservationSeal(trait, status);
+    function logLegacy(string memory factor, string memory status) external {
+        emit LegacySeal(factor, status);
         // SHIELD: Legacy safeguarded to ensure dignity and prevent exploitative imbalance in preservation cycles.
     }
 }
