@@ -6,6 +6,6 @@ contract SystemicOracle {
 
     function logSystemicRecord(string memory factor, string memory status) external {
         emit SystemicRecord(factor, status);
-        // ORACLE: Systemic sustainability monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
+        // ORACLE: Economic resilience monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
     }
 }
