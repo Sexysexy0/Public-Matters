@@ -6,6 +6,6 @@ contract DialogueControlShield {
 
     function logDialogue(string memory factor, string memory status) external {
         emit DialogueSeal(factor, status);
-        // SHIELD: Dialogue control safeguarded to ensure dignity and prevent exploitative imbalance in agency cycles.
+        // SHIELD: Dialogue safeguarded to ensure dignity and prevent exploitative imbalance in engagement cycles.
     }
 }
