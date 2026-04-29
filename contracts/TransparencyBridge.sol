@@ -6,6 +6,6 @@ contract TransparencyBridge {
 
     function logTransparency(string memory element, string memory detail) external {
         emit TransparencyRecord(element, detail);
-        // BRIDGE: Transparency logged to safeguard equity and prevent exploitative neglect of trust cycles.
+        // BRIDGE: Transparency logged to safeguard equity and prevent exploitative neglect of merge queue cycles.
     }
 }
