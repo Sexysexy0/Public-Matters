@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract DiscoveryBridge {
-    event DiscoveryRecord(string location, string secret);
+    event DiscoveryRecord(string element, string detail);
 
-    function logDiscovery(string memory location, string memory secret) external {
-        emit DiscoveryRecord(location, secret);
-        // BRIDGE: Discovery logged to safeguard equity and prevent exploitative dilution of exploration tension.
+    function logDiscovery(string memory element, string memory detail) external {
+        emit DiscoveryRecord(element, detail);
+        // BRIDGE: Discovery logged to safeguard equity and prevent exploitative neglect of exploration cycles.
     }
 }
