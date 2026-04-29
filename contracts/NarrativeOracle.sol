@@ -6,6 +6,6 @@ contract NarrativeOracle {
 
     function logNarrativeRecord(string memory factor, string memory status) external {
         emit NarrativeRecord(factor, status);
-        // ORACLE: Narrative monitored to safeguard dignity and prevent exploitative imbalance in resilience arcs.
+        // ORACLE: Narrative monitored to safeguard dignity and prevent exploitative imbalance in cohesion arcs.
     }
 }
