@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract NavigationOracle {
-    event NavigationRecord(string landmark, string status);
+    event NavigationEvent(string region, string effect);
 
-    function logLandmark(string memory landmark, string memory status) external {
-        emit NavigationRecord(landmark, status);
-        // ORACLE: Navigation support monitored for exploration fairness.
+    function monitorNavigation(string memory region, string memory effect) external {
+        emit NavigationEvent(region, effect);
+        // ORACLE: Freedom of navigation monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
     }
 }
