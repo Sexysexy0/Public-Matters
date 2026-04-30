@@ -6,6 +6,6 @@ contract ImmersionOracle {
 
     function monitorImmersion(string memory factor, string memory effect) external {
         emit ImmersionEvent(factor, effect);
-        // ORACLE: Immersion expansion monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
+        // ORACLE: Immersion resilience monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
     }
 }
