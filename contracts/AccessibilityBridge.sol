@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AccessibilityBridge {
-    event AccessibilityRecord(string feature, string detail);
+    event AccessibilityLogged(string project, string feature);
 
-    function logAccessibility(string memory feature, string memory detail) external {
-        emit AccessibilityRecord(feature, detail);
-        // BRIDGE: Accessibility logged to safeguard equity and prevent exploitative neglect of QoL cycles.
+    function logAccessibility(string memory project, string memory feature) external {
+        emit AccessibilityLogged(project, feature);
+        // BRIDGE: Accessibility logged to safeguard fairness and encode communal joy in transport systems.
     }
 }
