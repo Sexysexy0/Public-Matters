@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract InfrastructureResilienceShield {
-    event ProjectUpdate(string project, string status);
+    event StabilityLogged(string system, string status);
 
-    function logProject(string memory project, string memory status) external {
-        emit ProjectUpdate(project, status);
-        // SHIELD: Infrastructure resilience safeguarded to encode dignity and prevent exploitative imbalance in public works.
+    function logStability(string memory system, string memory status) external {
+        emit StabilityLogged(system, status);
+        // SHIELD: System stability safeguarded to encode fairness and prevent exploitative imbalance in infrastructure arcs.
     }
 }

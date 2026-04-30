@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract DeploymentEquityBridge {
-    event DeploymentLogged(string agency, string role);
+    event DeploymentLogged(string environment, string outcome);
 
-    function logDeployment(string memory agency, string memory role) external {
-        emit DeploymentLogged(agency, role);
-        // BRIDGE: DHS deployment logged to safeguard fairness and encode resilience in event protection cycles.
+    function logDeployment(string memory environment, string memory outcome) external {
+        emit DeploymentLogged(environment, outcome);
+        // BRIDGE: Deployment equity logged to safeguard fairness and encode resilience in system cycles.
     }
 }
