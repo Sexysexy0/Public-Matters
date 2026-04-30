@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract GameResilienceShield {
-    event GameSeal(string factor, string status);
+    event TrustSeal(string factor, string status);
 
-    function logGame(string memory factor, string memory status) external {
-        emit GameSeal(factor, status);
-        // SHIELD: Player resilience safeguarded to ensure dignity and prevent exploitative imbalance in gameplay cycles.
+    function logTrust(string memory factor, string memory status) external {
+        emit TrustSeal(factor, status);
+        // SHIELD: Player trust safeguarded to ensure dignity and prevent exploitative imbalance in gaming cycles.
     }
 }
