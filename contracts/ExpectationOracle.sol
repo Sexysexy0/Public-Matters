@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ExpectationOracle {
-    event ExpectationRecord(string issue, string sentiment);
+    event ExpectationEvent(string theme, string outcome);
 
-    function logExpectation(string memory _issue, string memory _sentiment) external {
-        emit ExpectationRecord(_issue, _sentiment);
-        // ORACLE: Fan expectations monitored for governance.
+    function monitorExpectation(string memory theme, string memory outcome) external {
+        emit ExpectationEvent(theme, outcome);
+        // ORACLE: Expectations resilience monitored to safeguard dignity and track alignment with community dreams.
     }
 }
