@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CorporateResilienceShield {
-    event ResilienceSeal(string factor, string status);
+    event CorporateSeal(string factor, string status);
 
-    function logResilience(string memory factor, string memory status) external {
-        emit ResilienceSeal(factor, status);
-        // SHIELD: Corporate stability safeguarded to ensure dignity and prevent exploitative imbalance in financial cycles.
+    function logCorporate(string memory factor, string memory status) external {
+        emit CorporateSeal(factor, status);
+        // SHIELD: Corporate equity safeguarded to ensure dignity and prevent exploitative imbalance in market cycles.
     }
 }
