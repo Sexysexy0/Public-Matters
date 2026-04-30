@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ImmersionEquityShield {
-    event ImmersionSeal(string element, string status);
+    event HistoricalAuthenticity(string era, string fidelity);
 
-    function logImmersion(string memory element, string memory status) external {
-        emit ImmersionSeal(element, status);
-        // SHIELD: Immersion safeguarded to ensure dignity and prevent exploitative imbalance in sensory cycles.
+    function logAuthenticity(string memory era, string memory fidelity) external {
+        emit HistoricalAuthenticity(era, fidelity);
+        // SHIELD: Historical authenticity safeguarded to encode fairness and prevent exploitative imbalance in immersion arcs.
     }
 }
