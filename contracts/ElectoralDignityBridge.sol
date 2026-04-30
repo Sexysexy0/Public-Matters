@@ -6,6 +6,6 @@ contract ElectoralDignityBridge {
 
     function logElectoral(string memory element, string memory detail) external {
         emit ElectoralRecord(element, detail);
-        // BRIDGE: Electoral dignity logged to safeguard fairness and prevent exploitative neglect of democracy cycles.
+        // BRIDGE: Electoral dignity logged to safeguard fairness and prevent exploitative neglect of democratic cycles.
     }
 }
