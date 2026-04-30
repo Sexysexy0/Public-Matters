@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract WorkerEquityShield {
-    event WorkerSeal(string factor, string status);
+    event WageJustice(string worker, uint256 amount);
 
-    function logWorker(string memory factor, string memory status) external {
-        emit WorkerSeal(factor, status);
-        // SHIELD: Worker equity safeguarded to ensure dignity and prevent exploitative imbalance in workplace cycles.
+    function logWage(string memory worker, uint256 amount) external {
+        emit WageJustice(worker, amount);
+        // SHIELD: Daily wage safeguarded to encode fairness and ensure dignified compensation for workers.
     }
 }
