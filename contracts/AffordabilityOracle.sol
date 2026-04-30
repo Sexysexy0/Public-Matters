@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AffordabilityOracle {
-    event AffordabilityRecord(string actor, string measure);
+    event PriceEvent(string component, string price);
 
-    function logAffordability(string memory actor, string memory measure) external {
-        emit AffordabilityRecord(actor, measure);
-        // ORACLE: Affordability equity monitored to safeguard dignity and prevent exploitative pricing cycles.
+    function monitorPrice(string memory component, string memory price) external {
+        emit PriceEvent(component, price);
+        // ORACLE: Memory affordability monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
     }
 }
