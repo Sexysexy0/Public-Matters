@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ImmersionExpansionShield {
-    event RequestSeal(string request, string status);
+    event ExpansionSeal(string factor, string status);
 
-    function logRequest(string memory request, string memory status) external {
-        emit RequestSeal(request, status);
-        // SHIELD: Community requests safeguarded (flags, ladders, skulls, sharks, shipwrecks) to ensure dignity in immersion cycles.
+    function logExpansion(string memory factor, string memory status) external {
+        emit ExpansionSeal(factor, status);
+        // SHIELD: Player retention safeguarded to ensure dignity and prevent exploitative imbalance in expansion cycles.
     }
 }
