@@ -6,6 +6,6 @@ contract LaborEquityShield {
 
     function logLabor(string memory element, string memory detail) external {
         emit LaborRecord(element, detail);
-        // SHIELD: Labor equity logged to safeguard fairness and prevent exploitative neglect of production cycles.
+        // SHIELD: Labor dignity logged to safeguard fairness and prevent exploitative neglect of manufacturing cycles.
     }
 }
