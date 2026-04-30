@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract GovernanceOracle {
-    event GovernanceRecord(string factor, string status);
+    event GovernanceEvent(string issue, string outcome);
 
-    function logGovernanceRecord(string memory factor, string memory status) external {
-        emit GovernanceRecord(factor, status);
-        // ORACLE: Governance monitored to safeguard dignity and prevent exploitative imbalance in cycle arcs.
+    function monitorGovernance(string memory issue, string memory outcome) external {
+        emit GovernanceEvent(issue, outcome);
+        // ORACLE: Governance resilience monitored to safeguard dignity and track institutional independence.
     }
 }
