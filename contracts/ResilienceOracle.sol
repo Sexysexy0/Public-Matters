@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ResilienceOracle {
-    event ResilienceRecord(string factor, string status);
+    event ResilienceEvent(string factor, string status);
 
-    function logResilienceRecord(string memory factor, string memory status) external {
-        emit ResilienceRecord(factor, status);
-        // ORACLE: Market resilience monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
+    function monitorResilience(string memory factor, string memory status) external {
+        emit ResilienceEvent(factor, status);
+        // ORACLE: Gaming resilience monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
     }
 }
