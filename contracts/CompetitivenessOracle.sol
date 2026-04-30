@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CompetitivenessOracle {
-    event CompetitivenessRecord(string factor, string status);
+    event CompetitivenessEvent(string sector, string outcome);
 
-    function logCompetitivenessRecord(string memory factor, string memory status) external {
-        emit CompetitivenessRecord(factor, status);
-        // ORACLE: Semiconductor competitiveness monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
+    function monitorCompetitiveness(string memory sector, string memory outcome) external {
+        emit CompetitivenessEvent(sector, outcome);
+        // ORACLE: Competitiveness resilience monitored to safeguard dignity and track global AI race positioning.
     }
 }
