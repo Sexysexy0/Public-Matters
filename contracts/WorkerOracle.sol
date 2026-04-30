@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract WorkerOracle {
-    event WorkerRecord(string factor, string status);
+    event WorkerEvent(string context, string status);
 
-    function logWorkerRecord(string memory factor, string memory status) external {
-        emit WorkerRecord(factor, status);
-        // ORACLE: Worker equity monitored to safeguard dignity and prevent exploitative imbalance in labor cycles.
+    function monitorWorker(string memory context, string memory status) external {
+        emit WorkerEvent(context, status);
+        // ORACLE: Worker resilience monitored to safeguard dignity and track equity in compensation and benefits arcs.
     }
 }
