@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract PerformanceBridge {
-    event PerformanceRecord(string option, string status);
+    event PerformanceLogged(string metric, string result);
 
-    function logPerformance(string memory option, string memory status) external {
-        emit PerformanceRecord(option, status);
-        // BRIDGE: Performance options logged to safeguard optimization equity and player choice.
+    function logPerformance(string memory metric, string memory result) external {
+        emit PerformanceLogged(metric, result);
+        // BRIDGE: Performance optimization logged to safeguard fairness and encode resilience in consumer cycles.
     }
 }
