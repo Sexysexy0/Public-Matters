@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract WealthEquityShield {
-    event WealthSeal(string sector, string safeguard);
+    event WealthSeal(string factor, string status);
 
-    function logWealth(string memory sector, string memory safeguard) external {
-        emit WealthSeal(sector, safeguard);
-        // SHIELD: Wealth safeguarded to ensure dignity and prevent exploitative monopolies or inequitable prosperity.
+    function logWealth(string memory factor, string memory status) external {
+        emit WealthSeal(factor, status);
+        // SHIELD: Wealth equity safeguarded to ensure dignity and prevent exploitative imbalance in financial cycles.
     }
 }
