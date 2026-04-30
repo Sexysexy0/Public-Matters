@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ProgressionOracle {
-    event ProgressionRecord(string factor, string status);
+    event ProgressionEvent(address player, uint256 totalPoints, string milestone);
 
-    function logProgressionRecord(string memory factor, string memory status) external {
-        emit ProgressionRecord(factor, status);
-        // ORACLE: Progression monitored to safeguard dignity and prevent exploitative imbalance in quest cycles.
+    function monitorProgression(address player, uint256 totalPoints, string memory milestone) external {
+        emit ProgressionEvent(player, totalPoints, milestone);
+        // ORACLE: Progression resilience monitored to safeguard dignity and track player advancement in reward arcs.
     }
 }
