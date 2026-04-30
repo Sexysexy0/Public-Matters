@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract OwnershipOracle {
-    event OwnershipRecord(string platform, string status);
+    event OwnershipEvent(string property, string status);
 
-    function logOwnership(string memory platform, string memory status) external {
-        emit OwnershipRecord(platform, status);
-        // ORACLE: Ownership monitored to safeguard dignity and prevent exploitative imbalance in consumer cycles.
+    function monitorOwnership(string memory property, string memory status) external {
+        emit OwnershipEvent(property, status);
+        // ORACLE: Ownership resilience monitored to safeguard dignity and track prestige housing integration.
     }
 }
