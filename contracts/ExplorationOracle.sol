@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ExplorationOracle {
-    event ExplorationRecord(string factor, string status);
+    event ExplorationEvent(string area, string outcome);
 
-    function logExplorationRecord(string memory factor, string memory status) external {
-        emit ExplorationRecord(factor, status);
-        // ORACLE: Exploration monitored to safeguard dignity and prevent exploitative imbalance in integration arcs.
+    function monitorExploration(string memory area, string memory outcome) external {
+        emit ExplorationEvent(area, outcome);
+        // ORACLE: Exploration resilience monitored to safeguard dignity and track loot expansion in map cycles.
     }
 }
