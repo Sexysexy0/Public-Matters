@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract CustomizationBridge {
-    event CustomizationRecord(string element, string detail);
+    event CustomizationRequest(string request, string detail);
 
-    function logCustomization(string memory element, string memory detail) external {
-        emit CustomizationRecord(element, detail);
-        // BRIDGE: Customization logged to safeguard equity and prevent exploitative neglect of access cycles.
+    function logCustomization(string memory request, string memory detail) external {
+        emit CustomizationRequest(request, detail);
+        // BRIDGE: Customization requests logged to safeguard fairness and encode immersive equity in housing systems.
     }
 }
