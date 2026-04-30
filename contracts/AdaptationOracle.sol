@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AdaptationOracle {
-    event AdaptationRecord(string factor, string status);
+    event AdaptationEvent(string sector, string progress);
 
-    function logAdaptationRecord(string memory factor, string memory status) external {
-        emit AdaptationRecord(factor, status);
-        // ORACLE: Market adaptation monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
+    function monitorAdaptation(string memory sector, string memory progress) external {
+        emit AdaptationEvent(sector, progress);
+        // ORACLE: Adaptation resilience monitored to safeguard dignity and track global competitiveness in innovation arcs.
     }
 }

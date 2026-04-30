@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract InnovationEquityShield {
-    event InnovationSeal(string factor, string status);
+    event InnovationLogged(string project, string status);
 
-    function logInnovation(string memory factor, string memory status) external {
-        emit InnovationSeal(factor, status);
-        // SHIELD: Innovation safeguarded to ensure dignity and prevent exploitative imbalance in creative cycles.
+    function logInnovation(string memory project, string memory status) external {
+        emit InnovationLogged(project, status);
+        // SHIELD: Innovation safeguarded to encode fairness and prevent exploitative imbalance in tech arcs.
     }
 }
