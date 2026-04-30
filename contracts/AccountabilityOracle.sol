@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract AccountabilityOracle {
-    event AccountabilityEvent(string actor, string action);
+    event AccountabilityEvent(string contractor, string action);
 
-    function monitorAccountability(string memory actor, string memory action) external {
-        emit AccountabilityEvent(actor, action);
-        // ORACLE: Accountability monitored to safeguard dignity and prevent exploitative imbalance in equity arcs.
+    function monitorAccountability(string memory contractor, string memory action) external {
+        emit AccountabilityEvent(contractor, action);
+        // ORACLE: Accountability resilience monitored to safeguard dignity and track corruption probes in public works.
     }
 }
