@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract PricingOracle {
-    event PricingRecord(string tier, uint256 price, string caveat);
+    event PricingEvent(string game, uint256 price);
 
-    function logPricing(string memory _tier, uint256 _price, string memory _caveat) external {
-        emit PricingRecord(_tier, _price, _caveat);
-        // ORACLE: Pricing experiments tracked with caveats.
+    function monitorPricing(string memory game, uint256 price) external {
+        emit PricingEvent(game, price);
+        // ORACLE: Pricing resilience monitored to safeguard dignity and track affordability across future releases.
     }
 }
