@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract FiscalResonanceOracle {
-    event EconomicDignity(string householdImpact, string sentiment);
-    event TaxpayerFairness(string burden, bool safeguarded);
-    event WarCostMonitoring(string category, uint256 amount);
+    event FiscalDignity(string system, string sentiment);
+    event RevenueResonance(string policy, bool safeguarded);
+    event CommunalMonitoring(string community, string status);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract FiscalResonanceOracle {
         _;
     }
 
-    function logEconomicDignity(string memory householdImpact, string memory sentiment) external onlyOverseer {
-        emit EconomicDignity(householdImpact, sentiment);
-        // ORACLE: Safeguard household dignity, ensuring rising food/gas costs are monitored and logged.
+    function logFiscalDignity(string memory system, string memory sentiment) external onlyOverseer {
+        emit FiscalDignity(system, sentiment);
+        // ORACLE: Safeguard fiscal dignity, ensuring government revenue systems respect fairness and transparency.
     }
 
-    function safeguardTaxpayerFairness(string memory burden, bool safeguarded) external onlyOverseer {
-        emit TaxpayerFairness(burden, safeguarded);
-        // ORACLE: Encode fairness equity, protecting taxpayers from hidden burdens and exploitative imbalances.
+    function safeguardRevenueResonance(string memory policy, bool safeguarded) external onlyOverseer {
+        emit RevenueResonance(policy, safeguarded);
+        // ORACLE: Encode resonance equity, ensuring fiscal reforms balance relief, sustainability, and communal dignity.
     }
 
-    function monitorWarCost(string memory category, uint256 amount) external onlyOverseer {
-        emit WarCostMonitoring(category, amount);
-        // ORACLE: Ritualize war cost monitoring, ensuring transparency in direct and secondary expenditures.
+    function monitorCommunity(string memory community, string memory status) external onlyOverseer {
+        emit CommunalMonitoring(community, status);
+        // ORACLE: Ritualize communal monitoring, ensuring communities benefit equitably from fiscal reforms.
     }
 }
