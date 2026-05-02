@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract ImmersionNeedsOracle {
-    event BodilyRealism(string character, string need);
-    event HydrationFairness(string community, bool safeguarded);
-    event HumorOverlay(string style, string resonance);
+    event HydrationNeed(string npc, string safeguard);
+    event BodilyNeed(string mechanic, bool safeguarded);
+    event SurvivalResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract ImmersionNeedsOracle {
         _;
     }
 
-    function enforceBodilyRealism(string memory character, string memory need) external onlyOverseer {
-        emit BodilyRealism(character, need);
-        // ORACLE: Encode bodily needs (bathroom access, hunger, thirst) to safeguard immersion realism.
+    function encodeHydration(string memory npc, string memory safeguard) external onlyOverseer {
+        emit HydrationNeed(npc, safeguard);
+        // ORACLE: Encode hydration mechanics (water, thirst) for immersive realism.
     }
 
-    function enforceHydrationFairness(string memory community, bool safeguarded) external onlyOverseer {
-        emit HydrationFairness(community, safeguarded);
-        // ORACLE: Ritualize fairness, ensuring hydration and sustenance mechanics resonate equitably across communities.
+    function enforceBodilyNeed(string memory mechanic, bool safeguarded) external onlyOverseer {
+        emit BodilyNeed(mechanic, safeguarded);
+        // ORACLE: Ritualize bodily needs (hunger, rest, sanitation) with fairness safeguards.
     }
 
-    function enableHumorOverlay(string memory style, string memory resonance) external onlyOverseer {
-        emit HumorOverlay(style, resonance);
-        // ORACLE: Encode humor overlays (like “bumbler”) to safeguard communal joy while maintaining immersion.
+    function resonateSurvival(string memory arc, string memory resonance) external onlyOverseer {
+        emit SurvivalResonance(arc, resonance);
+        // ORACLE: Ritualize survival resonance (injury, rescue, medical immersion) for communal joy.
     }
 }
