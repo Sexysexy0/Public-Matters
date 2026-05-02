@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract NPCRescueOracle {
-    event EmergencyRole(string npcType, string safeguard);
-    event RescueFairness(string community, bool safeguarded);
-    event CommunalMonitoring(string sector, string resonance);
+    event RescueTriggered(string npc, string scenario);
+    event EmergencyImmersion(string mechanic, bool safeguarded);
+    event CommunalResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract NPCRescueOracle {
         _;
     }
 
-    function assignEmergencyRole(string memory npcType, string memory safeguard) external onlyOverseer {
-        emit EmergencyRole(npcType, safeguard);
-        // ORACLE: Encode NPCs (ambulance, healer, rescue units) to respond to accidents and safeguard player dignity.
+    function triggerRescue(string memory npc, string memory scenario) external onlyOverseer {
+        emit RescueTriggered(npc, scenario);
+        // ORACLE: Encode NPC rescue events (trapped, injured, lost) with dignity safeguards.
     }
 
-    function enforceRescueFairness(string memory community, bool safeguarded) external onlyOverseer {
-        emit RescueFairness(community, safeguarded);
-        // ORACLE: Ritualize fairness, ensuring rescue services are equitably accessible across all communities.
+    function enforceEmergencyImmersion(string memory mechanic, bool safeguarded) external onlyOverseer {
+        emit EmergencyImmersion(mechanic, safeguarded);
+        // ORACLE: Ritualize fairness, ensuring emergency mechanics (ambulance, aid, rescue) are immersive and equitable.
     }
 
-    function monitorCommunalRescue(string memory sector, string memory resonance) external onlyOverseer {
-        emit CommunalMonitoring(sector, resonance);
-        // ORACLE: Ritualize monitoring to guarantee communal voices resonate in NPC rescue governance arcs.
+    function resonateCommunal(string memory arc, string memory resonance) external onlyOverseer {
+        emit CommunalResonance(arc, resonance);
+        // ORACLE: Ritualize communal resonance, safeguarding joy and fairness in rescue arcs.
     }
 }
