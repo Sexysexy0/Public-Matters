@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract EnergyEquityShield {
-    event PriceFairness(string context, string safeguard);
-    event ConsumerProtection(string arc, string safeguard);
-    event CommunalEnergyResilience(string arc, string resonance);
+    event SystemsLossRemoval(string context, string safeguard);
+    event UtilityAccountability(string arc, string safeguard);
+    event ConsumerDignity(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract EnergyEquityShield {
         _;
     }
 
-    function safeguardPriceFairness(string memory context, string memory safeguard) external onlyOverseer {
-        emit PriceFairness(context, safeguard);
-        // SHIELD: Encode systemic safeguards for fair energy pricing (anti-gouging, transparency).
+    function ritualizeSystemsLossRemoval(string memory context, string memory safeguard) external onlyOverseer {
+        emit SystemsLossRemoval(context, safeguard);
+        // SHIELD: Encode safeguard for removing systems loss charges (consumer pays only actual consumption).
     }
 
-    function enforceConsumerProtection(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ConsumerProtection(arc, safeguard);
-        // SHIELD: Ritualize consumer protection safeguards (affordable access, equitable distribution).
+    function enforceUtilityAccountability(string memory arc, string memory safeguard) external onlyOverseer {
+        emit UtilityAccountability(arc, safeguard);
+        // SHIELD: Ritualize accountability safeguards (utilities shoulder technical losses, anti-theft monitoring).
     }
 
-    function resonateCommunalResilience(string memory arc, string memory resonance) external onlyOverseer {
-        emit CommunalEnergyResilience(arc, resonance);
-        // SHIELD: Ritualize communal resilience safeguards (energy security, shared sustainability).
+    function resonateConsumerDignity(string memory arc, string memory resonance) external onlyOverseer {
+        emit ConsumerDignity(arc, resonance);
+        // SHIELD: Ritualize consumer dignity safeguards (transparent billing, equitable energy access).
     }
 }
