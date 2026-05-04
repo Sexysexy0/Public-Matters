@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract ConflictEquityOracle {
-    event ConflictDignity(string battle, string sentiment);
-    event StrategicFairness(string philosophy, bool safeguarded);
-    event HumanMonitoring(string cost, string status);
+    event WarLegitimacy(string context, string safeguard);
+    event HumanitarianFairness(string arc, string safeguard);
+    event PeaceResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract ConflictEquityOracle {
         _;
     }
 
-    function logConflictDignity(string memory battle, string memory sentiment) external onlyOverseer {
-        emit ConflictDignity(battle, sentiment);
-        // ORACLE: Safeguard conflict dignity, ensuring battles are portrayed authentically and equitably.
+    function safeguardWarLegitimacy(string memory context, string memory safeguard) external onlyOverseer {
+        emit WarLegitimacy(context, safeguard);
+        // ORACLE: Encode safeguards for war legitimacy (international law compliance, sovereignty respect, transparent justification).
     }
 
-    function safeguardStrategicFairness(string memory philosophy, bool safeguarded) external onlyOverseer {
-        emit StrategicFairness(philosophy, safeguarded);
-        // ORACLE: Encode fairness equity, ensuring war philosophies are balanced and respected.
+    function enforceHumanitarianFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit HumanitarianFairness(arc, safeguard);
+        // ORACLE: Ritualize humanitarian fairness safeguards (civilian protection, casualty accountability, equitable aid distribution).
     }
 
-    function monitorHumanCost(string memory cost, string memory status) external onlyOverseer {
-        emit HumanMonitoring(cost, status);
-        // ORACLE: Ritualize human monitoring, ensuring suffering and sacrifice are transparently acknowledged.
+    function resonatePeace(string memory arc, string memory resonance) external onlyOverseer {
+        emit PeaceResonance(arc, resonance);
+        // ORACLE: Ritualize communal peace resonance (dialogue facilitation, reconciliation monitoring, participatory peacebuilding).
     }
 }
