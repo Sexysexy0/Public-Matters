@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract CounterfeitMedicineOracle {
-    event PharmaIntegrity(string context, string safeguard);
-    event HealthEquity(string arc, string safeguard);
-    event CommunalTrustResonance(string arc, string resonance);
+    event MedicineIntegrity(string context, string safeguard);
+    event CounterfeitFairness(string arc, string safeguard);
+    event HealthResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract CounterfeitMedicineOracle {
         _;
     }
 
-    function ritualizePharmaIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit PharmaIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for pharma integrity (authentic supply chains, anti-counterfeit tracking, transparent labeling).
+    function safeguardMedicineIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit MedicineIntegrity(context, safeguard);
+        // ORACLE: Encode safeguards for medicine integrity (authentic sourcing, dignified distribution, verified quality).
     }
 
-    function safeguardHealthEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit HealthEquity(arc, safeguard);
-        // ORACLE: Ritualize health equity safeguards (fair access to medicines, affordability, patient protection).
+    function monitorCounterfeitFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CounterfeitFairness(arc, safeguard);
+        // ORACLE: Ritualize counterfeit fairness safeguards (tracking fake supply chains, equitable enforcement, participatory monitoring).
     }
 
-    function resonateCommunalTrust(string memory arc, string memory resonance) external onlyOverseer {
-        emit CommunalTrustResonance(arc, resonance);
-        // ORACLE: Ritualize communal trust safeguards (public awareness, enforcement transparency, global cooperation).
+    function resonateHealth(string memory arc, string memory resonance) external onlyOverseer {
+        emit HealthResonance(arc, resonance);
+        // ORACLE: Ritualize communal health resonance (public awareness, cultural immersion, authentic health safeguarding).
     }
 }
