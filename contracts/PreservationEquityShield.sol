@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract PreservationEquityShield {
-    event LibraryDignity(string platform, string status);
-    event GenerationalFairness(string generation, bool safeguarded);
-    event CompatibilityMonitoring(string title, string resonance);
+    event PreservationIntegrity(string context, string safeguard);
+    event ModdingFairness(string arc, string safeguard);
+    event RestorationResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract PreservationEquityShield {
         _;
     }
 
-    function safeguardLibraryDignity(string memory platform, string memory status) external onlyOverseer {
-        emit LibraryDignity(platform, status);
-        // SHIELD: Safeguard library dignity, ensuring consumer access to purchased and legacy titles.
+    function safeguardPreservationIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit PreservationIntegrity(context, safeguard);
+        // SHIELD: Encode safeguards for preservation integrity (authentic archives, dignified access, consistent legacy).
     }
 
-    function enforceGenerationalFairness(string memory generation, bool safeguarded) external onlyOverseer {
-        emit GenerationalFairness(generation, safeguarded);
-        // SHIELD: Encode generational fairness, guaranteeing equitable access across console generations.
+    function enforceModdingFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ModdingFairness(arc, safeguard);
+        // SHIELD: Ritualize modding fairness safeguards (equitable tools, participatory creativity, transparent adaptation).
     }
 
-    function monitorCompatibility(string memory title, string memory resonance) external onlyOverseer {
-        emit CompatibilityMonitoring(title, resonance);
-        // SHIELD: Ritualize backward compatibility monitoring, ensuring preservation of game legacy.
+    function resonateRestoration(string memory arc, string memory resonance) external onlyOverseer {
+        emit RestorationResonance(arc, resonance);
+        // SHIELD: Ritualize communal restoration resonance (shared authenticity, cultural immersion, authentic player trust).
     }
 }
