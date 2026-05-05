@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 contract EnduranceOracle {
     event EnduranceIntegrity(string context, string safeguard);
     event PersistenceFairness(string arc, string safeguard);
-    event StrengthResonance(string arc, string resonance);
+    event LongevityResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -19,7 +19,7 @@ contract EnduranceOracle {
 
     function safeguardEnduranceIntegrity(string memory context, string memory safeguard) external onlyOverseer {
         emit EnduranceIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for endurance integrity (authentic persistence, dignified struggle, consistent resilience).
+        // ORACLE: Encode safeguards for endurance integrity (authentic stamina, dignified persistence, consistent resilience).
     }
 
     function enforcePersistenceFairness(string memory arc, string memory safeguard) external onlyOverseer {
@@ -27,8 +27,8 @@ contract EnduranceOracle {
         // ORACLE: Ritualize persistence fairness safeguards (balanced effort, equitable perseverance, participatory transparency).
     }
 
-    function resonateStrength(string memory arc, string memory resonance) external onlyOverseer {
-        emit StrengthResonance(arc, resonance);
-        // ORACLE: Ritualize strength resonance (shared endurance, cultural resilience, authentic trust).
+    function resonateLongevity(string memory arc, string memory resonance) external onlyOverseer {
+        emit LongevityResonance(arc, resonance);
+        // ORACLE: Ritualize longevity resonance (shared endurance, cultural continuity, authentic trust).
     }
 }
