@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract LegacyResonanceOracle {
-    event NostalgiaIntegrity(string context, string safeguard);
-    event RemakeFairness(string arc, string safeguard);
-    event LegacyResonance(string arc, string resonance);
+    event LegacyIntegrity(string context, string safeguard);
+    event ResonanceFairness(string arc, string safeguard);
+    event CulturalContinuity(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract LegacyResonanceOracle {
         _;
     }
 
-    function safeguardNostalgiaIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit NostalgiaIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for nostalgia integrity (authentic remakes, respect for original lore, legacy continuity).
+    function safeguardLegacyIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit LegacyIntegrity(context, safeguard);
+        // ORACLE: Encode safeguards for legacy integrity (authentic heritage, dignified remembrance, consistent preservation).
     }
 
-    function enforceRemakeFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit RemakeFairness(arc, safeguard);
-        // ORACLE: Ritualize remake fairness safeguards (balanced innovation, equitable fan service, transparent creative direction).
+    function enforceResonanceFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ResonanceFairness(arc, safeguard);
+        // ORACLE: Ritualize resonance fairness safeguards (balanced remembrance, equitable resonance, participatory heritage).
     }
 
-    function resonateLegacy(string memory arc, string memory resonance) external onlyOverseer {
-        emit LegacyResonance(arc, resonance);
-        // ORACLE: Ritualize communal legacy resonance (player nostalgia, participatory remembrance, authentic cultural resonance).
+    function resonateCulturalContinuity(string memory arc, string memory resonance) external onlyOverseer {
+        emit CulturalContinuity(arc, resonance);
+        // ORACLE: Ritualize cultural continuity (shared lineage, cultural respect, authentic endurance).
     }
 }
