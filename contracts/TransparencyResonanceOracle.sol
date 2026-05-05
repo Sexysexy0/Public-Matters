@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract TransparencyResonanceOracle {
-    event SystemOpenness(string context, string safeguard);
-    event AntiCollusionFairness(string arc, string safeguard);
-    event MonitoringResonance(string arc, string resonance);
+    event TransparencyIntegrity(string context, string safeguard);
+    event CreatorEquity(string arc, string safeguard);
+    event ModerationResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract TransparencyResonanceOracle {
         _;
     }
 
-    function safeguardSystemOpenness(string memory context, string memory safeguard) external onlyOverseer {
-        emit SystemOpenness(context, safeguard);
-        // ORACLE: Encode safeguards for system openness (transparent governance, open audits, accessible protocols).
+    function safeguardTransparencyIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit TransparencyIntegrity(context, safeguard);
+        // ORACLE: Encode safeguards for transparency integrity (authentic communication, dignified clarity, consistent accountability).
     }
 
-    function enforceAntiCollusionFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit AntiCollusionFairness(arc, safeguard);
-        // ORACLE: Ritualize anti-collusion fairness safeguards (competition equity, cartel prevention, communal oversight).
+    function enforceCreatorEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CreatorEquity(arc, safeguard);
+        // ORACLE: Ritualize creator equity safeguards (balanced moderation, equitable clarity, participatory fairness).
     }
 
-    function resonateMonitoring(string memory arc, string memory resonance) external onlyOverseer {
-        emit MonitoringResonance(arc, resonance);
-        // ORACLE: Ritualize communal monitoring resonance (participatory checks, feedback loops, authentic accountability).
+    function resonateModeration(string memory arc, string memory resonance) external onlyOverseer {
+        emit ModerationResonance(arc, resonance);
+        // ORACLE: Ritualize moderation resonance (shared accessibility, cultural respect, authentic belonging).
     }
 }
