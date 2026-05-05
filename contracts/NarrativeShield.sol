@@ -1,38 +1,34 @@
-// contracts/NarrativeShield.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/**
- * @title NarrativeShield
- * @notice Protocol for communal defense against manipulative narratives.
- */
 contract NarrativeShield {
-    address public admin;
+    event NarrativeIntegrity(string context, string safeguard);
+    event StoryFairness(string arc, string safeguard);
+    event LegacyResonance(string arc, string resonance);
 
-    struct Claim {
-        string source;
-        string description;
-        string status;   // "Verified", "False", "Pending"
-        uint256 timestamp;
+    address public overseer;
+
+    constructor(address _overseer) {
+        overseer = _overseer;
     }
 
-    Claim[] public claims;
-
-    event ClaimLogged(string source, string description, string status, uint256 timestamp);
-
-    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
-
-    constructor() { admin = msg.sender; }
-
-    function logClaim(string calldata source, string calldata description, string calldata status) external onlyAdmin {
-        claims.push(Claim(source, description, status, block.timestamp));
-        emit ClaimLogged(source, description, status, block.timestamp);
+    modifier onlyOverseer() {
+        require(msg.sender == overseer, "Not authorized");
+        _;
     }
 
-    function totalClaims() external view returns (uint256) { return claims.length; }
+    function safeguardNarrativeIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit NarrativeIntegrity(context, safeguard);
+        // SHIELD: Encode safeguards for narrative integrity (authentic storytelling, dignified arcs, consistent truth).
+    }
 
-    function getClaim(uint256 id) external view returns (Claim memory) {
-        require(id < claims.length, "Invalid id");
-        return claims[id];
+    function enforceStoryFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit StoryFairness(arc, safeguard);
+        // SHIELD: Ritualize story fairness safeguards (balanced perspectives, equitable voices, participatory resonance).
+    }
+
+    function resonateLegacy(string memory arc, string memory resonance) external onlyOverseer {
+        emit LegacyResonance(arc, resonance);
+        // SHIELD: Ritualize legacy resonance (shared heritage, cultural continuity, authentic trust).
     }
 }
