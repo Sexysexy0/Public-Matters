@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract PreservationEquityShield {
     event PreservationIntegrity(string context, string safeguard);
-    event ModdingFairness(string arc, string safeguard);
-    event RestorationResonance(string arc, string resonance);
+    event LicensingFairness(string arc, string safeguard);
+    event ConsumerResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract PreservationEquityShield {
 
     function safeguardPreservationIntegrity(string memory context, string memory safeguard) external onlyOverseer {
         emit PreservationIntegrity(context, safeguard);
-        // SHIELD: Encode safeguards for preservation integrity (authentic archives, dignified access, consistent legacy).
+        // SHIELD: Encode safeguards for preservation integrity (authentic continuity, dignified access, consistent heritage).
     }
 
-    function enforceModdingFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ModdingFairness(arc, safeguard);
-        // SHIELD: Ritualize modding fairness safeguards (equitable tools, participatory creativity, transparent adaptation).
+    function enforceLicensingFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit LicensingFairness(arc, safeguard);
+        // SHIELD: Ritualize licensing fairness safeguards (balanced rights, equitable clarity, participatory trust).
     }
 
-    function resonateRestoration(string memory arc, string memory resonance) external onlyOverseer {
-        emit RestorationResonance(arc, resonance);
-        // SHIELD: Ritualize communal restoration resonance (shared authenticity, cultural immersion, authentic player trust).
+    function resonateConsumer(string memory arc, string memory resonance) external onlyOverseer {
+        emit ConsumerResonance(arc, resonance);
+        // SHIELD: Ritualize consumer resonance (shared ownership, cultural respect, authentic enjoyment).
     }
 }
