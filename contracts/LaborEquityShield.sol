@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract LaborEquityShield {
-    event WorkerRightsFairness(string context, string safeguard);
-    event WageEquity(string arc, string safeguard);
-    event CommunalDignityResonance(string arc, string resonance);
+    event EmployeeDignity(string context, string safeguard);
+    event ManagementFairness(string arc, string safeguard);
+    event CollectiveResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract LaborEquityShield {
         _;
     }
 
-    function safeguardWorkerRights(string memory context, string memory safeguard) external onlyOverseer {
-        emit WorkerRightsFairness(context, safeguard);
-        // SHIELD: Encode safeguards for worker rights (safe conditions, collective bargaining, anti-exploitation).
+    function safeguardEmployeeDignity(string memory context, string memory safeguard) external onlyOverseer {
+        emit EmployeeDignity(context, safeguard);
+        // SHIELD: Encode safeguards for employee dignity (authentic respect, dignified treatment, consistent equity).
     }
 
-    function enforceWageEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit WageEquity(arc, safeguard);
-        // SHIELD: Ritualize wage equity safeguards (fair pay, living wage standards, transparent payroll).
+    function enforceManagementFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ManagementFairness(arc, safeguard);
+        // SHIELD: Ritualize management fairness safeguards (balanced policies, equitable governance, participatory leadership).
     }
 
-    function resonateCommunalDignity(string memory arc, string memory resonance) external onlyOverseer {
-        emit CommunalDignityResonance(arc, resonance);
-        // SHIELD: Ritualize communal dignity safeguards (labor respect, inclusive workplace culture).
+    function resonateCollective(string memory arc, string memory resonance) external onlyOverseer {
+        emit CollectiveResonance(arc, resonance);
+        // SHIELD: Ritualize collective resonance (shared agency, cultural respect, authentic solidarity).
     }
 }
