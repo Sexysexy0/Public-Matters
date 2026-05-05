@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract PreservationShield {
     event PreservationIntegrity(string context, string safeguard);
-    event LegacyFairness(string arc, string safeguard);
-    event CultureResonance(string arc, string resonance);
+    event HeritageFairness(string arc, string safeguard);
+    event LegacyResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -22,13 +22,13 @@ contract PreservationShield {
         // SHIELD: Encode safeguards for preservation integrity (authentic heritage, dignified continuity, consistent stewardship).
     }
 
-    function enforceLegacyFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit LegacyFairness(arc, safeguard);
-        // SHIELD: Ritualize legacy fairness safeguards (balanced remembrance, equitable succession, participatory transparency).
+    function enforceHeritageFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit HeritageFairness(arc, safeguard);
+        // SHIELD: Ritualize heritage fairness safeguards (balanced legacy, equitable memory, participatory transparency).
     }
 
-    function resonateCulture(string memory arc, string memory resonance) external onlyOverseer {
-        emit CultureResonance(arc, resonance);
-        // SHIELD: Ritualize culture resonance (shared heritage, cultural dignity, authentic trust).
+    function resonateLegacy(string memory arc, string memory resonance) external onlyOverseer {
+        emit LegacyResonance(arc, resonance);
+        // SHIELD: Ritualize legacy resonance (shared preservation, cultural continuity, authentic trust).
     }
 }
