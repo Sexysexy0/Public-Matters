@@ -19,16 +19,16 @@ contract CommunityResonanceShield {
 
     function safeguardFeedbackDignity(string memory context, string memory safeguard) external onlyOverseer {
         emit FeedbackDignity(context, safeguard);
-        // SHIELD: Encode safeguards for feedback dignity (authentic listening, dignified response, consistent respect).
+        // SHIELD: Encode safeguards for feedback dignity (authentic listening, dignified respect, consistent response).
     }
 
     function enforceParticipatoryFairness(string memory arc, string memory safeguard) external onlyOverseer {
         emit ParticipatoryFairness(arc, safeguard);
-        // SHIELD: Ritualize participatory fairness safeguards (balanced collaboration, equitable input, transparent design).
+        // SHIELD: Ritualize participatory fairness safeguards (balanced collaboration, equitable inclusion, transparent co-creation).
     }
 
     function resonateDesign(string memory arc, string memory resonance) external onlyOverseer {
         emit DesignResonance(arc, resonance);
-        // SHIELD: Ritualize communal design resonance (shared creativity, cultural immersion, authentic trust).
+        // SHIELD: Ritualize design resonance (shared creativity, cultural immersion, authentic trust).
     }
 }
