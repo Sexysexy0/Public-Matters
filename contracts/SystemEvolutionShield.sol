@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract SystemEvolutionShield {
-    event PrivacyIntegrity(string context, string safeguard);
-    event UIFairness(string arc, string safeguard);
-    event FeatureResonance(string arc, string resonance);
+    event SystemIntegrity(string context, string safeguard);
+    event EvolutionFairness(string arc, string safeguard);
+    event ContinuityResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract SystemEvolutionShield {
         _;
     }
 
-    function safeguardPrivacyIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit PrivacyIntegrity(context, safeguard);
-        // SHIELD: Encode safeguards for privacy integrity (authentic control, dignified transparency, consistent protection).
+    function safeguardSystemIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit SystemIntegrity(context, safeguard);
+        // SHIELD: Encode safeguards for system integrity (bloat-free design, performance-first architecture, repair rights).
     }
 
-    function enforceUIFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit UIFairness(arc, safeguard);
-        // SHIELD: Ritualize UI fairness safeguards (balanced design, equitable accessibility, participatory clarity).
+    function enforceEvolutionFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit EvolutionFairness(arc, safeguard);
+        // SHIELD: Ritualize evolution fairness safeguards (no forced apps, equitable updates, participatory transparency).
     }
 
-    function resonateFeature(string memory arc, string memory resonance) external onlyOverseer {
-        emit FeatureResonance(arc, resonance);
-        // SHIELD: Ritualize feature resonance (shared innovation, cultural usability, authentic trust).
+    function resonateContinuity(string memory arc, string memory resonance) external onlyOverseer {
+        emit ContinuityResonance(arc, resonance);
+        // SHIELD: Ritualize continuity resonance (shared repairability, cultural resilience, authentic trust).
     }
 }
