@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 contract MasteryOracle {
     event MasteryIntegrity(string context, string safeguard);
     event ChallengeFairness(string arc, string safeguard);
-    event DisciplineResonance(string arc, string resonance);
+    event ProgressionResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract MasteryOracle {
 
     function safeguardMasteryIntegrity(string memory context, string memory safeguard) external onlyOverseer {
         emit MasteryIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for mastery integrity (authentic skill, dignified growth, consistent excellence).
+        // ORACLE: Encode safeguards for mastery integrity (authentic skill, dignified growth, consistent discipline).
     }
 
     function enforceChallengeFairness(string memory arc, string memory safeguard) external onlyOverseer {
         emit ChallengeFairness(arc, safeguard);
-        // ORACLE: Ritualize challenge fairness safeguards (balanced difficulty, equitable opportunity, participatory transparency).
+        // ORACLE: Ritualize challenge fairness safeguards (balanced trials, equitable difficulty, participatory transparency).
     }
 
-    function resonateDiscipline(string memory arc, string memory resonance) external onlyOverseer {
-        emit DisciplineResonance(arc, resonance);
-        // ORACLE: Ritualize discipline resonance (shared rigor, cultural mastery, authentic trust).
+    function resonateProgression(string memory arc, string memory resonance) external onlyOverseer {
+        emit ProgressionResonance(arc, resonance);
+        // ORACLE: Ritualize progression resonance (shared achievement, cultural mastery, authentic trust).
     }
 }
