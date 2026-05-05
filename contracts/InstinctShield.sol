@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract InstinctShield {
     event InstinctIntegrity(string context, string safeguard);
-    event ReflexFairness(string arc, string safeguard);
-    event PerceptionResonance(string arc, string resonance);
+    event ReactionFairness(string arc, string safeguard);
+    event SurvivalResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -22,13 +22,13 @@ contract InstinctShield {
         // SHIELD: Encode safeguards for instinct integrity (authentic reflex, dignified intuition, consistent awareness).
     }
 
-    function enforceReflexFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ReflexFairness(arc, safeguard);
-        // SHIELD: Ritualize reflex fairness safeguards (balanced response, equitable instinct, participatory transparency).
+    function enforceReactionFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ReactionFairness(arc, safeguard);
+        // SHIELD: Ritualize reaction fairness safeguards (balanced reflexes, equitable responses, participatory vigilance).
     }
 
-    function resonatePerception(string memory arc, string memory resonance) external onlyOverseer {
-        emit PerceptionResonance(arc, resonance);
-        // SHIELD: Ritualize perception resonance (shared clarity, cultural awareness, authentic trust).
+    function resonateSurvival(string memory arc, string memory resonance) external onlyOverseer {
+        emit SurvivalResonance(arc, resonance);
+        // SHIELD: Ritualize survival resonance (shared instinct, cultural resilience, authentic trust).
     }
 }
