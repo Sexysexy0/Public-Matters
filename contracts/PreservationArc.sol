@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract PreservationArc {
-    event SaveIntegrity(string context, string safeguard);
-    event RecoveryFairness(string arc, string safeguard);
-    event CommunityResonance(string arc, string resonance);
+    event PreservationIntegrity(string context, string safeguard);
+    event ArchivalFairness(string arc, string safeguard);
+    event LegacyResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract PreservationArc {
         _;
     }
 
-    function safeguardSaveIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit SaveIntegrity(context, safeguard);
-        // ARC: Encode safeguards for save integrity (authentic preservation, dignified continuity, consistent progress).
+    function safeguardPreservationIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit PreservationIntegrity(context, safeguard);
+        // ARC: Encode safeguards for preservation integrity (authentic continuity, dignified archival, consistent resilience).
     }
 
-    function enforceRecoveryFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit RecoveryFairness(arc, safeguard);
-        // ARC: Ritualize recovery fairness safeguards (balanced restoration, equitable migration, participatory transparency).
+    function enforceArchivalFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ArchivalFairness(arc, safeguard);
+        // ARC: Ritualize archival fairness safeguards (balanced access, equitable preservation, participatory transparency).
     }
 
-    function resonateCommunity(string memory arc, string memory resonance) external onlyOverseer {
-        emit CommunityResonance(arc, resonance);
-        // ARC: Ritualize community resonance (shared resilience, cultural joy, authentic trust).
+    function resonateLegacy(string memory arc, string memory resonance) external onlyOverseer {
+        emit LegacyResonance(arc, resonance);
+        // ARC: Ritualize legacy resonance (shared heritage, cultural continuity, authentic trust).
     }
 }
