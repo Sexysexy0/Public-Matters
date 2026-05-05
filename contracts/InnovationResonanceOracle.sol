@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract InnovationResonanceOracle {
-    event AmbitionIntegrity(string context, string safeguard);
-    event FeatureFairness(string arc, string safeguard);
-    event InnovationResonance(string arc, string resonance);
+    event InnovationIntegrity(string context, string safeguard);
+    event DesignFairness(string arc, string safeguard);
+    event PlayerResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract InnovationResonanceOracle {
         _;
     }
 
-    function safeguardAmbitionIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit AmbitionIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for AI ambition integrity (responsible innovation, transparent deployment, dignified governance).
+    function safeguardInnovationIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit InnovationIntegrity(context, safeguard);
+        // ORACLE: Encode safeguards for innovation integrity (authentic creativity, dignified originality, consistent transparency).
     }
 
-    function enforceFeatureFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit FeatureFairness(arc, safeguard);
-        // ORACLE: Ritualize feature innovation fairness safeguards (balanced rollout, equitable access, participatory design).
+    function enforceDesignFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit DesignFairness(arc, safeguard);
+        // ORACLE: Ritualize design fairness safeguards (balanced mechanics, equitable clarity, participatory usability).
     }
 
-    function resonateInnovation(string memory arc, string memory resonance) external onlyOverseer {
-        emit InnovationResonance(arc, resonance);
-        // ORACLE: Ritualize communal innovation resonance (community-driven feedback, authentic creativity, immersive evolution).
+    function resonatePlayer(string memory arc, string memory resonance) external onlyOverseer {
+        emit PlayerResonance(arc, resonance);
+        // ORACLE: Ritualize player resonance (shared immersion, cultural respect, authentic enjoyment).
     }
 }
