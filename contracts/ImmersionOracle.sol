@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract ImmersionOracle {
     event ImmersionIntegrity(string context, string safeguard);
-    event ExperientialFairness(string arc, string safeguard);
-    event NarrativeResonance(string arc, string resonance);
+    event ExperienceFairness(string arc, string safeguard);
+    event PresenceResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract ImmersionOracle {
 
     function safeguardImmersionIntegrity(string memory context, string memory safeguard) external onlyOverseer {
         emit ImmersionIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for immersion integrity (authentic depth, dignified experience, consistent world-building).
+        // ORACLE: Encode safeguards for immersion integrity (authentic engagement, dignified flow, consistent depth).
     }
 
-    function enforceExperientialFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ExperientialFairness(arc, safeguard);
-        // ORACLE: Ritualize experiential fairness safeguards (balanced mechanics, equitable immersion, participatory transparency).
+    function enforceExperienceFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ExperienceFairness(arc, safeguard);
+        // ORACLE: Ritualize experience fairness safeguards (balanced design, equitable accessibility, participatory transparency).
     }
 
-    function resonateNarrative(string memory arc, string memory resonance) external onlyOverseer {
-        emit NarrativeResonance(arc, resonance);
-        // ORACLE: Ritualize narrative resonance (shared storytelling, cultural immersion, authentic trust).
+    function resonatePresence(string memory arc, string memory resonance) external onlyOverseer {
+        emit PresenceResonance(arc, resonance);
+        // ORACLE: Ritualize presence resonance (shared awareness, cultural authenticity, authentic trust).
     }
 }
