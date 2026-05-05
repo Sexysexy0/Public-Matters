@@ -19,16 +19,16 @@ contract RestorationOracle {
 
     function safeguardRestorationIntegrity(string memory context, string memory safeguard) external onlyOverseer {
         emit RestorationIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for restoration integrity (authentic repair, dignified renewal, consistent stewardship).
+        // ORACLE: Encode safeguards for restoration integrity (authentic renewal, dignified repair, consistent resilience).
     }
 
     function enforceRenewalFairness(string memory arc, string memory safeguard) external onlyOverseer {
         emit RenewalFairness(arc, safeguard);
-        // ORACLE: Ritualize renewal fairness safeguards (balanced restoration, equitable revival, participatory transparency).
+        // ORACLE: Ritualize renewal fairness safeguards (balanced revival, equitable restoration, participatory transparency).
     }
 
     function resonateRevival(string memory arc, string memory resonance) external onlyOverseer {
         emit RevivalResonance(arc, resonance);
-        // ORACLE: Ritualize revival resonance (shared renewal, cultural rebirth, authentic trust).
+        // ORACLE: Ritualize revival resonance (shared renewal, cultural resilience, authentic trust).
     }
 }
