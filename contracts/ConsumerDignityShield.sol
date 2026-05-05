@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract ConsumerDignityShield {
-    event PricingIntegrity(string context, string safeguard);
-    event AvailabilityFairness(string arc, string safeguard);
-    event InnovationResonance(string arc, string resonance);
+    event ConsumerIntegrity(string context, string safeguard);
+    event DignityFairness(string arc, string safeguard);
+    event TrustResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract ConsumerDignityShield {
         _;
     }
 
-    function safeguardPricingIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit PricingIntegrity(context, safeguard);
-        // SHIELD: Encode safeguards for pricing integrity (fair entry points, dignified affordability, consistent transparency).
+    function safeguardConsumerIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit ConsumerIntegrity(context, safeguard);
+        // SHIELD: Encode safeguards for consumer integrity (authentic rights, dignified treatment, consistent equity).
     }
 
-    function enforceAvailabilityFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit AvailabilityFairness(arc, safeguard);
-        // SHIELD: Ritualize availability fairness safeguards (balanced supply, equitable access, participatory clarity).
+    function enforceDignityFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit DignityFairness(arc, safeguard);
+        // SHIELD: Ritualize dignity fairness safeguards (balanced protection, equitable respect, participatory transparency).
     }
 
-    function resonateInnovation(string memory arc, string memory resonance) external onlyOverseer {
-        emit InnovationResonance(arc, resonance);
-        // SHIELD: Ritualize innovation resonance (shared creativity, cultural openness, authentic trust).
+    function resonateTrust(string memory arc, string memory resonance) external onlyOverseer {
+        emit TrustResonance(arc, resonance);
+        // SHIELD: Ritualize trust resonance (shared confidence, cultural respect, authentic reliability).
     }
 }
