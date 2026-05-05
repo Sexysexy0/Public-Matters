@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract AwarenessOracle {
     event AwarenessIntegrity(string context, string safeguard);
-    event InstinctFairness(string arc, string safeguard);
-    event VigilanceResonance(string arc, string resonance);
+    event VigilanceFairness(string arc, string safeguard);
+    event InstinctResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract AwarenessOracle {
 
     function safeguardAwarenessIntegrity(string memory context, string memory safeguard) external onlyOverseer {
         emit AwarenessIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for awareness integrity (authentic perception, dignified instinct, consistent clarity).
+        // ORACLE: Encode safeguards for awareness integrity (authentic perception, dignified clarity, consistent vigilance).
     }
 
-    function enforceInstinctFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit InstinctFairness(arc, safeguard);
-        // ORACLE: Ritualize instinct fairness safeguards (balanced reflex, equitable intuition, participatory transparency).
+    function enforceVigilanceFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit VigilanceFairness(arc, safeguard);
+        // ORACLE: Ritualize vigilance fairness safeguards (balanced watchfulness, equitable alertness, participatory transparency).
     }
 
-    function resonateVigilance(string memory arc, string memory resonance) external onlyOverseer {
-        emit VigilanceResonance(arc, resonance);
-        // ORACLE: Ritualize vigilance resonance (shared alertness, cultural awareness, authentic trust).
+    function resonateInstinct(string memory arc, string memory resonance) external onlyOverseer {
+        emit InstinctResonance(arc, resonance);
+        // ORACLE: Ritualize instinct resonance (shared awareness, cultural vigilance, authentic trust).
     }
 }
