@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract InnovationEquityShield {
-    event InventorDignity(string context, string safeguard);
-    event CreativeEquity(string arc, string safeguard);
-    event InnovationResonance(string arc, string resonance);
+    event InnovationIntegrity(string context, string safeguard);
+    event CreativeFairness(string arc, string safeguard);
+    event CommunityResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract InnovationEquityShield {
         _;
     }
 
-    function safeguardInventorDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit InventorDignity(context, safeguard);
-        // SHIELD: Encode safeguards for inventor dignity (fair recognition, IP protection, incentive programs).
+    function safeguardInnovationIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit InnovationIntegrity(context, safeguard);
+        // SHIELD: Encode safeguards for innovation integrity (authentic originality, dignified creativity, consistent novelty).
     }
 
-    function enforceCreativeEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CreativeEquity(arc, safeguard);
-        // SHIELD: Ritualize creative equity safeguards (support for artists, equitable licensing, transparent royalties).
+    function enforceCreativeFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CreativeFairness(arc, safeguard);
+        // SHIELD: Ritualize creative fairness safeguards (balanced artistry, equitable design, participatory transparency).
     }
 
-    function resonateInnovation(string memory arc, string memory resonance) external onlyOverseer {
-        emit InnovationResonance(arc, resonance);
-        // SHIELD: Ritualize communal innovation resonance (inclusive innovation hubs, youth IP programs, global collaboration).
+    function resonateCommunity(string memory arc, string memory resonance) external onlyOverseer {
+        emit CommunityResonance(arc, resonance);
+        // SHIELD: Ritualize communal resonance (shared excitement, cultural immersion, authentic trust).
     }
 }
