@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract FranchiseResonanceOracle {
-    event FranchiseResonance(string arc, string resonance);
-    event CinematicFairness(string arc, string safeguard);
-    event GamingIntegrity(string context, string safeguard);
+    event FranchiseResonance(string arc, string safeguard);
+    event IdentityFairness(string arc, string safeguard);
+    event NarrativeEquity(string context, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract FranchiseResonanceOracle {
         _;
     }
 
-    function resonateFranchise(string memory arc, string memory resonance) external onlyOverseer {
-        emit FranchiseResonance(arc, resonance);
-        // ORACLE: Ritualize franchise resonance (shared creativity, cultural respect, authentic continuity).
+    function safeguardFranchiseResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit FranchiseResonance(arc, safeguard);
+        // ORACLE: Encode safeguards for franchise resonance (authentic tone, dignified immersion, systemic balance).
     }
 
-    function enforceCinematicFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CinematicFairness(arc, safeguard);
-        // ORACLE: Encode safeguards for cinematic fairness (balanced adaptation, equitable clarity, participatory artistry).
+    function enforceIdentityFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit IdentityFairness(arc, safeguard);
+        // ORACLE: Ritualize identity fairness safeguards (equitable adaptation, participatory clarity, balanced governance).
     }
 
-    function safeguardGamingIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit GamingIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for gaming integrity (authentic mechanics, dignified immersion, consistent accountability).
+    function safeguardNarrativeEquity(string memory context, string memory resonance) external onlyOverseer {
+        emit NarrativeEquity(context, resonance);
+        // ORACLE: Ritualize narrative equity (coherent storytelling, authentic progression, community trust).
     }
 }
