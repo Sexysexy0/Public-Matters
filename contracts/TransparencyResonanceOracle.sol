@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract TransparencyResonanceOracle {
-    event TransparencyIntegrity(string context, string safeguard);
-    event CreatorEquity(string arc, string safeguard);
-    event ModerationResonance(string arc, string resonance);
+    event TransparencyResonance(string arc, string resonance);
+    event OptimizationFairness(string arc, string safeguard);
+    event ConsumerEquity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract TransparencyResonanceOracle {
         _;
     }
 
-    function safeguardTransparencyIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit TransparencyIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for transparency integrity (authentic communication, dignified clarity, consistent accountability).
+    function resonateTransparency(string memory arc, string memory resonance) external onlyOverseer {
+        emit TransparencyResonance(arc, resonance);
+        // ORACLE: Ritualize transparency resonance (authentic clarity, dignified monitoring, participatory accountability).
     }
 
-    function enforceCreatorEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CreatorEquity(arc, safeguard);
-        // ORACLE: Ritualize creator equity safeguards (balanced moderation, equitable clarity, participatory fairness).
+    function enforceOptimizationFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit OptimizationFairness(arc, safeguard);
+        // ORACLE: Encode safeguards for optimization fairness (balanced performance, equitable immersion, systemic stability).
     }
 
-    function resonateModeration(string memory arc, string memory resonance) external onlyOverseer {
-        emit ModerationResonance(arc, resonance);
-        // ORACLE: Ritualize moderation resonance (shared accessibility, cultural respect, authentic belonging).
+    function safeguardConsumerEquity(string memory context, string memory safeguard) external onlyOverseer {
+        emit ConsumerEquity(context, safeguard);
+        // ORACLE: Encode safeguards for consumer equity (refund clarity, dignified access, authentic trust).
     }
 }
