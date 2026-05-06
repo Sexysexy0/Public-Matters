@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract PlayerTrustShield {
-    event TrustIntegrity(string context, string safeguard);
-    event PromiseFairness(string arc, string safeguard);
-    event CommunalResonance(string arc, string resonance);
+    event ServiceIntegrity(string context, string safeguard);
+    event PlayerFairness(string arc, string safeguard);
+    event CommunityResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract PlayerTrustShield {
         _;
     }
 
-    function safeguardTrustIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit TrustIntegrity(context, safeguard);
-        // SHIELD: Encode safeguards for trust integrity (transparent communication, dignified delivery, authentic consistency).
+    function safeguardServiceIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit ServiceIntegrity(context, safeguard);
+        // SHIELD: Encode safeguards for service integrity (authentic reliability, dignified transparency, consistent trust).
     }
 
-    function enforcePromiseFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit PromiseFairness(arc, safeguard);
-        // SHIELD: Ritualize promise fairness safeguards (balanced expectations, equitable assurances, participatory transparency).
+    function enforcePlayerFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit PlayerFairness(arc, safeguard);
+        // SHIELD: Ritualize player fairness safeguards (balanced mechanics, equitable clarity, participatory immersion).
     }
 
-    function resonateCommunal(string memory arc, string memory resonance) external onlyOverseer {
-        emit CommunalResonance(arc, resonance);
-        // SHIELD: Ritualize communal resonance (shared confidence, cultural immersion, authentic player assurance).
+    function resonateCommunity(string memory arc, string memory resonance) external onlyOverseer {
+        emit CommunityResonance(arc, resonance);
+        // SHIELD: Ritualize community resonance (shared dignity, cultural respect, authentic engagement).
     }
 }
