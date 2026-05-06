@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract LegacyResonanceShield {
-    event FranchiseLegacy(string franchise, string safeguard);
-    event EmotionalResonance(string arc, string resonance);
-    event CommunalHeritage(string heritage, string safeguard);
+    event LegacyResonance(string arc, string resonance);
+    event PlayerFairness(string arc, string safeguard);
+    event PricingIntegrity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract LegacyResonanceShield {
         _;
     }
 
-    function safeguardFranchise(string memory franchise, string memory safeguard) external onlyOverseer {
-        emit FranchiseLegacy(franchise, safeguard);
-        // SHIELD: Encode systemic safeguards for franchise legacy preservation.
+    function resonateLegacy(string memory arc, string memory resonance) external onlyOverseer {
+        emit LegacyResonance(arc, resonance);
+        // SHIELD: Ritualize legacy resonance (authentic nostalgia, dignified immersion, cultural continuity).
     }
 
-    function resonateEmotion(string memory arc, string memory resonance) external onlyOverseer {
-        emit EmotionalResonance(arc, resonance);
-        // SHIELD: Ritualize emotional resonance for narrative and player immersion.
+    function enforcePlayerFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit PlayerFairness(arc, safeguard);
+        // SHIELD: Encode safeguards for player fairness (balanced progression, equitable clarity, participatory play).
     }
 
-    function preserveHeritage(string memory heritage, string memory safeguard) external onlyOverseer {
-        emit CommunalHeritage(heritage, safeguard);
-        // SHIELD: Ritualize communal heritage safeguards for legacy cycles.
+    function safeguardPricingIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit PricingIntegrity(context, safeguard);
+        // SHIELD: Encode safeguards for pricing integrity (transparent value, dignified access, consistent fairness).
     }
 }
