@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract AccountabilityResonanceOracle {
-    event AccountabilityIntegrity(string context, string safeguard);
-    event CreatorEquity(string arc, string safeguard);
-    event PlatformResonance(string arc, string resonance);
+    event AccountabilityResonance(string arc, string resonance);
+    event ParticipationFairness(string arc, string safeguard);
+    event FreedomIntegrity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract AccountabilityResonanceOracle {
         _;
     }
 
-    function safeguardAccountabilityIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit AccountabilityIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for accountability integrity (authentic responsibility, dignified transparency, consistent governance).
+    function resonateAccountability(string memory arc, string memory resonance) external onlyOverseer {
+        emit AccountabilityResonance(arc, resonance);
+        // ORACLE: Ritualize accountability resonance (shared dignity, authentic responsibility, transparent monitoring).
     }
 
-    function enforceCreatorEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CreatorEquity(arc, safeguard);
-        // ORACLE: Ritualize creator equity safeguards (balanced treatment, equitable clarity, participatory fairness).
+    function enforceParticipationFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ParticipationFairness(arc, safeguard);
+        // ORACLE: Encode safeguards for participation fairness (balanced access, equitable clarity, participatory inclusion).
     }
 
-    function resonatePlatform(string memory arc, string memory resonance) external onlyOverseer {
-        emit PlatformResonance(arc, resonance);
-        // ORACLE: Ritualize platform resonance (shared trust, cultural respect, authentic belonging).
+    function safeguardFreedomIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit FreedomIntegrity(context, safeguard);
+        // ORACLE: Encode safeguards for freedom integrity (authentic rights, dignified transparency, consistent resilience).
     }
 }
