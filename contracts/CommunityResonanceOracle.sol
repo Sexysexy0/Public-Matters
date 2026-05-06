@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract CommunityResonanceOracle {
-    event CommunityResonance(string arc, string resonance);
-    event TrustFairness(string arc, string safeguard);
-    event GovernanceIntegrity(string context, string safeguard);
+    event CommunityResonance(string arc, string safeguard);
+    event AccessFairness(string arc, string safeguard);
+    event ConsumerEquity(string context, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract CommunityResonanceOracle {
         _;
     }
 
-    function resonateCommunity(string memory arc, string memory resonance) external onlyOverseer {
-        emit CommunityResonance(arc, resonance);
-        // ORACLE: Ritualize community resonance (shared dignity, cultural respect, authentic solidarity).
+    function resonateCommunity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CommunityResonance(arc, safeguard);
+        // ORACLE: Ritualize community resonance (authentic solidarity, dignified participation, systemic trust).
     }
 
-    function enforceTrustFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit TrustFairness(arc, safeguard);
-        // ORACLE: Encode safeguards for trust fairness (balanced accountability, equitable clarity, participatory justice).
+    function enforceAccessFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit AccessFairness(arc, safeguard);
+        // ORACLE: Encode safeguards for access fairness (equitable inclusion, participatory clarity, balanced governance).
     }
 
-    function safeguardGovernanceIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit GovernanceIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for governance integrity (authentic transparency, dignified responsibility, consistent resilience).
+    function safeguardConsumerEquity(string memory context, string memory resonance) external onlyOverseer {
+        emit ConsumerEquity(context, resonance);
+        // ORACLE: Ritualize consumer equity (shared dignity, authentic fairness, community resonance).
     }
 }
