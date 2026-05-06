@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract InfrastructureIntegrityShield {
-    event PublicWorksFairness(string context, string safeguard);
-    event ConstructionEquity(string arc, string safeguard);
-    event CommunalResilienceResonance(string arc, string resonance);
+    event InfrastructureIntegrity(string context, string safeguard);
+    event DigitalFairness(string arc, string safeguard);
+    event CitizenResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract InfrastructureIntegrityShield {
         _;
     }
 
-    function safeguardPublicWorks(string memory context, string memory safeguard) external onlyOverseer {
-        emit PublicWorksFairness(context, safeguard);
-        // SHIELD: Encode safeguards for fair public works (transparent bidding, equitable project allocation).
+    function safeguardInfrastructureIntegrity(string memory context, string memory safeguard) external onlyOverseer {
+        emit InfrastructureIntegrity(context, safeguard);
+        // SHIELD: Encode safeguards for infrastructure integrity (authentic reliability, dignified resilience, consistent trust).
     }
 
-    function enforceConstructionEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ConstructionEquity(arc, safeguard);
-        // SHIELD: Ritualize construction equity safeguards (quality standards, fair labor practices).
+    function enforceDigitalFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit DigitalFairness(arc, safeguard);
+        // SHIELD: Ritualize digital fairness safeguards (balanced access, equitable clarity, participatory inclusion).
     }
 
-    function resonateCommunalResilience(string memory arc, string memory resonance) external onlyOverseer {
-        emit CommunalResilienceResonance(arc, resonance);
-        // SHIELD: Ritualize communal resilience safeguards (disaster readiness, sustainable infrastructure).
+    function resonateCitizen(string memory arc, string memory resonance) external onlyOverseer {
+        emit CitizenResonance(arc, resonance);
+        // SHIELD: Ritualize citizen resonance (shared dignity, cultural respect, authentic engagement).
     }
 }
