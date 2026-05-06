@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract OptimizationEquityShield {
-    event PerformanceIntegrity(string context, string safeguard);
-    event SpecFairness(string arc, string safeguard);
-    event TrustResonance(string arc, string resonance);
+    event DeveloperAccountability(string arc, string safeguard);
+    event PerformanceOptimization(string arc, string safeguard);
+    event ConsumerTrust(string context, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract OptimizationEquityShield {
         _;
     }
 
-    function safeguardPerformanceIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit PerformanceIntegrity(context, safeguard);
-        // SHIELD: Encode safeguards for performance integrity (realistic FPS targets, dignified optimization, authentic consistency).
+    function enforceDeveloperAccountability(string memory arc, string memory safeguard) external onlyOverseer {
+        emit DeveloperAccountability(arc, safeguard);
+        // SHIELD: Encode safeguards for developer accountability (transparent performance data, equitable clarity, participatory responsibility).
     }
 
-    function enforceSpecFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit SpecFairness(arc, safeguard);
-        // SHIELD: Ritualize spec fairness safeguards (logical pairings, equitable tiers, participatory transparency).
+    function safeguardPerformanceOptimization(string memory arc, string memory safeguard) external onlyOverseer {
+        emit PerformanceOptimization(arc, safeguard);
+        // SHIELD: Ritualize performance optimization safeguards (authentic stability, dignified immersion, balanced hardware demands).
     }
 
-    function resonateTrust(string memory arc, string memory resonance) external onlyOverseer {
-        emit TrustResonance(arc, resonance);
-        // SHIELD: Ritualize communal trust resonance (shared expectations, cultural immersion, authentic player confidence).
+    function resonateConsumerTrust(string memory context, string memory resonance) external onlyOverseer {
+        emit ConsumerTrust(context, resonance);
+        // SHIELD: Ritualize consumer trust (shared dignity, refund equity, authentic transparency).
     }
 }
