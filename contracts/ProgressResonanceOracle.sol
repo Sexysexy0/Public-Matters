@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract ProgressResonanceOracle {
-    event ProgressResonance(string arc, string resonance);
+    event ProgressResonance(string arc, string safeguard);
     event InnovationFairness(string arc, string safeguard);
-    event CriticalIntegrity(string context, string safeguard);
+    event CollaborativeEquity(string context, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract ProgressResonanceOracle {
         _;
     }
 
-    function resonateProgress(string memory arc, string memory resonance) external onlyOverseer {
-        emit ProgressResonance(arc, resonance);
-        // ORACLE: Ritualize progress resonance (shared advancement, cultural respect, authentic development).
+    function safeguardProgressResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ProgressResonance(arc, safeguard);
+        // ORACLE: Encode safeguards for progress resonance (authentic breakthroughs, dignified pacing, systemic balance).
     }
 
     function enforceInnovationFairness(string memory arc, string memory safeguard) external onlyOverseer {
         emit InnovationFairness(arc, safeguard);
-        // ORACLE: Encode safeguards for innovation fairness (balanced creativity, equitable clarity, participatory progress).
+        // ORACLE: Ritualize innovation fairness safeguards (equitable experimentation, participatory clarity, balanced governance).
     }
 
-    function safeguardCriticalIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit CriticalIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for critical integrity (authentic reasoning, dignified inquiry, consistent responsibility).
+    function safeguardCollaborativeEquity(string memory context, string memory resonance) external onlyOverseer {
+        emit CollaborativeEquity(context, resonance);
+        // ORACLE: Ritualize collaborative equity (shared progress, authentic teamwork, community trust).
     }
 }
