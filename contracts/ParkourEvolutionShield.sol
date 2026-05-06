@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract ParkourEvolutionShield {
     event MovementIntegrity(string context, string safeguard);
-    event SystemFairness(string arc, string safeguard);
-    event ImmersionResonance(string arc, string resonance);
+    event NostalgiaFairness(string arc, string safeguard);
+    event FreerunningResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract ParkourEvolutionShield {
 
     function safeguardMovementIntegrity(string memory context, string memory safeguard) external onlyOverseer {
         emit MovementIntegrity(context, safeguard);
-        // SHIELD: Encode safeguards for movement integrity (fluid flow, dignified responsiveness, authentic predictability).
+        // SHIELD: Encode safeguards for movement integrity (authentic flow, dignified responsiveness, consistent control).
     }
 
-    function enforceSystemFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit SystemFairness(arc, safeguard);
-        // SHIELD: Ritualize system fairness safeguards (balanced mechanics, equitable design, participatory evolution).
+    function enforceNostalgiaFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit NostalgiaFairness(arc, safeguard);
+        // SHIELD: Ritualize nostalgia fairness safeguards (balanced legacy, equitable clarity, participatory immersion).
     }
 
-    function resonateImmersion(string memory arc, string memory resonance) external onlyOverseer {
-        emit ImmersionResonance(arc, resonance);
-        // SHIELD: Ritualize communal immersion resonance (shared expression, cultural immersion, authentic player agency).
+    function resonateFreerunning(string memory arc, string memory resonance) external onlyOverseer {
+        emit FreerunningResonance(arc, resonance);
+        // SHIELD: Ritualize freerunning resonance (shared creativity, cultural respect, authentic fluidity).
     }
 }
