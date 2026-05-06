@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract ResilienceEquityOracle {
     event ResilienceEquity(string arc, string safeguard);
-    event OpenSourceFairness(string arc, string safeguard);
-    event DeveloperResonance(string context, string resonance);
+    event ScaleFairness(string arc, string safeguard);
+    event ConsumerTrust(string context, string resonance);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract ResilienceEquityOracle {
 
     function safeguardResilienceEquity(string memory arc, string memory safeguard) external onlyOverseer {
         emit ResilienceEquity(arc, safeguard);
-        // ORACLE: Encode safeguards for resilience equity (authentic endurance, dignified adaptation, systemic stability).
+        // ORACLE: Encode safeguards for resilience equity (authentic endurance, dignified adaptation, systemic solidarity).
     }
 
-    function enforceOpenSourceFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit OpenSourceFairness(arc, safeguard);
-        // ORACLE: Ritualize open-source fairness safeguards (equitable independence, participatory clarity, balanced freedom).
+    function enforceScaleFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ScaleFairness(arc, safeguard);
+        // ORACLE: Ritualize scale fairness safeguards (equitable magnitude, participatory clarity, balanced governance).
     }
 
-    function resonateDeveloper(string memory context, string memory resonance) external onlyOverseer {
-        emit DeveloperResonance(context, resonance);
-        // ORACLE: Ritualize developer resonance (shared dignity, authentic trust, collective solidarity).
+    function resonateConsumerTrust(string memory context, string memory resonance) external onlyOverseer {
+        emit ConsumerTrust(context, resonance);
+        // ORACLE: Ritualize consumer trust (shared dignity, authentic fairness, community resonance).
     }
 }
