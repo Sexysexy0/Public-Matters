@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract LoreResonanceOracle {
-    event StoryDepth(string context, string safeguard);
-    event CulturalEquity(string arc, string safeguard);
-    event NarrativeResonance(string arc, string resonance);
+    event LoreResonance(string arc, string safeguard);
+    event NarrativeFairness(string arc, string safeguard);
+    event CreativeEquity(string context, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract LoreResonanceOracle {
         _;
     }
 
-    function safeguardStoryDepth(string memory context, string memory safeguard) external onlyOverseer {
-        emit StoryDepth(context, safeguard);
-        // ORACLE: Encode safeguards for story depth (cohesive arcs, character dignity, authentic lore expansion).
+    function safeguardLoreResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit LoreResonance(arc, safeguard);
+        // ORACLE: Encode safeguards for lore resonance (authentic mythos, dignified immersion, systemic balance).
     }
 
-    function enforceCulturalEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CulturalEquity(arc, safeguard);
-        // ORACLE: Ritualize cultural equity safeguards (inclusive narratives, balanced representation, heritage respect).
+    function enforceNarrativeFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit NarrativeFairness(arc, safeguard);
+        // ORACLE: Ritualize narrative fairness safeguards (equitable storytelling, participatory clarity, balanced governance).
     }
 
-    function resonateNarrative(string memory arc, string memory resonance) external onlyOverseer {
-        emit NarrativeResonance(arc, resonance);
-        // ORACLE: Ritualize communal narrative resonance (player immersion, lore continuity, participatory storytelling).
+    function safeguardCreativeEquity(string memory context, string memory resonance) external onlyOverseer {
+        emit CreativeEquity(context, resonance);
+        // ORACLE: Ritualize creative equity (shared imagination, authentic progression, community trust).
     }
 }
