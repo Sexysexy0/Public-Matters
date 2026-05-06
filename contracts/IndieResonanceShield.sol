@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract IndieResonanceShield {
-    event IndieDiscipline(string context, string safeguard);
-    event OwnershipFairness(string arc, string safeguard);
-    event OpenSourceResonance(string arc, string resonance);
+    event IndieResonance(string arc, string safeguard);
+    event ConsoleFairness(string arc, string safeguard);
+    event PlayerDignity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract IndieResonanceShield {
         _;
     }
 
-    function safeguardIndieDiscipline(string memory context, string memory safeguard) external onlyOverseer {
-        emit IndieDiscipline(context, safeguard);
-        // SHIELD: Encode safeguards for indie discipline (authentic workflow, dignified resilience, consistent immersion).
+    function safeguardIndieResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit IndieResonance(arc, safeguard);
+        // SHIELD: Encode safeguards for indie resonance (authentic creativity, dignified immersion, systemic balance).
     }
 
-    function enforceOwnershipFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit OwnershipFairness(arc, safeguard);
-        // SHIELD: Ritualize ownership fairness safeguards (100% IP control, equitable clarity, participatory independence).
+    function enforceConsoleFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ConsoleFairness(arc, safeguard);
+        // SHIELD: Ritualize console fairness safeguards (equitable access, participatory clarity, balanced governance).
     }
 
-    function resonateOpenSource(string memory arc, string memory resonance) external onlyOverseer {
-        emit OpenSourceResonance(arc, resonance);
-        // SHIELD: Ritualize open-source resonance (shared dignity, freedom from corporate interference, authentic community trust).
+    function safeguardPlayerDignity(string memory context, string memory safeguard) external onlyOverseer {
+        emit PlayerDignity(context, safeguard);
+        // SHIELD: Ritualize player dignity (shared respect, authentic progression, community solidarity).
     }
 }
