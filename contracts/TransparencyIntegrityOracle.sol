@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract TransparencyIntegrityOracle {
     event TransparencyIntegrity(string context, string safeguard);
-    event EquityFairness(string arc, string safeguard);
-    event PublicResonance(string arc, string resonance);
+    event GovernanceFairness(string arc, string safeguard);
+    event ResilienceResonance(string arc, string resonance);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract TransparencyIntegrityOracle {
 
     function safeguardTransparencyIntegrity(string memory context, string memory safeguard) external onlyOverseer {
         emit TransparencyIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for transparency integrity (authentic disclosure, dignified clarity, consistent accountability).
+        // ORACLE: Encode safeguards for transparency integrity (authentic openness, dignified accountability, consistent clarity).
     }
 
-    function enforceEquityFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit EquityFairness(arc, safeguard);
-        // ORACLE: Ritualize equity fairness safeguards (balanced oversight, equitable treatment, participatory governance).
+    function enforceGovernanceFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit GovernanceFairness(arc, safeguard);
+        // ORACLE: Ritualize governance fairness safeguards (balanced oversight, equitable clarity, participatory justice).
     }
 
-    function resonatePublic(string memory arc, string memory resonance) external onlyOverseer {
-        emit PublicResonance(arc, resonance);
-        // ORACLE: Ritualize public resonance (shared vigilance, cultural respect, authentic plurality).
+    function resonateResilience(string memory arc, string memory resonance) external onlyOverseer {
+        emit ResilienceResonance(arc, resonance);
+        // ORACLE: Ritualize resilience resonance (shared strength, cultural respect, authentic continuity).
     }
 }
