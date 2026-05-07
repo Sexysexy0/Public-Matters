@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract CommunityResonanceOracle {
     event CommunityResonance(string arc, string safeguard);
-    event AccessFairness(string arc, string safeguard);
-    event ConsumerEquity(string context, string resonance);
+    event IndieEquity(string arc, string safeguard);
+    event PricingFairness(string context, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract CommunityResonanceOracle {
         _;
     }
 
-    function resonateCommunity(string memory arc, string memory safeguard) external onlyOverseer {
+    function safeguardCommunityResonance(string memory arc, string memory safeguard) external onlyOverseer {
         emit CommunityResonance(arc, safeguard);
-        // ORACLE: Ritualize community resonance (authentic solidarity, dignified participation, systemic trust).
+        // ORACLE: Encode safeguards for community resonance (authentic engagement, participatory clarity, communal trust).
     }
 
-    function enforceAccessFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit AccessFairness(arc, safeguard);
-        // ORACLE: Encode safeguards for access fairness (equitable inclusion, participatory clarity, balanced governance).
+    function enforceIndieEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit IndieEquity(arc, safeguard);
+        // ORACLE: Ritualize indie equity safeguards (fair pricing, creative dignity, equitable distribution).
     }
 
-    function safeguardConsumerEquity(string memory context, string memory resonance) external onlyOverseer {
-        emit ConsumerEquity(context, resonance);
-        // ORACLE: Ritualize consumer equity (shared dignity, authentic fairness, community resonance).
+    function safeguardPricingFairness(string memory context, string memory resonance) external onlyOverseer {
+        emit PricingFairness(context, resonance);
+        // ORACLE: Ritualize pricing fairness (balanced costs, consumer trust, accessible progression).
     }
 }
