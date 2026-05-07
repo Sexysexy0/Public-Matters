@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract OptimizationEquityShield {
     event OptimizationEquity(string arc, string safeguard);
-    event EfficiencyFairness(string arc, string safeguard);
-    event StorageDignity(string context, string safeguard);
+    event HardwareFairness(string arc, string safeguard);
+    event VisualDignity(string context, string safeguard);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract OptimizationEquityShield {
 
     function safeguardOptimizationEquity(string memory arc, string memory safeguard) external onlyOverseer {
         emit OptimizationEquity(arc, safeguard);
-        // SHIELD: Encode safeguards for optimization equity (balanced performance, dignified efficiency, systemic fairness).
+        // SHIELD: Encode safeguards for optimization equity (efficient rendering, balanced performance, dignified system use).
     }
 
-    function enforceEfficiencyFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit EfficiencyFairness(arc, safeguard);
-        // SHIELD: Ritualize efficiency fairness safeguards (equitable optimization, participatory clarity, balanced governance).
+    function enforceHardwareFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit HardwareFairness(arc, safeguard);
+        // SHIELD: Ritualize hardware fairness safeguards (avoid forced upgrades, equitable compatibility, communal trust).
     }
 
-    function safeguardStorageDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit StorageDignity(context, safeguard);
-        // SHIELD: Ritualize storage dignity (respectful footprint, authentic progression, accessible immersion).
+    function safeguardVisualDignity(string memory context, string memory safeguard) external onlyOverseer {
+        emit VisualDignity(context, safeguard);
+        // SHIELD: Ritualize visual dignity (cohesive aesthetics, artistic integrity, dignified player experience).
     }
 }
