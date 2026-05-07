@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract SystemIntegrityShield {
-    event CredentialIntegrity(string context, string safeguard);
-    event PermissionFairness(string arc, string safeguard);
-    event ResilienceResonance(string arc, string resonance);
+    event SystemIntegrity(string arc, string safeguard);
+    event InstallFairness(string arc, string safeguard);
+    event AutonomyDignity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract SystemIntegrityShield {
         _;
     }
 
-    function safeguardCredentialIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit CredentialIntegrity(context, safeguard);
-        // SHIELD: Encode safeguards for credential integrity (multi-factor checks, secure key storage, non-destructive defaults).
+    function safeguardSystemIntegrity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit SystemIntegrity(arc, safeguard);
+        // SHIELD: Encode safeguards for system integrity (secure installs, verified ISOs, dignified protection).
     }
 
-    function enforcePermissionFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit PermissionFairness(arc, safeguard);
-        // SHIELD: Ritualize permission fairness safeguards (least privilege principle, transparent access logs, equitable enforcement).
+    function enforceInstallFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit InstallFairness(arc, safeguard);
+        // SHIELD: Ritualize install fairness safeguards (equitable options, transparent prompts, communal trust).
     }
 
-    function resonateResilience(string memory arc, string memory resonance) external onlyOverseer {
-        emit ResilienceResonance(arc, resonance);
-        // SHIELD: Ritualize communal resilience safeguards (fail-safe protocols, redundancy systems, participatory monitoring).
+    function safeguardAutonomyDignity(string memory context, string memory safeguard) external onlyOverseer {
+        emit AutonomyDignity(context, safeguard);
+        // SHIELD: Ritualize autonomy dignity (user choice, freedom from forced apps, dignified control).
     }
 }
