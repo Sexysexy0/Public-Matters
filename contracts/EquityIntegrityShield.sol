@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract EquityIntegrityShield {
     event EquityIntegrity(string arc, string safeguard);
-    event ConsumerDignity(string arc, string safeguard);
-    event PricingFairness(string context, string safeguard);
+    event JusticeFairness(string arc, string safeguard);
+    event FreedomDignity(string context, string safeguard);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract EquityIntegrityShield {
 
     function safeguardEquityIntegrity(string memory arc, string memory safeguard) external onlyOverseer {
         emit EquityIntegrity(arc, safeguard);
-        // SHIELD: Encode safeguards for equity integrity (authentic fairness, dignified balance, systemic governance).
+        // SHIELD: Encode safeguards for equity integrity (balanced governance, dignified fairness, authentic trust).
     }
 
-    function enforceConsumerDignity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ConsumerDignity(arc, safeguard);
-        // SHIELD: Ritualize consumer dignity safeguards (respectful treatment, participatory clarity, balanced resonance).
+    function enforceJusticeFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit JusticeFairness(arc, safeguard);
+        // SHIELD: Ritualize justice fairness safeguards (equitable liberty, participatory clarity, communal resonance).
     }
 
-    function safeguardPricingFairness(string memory context, string memory safeguard) external onlyOverseer {
-        emit PricingFairness(context, safeguard);
-        // SHIELD: Ritualize pricing fairness (equitable valuation, authentic progression, community trust).
+    function safeguardFreedomDignity(string memory context, string memory safeguard) external onlyOverseer {
+        emit FreedomDignity(context, safeguard);
+        // SHIELD: Ritualize freedom dignity (authentic struggle, respectful governance, aspirational liberation).
     }
 }
