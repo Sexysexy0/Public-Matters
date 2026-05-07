@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract IndieResonanceShield {
-    event IndieResonance(string arc, string safeguard);
-    event ConsoleFairness(string arc, string safeguard);
-    event PlayerDignity(string context, string safeguard);
+    event FormatResonance(string arc, string safeguard);
+    event PirateResonance(string arc, string safeguard);
+    event CommunityFairness(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract IndieResonanceShield {
         _;
     }
 
-    function safeguardIndieResonance(string memory arc, string memory safeguard) external onlyOverseer {
-        emit IndieResonance(arc, safeguard);
-        // SHIELD: Encode safeguards for indie resonance (authentic creativity, dignified immersion, systemic balance).
+    function safeguardFormatResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit FormatResonance(arc, safeguard);
+        // SHIELD: Encode safeguards for format resonance (compact reviews, indie spotlight, dignified content flow).
     }
 
-    function enforceConsoleFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ConsoleFairness(arc, safeguard);
-        // SHIELD: Ritualize console fairness safeguards (equitable access, participatory clarity, balanced governance).
+    function enforcePirateResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit PirateResonance(arc, safeguard);
+        // SHIELD: Ritualize pirate resonance safeguards (authentic fantasy, swashbuckling immersion, communal adventure).
     }
 
-    function safeguardPlayerDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit PlayerDignity(context, safeguard);
-        // SHIELD: Ritualize player dignity (shared respect, authentic progression, community solidarity).
+    function safeguardCommunityFairness(string memory context, string memory safeguard) external onlyOverseer {
+        emit CommunityFairness(context, safeguard);
+        // SHIELD: Ritualize community fairness (anti-griefing systems, cooperative trust, dignified multiplayer governance).
     }
 }
