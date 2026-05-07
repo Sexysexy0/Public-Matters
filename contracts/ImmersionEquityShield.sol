@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract ImmersionEquityShield {
-    event PlayerImmersion(string context, string safeguard);
-    event EnvironmentalAuthenticity(string arc, string safeguard);
-    event ResonanceEquity(string arc, string resonance);
+    event ImmersionEquity(string arc, string safeguard);
+    event EngagementFairness(string arc, string safeguard);
+    event BelongingDignity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract ImmersionEquityShield {
         _;
     }
 
-    function safeguardPlayerImmersion(string memory context, string memory safeguard) external onlyOverseer {
-        emit PlayerImmersion(context, safeguard);
-        // SHIELD: Encode safeguards for immersion (narrative cohesion, sensory depth, authentic gameplay flow).
+    function safeguardImmersionEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ImmersionEquity(arc, safeguard);
+        // SHIELD: Encode safeguards for immersion equity (authentic worldbuilding, dignified clarity, systemic fairness).
     }
 
-    function enforceEnvironmentalAuthenticity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit EnvironmentalAuthenticity(arc, safeguard);
-        // SHIELD: Ritualize environmental authenticity safeguards (biome diversity, cultural respect, ecological balance).
+    function enforceEngagementFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit EngagementFairness(arc, safeguard);
+        // SHIELD: Ritualize engagement fairness safeguards (equitable participation, balanced resonance, community trust).
     }
 
-    function resonateEquity(string memory arc, string memory resonance) external onlyOverseer {
-        emit ResonanceEquity(arc, resonance);
-        // SHIELD: Ritualize communal resonance safeguards (shared immersion, participatory design, authentic world-building).
+    function safeguardBelongingDignity(string memory context, string memory safeguard) external onlyOverseer {
+        emit BelongingDignity(context, safeguard);
+        // SHIELD: Ritualize belonging dignity (respectful inclusion, authentic progression, communal resonance).
     }
 }
