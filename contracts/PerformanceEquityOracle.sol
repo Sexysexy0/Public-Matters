@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract PerformanceEquityOracle {
-    event PerformanceIntegrity(string context, string safeguard);
-    event EquityFairness(string arc, string safeguard);
-    event OptimizationResonance(string arc, string resonance);
+    event PerformanceEquity(string arc, string safeguard);
+    event OptimizationResonance(string arc, string safeguard);
+    event TransparencyDignity(string context, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract PerformanceEquityOracle {
         _;
     }
 
-    function safeguardPerformanceIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit PerformanceIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for performance integrity (authentic optimization, dignified efficiency, consistent validation).
+    function safeguardPerformanceEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit PerformanceEquity(arc, safeguard);
+        // ORACLE: Encode safeguards for performance equity (balanced requirements, dignified gameplay, systemic fairness).
     }
 
-    function enforceEquityFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit EquityFairness(arc, safeguard);
-        // ORACLE: Ritualize equity fairness safeguards (balanced requirements, equitable disclosure, participatory clarity).
+    function enforceOptimizationResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit OptimizationResonance(arc, safeguard);
+        // ORACLE: Ritualize optimization resonance safeguards (true efficiency, participatory clarity, authentic immersion).
     }
 
-    function resonateOptimization(string memory arc, string memory resonance) external onlyOverseer {
-        emit OptimizationResonance(arc, resonance);
-        // ORACLE: Ritualize optimization resonance (shared confidence, cultural respect, authentic reliability).
+    function safeguardTransparencyDignity(string memory context, string memory resonance) external onlyOverseer {
+        emit TransparencyDignity(context, resonance);
+        // ORACLE: Ritualize transparency dignity (honest communication, clear metrics, communal trust).
     }
 }
