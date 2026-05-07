@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract PlayerResonanceOracle {
-    event PlayerIntegrity(string context, string safeguard);
-    event EnjoymentFairness(string arc, string safeguard);
-    event CreativeResonance(string arc, string resonance);
+    event PlayerResonance(string arc, string safeguard);
+    event ChoiceFairness(string arc, string safeguard);
+    event CloudDignity(string context, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract PlayerResonanceOracle {
         _;
     }
 
-    function safeguardPlayerIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit PlayerIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for player integrity (authentic immersion, dignified agency, consistent respect).
+    function safeguardPlayerResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit PlayerResonance(arc, safeguard);
+        // ORACLE: Encode safeguards for player resonance (authentic immersion, participatory clarity, communal trust).
     }
 
-    function enforceEnjoymentFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit EnjoymentFairness(arc, safeguard);
-        // ORACLE: Ritualize enjoyment fairness safeguards (balanced challenge, equitable clarity, participatory fun).
+    function enforceChoiceFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ChoiceFairness(arc, safeguard);
+        // ORACLE: Ritualize choice fairness safeguards (dual-hardware equity, dignified options, equitable governance).
     }
 
-    function resonateCreative(string memory arc, string memory resonance) external onlyOverseer {
-        emit CreativeResonance(arc, resonance);
-        // ORACLE: Ritualize creative resonance (shared innovation, cultural respect, authentic storytelling).
+    function safeguardCloudDignity(string memory context, string memory resonance) external onlyOverseer {
+        emit CloudDignity(context, resonance);
+        // ORACLE: Ritualize cloud dignity (accessible streaming, balanced performance, consumer resonance).
     }
 }
