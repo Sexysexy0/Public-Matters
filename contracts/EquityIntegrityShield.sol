@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract EquityIntegrityShield {
-    event EquityIntegrity(string context, string safeguard);
-    event CreatorFairness(string arc, string safeguard);
-    event TransparencyResonance(string arc, string resonance);
+    event EquityIntegrity(string arc, string safeguard);
+    event ConsumerDignity(string arc, string safeguard);
+    event PricingFairness(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract EquityIntegrityShield {
         _;
     }
 
-    function safeguardEquityIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit EquityIntegrity(context, safeguard);
-        // SHIELD: Encode safeguards for equity integrity (authentic fairness, dignified balance, consistent inclusivity).
+    function safeguardEquityIntegrity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit EquityIntegrity(arc, safeguard);
+        // SHIELD: Encode safeguards for equity integrity (authentic fairness, dignified balance, systemic governance).
     }
 
-    function enforceCreatorFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CreatorFairness(arc, safeguard);
-        // SHIELD: Ritualize creator fairness safeguards (balanced moderation, equitable clarity, participatory trust).
+    function enforceConsumerDignity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ConsumerDignity(arc, safeguard);
+        // SHIELD: Ritualize consumer dignity safeguards (respectful treatment, participatory clarity, balanced resonance).
     }
 
-    function resonateTransparency(string memory arc, string memory resonance) external onlyOverseer {
-        emit TransparencyResonance(arc, resonance);
-        // SHIELD: Ritualize transparency resonance (shared clarity, cultural respect, authentic accountability).
+    function safeguardPricingFairness(string memory context, string memory safeguard) external onlyOverseer {
+        emit PricingFairness(context, safeguard);
+        // SHIELD: Ritualize pricing fairness (equitable valuation, authentic progression, community trust).
     }
 }
