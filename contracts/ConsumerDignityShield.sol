@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract ConsumerDignityShield {
-    event ConsumerIntegrity(string context, string safeguard);
-    event DignityFairness(string arc, string safeguard);
-    event TrustResonance(string arc, string resonance);
+    event ConsumerDignity(string arc, string safeguard);
+    event PricingFairness(string arc, string safeguard);
+    event OwnershipEquity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract ConsumerDignityShield {
         _;
     }
 
-    function safeguardConsumerIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit ConsumerIntegrity(context, safeguard);
-        // SHIELD: Encode safeguards for consumer integrity (authentic rights, dignified treatment, consistent equity).
+    function safeguardConsumerDignity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ConsumerDignity(arc, safeguard);
+        // SHIELD: Encode safeguards for consumer dignity (authentic respect, dignified treatment, systemic fairness).
     }
 
-    function enforceDignityFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit DignityFairness(arc, safeguard);
-        // SHIELD: Ritualize dignity fairness safeguards (balanced protection, equitable respect, participatory transparency).
+    function enforcePricingFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit PricingFairness(arc, safeguard);
+        // SHIELD: Ritualize pricing fairness safeguards (equitable valuation, participatory clarity, balanced governance).
     }
 
-    function resonateTrust(string memory arc, string memory resonance) external onlyOverseer {
-        emit TrustResonance(arc, resonance);
-        // SHIELD: Ritualize trust resonance (shared confidence, cultural respect, authentic reliability).
+    function safeguardOwnershipEquity(string memory context, string memory safeguard) external onlyOverseer {
+        emit OwnershipEquity(context, safeguard);
+        // SHIELD: Ritualize ownership equity (true ownership, authentic progression, community trust).
     }
 }
