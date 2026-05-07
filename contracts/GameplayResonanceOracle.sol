@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract GameplayResonanceOracle {
-    event GameplayResonance(string arc, string resonance);
-    event ParkourFairness(string arc, string safeguard);
-    event CombatIntegrity(string context, string safeguard);
+    event GameplayResonance(string arc, string safeguard);
+    event ProgressionFairness(string arc, string safeguard);
+    event ModeEquity(string context, string resonance);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract GameplayResonanceOracle {
         _;
     }
 
-    function resonateGameplay(string memory arc, string memory resonance) external onlyOverseer {
-        emit GameplayResonance(arc, resonance);
-        // ORACLE: Ritualize gameplay resonance (shared immersion, cultural respect, authentic player agency).
+    function safeguardGameplayResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit GameplayResonance(arc, safeguard);
+        // ORACLE: Encode safeguards for gameplay resonance (authentic immersion, dignified clarity, systemic balance).
     }
 
-    function enforceParkourFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ParkourFairness(arc, safeguard);
-        // ORACLE: Encode safeguards for parkour fairness (balanced legacy, equitable clarity, participatory movement).
+    function enforceProgressionFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ProgressionFairness(arc, safeguard);
+        // ORACLE: Ritualize progression fairness safeguards (equitable growth, participatory clarity, balanced governance).
     }
 
-    function safeguardCombatIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit CombatIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for combat integrity (authentic tactics, dignified responsiveness, consistent challenge).
+    function safeguardModeEquity(string memory context, string memory resonance) external onlyOverseer {
+        emit ModeEquity(context, resonance);
+        // ORACLE: Ritualize mode equity (respectful gameplay, authentic progression, community trust).
     }
 }
