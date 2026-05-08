@@ -2,9 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ModerationTransparencyShield {
-    event ClarityIntegrity(string context, string safeguard);
-    event CreatorFairness(string arc, string safeguard);
-    event PlatformResonance(string arc, string resonance);
+    event CreatorDignity(string arc, string safeguard);
+    event ClarityIntegrity(string arc, string safeguard);
+    event EquityFairness(string arc, string safeguard);
+    event TransparencyResonance(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +18,23 @@ contract ModerationTransparencyShield {
         _;
     }
 
-    function safeguardClarityIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit ClarityIntegrity(context, safeguard);
-        // SHIELD: Encode safeguards for clarity integrity (authentic communication, dignified transparency, consistent accountability).
+    function safeguardCreatorDignity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CreatorDignity(arc, safeguard);
+        // SHIELD: Encode safeguards for creator dignity (fair treatment, dignified representation, authentic growth equity).
     }
 
-    function enforceCreatorFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CreatorFairness(arc, safeguard);
-        // SHIELD: Ritualize creator fairness safeguards (balanced moderation, equitable clarity, participatory trust).
+    function enforceClarityIntegrity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ClarityIntegrity(arc, safeguard);
+        // SHIELD: Ritualize clarity integrity safeguards (consistent policy, dignified enforcement, authentic governance).
     }
 
-    function resonatePlatform(string memory arc, string memory resonance) external onlyOverseer {
-        emit PlatformResonance(arc, resonance);
-        // SHIELD: Ritualize platform resonance (shared accessibility, cultural respect, authentic belonging).
+    function safeguardEquityFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit EquityFairness(arc, safeguard);
+        // SHIELD: Encode safeguards for equity fairness (balanced moderation, dignified appeals, authentic creator pathways).
+    }
+
+    function enforceTransparencyResonance(string memory context, string memory safeguard) external onlyOverseer {
+        emit TransparencyResonance(context, safeguard);
+        // SHIELD: Ritualize transparency resonance (open governance, dignified communication, authentic trust equity).
     }
 }
