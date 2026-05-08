@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract FranchiseResonanceOracle {
     event FranchiseResonance(string arc, string safeguard);
-    event IdentityFairness(string arc, string safeguard);
-    event NarrativeEquity(string context, string resonance);
+    event PlayerFairness(string arc, string safeguard);
+    event TonalDignity(string context, string safeguard);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract FranchiseResonanceOracle {
 
     function safeguardFranchiseResonance(string memory arc, string memory safeguard) external onlyOverseer {
         emit FranchiseResonance(arc, safeguard);
-        // ORACLE: Encode safeguards for franchise resonance (authentic tone, dignified immersion, systemic balance).
+        // ORACLE: Encode safeguards for franchise resonance (authentic identity, legacy preservation, dignified continuity).
     }
 
-    function enforceIdentityFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit IdentityFairness(arc, safeguard);
-        // ORACLE: Ritualize identity fairness safeguards (equitable adaptation, participatory clarity, balanced governance).
+    function enforcePlayerFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit PlayerFairness(arc, safeguard);
+        // ORACLE: Ritualize player fairness safeguards (balanced mechanics, immersive authenticity, dignified player value).
     }
 
-    function safeguardNarrativeEquity(string memory context, string memory resonance) external onlyOverseer {
-        emit NarrativeEquity(context, resonance);
-        // ORACLE: Ritualize narrative equity (coherent storytelling, authentic progression, community trust).
+    function safeguardTonalDignity(string memory context, string memory safeguard) external onlyOverseer {
+        emit TonalDignity(context, safeguard);
+        // ORACLE: Ritualize tonal dignity (franchise tone consistency, narrative grit, dignified resonance).
     }
 }
