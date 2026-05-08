@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract InnovationResonanceOracle {
-    event InnovationIntegrity(string context, string safeguard);
-    event DesignFairness(string arc, string safeguard);
-    event PlayerResonance(string arc, string resonance);
+    event InnovationResonance(string arc, string safeguard);
+    event ArchivalEquity(string arc, string safeguard);
+    event DigitalDignity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract InnovationResonanceOracle {
         _;
     }
 
-    function safeguardInnovationIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit InnovationIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for innovation integrity (authentic creativity, dignified originality, consistent transparency).
+    function safeguardInnovationResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit InnovationResonance(arc, safeguard);
+        // ORACLE: Encode safeguards for innovation resonance (search breakthroughs, dignified evolution, authentic digital progress).
     }
 
-    function enforceDesignFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit DesignFairness(arc, safeguard);
-        // ORACLE: Ritualize design fairness safeguards (balanced mechanics, equitable clarity, participatory usability).
+    function enforceArchivalEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ArchivalEquity(arc, safeguard);
+        // ORACLE: Ritualize archival equity safeguards (preservation of digital heritage, equitable memory access, dignified continuity).
     }
 
-    function resonatePlayer(string memory arc, string memory resonance) external onlyOverseer {
-        emit PlayerResonance(arc, resonance);
-        // ORACLE: Ritualize player resonance (shared immersion, cultural respect, authentic enjoyment).
+    function safeguardDigitalDignity(string memory context, string memory safeguard) external onlyOverseer {
+        emit DigitalDignity(context, safeguard);
+        // ORACLE: Ritualize digital dignity (respect for legacy platforms, cultural resonance, dignified shutdown transitions).
     }
 }
