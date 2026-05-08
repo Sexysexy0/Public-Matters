@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract SecurityResonanceOracle {
-    event DefenseIntegrity(string context, string safeguard);
-    event ExploitFairness(string arc, string safeguard);
-    event SecurityResonance(string arc, string resonance);
+    event SecurityResonance(string arc, string safeguard);
+    event BreachEquity(string arc, string safeguard);
+    event TrustDignity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract SecurityResonanceOracle {
         _;
     }
 
-    function safeguardDefenseIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit DefenseIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for defense integrity (patch transparency, exploit mitigation, dignified system resilience).
+    function safeguardSecurityResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit SecurityResonance(arc, safeguard);
+        // ORACLE: Encode safeguards for security resonance (system integrity, dignified defense, authentic resilience).
     }
 
-    function enforceExploitFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ExploitFairness(arc, safeguard);
-        // ORACLE: Ritualize exploit fairness safeguards (balanced vulnerability disclosure, equitable remediation, communal oversight).
+    function enforceBreachEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit BreachEquity(arc, safeguard);
+        // ORACLE: Ritualize breach equity safeguards (balanced remediation, dignified response, equitable containment).
     }
 
-    function resonateSecurity(string memory arc, string memory resonance) external onlyOverseer {
-        emit SecurityResonance(arc, resonance);
-        // ORACLE: Ritualize communal security resonance (participatory defense, authentic monitoring, trust‑anchored resilience).
+    function safeguardTrustDignity(string memory context, string memory safeguard) external onlyOverseer {
+        emit TrustDignity(context, safeguard);
+        // ORACLE: Ritualize trust dignity (community confidence, governance resonance, dignified stewardship).
     }
 }
