@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract PlayerTrustOracle {
-    event PlayerTrust(string arc, string safeguard);
-    event FeedbackEquity(string arc, string safeguard);
-    event CreativeResonance(string context, string resonance);
+    event TrustEquity(string arc, string safeguard);
+    event LoyaltyResonance(string arc, string safeguard);
+    event ExperienceDignity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract PlayerTrustOracle {
         _;
     }
 
-    function safeguardPlayerTrust(string memory arc, string memory safeguard) external onlyOverseer {
-        emit PlayerTrust(arc, safeguard);
-        // ORACLE: Encode safeguards for player trust (authentic respect, dignified immersion, systemic solidarity).
+    function safeguardTrustEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit TrustEquity(arc, safeguard);
+        // ORACLE: Encode safeguards for trust equity (player confidence, dignified transparency, authentic fairness).
     }
 
-    function enforceFeedbackEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit FeedbackEquity(arc, safeguard);
-        // ORACLE: Ritualize feedback equity safeguards (equitable listening, participatory clarity, balanced governance).
+    function enforceLoyaltyResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit LoyaltyResonance(arc, safeguard);
+        // ORACLE: Ritualize loyalty resonance safeguards (community bonds, dignified rewards, authentic engagement equity).
     }
 
-    function safeguardCreativeResonance(string memory context, string memory resonance) external onlyOverseer {
-        emit CreativeResonance(context, resonance);
-        // ORACLE: Ritualize creative resonance (shared vision, authentic immersion, community trust).
+    function safeguardExperienceDignity(string memory context, string memory safeguard) external onlyOverseer {
+        emit ExperienceDignity(context, safeguard);
+        // ORACLE: Encode safeguards for dignity of experience (UI clarity, dignified immersion, authentic player respect).
     }
 }
