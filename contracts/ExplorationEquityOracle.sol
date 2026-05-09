@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract ExplorationEquityOracle {
-    event MapDensity(string region, string status);
-    event ExplorationFairness(string player, bool safeguarded);
-    event RiftMonitoring(string riftID, string resonance);
+    event ExplorationEquity(string arc, string safeguard);
+    event NavigationResonance(string arc, string safeguard);
+    event ImmersionDignity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract ExplorationEquityOracle {
         _;
     }
 
-    function logMapDensity(string memory region, string memory status) external onlyOverseer {
-        emit MapDensity(region, status);
-        // ORACLE: Safeguard map density, ensuring exploration remains rich and immersive without bloating or dilution.
+    function safeguardExplorationEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ExplorationEquity(arc, safeguard);
+        // ORACLE: Encode safeguards for exploration equity (expanded maps, dignified discovery, authentic player fairness).
     }
 
-    function safeguardExplorationFairness(string memory player, bool safeguarded) external onlyOverseer {
-        emit ExplorationFairness(player, safeguarded);
-        // ORACLE: Encode exploration fairness, balancing optional rifts and legacy features with equitable player access.
+    function enforceNavigationResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit NavigationResonance(arc, safeguard);
+        // ORACLE: Ritualize navigation resonance safeguards (custom paths, dignified travel, authentic immersion).
     }
 
-    function monitorRift(string memory riftID, string memory resonance) external onlyOverseer {
-        emit RiftMonitoring(riftID, resonance);
-        // ORACLE: Ritualize rift monitoring, ensuring modern-day arcs remain optional yet resonant in open world immersion.
+    function safeguardImmersionDignity(string memory context, string memory safeguard) external onlyOverseer {
+        emit ImmersionDignity(context, safeguard);
+        // ORACLE: Ritualize immersion dignity (world depth, dignified atmosphere, authentic exploration resonance).
     }
 }
