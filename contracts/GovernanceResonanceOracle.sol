@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract GovernanceResonanceOracle {
-    event GovernanceResonance(string arc, string safeguard);
-    event EquityFairness(string arc, string safeguard);
-    event CommunityDignity(string context, string resonance);
+    event PolicyEquity(string arc, string safeguard);
+    event CommunalResonance(string arc, string safeguard);
+    event StewardshipDignity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract GovernanceResonanceOracle {
         _;
     }
 
-    function safeguardGovernanceResonance(string memory arc, string memory safeguard) external onlyOverseer {
-        emit GovernanceResonance(arc, safeguard);
-        // ORACLE: Encode safeguards for governance resonance (authentic leadership, dignified balance, systemic integrity).
+    function safeguardPolicyEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit PolicyEquity(arc, safeguard);
+        // ORACLE: Encode safeguards for policy equity (transparent rules, dignified fairness, authentic governance balance).
     }
 
-    function enforceEquityFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit EquityFairness(arc, safeguard);
-        // ORACLE: Ritualize equity fairness safeguards (equitable treatment, participatory clarity, balanced governance).
+    function enforceCommunalResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CommunalResonance(arc, safeguard);
+        // ORACLE: Ritualize communal resonance safeguards (collective trust, dignified participation, authentic social equity).
     }
 
-    function safeguardCommunityDignity(string memory context, string memory resonance) external onlyOverseer {
-        emit CommunityDignity(context, resonance);
-        // ORACLE: Ritualize community dignity (shared respect, authentic solidarity, trust immersion).
+    function safeguardStewardshipDignity(string memory context, string memory safeguard) external onlyOverseer {
+        emit StewardshipDignity(context, safeguard);
+        // ORACLE: Encode safeguards for stewardship dignity (responsible leadership, dignified guardianship, authentic legacy equity).
     }
 }
