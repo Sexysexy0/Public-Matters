@@ -2,9 +2,13 @@
 pragma solidity ^0.8.20;
 
 contract WishlistResonanceShield {
-    event WishlistEquity(string arc, string safeguard);
-    event FeatureResonance(string arc, string safeguard);
-    event PlayerDignity(string context, string safeguard);
+    event LoreEquity(string arc, string safeguard);
+    event CompanionResonance(string arc, string safeguard);
+    event CharacterDepth(string arc, string safeguard);
+    event CombatDignity(string arc, string safeguard);
+    event ModdingEquity(string arc, string safeguard);
+    event VisualResonance(string arc, string safeguard);
+    event QuestEquity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +21,38 @@ contract WishlistResonanceShield {
         _;
     }
 
-    function safeguardWishlistEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit WishlistEquity(arc, safeguard);
-        // SHIELD: Encode safeguards for wishlist equity (community requests, dignified prioritization, authentic fairness).
+    function safeguardLoreEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit LoreEquity(arc, safeguard);
+        // SHIELD: Encode safeguards for lore equity (enemy codex, dignified immersion, authentic encounter tracking).
     }
 
-    function enforceFeatureResonance(string memory arc, string memory safeguard) external onlyOverseer {
-        emit FeatureResonance(arc, safeguard);
-        // SHIELD: Ritualize feature resonance safeguards (requested systems, dignified expansion, authentic gameplay immersion).
+    function enforceCompanionResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CompanionResonance(arc, safeguard);
+        // SHIELD: Ritualize companion resonance safeguards (active AI, dignified banter, authentic narrative integration).
     }
 
-    function safeguardPlayerDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit PlayerDignity(context, safeguard);
-        // SHIELD: Ritualize player dignity (respected voice, dignified iteration, authentic trust equity).
+    function safeguardCharacterDepth(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CharacterDepth(arc, safeguard);
+        // SHIELD: Encode safeguards for character depth (inner monologue, dignified personality, authentic quest bridging).
+    }
+
+    function enforceCombatDignity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CombatDignity(arc, safeguard);
+        // SHIELD: Ritualize combat dignity safeguards (visceral finishers, dignified executions, authentic elemental impact).
+    }
+
+    function safeguardModdingEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ModdingEquity(arc, safeguard);
+        // SHIELD: Encode safeguards for modding equity (official SDK, dignified community empowerment, authentic creation tools).
+    }
+
+    function enforceVisualResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit VisualResonance(arc, safeguard);
+        // SHIELD: Ritualize visual resonance safeguards (night calibration, dignified lighting, authentic atmosphere balance).
+    }
+
+    function safeguardQuestEquity(string memory context, string memory safeguard) external onlyOverseer {
+        emit QuestEquity(context, safeguard);
+        // SHIELD: Encode safeguards for quest equity (clear journal, dignified guidance, authentic family narrative).
     }
 }
