@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract PreservationEquityShield {
-    event PreservationIntegrity(string context, string safeguard);
-    event LicensingFairness(string arc, string safeguard);
-    event ConsumerResonance(string arc, string resonance);
+    event CommunityEquity(string arc, string safeguard);
+    event TechnicalResonance(string arc, string safeguard);
+    event DignityPreservation(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract PreservationEquityShield {
         _;
     }
 
-    function safeguardPreservationIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit PreservationIntegrity(context, safeguard);
-        // SHIELD: Encode safeguards for preservation integrity (authentic continuity, dignified access, consistent heritage).
+    function safeguardCommunityEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CommunityEquity(arc, safeguard);
+        // SHIELD: Encode safeguards for community equity (volunteer respect, dignified collaboration, authentic preservation fairness).
     }
 
-    function enforceLicensingFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit LicensingFairness(arc, safeguard);
-        // SHIELD: Ritualize licensing fairness safeguards (balanced rights, equitable clarity, participatory trust).
+    function enforceTechnicalResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit TechnicalResonance(arc, safeguard);
+        // SHIELD: Ritualize technical resonance safeguards (modernization honored, dignified restoration, authentic archival coherence).
     }
 
-    function resonateConsumer(string memory arc, string memory resonance) external onlyOverseer {
-        emit ConsumerResonance(arc, resonance);
-        // SHIELD: Ritualize consumer resonance (shared ownership, cultural respect, authentic enjoyment).
+    function safeguardDignityPreservation(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityPreservation(context, safeguard);
+        // SHIELD: Encode safeguards for dignity preservation (player trust, dignified heritage, authentic preservation stewardship).
     }
 }
