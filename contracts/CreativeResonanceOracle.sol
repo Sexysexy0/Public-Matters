@@ -1,10 +1,10 @@
-// SPDX-License-Identifier: MIT
+ // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 contract CreativeResonanceOracle {
-    event CreativeResonance(string arc, string resonance);
-    event AnimationFairness(string arc, string safeguard);
-    event LegacyIntegrity(string context, string safeguard);
+    event InnovationEquity(string arc, string safeguard);
+    event AudienceResonance(string arc, string safeguard);
+    event DignityPreservation(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract CreativeResonanceOracle {
         _;
     }
 
-    function resonateCreative(string memory arc, string memory resonance) external onlyOverseer {
-        emit CreativeResonance(arc, resonance);
-        // ORACLE: Ritualize creative resonance (shared artistry, cultural respect, authentic storytelling).
+    function safeguardInnovationEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit InnovationEquity(arc, safeguard);
+        // ORACLE: Encode safeguards for innovation equity (fresh IP nurtured, dignified creativity, authentic industry fairness).
     }
 
-    function enforceAnimationFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit AnimationFairness(arc, safeguard);
-        // ORACLE: Encode safeguards for animation fairness (balanced programming, equitable clarity, participatory innovation).
+    function enforceAudienceResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit AudienceResonance(arc, safeguard);
+        // ORACLE: Ritualize audience resonance safeguards (viewer respect, dignified engagement, authentic cultural coherence).
     }
 
-    function safeguardLegacyIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit LegacyIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for legacy integrity (authentic preservation, dignified continuity, consistent heritage).
+    function safeguardDignityPreservation(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityPreservation(context, safeguard);
+        // ORACLE: Encode safeguards for dignity preservation (brand heritage, dignified continuity, authentic creative trust).
     }
 }
