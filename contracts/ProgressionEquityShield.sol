@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract ProgressionEquityShield {
     event ProgressionEquity(string arc, string safeguard);
-    event ModeFairness(string arc, string safeguard);
-    event CommunityDignity(string context, string safeguard);
+    event SimulationResonance(string arc, string safeguard);
+    event DignityPreservation(string context, string safeguard);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract ProgressionEquityShield {
 
     function safeguardProgressionEquity(string memory arc, string memory safeguard) external onlyOverseer {
         emit ProgressionEquity(arc, safeguard);
-        // SHIELD: Encode safeguards for progression equity (authentic growth, dignified advancement, systemic fairness).
+        // SHIELD: Encode safeguards for progression equity (novice-to-master fairness, dignified climb, authentic Horizon balance).
     }
 
-    function enforceModeFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ModeFairness(arc, safeguard);
-        // SHIELD: Ritualize mode fairness safeguards (equitable gameplay, participatory clarity, balanced governance).
+    function enforceSimulationResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit SimulationResonance(arc, safeguard);
+        // SHIELD: Ritualize simulation resonance safeguards (fuel realism, dignified mechanics, authentic driving coherence).
     }
 
-    function safeguardCommunityDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit CommunityDignity(context, safeguard);
-        // SHIELD: Ritualize community dignity (respectful engagement, authentic progression, trust resonance).
+    function safeguardDignityPreservation(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityPreservation(context, safeguard);
+        // SHIELD: Encode safeguards for dignity preservation (player trust, dignified engagement, authentic FH6 stewardship).
     }
 }
