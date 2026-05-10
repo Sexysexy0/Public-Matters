@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract ResilienceResonanceOracle {
-    event ResilienceLogged(string sector, string sentiment);
-    event StrategicFairness(string policy, bool safeguarded);
-    event CommunalMonitoring(string issue, string status);
+    event AdaptationEquity(string arc, string safeguard);
+    event RecoveryResonance(string arc, string safeguard);
+    event EnduranceDignity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract ResilienceResonanceOracle {
         _;
     }
 
-    function logResilience(string memory sector, string memory sentiment) external onlyOverseer {
-        emit ResilienceLogged(sector, sentiment);
-        // ORACLE: Safeguard resilience dignity, ensuring communities withstand economic and strategic shocks with fairness.
+    function safeguardAdaptationEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit AdaptationEquity(arc, safeguard);
+        // ORACLE: Encode safeguards for adaptation equity (flexible systems, dignified adjustments, authentic developer alignment).
     }
 
-    function safeguardStrategicFairness(string memory policy, bool safeguarded) external onlyOverseer {
-        emit StrategicFairness(policy, safeguarded);
-        // ORACLE: Encode fairness equity, ensuring strategic policies are balanced and non‑exploitative.
+    function enforceRecoveryResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit RecoveryResonance(arc, safeguard);
+        // ORACLE: Ritualize recovery resonance safeguards (rapid restoration, dignified fallback, authentic operational coherence).
     }
 
-    function monitorCommunal(string memory issue, string memory status) external onlyOverseer {
-        emit CommunalMonitoring(issue, status);
-        // ORACLE: Ritualize communal monitoring, ensuring households and taxpayers are protected from hidden burdens.
+    function safeguardEnduranceDignity(string memory context, string memory safeguard) external onlyOverseer {
+        emit EnduranceDignity(context, safeguard);
+        // ORACLE: Encode safeguards for endurance dignity (long-term resilience, dignified persistence, authentic trust in continuity).
     }
 }
