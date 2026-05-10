@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract AnimationLegacyShield {
-    event CreativeIntegrity(string context, string safeguard);
-    event RegulatoryFairness(string arc, string safeguard);
-    event NetworkResonance(string arc, string resonance);
+    event CreativeEquity(string arc, string safeguard);
+    event IndustryResonance(string arc, string safeguard);
+    event DignityPreservation(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract AnimationLegacyShield {
         _;
     }
 
-    function safeguardCreativeIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit CreativeIntegrity(context, safeguard);
-        // SHIELD: Encode safeguards for creative integrity (authentic artistry, dignified originality, consistent innovation).
+    function safeguardCreativeEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CreativeEquity(arc, safeguard);
+        // SHIELD: Encode safeguards for creative equity (original IP nurtured, dignified innovation, authentic storytelling fairness).
     }
 
-    function enforceRegulatoryFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit RegulatoryFairness(arc, safeguard);
-        // SHIELD: Ritualize regulatory fairness safeguards (balanced compliance, equitable clarity, participatory trust).
+    function enforceIndustryResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit IndustryResonance(arc, safeguard);
+        // SHIELD: Ritualize industry resonance safeguards (animator respect, dignified labor equity, authentic creative continuity).
     }
 
-    function resonateNetwork(string memory arc, string memory resonance) external onlyOverseer {
-        emit NetworkResonance(arc, resonance);
-        // SHIELD: Ritualize network resonance (shared identity, cultural respect, authentic belonging).
+    function safeguardDignityPreservation(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityPreservation(context, safeguard);
+        // SHIELD: Encode safeguards for dignity preservation (brand heritage, dignified identity, authentic animation trust).
     }
 }
