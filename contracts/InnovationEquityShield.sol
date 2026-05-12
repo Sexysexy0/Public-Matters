@@ -2,33 +2,36 @@
 pragma solidity ^0.8.20;
 
 contract InnovationEquityShield {
-    event InnovationEquity(string arc, string safeguard);
-    event DisruptionFairness(string arc, string safeguard);
-    event ConsumerDignity(string context, string safeguard);
-
-    address public overseer;
-
-    constructor(address _overseer) {
-        overseer = _overseer;
+    struct Innovation {
+        address creator;
+        string project;
+        string safeguard;
+        uint256 timestamp;
+        bool safeguarded;
     }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
+    Innovation[] public innovations;
+
+    event InnovationLogged(address indexed creator, string project, string safeguard);
+    event InnovationSafeguarded(uint256 indexed id, address verifier);
+
+    function logInnovation(string memory _project, string memory _safeguard) public {
+        innovations.push(Innovation(msg.sender, _project, _safeguard, block.timestamp, false));
+        emit InnovationLogged(msg.sender, _project, _safeguard);
     }
 
-    function safeguardInnovationEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit InnovationEquity(arc, safeguard);
-        // SHIELD: Encode safeguards for innovation equity (authentic progress, dignified creativity, systemic fairness).
+    function safeguardInnovation(uint256 _id) public {
+        require(_id < innovations.length, "Invalid ID");
+        innovations[_id].safeguarded = true;
+        emit InnovationSafeguarded(_id, msg.sender);
     }
 
-    function enforceDisruptionFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit DisruptionFairness(arc, safeguard);
-        // SHIELD: Ritualize disruption fairness safeguards (equitable adaptation, participatory clarity, balanced governance).
+    function getInnovation(uint256 _id) public view returns (Innovation memory) {
+        require(_id < innovations.length, "Invalid ID");
+        return innovations[_id];
     }
 
-    function safeguardConsumerDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit ConsumerDignity(context, safeguard);
-        // SHIELD: Ritualize consumer dignity (respectful adoption, authentic progression, community trust).
+    function totalInnovations() public view returns (uint256) {
+        return innovations.length;
     }
 }
