@@ -2,33 +2,36 @@
 pragma solidity ^0.8.20;
 
 contract EquityResonanceBridge {
-    event EquityLogged(address shareholder, uint256 shares, string sentiment);
-    event FairnessSafeguard(address shareholder, bool safeguarded);
-    event AccountabilityMonitoring(string detail, string status);
-
-    address public majorityShareholder;
-
-    constructor(address _majorityShareholder) {
-        majorityShareholder = _majorityShareholder;
+    struct EquityResonance {
+        address participant;
+        string context;
+        string safeguard;
+        uint256 timestamp;
+        bool safeguarded;
     }
 
-    modifier onlyMajority() {
-        require(msg.sender == majorityShareholder, "Not authorized");
-        _;
+    EquityResonance[] public resonances;
+
+    event EquityResonanceLogged(address indexed participant, string context, string safeguard);
+    event EquityResonanceSafeguarded(uint256 indexed id, address verifier);
+
+    function logEquityResonance(string memory _context, string memory _safeguard) public {
+        resonances.push(EquityResonance(msg.sender, _context, _safeguard, block.timestamp, false));
+        emit EquityResonanceLogged(msg.sender, _context, _safeguard);
     }
 
-    function logEquity(address shareholder, uint256 shares, string memory sentiment) external onlyMajority {
-        emit EquityLogged(shareholder, shares, sentiment);
-        // BRIDGE: Safeguard equity dignity, ensuring shareholder allocations are transparent and fair.
+    function safeguardEquityResonance(uint256 _id) public {
+        require(_id < resonances.length, "Invalid ID");
+        resonances[_id].safeguarded = true;
+        emit EquityResonanceSafeguarded(_id, msg.sender);
     }
 
-    function safeguardFairness(address shareholder, bool safeguarded) external onlyMajority {
-        emit FairnessSafeguard(shareholder, safeguarded);
-        // BRIDGE: Encode fairness equity, trimming exploitative practices and reinforcing shareholder dignity.
+    function getEquityResonance(uint256 _id) public view returns (EquityResonance memory) {
+        require(_id < resonances.length, "Invalid ID");
+        return resonances[_id];
     }
 
-    function monitorAccountability(string memory detail, string memory status) external onlyMajority {
-        emit AccountabilityMonitoring(detail, status);
-        // BRIDGE: Monitor governance accountability, ensuring malpractice is logged and communal trust safeguarded.
+    function totalEquityResonances() public view returns (uint256) {
+        return resonances.length;
     }
 }
