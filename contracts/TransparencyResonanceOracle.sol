@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract TransparencyResonanceOracle {
-    event TransparencyResonance(string arc, string resonance);
-    event OptimizationFairness(string arc, string safeguard);
-    event ConsumerEquity(string context, string safeguard);
+    event PublicInterestEquity(string arc, string safeguard);
+    event ConstitutionalResonance(string arc, string safeguard);
+    event DignityPreservation(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract TransparencyResonanceOracle {
         _;
     }
 
-    function resonateTransparency(string memory arc, string memory resonance) external onlyOverseer {
-        emit TransparencyResonance(arc, resonance);
-        // ORACLE: Ritualize transparency resonance (authentic clarity, dignified monitoring, participatory accountability).
+    function safeguardPublicInterestEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit PublicInterestEquity(arc, safeguard);
+        // ORACLE: Encode safeguards for public interest equity (petition fairness, dignified representation, authentic citizen balance).
     }
 
-    function enforceOptimizationFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit OptimizationFairness(arc, safeguard);
-        // ORACLE: Encode safeguards for optimization fairness (balanced performance, equitable immersion, systemic stability).
+    function enforceConstitutionalResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ConstitutionalResonance(arc, safeguard);
+        // ORACLE: Ritualize constitutional resonance safeguards (jurisprudence fidelity, dignified mechanics, authentic institutional coherence).
     }
 
-    function safeguardConsumerEquity(string memory context, string memory safeguard) external onlyOverseer {
-        emit ConsumerEquity(context, safeguard);
-        // ORACLE: Encode safeguards for consumer equity (refund clarity, dignified access, authentic trust).
+    function safeguardDignityPreservation(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityPreservation(context, safeguard);
+        // ORACLE: Encode safeguards for dignity preservation (public trust, dignified engagement, authentic Supreme Court stewardship).
     }
 }
