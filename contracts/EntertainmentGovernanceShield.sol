@@ -31,4 +31,18 @@ contract EntertainmentGovernanceShield {
         emit DignityPreservation(audience, safeguard);
         // Encode safeguards for dignity preservation (audience trust, dignified engagement, authentic entertainment stewardship).
     }
+
+    // Directive: Eat Bulaga sa Channel 7
+    function directiveEatBulagaChannel7() external onlyOverseer {
+        safeguardProgrammingEquity("Eat Bulaga", "Return to Channel 7 heritage arc");
+        enforceChannelResonance("Channel 7", "Safeguard cultural resonance and audience fidelity");
+        safeguardDignityPreservation("Philippine audience", "Restore trust in heritage programming");
+    }
+
+    // Directive: It's Showtime sa Channel 5
+    function directiveShowtimeChannel5() external onlyOverseer {
+        safeguardProgrammingEquity("It's Showtime", "Transfer to Channel 5 youth arc");
+        enforceChannelResonance("Channel 5", "Safeguard dynamic resonance and network coherence");
+        safeguardDignityPreservation("Philippine audience", "Ensure dignified entertainment stewardship");
+    }
 }
