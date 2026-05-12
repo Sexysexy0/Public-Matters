@@ -2,35 +2,36 @@
 pragma solidity ^0.8.20;
 
 contract PreservationContinuityVault {
-    struct LegacyTitle {
-        address player;
-        string game;
+    struct Legacy {
+        address curator;
+        string title;
+        string platform;
         uint256 timestamp;
         bool safeguarded;
     }
 
-    LegacyTitle[] public titles;
+    Legacy[] public legacies;
 
-    event TitleLogged(address indexed player, string game);
-    event TitleSafeguarded(uint256 indexed id, address verifier);
+    event LegacyLogged(address indexed curator, string title, string platform);
+    event LegacySafeguarded(uint256 indexed id, address verifier);
 
-    function logTitle(string memory _game) public {
-        titles.push(LegacyTitle(msg.sender, _game, block.timestamp, false));
-        emit TitleLogged(msg.sender, _game);
+    function logLegacy(string memory _title, string memory _platform) public {
+        legacies.push(Legacy(msg.sender, _title, _platform, block.timestamp, false));
+        emit LegacyLogged(msg.sender, _title, _platform);
     }
 
-    function safeguardTitle(uint256 _id) public {
-        require(_id < titles.length, "Invalid ID");
-        titles[_id].safeguarded = true;
-        emit TitleSafeguarded(_id, msg.sender);
+    function safeguardLegacy(uint256 _id) public {
+        require(_id < legacies.length, "Invalid ID");
+        legacies[_id].safeguarded = true;
+        emit LegacySafeguarded(_id, msg.sender);
     }
 
-    function getTitle(uint256 _id) public view returns (LegacyTitle memory) {
-        require(_id < titles.length, "Invalid ID");
-        return titles[_id];
+    function getLegacy(uint256 _id) public view returns (Legacy memory) {
+        require(_id < legacies.length, "Invalid ID");
+        return legacies[_id];
     }
 
-    function totalTitles() public view returns (uint256) {
-        return titles.length;
+    function totalLegacies() public view returns (uint256) {
+        return legacies.length;
     }
 }
