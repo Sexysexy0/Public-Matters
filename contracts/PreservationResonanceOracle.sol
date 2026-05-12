@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 contract PreservationResonanceOracle {
     event PreservationResonance(string arc, string safeguard);
     event ModernizationFairness(string arc, string safeguard);
-    event LegacyEquity(string context, string resonance);
+    event LegacyEquity(string context, string safeguard);
 
     address public overseer;
 
@@ -27,8 +27,8 @@ contract PreservationResonanceOracle {
         // ORACLE: Ritualize modernization fairness safeguards (equitable updates, participatory clarity, balanced innovation).
     }
 
-    function safeguardLegacyEquity(string memory context, string memory resonance) external onlyOverseer {
-        emit LegacyEquity(context, resonance);
+    function safeguardLegacyEquity(string memory context, string memory safeguard) external onlyOverseer {
+        emit LegacyEquity(context, safeguard);
         // ORACLE: Ritualize legacy equity (authentic preservation, community trust, dignified resonance).
     }
 }
