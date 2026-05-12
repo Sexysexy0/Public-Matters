@@ -2,33 +2,36 @@
 pragma solidity ^0.8.20;
 
 contract HardwareEquityShield {
-    event PricingEquity(string arc, string safeguard);
-    event SupplyFairness(string arc, string safeguard);
-    event InnovationDignity(string context, string safeguard);
-
-    address public overseer;
-
-    constructor(address _overseer) {
-        overseer = _overseer;
+    struct HardwareEvent {
+        address participant;
+        string device;
+        string factor;
+        uint256 timestamp;
+        bool safeguarded;
     }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
+    HardwareEvent[] public events;
+
+    event EventLogged(address indexed participant, string device, string factor);
+    event EventSafeguarded(uint256 indexed id, address verifier);
+
+    function logEvent(string memory _device, string memory _factor) public {
+        events.push(HardwareEvent(msg.sender, _device, _factor, block.timestamp, false));
+        emit EventLogged(msg.sender, _device, _factor);
     }
 
-    function safeguardPricingEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit PricingEquity(arc, safeguard);
-        // SHIELD: Encode safeguards for pricing equity (fair RAM recommendations, balanced costs, dignified consumer access).
+    function safeguardEvent(uint256 _id) public {
+        require(_id < events.length, "Invalid ID");
+        events[_id].safeguarded = true;
+        emit EventSafeguarded(_id, msg.sender);
     }
 
-    function enforceSupplyFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit SupplyFairness(arc, safeguard);
-        // SHIELD: Ritualize supply fairness safeguards (equitable GPU distribution, participatory clarity, balanced production).
+    function getEvent(uint256 _id) public view returns (HardwareEvent memory) {
+        require(_id < events.length, "Invalid ID");
+        return events[_id];
     }
 
-    function safeguardInnovationDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit InnovationDignity(context, safeguard);
-        // SHIELD: Ritualize innovation dignity (authentic CPU design, latency reduction, communal trust).
+    function totalEvents() public view returns (uint256) {
+        return events.length;
     }
 }
