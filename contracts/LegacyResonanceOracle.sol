@@ -2,33 +2,36 @@
 pragma solidity ^0.8.20;
 
 contract LegacyResonanceOracle {
-    event LegacyResonance(string arc, string safeguard);
-    event HistoricalEquity(string arc, string safeguard);
-    event MemoryDignity(string context, string safeguard);
-
-    address public overseer;
-
-    constructor(address _overseer) {
-        overseer = _overseer;
+    struct LegacyResonance {
+        address overseer;
+        string arc;
+        string safeguard;
+        uint256 timestamp;
+        bool safeguarded;
     }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
+    LegacyResonance[] public legacies;
+
+    event LegacyResonanceLogged(address indexed overseer, string arc, string safeguard);
+    event LegacyResonanceSafeguarded(uint256 indexed id, address verifier);
+
+    function logLegacyResonance(string memory _arc, string memory _safeguard) public {
+        legacies.push(LegacyResonance(msg.sender, _arc, _safeguard, block.timestamp, false));
+        emit LegacyResonanceLogged(msg.sender, _arc, _safeguard);
     }
 
-    function safeguardLegacyResonance(string memory arc, string memory safeguard) external onlyOverseer {
-        emit LegacyResonance(arc, safeguard);
-        // ORACLE: Encode safeguards for legacy resonance (franchise continuity, dignified heritage, authentic resonance arcs).
+    function safeguardLegacyResonance(uint256 _id) public {
+        require(_id < legacies.length, "Invalid ID");
+        legacies[_id].safeguarded = true;
+        emit LegacyResonanceSafeguarded(_id, msg.sender);
     }
 
-    function enforceHistoricalEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit HistoricalEquity(arc, safeguard);
-        // ORACLE: Ritualize historical equity safeguards (fair preservation, balanced recognition, dignified archival stewardship).
+    function getLegacyResonance(uint256 _id) public view returns (LegacyResonance memory) {
+        require(_id < legacies.length, "Invalid ID");
+        return legacies[_id];
     }
 
-    function safeguardMemoryDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit MemoryDignity(context, safeguard);
-        // ORACLE: Ritualize memory dignity (community remembrance, cultural resonance, dignified legacy monitoring).
+    function totalLegacies() public view returns (uint256) {
+        return legacies.length;
     }
 }
