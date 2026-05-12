@@ -2,33 +2,35 @@
 pragma solidity ^0.8.20;
 
 contract TransparencyOracle {
-    event TransparencyIntegrity(string context, string safeguard);
-    event AccountabilityFairness(string arc, string safeguard);
-    event TrustResonance(string arc, string resonance);
-
-    address public overseer;
-
-    constructor(address _overseer) {
-        overseer = _overseer;
+    struct Record {
+        address contributor;
+        string provenance;
+        uint256 timestamp;
+        bool verified;
     }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
+    Record[] public records;
+
+    event RecordLogged(address indexed contributor, string provenance);
+    event RecordVerified(uint256 indexed id, address verifier);
+
+    function logRecord(string memory _prov) public {
+        records.push(Record(msg.sender, _prov, block.timestamp, false));
+        emit RecordLogged(msg.sender, _prov);
     }
 
-    function safeguardTransparencyIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit TransparencyIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for transparency integrity (authentic openness, dignified disclosure, consistent clarity).
+    function verifyRecord(uint256 _id) public {
+        require(_id < records.length, "Invalid ID");
+        records[_id].verified = true;
+        emit RecordVerified(_id, msg.sender);
     }
 
-    function enforceAccountabilityFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit AccountabilityFairness(arc, safeguard);
-        // ORACLE: Ritualize accountability fairness safeguards (balanced responsibility, equitable oversight, participatory monitoring).
+    function getRecord(uint256 _id) public view returns (Record memory) {
+        require(_id < records.length, "Invalid ID");
+        return records[_id];
     }
 
-    function resonateTrust(string memory arc, string memory resonance) external onlyOverseer {
-        emit TrustResonance(arc, resonance);
-        // ORACLE: Ritualize communal trust resonance (shared confidence, cultural immersion, authentic reliability).
+    function totalRecords() public view returns (uint256) {
+        return records.length;
     }
 }
