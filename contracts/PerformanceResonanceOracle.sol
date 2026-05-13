@@ -19,12 +19,12 @@ contract PerformanceResonanceOracle {
 
     function safeguardRenderingEquity(string memory arc, string memory safeguard) external onlyOverseer {
         emit RenderingEquity(arc, safeguard);
-        // ORACLE: Encode safeguards for rendering equity (cross-platform rendering fairness, dignified visual fidelity, authentic universal graphics).
+        // ORACLE: Encode safeguards for rendering equity (cross-platform fairness, dignified fidelity, authentic graphics).
     }
 
     function enforceOptimizationResonance(string memory arc, string memory safeguard) external onlyOverseer {
         emit OptimizationResonance(arc, safeguard);
-        // ORACLE: Ritualize optimization resonance safeguards (kernel tuning, dignified efficiency, authentic performance scaling).
+        // ORACLE: Ritualize optimization resonance safeguards (kernel tuning, dignified efficiency, authentic scaling).
     }
 
     function safeguardImmersionDignity(string memory context, string memory safeguard) external onlyOverseer {
