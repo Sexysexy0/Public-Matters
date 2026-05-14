@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract EquityAccessOracle {
-    event AccessIntegrity(string context, string safeguard);
-    event DistributionFairness(string arc, string safeguard);
-    event ConsumerResonance(string arc, string resonance);
+    event EquityAccess(string arc, string safeguard);
+    event FairnessBalance(string arc, string safeguard);
+    event DignityPreservation(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract EquityAccessOracle {
         _;
     }
 
-    function safeguardAccessIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit AccessIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for access integrity (authentic entry, dignified inclusivity, consistent transparency).
+    function safeguardEquityAccess(string memory arc, string memory safeguard) external onlyOverseer {
+        emit EquityAccess(arc, safeguard);
+        // ORACLE: Encode safeguards for equity access (dignified availability, transparent distribution, participatory fairness).
     }
 
-    function enforceDistributionFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit DistributionFairness(arc, safeguard);
-        // ORACLE: Ritualize distribution fairness safeguards (balanced supply, equitable reach, participatory openness).
+    function enforceFairnessBalance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit FairnessBalance(arc, safeguard);
+        // ORACLE: Ritualize fairness balance safeguards (equitable access, transparent accountability, authentic governance).
     }
 
-    function resonateConsumer(string memory arc, string memory resonance) external onlyOverseer {
-        emit ConsumerResonance(arc, resonance);
-        // ORACLE: Ritualize consumer resonance (shared dignity, cultural accessibility, authentic trust).
+    function safeguardDignityPreservation(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityPreservation(context, safeguard);
+        // ORACLE: Encode safeguards for dignity preservation (communal respect, authentic resonance, shared trust).
     }
 }
