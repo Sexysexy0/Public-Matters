@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract WorkerRightsShield {
-    event LaborRights(string arc, string safeguard);
+    event WorkerRights(string arc, string safeguard);
     event OccupationalDignity(string arc, string safeguard);
-    event EquityMonitoring(string context, string safeguard);
+    event FairnessEquity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract WorkerRightsShield {
         _;
     }
 
-    function safeguardLaborRights(string memory arc, string memory safeguard) external onlyOverseer {
-        emit LaborRights(arc, safeguard);
-        // SHIELD: Encode safeguards for labor rights (authentic protections, dignified treatment, systemic fairness).
+    function safeguardWorkerRights(string memory arc, string memory safeguard) external onlyOverseer {
+        emit WorkerRights(arc, safeguard);
+        // SHIELD: Encode safeguards for worker rights (dignified labor, humane conditions, participatory fairness).
     }
 
     function enforceOccupationalDignity(string memory arc, string memory safeguard) external onlyOverseer {
         emit OccupationalDignity(arc, safeguard);
-        // SHIELD: Ritualize occupational dignity safeguards (humane workplace, equitable respect, authentic resilience).
+        // SHIELD: Ritualize occupational dignity safeguards (equitable employment, transparent accountability, authentic governance).
     }
 
-    function safeguardEquityMonitoring(string memory context, string memory safeguard) external onlyOverseer {
-        emit EquityMonitoring(context, safeguard);
-        // SHIELD: Encode safeguards for equity monitoring (systemic oversight, dignified balance, authentic labor equity).
+    function safeguardFairnessEquity(string memory context, string memory safeguard) external onlyOverseer {
+        emit FairnessEquity(context, safeguard);
+        // SHIELD: Encode safeguards for fairness equity (communal respect, authentic resonance, shared trust).
     }
 }
