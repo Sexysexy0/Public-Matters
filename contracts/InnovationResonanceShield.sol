@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract InnovationResonanceShield {
     event InnovationResonance(string arc, string safeguard);
-    event CompetitionFairness(string arc, string safeguard);
-    event ConsumerDignity(string context, string safeguard);
+    event EquityFairness(string arc, string safeguard);
+    event DignityContinuity(string context, string safeguard);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract InnovationResonanceShield {
 
     function safeguardInnovationResonance(string memory arc, string memory safeguard) external onlyOverseer {
         emit InnovationResonance(arc, safeguard);
-        // SHIELD: Encode safeguards for innovation resonance (authentic creativity, dignified progress, systemic resilience).
+        // SHIELD: Encode safeguards for innovation resonance (authentic creativity, dignified originality, participatory resonance).
     }
 
-    function enforceCompetitionFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CompetitionFairness(arc, safeguard);
-        // SHIELD: Ritualize competition fairness safeguards (equitable rivalry, participatory clarity, balanced governance).
+    function enforceEquityFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit EquityFairness(arc, safeguard);
+        // SHIELD: Ritualize equity fairness safeguards (balanced innovation cycles, transparent accountability, authentic governance).
     }
 
-    function safeguardConsumerDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit ConsumerDignity(context, safeguard);
-        // SHIELD: Ritualize consumer dignity (shared respect, authentic trust, community solidarity).
+    function safeguardDignityContinuity(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityContinuity(context, safeguard);
+        // SHIELD: Encode safeguards for dignity continuity (communal respect, authentic resonance, shared trust).
     }
 }
