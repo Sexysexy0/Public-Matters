@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 contract OpenSourceEquityShield {
-    event CodeEquity(string arc, string safeguard);
+    event OpenSourceEquity(string arc, string safeguard);
     event CollaborationResonance(string arc, string safeguard);
     event TransparencyDignity(string context, string safeguard);
 
@@ -17,9 +17,9 @@ contract OpenSourceEquityShield {
         _;
     }
 
-    function safeguardCodeEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CodeEquity(arc, safeguard);
-        // SHIELD: Encode safeguards for code equity (open access, dignified contribution, authentic community fairness).
+    function safeguardOpenSourceEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit OpenSourceEquity(arc, safeguard);
+        // SHIELD: Encode safeguards for open-source equity (dignified access, authentic contribution, community fairness).
     }
 
     function enforceCollaborationResonance(string memory arc, string memory safeguard) external onlyOverseer {
