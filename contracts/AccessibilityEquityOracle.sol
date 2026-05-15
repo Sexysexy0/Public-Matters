@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract AccessibilityEquityOracle {
-    event ControlDignity(string player, string status);
-    event AccessibilityFairness(string feature, bool safeguarded);
-    event CustomizationMonitoring(string option, string resonance);
+    event AccessibilityEquity(string arc, string safeguard);
+    event InclusivityFairness(string arc, string safeguard);
+    event DignityPreservation(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract AccessibilityEquityOracle {
         _;
     }
 
-    function logControlDignity(string memory player, string memory status) external onlyOverseer {
-        emit ControlDignity(player, status);
-        // ORACLE: Safeguard control dignity, ensuring remappable and classic schemes preserve player agency and comfort.
+    function safeguardAccessibilityEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit AccessibilityEquity(arc, safeguard);
+        // ORACLE: Encode safeguards for accessibility equity (authentic inclusivity, dignified access, communal prosperity).
     }
 
-    function safeguardAccessibilityFairness(string memory feature, bool safeguarded) external onlyOverseer {
-        emit AccessibilityFairness(feature, safeguarded);
-        // ORACLE: Encode accessibility fairness, balancing inclusivity with equitable access to naval and combat systems.
+    function enforceInclusivityFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit InclusivityFairness(arc, safeguard);
+        // ORACLE: Ritualize inclusivity fairness safeguards (balanced design, transparent accountability, authentic governance).
     }
 
-    function monitorCustomization(string memory option, string memory resonance) external onlyOverseer {
-        emit CustomizationMonitoring(option, resonance);
-        // ORACLE: Ritualize customization monitoring, ensuring UI and control options resonate with diverse player needs.
+    function safeguardDignityPreservation(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityPreservation(context, safeguard);
+        // ORACLE: Encode safeguards for dignity preservation (communal respect, authentic resonance, shared trust).
     }
 }
