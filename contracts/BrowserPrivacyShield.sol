@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 contract BrowserPrivacyShield {
     event AITransparency(string context, string safeguard);
     event ConsentFairness(string arc, string safeguard);
-    event DeviceIntegrity(string arc, string resonance);
+    event DeviceIntegrity(string arc, string safeguard);
 
     address public overseer;
 
