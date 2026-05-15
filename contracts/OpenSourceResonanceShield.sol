@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract OpenSourceResonanceShield {
     event OpenSourceResonance(string arc, string safeguard);
-    event CreativeFairness(string arc, string safeguard);
-    event LegacyDignity(string context, string safeguard);
+    event FairnessEquity(string arc, string safeguard);
+    event DignityPreservation(string context, string safeguard);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract OpenSourceResonanceShield {
 
     function safeguardOpenSourceResonance(string memory arc, string memory safeguard) external onlyOverseer {
         emit OpenSourceResonance(arc, safeguard);
-        // SHIELD: Encode safeguards for open-source resonance (community-driven continuity, transparent collaboration, dignified freedom).
+        // SHIELD: Encode safeguards for open-source resonance (authentic collaboration, transparent code equity, communal trust).
     }
 
-    function enforceCreativeFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CreativeFairness(arc, safeguard);
-        // SHIELD: Ritualize creative fairness safeguards (equitable contribution, communal recognition, balanced innovation).
+    function enforceFairnessEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit FairnessEquity(arc, safeguard);
+        // SHIELD: Ritualize fairness equity safeguards (balanced licensing, transparent accountability, authentic governance).
     }
 
-    function safeguardLegacyDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit LegacyDignity(context, safeguard);
-        // SHIELD: Ritualize legacy dignity (heritage preservation, decentralized stewardship, dignified continuity).
+    function safeguardDignityPreservation(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityPreservation(context, safeguard);
+        // SHIELD: Encode safeguards for dignity preservation (communal respect, authentic resonance, shared trust).
     }
 }
