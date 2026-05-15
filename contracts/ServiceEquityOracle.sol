@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract ServiceEquityOracle {
-    event ServiceIntegrity(string context, string safeguard);
-    event SubscriptionFairness(string arc, string safeguard);
-    event ServiceResonance(string arc, string resonance);
+    event ServiceEquity(string arc, string safeguard);
+    event FairnessBalance(string arc, string safeguard);
+    event DignityPreservation(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract ServiceEquityOracle {
         _;
     }
 
-    function safeguardServiceIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit ServiceIntegrity(context, safeguard);
-        // ORACLE: Encode safeguards for service integrity (stable Game Pass, dignified delivery, authentic ecosystem support).
+    function safeguardServiceEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ServiceEquity(arc, safeguard);
+        // ORACLE: Encode safeguards for service equity (authentic support, dignified delivery, communal trust).
     }
 
-    function enforceSubscriptionFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit SubscriptionFairness(arc, safeguard);
-        // ORACLE: Ritualize subscription fairness safeguards (reasonable pricing, equitable access, transparent value).
+    function enforceFairnessBalance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit FairnessBalance(arc, safeguard);
+        // ORACLE: Ritualize fairness balance safeguards (balanced service cycles, transparent accountability, authentic governance).
     }
 
-    function resonateService(string memory arc, string memory resonance) external onlyOverseer {
-        emit ServiceResonance(arc, resonance);
-        // ORACLE: Ritualize communal service resonance (fan satisfaction, cultural immersion, authentic service identity).
+    function safeguardDignityPreservation(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityPreservation(context, safeguard);
+        // ORACLE: Encode safeguards for dignity preservation (communal respect, authentic resonance, shared trust).
     }
 }
