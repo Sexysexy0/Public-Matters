@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 contract ArchivalResonanceOracle {
-    event ArchivalEquity(string arc, string safeguard);
-    event ResonanceContinuity(string arc, string safeguard);
-    event DignityPreservation(string context, string safeguard);
+    event ArchivalResonance(string arc, string safeguard);
+    event EquityFairness(string arc, string safeguard);
+    event DignityContinuity(string context, string safeguard);
 
     address public overseer;
 
@@ -17,18 +17,18 @@ contract ArchivalResonanceOracle {
         _;
     }
 
-    function safeguardArchivalEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ArchivalEquity(arc, safeguard);
-        // ORACLE: Encode safeguards for archival equity (authentic preservation, dignified access, participatory fairness).
+    function safeguardArchivalResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ArchivalResonance(arc, safeguard);
+        // ORACLE: Encode safeguards for archival resonance (cultural preservation, dignified continuity, communal prosperity).
     }
 
-    function enforceResonanceContinuity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ResonanceContinuity(arc, safeguard);
-        // ORACLE: Ritualize resonance continuity safeguards (balanced preservation, transparent accountability, authentic governance).
+    function enforceEquityFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit EquityFairness(arc, safeguard);
+        // ORACLE: Ritualize equity fairness safeguards (balanced access, authentic governance, archival dignity).
     }
 
-    function safeguardDignityPreservation(string memory context, string memory safeguard) external onlyOverseer {
-        emit DignityPreservation(context, safeguard);
-        // ORACLE: Encode safeguards for dignity preservation (cultural respect, communal trust, authentic resonance).
+    function safeguardDignityContinuity(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityContinuity(context, safeguard);
+        // ORACLE: Encode safeguards for dignity continuity (communal respect, authentic resonance, shared trust).
     }
 }
