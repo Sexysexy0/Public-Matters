@@ -3,8 +3,8 @@ pragma solidity ^0.8.20;
 
 contract TrustResonanceShield {
     event TrustResonance(string arc, string safeguard);
-    event CommunityFairness(string arc, string safeguard);
-    event ConsumerDignity(string context, string safeguard);
+    event FairnessEquity(string arc, string safeguard);
+    event DignityContinuity(string context, string safeguard);
 
     address public overseer;
 
@@ -19,16 +19,16 @@ contract TrustResonanceShield {
 
     function safeguardTrustResonance(string memory arc, string memory safeguard) external onlyOverseer {
         emit TrustResonance(arc, safeguard);
-        // SHIELD: Encode safeguards for trust resonance (authentic solidarity, dignified transparency, systemic accountability).
+        // SHIELD: Encode safeguards for trust resonance (community dignity, authentic bonds, communal prosperity).
     }
 
-    function enforceCommunityFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CommunityFairness(arc, safeguard);
-        // SHIELD: Ritualize community fairness safeguards (equitable participation, balanced governance, shared clarity).
+    function enforceFairnessEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit FairnessEquity(arc, safeguard);
+        // SHIELD: Ritualize fairness equity safeguards (balanced governance, authentic treatment, stakeholder dignity).
     }
 
-    function safeguardConsumerDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit ConsumerDignity(context, safeguard);
-        // SHIELD: Ritualize consumer dignity (shared respect, authentic trust, community resonance).
+    function safeguardDignityContinuity(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityContinuity(context, safeguard);
+        // SHIELD: Encode safeguards for dignity continuity (communal respect, authentic resonance, shared trust).
     }
 }
