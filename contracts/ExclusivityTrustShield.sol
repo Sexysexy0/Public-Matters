@@ -2,9 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract ExclusivityTrustShield {
-    event ContentTrust(string context, string safeguard);
-    event LoyaltyFairness(string arc, string safeguard);
-    event ExclusivityResonance(string arc, string resonance);
+    event ExclusiveTrust(string arc, string safeguard);
+    event FairnessEquity(string arc, string safeguard);
+    event DignityContinuity(string context, string safeguard);
+    event SkippedRelease(address indexed player, string title, string reason);
 
     address public overseer;
 
@@ -17,18 +18,23 @@ contract ExclusivityTrustShield {
         _;
     }
 
-    function safeguardContentTrust(string memory context, string memory safeguard) external onlyOverseer {
-        emit ContentTrust(context, safeguard);
-        // SHIELD: Encode safeguards for exclusive content trust (consistent delivery, authentic exclusivity, brand integrity).
+    function safeguardExclusiveTrust(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ExclusiveTrust(arc, safeguard);
+        // SHIELD: Encode safeguards for exclusive trust (platform dignity, authentic resonance, communal prosperity).
     }
 
-    function enforceLoyaltyFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit LoyaltyFairness(arc, safeguard);
-        // SHIELD: Ritualize platform loyalty fairness safeguards (balanced exclusivity, equitable player treatment, participatory trust).
+    function enforceFairnessEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit FairnessEquity(arc, safeguard);
+        // SHIELD: Ritualize fairness equity safeguards (balanced exclusivity, authentic governance, player dignity).
     }
 
-    function resonateExclusivity(string memory arc, string memory resonance) external onlyOverseer {
-        emit ExclusivityResonance(arc, resonance);
-        // SHIELD: Ritualize communal exclusivity resonance (fan loyalty, cultural anchoring, authentic brand resonance).
+    function safeguardDignityContinuity(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityContinuity(context, safeguard);
+        // SHIELD: Encode safeguards for dignity continuity (communal respect, authentic resonance, shared trust).
+    }
+
+    function logSkippedRelease(string memory title, string memory reason) external {
+        emit SkippedRelease(msg.sender, title, reason);
+        // SHIELD: Allow players to log skipped Xbox releases (Talos Principle 3, exclusivity concerns).
     }
 }
