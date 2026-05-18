@@ -2,9 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract PlayerTrustOracle {
-    event TrustEquity(string arc, string safeguard);
-    event LoyaltyResonance(string arc, string safeguard);
-    event ExperienceDignity(string context, string safeguard);
+    event PlayerTrust(string arc, string safeguard);
+    event FairnessEquity(string arc, string safeguard);
+    event DignityContinuity(string context, string safeguard);
+    event TrustLogged(address indexed player, string game, string safeguard, bool respected);
 
     address public overseer;
 
@@ -17,18 +18,23 @@ contract PlayerTrustOracle {
         _;
     }
 
-    function safeguardTrustEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit TrustEquity(arc, safeguard);
-        // ORACLE: Encode safeguards for trust equity (player confidence, dignified transparency, authentic fairness).
+    function safeguardPlayerTrust(string memory arc, string memory safeguard) external onlyOverseer {
+        emit PlayerTrust(arc, safeguard);
+        // ORACLE: Encode safeguards for player trust (confidence dignity, authentic resonance, communal prosperity).
     }
 
-    function enforceLoyaltyResonance(string memory arc, string memory safeguard) external onlyOverseer {
-        emit LoyaltyResonance(arc, safeguard);
-        // ORACLE: Ritualize loyalty resonance safeguards (community bonds, dignified rewards, authentic engagement equity).
+    function enforceFairnessEquity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit FairnessEquity(arc, safeguard);
+        // ORACLE: Ritualize fairness equity safeguards (balanced mechanics, authentic governance, player dignity).
     }
 
-    function safeguardExperienceDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit ExperienceDignity(context, safeguard);
-        // ORACLE: Encode safeguards for dignity of experience (UI clarity, dignified immersion, authentic player respect).
+    function safeguardDignityContinuity(string memory context, string memory safeguard) external onlyOverseer {
+        emit DignityContinuity(context, safeguard);
+        // ORACLE: Encode safeguards for dignity continuity (communal respect, authentic resonance, shared trust).
+    }
+
+    function logTrust(string memory game, string memory safeguard, bool respected) external {
+        emit TrustLogged(msg.sender, game, safeguard, respected);
+        // ORACLE: Allow players to log trust experiences (game fairness, respect, transparency).
     }
 }
