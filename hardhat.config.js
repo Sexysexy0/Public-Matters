@@ -1,5 +1,6 @@
 import "@nomicfoundation/hardhat-ethers";
 import "@nomicfoundation/hardhat-chai-matchers";
+import "@nomicfoundation/hardhat-toolbox";
 
 export default {
   solidity: "0.8.20",
