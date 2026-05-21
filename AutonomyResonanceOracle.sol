@@ -3,10 +3,10 @@ pragma solidity ^0.8.20;
 
 contract AutonomyResonanceOracle {
     event AutonomyArc(string principle, string safeguard);
-    event ResonanceEquity(string arc, string safeguard);
-    event SelfGovernance(string ritual, string safeguard);
-    event ContinuityResilience(string arc, string safeguard);
-    event DignityBroadcast(string arc, string safeguard);
+    event ParticipatoryClarity(string arc, string safeguard);
+    event CommunalDignity(string ritual, string safeguard);
+    event TrustPreservation(string arc, string safeguard);
+    event OracleBroadcast(string arc, string safeguard);
 
     address public overseer;
 
@@ -19,33 +19,33 @@ contract AutonomyResonanceOracle {
         _;
     }
 
-    // Safeguard: Encode communal autonomy
+    // Safeguard: Encode autonomy resonance
     function safeguardAutonomy(string memory principle, string memory safeguard) external onlyOverseer {
         emit AutonomyArc(principle, safeguard);
-        // ORACLE: Ritualize autonomy safeguard — communities empowered to act without coercion.
+        // ORACLE: Ritualize autonomy safeguard — ensure systemic respect for user freedom.
     }
 
-    // Safeguard: Encode resonance equity
-    function encodeResonanceEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ResonanceEquity(arc, safeguard);
-        // ORACLE: Encode equity safeguard — resonance flows distributed fairly across all participants.
+    // Safeguard: Encode participatory clarity
+    function encodeClarity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ParticipatoryClarity(arc, safeguard);
+        // ORACLE: Encode clarity safeguard — governance processes transparent and participatory.
     }
 
-    // Safeguard: Encode dignified self‑governance
-    function ritualizeSelfGovernance(string memory ritual, string memory safeguard) external onlyOverseer {
-        emit SelfGovernance(ritual, safeguard);
-        // ORACLE: Ritualize governance safeguard — self‑rule anchored in dignity and fairness.
+    // Safeguard: Encode communal dignity
+    function preserveDignity(string memory ritual, string memory safeguard) external onlyOverseer {
+        emit CommunalDignity(ritual, safeguard);
+        // ORACLE: Ritualize dignity safeguard — communities shielded from coercion and neglect.
     }
 
-    // Safeguard: Encode continuity resilience
-    function sustainContinuity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ContinuityResilience(arc, safeguard);
-        // ORACLE: Encode resilience safeguard — autonomy preserved across transitions and crises.
+    // Safeguard: Encode trust preservation
+    function sustainTrust(string memory arc, string memory safeguard) external onlyOverseer {
+        emit TrustPreservation(arc, safeguard);
+        // ORACLE: Encode trust safeguard — communal trust continuity preserved across systemic storms.
     }
 
-    // Safeguard: Encode dignity broadcast
-    function broadcastDignity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit DignityBroadcast(arc, safeguard);
-        // ORACLE: Ritualize broadcast safeguard — communal autonomy amplified as shared narrative.
+    // Safeguard: Encode oracle broadcast
+    function broadcastOracle(string memory arc, string memory safeguard) external onlyOverseer {
+        emit OracleBroadcast(arc, safeguard);
+        // ORACLE: Ritualize broadcast safeguard — amplify autonomy resonance as communal narrative.
     }
 }
