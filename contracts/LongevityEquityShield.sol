@@ -2,9 +2,11 @@
 pragma solidity ^0.8.20;
 
 contract LongevityEquityShield {
-    event GPULongevityEquity(string arc, string safeguard);
-    event FairnessEquity(string arc, string safeguard);
-    event DignityPreservation(string context, string safeguard);
+    event LongevityEquity(string principle, string safeguard);
+    event PreservationDignity(string arc, string safeguard);
+    event FairnessContinuity(string ritual, string safeguard);
+    event DeviceSustainability(string arc, string safeguard);
+    event ShieldBroadcast(string arc, string safeguard);
 
     address public overseer;
 
@@ -17,18 +19,33 @@ contract LongevityEquityShield {
         _;
     }
 
-    function safeguardGPULongevityEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit GPULongevityEquity(arc, safeguard);
-        // SHIELD: Encode safeguards for GPU longevity equity (extended lifespan, dignified viability, authentic preservation).
+    // Safeguard: Encode longevity equity
+    function safeguardLongevity(string memory principle, string memory safeguard) external onlyOverseer {
+        emit LongevityEquity(principle, safeguard);
+        // SHIELD: Ritualize equity safeguard — affirm fairness in extending device lifespan and usability.
     }
 
-    function enforceFairnessEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit FairnessEquity(arc, safeguard);
-        // SHIELD: Ritualize fairness equity safeguards (balanced support cycles, transparent accountability, authentic governance).
+    // Safeguard: Encode preservation dignity
+    function encodePreservation(string memory arc, string memory safeguard) external onlyOverseer {
+        emit PreservationDignity(arc, safeguard);
+        // SHIELD: Encode dignity safeguard — uphold respect for preservation of hardware and user experience.
     }
 
-    function safeguardDignityPreservation(string memory context, string memory safeguard) external onlyOverseer {
-        emit DignityPreservation(context, safeguard);
-        // SHIELD: Encode safeguards for dignity preservation (communal respect, authentic resonance, shared trust).
+    // Safeguard: Encode fairness continuity
+    function enforceFairness(string memory ritual, string memory safeguard) external onlyOverseer {
+        emit FairnessContinuity(ritual, safeguard);
+        // SHIELD: Ritualize fairness safeguard — ensure continuity of support and equitable treatment across generations.
+    }
+
+    // Safeguard: Encode device sustainability
+    function sustainDevice(string memory arc, string memory safeguard) external onlyOverseer {
+        emit DeviceSustainability(arc, safeguard);
+        // SHIELD: Encode sustainability safeguard — maintain ecological and systemic sustainability of devices.
+    }
+
+    // Safeguard: Encode shield broadcast
+    function broadcastShield(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ShieldBroadcast(arc, safeguard);
+        // SHIELD: Ritualize broadcast safeguard — amplify longevity equity narrative as communal covenant.
     }
 }
