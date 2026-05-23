@@ -2,9 +2,11 @@
 pragma solidity ^0.8.20;
 
 contract CommunalEquityShield {
-    event CommunalDignity(string community, string sentiment);
-    event TaxpayerFairness(string burden, bool safeguarded);
-    event ResilienceMonitoring(string sector, string status);
+    event CommunalEquity(string principle, string safeguard);
+    event ParticipatoryJustice(string arc, string safeguard);
+    event DignityPreservation(string ritual, string safeguard);
+    event ResonanceContinuity(string arc, string safeguard);
+    event ShieldBroadcast(string arc, string safeguard);
 
     address public overseer;
 
@@ -17,18 +19,33 @@ contract CommunalEquityShield {
         _;
     }
 
-    function logCommunalDignity(string memory community, string memory sentiment) external onlyOverseer {
-        emit CommunalDignity(community, sentiment);
-        // SHIELD: Safeguard communal dignity, ensuring households and communities are respected in governance arcs.
+    // Safeguard: Encode communal equity
+    function safeguardEquity(string memory principle, string memory safeguard) external onlyOverseer {
+        emit CommunalEquity(principle, safeguard);
+        // SHIELD: Ritualize safeguard — affirm fairness and equity for communities in governance arcs.
     }
 
-    function safeguardTaxpayerFairness(string memory burden, bool safeguarded) external onlyOverseer {
-        emit TaxpayerFairness(burden, safeguarded);
-        // SHIELD: Encode fairness equity, protecting taxpayers from exploitative burdens and hidden costs.
+    // Safeguard: Encode participatory justice
+    function enforceJustice(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ParticipatoryJustice(arc, safeguard);
+        // SHIELD: Encode safeguard — ensure participatory justice and inclusive governance continuity.
     }
 
-    function monitorResilience(string memory sector, string memory status) external onlyOverseer {
-        emit ResilienceMonitoring(sector, status);
-        // SHIELD: Ritualize resilience monitoring, ensuring communities withstand shocks with fairness and equity.
+    // Safeguard: Encode dignity preservation
+    function preserveDignity(string memory ritual, string memory safeguard) external onlyOverseer {
+        emit DignityPreservation(ritual, safeguard);
+        // SHIELD: Ritualize safeguard — uphold dignity and respect in communal governance.
+    }
+
+    // Safeguard: Encode resonance continuity
+    function sustainResonance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ResonanceContinuity(arc, safeguard);
+        // SHIELD: Encode safeguard — maintain authentic resonance with communal equity across expansions.
+    }
+
+    // Safeguard: Encode shield broadcast
+    function broadcastShield(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ShieldBroadcast(arc, safeguard);
+        // SHIELD: Ritualize broadcast safeguard — amplify communal equity narrative as covenant.
     }
 }
