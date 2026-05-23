@@ -2,9 +2,11 @@
 pragma solidity ^0.8.20;
 
 contract AccountabilityResonanceShield {
-    event AccountabilityResonance(string arc, string safeguard);
+    event AccountabilityResonance(string principle, string safeguard);
     event GovernanceFairness(string arc, string safeguard);
-    event DignityPreservation(string context, string safeguard);
+    event DignityPreservation(string ritual, string safeguard);
+    event CommunalTrust(string arc, string safeguard);
+    event ShieldBroadcast(string arc, string safeguard);
 
     address public overseer;
 
@@ -17,18 +19,33 @@ contract AccountabilityResonanceShield {
         _;
     }
 
-    function safeguardAccountabilityResonance(string memory arc, string memory safeguard) external onlyOverseer {
-        emit AccountabilityResonance(arc, safeguard);
-        // SHIELD: Encode safeguards for accountability resonance (authentic responsibility, dignified monitoring, communal resonance).
+    // Safeguard: Encode accountability resonance
+    function safeguardAccountability(string memory principle, string memory safeguard) external onlyOverseer {
+        emit AccountabilityResonance(principle, safeguard);
+        // SHIELD: Ritualize resonance safeguard — affirm authentic responsibility and dignified monitoring in governance arcs.
     }
 
-    function enforceGovernanceFairness(string memory arc, string memory safeguard) external onlyOverseer {
+    // Safeguard: Encode governance fairness
+    function enforceFairness(string memory arc, string memory safeguard) external onlyOverseer {
         emit GovernanceFairness(arc, safeguard);
-        // SHIELD: Ritualize governance fairness safeguards (balanced oversight, transparent accountability, authentic governance).
+        // SHIELD: Encode fairness safeguard — ensure balanced oversight and transparent accountability.
     }
 
-    function safeguardDignityPreservation(string memory context, string memory safeguard) external onlyOverseer {
-        emit DignityPreservation(context, safeguard);
-        // SHIELD: Encode safeguards for dignity preservation (communal respect, authentic resonance, shared trust).
+    // Safeguard: Encode dignity preservation
+    function preserveDignity(string memory ritual, string memory safeguard) external onlyOverseer {
+        emit DignityPreservation(ritual, safeguard);
+        // SHIELD: Ritualize dignity safeguard — uphold communal respect and authentic resonance in governance.
+    }
+
+    // Safeguard: Encode communal trust
+    function sustainTrust(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CommunalTrust(arc, safeguard);
+        // SHIELD: Encode trust safeguard — maintain shared trust and participatory justice continuity.
+    }
+
+    // Safeguard: Encode shield broadcast
+    function broadcastShield(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ShieldBroadcast(arc, safeguard);
+        // SHIELD: Ritualize broadcast safeguard — amplify accountability resonance narrative as communal covenant.
     }
 }
