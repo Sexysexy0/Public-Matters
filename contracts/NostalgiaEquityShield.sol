@@ -2,9 +2,11 @@
 pragma solidity ^0.8.20;
 
 contract NostalgiaEquityShield {
-    event NostalgiaResonance(string arc, string safeguard);
-    event IndieFairness(string arc, string safeguard);
-    event PricingDignity(string context, string safeguard);
+    event NostalgiaEquity(string principle, string safeguard);
+    event FamilyResonance(string arc, string safeguard);
+    event AuthenticIdentity(string ritual, string safeguard);
+    event CommunalContinuity(string arc, string safeguard);
+    event ShieldBroadcast(string arc, string safeguard);
 
     address public overseer;
 
@@ -17,18 +19,33 @@ contract NostalgiaEquityShield {
         _;
     }
 
-    function safeguardNostalgiaResonance(string memory arc, string memory safeguard) external onlyOverseer {
-        emit NostalgiaResonance(arc, safeguard);
-        // SHIELD: Encode safeguards for nostalgia resonance (authentic remakes, dignified heritage, communal joy).
+    // Safeguard: Encode nostalgia equity
+    function safeguardNostalgia(string memory principle, string memory safeguard) external onlyOverseer {
+        emit NostalgiaEquity(principle, safeguard);
+        // SHIELD: Ritualize safeguard — uphold nostalgia equity and cultural memory resonance.
     }
 
-    function enforceIndieFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit IndieFairness(arc, safeguard);
-        // SHIELD: Ritualize indie fairness safeguards (equitable pricing, participatory clarity, creative dignity).
+    // Safeguard: Encode family resonance
+    function enforceFamily(string memory arc, string memory safeguard) external onlyOverseer {
+        emit FamilyResonance(arc, safeguard);
+        // SHIELD: Encode safeguard — ensure family resonance and communal bonding in brand arcs.
     }
 
-    function safeguardPricingDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit PricingDignity(context, safeguard);
-        // SHIELD: Ritualize pricing dignity (balanced costs, consumer trust, accessible progression).
+    // Safeguard: Encode authentic brand identity
+    function preserveIdentity(string memory ritual, string memory safeguard) external onlyOverseer {
+        emit AuthenticIdentity(ritual, safeguard);
+        // SHIELD: Ritualize safeguard — uphold authentic brand identity and resist homogenization.
+    }
+
+    // Safeguard: Encode communal continuity
+    function sustainCommunity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CommunalContinuity(arc, safeguard);
+        // SHIELD: Encode safeguard — maintain communal continuity and participatory justice in nostalgia arcs.
+    }
+
+    // Safeguard: Encode shield broadcast
+    function broadcastShield(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ShieldBroadcast(arc, safeguard);
+        // SHIELD: Ritualize broadcast safeguard — amplify nostalgia equity narrative as communal covenant.
     }
 }
