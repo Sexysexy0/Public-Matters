@@ -2,9 +2,11 @@
 pragma solidity ^0.8.20;
 
 contract TaxEquityShield {
-    event AntiBracketCreep(string context, string safeguard);
-    event WageLiberation(string arc, string safeguard);
-    event DomesticDemandResonance(string arc, string resonance);
+    event TaxEquity(string principle, string safeguard);
+    event CommunalFairness(string arc, string safeguard);
+    event WorkingClassDignity(string ritual, string safeguard);
+    event CorporateCustodianship(string arc, string safeguard);
+    event ShieldBroadcast(string arc, string safeguard);
 
     address public overseer;
 
@@ -17,18 +19,33 @@ contract TaxEquityShield {
         _;
     }
 
-    function safeguardAntiBracketCreep(string memory context, string memory safeguard) external onlyOverseer {
-        emit AntiBracketCreep(context, safeguard);
-        // SHIELD: Encode systemic safeguards against bracket creep (inflation-adjusted tax fairness).
+    // Safeguard: Encode tax equity
+    function safeguardTax(string memory principle, string memory safeguard) external onlyOverseer {
+        emit TaxEquity(principle, safeguard);
+        // SHIELD: Ritualize safeguard — uphold equitable taxation across systemic arcs.
     }
 
-    function enforceWageLiberation(string memory arc, string memory safeguard) external onlyOverseer {
-        emit WageLiberation(arc, safeguard);
-        // SHIELD: Ritualize wage liberation safeguards (income shields, fair taxation).
+    // Safeguard: Encode communal fairness
+    function enforceFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CommunalFairness(arc, safeguard);
+        // SHIELD: Encode safeguard — ensure communal fairness in tax distribution and burden sharing.
     }
 
-    function resonateDomesticDemand(string memory arc, string memory resonance) external onlyOverseer {
-        emit DomesticDemandResonance(arc, resonance);
-        // SHIELD: Ritualize domestic demand resonance safeguards (consumption-driven GDP growth).
+    // Safeguard: Encode working class dignity
+    function preserveDignity(string memory ritual, string memory safeguard) external onlyOverseer {
+        emit WorkingClassDignity(ritual, safeguard);
+        // SHIELD: Ritualize safeguard — uphold dignity of working class by exempting them from exploitative taxation.
+    }
+
+    // Safeguard: Encode corporate custodianship
+    function sustainCustodianship(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CorporateCustodianship(arc, safeguard);
+        // SHIELD: Encode safeguard — maintain corporate custodianship of tax responsibilities for communal equity.
+    }
+
+    // Safeguard: Encode shield broadcast
+    function broadcastShield(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ShieldBroadcast(arc, safeguard);
+        // SHIELD: Ritualize broadcast safeguard — amplify tax equity narrative as communal covenant.
     }
 }
