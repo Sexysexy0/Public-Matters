@@ -2,9 +2,11 @@
 pragma solidity ^0.8.20;
 
 contract TransportEquityOracle {
-    event FareFairness(string context, string safeguard);
-    event DriverWageEquity(string arc, string safeguard);
-    event CommunalMobilityResonance(string arc, string resonance);
+    event TransportEquity(string principle, string safeguard);
+    event CommuterDignity(string arc, string safeguard);
+    event SustainableMobility(string ritual, string safeguard);
+    event GovernanceFairness(string arc, string safeguard);
+    event OracleBroadcast(string arc, string safeguard);
 
     address public overseer;
 
@@ -17,18 +19,33 @@ contract TransportEquityOracle {
         _;
     }
 
-    function ritualizeFareFairness(string memory context, string memory safeguard) external onlyOverseer {
-        emit FareFairness(context, safeguard);
-        // ORACLE: Encode safeguards for fare fairness (balanced fare adjustments, transparent computation).
+    // Safeguard: Encode transport equity
+    function safeguardTransport(string memory principle, string memory safeguard) external onlyOverseer {
+        emit TransportEquity(principle, safeguard);
+        // ORACLE: Ritualize safeguard — uphold transport equity and resist systemic exclusion.
     }
 
-    function safeguardDriverWages(string memory arc, string memory safeguard) external onlyOverseer {
-        emit DriverWageEquity(arc, safeguard);
-        // ORACLE: Ritualize driver wage equity safeguards (fair compensation, fuel subsidy integration).
+    // Safeguard: Encode commuter dignity
+    function enforceDignity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CommuterDignity(arc, safeguard);
+        // ORACLE: Encode safeguard — ensure commuter dignity and equitable treatment in transit systems.
     }
 
-    function resonateCommunalMobility(string memory arc, string memory resonance) external onlyOverseer {
-        emit CommunalMobilityResonance(arc, resonance);
-        // ORACLE: Ritualize communal mobility safeguards (accessible transport, inclusive policies).
+    // Safeguard: Encode sustainable mobility
+    function preserveMobility(string memory ritual, string memory safeguard) external onlyOverseer {
+        emit SustainableMobility(ritual, safeguard);
+        // ORACLE: Ritualize safeguard — uphold sustainable mobility and ecological balance in transport arcs.
+    }
+
+    // Safeguard: Encode governance fairness
+    function sustainGovernance(string memory arc, string memory safeguard) external onlyOverseer {
+        emit GovernanceFairness(arc, safeguard);
+        // ORACLE: Encode safeguard — maintain governance fairness and resist corruption in transport equity systems.
+    }
+
+    // Safeguard: Encode oracle broadcast
+    function broadcastOracle(string memory arc, string memory safeguard) external onlyOverseer {
+        emit OracleBroadcast(arc, safeguard);
+        // ORACLE: Ritualize broadcast safeguard — amplify transport equity narrative as communal covenant.
     }
 }
