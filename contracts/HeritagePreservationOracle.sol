@@ -2,9 +2,11 @@
 pragma solidity ^0.8.20;
 
 contract HeritagePreservationOracle {
-    event HeritagePreserved(string artifact, string safeguard);
-    event RediscoveryEquity(string community, bool safeguarded);
-    event LegacyMonitoring(string arc, string resonance);
+    event HeritagePreserved(string principle, string safeguard);
+    event CulturalDignity(string arc, string safeguard);
+    event RediscoveryEquity(string ritual, string safeguard);
+    event ArchivalContinuity(string arc, string safeguard);
+    event OracleBroadcast(string arc, string safeguard);
 
     address public overseer;
 
@@ -17,18 +19,33 @@ contract HeritagePreservationOracle {
         _;
     }
 
-    function preserveHeritage(string memory artifact, string memory safeguard) external onlyOverseer {
-        emit HeritagePreserved(artifact, safeguard);
-        // ORACLE: Encode preservation of heritage (retro games, cultural artifacts) with dignity safeguards.
+    // Safeguard: Encode heritage preservation
+    function safeguardHeritage(string memory principle, string memory safeguard) external onlyOverseer {
+        emit HeritagePreserved(principle, safeguard);
+        // ORACLE: Ritualize safeguard — uphold authentic preservation of heritage artifacts and cultural legacies.
     }
 
-    function enforceRediscoveryEquity(string memory community, bool safeguarded) external onlyOverseer {
-        emit RediscoveryEquity(community, safeguarded);
-        // ORACLE: Ritualize fairness, ensuring rediscovery of heritage benefits all communities equitably.
+    // Safeguard: Encode cultural dignity
+    function enforceDignity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CulturalDignity(arc, safeguard);
+        // ORACLE: Encode safeguard — ensure cultural dignity and fairness in preservation arcs.
     }
 
-    function monitorLegacy(string memory arc, string memory resonance) external onlyOverseer {
-        emit LegacyMonitoring(arc, resonance);
-        // ORACLE: Ritualize monitoring to guarantee communal voices resonate in heritage preservation arcs.
+    // Safeguard: Encode rediscovery equity
+    function preserveRediscovery(string memory ritual, string memory safeguard) external onlyOverseer {
+        emit RediscoveryEquity(ritual, safeguard);
+        // ORACLE: Ritualize safeguard — uphold equity in rediscovery efforts and communal benefit.
+    }
+
+    // Safeguard: Encode archival continuity
+    function sustainArchival(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ArchivalContinuity(arc, safeguard);
+        // ORACLE: Encode safeguard — maintain archival continuity and intergenerational resonance.
+    }
+
+    // Safeguard: Encode oracle broadcast
+    function broadcastOracle(string memory arc, string memory safeguard) external onlyOverseer {
+        emit OracleBroadcast(arc, safeguard);
+        // ORACLE: Ritualize broadcast safeguard — amplify heritage preservation narrative as communal covenant.
     }
 }
