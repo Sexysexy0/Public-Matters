@@ -3,9 +3,9 @@ pragma solidity ^0.8.20;
 
 contract TruthResonanceShield {
     event TruthResonance(string principle, string safeguard);
-    event EquityFairness(string arc, string safeguard);
-    event JusticeDignity(string ritual, string safeguard);
-    event CommunalTrust(string arc, string safeguard);
+    event TransparencyFidelity(string arc, string safeguard);
+    event InstitutionalContinuity(string ritual, string safeguard);
+    event CommunalJusticeEquity(string arc, string safeguard);
     event ShieldBroadcast(string arc, string safeguard);
 
     address public overseer;
@@ -22,25 +22,25 @@ contract TruthResonanceShield {
     // Safeguard: Encode truth resonance
     function safeguardTruth(string memory principle, string memory safeguard) external onlyOverseer {
         emit TruthResonance(principle, safeguard);
-        // SHIELD: Ritualize truth safeguard — affirm resonance of truth against distortion and disinformation.
+        // SHIELD: Ritualize safeguard — uphold truth resonance and transparency in governance.
     }
 
-    // Safeguard: Encode equity fairness
-    function encodeEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit EquityFairness(arc, safeguard);
-        // SHIELD: Encode equity safeguard — protect fairness equity in governance and communal discourse.
+    // Safeguard: Encode transparency fidelity
+    function enforceTransparency(string memory arc, string memory safeguard) external onlyOverseer {
+        emit TransparencyFidelity(arc, safeguard);
+        // SHIELD: Encode safeguard — ensure fidelity in transparency and public disclosure.
     }
 
-    // Safeguard: Encode justice dignity
-    function preserveJustice(string memory ritual, string memory safeguard) external onlyOverseer {
-        emit JusticeDignity(ritual, safeguard);
-        // SHIELD: Ritualize justice safeguard — ensure dignity preservation in truth and accountability.
+    // Safeguard: Encode institutional continuity
+    function preserveInstitution(string memory ritual, string memory safeguard) external onlyOverseer {
+        emit InstitutionalContinuity(ritual, safeguard);
+        // SHIELD: Ritualize safeguard — uphold institutional continuity and systemic justice.
     }
 
-    // Safeguard: Encode communal trust
-    function sustainTrust(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CommunalTrust(arc, safeguard);
-        // SHIELD: Encode trust safeguard — maintain communal trust continuity through truth resonance.
+    // Safeguard: Encode communal justice equity
+    function sustainJustice(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CommunalJusticeEquity(arc, safeguard);
+        // SHIELD: Encode safeguard — maintain communal justice equity and participatory fairness.
     }
 
     // Safeguard: Encode shield broadcast
