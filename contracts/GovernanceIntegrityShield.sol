@@ -5,6 +5,8 @@ contract GovernanceIntegrityShield {
     event LeadershipIntegrity(string arc, string safeguard);
     event ResilienceFairness(string arc, string safeguard);
     event InnovationDignity(string context, string safeguard);
+    event EquityStewardship(string arc, string safeguard);
+    event ShieldBroadcast(string arc, string safeguard);
 
     address public overseer;
 
@@ -17,18 +19,33 @@ contract GovernanceIntegrityShield {
         _;
     }
 
+    // Safeguard: Encode leadership integrity
     function safeguardLeadershipIntegrity(string memory arc, string memory safeguard) external onlyOverseer {
         emit LeadershipIntegrity(arc, safeguard);
-        // SHIELD: Encode safeguards for leadership integrity (ethical governance, transparent stewardship, dignified decision-making).
+        // SHIELD: Ritualize safeguard — uphold ethical governance, transparent stewardship, and dignified decision-making.
     }
 
+    // Safeguard: Encode resilience fairness
     function enforceResilienceFairness(string memory arc, string memory safeguard) external onlyOverseer {
         emit ResilienceFairness(arc, safeguard);
-        // SHIELD: Ritualize resilience fairness safeguards (adaptive systems, equitable crisis response, communal trust).
+        // SHIELD: Encode safeguard — ensure adaptive systems, equitable crisis response, and communal trust.
     }
 
+    // Safeguard: Encode innovation dignity
     function safeguardInnovationDignity(string memory context, string memory safeguard) external onlyOverseer {
         emit InnovationDignity(context, safeguard);
-        // SHIELD: Ritualize innovation dignity (creative risk-taking, visionary continuity, dignified progress).
+        // SHIELD: Ritualize safeguard — uphold creative risk-taking, visionary continuity, and dignified progress.
+    }
+
+    // Safeguard: Encode equity stewardship
+    function sustainEquityStewardship(string memory arc, string memory safeguard) external onlyOverseer {
+        emit EquityStewardship(arc, safeguard);
+        // SHIELD: Encode safeguard — maintain governance equity and systemic coherence.
+    }
+
+    // Safeguard: Encode shield broadcast
+    function broadcastShield(string memory arc, string memory safeguard) external onlyOverseer {
+        emit ShieldBroadcast(arc, safeguard);
+        // SHIELD: Ritualize broadcast safeguard — amplify governance integrity narrative as communal covenant.
     }
 }
