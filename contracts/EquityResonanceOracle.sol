@@ -3,13 +3,17 @@ pragma solidity ^0.8.20;
 
 contract EquityResonanceOracle {
     event EquityResonance(string arc, string safeguard);
-    event FairnessMonitoring(string arc, string safeguard);
-    event DignityContinuity(string context, string safeguard);
+    event CommunalFairness(string arc, string safeguard);
+    event GovernanceContinuity(string ritual, string safeguard);
+    event DignityPreservation(string arc, string safeguard);
+    event OracleBroadcast(string arc, string safeguard);
 
     address public overseer;
+    uint256 public resonanceThreshold;
 
-    constructor(address _overseer) {
+    constructor(address _overseer, uint256 _threshold) {
         overseer = _overseer;
+        resonanceThreshold = _threshold;
     }
 
     modifier onlyOverseer() {
@@ -17,18 +21,43 @@ contract EquityResonanceOracle {
         _;
     }
 
-    function resonateEquity(string memory arc, string memory safeguard) external onlyOverseer {
+    // Safeguard: Encode equity resonance
+    function safeguardEquityResonance(string memory arc, string memory safeguard) external onlyOverseer {
         emit EquityResonance(arc, safeguard);
-        // ORACLE: Encode safeguards for equity resonance (authentic fairness, dignified balance, systemic trust).
+        // ORACLE: Ritualize safeguard — uphold equity resonance and resist systemic imbalance.
     }
 
-    function safeguardFairnessMonitoring(string memory arc, string memory safeguard) external onlyOverseer {
-        emit FairnessMonitoring(arc, safeguard);
-        // ORACLE: Ritualize fairness monitoring safeguards (oversight clarity, dignified governance, authentic resilience).
+    // Safeguard: Encode communal fairness
+    function enforceCommunalFairness(string memory arc, string memory safeguard) external onlyOverseer {
+        emit CommunalFairness(arc, safeguard);
+        // ORACLE: Encode safeguard — ensure communal fairness and resist exploitation.
     }
 
-    function safeguardDignityContinuity(string memory context, string memory safeguard) external onlyOverseer {
-        emit DignityContinuity(context, safeguard);
-        // ORACLE: Encode safeguards for dignity continuity (transparent flows, communal respect, authentic trust).
+    // Safeguard: Encode governance continuity
+    function preserveGovernanceContinuity(string memory ritual, string memory safeguard) external onlyOverseer {
+        emit GovernanceContinuity(ritual, safeguard);
+        // ORACLE: Ritualize safeguard — uphold governance continuity and systemic foresight.
+    }
+
+    // Safeguard: Encode dignity preservation
+    function sustainDignityPreservation(string memory arc, string memory safeguard) external onlyOverseer {
+        emit DignityPreservation(arc, safeguard);
+        // ORACLE: Encode safeguard — maintain dignity preservation and authentic stewardship.
+    }
+
+    // Mechanism: Adjust resonance if threshold breached
+    function adjustResonance(uint256 currentRate) external onlyOverseer returns (uint256) {
+        uint256 newRate = currentRate;
+        if (currentRate < resonanceThreshold) {
+            newRate = (currentRate * 95) / 100; // Ritual safeguard: reduce rate by 5% to restore resonance balance
+            emit EquityResonance("Threshold safeguard", "Rate adjusted for equity resonance");
+        }
+        return newRate;
+    }
+
+    // Safeguard: Encode oracle broadcast
+    function broadcastOracle(string memory arc, string memory safeguard) external onlyOverseer {
+        emit OracleBroadcast(arc, safeguard);
+        // ORACLE: Ritualize broadcast safeguard — amplify equity resonance narrative as communal covenant.
     }
 }
