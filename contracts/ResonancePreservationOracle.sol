@@ -1,37 +1,67 @@
+// Copyright (c) 2026 Vinvin. All rights reserved.
+// ResonancePreservationOracle.sol — Immutable oracle for resonance foresight and preservation dignity
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 contract ResonancePreservationOracle {
-    struct Preservation {
+    struct ResonanceRecord {
         address curator;
-        string title;
+        string arc;
         string safeguard;
         uint256 timestamp;
-        bool safeguarded;
+        bool preserved;
     }
 
-    Preservation[] public preservations;
+    ResonanceRecord[] public records;
 
-    event PreservationLogged(address indexed curator, string title, string safeguard);
+    event ResonanceLogged(address indexed curator, string arc, string safeguard);
     event PreservationSafeguarded(uint256 indexed id, address verifier);
+    event DignityBroadcast(string arc, string safeguard);
+    event ContinuityAnchor(string arc, string safeguard);
+    event EquityResonance(string arc, string safeguard);
 
-    function logPreservation(string memory _title, string memory _safeguard) public {
-        preservations.push(Preservation(msg.sender, _title, _safeguard, block.timestamp, false));
-        emit PreservationLogged(msg.sender, _title, _safeguard);
+    // Ritualize: Log resonance foresight
+    function logResonance(string memory _arc, string memory _safeguard) public {
+        records.push(ResonanceRecord(msg.sender, _arc, _safeguard, block.timestamp, false));
+        emit ResonanceLogged(msg.sender, _arc, _safeguard);
+        // ORACLE: Immutable log — record resonance foresight and preservation dignity.
     }
 
+    // Safeguard: Mark resonance as preserved
     function safeguardPreservation(uint256 _id) public {
-        require(_id < preservations.length, "Invalid ID");
-        preservations[_id].safeguarded = true;
+        require(_id < records.length, "Invalid ID");
+        records[_id].preserved = true;
         emit PreservationSafeguarded(_id, msg.sender);
+        // ORACLE: Ritualize safeguard — confirm preservation dignity and intergenerational continuity.
     }
 
-    function getPreservation(uint256 _id) public view returns (Preservation memory) {
-        require(_id < preservations.length, "Invalid ID");
-        return preservations[_id];
+    // Safeguard: Encode dignity broadcast
+    function broadcastDignity(string memory arc, string memory safeguard) public {
+        emit DignityBroadcast(arc, safeguard);
+        // ORACLE: Ritualize broadcast safeguard — amplify dignity preservation narrative.
     }
 
-    function totalPreservations() public view returns (uint256) {
-        return preservations.length;
+    // Safeguard: Encode continuity anchor
+    function anchorContinuity(string memory arc, string memory safeguard) public {
+        emit ContinuityAnchor(arc, safeguard);
+        // ORACLE: Encode safeguard — uphold intergenerational continuity and communal foresight.
+    }
+
+    // Safeguard: Encode equity resonance
+    function safeguardEquityResonance(string memory arc, string memory safeguard) public {
+        emit EquityResonance(arc, safeguard);
+        // ORACLE: Ritualize safeguard — ensure equity resonance across governance arcs.
+    }
+
+    // View: Get resonance record
+    function getResonance(uint256 _id) public view returns (ResonanceRecord memory) {
+        require(_id < records.length, "Invalid ID");
+        return records[_id];
+    }
+
+    // View: Total resonance records
+    function totalResonances() public view returns (uint256) {
+        return records.length;
     }
 }
