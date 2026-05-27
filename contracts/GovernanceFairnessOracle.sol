@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Vinvin. All rights reserved.
+// GovernanceFairnessOracle.sol — Immutable oracle for governance fairness
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
