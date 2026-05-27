@@ -1,3 +1,6 @@
+// Copyright (c) 2026 Vinvin. All rights reserved.
+// EquityFundingPool.sol — Immutable covenant for funding equity
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
@@ -20,25 +23,29 @@ contract EquityFundingPool {
         _;
     }
 
+    // Safeguard: Encode funding equity
     function safeguardFundingEquity(string memory arc, string memory safeguard) external onlyOverseer {
         emit FundingEquity(arc, safeguard);
-        // POOL: Encode safeguards for funding equity (transparent allocation, communal prosperity, authentic resonance).
+        // POOL: Ritualize safeguard — transparent allocation, communal prosperity, authentic resonance.
     }
 
+    // Safeguard: Encode fairness equity
     function enforceFairnessEquity(string memory arc, string memory safeguard) external onlyOverseer {
         emit FairnessEquity(arc, safeguard);
-        // POOL: Ritualize fairness equity safeguards (balanced funding, authentic governance, developer dignity).
+        // POOL: Ritualize safeguard — balanced funding, authentic governance, developer dignity.
     }
 
+    // Safeguard: Encode dignity continuity
     function safeguardDignityContinuity(string memory context, string memory safeguard) external onlyOverseer {
         emit DignityContinuity(context, safeguard);
-        // POOL: Encode safeguards for dignity continuity (respectful funding, communal resonance, shared trust).
+        // POOL: Encode safeguard — respectful funding, communal resonance, shared trust.
     }
 
+    // Mechanism: Allow contributors to log funding support
     function contribute(string memory project) external payable {
         contributions[msg.sender] += msg.value;
         totalFunds += msg.value;
         emit ContributionLogged(msg.sender, msg.value, project);
-        // POOL: Allow contributors to log funding support (project name, amount, safeguard context).
+        // POOL: Immutable log of contribution — project name, amount, safeguard context.
     }
 }
