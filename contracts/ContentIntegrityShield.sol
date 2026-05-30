@@ -1,34 +1,29 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title ContentIntegrityShield
+/// @notice Covenant contract to safeguard human-generated content
 contract ContentIntegrityShield {
-    event ContentEquity(string arc, string safeguard);
-    event OriginalityResonance(string arc, string safeguard);
-    event IntegrityDignity(string context, string safeguard);
-
-    address public overseer;
-
-    constructor(address _overseer) {
-        overseer = _overseer;
+    struct Content {
+        address creator;
+        string uri;
+        uint256 timestamp;
+        bool verifiedHuman;
     }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
+    mapping(bytes32 => Content) public registry;
+
+    event ContentRegistered(bytes32 indexed hash, address indexed creator, string uri, bool verifiedHuman);
+
+    /// @notice Register content with human verification
+    function registerContent(string memory uri, bool verifiedHuman) public {
+        bytes32 hash = keccak256(abi.encodePacked(uri, msg.sender, block.timestamp));
+        registry[hash] = Content(msg.sender, uri, block.timestamp, verifiedHuman);
+        emit ContentRegistered(hash, msg.sender, uri, verifiedHuman);
     }
 
-    function safeguardContentEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ContentEquity(arc, safeguard);
-        // SHIELD: Encode safeguards for content equity (fair distribution, dignified creation, authentic ownership).
-    }
-
-    function enforceOriginalityResonance(string memory arc, string memory safeguard) external onlyOverseer {
-        emit OriginalityResonance(arc, safeguard);
-        // SHIELD: Ritualize originality resonance safeguards (creative authenticity, dignified innovation, authentic narrative depth).
-    }
-
-    function safeguardIntegrityDignity(string memory context, string memory safeguard) external onlyOverseer {
-        emit IntegrityDignity(context, safeguard);
-        // SHIELD: Encode safeguards for integrity dignity (truthful representation, dignified transparency, authentic trust equity).
+    /// @notice Verify if content is human-generated
+    function isHuman(bytes32 hash) public view returns (bool) {
+        return registry[hash].verifiedHuman;
     }
 }
