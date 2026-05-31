@@ -1,51 +1,58 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title SovereigntyShield
+/// @notice Safeguard contract for personal sovereignty in a centralized world
+/// @dev Encodes principles of family-centered businesses, uncapturable assets, and truthfulness
+
 contract SovereigntyShield {
-    event SovereigntyDignity(string principle, string safeguard);
-    event AntiImperialistEquity(string arc, string safeguard);
-    event CommunityProtection(string ritual, string safeguard);
-    event IndustrialAuthenticity(string arc, string safeguard);
-    event ShieldBroadcast(string arc, string safeguard);
+    address public guardian;
+    uint256 public principleCount;
 
-    address public overseer;
-
-    constructor(address _overseer) {
-        overseer = _overseer;
+    struct Principle {
+        uint256 id;
+        string category;   // e.g., "Business", "Asset", "Truth"
+        string description;
+        uint256 timestamp;
     }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
+    mapping(uint256 => Principle) public principles;
+
+    event PrincipleLogged(uint256 id, string category, string description, uint256 timestamp);
+    event PrincipleCleared(uint256 id, uint256 timestamp);
+    event SovereigntyAudit(string report, uint256 timestamp);
+
+    modifier onlyGuardian() {
+        require(msg.sender == guardian, "Not authorized");
         _;
     }
 
-    // Safeguard: Encode sovereignty dignity
-    function safeguardSovereignty(string memory principle, string memory safeguard) external onlyOverseer {
-        emit SovereigntyDignity(principle, safeguard);
-        // SHIELD: Ritualize safeguard — uphold national sovereignty and dignity against foreign control.
+    constructor(address _guardian) {
+        guardian = _guardian;
+        principleCount = 0;
     }
 
-    // Safeguard: Encode anti-imperialist equity
-    function enforceEquity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit AntiImperialistEquity(arc, safeguard);
-        // SHIELD: Encode safeguard — ensure equity against imperialist plunder and war economy schemes.
+    /// @notice Log a new sovereignty principle
+    function logPrinciple(string calldata category, string calldata description) external onlyGuardian {
+        principleCount++;
+        principles[principleCount] = Principle(principleCount, category, description, block.timestamp);
+        emit PrincipleLogged(principleCount, category, description, block.timestamp);
     }
 
-    // Safeguard: Encode community protection
-    function preserveCommunity(string memory ritual, string memory safeguard) external onlyOverseer {
-        emit CommunityProtection(ritual, safeguard);
-        // SHIELD: Ritualize safeguard — protect Indigenous and farming communities from displacement and exploitation.
+    /// @notice Clear a principle after resolution
+    function clearPrinciple(uint256 id) external onlyGuardian {
+        require(bytes(principles[id].description).length > 0, "Principle not found");
+        delete principles[id];
+        emit PrincipleCleared(id, block.timestamp);
     }
 
-    // Safeguard: Encode authentic industrial path
-    function sustainIndustry(string memory arc, string memory safeguard) external onlyOverseer {
-        emit IndustrialAuthenticity(arc, safeguard);
-        // SHIELD: Encode safeguard — maintain authentic national industrial development rooted in sovereignty.
+    /// @notice Log a sovereignty audit report
+    function logAudit(string calldata report) external onlyGuardian {
+        emit SovereigntyAudit(report, block.timestamp);
     }
 
-    // Safeguard: Encode shield broadcast
-    function broadcastShield(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ShieldBroadcast(arc, safeguard);
-        // SHIELD: Ritualize broadcast safeguard — amplify sovereignty narrative as communal covenant.
+    /// @notice Check if a principle exists
+    function principleExists(uint256 id) external view returns (bool) {
+        return bytes(principles[id].description).length > 0;
     }
 }
