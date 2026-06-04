@@ -1,28 +1,72 @@
-// GovernanceDAO.sol
-pragma solidity ^0.8.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
 
+/// @title GovernanceDAO
+/// @notice Covenant contract to manage decentralized governance of AI and faith safeguards
 contract GovernanceDAO {
-    struct Decision {
-        uint256 id;
-        string policy;   // e.g. "Compliance Check"
-        string detail;   // e.g. "Ensure licenses updated"
-        bool approved;
+    address public founder;
+    mapping(address => bool) public members;
+    uint256 public proposalCount;
+
+    struct Proposal {
+        string title;
+        string description;
+        uint256 votesFor;
+        uint256 votesAgainst;
+        bool active;
     }
 
-    uint256 public decisionCount;
-    mapping(uint256 => Decision) public decisions;
+    mapping(uint256 => Proposal) public proposals;
 
-    event DecisionLogged(uint256 id, string policy, string detail);
-    event DecisionApproved(uint256 id, string policy);
+    event MemberJoined(address member);
+    event ProposalCreated(uint256 id, string title, string description);
+    event Voted(address voter, uint256 proposalId, bool support);
+    event ProposalClosed(uint256 id, string title, uint256 votesFor, uint256 votesAgainst);
 
-    function logDecision(string memory policy, string memory detail) public {
-        decisionCount++;
-        decisions[decisionCount] = Decision(decisionCount, policy, detail, false);
-        emit DecisionLogged(decisionCount, policy, detail);
+    modifier onlyFounder() {
+        require(msg.sender == founder, "Not authorized");
+        _;
     }
 
-    function approveDecision(uint256 id) public {
-        decisions[id].approved = true;
-        emit DecisionApproved(id, decisions[id].policy);
+    modifier onlyMember() {
+        require(members[msg.sender], "Not a DAO member");
+        _;
+    }
+
+    constructor() {
+        founder = msg.sender;
+        members[msg.sender] = true;
+    }
+
+    function joinDAO(address newMember) public onlyFounder {
+        members[newMember] = true;
+        emit MemberJoined(newMember);
+    }
+
+    function createProposal(string memory title, string memory description) public onlyMember {
+        proposalCount++;
+        proposals[proposalCount] = Proposal(title, description, 0, 0, true);
+        emit ProposalCreated(proposalCount, title, description);
+    }
+
+    function vote(uint256 proposalId, bool support) public onlyMember {
+        require(proposals[proposalId].active, "Proposal not active");
+        if (support) {
+            proposals[proposalId].votesFor++;
+        } else {
+            proposals[proposalId].votesAgainst++;
+        }
+        emit Voted(msg.sender, proposalId, support);
+    }
+
+    function closeProposal(uint256 proposalId) public onlyFounder {
+        require(proposals[proposalId].active, "Proposal already closed");
+        proposals[proposalId].active = false;
+        emit ProposalClosed(
+            proposalId,
+            proposals[proposalId].title,
+            proposals[proposalId].votesFor,
+            proposals[proposalId].votesAgainst
+        );
     }
 }
