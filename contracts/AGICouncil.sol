@@ -2,68 +2,62 @@
 pragma solidity ^0.8.20;
 
 /// @title AGICouncil
-/// @notice DAO-style council for voting on AGI trajectory safeguards
-/// @dev Collective governance for milestones, audits, and ethical checks
-
+/// @notice Covenant contract for council-level governance linking AGI transparency and planetary safeguards
 contract AGICouncil {
-    address public chair;
-    uint256 public proposalCount;
+    address public owner;
 
-    struct Proposal {
-        uint256 id;
-        string subject;   // e.g., "AGI Milestone", "Job Disruption Audit", "Corporate Ethics Check"
-        string action;    // e.g., "Mark Achieved", "Conduct Audit", "Apply Governance Penalty"
+    struct Decision {
+        string title;        // e.g. "Integrate AGITransparency with Planetary Safeguards"
+        string description;  // details of council safeguard
         uint256 votesFor;
         uint256 votesAgainst;
+        bool active;
         uint256 timestamp;
-        bool executed;
     }
 
-    mapping(uint256 => Proposal) public proposals;
-    mapping(address => mapping(uint256 => bool)) public hasVoted;
+    uint256 public decisionCount;
+    mapping(uint256 => Decision) public decisions;
 
-    event ProposalCreated(uint256 id, string subject, string action, uint256 timestamp);
-    event Voted(uint256 id, address voter, bool support, uint256 timestamp);
-    event ProposalExecuted(uint256 id, string action, uint256 timestamp);
+    event DecisionCreated(uint256 id, string title, string description, uint256 timestamp);
+    event Voted(address voter, uint256 decisionId, bool support);
+    event DecisionClosed(uint256 id, string title, uint256 votesFor, uint256 votesAgainst);
 
-    modifier onlyChair() {
-        require(msg.sender == chair, "Not authorized");
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not authorized");
         _;
     }
 
-    constructor(address _chair) {
-        chair = _chair;
-        proposalCount = 0;
+    constructor() {
+        owner = msg.sender;
     }
 
-    /// @notice Create a new proposal for AGI safeguard enforcement
-    function createProposal(string calldata subject, string calldata action) external onlyChair {
-        proposalCount++;
-        proposals[proposalCount] = Proposal(proposalCount, subject, action, 0, 0, block.timestamp, false);
-        emit ProposalCreated(proposalCount, subject, action, block.timestamp);
+    /// @notice Create a new AGI council decision
+    function createDecision(string memory title, string memory description) public onlyOwner {
+        decisionCount++;
+        decisions[decisionCount] = Decision(title, description, 0, 0, true, block.timestamp);
+        emit DecisionCreated(decisionCount, title, description, block.timestamp);
     }
 
-    /// @notice Vote on a proposal
-    function vote(uint256 id, bool support) external {
-        require(!hasVoted[msg.sender][id], "Already voted");
-        require(!proposals[id].executed, "Proposal already executed");
-
-        hasVoted[msg.sender][id] = true;
+    /// @notice Council members vote on AGI safeguard decisions
+    function vote(uint256 decisionId, bool support) public {
+        require(decisions[decisionId].active, "Decision not active");
         if (support) {
-            proposals[id].votesFor++;
+            decisions[decisionId].votesFor++;
         } else {
-            proposals[id].votesAgainst++;
+            decisions[decisionId].votesAgainst++;
         }
-        emit Voted(id, msg.sender, support, block.timestamp);
+        emit Voted(msg.sender, decisionId, support);
     }
 
-    /// @notice Execute proposal if majority supports
-    function executeProposal(uint256 id) external onlyChair {
-        Proposal storage p = proposals[id];
-        require(!p.executed, "Already executed");
-        require(p.votesFor > p.votesAgainst, "Not enough support");
-
-        p.executed = true;
-        emit ProposalExecuted(id, p.action, block.timestamp);
+    /// @notice Close council decision after voting
+    function closeDecision(uint256 decisionId) public onlyOwner {
+        require(decisions[decisionId].active, "Decision already closed");
+        decisions[decisionId].active = false;
+        emit DecisionClosed(
+            decisionId,
+            decisions[decisionId].title,
+            decisions[decisionId].votesFor,
+            decisions[decisionId].votesAgainst
+        );
     }
 }
