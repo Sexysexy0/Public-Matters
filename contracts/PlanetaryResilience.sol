@@ -1,40 +1,44 @@
-// contracts/PlanetaryResilience.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/**
- * @title PlanetaryResilience
- * @notice Climate protocols, durability tags, repair rights, and communal stewardship.
- */
+/// @title PlanetaryResilience v2
+/// @notice Covenant contract to unify transparency outcomes, citizen votes, audits, and ethical anchors
 contract PlanetaryResilience {
-    address public admin;
+    address public owner;
 
-    struct Asset {
-        string name;
-        bool repairable;
-        uint256 durabilityYears;
-        string stewardshipNote;
+    struct Safeguard {
+        string domain;       // e.g. "Transparency", "Citizen Votes", "Audit", "Ethics"
+        string description;  // safeguard details
+        address linkedContract; // linked module contract
+        uint256 timestamp;
     }
 
-    Asset[] public assets;
+    Safeguard[] public safeguards;
 
-    event AssetRegistered(string name, bool repairable, uint256 durabilityYears, string stewardshipNote);
+    event SafeguardRegistered(string domain, string description, address linkedContract, uint256 timestamp);
 
-    modifier onlyAdmin() {
-        require(msg.sender == admin, "Not admin");
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not authorized");
         _;
     }
 
     constructor() {
-        admin = msg.sender;
+        owner = msg.sender;
     }
 
-    function registerAsset(string calldata name, bool repairable, uint256 durabilityYears, string calldata stewardshipNote) external onlyAdmin {
-        assets.push(Asset(name, repairable, durabilityYears, stewardshipNote));
-        emit AssetRegistered(name, repairable, durabilityYears, stewardshipNote);
+    /// @notice Register a new planetary safeguard
+    function registerSafeguard(string memory domain, string memory description, address linkedContract) public onlyOwner {
+        Safeguard memory newSafeguard = Safeguard(domain, description, linkedContract, block.timestamp);
+        safeguards.push(newSafeguard);
+        emit SafeguardRegistered(domain, description, linkedContract, block.timestamp);
     }
 
-    function totalAssets() external view returns (uint256) {
-        return assets.length;
+    function getSafeguard(uint256 index) public view returns (string memory, string memory, address, uint256) {
+        Safeguard memory s = safeguards[index];
+        return (s.domain, s.description, s.linkedContract, s.timestamp);
+    }
+
+    function getSafeguardCount() public view returns (uint256) {
+        return safeguards.length;
     }
 }
