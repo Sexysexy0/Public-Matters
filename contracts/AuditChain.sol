@@ -2,20 +2,19 @@
 pragma solidity ^0.8.20;
 
 /// @title AuditChain
-/// @notice Covenant contract to log citizen votes and allocations on-chain
+/// @notice Covenant contract to log immutable audit records for tax allocations and citizen votes
 contract AuditChain {
     address public owner;
 
-    struct AuditLog {
-        string action;       // e.g. "VoteCast", "FundsAllocated"
-        address actor;       // who performed the action
-        uint256 timestamp;   // block timestamp
-        string details;      // extra info
+    struct AuditRecord {
+        string action;       // e.g. "Citizen Vote", "Tax Allocation"
+        string details;      // description of the action
+        uint256 timestamp;
     }
 
-    AuditLog[] public logs;
+    AuditRecord[] public records;
 
-    event ActionLogged(string action, address actor, uint256 timestamp, string details);
+    event AuditLogged(string action, string details, uint256 timestamp);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Not authorized");
@@ -26,18 +25,19 @@ contract AuditChain {
         owner = msg.sender;
     }
 
-    function logAction(string memory action, address actor, string memory details) public onlyOwner {
-        AuditLog memory newLog = AuditLog(action, actor, block.timestamp, details);
-        logs.push(newLog);
-        emit ActionLogged(action, actor, block.timestamp, details);
+    /// @notice Log an audit record
+    function logAudit(string memory action, string memory details) public onlyOwner {
+        AuditRecord memory newRecord = AuditRecord(action, details, block.timestamp);
+        records.push(newRecord);
+        emit AuditLogged(action, details, block.timestamp);
     }
 
-    function getLog(uint256 index) public view returns (string memory, address, uint256, string memory) {
-        AuditLog memory log = logs[index];
-        return (log.action, log.actor, log.timestamp, log.details);
+    function getRecord(uint256 index) public view returns (string memory, string memory, uint256) {
+        AuditRecord memory r = records[index];
+        return (r.action, r.details, r.timestamp);
     }
 
-    function getLogCount() public view returns (uint256) {
-        return logs.length;
+    function getRecordCount() public view returns (uint256) {
+        return records.length;
     }
 }
