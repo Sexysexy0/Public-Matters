@@ -2,20 +2,20 @@
 pragma solidity ^0.8.20;
 
 /// @title TransparencyDashboard
-/// @notice Covenant contract to provide public visibility of audit logs and allocations
+/// @notice Covenant contract to provide public access to audit logs, votes, and allocations
 contract TransparencyDashboard {
     address public owner;
 
     struct DashboardEntry {
-        string category;     // e.g. "Vote", "Allocation", "Audit"
-        string details;      // description of the action
-        uint256 amount;      // optional funds involved
-        uint256 timestamp;   // block timestamp
+        string category;     // e.g. "Audit", "Citizen Vote", "Tax Allocation", "Flag"
+        string details;      // description of the record
+        uint256 amount;      // optional value (0 if not applicable)
+        uint256 timestamp;
     }
 
     DashboardEntry[] public entries;
 
-    event EntryAdded(string category, string details, uint256 amount, uint256 timestamp);
+    event EntryLogged(string category, string details, uint256 amount, uint256 timestamp);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Not authorized");
@@ -26,15 +26,16 @@ contract TransparencyDashboard {
         owner = msg.sender;
     }
 
-    function addEntry(string memory category, string memory details, uint256 amount) public onlyOwner {
+    /// @notice Log a new entry to the dashboard
+    function logEntry(string memory category, string memory details, uint256 amount) public onlyOwner {
         DashboardEntry memory newEntry = DashboardEntry(category, details, amount, block.timestamp);
         entries.push(newEntry);
-        emit EntryAdded(category, details, amount, block.timestamp);
+        emit EntryLogged(category, details, amount, block.timestamp);
     }
 
     function getEntry(uint256 index) public view returns (string memory, string memory, uint256, uint256) {
-        DashboardEntry memory entry = entries[index];
-        return (entry.category, entry.details, entry.amount, entry.timestamp);
+        DashboardEntry memory e = entries[index];
+        return (e.category, e.details, e.amount, e.timestamp);
     }
 
     function getEntryCount() public view returns (uint256) {
