@@ -1,20 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title DemocracyResilience
-/// @notice Covenant contract to safeguard democracy against corruption, dynasties, and military risks
+/// @title DemocracyResilience v3
+/// @notice Covenant contract to embed ethical transparency anchors into Philippine institutional safeguards
 contract DemocracyResilience {
     address public owner;
 
     struct Safeguard {
-        string threat;       // e.g. "Trillion Heist", "Military Junta", "Political Dynasty"
-        string action;       // covenant safeguard action
+        string institution;  // e.g. "Congress", "Judiciary", "Military"
+        string anchor;       // ethical principle applied
+        string action;       // safeguard action (e.g. "Anti-Corruption Audit", "Dynasty Reform")
         uint256 timestamp;
     }
 
     Safeguard[] public safeguards;
 
-    event SafeguardLogged(string threat, string action, uint256 timestamp);
+    event SafeguardLogged(string institution, string anchor, string action, uint256 timestamp);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Not authorized");
@@ -25,15 +26,16 @@ contract DemocracyResilience {
         owner = msg.sender;
     }
 
-    function logSafeguard(string memory threat, string memory action) public onlyOwner {
-        Safeguard memory newSafeguard = Safeguard(threat, action, block.timestamp);
+    /// @notice Log a new institutional safeguard with ethical anchor
+    function logSafeguard(string memory institution, string memory anchor, string memory action) public onlyOwner {
+        Safeguard memory newSafeguard = Safeguard(institution, anchor, action, block.timestamp);
         safeguards.push(newSafeguard);
-        emit SafeguardLogged(threat, action, block.timestamp);
+        emit SafeguardLogged(institution, anchor, action, block.timestamp);
     }
 
-    function getSafeguard(uint256 index) public view returns (string memory, string memory, uint256) {
+    function getSafeguard(uint256 index) public view returns (string memory, string memory, string memory, uint256) {
         Safeguard memory s = safeguards[index];
-        return (s.threat, s.action, s.timestamp);
+        return (s.institution, s.anchor, s.action, s.timestamp);
     }
 
     function getSafeguardCount() public view returns (uint256) {
