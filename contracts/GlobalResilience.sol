@@ -1,78 +1,44 @@
-// contracts/GlobalResilience.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/**
- * @title GlobalResilience
- * @notice Protocols for food security, energy resilience, digital sovereignty, and geopolitical audit.
- */
+/// @title GlobalResilience
+/// @notice Covenant contract to unify audits, transparency, ethics, and citizen participation across nations
 contract GlobalResilience {
-    address public admin;
+    address public owner;
 
-    enum Domain { FoodSecurity, EnergyResilience, DigitalSovereignty, GeopoliticalAudit }
-
-    struct ResilienceDomain {
-        Domain domain;
-        string status;   // e.g., "Stable", "Watch", "Critical"
-        string note;     // summary/details
-        uint256 updatedAt;
-    }
-
-    struct AuditLog {
-        Domain domain;
-        string entry;
+    struct Module {
+        string domain;       // e.g. "Audit", "Transparency", "Ethics", "Citizen Participation"
+        string description;  // details of safeguard
+        address linkedContract; // address of linked module (AuditTransparency, GovernanceDAO, FaithAndTransparency, etc.)
         uint256 timestamp;
     }
 
-    ResilienceDomain[] public domains;
-    AuditLog[] public audits;
+    Module[] public modules;
 
-    event DomainRegistered(Domain domain, string status, string note, uint256 updatedAt);
-    event DomainUpdated(Domain domain, string status, string note, uint256 updatedAt);
-    event AuditLogged(Domain domain, string entry, uint256 timestamp);
+    event ModuleRegistered(string domain, string description, address linkedContract, uint256 timestamp);
 
-    modifier onlyAdmin() {
-        require(msg.sender == admin, "Not admin");
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not authorized");
         _;
     }
 
     constructor() {
-        admin = msg.sender;
+        owner = msg.sender;
     }
 
-    function registerDomain(Domain domain, string calldata status, string calldata note) external onlyAdmin {
-        domains.push(ResilienceDomain(domain, status, note, block.timestamp));
-        emit DomainRegistered(domain, status, note, block.timestamp);
+    /// @notice Register a new safeguard module
+    function registerModule(string memory domain, string memory description, address linkedContract) public onlyOwner {
+        Module memory newModule = Module(domain, description, linkedContract, block.timestamp);
+        modules.push(newModule);
+        emit ModuleRegistered(domain, description, linkedContract, block.timestamp);
     }
 
-    function updateDomain(uint256 id, string calldata status, string calldata note) external onlyAdmin {
-        require(id < domains.length, "Invalid id");
-        domains[id].status = status;
-        domains[id].note = note;
-        domains[id].updatedAt = block.timestamp;
-        emit DomainUpdated(domains[id].domain, status, note, block.timestamp);
+    function getModule(uint256 index) public view returns (string memory, string memory, address, uint256) {
+        Module memory m = modules[index];
+        return (m.domain, m.description, m.linkedContract, m.timestamp);
     }
 
-    function logAudit(Domain domain, string calldata entry) external onlyAdmin {
-        audits.push(AuditLog(domain, entry, block.timestamp));
-        emit AuditLogged(domain, entry, block.timestamp);
-    }
-
-    function totalDomains() external view returns (uint256) {
-        return domains.length;
-    }
-
-    function totalAudits() external view returns (uint256) {
-        return audits.length;
-    }
-
-    function getDomain(uint256 id) external view returns (ResilienceDomain memory) {
-        require(id < domains.length, "Invalid id");
-        return domains[id];
-    }
-
-    function getAudit(uint256 id) external view returns (AuditLog memory) {
-        require(id < audits.length, "Invalid id");
-        return audits[id];
+    function getModuleCount() public view returns (uint256) {
+        return modules.length;
     }
 }
