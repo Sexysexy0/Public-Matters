@@ -60,3 +60,4 @@ contract PlanetaryInvestorCouncil {
             decisions[decisionId].votesAgainst
         );
     }
+}
