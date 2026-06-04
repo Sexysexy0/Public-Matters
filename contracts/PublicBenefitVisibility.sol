@@ -2,21 +2,20 @@
 pragma solidity ^0.8.20;
 
 /// @title PublicBenefitVisibility
-/// @notice Covenant contract to show taxpayers how funds are allocated
+/// @notice Covenant contract to make tax usage transparent and visible to citizens
 contract PublicBenefitVisibility {
     address public owner;
 
-    struct Allocation {
-        string service;   // e.g. "Health", "Education", "Infrastructure"
-        uint256 amount;   // allocated funds
+    struct Benefit {
+        string project;      // e.g. "School Building", "Hospital Upgrade"
+        uint256 amount;      // funds allocated
+        string description;  // details of the project
+        uint256 timestamp;
     }
 
-    mapping(string => Allocation) public allocations;
-    string[] public services;
+    Benefit[] public benefits;
 
-    event ServiceCreated(string service);
-    event FundsAllocated(string service, uint256 amount);
-    event ReportGenerated(string service, uint256 amount);
+    event BenefitLogged(string project, uint256 amount, string description, uint256 timestamp);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Not authorized");
@@ -27,23 +26,18 @@ contract PublicBenefitVisibility {
         owner = msg.sender;
     }
 
-    function createService(string memory service) public onlyOwner {
-        allocations[service] = Allocation(service, 0);
-        services.push(service);
-        emit ServiceCreated(service);
+    function logBenefit(string memory project, uint256 amount, string memory description) public onlyOwner {
+        Benefit memory newBenefit = Benefit(project, amount, description, block.timestamp);
+        benefits.push(newBenefit);
+        emit BenefitLogged(project, amount, description, block.timestamp);
     }
 
-    function allocateFunds(string memory service, uint256 amount) public onlyOwner {
-        require(bytes(allocations[service].service).length > 0, "Service not found");
-        allocations[service].amount += amount;
-        emit FundsAllocated(service, amount);
+    function getBenefit(uint256 index) public view returns (string memory, uint256, string memory, uint256) {
+        Benefit memory b = benefits[index];
+        return (b.project, b.amount, b.description, b.timestamp);
     }
 
-    function generateReport(string memory service) public view returns (uint256) {
-        return allocations[service].amount;
-    }
-
-    function listServices() public view returns (string[] memory) {
-        return services;
+    function getBenefitCount() public view returns (uint256) {
+        return benefits.length;
     }
 }
