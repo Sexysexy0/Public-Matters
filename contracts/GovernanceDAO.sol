@@ -2,54 +2,44 @@
 pragma solidity ^0.8.20;
 
 /// @title GovernanceDAO
-/// @notice Covenant contract to manage decentralized governance of AI and faith safeguards
+/// @notice Covenant contract to integrate UnifiedResilience safeguards with citizen voting
 contract GovernanceDAO {
-    address public founder;
-    mapping(address => bool) public members;
-    uint256 public proposalCount;
+    address public owner;
 
     struct Proposal {
-        string title;
-        string description;
+        string title;        // e.g. "Anti-Corruption Expansion", "Crop Stability Program"
+        string description;  // details of the safeguard proposal
         uint256 votesFor;
         uint256 votesAgainst;
         bool active;
+        uint256 timestamp;
     }
 
+    uint256 public proposalCount;
     mapping(uint256 => Proposal) public proposals;
 
-    event MemberJoined(address member);
-    event ProposalCreated(uint256 id, string title, string description);
+    event ProposalCreated(uint256 id, string title, string description, uint256 timestamp);
     event Voted(address voter, uint256 proposalId, bool support);
     event ProposalClosed(uint256 id, string title, uint256 votesFor, uint256 votesAgainst);
 
-    modifier onlyFounder() {
-        require(msg.sender == founder, "Not authorized");
-        _;
-    }
-
-    modifier onlyMember() {
-        require(members[msg.sender], "Not a DAO member");
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not authorized");
         _;
     }
 
     constructor() {
-        founder = msg.sender;
-        members[msg.sender] = true;
+        owner = msg.sender;
     }
 
-    function joinDAO(address newMember) public onlyFounder {
-        members[newMember] = true;
-        emit MemberJoined(newMember);
-    }
-
-    function createProposal(string memory title, string memory description) public onlyMember {
+    /// @notice Create a new governance proposal linked to resilience safeguards
+    function createProposal(string memory title, string memory description) public onlyOwner {
         proposalCount++;
-        proposals[proposalCount] = Proposal(title, description, 0, 0, true);
-        emit ProposalCreated(proposalCount, title, description);
+        proposals[proposalCount] = Proposal(title, description, 0, 0, true, block.timestamp);
+        emit ProposalCreated(proposalCount, title, description, block.timestamp);
     }
 
-    function vote(uint256 proposalId, bool support) public onlyMember {
+    /// @notice Citizens vote on proposals
+    function vote(uint256 proposalId, bool support) public {
         require(proposals[proposalId].active, "Proposal not active");
         if (support) {
             proposals[proposalId].votesFor++;
@@ -59,7 +49,8 @@ contract GovernanceDAO {
         emit Voted(msg.sender, proposalId, support);
     }
 
-    function closeProposal(uint256 proposalId) public onlyFounder {
+    /// @notice Close proposal after voting
+    function closeProposal(uint256 proposalId) public onlyOwner {
         require(proposals[proposalId].active, "Proposal already closed");
         proposals[proposalId].active = false;
         emit ProposalClosed(
