@@ -2,42 +2,45 @@
 pragma solidity ^0.8.20;
 
 /// @title AuditChain
-/// @notice Covenant contract to log immutable audit records for tax allocations and citizen votes
+/// @notice Immutable audit trail for tax expenditures and collections
 contract AuditChain {
-    address public owner;
+    address public oversightCommittee;
+    uint256 public auditCount;
 
-    struct AuditRecord {
-        string action;       // e.g. "Citizen Vote", "Tax Allocation"
-        string details;      // description of the action
+    struct AuditLog {
+        uint256 id;
+        address auditor;
+        string details;
         uint256 timestamp;
     }
 
-    AuditRecord[] public records;
+    mapping(uint256 => AuditLog) public audits;
 
-    event AuditLogged(string action, string details, uint256 timestamp);
+    event AuditRecorded(uint256 indexed id, address indexed auditor, string details);
 
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Not authorized");
+    modifier onlyOversight() {
+        require(msg.sender == oversightCommittee, "Not authorized");
         _;
     }
 
-    constructor() {
-        owner = msg.sender;
+    constructor(address _oversightCommittee) {
+        oversightCommittee = _oversightCommittee;
     }
 
-    /// @notice Log an audit record
-    function logAudit(string memory action, string memory details) public onlyOwner {
-        AuditRecord memory newRecord = AuditRecord(action, details, block.timestamp);
-        records.push(newRecord);
-        emit AuditLogged(action, details, block.timestamp);
+    /// @notice Oversight Committee records immutable audit logs
+    function recordAudit(string calldata details) external onlyOversight {
+        auditCount++;
+        audits[auditCount] = AuditLog({
+            id: auditCount,
+            auditor: msg.sender,
+            details: details,
+            timestamp: block.timestamp
+        });
+        emit AuditRecorded(auditCount, msg.sender, details);
     }
 
-    function getRecord(uint256 index) public view returns (string memory, string memory, uint256) {
-        AuditRecord memory r = records[index];
-        return (r.action, r.details, r.timestamp);
-    }
-
-    function getRecordCount() public view returns (uint256) {
-        return records.length;
+    /// @notice Citizens can view audit logs
+    function viewAudit(uint256 id) external view returns (AuditLog memory) {
+        return audits[id];
     }
 }
