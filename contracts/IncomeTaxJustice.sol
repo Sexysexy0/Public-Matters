@@ -2,51 +2,47 @@
 pragma solidity ^0.8.20;
 
 /// @title IncomeTaxJustice
-/// @notice Covenant contract to enforce ₱1M tax-free threshold and ensure transparency
+/// @notice Encodes fairness safeguards: ₱1M tax-free threshold + anti-corruption audit
 contract IncomeTaxJustice {
-    address public owner;
-    uint256 public taxFreeThreshold = 1_000_000; // ₱1M
+    address public oversightCommittee;
+    uint256 public exemptionThreshold = 1_000_000; // ₱1M threshold
+    uint256 public progressiveRate = 20; // example: 20% rate above threshold
 
-    struct TaxRecord {
-        address citizen;
-        uint256 income;
-        uint256 taxDue;
-        uint256 timestamp;
-    }
+    event ThresholdUpdated(uint256 newThreshold);
+    event ProgressiveRateUpdated(uint256 newRate);
+    event JusticeAudit(address indexed auditor, address indexed taxpayer);
 
-    TaxRecord[] public records;
-
-    event TaxCalculated(address citizen, uint256 income, uint256 taxDue, uint256 timestamp);
-
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Not authorized");
+    modifier onlyOversight() {
+        require(msg.sender == oversightCommittee, "Not authorized");
         _;
     }
 
-    constructor() {
-        owner = msg.sender;
+    constructor(address _oversightCommittee) {
+        oversightCommittee = _oversightCommittee;
     }
 
-    /// @notice Calculate tax based on ₱1M threshold
-    function calculateTax(address citizen, uint256 income, uint256 rate) public onlyOwner {
-        uint256 taxDue = 0;
-        if (income > taxFreeThreshold) {
-            uint256 taxableIncome = income - taxFreeThreshold;
-            taxDue = (taxableIncome * rate) / 100;
+    /// @notice Oversight Committee updates exemption threshold
+    function updateThreshold(uint256 newThreshold) external onlyOversight {
+        exemptionThreshold = newThreshold;
+        emit ThresholdUpdated(newThreshold);
+    }
+
+    /// @notice Oversight Committee updates progressive rate
+    function updateRate(uint256 newRate) external onlyOversight {
+        progressiveRate = newRate;
+        emit ProgressiveRateUpdated(newRate);
+    }
+
+    /// @notice Citizens can calculate fair tax
+    function calculateTax(uint256 income) external view returns (uint256) {
+        if (income <= exemptionThreshold) {
+            return 0;
         }
-
-        TaxRecord memory newRecord = TaxRecord(citizen, income, taxDue, block.timestamp);
-        records.push(newRecord);
-
-        emit TaxCalculated(citizen, income, taxDue, block.timestamp);
+        return (income - exemptionThreshold) * progressiveRate / 100;
     }
 
-    function getRecord(uint256 index) public view returns (address, uint256, uint256, uint256) {
-        TaxRecord memory r = records[index];
-        return (r.citizen, r.income, r.taxDue, r.timestamp);
-    }
-
-    function getRecordCount() public view returns (uint256) {
-        return records.length;
+    /// @notice Oversight Committee audits taxpayer for fairness
+    function auditTaxpayer(address taxpayer) external onlyOversight {
+        emit JusticeAudit(msg.sender, taxpayer);
     }
 }
