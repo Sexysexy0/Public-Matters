@@ -2,42 +2,38 @@
 pragma solidity ^0.8.20;
 
 /// @title PublicBenefitVisibility
-/// @notice Covenant contract to make tax usage transparent and visible to citizens
+/// @notice Ensures every peso of tax revenue is transparently tracked
 contract PublicBenefitVisibility {
-    address public owner;
+    address public oversightCommittee;
+    mapping(uint256 => string) public expenditureLogs;
+    uint256 public logCount;
 
-    struct Benefit {
-        string project;      // e.g. "School Building", "Hospital Upgrade"
-        uint256 amount;      // funds allocated
-        string description;  // details of the project
-        uint256 timestamp;
-    }
+    event ExpenditureLogged(uint256 indexed logId, string details);
+    event OversightAudit(address indexed auditor, uint256 indexed logId);
 
-    Benefit[] public benefits;
-
-    event BenefitLogged(string project, uint256 amount, string description, uint256 timestamp);
-
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Not authorized");
+    modifier onlyOversight() {
+        require(msg.sender == oversightCommittee, "Not authorized");
         _;
     }
 
-    constructor() {
-        owner = msg.sender;
+    constructor(address _oversightCommittee) {
+        oversightCommittee = _oversightCommittee;
     }
 
-    function logBenefit(string memory project, uint256 amount, string memory description) public onlyOwner {
-        Benefit memory newBenefit = Benefit(project, amount, description, block.timestamp);
-        benefits.push(newBenefit);
-        emit BenefitLogged(project, amount, description, block.timestamp);
+    /// @notice Citizens can view all expenditure logs
+    function viewLog(uint256 logId) external view returns (string memory) {
+        return expenditureLogs[logId];
     }
 
-    function getBenefit(uint256 index) public view returns (string memory, uint256, string memory, uint256) {
-        Benefit memory b = benefits[index];
-        return (b.project, b.amount, b.description, b.timestamp);
+    /// @notice Oversight Committee encodes expenditure transparency
+    function logExpenditure(string calldata details) external onlyOversight {
+        logCount++;
+        expenditureLogs[logCount] = details;
+        emit ExpenditureLogged(logCount, details);
     }
 
-    function getBenefitCount() public view returns (uint256) {
-        return benefits.length;
+    /// @notice Oversight Committee audits specific expenditure
+    function auditExpenditure(uint256 logId) external onlyOversight {
+        emit OversightAudit(msg.sender, logId);
     }
 }
