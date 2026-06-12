@@ -2,51 +2,40 @@
 pragma solidity ^0.8.20;
 
 /// @title DigitalEnforcement
-/// @notice Covenant contract to automate tax compliance and reduce corruption
+/// @notice Automates enforcement of tax compliance and prevents under-the-table deals
 contract DigitalEnforcement {
-    address public owner;
+    address public oversightCommittee;
+    mapping(address => bool) public registeredTaxpayers;
+    mapping(address => bool) public flaggedEntities;
 
-    struct Taxpayer {
-        string name;
-        uint256 declaredIncome;
-        uint256 taxPaid;
-        bool compliant;
-    }
+    event TaxpayerRegistered(address indexed taxpayer);
+    event EntityFlagged(address indexed entity, string reason);
+    event EnforcementExecuted(address indexed entity, string action);
 
-    mapping(address => Taxpayer) public taxpayers;
-
-    event TaxpayerRegistered(address taxpayer, string name);
-    event ComplianceChecked(address taxpayer, bool compliant);
-    event IncomeDeclared(address taxpayer, uint256 amount, uint256 taxPaid);
-
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Not authorized");
+    modifier onlyOversight() {
+        require(msg.sender == oversightCommittee, "Not authorized");
         _;
     }
 
-    constructor() {
-        owner = msg.sender;
+    constructor(address _oversightCommittee) {
+        oversightCommittee = _oversightCommittee;
     }
 
-    function registerTaxpayer(address taxpayerAddr, string memory name) public onlyOwner {
-        taxpayers[taxpayerAddr] = Taxpayer(name, 0, 0, false);
-        emit TaxpayerRegistered(taxpayerAddr, name);
+    /// @notice Register taxpayers digitally
+    function registerTaxpayer(address taxpayer) external onlyOversight {
+        registeredTaxpayers[taxpayer] = true;
+        emit TaxpayerRegistered(taxpayer);
     }
 
-    function declareIncome(address taxpayerAddr, uint256 income, uint256 taxPaid) public onlyOwner {
-        Taxpayer storage tp = taxpayers[taxpayerAddr];
-        tp.declaredIncome = income;
-        tp.taxPaid = taxPaid;
-        emit IncomeDeclared(taxpayerAddr, income, taxPaid);
+    /// @notice Flag suspicious entities for corruption or evasion
+    function flagEntity(address entity, string calldata reason) external onlyOversight {
+        flaggedEntities[entity] = true;
+        emit EntityFlagged(entity, reason);
     }
 
-    function checkCompliance(address taxpayerAddr, uint256 requiredRate) public onlyOwner {
-        Taxpayer storage tp = taxpayers[taxpayerAddr];
-        require(bytes(tp.name).length > 0, "Taxpayer not registered");
-
-        uint256 effectiveRate = (tp.taxPaid * 100) / tp.declaredIncome;
-        tp.compliant = effectiveRate >= requiredRate;
-
-        emit ComplianceChecked(taxpayerAddr, tp.compliant);
+    /// @notice Execute enforcement actions (e.g., freeze, audit)
+    function enforceAction(address entity, string calldata action) external onlyOversight {
+        require(flaggedEntities[entity], "Entity not flagged");
+        emit EnforcementExecuted(entity, action);
     }
 }
