@@ -1,54 +1,52 @@
-// Copyright (c) 2026 Vinvin. All rights reserved.
-// TransparencyLedger.sol — Immutable ledger of governance and authorship events
-
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title TransparencyLedger
+/// @notice Immutable ledger covenant to record authorship commits on-chain
 contract TransparencyLedger {
-    event CovenantLogged(address indexed actor, string action, string context, uint256 timestamp);
-    event AuditTrail(string arc, string safeguard);
-    event EquitySafeguard(string arc, string safeguard);
-    event DignityContinuity(string arc, string safeguard);
-    event LedgerBroadcast(string arc, string safeguard);
-
     address public overseer;
+    uint256 public entryCount;
 
-    constructor(address _overseer) {
-        overseer = _overseer;
+    struct LedgerEntry {
+        uint256 id;
+        string author;       // e.g. Emervin V. Gueco (Vinvin)
+        string workHash;     // hash of code/doc commit
+        string project;      // project/repo name
+        string safeguard;    // copyright, integrity, transparency
+        string notes;
+        uint256 timestamp;
     }
+
+    mapping(uint256 => LedgerEntry) public entries;
+
+    event EntryLogged(uint256 indexed id, string author, string workHash, string project, string safeguard, string notes);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    // Ritualize: Log covenant event
-    function logCovenant(string memory action, string memory context) external {
-        emit CovenantLogged(msg.sender, action, context, block.timestamp);
-        // LEDGER: Immutable log of covenant events (funding, mods, preservation, governance).
+    constructor(address _overseer) {
+        overseer = _overseer;
     }
 
-    // Safeguard: Encode audit trail
-    function enforceAuditTrail(string memory arc, string memory safeguard) external onlyOverseer {
-        emit AuditTrail(arc, safeguard);
-        // LEDGER: Encode safeguard — ensure accountability and trust resonance.
+    /// @notice Overseer logs immutable authorship entry
+    function logEntry(string calldata author, string calldata workHash, string calldata project, string calldata safeguard, string calldata notes) external onlyOverseer {
+        entryCount++;
+        entries[entryCount] = LedgerEntry({
+            id: entryCount,
+            author: author,
+            workHash: workHash,
+            project: project,
+            safeguard: safeguard,
+            notes: notes,
+            timestamp: block.timestamp
+        });
+        emit EntryLogged(entryCount, author, workHash, project, safeguard, notes);
     }
 
-    // Safeguard: Encode equity safeguard
-    function enforceEquitySafeguard(string memory arc, string memory safeguard) external onlyOverseer {
-        emit EquitySafeguard(arc, safeguard);
-        // LEDGER: Encode safeguard — uphold fairness, resist hidden allocations.
-    }
-
-    // Safeguard: Encode dignity continuity
-    function safeguardDignityContinuity(string memory arc, string memory safeguard) external onlyOverseer {
-        emit DignityContinuity(arc, safeguard);
-        // LEDGER: Encode safeguard — ritualize respect, communal trust, authentic resonance.
-    }
-
-    // Safeguard: Encode ledger broadcast
-    function broadcastLedger(string memory arc, string memory safeguard) external onlyOverseer {
-        emit LedgerBroadcast(arc, safeguard);
-        // LEDGER: Ritualize broadcast safeguard — amplify transparency narrative as communal covenant.
+    /// @notice Citizens can view ledger entries
+    function viewEntry(uint256 id) external view returns (LedgerEntry memory) {
+        return entries[id];
     }
 }
