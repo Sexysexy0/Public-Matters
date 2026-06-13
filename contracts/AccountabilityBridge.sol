@@ -2,50 +2,49 @@
 pragma solidity ^0.8.20;
 
 /// @title AccountabilityBridge
-/// @notice Encodes automatic penalties for governance failures
+/// @notice Bridge covenant to connect citizen oversight with institutional safeguards
 contract AccountabilityBridge {
-    address public oversightCommittee;
-    uint256 public penaltyRate; // e.g. 5% penalty on failed compliance
+    address public overseer;
+    uint256 public bridgeCount;
 
-    struct FailureRecord {
+    struct OversightRecord {
         uint256 id;
-        address entity;
-        string reason;
-        uint256 penaltyAmount;
+        string citizenInput;   // e.g. complaint, audit request, feedback
+        string safeguard;      // transparency, fairness, integrity
+        string institutionalResponse; // action taken by institution
+        string notes;          // contextual application
         uint256 timestamp;
     }
 
-    uint256 public failureCount;
-    mapping(uint256 => FailureRecord) public failures;
+    mapping(uint256 => OversightRecord) public records;
 
-    event FailureLogged(uint256 indexed id, address indexed entity, string reason, uint256 penaltyAmount);
+    event OversightLinked(uint256 indexed id, string citizenInput, string safeguard, string institutionalResponse, string notes);
 
-    modifier onlyOversight() {
-        require(msg.sender == oversightCommittee, "Not authorized");
+    modifier onlyOverseer() {
+        require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor(address _oversightCommittee, uint256 _penaltyRate) {
-        oversightCommittee = _oversightCommittee;
-        penaltyRate = _penaltyRate;
+    constructor(address _overseer) {
+        overseer = _overseer;
     }
 
-    /// @notice Oversight Committee logs governance failure and applies penalty
-    function logFailure(address entity, string calldata reason, uint256 baseAmount) external onlyOversight {
-        failureCount++;
-        uint256 penalty = (baseAmount * penaltyRate) / 100;
-        failures[failureCount] = FailureRecord({
-            id: failureCount,
-            entity: entity,
-            reason: reason,
-            penaltyAmount: penalty,
+    /// @notice Overseer links citizen oversight to institutional safeguard
+    function linkOversight(string calldata citizenInput, string calldata safeguard, string calldata institutionalResponse, string calldata notes) external onlyOverseer {
+        bridgeCount++;
+        records[bridgeCount] = OversightRecord({
+            id: bridgeCount,
+            citizenInput: citizenInput,
+            safeguard: safeguard,
+            institutionalResponse: institutionalResponse,
+            notes: notes,
             timestamp: block.timestamp
         });
-        emit FailureLogged(failureCount, entity, reason, penalty);
+        emit OversightLinked(bridgeCount, citizenInput, safeguard, institutionalResponse, notes);
     }
 
-    /// @notice Citizens can view failure records
-    function viewFailure(uint256 id) external view returns (FailureRecord memory) {
-        return failures[id];
+    /// @notice Citizens can view oversight records
+    function viewOversight(uint256 id) external view returns (OversightRecord memory) {
+        return records[id];
     }
 }
