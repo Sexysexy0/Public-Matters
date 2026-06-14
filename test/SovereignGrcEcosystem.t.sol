@@ -12,6 +12,7 @@ import "../contracts/NetworkEngineerPerformanceAudit.sol";
 import "../contracts/IetTechnicalReportRegistry.sol";
 import "../contracts/PersonalGrowthBetEscrow.sol";
 import "../contracts/SovereignSupplierEsourcingRouter.sol";
+import "../contracts/ForceMajeureMdrOracle.sol";
 import "../contracts/InstitutionalAuditHistory.sol";
 
 contract SovereignGrcEcosystemTest is Test {
@@ -25,6 +26,7 @@ contract SovereignGrcEcosystemTest is Test {
     IetTechnicalReportRegistry public ietRegistry;
     PersonalGrowthBetEscrow public growthBetEscrow;
     SovereignSupplierEsourcingRouter public supplierRouter;
+    ForceMajeureMdrOracle public forceMajeureMdr;
     InstitutionalAuditHistory public auditHistory;
 
     address public masterContractor = address(0x9999);
@@ -47,6 +49,7 @@ contract SovereignGrcEcosystemTest is Test {
         ietRegistry = new IetTechnicalReportRegistry();
         growthBetEscrow = new PersonalGrowthBetEscrow();
         supplierRouter = new SovereignSupplierEsourcingRouter();
+        forceMajeureMdr = new ForceMajeureMdrOracle();
 
         indexOracle.setAuditHistoryAddress(address(auditHistory));
         wipoVault.setAuditHistoryAddress(address(auditHistory));
@@ -58,6 +61,7 @@ contract SovereignGrcEcosystemTest is Test {
         ietRegistry.setAuditHistoryAddress(address(auditHistory));
         growthBetEscrow.setAuditHistoryAddress(address(auditHistory));
         supplierRouter.setAuditHistoryAddress(address(auditHistory));
+        forceMajeureMdr.setAuditHistoryAddress(address(auditHistory));
 
         auditHistory.setLoggerAuthorization(address(indexOracle), true);
         auditHistory.setLoggerAuthorization(address(wipoVault), true);
@@ -69,6 +73,7 @@ contract SovereignGrcEcosystemTest is Test {
         auditHistory.setLoggerAuthorization(address(ietRegistry), true);
         auditHistory.setLoggerAuthorization(address(growthBetEscrow), true);
         auditHistory.setLoggerAuthorization(address(supplierRouter), true);
+        auditHistory.setLoggerAuthorization(address(forceMajeureMdr), true);
         
         vm.stopPrank();
     }
@@ -158,33 +163,38 @@ contract SovereignGrcEcosystemTest is Test {
         vm.stopPrank();
     }
 
-    // 9. NEW ADVANCED TRACK: TESTING RASKIN PERSONAL GROWTH FORFEITURE LOCK
     function test_MaxRaskinPersonalGrowthForfeitureFlow() public {
         vm.deal(targetNodeNode, 10 ether);
-        
         vm.prank(targetNodeNode);
         uint256 betId = growthBetEscrow.initializeGrowthBet{value: 5 ether}(500, secondaryNodeNode, sampleHash);
-
-        // Simulate target breach (False) -> Trigger automated preemptive self-help forfeiture
         uint256 initialContractorBalance = masterContractor.balance;
-        
         vm.prank(secondaryNodeNode);
         growthBetEscrow.evaluateAndSettleBet(betId, false);
-
         assertEq(masterContractor.balance, initialContractorBalance + 5 ether);
     }
 
-    // 10. NEW ADVANCED TRACK: TESTING SNG SUPPLIER PRIVACY LOCKDOWN
     function test_SngSupplierPrivacyBreachSanctionFlow() public {
         vm.startPrank(masterContractor);
         supplierRouter.registerSngSupplier(targetNodeNode, sampleHash);
-        
-        // Trigger emergency 24-hour CCPA/SNG data breach notification penalty
         supplierRouter.enforcePrivacyBreachSanction(targetNodeNode, sampleHash);
         vm.stopPrank();
-
         (,,,, bool hasAccess, bool isLocked) = supplierRouter.suppliers(targetNodeNode);
         assertFalse(hasAccess);
         assertTrue(isLocked);
+    }
+
+    // FIXED: Nananatili sa active prank space ang masterContractor sa kabuuang incident logging
+    function test_ForceMajeureMdrOracleRemedialRecoveryFlow() public {
+        vm.startPrank(masterContractor);
+        uint256 dId = forceMajeureMdr.flagForceMajeureIncident{value: 10 ether}(targetNodeNode, secondaryNodeNode, sampleHash);
+        forceMajeureMdr.escalateToMediation(dId);
+        vm.stopPrank();
+
+        uint256 initialAffectedNodeBalance = targetNodeNode.balance;
+
+        vm.prank(secondaryNodeNode);
+        forceMajeureMdr.resolveMdrDispute(dId, true, sampleHash);
+
+        assertEq(targetNodeNode.balance, initialAffectedNodeBalance + 10 ether);
     }
 }
