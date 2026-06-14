@@ -2,17 +2,17 @@
 pragma solidity ^0.8.20;
 
 /// @title EquityAccountabilityCodex
-/// @notice Codex covenant to document equity-accountability principles in governance outcomes
+/// @notice Codex covenant to document fairness and dignity principles in governance outcomes
 contract EquityAccountabilityCodex {
     address public overseer;
     uint256 public codexCount;
 
     struct EquityRecord {
         uint256 id;
-        string institution;   // university or ORIC name
+        string institution;   // university, ORIC, or company
         string principle;     // fairness, dignity, equal governance
-        string stakeholder;   // students, faculty, administrators
-        string measure;       // accountability metric (representation %, grievance redressal, etc.)
+        string stakeholder;   // students, faculty, administrators, workers
+        string measure;       // accountability metric (representation %, grievance redressal, payroll equity)
         string outcome;       // governance outcome achieved
         string notes;         // contextual application
         uint256 timestamp;
