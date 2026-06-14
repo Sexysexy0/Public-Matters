@@ -19,6 +19,12 @@ import "../contracts/JudiciaryWelfareVault.sol";
 import "../contracts/ContractorDelegationRegistry.sol";
 import "../contracts/JudicialDisputeRouter.sol";
 import "../contracts/SubcontractorComplianceEscrow.sol";
+import "../contracts/FinancialIndexReconstitutionOracle.sol";
+import "../contracts/WipoContentExpertDetermination.sol";
+import "../contracts/QualityAssuranceSelfAssessment.sol";
+import "../contracts/FoundationGovernanceLedger.sol";
+import "../contracts/AcademicAccreditationSAROracle.sol";
+import "../contracts/HolisticCompetencyRegistry.sol";
 
 contract DeployGovernanceEcosystem is Script {
     function run() external {
@@ -26,56 +32,40 @@ contract DeployGovernanceEcosystem is Script {
 
         vm.startBroadcast(deployerPrivateKey);
 
-        // 1. I-deploy ang Core Registries at Central Auditing Ledger
-        TimeLockedComplianceSignal gracePeriod = new TimeLockedComplianceSignal();
+        // 1. I-deploy ang Auditing Registry Ledger
         InstitutionalAuditHistory auditHistory = new InstitutionalAuditHistory();
-        IPClaimRegistry ipRegistry = new IPClaimRegistry();
-        PublicBenefitGrant publicBenefitVault = new PublicBenefitGrant();
 
-        // 2. I-deploy ang Operational Gateways, Multi-Agent Registries, at Compliance Vaults
-        AutonomousComplianceEscrowRouter centralRouter = new AutonomousComplianceEscrowRouter(
-            address(0xDEAd),
-            address(gracePeriod),
-            address(auditHistory)
-        );
+        // 2. I-deploy ang Bagong Anim (6) na GRC Sovereign Strategic Modules
+        FinancialIndexReconstitutionOracle indexOracle = new FinancialIndexReconstitutionOracle();
+        WipoContentExpertDetermination wipoVault = new WipoContentExpertDetermination();
+        QualityAssuranceSelfAssessment qaVault = new QualityAssuranceSelfAssessment();
+        FoundationGovernanceLedger foundationLedger = new FoundationGovernanceLedger();
+        AcademicAccreditationSAROracle accreditationOracle = new AcademicAccreditationSAROracle();
+        HolisticCompetencyRegistry competencyRouter = new HolisticCompetencyRegistry();
 
-        WhistleblowerSanctuary whistleblowerSanctuary = new WhistleblowerSanctuary();
-        ComplianceRecoveryEscrow complianceEscrow = new ComplianceRecoveryEscrow(address(publicBenefitVault));
-        ShariahComplianceRouter shariahRouter = new ShariahComplianceRouter();
-        JudiciaryWelfareVault welfareVault = new JudiciaryWelfareVault(0.05 ether);
-        ContractorDelegationRegistry delegationRegistry = new ContractorDelegationRegistry();
-        JudicialDisputeRouter disputeRouter = new JudicialDisputeRouter();
-        SubcontractorComplianceEscrow subcontractorEscrow = new SubcontractorComplianceEscrow();
+        // 3. MASTER TELEMETRY BINDING CONNECTORS
+        indexOracle.setAuditHistoryAddress(address(auditHistory));
+        wipoVault.setAuditHistoryAddress(address(auditHistory));
+        qaVault.setAuditHistoryAddress(address(auditHistory));
+        foundationLedger.setAuditHistoryAddress(address(auditHistory));
+        acreditationOracle.setAuditHistoryAddress(address(auditHistory));
+        competencyRouter.setAuditHistoryAddress(address(auditHistory));
 
-        // 3. MASTER INITIALIZATION LOOP: Itali ang Cross-Contract Permissions at Telemetry Routes
-        whistleblowerSanctuary.setAuditHistoryAddress(address(auditHistory));
-        complianceEscrow.setAuditHistoryAddress(address(auditHistory));
-        shariahRouter.setAuditHistoryAddress(address(auditHistory));
-        welfareVault.setAuditHistoryAddress(address(auditHistory));
-        delegationRegistry.setAuditHistoryAddress(address(auditHistory));
-        disputeRouter.setAuditHistoryAddress(address(auditHistory));
-        subcontractorEscrow.setAuditHistoryAddress(address(auditHistory));
+        auditHistory.setLoggerAuthorization(address(indexOracle), true);
+        auditHistory.setLoggerAuthorization(address(wipoVault), true);
+        auditHistory.setLoggerAuthorization(address(qaVault), true);
+        auditHistory.setLoggerAuthorization(address(foundationLedger), true);
+        auditHistory.setLoggerAuthorization(address(acreditationOracle), true);
+        auditHistory.setLoggerAuthorization(address(competencyRouter), true);
 
-        // Bigyan ng pormal na Root Owner clearance ang sub-systems na mag-log sa central history registry
-        auditHistory.setLoggerAuthorization(address(whistleblowerSanctuary), true);
-        auditHistory.setLoggerAuthorization(address(complianceEscrow), true);
-        auditHistory.setLoggerAuthorization(address(shariahRouter), true);
-        auditHistory.setLoggerAuthorization(address(welfareVault), true);
-        auditHistory.setLoggerAuthorization(address(delegationRegistry), true);
-        auditHistory.setLoggerAuthorization(address(disputeRouter), true);
-        auditHistory.setLoggerAuthorization(address(subcontractorEscrow), true);
-
-        console.log("=== MASTER ECOSYSTEM DEPLOYMENT SUCCESSFUL ===");
-        console.log("Root Admin Central Router Deployed at:", address(centralRouter));
-        console.log("Audit History Registry Deployed at:", address(auditHistory));
-        console.log("Whistleblower Sanctuary Deployed at:", address(whistleblowerSanctuary));
-        console.log("Compliance Escrow Deployed at:", address(complianceEscrow));
-        console.log("Shariah Compliance Router Deployed at:", address(shariahRouter));
-        console.log("Judiciary Welfare Vault Deployed at:", address(welfareVault));
-        console.log("Contractor Delegation Registry Deployed at:", address(delegationRegistry));
-        console.log("Judicial Dispute Router Deployed at:", address(disputeRouter));
-        console.log("Subcontractor Compliance Escrow Deployed at:", address(subcontractorEscrow));
-        console.log("==============================================");
+        console.log("=== GLOBAL SOVEREIGN ECOSYSTEM GRC DEPLOY SUCCESSFUL ===");
+        console.log("Morningstar Index Oracle Deployed at:", address(indexOracle));
+        console.log("WIPO ADR Determination Deployed at:", address(wipoVault));
+        console.log("Quality Assurance QA Vault Deployed at:", address(qaVault));
+        console.log("Foundation Governance Ledger Deployed at:", address(foundationLedger));
+        console.log("NBA Academic Accreditation Deployed at:", address(acreditationOracle));
+        console.log("Engineers Australia Router Deployed at:", address(competencyRouter));
+        console.log("=========================================================");
 
         vm.stopBroadcast();
     }
