@@ -2,23 +2,24 @@
 pragma solidity ^0.8.20;
 
 /// @title AccountabilityBridge
-/// @notice Bridge covenant to connect citizen oversight with institutional safeguards
+/// @notice Bridge covenant to enforce accountability across campuses, functions, and stakeholders
 contract AccountabilityBridge {
     address public overseer;
     uint256 public bridgeCount;
 
-    struct OversightRecord {
+    struct AccountabilityLink {
         uint256 id;
-        string citizenInput;   // e.g. complaint, audit request, feedback
-        string safeguard;      // transparency, fairness, integrity
-        string institutionalResponse; // action taken by institution
-        string notes;          // contextual application
+        string stakeholder; // students, faculty, administrators
+        string function;    // helpdesk, engineering, project management
+        string safeguard;   // fairness, transparency, dignity
+        string metric;      // SLA, uptime %, ROI measure
+        string notes;       // contextual application
         uint256 timestamp;
     }
 
-    mapping(uint256 => OversightRecord) public records;
+    mapping(uint256 => AccountabilityLink) public links;
 
-    event OversightLinked(uint256 indexed id, string citizenInput, string safeguard, string institutionalResponse, string notes);
+    event AccountabilityLinked(uint256 indexed id, string stakeholder, string function, string safeguard, string metric, string notes);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -29,22 +30,23 @@ contract AccountabilityBridge {
         overseer = _overseer;
     }
 
-    /// @notice Overseer links citizen oversight to institutional safeguard
-    function linkOversight(string calldata citizenInput, string calldata safeguard, string calldata institutionalResponse, string calldata notes) external onlyOverseer {
+    /// @notice Overseer links accountability safeguard
+    function linkAccountability(string calldata stakeholder, string calldata function, string calldata safeguard, string calldata metric, string calldata notes) external onlyOverseer {
         bridgeCount++;
-        records[bridgeCount] = OversightRecord({
+        links[bridgeCount] = AccountabilityLink({
             id: bridgeCount,
-            citizenInput: citizenInput,
+            stakeholder: stakeholder,
+            function: function,
             safeguard: safeguard,
-            institutionalResponse: institutionalResponse,
+            metric: metric,
             notes: notes,
             timestamp: block.timestamp
         });
-        emit OversightLinked(bridgeCount, citizenInput, safeguard, institutionalResponse, notes);
+        emit AccountabilityLinked(bridgeCount, stakeholder, function, safeguard, metric, notes);
     }
 
-    /// @notice Citizens can view oversight records
-    function viewOversight(uint256 id) external view returns (OversightRecord memory) {
-        return records[id];
+    /// @notice Citizens can view accountability links
+    function viewAccountability(uint256 id) external view returns (AccountabilityLink memory) {
+        return links[id];
     }
 }
