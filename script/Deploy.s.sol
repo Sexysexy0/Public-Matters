@@ -2,6 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "forge-std/Script.sol";
+import "../contracts/IPClaimRegistry.sol";
 import "../contracts/SovereignAllowanceProtocol.sol";
 import "../contracts/WhistleblowerSanctuary.sol";
 import "../contracts/PublicBenefitGrant.sol";
@@ -33,10 +34,11 @@ contract DeployGovernanceEcosystem is Script {
         EcosystemShutdown killSwitch = new EcosystemShutdown(secureBackupWallet);
         WhistleblowerSanctuary whistleblowerSanctuary = new WhistleblowerSanctuary();
         SovereignAllowanceProtocol allowance = new SovereignAllowanceProtocol();
+        IPClaimRegistry ipRegistry = new IPClaimRegistry();
 
         console.log("=== ECOSYSTEM DEPLOYMENT SUCCESSFUL ===");
         console.log("Central Router Deployed at:", address(centralRouter));
-        console.log("Allowance Protocol Deployed at:", address(allowance));
+        console.log("IP Claim Registry Deployed at:", address(ipRegistry));
         console.log("=======================================");
 
         vm.stopBroadcast();
