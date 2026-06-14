@@ -36,9 +36,7 @@ contract AutonomousComplianceEscrowRouter {
         auditHistoryContract = _auditHistory;
     }
 
-    // Isang pindot o tawag mo lang dito, gagawin na ng router ang tatlong magkakaibang aksyon sabay-sabay
-    // render automated orchestration across the compliance ecosystem
-    contract OrchestratedIntervention {
+    // Isang tawag mo lang dito bilang Guardian, gagawin na ng router ang tatlong magkakaibang aksyon sabay-sabay
     function executeIntervention(
         address _institution,
         uint256 _demeritPoints,
@@ -46,18 +44,18 @@ contract AutonomousComplianceEscrowRouter {
         uint256 _graceDurationSeconds
     ) public onlyGuardian returns (uint256) {
         
-        // 1. Awtomatikong magpataw ng bawas sa reputasyon dahil sa nakitang isyu
-        IReputationSystem(reputationContract).penalizeDemerit(_institution, _demeritPoints, _reason);
+        // 1. Awtomatikong magpataw ng demerit points sa reputasyon ng institusyon
+        IRutationSystem(reputationContract).penalizeDemerit(_institution, _demeritPoints, _reason);
 
-        // 2. Awtomatikong simulan ang countdown o grace period para ayusin nila ang problema
+        // 2. Awtomatikong simulan ang countdown o grace period
         uint256 graceId = IGracePeriod(gracePeriodContract).issueGracePeriod(_institution, _reason, _graceDurationSeconds);
 
-        // 3. Awtomatikong i-update ang pangmatagalang kasaysayan sa Archive dashboard mo
+        // 3. Awtomatikong i-update ang pangmatagalang kasaysayan sa Archive dashboard
         IAuditHistory(auditHistoryContract).logHistoricalAction(
             _institution,
-            0,            // 0 muna sa freeze count
-            0,            // 0 muna sa grant count
-            1,            // Magdagdag ng 1 sa warning count
+            0, // 0 muna sa freeze count
+            0, // 0 muna sa grant count
+            1, // Magdagdag ng 1 sa warning count
             string(abi.encodePacked("Router Intervention triggered. Reason: ", _reason))
         );
 
@@ -65,7 +63,7 @@ contract AutonomousComplianceEscrowRouter {
         return graceId;
     }
 
-    // Payagan ang Guardian na i-update ang mga address ng mga sub-contracts kung magkaroon ng upgrade
+    // Payagan ang Guardian na i-update ang mga address ng mga sub-contracts
     function updateContractAddresses(address _reputation, address _gracePeriod, address _auditHistory) public onlyGuardian {
         reputationContract = _reputation;
         gracePeriodContract = _gracePeriod;
