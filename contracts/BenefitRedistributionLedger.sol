@@ -13,13 +13,14 @@ contract BenefitRedistributionLedger {
         string perk;          // healthcare, housing, allowance, etc.
         uint256 reducedFrom;  // amount reduced from executives
         uint256 reallocatedTo;// amount reallocated to workers
+        string beneficiary;   // who benefits (rank-and-file, families)
         string notes;         // contextual application
         uint256 timestamp;
     }
 
     mapping(uint256 => BenefitRecord) public records;
 
-    event BenefitLogged(uint256 indexed id, string institution, string perk, uint256 reducedFrom, uint256 reallocatedTo, string notes);
+    event BenefitLogged(uint256 indexed id, string institution, string perk, uint256 reducedFrom, uint256 reallocatedTo, string beneficiary, string notes);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -31,7 +32,7 @@ contract BenefitRedistributionLedger {
     }
 
     /// @notice Overseer logs benefit redistribution record
-    function logBenefit(string calldata institution, string calldata perk, uint256 reducedFrom, uint256 reallocatedTo, string calldata notes) external onlyOverseer {
+    function logBenefit(string calldata institution, string calldata perk, uint256 reducedFrom, uint256 reallocatedTo, string calldata beneficiary, string calldata notes) external onlyOverseer {
         entryCount++;
         records[entryCount] = BenefitRecord({
             id: entryCount,
@@ -39,10 +40,11 @@ contract BenefitRedistributionLedger {
             perk: perk,
             reducedFrom: reducedFrom,
             reallocatedTo: reallocatedTo,
+            beneficiary: beneficiary,
             notes: notes,
             timestamp: block.timestamp
         });
-        emit BenefitLogged(entryCount, institution, perk, reducedFrom, reallocatedTo, notes);
+        emit BenefitLogged(entryCount, institution, perk, reducedFrom, reallocatedTo, beneficiary, notes);
     }
 
     /// @notice Citizens can view benefit redistribution records
