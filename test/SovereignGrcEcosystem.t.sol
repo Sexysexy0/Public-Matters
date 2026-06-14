@@ -10,6 +10,8 @@ import "../contracts/AcademicAccreditationSAROracle.sol";
 import "../contracts/HolisticCompetencyRegistry.sol";
 import "../contracts/NetworkEngineerPerformanceAudit.sol";
 import "../contracts/IetTechnicalReportRegistry.sol";
+import "../contracts/PersonalGrowthBetEscrow.sol";
+import "../contracts/SovereignSupplierEsourcingRouter.sol";
 import "../contracts/InstitutionalAuditHistory.sol";
 
 contract SovereignGrcEcosystemTest is Test {
@@ -21,6 +23,8 @@ contract SovereignGrcEcosystemTest is Test {
     HolisticCompetencyRegistry public competencyRouter;
     NetworkEngineerPerformanceAudit public networkAudit;
     IetTechnicalReportRegistry public ietRegistry;
+    PersonalGrowthBetEscrow public growthBetEscrow;
+    SovereignSupplierEsourcingRouter public supplierRouter;
     InstitutionalAuditHistory public auditHistory;
 
     address public masterContractor = address(0x9999);
@@ -41,6 +45,8 @@ contract SovereignGrcEcosystemTest is Test {
         competencyRouter = new HolisticCompetencyRegistry();
         networkAudit = new NetworkEngineerPerformanceAudit();
         ietRegistry = new IetTechnicalReportRegistry();
+        growthBetEscrow = new PersonalGrowthBetEscrow();
+        supplierRouter = new SovereignSupplierEsourcingRouter();
 
         indexOracle.setAuditHistoryAddress(address(auditHistory));
         wipoVault.setAuditHistoryAddress(address(auditHistory));
@@ -50,6 +56,8 @@ contract SovereignGrcEcosystemTest is Test {
         competencyRouter.setAuditHistoryAddress(address(auditHistory));
         networkAudit.setAuditHistoryAddress(address(auditHistory));
         ietRegistry.setAuditHistoryAddress(address(auditHistory));
+        growthBetEscrow.setAuditHistoryAddress(address(auditHistory));
+        supplierRouter.setAuditHistoryAddress(address(auditHistory));
 
         auditHistory.setLoggerAuthorization(address(indexOracle), true);
         auditHistory.setLoggerAuthorization(address(wipoVault), true);
@@ -59,6 +67,8 @@ contract SovereignGrcEcosystemTest is Test {
         auditHistory.setLoggerAuthorization(address(competencyRouter), true);
         auditHistory.setLoggerAuthorization(address(networkAudit), true);
         auditHistory.setLoggerAuthorization(address(ietRegistry), true);
+        auditHistory.setLoggerAuthorization(address(growthBetEscrow), true);
+        auditHistory.setLoggerAuthorization(address(supplierRouter), true);
         
         vm.stopPrank();
     }
@@ -133,23 +143,48 @@ contract SovereignGrcEcosystemTest is Test {
         assertTrue(isValidated);
     }
 
-    // 7. NEW INTEGRATION: TESTING CAJON VALLEY UP-TIME CRITERIA SANCTION
     function test_NetworkEngineerLowPerformanceSanction() public {
         vm.startPrank(masterContractor);
-        // Pumasok ang Uptime sa 91.00% (Bagsak sa strict 95.00% floor check!)
         networkAudit.logPersonnelPerformance(targetNodeNode, 9100, NetworkEngineerPerformanceAudit.CompetencyRating.NeedsImprovement);
         vm.stopPrank();
-
         (,,,, bool hasClearance) = networkAudit.evaluationRegistry(targetNodeNode);
         assertFalse(hasClearance);
     }
 
-    // 8. NEW INTEGRATION: TESTING IET REFERENCES TRACKING FLOOR REVERT
     function test_IetDocumentationReferencesFloorRevert() public {
         vm.startPrank(masterContractor);
-        // Fail case: Walang bitbit na references parameter check (False)
         vm.expectRevert("Error: Structural violation. Technical reports must include references.");
         ietRegistry.registerTechnicalDocumentation(targetNodeNode, sampleHash, 1, false);
         vm.stopPrank();
+    }
+
+    // 9. NEW ADVANCED TRACK: TESTING RASKIN PERSONAL GROWTH FORFEITURE LOCK
+    function test_MaxRaskinPersonalGrowthForfeitureFlow() public {
+        vm.deal(targetNodeNode, 10 ether);
+        
+        vm.prank(targetNodeNode);
+        uint256 betId = growthBetEscrow.initializeGrowthBet{value: 5 ether}(500, secondaryNodeNode, sampleHash);
+
+        // Simulate target breach (False) -> Trigger automated preemptive self-help forfeiture
+        uint256 initialContractorBalance = masterContractor.balance;
+        
+        vm.prank(secondaryNodeNode);
+        growthBetEscrow.evaluateAndSettleBet(betId, false);
+
+        assertEq(masterContractor.balance, initialContractorBalance + 5 ether);
+    }
+
+    // 10. NEW ADVANCED TRACK: TESTING SNG SUPPLIER PRIVACY LOCKDOWN
+    function test_SngSupplierPrivacyBreachSanctionFlow() public {
+        vm.startPrank(masterContractor);
+        supplierRouter.registerSngSupplier(targetNodeNode, sampleHash);
+        
+        // Trigger emergency 24-hour CCPA/SNG data breach notification penalty
+        supplierRouter.enforcePrivacyBreachSanction(targetNodeNode, sampleHash);
+        vm.stopPrank();
+
+        (,,,, bool hasAccess, bool isLocked) = supplierRouter.suppliers(targetNodeNode);
+        assertFalse(hasAccess);
+        assertTrue(isLocked);
     }
 }
