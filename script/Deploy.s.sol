@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "forge-std/Script.sol";
-import "../contracts/DecentralizedWhistleblowerInbox.sol";
+import "../contracts/WhistleblowerSanctuary.sol";
 import "../contracts/PublicBenefitGrant.sol";
 import "../contracts/ImmutablePolicyLedger.sol";
 import "../contracts/ComplianceRecoveryEscrow.sol";
@@ -20,7 +20,6 @@ contract DeployGovernanceEcosystem is Script {
 
         vm.startBroadcast(deployerPrivateKey);
 
-        // Deployment sequence batay sa active on-chain codebase
         bytes32 initialCommitment = bytes32(uint256(1));
         AnonymousIdentityProof identityProof = new AnonymousIdentityProof(initialCommitment);
         CompliantIdentityRevealer identityRevealer = new CompliantIdentityRevealer();
@@ -29,7 +28,6 @@ contract DeployGovernanceEcosystem is Script {
         InstitutionalAuditHistory auditHistory = new InstitutionalAuditHistory();
         ImmutablePolicyLedger policyLedger = new ImmutablePolicyLedger();
         
-        // I-deploy ang Router (Gumagamit ng dummy validation address para sa reputation system sa ngayon)
         AutonomousComplianceEscrowRouter centralRouter = new AutonomousComplianceEscrowRouter(
             address(0xDEAd),
             address(gracePeriod),
@@ -39,11 +37,11 @@ contract DeployGovernanceEcosystem is Script {
         PublicBenefitGrant publicGrants = new PublicBenefitGrant();
         ComplianceRecoveryEscrow recoveryEscrow = new ComplianceRecoveryEscrow(address(publicGrants));
         EcosystemShutdown killSwitch = new EcosystemShutdown(secureBackupWallet);
-        DecentralizedWhistleblowerInbox whistleblower = new DecentralizedWhistleblowerInbox();
+        WhistleblowerSanctuary whistleblowerSanctuary = new WhistleblowerSanctuary();
 
         console.log("=== ECOSYSTEM DEPLOYMENT SUCCESSFUL ===");
         console.log("Central Router Deployed at:", address(centralRouter));
-        console.log("Sovereign Kill-Switch Deployed at:", address(killSwitch));
+        console.log("Whistleblower Sanctuary Deployed at:", address(whistleblowerSanctuary));
         console.log("=======================================");
 
         vm.stopBroadcast();
