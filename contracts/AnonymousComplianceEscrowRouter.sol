@@ -45,7 +45,7 @@ contract AutonomousComplianceEscrowRouter {
     ) public onlyGuardian returns (uint256) {
         
         // 1. Awtomatikong magpataw ng demerit points sa reputasyon ng institusyon
-        IRutationSystem(reputationContract).penalizeDemerit(_institution, _demeritPoints, _reason);
+        IReputationSystem(reputationContract).penalizeDemerit(_institution, _demeritPoints, _reason);
 
         // 2. Awtomatikong simulan ang countdown o grace period
         uint256 graceId = IGracePeriod(gracePeriodContract).issueGracePeriod(_institution, _reason, _graceDurationSeconds);
