@@ -1,29 +1,31 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "./IAuditHistory.sol";
+
 contract ComplianceRecoveryEscrow {
     address public guardian;
-    address public publicBenefitVault; // Address kung saan mapupunta ang pondo kapag bagsak sila
-
-    enum EscrowStatus { Active, Resolved, Forfeited }
+    address public publicBenefitVault;
+    IAuditHistory public auditHistory; 
+    uint256 public totalCases;
 
     struct RecoveryCase {
         address institution;
         uint256 collateralAmount;
-        string requiredImprovement; // Ang nakatalagang misyon o solusyon na dapat nilang gawin
-        uint256 deadline;
-        EscrowStatus status;
+        string requiredImprovement;
+        uint256 expirationTime;
+        bool isResolved;
     }
 
-    uint256 public totalCases;
     mapping(uint256 => RecoveryCase) public cases;
 
-    event RecoveryInitiated(uint256 indexed caseId, address indexed institution, uint256 amount, uint256 deadline);
-    event RecoverySuccess(uint256 indexed caseId, address indexed institution);
-    event RecoveryForfeited(uint256 indexed caseId, address indexed institution);
+    event RecoveryInitiated(uint256 indexed caseId, address indexed institution, uint256 amount);
+    event RecoveryApproved(uint256 indexed caseId, uint256 amount);
+    event CollateralForfeited(uint256 indexed caseId, address indexed institution, uint256 amount);
+    event AuditHistoryAddressUpdated(address indexed newAddress);
 
     modifier onlyGuardian() {
-        require(msg.sender == guardian, "Error: Access denied. Only the Guardian can manage recovery cases.");
+        require(msg.sender == guardian, "Error: Access denied. Only the Guardian can execute recovery routing.");
         _;
     }
 
@@ -32,9 +34,13 @@ contract ComplianceRecoveryEscrow {
         publicBenefitVault = _publicBenefitVault;
     }
 
-    // Isang institusyon ang magpapasok ng kanilang piyansa/collateral para sa pagbabago
+    function setAuditHistoryAddress(address _auditHistoryAddress) public onlyGuardian {
+        auditHistory = IAuditHistory(_auditHistoryAddress);
+        emit AuditHistoryAddressUpdated(_auditHistoryAddress);
+    }
+
     function initiateRecovery(
-        string memory _requiredImprovement, 
+        string memory _requiredImprovement,
         uint256 _durationInSeconds
     ) public payable returns (uint256) {
         require(msg.value > 0, "Collateral must be greater than zero.");
@@ -44,37 +50,40 @@ contract ComplianceRecoveryEscrow {
             institution: msg.sender,
             collateralAmount: msg.value,
             requiredImprovement: _requiredImprovement,
-            deadline: block.timestamp + _durationInSeconds,
-            status: EscrowStatus.Active
+            expirationTime: block.timestamp + _durationInSeconds,
+            isResolved: false
         });
 
-        emit RecoveryInitiated(totalCases, msg.sender, msg.value, block.timestamp + _durationInSeconds);
+        emit RecoveryInitiated(totalCases, msg.sender, msg.value);
         return totalCases;
     }
 
-    // Aprubahan ng Guardian kapag nagawa ng institusyon ang nakatalagang improvement (Atonement Complete)
     function approveRecovery(uint256 _caseId) public onlyGuardian {
+        require(_caseId > 0 && _caseId <= totalCases, "Error: Case context non-existent.");
         RecoveryCase storage c = cases[_caseId];
-        require(c.status == EscrowStatus.Active, "Case is no longer active.");
-        require(block.timestamp <= c.deadline, "Deadline has already passed.");
+        require(!c.isResolved, "Error: Case already resolved.");
 
-        c.status = EscrowStatus.Resolved;
-        
-        // Ibalik ang collateral sa institusyon bilang gantimpala sa pagbabago
-        payable(c.institution).transfer(c.collateralAmount);
-        emit RecoverySuccess(_caseId, c.institution);
+        c.isResolved = true;
+        payable(publicBenefitVault).transfer(c.collateralAmount);
+
+        emit RecoveryApproved(_caseId, c.collateralAmount);
     }
 
-    // Rematado/Forfeited ang pondo kapag lumagpas sa deadline at walang ginawang pagbabago ang institusyon
     function forfeitCollateral(uint256 _caseId) public onlyGuardian {
+        require(_caseId > 0 && _caseId <= totalCases, "Error: Case context non-existent.");
         RecoveryCase storage c = cases[_caseId];
-        require(c.status == EscrowStatus.Active, "Case is no longer active.");
-        require(block.timestamp > c.deadline, "Institution still has time to comply.");
+        require(!c.isResolved, "Error: Case already resolved.");
+        require(block.timestamp > c.expirationTime, "Error: Institution still has time to comply.");
 
-        c.status = EscrowStatus.Forfeited;
-        
-        // Ipadala ang pondo sa pampublikong benepisyo dahil sa hindi pagtupad sa pangako
-        payable(publicBenefitVault).transfer(c.collateralAmount);
-        emit RecoveryForfeited(_caseId, c.institution);
+        c.isResolved = true;
+        address penaltyTarget = c.institution;
+        uint256 amount = c.collateralAmount;
+
+        payable(publicBenefitVault).transfer(amount);
+        emit CollateralForfeited(_caseId, penaltyTarget, amount);
+
+        if (address(auditHistory) != address(0)) {
+            try auditHistory.logHistoricalAction(penaltyTarget, 1, 0, 0, "COLLATERAL_FORFEITED_BREACH") {} catch {}
+        }
     }
 }
