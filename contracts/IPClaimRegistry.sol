@@ -5,21 +5,23 @@ contract IPClaimRegistry {
     address public guardian;
     uint256 public totalClaims;
 
-    struct IPClaim {
+    struct AssetClaim {
         uint256 id;
-        bytes32 ipHash;          // Cryptographic footprint ng code blueprint o asset logic
-        string assetName;        // Pormal na pangalan ng system asset
-        address registeredOwner; // Ang orihinal na nagmamay-ari o nag-rehistro ng asset
-        bool isVerified;         // Estado ng verification mula sa Guardian
-        uint256 timestamp;       // Oras ng pagpapatala
+        bytes32 ipHash;
+        // SLOT HYDRATION: Naka-pack sa iisang 32-byte slot (20 + 1 + 1 bytes = 22 bytes)
+        address owner;
+        bool isVerified;
+        bool isActive;
+        // --- End of Slot ---
+        string assetMetadata;
     }
 
-    mapping(uint256 => IPClaim) public claims;
-    mapping(bytes32 => bool) public ipExists;
-    mapping(bytes32 => mapping(address => bool)) public authorizedUsers;
+    mapping(uint256 => AssetClaim) public claims;
+    mapping(bytes32 => address) public ipToOwner;
+    mapping(bytes32 => mapping(address => bool)) public authorizations;
 
-    event IPCreated(uint256 indexed claimId, bytes32 indexed ipHash, address indexed owner, string assetName);
-    event IPVerified(uint256 indexed claimId, bool status);
+    event AssetClaimRegistered(uint256 indexed claimId, bytes32 indexed ipHash, address indexed owner);
+    event AssetClaimVerified(uint256 indexed claimId, bool indexed status);
     event AccessGranted(bytes32 indexed ipHash, address indexed user);
     event AccessRevoked(bytes32 indexed ipHash, address indexed user);
 
@@ -28,8 +30,8 @@ contract IPClaimRegistry {
         _;
     }
 
-    modifier onlyIPOwner(uint256 _claimId) {
-        require(claims[_claimId].registeredOwner == msg.sender, "Error: Access denied. You are not the registered owner of this asset.");
+    modifier onlyAssetOwner(uint256 _claimId) {
+        require(claims[_claimId].owner == msg.sender, "Error: Access denied. You are not the registered owner of this asset.");
         _;
     }
 
@@ -37,51 +39,45 @@ contract IPClaimRegistry {
         guardian = msg.sender;
     }
 
-    // Hakbang 1: Pagpapatala ng isang bagong IP asset hash (Code base, master key footprint, etc.)
-    function registerAssetClaim(bytes32 _ipHash, string memory _assetName) public returns (uint256) {
-        require(!ipExists[_ipHash], "Error: This intellectual property cryptographic hash already exists.");
-        require(bytes(_assetName).length > 0, "Error: Asset name cannot be empty.");
+    function registerAssetClaim(bytes32 _ipHash, string memory _metadata) public returns (uint256) {
+        require(ipToOwner[_ipHash] == address(0), "Error: This asset hash has already been registered.");
 
         totalClaims++;
-
-        claims[totalClaims] = IPClaim({
+        claims[totalClaims] = AssetClaim({
             id: totalClaims,
             ipHash: _ipHash,
-            assetName: _assetName,
-            registeredOwner: msg.sender,
+            owner: msg.sender,
             isVerified: false,
-            timestamp: block.timestamp
+            isActive: true,
+            assetMetadata: _metadata
         });
 
-        ipExists[_ipHash] = true;
+        ipToOwner[_ipHash] = msg.sender;
+        authorizations[_ipHash][msg.sender] = true;
 
-        emit IPCreated(totalClaims, _ipHash, msg.sender, _assetName);
+        emit AssetClaimRegistered(totalClaims, _ipHash, msg.sender);
         return totalClaims;
     }
 
-    // Hakbang 2: Pag-verify ng Guardian sa legalidad at authenticity ng asset
     function verifyAssetClaim(uint256 _claimId, bool _status) public onlyGuardian {
-        require(_claimId > 0 && _claimId <= totalClaims, "Error: Target claim ID context non-existent.");
+        require(_claimId > 0 && _claimId <= totalClaims, "Error: Non-existent claim context.");
         claims[_claimId].isVerified = _status;
-        emit IPVerified(_claimId, _status);
+        emit AssetClaimVerified(_claimId, _status);
     }
 
-    // Hakbang 3: Pagpasa ng karapatan o awtorisasyon sa ibang wallet (Open OS licensing model)
-    function grantAccess(uint256 _claimId, address _user) public onlyIPOwner(_claimId) {
-        bytes32 hash = claims[_claimId].ipHash;
-        authorizedUsers[hash][_user] = true;
-        emit AccessGranted(hash, _user);
+    function grantAccess(uint256 _claimId, address _user) public onlyAssetOwner(_claimId) {
+        bytes32 targetHash = claims[_claimId].ipHash;
+        authorizations[targetHash][_user] = true;
+        emit AccessGranted(targetHash, _user);
     }
 
-    // Hakbang 4: Pagbawi ng karapatan kung magkaroon ng breach o panggagaya
-    function revokeAccess(uint256 _claimId, address _user) public onlyIPOwner(_claimId) {
-        bytes32 hash = claims[_claimId].ipHash;
-        authorizedUsers[hash][_user] = false;
-        emit AccessRevoked(hash, _user);
+    function revokeAccess(uint256 _claimId, address _user) public onlyAssetOwner(_claimId) {
+        bytes32 targetHash = claims[_claimId].ipHash;
+        authorizations[targetHash][_user] = false;
+        emit AccessRevoked(targetHash, _user);
     }
 
-    // View function para sa pormal na on-chain checking ng access tokens
     function checkAuthorization(bytes32 _ipHash, address _user) public view returns (bool) {
-        return authorizedUsers[_ipHash][_user];
+        return authorizations[_ipHash][_user];
     }
 }
