@@ -10,9 +10,9 @@ contract GovernanceResilienceShield {
     struct GovernanceRecord {
         uint256 id;
         string institution;   // university, ORIC, or organization
-        string risk;          // identified risk (leadership gap, funding decline, compliance issue)
+        string risk;          // leadership gap, funding decline, compliance issue
         string safeguard;     // resilience safeguard applied
-        string outcome;       // governance outcome (stability, improvement, recovery)
+        string outcome;       // stability, improvement, recovery
         string notes;         // contextual application
         uint256 timestamp;
     }
