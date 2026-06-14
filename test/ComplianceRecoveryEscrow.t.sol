@@ -8,13 +8,16 @@ contract ComplianceRecoveryEscrowTest is Test {
     PublicBenefitGrant public targetGrant;
     address public guardianWallet = address(0x1111);
     address public externalAttacker = address(0x2222);
+    address public institution = address(0x4444);
     function setUp() public {
         vm.deal(guardianWallet, 100 ether);
-        vm.startPrank(guardianWallet);
+        vm.deal(institution, 10 ether);
+        vm.prank(guardianWallet);
         targetGrant = new PublicBenefitGrant();
+        vm.prank(guardianWallet);
         escrow = new ComplianceRecoveryEscrow(address(targetGrant));
-        payable(address(escrow)).transfer(5 ether);
-        vm.stopPrank();
+        vm.prank(institution);
+        escrow.initiateRecovery{value: 5 ether}("Structural Improvement Alpha", 30 days);
     }
     function test_VaultLiquidityVerification() public view {
         assertEq(address(escrow).balance, 5 ether);
