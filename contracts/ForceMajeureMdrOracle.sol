@@ -46,6 +46,9 @@ contract ForceMajeureMdrOracle {
         sovereignContractor = msg.sender;
     }
 
+    receive() external payable {}
+    fallback() external payable {}
+
     function setAuditHistoryAddress(address _auditHistoryAddress) public onlyContractor {
         auditHistory = IAuditHistory(_auditHistoryAddress);
     }
@@ -68,7 +71,7 @@ contract ForceMajeureMdrOracle {
             disputeId: totalForceMajeureDisputes,
             affectedPartyNode: _affectedNode,
             lockedTargetFunds: msg.value,
-            mediationDeadlineBlock: block.number + 1000, // 1000 block mandatory mediation window
+            mediationDeadlineBlock: block.number + 1000,
             currentState: DisputeState.ActiveLock,
             neutralArbitratorOracle: _arbitrator,
             forceMajeureEvidenceHash: _evidenceHash
@@ -89,8 +92,7 @@ contract ForceMajeureMdrOracle {
     /**
      * @dev HOLDEN & SZABO RESOLUTION ENGINE: Tanging ang pinagkakatiwalaang neutral expert 
      * oracle ang makakapag-submit ng pinal na cryptographic decision hash upang kilalanin 
-     * kung ito ay isang "Legitimate Adaptation" (babalik ang pera sa tao) o isang "Illegitimate Holdup" 
-     * (maforforfeit ang pera patungo sa master contractor pool).
+     * kung ito ay isang "Legitimate Adaptation" o isang "Illegitimate Holdup".
      */
     function resolveMdrDispute(
         uint256 _disputeId,
@@ -105,12 +107,10 @@ contract ForceMajeureMdrOracle {
 
         if (_isLegitimateAdaptation) {
             d.currentState = DisputeState.ResolvedAdaptation;
-            (bool success, ) = d.affectedPartyNode.call{value: settlementCapital}("");
-            require(success, "Error: Remedial distribution to affected party failed.");
+            payable(d.affectedPartyNode).transfer(settlementCapital);
         } else {
             d.currentState = DisputeState.RejectedHoldup;
-            (bool success, ) = sovereignContractor.call{value: settlementCapital}("");
-            require(success, "Error: Forfeiture distribution parameters failed.");
+            payable(sovereignContractor).transfer(settlementCapital);
             
             if (address(auditHistory) != address(0)) {
                 try auditHistory.logHistoricalAction(d.affectedPartyNode, 0, 0, 1, "FORCE_MAJEURE_HOLDUP_REJECTED") {} catch {}

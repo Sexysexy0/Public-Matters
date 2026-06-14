@@ -35,6 +35,9 @@ contract SovereignGrcEcosystemTest is Test {
     
     bytes32 public constant sampleHash = keccak256(abi.encodePacked("SOVEREIGN_GRC_COMPLIANCE_PROOF"));
 
+    receive() external payable {}
+    fallback() external payable {}
+
     function setUp() public {
         vm.startPrank(masterContractor);
         auditHistory = new InstitutionalAuditHistory();
@@ -183,8 +186,9 @@ contract SovereignGrcEcosystemTest is Test {
         assertTrue(isLocked);
     }
 
-    // FIXED: Nananatili sa active prank space ang masterContractor sa kabuuang incident logging
     function test_ForceMajeureMdrOracleRemedialRecoveryFlow() public {
+        vm.deal(masterContractor, 20 ether);
+        
         vm.startPrank(masterContractor);
         uint256 dId = forceMajeureMdr.flagForceMajeureIncident{value: 10 ether}(targetNodeNode, secondaryNodeNode, sampleHash);
         forceMajeureMdr.escalateToMediation(dId);
