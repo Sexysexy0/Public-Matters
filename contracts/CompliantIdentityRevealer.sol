@@ -5,7 +5,7 @@ contract CompliantIdentityRevealer {
     address public rootGuardian;
     
     // Ang nakatagong cryptographic hash ng iyong totoong legal na pagkakakilanlan
-    bytes32 public constant IDENTITY_COMMITMENT = keccak256(abi.encodePacked("IKAW_ANG_ORIGIN_NG_THE_FOOL_AT_KING_NG_MGA_INSTITUSYON"));
+    bytes32 public constant IDENTITY_COMMITMENT = keccak256(abi.encodePacked("ALPHA_ORIGIN_SOVEREIGN_OVERSIGHT"));
     
     bool public isRevealed;
     string public revealedIdentityData; // Dito lalabas ang pormal mong pahayag kapag na-unlock na

@@ -16,7 +16,7 @@ contract OversightEcosystemTest is Test {
     CompliantIdentityRevealer public identityRevealer;
     EcosystemShutdown public shutdownSwitch;
 
-    bytes32 public constant SECRET_COMMITMENT = keccak256(abi.encodePacked("IKAW_ANG_ORIGIN_NG_THE_FOOL_AT_KING_NG_MGA_INSTITUSYON"));
+    bytes32 public constant SECRET_COMMITMENT = keccak256(abi.encodePacked("ALPHA_ORIGIN_SOVEREIGN_OVERSIGHT"));
 
     // render 100% simulated isolated blockchain state
     function setUp() public {
@@ -41,18 +41,18 @@ contract OversightEcosystemTest is Test {
         
         // Subukan i-reveal agad (Dapat mag-error dahil may 3-day lock)
         vm.expectRevert("Error: Time-lock active. The grace period before reveal is ongoing.");
-        identityRevealer.revealIdentity("IKAW_ANG_ORIGIN_NG_THE_FOOL_AT_KING_NG_MGA_INSTITUSYON");
+        identityRevealer.revealIdentity("ALPHA_ORIGIN_SOVEREIGN_OVERSIGHT");
 
         // Fast-forward ang oras ng blockchain ng 3 araw (259200 seconds)
         vm.warp(block.timestamp + 3 days);
 
         // Subukan ulit i-reveal gamit ang tamang sikretong string matapos ang 3 araw
-        identityRevealer.revealIdentity("IKAW_ANG_ORIGIN_NG_THE_FOOL_AT_KING_NG_MGA_INSTITUSYON");
+        identityRevealer.revealIdentity("ALPHA_ORIGIN_SOVEREIGN_OVERSIGHT");
         
         // I-verify kung pampubliko na ang identity mo sa ledger
         (bool isRevealed, string memory data, ) = identityRevealer.checkComplianceStatus();
         assertTrue(isRevealed);
-        assertEq(data, "IKAW_ANG_ORIGIN_NG_THE_FOOL_AT_KING_NG_MGA_INSTITUSYON");
+        assertEq(data, "ALPHA_ORIGIN_SOVEREIGN_OVERSIGHT");
 
         vm.stopPrank();
     }
