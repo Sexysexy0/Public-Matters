@@ -8,6 +8,8 @@ import "../contracts/QualityAssuranceSelfAssessment.sol";
 import "../contracts/FoundationGovernanceLedger.sol";
 import "../contracts/AcademicAccreditationSAROracle.sol";
 import "../contracts/HolisticCompetencyRegistry.sol";
+import "../contracts/NetworkEngineerPerformanceAudit.sol";
+import "../contracts/IetTechnicalReportRegistry.sol";
 import "../contracts/InstitutionalAuditHistory.sol";
 
 contract SovereignGrcEcosystemTest is Test {
@@ -17,6 +19,8 @@ contract SovereignGrcEcosystemTest is Test {
     FoundationGovernanceLedger public foundationLedger;
     AcademicAccreditationSAROracle public accreditationOracle;
     HolisticCompetencyRegistry public competencyRouter;
+    NetworkEngineerPerformanceAudit public networkAudit;
+    IetTechnicalReportRegistry public ietRegistry;
     InstitutionalAuditHistory public auditHistory;
 
     address public masterContractor = address(0x9999);
@@ -35,14 +39,17 @@ contract SovereignGrcEcosystemTest is Test {
         foundationLedger = new FoundationGovernanceLedger();
         accreditationOracle = new AcademicAccreditationSAROracle();
         competencyRouter = new HolisticCompetencyRegistry();
+        networkAudit = new NetworkEngineerPerformanceAudit();
+        ietRegistry = new IetTechnicalReportRegistry();
 
-        // FIXED: Itinuwid ang lahat ng tawag patungong accreditationOracle
         indexOracle.setAuditHistoryAddress(address(auditHistory));
         wipoVault.setAuditHistoryAddress(address(auditHistory));
         qaVault.setAuditHistoryAddress(address(auditHistory));
         foundationLedger.setAuditHistoryAddress(address(auditHistory));
         accreditationOracle.setAuditHistoryAddress(address(auditHistory));
         competencyRouter.setAuditHistoryAddress(address(auditHistory));
+        networkAudit.setAuditHistoryAddress(address(auditHistory));
+        ietRegistry.setAuditHistoryAddress(address(auditHistory));
 
         auditHistory.setLoggerAuthorization(address(indexOracle), true);
         auditHistory.setLoggerAuthorization(address(wipoVault), true);
@@ -50,99 +57,99 @@ contract SovereignGrcEcosystemTest is Test {
         auditHistory.setLoggerAuthorization(address(foundationLedger), true);
         auditHistory.setLoggerAuthorization(address(accreditationOracle), true);
         auditHistory.setLoggerAuthorization(address(competencyRouter), true);
+        auditHistory.setLoggerAuthorization(address(networkAudit), true);
+        auditHistory.setLoggerAuthorization(address(ietRegistry), true);
         
         vm.stopPrank();
     }
 
-    // 1. TESTING MORNINGSTAR INDEX MATRIX
     function test_MorningstarIndexWeightComplianceFlow() public {
         vm.startPrank(masterContractor);
         uint256 idxId = indexOracle.initiateIndex("Wide Moat Focus");
-        
         address[] memory assets = new address[](2);
         assets[0] = address(0xAAAA);
         assets[1] = address(0xBBBB);
-
         uint256[] memory weights = new uint256[](2);
-        weights[0] = 600000; // 60%
-        weights[1] = 400000; // 40% (Total = 100%)
-
+        weights[0] = 600000;
+        weights[1] = 400000;
         indexOracle.executeIndexReconstitution(idxId, assets, weights, sampleHash);
         vm.stopPrank();
-
         assertEq(indexOracle.constituentWeights(idxId, address(0xAAAA)), 600000);
     }
 
     function test_MorningstarIndexWeightMismatchRevert() public {
         vm.startPrank(masterContractor);
         uint256 idxId = indexOracle.initiateIndex("Multi-Asset High Income");
-        
         address[] memory assets = new address[](1);
         assets[0] = address(0xAAAA);
-
         uint256[] memory weights = new uint256[](1);
-        weights[0] = 500000; // Only 50% (Must revert!)
-
+        weights[0] = 500000;
         vm.expectRevert("Error: Mismatch identified. Weights sum must equal exactly 100%.");
         indexOracle.executeIndexReconstitution(idxId, assets, weights, sampleHash);
         vm.stopPrank();
     }
 
-    // 2. TESTING WIPO ADR MECHANISMS
     function test_WipoExpertDeterminationResolutionFlow() public {
         vm.startPrank(masterContractor);
         wipoVault.setExpertClearance(secondaryNodeNode, true);
         uint256 caseId = wipoVault.openContentADR(targetNodeNode, sampleHash, secondaryNodeNode);
         vm.stopPrank();
-
         vm.prank(secondaryNodeNode);
         wipoVault.resolveContentADR(caseId, true, sampleHash);
-
         (,,,, WipoContentExpertDetermination.ADRStatus pinalStatus, bytes32 pinalHash) = wipoVault.disputes(caseId);
-        
         assertTrue(pinalStatus == WipoContentExpertDetermination.ADRStatus.Upheld);
         assertEq(pinalHash, sampleHash);
     }
 
-    // 3. TESTING QUALITY ASSURANCE SELF ASSESSMENT
     function test_QualityAssuranceSARLifecycleFlow() public {
         vm.prank(targetNodeNode);
         uint256 sarId = qaVault.submitSelfAssessmentReport("Strategy & Planning", sampleHash);
-
         vm.prank(masterContractor);
         qaVault.evaluateSARCompliance(sarId, true);
-
         (,,,,, bool isApproved) = qaVault.audits(sarId);
         assertTrue(isApproved);
     }
 
-    // 4. TESTING FOUNDATION GOVERNANCE REMUNERATION
     function test_FoundationGovernanceExternalConflictSanction() public {
         vm.startPrank(masterContractor);
         foundationLedger.registerBoardNode(targetNodeNode, "Managing Director", 100000, 20000);
-        
         foundationLedger.auditExternalTaskCompliance(targetNodeNode, sampleHash, false);
         vm.stopPrank();
-
         (,,,, bool currentClearance) = foundationLedger.boardRegistry(targetNodeNode);
         assertFalse(currentClearance);
     }
 
-    // 5. TESTING NBA ACCREDITATION ATTENMENT CRITERIA
     function test_AcademicAccreditationOutcomeFloorRevert() public {
         vm.startPrank(masterContractor);
-        // FIXED: Itinuwid ang identifier patungong accreditationOracle
         vm.expectRevert("Error: Accreditation rejected. Course Outcome attainment falls below strict 70% threshold.");
         accreditationOracle.processProgramAccreditationSAR("Tier-I Computer Science", 65, 80, sampleHash);
         vm.stopPrank();
     }
 
-    // 6. TESTING ENGINEERS AUSTRALIA COMPETENCY CONTROLLER
     function test_HolisticCompetencyValidationFlow() public {
         vm.prank(masterContractor);
         competencyRouter.registerProfessionalEngineer(targetNodeNode, true, true);
-
         (,,,, bool isValidated) = competencyRouter.engineers(targetNodeNode);
         assertTrue(isValidated);
+    }
+
+    // 7. NEW INTEGRATION: TESTING CAJON VALLEY UP-TIME CRITERIA SANCTION
+    function test_NetworkEngineerLowPerformanceSanction() public {
+        vm.startPrank(masterContractor);
+        // Pumasok ang Uptime sa 91.00% (Bagsak sa strict 95.00% floor check!)
+        networkAudit.logPersonnelPerformance(targetNodeNode, 9100, NetworkEngineerPerformanceAudit.CompetencyRating.NeedsImprovement);
+        vm.stopPrank();
+
+        (,,,, bool hasClearance) = networkAudit.evaluationRegistry(targetNodeNode);
+        assertFalse(hasClearance);
+    }
+
+    // 8. NEW INTEGRATION: TESTING IET REFERENCES TRACKING FLOOR REVERT
+    function test_IetDocumentationReferencesFloorRevert() public {
+        vm.startPrank(masterContractor);
+        // Fail case: Walang bitbit na references parameter check (False)
+        vm.expectRevert("Error: Structural violation. Technical reports must include references.");
+        ietRegistry.registerTechnicalDocumentation(targetNodeNode, sampleHash, 1, false);
+        vm.stopPrank();
     }
 }
