@@ -1,20 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-interface IAuditHistory {
-    function logHistoricalAction(
-        address _institution,
-        uint256 _freezeCount,
-        uint256 _grantCount,
-        uint256 _warningCount,
-        bytes32 _actionLog
-    ) external;
-}
+import "./IAuditHistory.sol";
 
 contract WhistleblowerSanctuary {
     address public guardian;
     uint256 public totalReports;
-    IAuditHistory public auditHistory; // Reference sa master record ledger
+    IAuditHistory public auditHistory; 
 
     enum ReportStatus { Submitted, UnderReview, Validated, Rejected }
 
@@ -43,7 +35,6 @@ contract WhistleblowerSanctuary {
         guardian = msg.sender;
     }
 
-    // Pormal na pagkakabit ng Audit History contract target
     function setAuditHistoryAddress(address _auditHistoryAddress) public onlyGuardian {
         auditHistory = IAuditHistory(_auditHistoryAddress);
         emit AuditHistoryAddressUpdated(_auditHistoryAddress);
@@ -69,7 +60,6 @@ contract WhistleblowerSanctuary {
 
         emit ReportSubmitted(totalReports, _encryptedReportHash, _targetedInstitution);
 
-        // CROSS-CONTRACT AUTOMATION: Mag-iwan ng selyo ng Warning sa pinag-isang kasaysayan
         if (address(auditHistory) != address(0)) {
             try auditHistory.logHistoricalAction(_targetedInstitution, 0, 0, 1, "INTEL_REPORT_FILED") {} catch {}
         }
