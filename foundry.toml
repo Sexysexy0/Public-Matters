@@ -1,13 +1,9 @@
 [profile.default]
 src = "src"
 out = "out"
-libs = [
-    "lib",
-    "node_modules",
-]
-remappings = [
-    "@nomicfoundation/=node_modules/@nomicfoundation/",
-    "hardhat/=node_modules/hardhat/",
-]
+libs = ["lib"]
+test = "test"
+script = "script"
 
-# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+# Payagan ang Foundry na mag-load ng environment variables mula sa .env
+ffi = true
