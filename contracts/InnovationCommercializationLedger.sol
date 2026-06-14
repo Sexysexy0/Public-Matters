@@ -11,8 +11,8 @@ contract InnovationCommercializationLedger {
         uint256 id;
         string institution;   // university, ORIC, or company
         string output;        // research paper, patent, prototype
-        string pathway;       // commercialization pathway (startup, licensing, industry partnership)
-        string beneficiary;   // who benefits (students, faculty, community)
+        string pathway;       // startup, licensing, industry partnership
+        string beneficiary;   // students, faculty, community
         string notes;         // contextual application
         uint256 timestamp;
     }
