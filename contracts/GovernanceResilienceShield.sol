@@ -1,34 +1,52 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title GovernanceResilienceShield
+/// @notice Shield covenant to secure governance resilience against decline or underperformance
 contract GovernanceResilienceShield {
-    event LeadershipIntegrity(string context, string safeguard);
-    event BudgetFairness(string arc, string safeguard);
-    event InnovationResonance(string arc, string resonance);
-
     address public overseer;
+    uint256 public shieldCount;
 
-    constructor(address _overseer) {
-        overseer = _overseer;
+    struct GovernanceRecord {
+        uint256 id;
+        string institution;   // university, ORIC, or organization
+        string risk;          // identified risk (leadership gap, funding decline, compliance issue)
+        string safeguard;     // resilience safeguard applied
+        string outcome;       // governance outcome (stability, improvement, recovery)
+        string notes;         // contextual application
+        uint256 timestamp;
     }
+
+    mapping(uint256 => GovernanceRecord) public records;
+
+    event GovernanceLogged(uint256 indexed id, string institution, string risk, string safeguard, string outcome, string notes);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    function safeguardLeadershipIntegrity(string memory context, string memory safeguard) external onlyOverseer {
-        emit LeadershipIntegrity(context, safeguard);
-        // SHIELD: Encode safeguards for leadership integrity (authentic unity, dignified service, consistent trust).
+    constructor(address _overseer) {
+        overseer = _overseer;
     }
 
-    function enforceBudgetFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit BudgetFairness(arc, safeguard);
-        // SHIELD: Ritualize budget fairness safeguards (balanced allocation, equitable clarity, participatory transparency).
+    /// @notice Overseer logs governance resilience record
+    function logGovernance(string calldata institution, string calldata risk, string calldata safeguard, string calldata outcome, string calldata notes) external onlyOverseer {
+        shieldCount++;
+        records[shieldCount] = GovernanceRecord({
+            id: shieldCount,
+            institution: institution,
+            risk: risk,
+            safeguard: safeguard,
+            outcome: outcome,
+            notes: notes,
+            timestamp: block.timestamp
+        });
+        emit GovernanceLogged(shieldCount, institution, risk, safeguard, outcome, notes);
     }
 
-    function resonateInnovation(string memory arc, string memory resonance) external onlyOverseer {
-        emit InnovationResonance(arc, resonance);
-        // SHIELD: Ritualize innovation resonance (shared creativity, cultural respect, authentic progress).
+    /// @notice Citizens can view governance resilience records
+    function viewGovernance(uint256 id) external view returns (GovernanceRecord memory) {
+        return records[id];
     }
 }
