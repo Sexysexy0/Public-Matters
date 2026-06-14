@@ -18,27 +18,39 @@ import "../contracts/EcosystemShutdown.sol";
 contract DeployGovernanceEcosystem is Script {
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        address secureBackupWallet = vm.envAddress("BACKUP_WALLET");
 
         vm.startBroadcast(deployerPrivateKey);
 
+        // 1. I-deploy ang Core Registries at Auditing Ledger
         TimeLockedComplianceSignal gracePeriod = new TimeLockedComplianceSignal();
         InstitutionalAuditHistory auditHistory = new InstitutionalAuditHistory();
-        
+        IPClaimRegistry ipRegistry = new IPClaimRegistry();
+        PublicBenefitGrant publicBenefitVault = new PublicBenefitGrant();
+
+        // 2. I-deploy ang Operational Gateways (Router, Sanctuary, Escrow)
         AutonomousComplianceEscrowRouter centralRouter = new AutonomousComplianceEscrowRouter(
             address(0xDEAd),
             address(gracePeriod),
             address(auditHistory)
         );
 
-        EcosystemShutdown killSwitch = new EcosystemShutdown(secureBackupWallet);
         WhistleblowerSanctuary whistleblowerSanctuary = new WhistleblowerSanctuary();
-        SovereignAllowanceProtocol allowance = new SovereignAllowanceProtocol();
-        IPClaimRegistry ipRegistry = new IPClaimRegistry();
+        ComplianceRecoveryEscrow complianceEscrow = new ComplianceRecoveryEscrow(address(publicBenefitVault));
+
+        // 3. AUTOMATED INITIALIZATION LOOP: Itali ang Cross-Contract Permissions
+        // Ikabit ang Audit History tracking addresses sa sub-systems
+        whistleblowerSanctuary.setAuditHistoryAddress(address(auditHistory));
+        complianceEscrow.setAuditHistoryAddress(address(auditHistory));
+
+        // Bigyan ng pormal na awtorisasyon ang sub-systems na mag-log sa Audit History
+        auditHistory.setLoggerAuthorization(address(whistleblowerSanctuary), true);
+        auditHistory.setLoggerAuthorization(address(complianceEscrow), true);
 
         console.log("=== ECOSYSTEM DEPLOYMENT SUCCESSFUL ===");
         console.log("Central Router Deployed at:", address(centralRouter));
-        console.log("IP Claim Registry Deployed at:", address(ipRegistry));
+        console.log("Audit History Registry Deployed at:", address(auditHistory));
+        console.log("Whistleblower Sanctuary Deployed at:", address(whistleblowerSanctuary));
+        console.log("Compliance Escrow Deployed at:", address(complianceEscrow));
         console.log("=======================================");
 
         vm.stopBroadcast();
