@@ -2,6 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "forge-std/Script.sol";
+import "../contracts/SovereignAllowanceProtocol.sol";
 import "../contracts/WhistleblowerSanctuary.sol";
 import "../contracts/PublicBenefitGrant.sol";
 import "../contracts/ImmutablePolicyLedger.sol";
@@ -20,13 +21,8 @@ contract DeployGovernanceEcosystem is Script {
 
         vm.startBroadcast(deployerPrivateKey);
 
-        bytes32 initialCommitment = bytes32(uint256(1));
-        AnonymousIdentityProof identityProof = new AnonymousIdentityProof(initialCommitment);
-        CompliantIdentityRevealer identityRevealer = new CompliantIdentityRevealer();
-        
         TimeLockedComplianceSignal gracePeriod = new TimeLockedComplianceSignal();
         InstitutionalAuditHistory auditHistory = new InstitutionalAuditHistory();
-        ImmutablePolicyLedger policyLedger = new ImmutablePolicyLedger();
         
         AutonomousComplianceEscrowRouter centralRouter = new AutonomousComplianceEscrowRouter(
             address(0xDEAd),
@@ -34,14 +30,13 @@ contract DeployGovernanceEcosystem is Script {
             address(auditHistory)
         );
 
-        PublicBenefitGrant publicGrants = new PublicBenefitGrant();
-        ComplianceRecoveryEscrow recoveryEscrow = new ComplianceRecoveryEscrow(address(publicGrants));
         EcosystemShutdown killSwitch = new EcosystemShutdown(secureBackupWallet);
         WhistleblowerSanctuary whistleblowerSanctuary = new WhistleblowerSanctuary();
+        SovereignAllowanceProtocol allowance = new SovereignAllowanceProtocol();
 
         console.log("=== ECOSYSTEM DEPLOYMENT SUCCESSFUL ===");
         console.log("Central Router Deployed at:", address(centralRouter));
-        console.log("Whistleblower Sanctuary Deployed at:", address(whistleblowerSanctuary));
+        console.log("Allowance Protocol Deployed at:", address(allowance));
         console.log("=======================================");
 
         vm.stopBroadcast();
