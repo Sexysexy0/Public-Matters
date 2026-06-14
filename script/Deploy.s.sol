@@ -17,6 +17,7 @@ import "../contracts/EcosystemShutdown.sol";
 import "../contracts/ShariahComplianceRouter.sol";
 import "../contracts/JudiciaryWelfareVault.sol";
 import "../contracts/ContractorDelegationRegistry.sol";
+import "../contracts/JudicialDisputeRouter.sol";
 
 contract DeployGovernanceEcosystem is Script {
     function run() external {
@@ -30,7 +31,7 @@ contract DeployGovernanceEcosystem is Script {
         IPClaimRegistry ipRegistry = new IPClaimRegistry();
         PublicBenefitGrant publicBenefitVault = new PublicBenefitGrant();
 
-        // 2. I-deploy ang Operational Gateways at Multi-Agent Registries
+        // 2. I-deploy ang Operational Gateways, Multi-Agent Registries, at Mediation Routers
         AutonomousComplianceEscrowRouter centralRouter = new AutonomousComplianceEscrowRouter(
             address(0xDEAd),
             address(gracePeriod),
@@ -42,6 +43,7 @@ contract DeployGovernanceEcosystem is Script {
         ShariahComplianceRouter shariahRouter = new ShariahComplianceRouter();
         JudiciaryWelfareVault welfareVault = new JudiciaryWelfareVault(0.05 ether);
         ContractorDelegationRegistry delegationRegistry = new ContractorDelegationRegistry();
+        JudicialDisputeRouter disputeRouter = new JudicialDisputeRouter();
 
         // 3. MASTER INITIALIZATION LOOP: Itali ang Cross-Contract Permissions at Telemetry Routes
         whistleblowerSanctuary.setAuditHistoryAddress(address(auditHistory));
@@ -49,6 +51,7 @@ contract DeployGovernanceEcosystem is Script {
         shariahRouter.setAuditHistoryAddress(address(auditHistory));
         welfareVault.setAuditHistoryAddress(address(auditHistory));
         delegationRegistry.setAuditHistoryAddress(address(auditHistory));
+        disputeRouter.setAuditHistoryAddress(address(auditHistory));
 
         // Bigyan ng pormal na Root Owner clearance ang sub-systems na mag-log sa central history registry
         auditHistory.setLoggerAuthorization(address(whistleblowerSanctuary), true);
@@ -56,6 +59,7 @@ contract DeployGovernanceEcosystem is Script {
         auditHistory.setLoggerAuthorization(address(shariahRouter), true);
         auditHistory.setLoggerAuthorization(address(welfareVault), true);
         auditHistory.setLoggerAuthorization(address(delegationRegistry), true);
+        auditHistory.setLoggerAuthorization(address(disputeRouter), true);
 
         console.log("=== MASTER ECOSYSTEM DEPLOYMENT SUCCESSFUL ===");
         console.log("Root Admin Central Router Deployed at:", address(centralRouter));
@@ -65,6 +69,7 @@ contract DeployGovernanceEcosystem is Script {
         console.log("Shariah Compliance Router Deployed at:", address(shariahRouter));
         console.log("Judiciary Welfare Vault Deployed at:", address(welfareVault));
         console.log("Contractor Delegation Registry Deployed at:", address(delegationRegistry));
+        console.log("Judicial Dispute Router Deployed at:", address(disputeRouter));
         console.log("==============================================");
 
         vm.stopBroadcast();
