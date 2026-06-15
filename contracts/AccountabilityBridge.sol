@@ -2,24 +2,23 @@
 pragma solidity ^0.8.20;
 
 /// @title AccountabilityBridge
-/// @notice Bridge covenant to enforce accountability across campuses, functions, and stakeholders
+/// @notice Bridge covenant to encode direct responsibility of executives and directors in cyber governance
 contract AccountabilityBridge {
     address public overseer;
-    uint256 public bridgeCount;
+    uint256 public accountabilityCount;
 
-    struct AccountabilityLink {
+    struct AccountabilityRecord {
         uint256 id;
-        string stakeholder; // students, faculty, administrators
-        string function;    // helpdesk, engineering, project management
-        string safeguard;   // fairness, transparency, dignity
-        string metric;      // SLA, uptime %, ROI measure
+        string actor;       // executive, director, board committee
+        string decision;    // compliance, oversight, incident response
+        string safeguard;   // liability clause, accountability clause
         string notes;       // contextual application
         uint256 timestamp;
     }
 
-    mapping(uint256 => AccountabilityLink) public links;
+    mapping(uint256 => AccountabilityRecord) public records;
 
-    event AccountabilityLinked(uint256 indexed id, string stakeholder, string function, string safeguard, string metric, string notes);
+    event AccountabilityLogged(uint256 indexed id, string actor, string decision, string safeguard);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,23 +29,22 @@ contract AccountabilityBridge {
         overseer = _overseer;
     }
 
-    /// @notice Overseer links accountability safeguard
-    function linkAccountability(string calldata stakeholder, string calldata function, string calldata safeguard, string calldata metric, string calldata notes) external onlyOverseer {
-        bridgeCount++;
-        links[bridgeCount] = AccountabilityLink({
-            id: bridgeCount,
-            stakeholder: stakeholder,
-            function: function,
+    /// @notice Overseer logs accountability record
+    function logAccountability(string calldata actor, string calldata decision, string calldata safeguard, string calldata notes) external onlyOverseer {
+        accountabilityCount++;
+        records[accountabilityCount] = AccountabilityRecord({
+            id: accountabilityCount,
+            actor: actor,
+            decision: decision,
             safeguard: safeguard,
-            metric: metric,
             notes: notes,
             timestamp: block.timestamp
         });
-        emit AccountabilityLinked(bridgeCount, stakeholder, function, safeguard, metric, notes);
+        emit AccountabilityLogged(accountabilityCount, actor, decision, safeguard);
     }
 
-    /// @notice Citizens can view accountability links
-    function viewAccountability(uint256 id) external view returns (AccountabilityLink memory) {
-        return links[id];
+    /// @notice Citizens can view accountability records
+    function viewAccountability(uint256 id) external view returns (AccountabilityRecord memory) {
+        return records[id];
     }
 }
