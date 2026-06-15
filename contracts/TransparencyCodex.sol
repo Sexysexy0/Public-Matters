@@ -2,43 +2,47 @@
 pragma solidity ^0.8.20;
 
 /// @title TransparencyCodex
-/// @notice Immutable record of government decisions and budget allocations
+/// @notice Codex covenant to encode disclosure obligations and public trust safeguards
 contract TransparencyCodex {
-    address public oversightCommittee;
-    uint256 public recordCount;
+    address public overseer;
+    uint256 public disclosureCount;
 
-    struct Record {
+    struct DisclosureRecord {
         uint256 id;
-        string decision;
+        string obligation;  // disclosure, reporting, audit, communication
+        string safeguard;   // accountability clause
+        string notes;       // contextual application
         uint256 timestamp;
     }
 
-    mapping(uint256 => Record) public records;
+    mapping(uint256 => DisclosureRecord) public records;
 
-    event RecordLogged(uint256 indexed id, string decision);
+    event DisclosureLogged(uint256 indexed id, string obligation, string safeguard);
 
-    modifier onlyOversight() {
-        require(msg.sender == oversightCommittee, "Not authorized");
+    modifier onlyOverseer() {
+        require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor(address _oversightCommittee) {
-        oversightCommittee = _oversightCommittee;
+    constructor(address _overseer) {
+        overseer = _overseer;
     }
 
-    /// @notice Oversight Committee logs government decisions
-    function logDecision(string calldata decision) external onlyOversight {
-        recordCount++;
-        records[recordCount] = Record({
-            id: recordCount,
-            decision: decision,
+    /// @notice Overseer logs disclosure obligation record
+    function logDisclosure(string calldata obligation, string calldata safeguard, string calldata notes) external onlyOverseer {
+        disclosureCount++;
+        records[disclosureCount] = DisclosureRecord({
+            id: disclosureCount,
+            obligation: obligation,
+            safeguard: safeguard,
+            notes: notes,
             timestamp: block.timestamp
         });
-        emit RecordLogged(recordCount, decision);
+        emit DisclosureLogged(disclosureCount, obligation, safeguard);
     }
 
-    /// @notice Citizens can view logged decisions
-    function viewDecision(uint256 id) external view returns (Record memory) {
+    /// @notice Citizens can view disclosure obligation records
+    function viewDisclosure(uint256 id) external view returns (DisclosureRecord memory) {
         return records[id];
     }
 }
