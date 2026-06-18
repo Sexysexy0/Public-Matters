@@ -32,7 +32,7 @@ contract SovereignGrcEcosystemTest is Test {
     address public masterContractor = address(0x9999);
     address public targetNodeNode = address(0x1111);
     address public secondaryNodeNode = address(0x2222);
-    
+
     bytes32 public constant sampleHash = keccak256(abi.encodePacked("SOVEREIGN_GRC_COMPLIANCE_PROOF"));
 
     receive() external payable {}
@@ -41,7 +41,7 @@ contract SovereignGrcEcosystemTest is Test {
     function setUp() public {
         vm.startPrank(masterContractor);
         auditHistory = new InstitutionalAuditHistory();
-        
+
         indexOracle = new FinancialIndexReconstitutionOracle();
         wipoVault = new WipoContentExpertDetermination();
         qaVault = new QualityAssuranceSelfAssessment();
@@ -77,7 +77,7 @@ contract SovereignGrcEcosystemTest is Test {
         auditHistory.setLoggerAuthorization(address(growthBetEscrow), true);
         auditHistory.setLoggerAuthorization(address(supplierRouter), true);
         auditHistory.setLoggerAuthorization(address(forceMajeureMdr), true);
-        
+
         vm.stopPrank();
     }
 
@@ -153,7 +153,9 @@ contract SovereignGrcEcosystemTest is Test {
 
     function test_NetworkEngineerLowPerformanceSanction() public {
         vm.startPrank(masterContractor);
-        networkAudit.logPersonnelPerformance(targetNodeNode, 9100, NetworkEngineerPerformanceAudit.CompetencyRating.NeedsImprovement);
+        networkAudit.logPersonnelPerformance(
+            targetNodeNode, 9100, NetworkEngineerPerformanceAudit.CompetencyRating.NeedsImprovement
+        );
         vm.stopPrank();
         (,,,, bool hasClearance) = networkAudit.evaluationRegistry(targetNodeNode);
         assertFalse(hasClearance);
@@ -188,9 +190,10 @@ contract SovereignGrcEcosystemTest is Test {
 
     function test_ForceMajeureMdrOracleRemedialRecoveryFlow() public {
         vm.deal(masterContractor, 20 ether);
-        
+
         vm.startPrank(masterContractor);
-        uint256 dId = forceMajeureMdr.flagForceMajeureIncident{value: 10 ether}(targetNodeNode, secondaryNodeNode, sampleHash);
+        uint256 dId =
+            forceMajeureMdr.flagForceMajeureIncident{value: 10 ether}(targetNodeNode, secondaryNodeNode, sampleHash);
         forceMajeureMdr.escalateToMediation(dId);
         vm.stopPrank();
 

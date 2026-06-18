@@ -40,8 +40,8 @@ contract InstitutionalAuditHistoryTest is Test {
     function test_CrossContractWarningLogging() public {
         vm.prank(whistleblower);
         sanctuary.submitIntel(intelHash, badInstitution);
-        
-        (uint256 freezes, uint256 grants, uint256 warnings, , , ) = auditHistory.viewHistory(badInstitution);
+
+        (uint256 freezes, uint256 grants, uint256 warnings,,,) = auditHistory.viewHistory(badInstitution);
         assertEq(warnings, 1);
         assertEq(freezes, 0);
         assertEq(grants, 0);
@@ -60,7 +60,7 @@ contract InstitutionalAuditHistoryTest is Test {
         escrow.forfeitCollateral(caseId);
 
         // Hakbang D: Pagsusuri kung pumasok ang +1 freeze record sa kasaysayan ng Audit History
-        (uint256 freezes, , , , , ) = auditHistory.viewHistory(badInstitution);
+        (uint256 freezes,,,,,) = auditHistory.viewHistory(badInstitution);
         assertEq(freezes, 1);
     }
 }
