@@ -10,7 +10,8 @@ contract DeployNevada is Script {
         address client = vm.envAddress("NEVADA_CLIENT");
         address contractor = vm.envAddress("STEWARD_ENTITY");
 
-        string memory purpose = "Restore & harden Nevada's state systems post-cyberattack with Mythic Stewardship replication.";
+        string memory purpose =
+            "Restore & harden Nevada's state systems post-cyberattack with Mythic Stewardship replication.";
 
         // Start broadcast
         vm.startBroadcast();
@@ -22,7 +23,7 @@ contract DeployNevada is Script {
         string[] memory names = vm.parseJsonStringArray(json, ".deliverables[*].name");
         string[] memory descs = vm.parseJsonStringArray(json, ".deliverables[*].description");
 
-        for (uint i = 0; i < names.length; i++) {
+        for (uint256 i = 0; i < names.length; i++) {
             nevada.addDeliverable(names[i], descs[i]);
         }
 

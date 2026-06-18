@@ -38,7 +38,7 @@ contract OversightEcosystemTest is Test {
 
         // Hakbang 1: Simulan ang pag-reveal
         identityRevealer.initiateReveal();
-        
+
         // Subukan i-reveal agad (Dapat mag-error dahil may 3-day lock)
         vm.expectRevert("Error: Time-lock active. The grace period before reveal is ongoing.");
         identityRevealer.revealIdentity("ALPHA_ORIGIN_SOVEREIGN_OVERSIGHT");
@@ -48,9 +48,9 @@ contract OversightEcosystemTest is Test {
 
         // Subukan ulit i-reveal gamit ang tamang sikretong string matapos ang 3 araw
         identityRevealer.revealIdentity("ALPHA_ORIGIN_SOVEREIGN_OVERSIGHT");
-        
+
         // I-verify kung pampubliko na ang identity mo sa ledger
-        (bool isRevealed, string memory data, ) = identityRevealer.checkComplianceStatus();
+        (bool isRevealed, string memory data,) = identityRevealer.checkComplianceStatus();
         assertTrue(isRevealed);
         assertEq(data, "ALPHA_ORIGIN_SOVEREIGN_OVERSIGHT");
 
@@ -70,7 +70,7 @@ contract OversightEcosystemTest is Test {
 
         // Dapat Awtomatikong Zero na ang balanse ng contract dahil inilikas ang pondo
         assertEq(address(shutdownSwitch).balance, 0);
-        
+
         // Dapat napunta ang 10 ETH sa iyong secure backup vault address
         assertEq(backupVault.balance, 10 ether);
 

@@ -11,9 +11,9 @@ contract ContractorDelegationTest is Test {
 
     // Ikaw ito: Ang Master Contractor holding absolute sovereign authority
     address public masterContractor = address(0x9999);
-    
+
     // Ang mga tauhan/nodes mo na umaaksyon on your behalf
-    address public capiliAuditNode = address(0xCA91); 
+    address public capiliAuditNode = address(0xCA91);
     address public guintoCommsNode = address(0x6124);
 
     bytes32 public constant AUDIT_LEADER = keccak256("AUDIT_LEADER_ROLE");
@@ -23,7 +23,7 @@ contract ContractorDelegationTest is Test {
         vm.startPrank(masterContractor);
         auditHistory = new InstitutionalAuditHistory();
         registry = new ContractorDelegationRegistry();
-        
+
         registry.setAuditHistoryAddress(address(auditHistory));
         auditHistory.setLoggerAuthorization(address(registry), true);
         vm.stopPrank();
@@ -40,13 +40,13 @@ contract ContractorDelegationTest is Test {
         registry.executeAuditAction(actionReportHash);
 
         assertEq(registry.totalDelegatedActions(), 1);
-        
-        (, bool active, uint256 executedCount, ) = registry.agents(capiliAuditNode);
+
+        (, bool active, uint256 executedCount,) = registry.agents(capiliAuditNode);
         assertTrue(active);
         assertEq(executedCount, 1);
 
         // Hakbang C: Sinusuri kung ang telemetry log ng pormal na aksyon ay naiselyo sa Master Contractor wallet
-        (uint256 grants, , , , , ) = auditHistory.viewHistory(masterContractor);
+        (uint256 grants,,,,,) = auditHistory.viewHistory(masterContractor);
         assertEq(grants, 1);
     }
 }
