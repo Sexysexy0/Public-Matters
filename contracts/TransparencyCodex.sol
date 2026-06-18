@@ -2,22 +2,32 @@
 pragma solidity ^0.8.20;
 
 /// @title TransparencyCodex
-/// @notice Codex covenant to encode disclosure obligations and public trust safeguards
+/// @notice Covenant contract to encode openness, auditability, and governance traceability
+/// @dev Provides structured rituals for transparent governance records
 contract TransparencyCodex {
     address public overseer;
-    uint256 public disclosureCount;
+    uint256 public covenantCount;
 
-    struct DisclosureRecord {
+    struct Record {
         uint256 id;
-        string obligation;  // disclosure, reporting, audit, communication
-        string safeguard;   // accountability clause
-        string notes;       // contextual application
+        string action;          // Governance action description
+        string actor;           // Actor responsible (e.g., overseer, citizen, provider)
+        bool auditable;         // True if record is auditable
+        bool traceable;         // True if record is traceable
+        string notes;           // Governance notes
         uint256 timestamp;
     }
 
-    mapping(uint256 => DisclosureRecord) public records;
+    mapping(uint256 => Record) public records;
 
-    event DisclosureLogged(uint256 indexed id, string obligation, string safeguard);
+    event RecordLogged(
+        uint256 indexed id,
+        string action,
+        string actor,
+        bool auditable,
+        bool traceable,
+        string notes
+    );
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -28,21 +38,30 @@ contract TransparencyCodex {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs disclosure obligation record
-    function logDisclosure(string calldata obligation, string calldata safeguard, string calldata notes) external onlyOverseer {
-        disclosureCount++;
-        records[disclosureCount] = DisclosureRecord({
-            id: disclosureCount,
-            obligation: obligation,
-            safeguard: safeguard,
+    /// @notice Overseer logs governance record with transparency safeguards
+    function logRecord(
+        string calldata action,
+        string calldata actor,
+        bool auditable,
+        bool traceable,
+        string calldata notes
+    ) external onlyOverseer {
+        covenantCount++;
+        records[covenantCount] = Record({
+            id: covenantCount,
+            action: action,
+            actor: actor,
+            auditable: auditable,
+            traceable: traceable,
             notes: notes,
             timestamp: block.timestamp
         });
-        emit DisclosureLogged(disclosureCount, obligation, safeguard);
+        emit RecordLogged(covenantCount, action, actor, auditable, traceable, notes);
     }
 
-    /// @notice Citizens can view disclosure obligation records
-    function viewDisclosure(uint256 id) external view returns (DisclosureRecord memory) {
-        return records[id];
+    /// @notice Governance rule: if auditable == false or traceable == false, mark as opaque
+    function isOpaque(uint256 id) external view returns (bool) {
+        Record memory r = records[id];
+        return (!r.auditable || !r.traceable);
     }
 }
