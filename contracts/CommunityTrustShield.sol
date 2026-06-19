@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title CommunityTrustShield
+/// @notice Governance shield to safeguard community trust, resilience fairness, and dignified solidarity
 contract CommunityTrustShield {
-    event CommunityTrust(string arc, string safeguard);
-    event ResilienceFairness(string arc, string safeguard);
-    event OpenSourceResonance(string context, string safeguard);
+    event TrustCheck(string arc, string safeguard);
+    event FairnessCheck(string arc, string safeguard);
+    event SolidarityBroadcast(string arc, string safeguard);
 
     address public overseer;
 
@@ -17,18 +19,21 @@ contract CommunityTrustShield {
         _;
     }
 
+    /// @notice Ritualize safeguard for community trust
     function safeguardCommunityTrust(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CommunityTrust(arc, safeguard);
+        emit TrustCheck(arc, safeguard);
         // SHIELD: Encode safeguards for community trust (authentic solidarity, dignified transparency, participatory resonance).
     }
 
+    /// @notice Ritualize safeguard for resilience fairness
     function enforceResilienceFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ResilienceFairness(arc, safeguard);
+        emit FairnessCheck(arc, safeguard);
         // SHIELD: Ritualize resilience fairness safeguards (equitable adaptation, balanced endurance, systemic clarity).
     }
 
-    function resonateOpenSource(string memory context, string memory resonance) external onlyOverseer {
-        emit OpenSourceResonance(context, resonance);
-        // SHIELD: Ritualize open-source resonance (shared dignity, freedom anchored, authentic community trust).
+    /// @notice Ritualize broadcast for solidarity safeguard
+    function broadcastSolidarity(string memory arc, string memory safeguard) external onlyOverseer {
+        emit SolidarityBroadcast(arc, safeguard);
+        // SHIELD: Ritualize solidarity safeguard — amplify communal dignity and participatory trust.
     }
 }
