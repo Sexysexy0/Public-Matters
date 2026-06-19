@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title LaborEquityShield
+/// @notice Governance covenant to safeguard worker rights fairness, wage equity, communal dignity, and governance continuity
 contract LaborEquityShield {
     event WorkerRightsFairness(string principle, string safeguard);
     event WageEquity(string arc, string safeguard);
@@ -19,33 +21,33 @@ contract LaborEquityShield {
         _;
     }
 
-    // Safeguard: Encode worker rights fairness
+    /// @notice Safeguard: Encode worker rights fairness
     function safeguardWorkerRights(string memory principle, string memory safeguard) external onlyOverseer {
         emit WorkerRightsFairness(principle, safeguard);
-        // SHIELD: Ritualize safeguard — uphold worker rights fairness and resist exploitation.
+        // SHIELD: Ritualize safeguard — uphold worker rights fairness and resist exploitation
     }
 
-    // Safeguard: Encode wage equity
+    /// @notice Safeguard: Encode wage equity
     function enforceWageEquity(string memory arc, string memory safeguard) external onlyOverseer {
         emit WageEquity(arc, safeguard);
-        // SHIELD: Encode safeguard — ensure wage equity and dignified compensation.
+        // SHIELD: Encode safeguard — ensure wage equity and dignified compensation
     }
 
-    // Safeguard: Encode communal dignity resonance
+    /// @notice Safeguard: Encode communal dignity resonance
     function preserveDignity(string memory ritual, string memory safeguard) external onlyOverseer {
         emit CommunalDignityResonance(ritual, safeguard);
-        // SHIELD: Ritualize safeguard — uphold communal dignity and inclusive workplace culture.
+        // SHIELD: Ritualize safeguard — uphold communal dignity and inclusive workplace culture
     }
 
-    // Safeguard: Encode governance continuity
+    /// @notice Safeguard: Encode governance continuity
     function sustainGovernance(string memory arc, string memory safeguard) external onlyOverseer {
         emit GovernanceContinuity(arc, safeguard);
-        // SHIELD: Encode safeguard — maintain governance continuity and systemic resilience in labor arcs.
+        // SHIELD: Encode safeguard — maintain governance continuity and systemic resilience in labor arcs
     }
 
-    // Safeguard: Encode shield broadcast
+    /// @notice Safeguard: Encode shield broadcast
     function broadcastShield(string memory arc, string memory safeguard) external onlyOverseer {
         emit ShieldBroadcast(arc, safeguard);
-        // SHIELD: Ritualize broadcast safeguard — amplify labor equity narrative as communal covenant.
+        // SHIELD: Ritualize broadcast safeguard — amplify labor equity narrative as communal covenant
     }
 }
