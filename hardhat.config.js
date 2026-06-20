@@ -1,23 +1,20 @@
-import "@nomicfoundation/hardhat-toolbox";
-import "@nomicfoundation/hardhat-ethers";
+require("@nomicfoundation/hardhat-toolbox");
 
 /** @type import('hardhat/config').HardhatUserConfig */
-const config = {
+module.exports = {
   solidity: {
     version: "0.8.30",
     settings: {
       optimizer: {
         enabled: true,
-        runs: 200,
-      },
-    },
+        runs: 200
+      }
+    }
   },
   networks: {
     sepolia: {
       url: process.env.SEPOLIA_RPC_URL || "",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-    },
-  },
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : []
+    }
+  }
 };
-
-export default config;
