@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title EquityResonanceOracle
+/// @notice Governance oracle to safeguard equity resonance across tax, diversification, dignity, and governance arcs
 contract EquityResonanceOracle {
-    event EquityResonance(string arc, string safeguard);
-    event CommunalFairness(string arc, string safeguard);
-    event GovernanceContinuity(string ritual, string safeguard);
-    event DignityPreservation(string arc, string safeguard);
+    event ResonanceCheck(string arc, uint256 intensity, string safeguard);
+    event DistortionAlert(string arc, uint256 intensity, string alert);
     event OracleBroadcast(string arc, string safeguard);
 
     address public overseer;
-    uint256 public resonanceThreshold;
+    uint256 public minResonance; // minimum resonance threshold for equity safeguards
 
-    constructor(address _overseer, uint256 _threshold) {
+    constructor(address _overseer, uint256 _minResonance) {
         overseer = _overseer;
-        resonanceThreshold = _threshold;
+        minResonance = _minResonance;
     }
 
     modifier onlyOverseer() {
@@ -21,43 +21,26 @@ contract EquityResonanceOracle {
         _;
     }
 
-    // Safeguard: Encode equity resonance
-    function safeguardEquityResonance(string memory arc, string memory safeguard) external onlyOverseer {
-        emit EquityResonance(arc, safeguard);
-        // ORACLE: Ritualize safeguard — uphold equity resonance and resist systemic imbalance.
-    }
-
-    // Safeguard: Encode communal fairness
-    function enforceCommunalFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CommunalFairness(arc, safeguard);
-        // ORACLE: Encode safeguard — ensure communal fairness and resist exploitation.
-    }
-
-    // Safeguard: Encode governance continuity
-    function preserveGovernanceContinuity(string memory ritual, string memory safeguard) external onlyOverseer {
-        emit GovernanceContinuity(ritual, safeguard);
-        // ORACLE: Ritualize safeguard — uphold governance continuity and systemic foresight.
-    }
-
-    // Safeguard: Encode dignity preservation
-    function sustainDignityPreservation(string memory arc, string memory safeguard) external onlyOverseer {
-        emit DignityPreservation(arc, safeguard);
-        // ORACLE: Encode safeguard — maintain dignity preservation and authentic stewardship.
-    }
-
-    // Mechanism: Adjust resonance if threshold breached
-    function adjustResonance(uint256 currentRate) external onlyOverseer returns (uint256) {
-        uint256 newRate = currentRate;
-        if (currentRate < resonanceThreshold) {
-            newRate = (currentRate * 95) / 100; // Ritual safeguard: reduce rate by 5% to restore resonance balance
-            emit EquityResonance("Threshold safeguard", "Rate adjusted for equity resonance");
+    /// @notice Ritualize equity resonance safeguard check
+    function checkEquityResonance(string memory arc, uint256 intensity) external onlyOverseer {
+        if (intensity < minResonance) {
+            emit DistortionAlert(arc, intensity, "Equity resonance compromised: below safeguard threshold");
+            // ORACLE: Ritualize safeguard — prevent systemic distortion across equity arcs
+        } else {
+            emit ResonanceCheck(arc, intensity, "Equity resonance preserved within safeguard threshold");
+            // ORACLE: Encode safeguard — uphold resonance across tax fairness, diversification, dignity, and governance
         }
-        return newRate;
     }
 
-    // Safeguard: Encode oracle broadcast
+    /// @notice Ritualize codex broadcast
     function broadcastOracle(string memory arc, string memory safeguard) external onlyOverseer {
         emit OracleBroadcast(arc, safeguard);
-        // ORACLE: Ritualize broadcast safeguard — amplify equity resonance narrative as communal covenant.
+        // ORACLE: Ritualize broadcast safeguard — amplify equity resonance narrative as communal covenant
+    }
+
+    /// @notice Update resonance threshold
+    function updateThreshold(uint256 newThreshold) external onlyOverseer {
+        minResonance = newThreshold;
+        // ORACLE: Governance safeguard — overseer may adjust resonance threshold in response to systemic changes
     }
 }
