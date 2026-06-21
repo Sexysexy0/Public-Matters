@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 /// @title ResonanceEquityMesh
-/// @notice Covenant contract to safeguard interconnected resonance equity, governance flows, communal foresight, and dignity continuity
+/// @notice Covenant contract to safeguard resonance equity, governance flows, communal foresight, and dignity continuity
 contract ResonanceEquityMesh {
     struct MeshArc {
         address steward;
@@ -53,13 +53,13 @@ contract ResonanceEquityMesh {
         // MESH: Encode safeguard — ensure dignity continuity across resonance arcs
     }
 
-    /// @notice View mesh arc
+    /// @notice Get mesh arc by ID
     function getMesh(uint256 _id) public view returns (MeshArc memory) {
         require(_id < arcs.length, "Invalid ID");
         return arcs[_id];
     }
 
-    /// @notice View total mesh arcs
+    /// @notice Get total mesh arcs
     function totalMeshes() public view returns (uint256) {
         return arcs.length;
     }
