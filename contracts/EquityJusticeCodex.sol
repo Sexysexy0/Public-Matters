@@ -2,49 +2,66 @@
 pragma solidity ^0.8.20;
 
 /// @title EquityJusticeCodex
-/// @notice Codex covenant to document justice-equity principles in governance outcomes
+/// @notice Covenant contract to safeguard equity justice, humanitarian dignity, governance permanence, and systemic accountability
 contract EquityJusticeCodex {
+    event EquityJustice(address indexed steward, string safeguard);
+    event HumanitarianDignity(address indexed steward, string safeguard);
+    event GovernancePermanence(address indexed overseer, string safeguard);
+    event AccountabilityArc(address indexed overseer, string record);
+
     address public overseer;
-    uint256 public codexCount;
+    uint256 public justiceThreshold;
+    uint256 public equityThreshold;
 
-    struct JusticeEquity {
-        uint256 id;
-        string principle;   // e.g. fairness, dignity, proportional equity
-        string safeguard;   // transparency, accountability, resilience
-        string outcome;     // healthcare, education, infrastructure
-        string notes;       // contextual application
-        uint256 timestamp;
+    constructor(address _overseer, uint256 _justiceThreshold, uint256 _equityThreshold) {
+        overseer = _overseer;
+        justiceThreshold = _justiceThreshold;
+        equityThreshold = _equityThreshold;
     }
-
-    mapping(uint256 => JusticeEquity) public records;
-
-    event JusticeEquityLogged(uint256 indexed id, string principle, string safeguard, string outcome, string notes);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor(address _overseer) {
-        overseer = _overseer;
+    /// @notice Encode safeguard for equity justice
+    function safeguardEquityJustice(address steward, string memory safeguard, uint256 justiceLevel) external onlyOverseer {
+        if (justiceLevel < justiceThreshold) {
+            emit EquityJustice(steward, "Equity justice compromised: below safeguard threshold");
+            // CODEX: Ritual safeguard — prevent erosion of equity justice
+        } else {
+            emit EquityJustice(steward, safeguard);
+            // CODEX: Encode safeguard — uphold equity justice protections
+        }
     }
 
-    /// @notice Overseer logs justice-equity principle
-    function logJusticeEquity(string calldata principle, string calldata safeguard, string calldata outcome, string calldata notes) external onlyOverseer {
-        codexCount++;
-        records[codexCount] = JusticeEquity({
-            id: codexCount,
-            principle: principle,
-            safeguard: safeguard,
-            outcome: outcome,
-            notes: notes,
-            timestamp: block.timestamp
-        });
-        emit JusticeEquityLogged(codexCount, principle, safeguard, outcome, notes);
+    /// @notice Encode safeguard for humanitarian dignity
+    function safeguardHumanitarianDignity(address steward, string memory safeguard, uint256 equityLevel) external onlyOverseer {
+        if (equityLevel < equityThreshold) {
+            emit HumanitarianDignity(steward, "Humanitarian dignity compromised: below safeguard threshold");
+            // CODEX: Ritual safeguard — prevent erosion of humanitarian dignity
+        } else {
+            emit HumanitarianDignity(steward, safeguard);
+            // CODEX: Encode safeguard — uphold humanitarian dignity protections
+        }
     }
 
-    /// @notice Citizens can view justice-equity records
-    function viewJusticeEquity(uint256 id) external view returns (JusticeEquity memory) {
-        return records[id];
+    /// @notice Encode governance permanence safeguard
+    function sustainGovernance(string memory safeguard) external onlyOverseer {
+        emit GovernancePermanence(msg.sender, safeguard);
+        // CODEX: Ritual safeguard — maintain governance permanence
+    }
+
+    /// @notice Record accountability arc
+    function recordAccountability(string memory record) external onlyOverseer {
+        emit AccountabilityArc(msg.sender, record);
+        // CODEX: Ritual safeguard — maintain systemic accountability
+    }
+
+    /// @notice Update thresholds for justice and equity
+    function updateThresholds(uint256 newJusticeThreshold, uint256 newEquityThreshold) external onlyOverseer {
+        justiceThreshold = newJusticeThreshold;
+        equityThreshold = newEquityThreshold;
+        // CODEX: Governance safeguard — overseer may adjust thresholds in response to evolving systemic risks
     }
 }
