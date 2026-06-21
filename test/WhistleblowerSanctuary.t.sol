@@ -20,8 +20,9 @@ contract WhistleblowerSanctuaryTest is Test {
         vm.prank(whistleblower);
         uint256 reportId = sanctuary.submitIntel(sampleReportHash, badInstitution);
         assertEq(reportId, 1);
-        
-        (bytes32 hash, address target, WhistleblowerSanctuary.ReportStatus status, , bytes32 log) = sanctuary.getReportMetrics(1);
+
+        (bytes32 hash, address target, WhistleblowerSanctuary.ReportStatus status,, bytes32 log) =
+            sanctuary.getReportMetrics(1);
         assertEq(hash, sampleReportHash);
         assertEq(target, badInstitution);
         assertTrue(status == WhistleblowerSanctuary.ReportStatus.Submitted);
@@ -35,7 +36,7 @@ contract WhistleblowerSanctuaryTest is Test {
         vm.prank(guardianWallet);
         sanctuary.updateReportStatus(reportId, WhistleblowerSanctuary.ReportStatus.Validated, "INTEL_VERIFIED_AIRTIGHT");
 
-        (, , WhistleblowerSanctuary.ReportStatus status, , bytes32 log) = sanctuary.getReportMetrics(reportId);
+        (,, WhistleblowerSanctuary.ReportStatus status,, bytes32 log) = sanctuary.getReportMetrics(reportId);
         assertTrue(status == WhistleblowerSanctuary.ReportStatus.Validated);
         assertEq(log, "INTEL_VERIFIED_AIRTIGHT");
     }

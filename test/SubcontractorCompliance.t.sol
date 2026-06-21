@@ -45,7 +45,7 @@ contract SubcontractorComplianceTest is Test {
 
         (,,,,,, bytes32 verifiedProof) = complianceVault.projects(projectId);
         assertEq(verifiedProof, sampleReceiptHash);
-        
+
         (,,,,, bool finalPending,) = complianceVault.projects(projectId);
         assertFalse(finalPending);
     }
@@ -65,7 +65,9 @@ contract SubcontractorComplianceTest is Test {
 
         // Hakbang B: I-verify na ang release transaction drawing chain ay permanenteng sarado at magre-revert na ngayon
         vm.startPrank(masterContractor);
-        vm.expectRevert("Error: Funding draw rejected. Prime Contractor violated the strict 3-day proof of payment upload rule.");
+        vm.expectRevert(
+            "Error: Funding draw rejected. Prime Contractor violated the strict 3-day proof of payment upload rule."
+        );
         complianceVault.releaseProjectFundingDraw{value: 5 ether}(projectId);
         vm.stopPrank();
     }
