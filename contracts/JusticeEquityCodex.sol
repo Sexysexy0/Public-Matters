@@ -2,11 +2,12 @@
 pragma solidity ^0.8.20;
 
 /// @title JusticeEquityCodex
-/// @notice Covenant contract to safeguard justice equity, dignity resonance, and governance permanence
+/// @notice Covenant contract to safeguard justice equity, dignity continuity, governance safeguards, and systemic accountability
 contract JusticeEquityCodex {
-    event JusticeEquity(address indexed actor, string safeguard);
-    event DignityResonance(address indexed actor, string resonance);
-    event GovernancePermanence(address indexed overseer, string safeguard);
+    event JusticeEquity(address indexed steward, string safeguard);
+    event DignityContinuity(address indexed steward, string safeguard);
+    event GovernanceSafeguard(address indexed overseer, string safeguard);
+    event AccountabilityArc(address indexed overseer, string record);
 
     address public overseer;
     uint256 public justiceThreshold;
@@ -22,26 +23,32 @@ contract JusticeEquityCodex {
     }
 
     /// @notice Encode safeguard for justice equity
-    function safeguardJustice(address actor, string memory safeguard, uint256 justiceLevel) external onlyOverseer {
+    function safeguardJustice(address steward, string memory safeguard, uint256 justiceLevel) external onlyOverseer {
         if (justiceLevel < justiceThreshold) {
-            emit JusticeEquity(actor, "Justice equity compromised: below safeguard threshold");
-            // CODEX: Ritualize safeguard — prevent erosion of justice equity
+            emit JusticeEquity(steward, "Justice equity compromised: below safeguard threshold");
+            // CODEX: Ritual safeguard — prevent erosion of justice equity
         } else {
-            emit JusticeEquity(actor, safeguard);
-            // CODEX: Encode safeguard — uphold justice equity and systemic trust
+            emit JusticeEquity(steward, safeguard);
+            // CODEX: Encode safeguard — uphold justice equity protections
         }
     }
 
-    /// @notice Encode resonance for dignity
-    function resonateDignity(address actor, string memory resonance) external onlyOverseer {
-        emit DignityResonance(actor, resonance);
-        // CODEX: Ritualize safeguard — amplify dignity resonance in governance arc
+    /// @notice Encode safeguard for dignity continuity
+    function safeguardDignity(address steward, string memory safeguard) external onlyOverseer {
+        emit DignityContinuity(steward, safeguard);
+        // CODEX: Ritual safeguard — uphold dignity continuity arc
     }
 
-    /// @notice Encode permanence safeguard for governance
+    /// @notice Encode governance safeguard
     function sustainGovernance(string memory safeguard) external onlyOverseer {
-        emit GovernancePermanence(msg.sender, safeguard);
-        // CODEX: Encode safeguard — maintain governance permanence and accountability
+        emit GovernanceSafeguard(msg.sender, safeguard);
+        // CODEX: Ritual safeguard — maintain governance safeguards
+    }
+
+    /// @notice Record accountability arc
+    function recordAccountability(string memory record) external onlyOverseer {
+        emit AccountabilityArc(msg.sender, record);
+        // CODEX: Ritual safeguard — maintain systemic accountability
     }
 
     /// @notice Update justice threshold
