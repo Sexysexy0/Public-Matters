@@ -10,7 +10,7 @@ contract JudicialDisputeTest is Test {
     InstitutionalAuditHistory public auditHistory;
 
     address public masterContractor = address(0x9999);
-    address public certifiedMediatorNode = address(0xCC15); 
+    address public certifiedMediatorNode = address(0xCC15);
     address public litigantClaimant = address(0xAAAA);
     address public litigantRespondent = address(0xBBBB);
 
@@ -18,14 +18,14 @@ contract JudicialDisputeTest is Test {
 
     function setUp() public {
         vm.deal(address(this), 50 ether);
-        
+
         vm.startPrank(masterContractor);
         auditHistory = new InstitutionalAuditHistory();
         router = new JudicialDisputeRouter();
-        
+
         router.setAuditHistoryAddress(address(auditHistory));
         auditHistory.setLoggerAuthorization(address(router), true);
-        
+
         router.setMediatorClearance(certifiedMediatorNode, true);
         vm.stopPrank();
 
@@ -38,7 +38,7 @@ contract JudicialDisputeTest is Test {
         uint256 disputeId = router.referToMediation{value: 5 ether}(litigantRespondent, certifiedMediatorNode);
         assertEq(disputeId, 1);
 
-        (,,,, JudicialDisputeRouter.MediationStatus status, address mediator, ) = router.disputes(1);
+        (,,,, JudicialDisputeRouter.MediationStatus status, address mediator,) = router.disputes(1);
         assertTrue(status == JudicialDisputeRouter.MediationStatus.UnderMediation);
         assertEq(mediator, certifiedMediatorNode);
 
@@ -54,7 +54,7 @@ contract JudicialDisputeTest is Test {
         assertEq(litigantRespondent.balance, initialRespondentBalance + 2 ether);
 
         // Hakbang C: Pormal na verification ng mediation case lifecycle resolution parameters
-        (,,,, JudicialDisputeRouter.MediationStatus finalStatus,,bytes32 resolutionHash) = router.disputes(1);
+        (,,,, JudicialDisputeRouter.MediationStatus finalStatus,, bytes32 resolutionHash) = router.disputes(1);
         assertTrue(finalStatus == JudicialDisputeRouter.MediationStatus.Settled);
         assertEq(resolutionHash, sampleResolution);
     }

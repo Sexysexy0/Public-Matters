@@ -22,7 +22,7 @@ contract JudiciaryWelfareVaultTest is Test {
         vm.startPrank(guardianWallet);
         auditHistory = new InstitutionalAuditHistory();
         vault = new JudiciaryWelfareVault(minimalContribution);
-        
+
         vault.setAuditHistoryAddress(address(auditHistory));
         auditHistory.setLoggerAuthorization(address(vault), true);
         vm.stopPrank();
@@ -48,12 +48,12 @@ contract JudiciaryWelfareVaultTest is Test {
         vm.prank(guardianWallet);
         vault.settleWelfareClaim(claimId);
 
-        (, , , , bool approved, bool settled) = vault.claims(1);
+        (,,,, bool approved, bool settled) = vault.claims(1);
         assertTrue(approved);
         assertTrue(settled);
 
         // Hakbang D: Sinusuri kung pumasok ang +1 grantsReceived record telemetry on-chain
-        (, uint256 grants, , , , ) = auditHistory.viewHistory(courtStaff);
+        (, uint256 grants,,,,) = auditHistory.viewHistory(courtStaff);
         assertEq(grants, 1);
     }
 }
