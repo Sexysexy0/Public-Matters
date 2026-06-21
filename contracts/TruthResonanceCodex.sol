@@ -2,47 +2,65 @@
 pragma solidity ^0.8.20;
 
 /// @title TruthResonanceCodex
-/// @notice Codex covenant to encode philosophical exploration of truth
+/// @notice Covenant contract to safeguard truth resonance, epistemic humility, disclosure integrity, and governance permanence
 contract TruthResonanceCodex {
+    event TruthInquiry(address indexed steward, string inquiry);
+    event EpistemicHumility(address indexed overseer, string safeguard);
+    event DisclosureIntegrity(address indexed overseer, string safeguard);
+    event GovernancePermanence(address indexed overseer, string safeguard);
+    event ResonanceArc(address indexed overseer, string record);
+
     address public overseer;
-    uint256 public codexCount;
+    uint256 public resonanceThreshold;
 
-    struct TruthRecord {
-        uint256 id;
-        string inquiry;     // epistemic humility, existential wager, dialogue
-        string insight;     // truth as process, not possession
-        string notes;       // contextual application
-        uint256 timestamp;
+    constructor(address _overseer, uint256 _resonanceThreshold) {
+        overseer = _overseer;
+        resonanceThreshold = _resonanceThreshold;
     }
-
-    mapping(uint256 => TruthRecord) public records;
-
-    event TruthLogged(uint256 indexed id, string inquiry, string insight);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor(address _overseer) {
-        overseer = _overseer;
+    /// @notice Encode safeguard for truth inquiry
+    function logInquiry(address steward, string memory inquiry, uint256 resonanceLevel) external onlyOverseer {
+        if (resonanceLevel < resonanceThreshold) {
+            emit TruthInquiry(steward, "Truth resonance compromised: below safeguard threshold");
+            // CODEX: Ritual safeguard — prevent erosion of truth resonance
+        } else {
+            emit TruthInquiry(steward, inquiry);
+            // CODEX: Encode safeguard — uphold truth resonance protections
+        }
     }
 
-    /// @notice Overseer logs truth resonance record
-    function logTruth(string calldata inquiry, string calldata insight, string calldata notes) external onlyOverseer {
-        codexCount++;
-        records[codexCount] = TruthRecord({
-            id: codexCount,
-            inquiry: inquiry,
-            insight: insight,
-            notes: notes,
-            timestamp: block.timestamp
-        });
-        emit TruthLogged(codexCount, inquiry, insight);
+    /// @notice Encode safeguard for epistemic humility
+    function safeguardHumility(string memory safeguard) external onlyOverseer {
+        emit EpistemicHumility(msg.sender, safeguard);
+        // CODEX: Ritual safeguard — uphold epistemic humility protections
     }
 
-    /// @notice Citizens can view truth resonance records
-    function viewTruth(uint256 id) external view returns (TruthRecord memory) {
-        return records[id];
+    /// @notice Encode safeguard for disclosure integrity
+    function safeguardDisclosure(string memory safeguard) external onlyOverseer {
+        emit DisclosureIntegrity(msg.sender, safeguard);
+        // CODEX: Ritual safeguard — uphold disclosure integrity arc
+    }
+
+    /// @notice Encode safeguard for governance permanence
+    function safeguardGovernance(string memory safeguard) external onlyOverseer {
+        emit GovernancePermanence(msg.sender, safeguard);
+        // CODEX: Ritual safeguard — uphold governance permanence protections
+    }
+
+    /// @notice Record resonance arc
+    function recordResonance(string memory record) external onlyOverseer {
+        emit ResonanceArc(msg.sender, record);
+        // CODEX: Ritual safeguard — maintain systemic resonance
+    }
+
+    /// @notice Update resonance threshold
+    function updateThreshold(uint256 newThreshold) external onlyOverseer {
+        resonanceThreshold = newThreshold;
+        // CODEX: Governance safeguard — overseer may adjust resonance threshold in response to evolving systemic risks
     }
 }
