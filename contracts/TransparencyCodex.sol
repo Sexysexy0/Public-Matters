@@ -2,43 +2,66 @@
 pragma solidity ^0.8.20;
 
 /// @title TransparencyCodex
-/// @notice Immutable record of government decisions and budget allocations
+/// @notice Covenant contract to encode openness, auditability, and governance traceability
+/// @dev Provides structured rituals for transparent governance records
 contract TransparencyCodex {
-    address public oversightCommittee;
-    uint256 public recordCount;
+    address public overseer;
+    uint256 public covenantCount;
 
     struct Record {
         uint256 id;
-        string decision;
+        string action;          // Governance action description
+        string actor;           // Actor responsible (e.g., overseer, citizen, provider)
+        bool auditable;         // True if record is auditable
+        bool traceable;         // True if record is traceable
+        string notes;           // Governance notes
         uint256 timestamp;
     }
 
     mapping(uint256 => Record) public records;
 
-    event RecordLogged(uint256 indexed id, string decision);
+    event RecordLogged(
+        uint256 indexed id,
+        string action,
+        string actor,
+        bool auditable,
+        bool traceable,
+        string notes
+    );
 
-    modifier onlyOversight() {
-        require(msg.sender == oversightCommittee, "Not authorized");
+    modifier onlyOverseer() {
+        require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor(address _oversightCommittee) {
-        oversightCommittee = _oversightCommittee;
+    constructor(address _overseer) {
+        overseer = _overseer;
     }
 
-    /// @notice Oversight Committee logs government decisions
-    function logDecision(string calldata decision) external onlyOversight {
-        recordCount++;
-        records[recordCount] = Record({
-            id: recordCount,
-            decision: decision,
+    /// @notice Overseer logs governance record with transparency safeguards
+    function logRecord(
+        string calldata action,
+        string calldata actor,
+        bool auditable,
+        bool traceable,
+        string calldata notes
+    ) external onlyOverseer {
+        covenantCount++;
+        records[covenantCount] = Record({
+            id: covenantCount,
+            action: action,
+            actor: actor,
+            auditable: auditable,
+            traceable: traceable,
+            notes: notes,
             timestamp: block.timestamp
         });
-        emit RecordLogged(recordCount, decision);
+        emit RecordLogged(covenantCount, action, actor, auditable, traceable, notes);
     }
 
-    /// @notice Citizens can view logged decisions
-    function viewDecision(uint256 id) external view returns (Record memory) {
-        return records[id];
+    /// @notice Governance rule: if auditable == false or traceable == false, mark as opaque
+    function isOpaque(uint256 id) external view returns (bool) {
+        Record memory r = records[id];
+        return (!r.auditable || !r.traceable);
     }
 }

@@ -1,3 +1,21 @@
 [submodule "lib/forge-std"]
 	path = lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "upgrades/superpowers"]
+	path = upgrades/superpowers
+	url = https://github.com/obra/superpowers
+[submodule "upgrades/get-shit-done"]
+	path = upgrades/get-shit-done
+	url = https://github.com/open-gsd/gsd-core
+[submodule "upgrades/ultra-review"]
+	path = upgrades/ultra-review
+	url = https://github.com/th9rain/ultrareview
+[submodule "upgrades/context-mode"]
+	path = upgrades/context-mode
+	url = https://github.com/ShmidtS/context-mode
+[submodule "upgrades/cloud-mem"]
+	path = upgrades/cloud-mem
+	url = https://github.com/kingbootoshi/cloud
+[submodule "upgrades/entropiq-design"]
+	path = upgrades/entropiq-design
+	url = https://github.com/mercicle/entropiq
