@@ -1,17 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title BiodiversityPreservationOracle
+/// @notice Covenant contract to safeguard species equity, habitat resonance, ecological continuity, and oracle broadcasts
 contract BiodiversityPreservationOracle {
-    event BiodiversityEquity(string principle, string safeguard);
-    event SpeciesDignity(string arc, string safeguard);
-    event HabitatResonance(string ritual, string safeguard);
-    event EcologicalContinuity(string arc, string safeguard);
-    event OracleBroadcast(string arc, string safeguard);
+    event SpeciesEquity(address indexed overseer, string safeguard);
+    event HabitatResonance(address indexed overseer, string safeguard);
+    event EcologicalContinuity(address indexed overseer, string safeguard);
+    event OracleBroadcast(address indexed overseer, string message);
 
     address public overseer;
+    uint256 public preservationThreshold;
 
-    constructor(address _overseer) {
+    constructor(address _overseer, uint256 _preservationThreshold) {
         overseer = _overseer;
+        preservationThreshold = _preservationThreshold;
     }
 
     modifier onlyOverseer() {
@@ -19,33 +22,38 @@ contract BiodiversityPreservationOracle {
         _;
     }
 
-    // Safeguard: Encode biodiversity equity
-    function safeguardBiodiversity(string memory principle, string memory safeguard) external onlyOverseer {
-        emit BiodiversityEquity(principle, safeguard);
-        // ORACLE: Ritualize safeguard — uphold biodiversity equity and resist systemic extinction pressures.
+    /// @notice Encode safeguard for species equity
+    function safeguardSpecies(string memory safeguard, uint256 preservationLevel) external onlyOverseer {
+        if (preservationLevel < preservationThreshold) {
+            emit SpeciesEquity(msg.sender, "Species equity compromised: below safeguard threshold");
+            // ORACLE: Ritual safeguard — prevent erosion of species equity
+        } else {
+            emit SpeciesEquity(msg.sender, safeguard);
+            // ORACLE: Encode safeguard — uphold species equity protections
+        }
     }
 
-    // Safeguard: Encode species dignity
-    function enforceSpecies(string memory arc, string memory safeguard) external onlyOverseer {
-        emit SpeciesDignity(arc, safeguard);
-        // ORACLE: Encode safeguard — ensure species dignity and protect against exploitation or neglect.
+    /// @notice Encode safeguard for habitat resonance
+    function safeguardHabitat(string memory safeguard) external onlyOverseer {
+        emit HabitatResonance(msg.sender, safeguard);
+        // ORACLE: Ritual safeguard — uphold habitat resonance protections
     }
 
-    // Safeguard: Encode habitat resonance
-    function preserveHabitat(string memory ritual, string memory safeguard) external onlyOverseer {
-        emit HabitatResonance(ritual, safeguard);
-        // ORACLE: Ritualize safeguard — uphold habitat resonance and ecological stewardship.
+    /// @notice Encode safeguard for ecological continuity
+    function safeguardEcology(string memory safeguard) external onlyOverseer {
+        emit EcologicalContinuity(msg.sender, safeguard);
+        // ORACLE: Ritual safeguard — uphold ecological continuity protections
     }
 
-    // Safeguard: Encode ecological continuity
-    function sustainEcology(string memory arc, string memory safeguard) external onlyOverseer {
-        emit EcologicalContinuity(arc, safeguard);
-        // ORACLE: Encode safeguard — maintain ecological continuity and systemic resilience.
+    /// @notice Broadcast oracle message for biodiversity preservation
+    function broadcastOracle(string memory message) external onlyOverseer {
+        emit OracleBroadcast(msg.sender, message);
+        // ORACLE: Ritual safeguard — amplify biodiversity preservation narrative
     }
 
-    // Safeguard: Encode oracle broadcast
-    function broadcastOracle(string memory arc, string memory safeguard) external onlyOverseer {
-        emit OracleBroadcast(arc, safeguard);
-        // ORACLE: Ritualize broadcast safeguard — amplify biodiversity preservation narrative as communal covenant.
+    /// @notice Update preservation threshold
+    function updateThreshold(uint256 newThreshold) external onlyOverseer {
+        preservationThreshold = newThreshold;
+        // ORACLE: Governance safeguard — overseer may adjust preservation threshold in response to evolving systemic risks
     }
 }
