@@ -18,7 +18,7 @@ contract OperationalCircuitBreaker {
     uint256 public cooldownExpiryBlock;
     uint256 public constant MINIMUM_FREEZE_WINDOW = 50; // Minimum block lock length to guarantee investigation buffer
     
-    // Registry tracking awtorisadong telemetry nodes at watcher bots
+    // Registry tracking authorized telemetry nodes and watcher bots
     mapping(address => bool) public authorizedRiskTriggers;
 
     constructor() {
