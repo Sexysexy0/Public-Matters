@@ -122,7 +122,7 @@ contract ConsensusTimeLockGovernor {
     }
 
     /**
-     * @notice Instantly volds, purges, and erases an unverified proposal or transaction trail from the system lifecycle queues.
+     * @notice Instantly voids, purges, and erases an unverified proposal or transaction trail from the system lifecycle queues.
      */
     function emergencyVetoProposal(bytes32 _proposalId, string calldata _reason) external onlyMasterRoot {
         require(proposalsHistory[_proposalId].initialized, "Registry Exception: Targeted architecture queue tracking coordinate is uninstantiated");
