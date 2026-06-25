@@ -1,120 +1,123 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title TalentSovereigntyLedger
-/// @notice Safeguard contract to map personal abilities, track whole person parameters, and enforce identity bounds against systemic coercion
+/**
+ * @title TalentSovereigntyLedger
+ * @notice Cryptographic infrastructure to attest, log, and protect human intellectual property against un-authorized AI scraping and algorithm generation synthesis.
+ */
 contract TalentSovereigntyLedger {
-    event TalentProfileEnrolled(address indexed individual, bytes32 indexed abilityVectorHash, bool indexed matchesJobFit);
-    event BehavioralAptitudeLogged(address indexed individual, uint256 introversionExtroversionIndex, uint256 specialistGeneralistIndex);
-    event SystemicHoopFlagged(address indexed individual, string trapType, uint256 blockTimestamp);
-    event PersonalVisionAnchored(address indexed individual, bytes32 indexed visionStatementHash);
-    event BoundaryStewardTransferred(address indexed oldSteward, address indexed newSteward);
+    event CreationAttested(bytes32 indexed workHash, address indexed creator, string workTitle, bool isFullyHuman);
+    event InfringementLogged(bytes32 indexed workHash, string evidenceUrl, uint256 severityTier);
+    event VerificationNodeConfigured(address indexed validatorAddress, bool status);
 
-    address public boundarySteward;
-    bool public zeroTrustSystemFiltering;
+    address public ledgerSteward;
+    uint256 public totalAttestedWorks;
+    uint256 public totalInfringementClaims;
 
-    struct HardwiredAbilities {
-        uint256 drivingAptitudeScore;       // Derived from objective work samples index (e.g., Classification, Concept Organization)
-        uint256 spatialRelationsScore;      // Structural vs Abstract metric mapping
-        uint256 ideaProductivityIndex;      // Flow rate processing metrics
-        bool profileInstantiated;
+    struct WorkAttestation {
+        address creator;
+        string title;
+        uint256 registeredBlock;
+        bool verifiedHumanMade;
+        bool initialSignatureLock;
     }
 
-    struct PersonalityAlignment {
-        uint256 interpersonalStyleDial;     // Introvert to Extrovert continuum array mapping
-        uint256 executionSpecialtyDial;     // Specialist to Generalist baseline indexing
-        bool boundariesEstablished;
-        uint256 evaluatedAtBlock;
+    struct InfringementLog {
+        bytes32 targetWorkHash;
+        uint256 alertBlock;
+        string proofLink; // Decentralized link tracking AI model scraping or unlicensed duplication
+        bool resolved;
     }
 
-    // Mapping from individual identity address to measured ability capital blocks
-    mapping(address => HardwiredAbilities) public abilitiesRegistry;
-    // Mapping from individual identity address to core person alignment metrics
-    mapping(address => PersonalityAlignment) public personalityRegistry;
-    // Mapping from unique vision tracking tokens to authenticity verification flags
-    mapping(bytes32 => bool) public verifiedPersonalVisions;
+    // Master mapping verifying human creative tokens and hashes
+    mapping(bytes32 => WorkAttestation) public sovereigntyRegistry;
+    // Infringement tracker protecting registered works
+    mapping(bytes32 => InfringementLog) public securityBreachLedger;
+    // Trusted copyright boards, creative guilds, or independent human networks
+    mapping(address => bool) public humanVerificationNodes;
 
     constructor() {
-        boundarySteward = msg.sender;
-        zeroTrustSystemFiltering = true;
+        ledgerSteward = msg.sender;
+        humanVerificationNodes[msg.sender] = true;
     }
 
     modifier onlySteward() {
-        require(msg.sender == boundarySteward, "Unauthorized: Boundary Steward signature check failed");
+        require(msg.sender == ledgerSteward, "Access Denied: Master steward signature validation fail");
         _;
     }
 
-    /// @notice Instantiate an individual's hardwired natural talents and structural ability framework
-    function recordHardwiredAbilities(
-        address _individual,
-        uint256 _drivingScore,
-        uint256 _spatialScore,
-        uint256 _ideaIndex
-    ) external onlySteward {
-        require(_individual != address(0), "Invalid deployment target coordinates");
-        require(!abilitiesRegistry[_individual].profileInstantiated, "Talent profile baseline parameters already verified");
+    modifier onlyVerificationNode() {
+        require(humanVerificationNodes[msg.sender], "Access Denied: Caller is not an authorized human verification node");
+        _;
+    }
 
-        abilitiesRegistry[_individual] = HardwiredAbilities({
-            drivingAptitudeScore: _drivingScore,
-            spatialRelationsScore: _spatialScore,
-            ideaProductivityIndex: _ideaIndex,
-            profileInstantiated: true
+    /**
+     * @notice Authorizes independent creative unions or technical guilds to verify human authenticity signatures.
+     */
+    function configureVerificationNode(address _node, bool _status) external onlySteward {
+        require(_node != address(0), "Parameter Error: Node identity cannot be blank coordinate");
+        humanVerificationNodes[_node] = _status;
+        emit VerificationNodeConfigured(_node, _status);
+    }
+
+    /**
+     * @notice Registers and immutably time-stamps a creation hash to prove human origin.
+     * @param _workHash The unique Keccak-256 fingerprint/hash of the text, digital design, or asset source file.
+     * @param _title Publicly legible metadata title describing the work.
+     */
+    function attestHumanCreation(bytes32 _workHash, string calldata _title) external {
+        require(_workHash != bytes32(0), "Parameter Error: Target creation fingerprint cannot be blank");
+        require(!sovereigntyRegistry[_workHash].initialSignatureLock, "Collision Intercept: Provenance token already registered");
+        bytes memory titleCheck = bytes(_title);
+        require(titleCheck.length > 0, "Parameter Error: Title coordinate cannot be blank");
+
+        sovereigntyRegistry[_workHash] = WorkAttestation({
+            creator: msg.sender,
+            title: _title,
+            registeredBlock: block.number,
+            verifiedHumanMade: false, // Default state until validated by a trusted verification node
+            initialSignatureLock: true
         });
 
-        bytes32 vectorHash = keccak256(abi.encodePacked(_drivingScore, _spatialScore, _ideaIndex));
-        emit TalentProfileEnrolled(_individual, vectorHash, true);
+        totalAttestedWorks += 1;
+        emit CreationAttested(_workHash, msg.sender, _title, false);
     }
 
-    /// @notice Log dynamic internal personality style parameters to prevent outer-directed role coercion
-    /// @param _introExtro Value tracking energy source patterns (Introversion vs Extroversion)
-    /// @param _specGen Value tracking operational execution context (Specialist vs Generalist)
-    function synchronizePersonalityDials(
-        address _individual,
-        uint256 _introExtro,
-        uint256 _specGen
-    ) external onlySteward {
-        require(abilitiesRegistry[_individual].profileInstantiated, "Access Denied: Ability matrix baseline registry must be instantiated first");
-        require(_introExtro <= 100 && _specGen <= 100, "Parameter Violation: Matrix dials must scale from 0 to 100 base index");
+    /**
+     * @notice Upgrades a work's state to 'Verified Human-Made' following review by a validated verification node.
+     */
+    function validateHumanProvenance(bytes32 _workHash) external onlyVerificationNode {
+        WorkAttestation storage asset = sovereigntyRegistry[_workHash];
+        require(asset.initialSignatureLock, "Registry Exception: Targeted asset fingerprint does not exist");
+        require(!asset.verifiedHumanMade, "State Error: Provenance signature is already certified human-made");
 
-        personalityRegistry[_individual] = PersonalityAlignment({
-            interpersonalStyleDial: _introExtro,
-            executionSpecialtyDial: _specGen,
-            boundariesEstablished: true,
-            evaluatedAtBlock: block.number
+        asset.verifiedHumanMade = true;
+        emit CreationAttested(_workHash, asset.creator, asset.title, true);
+    }
+
+    /**
+     * @notice Logs public incidents where AI frameworks or unauthorized scrapers copy human intellectual properties.
+     * @param _claimId Unique cryptographic tracking key for the active incident file.
+     * @param _workHash The original registered asset fingerprint affected by the breach.
+     * @param _evidenceUrl IPFS or secure storage link demonstrating the unlicensed training data use.
+     */
+    function logAIScrapingBreach(
+        bytes32 _claimId, 
+        bytes32 _workHash, 
+        string calldata _evidenceUrl
+    ) external {
+        require(_claimId != bytes32(0) && _workHash != bytes32(0), "Parameter Error: Invalid structural indicators");
+        require(sovereigntyRegistry[_workHash].initialSignatureLock, "Registry Exception: Cannot log breach for unregistered work");
+        require(!securityBreachLedger[_claimId].resolved, "Collision Intercept: Breach case code already registered");
+
+        securityBreachLedger[_claimId] = InfringementLog({
+            targetWorkHash: _workHash,
+            alertBlock: block.number,
+            proofLink: _evidenceUrl,
+            resolved: false
         });
 
-        emit BehavioralAptitudeLogged(_individual, _introExtro, _specGen);
-    }
-
-    /// @notice Enforce strict inside-out Personal Vision parameters against rigid outside system rules
-    /// @param _visionHash Cryptographic trace of the integrated personal statement matrix
-    /// @param _isOuterDirected If true, signals an external system configuration attempting parameter injection
-    function auditSystemicHoops(
-        address _individual,
-        bytes32 _visionHash,
-        bool _isOuterDirected
-    ) external onlySteward {
-        require(personalityRegistry[_individual].boundariesEstablished, "Security Gate: Personal boundaries registry must be locked");
-
-        if (zeroTrustSystemFiltering && _isOuterDirected) {
-            emit SystemicHoopFlagged(_individual, "The Lemming Conspiracy: Unauthorized systemic prioritization token detected", block.number);
-            // Reverse integration protocol: block verification flow until inside-out alignment matches baseline criteria
-            verifiedPersonalVisions[_visionHash] = false;
-        } else {
-            verifiedPersonalVisions[_visionHash] = true;
-            emit PersonalVisionAnchored(_individual, _visionHash);
-        }
-    }
-
-    /// @notice Toggle the proactive system optimization loop configuration overrides
-    function toggleSystemFiltering(bool _filteringStatus) external onlySteward {
-        zeroTrustSystemFiltering = _filteringStatus;
-    }
-
-    /// @notice Upgrade the central boundary control structure to a verified destination anchor node
-    function transferBoundaryStewardship(address _newSteward) external onlySteward {
-        require(_newSteward != address(0), "Invalid corporate deployment coordinate configurations");
-        emit BoundaryStewardTransferred(boundarySteward, _newSteward);
-        boundarySteward = _newSteward;
+        totalInfringementClaims += 1;
+        emit InfringementLogged(_workHash, _evidenceUrl, block.number);
     }
 }
