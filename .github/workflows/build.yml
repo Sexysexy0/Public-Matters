@@ -1,0 +1,32 @@
+name: Smart Contract CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Gagamit na ng v4 para compliant sa Node 24 image setup
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22' # Puwersahing tumakbo sa pinaka-stable na LTS block
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Run Tests & Build
+      run: |
+        if [ -f "package.json" ]; then
+          npm run build --if-present
+          npm test --if-present
+        fi
