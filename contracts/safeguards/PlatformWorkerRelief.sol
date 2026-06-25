@@ -1,141 +1,132 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title PlatformWorkerRelief
-/// @notice Covenant contract to manage emergency financial relief distributions, verify worker metrics, and enforce labor protection rules
+/**
+ * @title PlatformWorkerRelief
+ * @notice Engineering architecture providing decentralized protection pools and verifiable human labor certification to shield traditional workers from AI automation displacement.
+ */
 contract PlatformWorkerRelief {
-    event GrantAllocated(bytes32 indexed reliefId, address indexed workerNode, uint256 tokenAmount, string conditionTag);
-    event ReliefPackageDisbursed(bytes32 indexed reliefId, address indexed workerNode, uint256 blockTimestamp);
-    event WorkerStandingUpdated(address indexed workerNode, bool indexed isActive, uint256 outputScore);
-    event ReliefAuthorityTransferred(address indexed oldAuthority, address indexed newAuthority);
+    event WorkerRegistered(address indexed workerAddress, string name, string traditionalJob);
+    event WorkerDisplaced(address indexed workerAddress, string verificationHash);
+    event ReliefDisbursed(address indexed workerAddress, uint256 amountClaimed);
+    event PoolFunded(address indexed donorNode, uint256 fundingAmount);
+    event AuditorStatusUpdated(address indexed auditorAddress, bool status);
 
-    address public reliefAuthority;
-    bool public reliefGrantsLocked;
-    uint256 public totalDisbursedReliefFunds;
+    address public systemGovernor;
+    uint256 public totalRegisteredWorkers;
+    uint256 public totalDisplacedWorkers;
+    uint256 public constant RELIEF_PAYOUT = 0.005 ether; // Gas allocation allocation for immediate deployment testing
 
     struct WorkerProfile {
-        bool isRegistered;
-        bool isActive;
-        uint256 totalContributionHours;
-        uint256 lastValidationTimestamp;
-        uint256 compositePerformanceIndex; // Scaled out of 100
+        string name;
+        string traditionalJob;
+        uint256 registrationBlock;
+        bool isDisplacedByAI;
+        uint256 totalReliefClaimed;
+        bool initialized;
     }
 
-    struct EmergencyGrant {
-        uint256 grantAmount;
-        bool claimsExecuted;
-        bytes32 strategicJustificationHash; // Cryptographic verification link to official impact reports
-        uint256 expiryTimestamp;
-    }
-
-    // Mapping from worker node coordinate address to structural profiling records
+    // Transparent ledger tracking each registered human worker profile
     mapping(address => WorkerProfile) public workerRegistry;
-    // Mapping from unique relief batch ID to programmatic grant configurations
-    mapping(bytes32 => EmergencyGrant) public reliefGrantsLedger;
+    // Authorized entities (e.g., labor unions, human resources audit networks) allowed to verify AI displacement
+    mapping(address => bool) public authorizedLaborAuditors;
 
     constructor() {
-        reliefAuthority = msg.sender;
-        reliefGrantsLocked = false;
-        totalDisbursedReliefFunds = 0;
+        systemGovernor = msg.sender;
+        authorizedLaborAuditors[msg.sender] = true;
     }
 
-    modifier onlyAuthority() {
-        require(msg.sender == reliefAuthority, "Unauthorized: Relief Authority credentials check failed");
+    modifier onlyGovernor() {
+        require(msg.sender == systemGovernor, "Access Denied: Master governor validation signature failure");
         _;
     }
 
-    /// @notice Register a verified platform operator, developer, or infrastructure labor node
-    function registerWorkerNode(address _worker, uint256 _initialScore) external onlyAuthority {
-        require(_worker != address(0), "Invalid worker machine node coordinates");
-        require(!workerRegistry[_worker].isRegistered, "Worker profile already enrolled inside layout registry");
-        require(_initialScore <= 100, "Performance score validation exception: out of boundary scale");
-
-        workerRegistry[_worker] = WorkerProfile({
-            isRegistered: true,
-            isActive: true,
-            totalContributionHours: 0,
-            lastValidationTimestamp: block.timestamp,
-            compositePerformanceIndex: _initialScore
-        });
-
-        emit WorkerStandingUpdated(_worker, true, _initialScore);
+    modifier onlyAuthorizedAuditor() {
+        require(authorizedLaborAuditors[msg.sender], "Access Denied: Caller node is not an authorized labor auditor");
+        _;
     }
 
-    /// @notice Initialize and stage an emergency financial or resource relief grant pool
-    /// @param _reliefId Unique cryptographic tracker token assigned to the relief framework batch
-    /// @param _amount Quantitative asset or unit value allocated per qualified node claim
-    /// @param _reportCid Cryptographic fingerprint proof document detailing structural dislocation parameters
-    /// @param _duration Temporal validity lifetime of the grant track before auto-expiration triggers
-    function stageEmergencyGrant(
-        bytes32 _reliefId,
-        uint256 _amount,
-        bytes32 _reportCid,
-        uint256 _duration
-    ) external onlyAuthority {
-        require(_reliefId != bytes32(0), "Invalid configuration identifier token hash");
-        require(_amount > 0, "Allocation amount must be greater than zero configuration steps");
-        require(reliefGrantsLedger[_reliefId].grantAmount == 0, "Relief package instance already registered in ledger");
-
-        reliefGrantsLedger[_reliefId] = EmergencyGrant({
-            grantAmount: _amount,
-            claimsExecuted: false,
-            strategicJustificationHash: _reportCid,
-            expiryTimestamp: block.timestamp + _duration
-        });
+    modifier onlyRegisteredWorker() {
+        require(workerRegistry[msg.sender].initialized, "Access Denied: Caller wallet is not a registered human worker");
+        _;
     }
 
-    /// @notice Execute and disburse an approved emergency relief packet directly to an active worker node
-    /// @param _reliefId Cryptographic identity string of the staged relief token batch
-    /// @param _workerNode The destination worker address authorized to absorb the stabilization payout
-    /// @param _condition Metadata string verifying compliance context (e.g., "Systemic Down-time Compensation")
-    function executeReliefPayout(
-        bytes32 _reliefId,
-        address payable _workerNode,
-        string memory _condition
-    ) external onlyAuthority {
-        require(!reliefGrantsLocked, "Systemic Override: Grant distributions are currently frozen by authority");
+    /**
+     * @notice Authorizes a human-centric organization or labor union node to audit and verify displacement cases.
+     */
+    function configureAuditorNode(address _auditor, bool _status) external onlyGovernor {
+        require(_auditor != address(0), "Parameter Error: Auditor node address cannot be blank coordinate");
+        authorizedLaborAuditors[_auditor] = _status;
+        emit AuditorStatusUpdated(_auditor, _status);
+    }
+
+    /**
+     * @notice Registers a traditional worker into the immutable human labor ledger.
+     * @param _name Full identity string or pseudo-anonymous developer alias of the worker.
+     * @param _job The traditional manual, creative, or technical job title threatened by automation.
+     */
+    function registerHumanWorker(string calldata _name, string calldata _job) external {
+        require(!workerRegistry[msg.sender].initialized, "Collision Intercept: Human worker wallet already registered");
+        bytes memory nameCheck = bytes(_name);
+        bytes memory jobCheck = bytes(_job);
+        require(nameCheck.length > 0 && jobCheck.length > 0, "Parameter Error: Identity fields cannot be blank");
+
+        workerRegistry[msg.sender] = WorkerProfile({
+            name: _name,
+            traditionalJob: _job,
+            registrationBlock: block.number,
+            isDisplacedByAI: false,
+            totalReliefClaimed: 0,
+            initialized: true
+        });
+
+        totalRegisteredWorkers += 1;
+        emit WorkerRegistered(msg.sender, _name, _job);
+    }
+
+    /**
+     * @notice Cryptographically verifies that a worker's specific role was replaced or automated away by an AI system.
+     * @param _worker The public address of the displaced human worker.
+     * @param _verificationHash External storage link containing layoff letters, audit reports, or firm automation telemetry.
+     */
+    function verifyAIDisplacement(address _worker, string calldata _verificationHash) external onlyAuthorizedAuditor {
+        WorkerProfile storage worker = workerRegistry[_worker];
+        require(worker.initialized, "Registry Exception: Targeted worker profile does not exist");
+        require(!worker.isDisplacedByAI, "State Error: Targeted worker is already verified as AI-displaced");
+
+        worker.isDisplacedByAI = true;
+        totalDisplacedWorkers += 1;
+
+        emit WorkerDisplaced(_worker, _verificationHash);
+    }
+
+    /**
+     * @notice Allows verified displaced workers to instantly claim financial lifelines directly from the smart contract pool.
+     */
+    function claimWorkerRelief() external onlyRegisteredWorker {
+        WorkerProfile storage worker = workerRegistry[msg.sender];
+        require(worker.isDisplacedByAI, "Access Denied: Worker status is not currently verified as AI-displaced");
+        require(address(this).balance >= RELIEF_PAYOUT, "Liquidity Exception: Relief pool reserves exhausted, awaiting system funding");
+
+        worker.totalReliefClaimed += RELIEF_PAYOUT;
         
-        EmergencyGrant storage grant = reliefGrantsLedger[_reliefId];
-        require(grant.grantAmount > 0, "Target relief blueprint instance does not exist in ledger");
-        require(!grant.claimsExecuted, "Execution Collision: Target grant package already executed or depleted");
-        require(block.timestamp <= grant.expiryTimestamp, "Temporal Exception: Relief grant validation timeframe has expired");
+        (bool success, ) = payable(msg.sender).call{value: RELIEF_PAYOUT}("");
+        require(success, "Execution Failure: Emergency asset transfer rejected by receiver node");
 
-        WorkerProfile memory worker = workerRegistry[_workerNode];
-        require(worker.isRegistered && worker.isActive, "Access Denied: Target node has no valid standing clearance");
-
-        grant.claimsExecuted = true;
-        totalDisbursedReliefFunds += grant.grantAmount;
-
-        (bool success, ) = _workerNode.call{value: grant.grantAmount}("");
-        require(success, "Critical Fault: Failed to execute economic asset transference to worker node");
-
-        emit GrantAllocated(_reliefId, _workerNode, grant.grantAmount, _condition);
-        emit ReliefPackageDisbursed(_reliefId, _workerNode, block.timestamp);
+        emit ReliefDisbursed(msg.sender, RELIEF_PAYOUT);
     }
 
-    /// @notice Calibrate worker performance indexes to reflect dynamic structural output adjustments
-    function updateWorkerMetrics(address _worker, uint256 _newScore, uint256 _hoursAdded) external onlyAuthority {
-        require(workerRegistry[_worker].isRegistered, "Worker configuration profile not found");
-        require(_newScore <= 100, "Performance index out of boundary range");
-
-        workerRegistry[_worker].compositePerformanceIndex = _newScore;
-        workerRegistry[_worker].totalContributionHours += _hoursAdded;
-        workerRegistry[_worker].lastValidationTimestamp = block.timestamp;
-
-        emit WorkerStandingUpdated(_worker, workerRegistry[_worker].isActive, _newScore);
+    /**
+     * @notice Public reception terminal to receive funding and corporate taxes from AI-operating platforms.
+     */
+    receive() external payable {
+        emit PoolFunded(msg.sender, msg.value);
     }
 
-    /// @notice Toggle emergency grant locks instantly to defend core reserves during network attacks
-    function toggleGrantsLock(bool _lockStatus) external onlyAuthority {
-        reliefGrantsLocked = _lockStatus;
+    /**
+     * @notice External view to inspect total economic safety reserves currently stored in the framework.
+     */
+    function getReliefPoolBalance() external view returns (uint256) {
+        return address(this).balance;
     }
-
-    /// @notice Upgrade or migrate the central Relief Authority execution framework
-    function transferReliefAuthority(address _newAuthority) external onlyAuthority {
-        require(_newAuthority != address(0), "Invalid upgrade destination coordinates");
-        emit ReliefAuthorityTransferred(reliefAuthority, _newAuthority);
-        reliefAuthority = _newAuthority;
-    }
-
-    receive() external payable {}
 }
