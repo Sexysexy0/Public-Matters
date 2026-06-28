@@ -3,22 +3,22 @@
 pragma solidity ^0.8.20;
 
 /// @title WellnessSupportCodex
-/// @notice Covenant contract to safeguard students through counseling and wellness programs
+/// @notice Covenant contract to safeguard communities through emotional and psychological wellness support
 contract WellnessSupportCodex {
     address public overseer;
     uint256 public wellnessCount;
 
     struct WellnessEntry {
         uint256 id;
-        string program;
         string beneficiary;
-        string description;
+        string program;
+        string facilitator;
         uint256 timestamp;
     }
 
     mapping(uint256 => WellnessEntry) public wellnessEntries;
 
-    event WellnessLogged(uint256 indexed id, string program, string beneficiary);
+    event WellnessLogged(uint256 indexed id, string beneficiary, string program);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,19 +30,19 @@ contract WellnessSupportCodex {
     }
 
     function logWellness(
-        string calldata program,
         string calldata beneficiary,
-        string calldata description
+        string calldata program,
+        string calldata facilitator
     ) external onlyOverseer {
         wellnessCount++;
         wellnessEntries[wellnessCount] = WellnessEntry({
             id: wellnessCount,
-            program: program,
             beneficiary: beneficiary,
-            description: description,
+            program: program,
+            facilitator: facilitator,
             timestamp: block.timestamp
         });
-        emit WellnessLogged(wellnessCount, program, beneficiary);
+        emit WellnessLogged(wellnessCount, beneficiary, program);
     }
 
     function viewWellness(uint256 id) external view returns (WellnessEntry memory) {
