@@ -3,7 +3,7 @@
 pragma solidity ^0.8.20;
 
 /// @title CitizenParticipationCodex
-/// @notice Covenant contract to encode systemic citizen participation in governance reforms
+/// @notice Covenant contract to encode participatory governance arc
 contract CitizenParticipationCodex {
     address public overseer;
     uint256 public participationCount;
@@ -11,35 +11,38 @@ contract CitizenParticipationCodex {
     struct ParticipationEntry {
         uint256 id;
         address citizen;
-        string policyName;
-        string role;
-        string comments;
+        string activity;
+        string notes;
         uint256 timestamp;
     }
 
     mapping(uint256 => ParticipationEntry) public participations;
 
-    event ParticipationLogged(uint256 indexed id, address citizen, string policyName, string role);
+    event ParticipationLogged(uint256 indexed id, address citizen, string activity);
+
+    modifier onlyOverseer() {
+        require(msg.sender == overseer, "Not authorized");
+        _;
+    }
 
     constructor(address _overseer) {
         overseer = _overseer;
     }
 
     function logParticipation(
-        string calldata policyName,
-        string calldata role,
-        string calldata comments
-    ) external {
+        address citizen,
+        string calldata activity,
+        string calldata notes
+    ) external onlyOverseer {
         participationCount++;
         participations[participationCount] = ParticipationEntry({
             id: participationCount,
-            citizen: msg.sender,
-            policyName: policyName,
-            role: role,
-            comments: comments,
+            citizen: citizen,
+            activity: activity,
+            notes: notes,
             timestamp: block.timestamp
         });
-        emit ParticipationLogged(participationCount, msg.sender, policyName, role);
+        emit ParticipationLogged(participationCount, citizen, activity);
     }
 
     function viewParticipation(uint256 id) external view returns (ParticipationEntry memory) {
