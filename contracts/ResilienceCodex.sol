@@ -1,33 +1,24 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title ResilienceCodex
-/// @notice Covenant contract to encode adaptability, regeneration, and resilience safeguards in governance systems
-/// @dev Provides structured rituals for resilience enforcement across governance layers
+/// @notice Covenant contract to safeguard communities through systemic anchoring of resilience against exhaustion
 contract ResilienceCodex {
     address public overseer;
-    uint256 public covenantCount;
+    uint256 public resilienceCount;
 
-    struct ResilienceRule {
+    struct ResilienceEntry {
         uint256 id;
-        string principle;       // Resilience principle (e.g., adaptability, regeneration, sustainability)
-        bool adaptable;         // True if adaptability safeguard is active
-        bool regenerative;      // True if regeneration safeguard is active
-        bool sustainable;       // True if sustainability safeguard is active
-        string notes;           // Governance notes
+        string actor;
+        string challenge;
+        string method;
         uint256 timestamp;
     }
 
-    mapping(uint256 => ResilienceRule) public rules;
+    mapping(uint256 => ResilienceEntry) public resiliences;
 
-    event ResilienceLogged(
-        uint256 indexed id,
-        string principle,
-        bool adaptable,
-        bool regenerative,
-        bool sustainable,
-        string notes
-    );
+    event ResilienceLogged(uint256 indexed id, string actor, string method);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -38,30 +29,23 @@ contract ResilienceCodex {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs resilience principle with safeguards
-    function logRule(
-        string calldata principle,
-        bool adaptable,
-        bool regenerative,
-        bool sustainable,
-        string calldata notes
+    function logResilience(
+        string calldata actor,
+        string calldata challenge,
+        string calldata method
     ) external onlyOverseer {
-        covenantCount++;
-        rules[covenantCount] = ResilienceRule({
-            id: covenantCount,
-            principle: principle,
-            adaptable: adaptable,
-            regenerative: regenerative,
-            sustainable: sustainable,
-            notes: notes,
+        resilienceCount++;
+        resiliences[resilienceCount] = ResilienceEntry({
+            id: resilienceCount,
+            actor: actor,
+            challenge: challenge,
+            method: method,
             timestamp: block.timestamp
         });
-        emit ResilienceLogged(covenantCount, principle, adaptable, regenerative, sustainable, notes);
+        emit ResilienceLogged(resilienceCount, actor, method);
     }
 
-    /// @notice Governance rule: if adaptable == false or regenerative == false, mark as fragile
-    function isFragile(uint256 id) external view returns (bool) {
-        ResilienceRule memory r = rules[id];
-        return (!r.adaptable || !r.regenerative);
+    function viewResilience(uint256 id) external view returns (ResilienceEntry memory) {
+        return resiliences[id];
     }
 }
