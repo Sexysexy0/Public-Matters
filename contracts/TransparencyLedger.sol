@@ -9,10 +9,10 @@ contract TransparencyLedger {
 
     struct LedgerEntry {
         uint256 id;
-        string author;       // e.g. Emervin V. Gueco (Vinvin)
-        string workHash;     // hash of code/doc commit
-        string project;      // project/repo name
-        string safeguard;    // copyright, integrity, transparency
+        string author;
+        string workHash;
+        string project;
+        string safeguard;
         string notes;
         uint256 timestamp;
     }
@@ -30,8 +30,13 @@ contract TransparencyLedger {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs immutable authorship entry
-    function logEntry(string calldata author, string calldata workHash, string calldata project, string calldata safeguard, string calldata notes) external onlyOverseer {
+    function logEntry(
+        string calldata author,
+        string calldata workHash,
+        string calldata project,
+        string calldata safeguard,
+        string calldata notes
+    ) external onlyOverseer {
         entryCount++;
         entries[entryCount] = LedgerEntry({
             id: entryCount,
@@ -45,7 +50,6 @@ contract TransparencyLedger {
         emit EntryLogged(entryCount, author, workHash, project, safeguard, notes);
     }
 
-    /// @notice Citizens can view ledger entries
     function viewEntry(uint256 id) external view returns (LedgerEntry memory) {
         return entries[id];
     }
