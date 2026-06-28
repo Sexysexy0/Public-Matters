@@ -1,33 +1,24 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title JusticeCodex
-/// @notice Covenant contract to encode accountability, lawful governance, and justice safeguards
-/// @dev Provides structured rituals for justice enforcement across governance layers
+/// @notice Covenant contract to safeguard communities through systemic anchoring of justice principles
 contract JusticeCodex {
     address public overseer;
-    uint256 public covenantCount;
+    uint256 public justiceCount;
 
-    struct JusticeRule {
+    struct JusticeEntry {
         uint256 id;
-        string principle;       // Justice principle (e.g., accountability, lawful governance, fairness)
-        bool accountable;       // True if accountability safeguard is active
-        bool lawful;            // True if lawful governance safeguard is active
-        bool fair;              // True if fairness safeguard is active
-        string notes;           // Governance notes
+        string actor;
+        string domain;
+        string principle;
         uint256 timestamp;
     }
 
-    mapping(uint256 => JusticeRule) public rules;
+    mapping(uint256 => JusticeEntry) public justices;
 
-    event JusticeLogged(
-        uint256 indexed id,
-        string principle,
-        bool accountable,
-        bool lawful,
-        bool fair,
-        string notes
-    );
+    event JusticeLogged(uint256 indexed id, string actor, string domain);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -38,30 +29,23 @@ contract JusticeCodex {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs justice principle with safeguards
-    function logRule(
-        string calldata principle,
-        bool accountable,
-        bool lawful,
-        bool fair,
-        string calldata notes
+    function logJustice(
+        string calldata actor,
+        string calldata domain,
+        string calldata principle
     ) external onlyOverseer {
-        covenantCount++;
-        rules[covenantCount] = JusticeRule({
-            id: covenantCount,
+        justiceCount++;
+        justices[justiceCount] = JusticeEntry({
+            id: justiceCount,
+            actor: actor,
+            domain: domain,
             principle: principle,
-            accountable: accountable,
-            lawful: lawful,
-            fair: fair,
-            notes: notes,
             timestamp: block.timestamp
         });
-        emit JusticeLogged(covenantCount, principle, accountable, lawful, fair, notes);
+        emit JusticeLogged(justiceCount, actor, domain);
     }
 
-    /// @notice Governance rule: if accountable == false or lawful == false, mark as injustice
-    function isInjustice(uint256 id) external view returns (bool) {
-        JusticeRule memory r = rules[id];
-        return (!r.accountable || !r.lawful);
+    function viewJustice(uint256 id) external view returns (JusticeEntry memory) {
+        return justices[id];
     }
 }
