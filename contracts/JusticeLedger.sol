@@ -1,46 +1,51 @@
-// contracts/JusticeLedger.sol
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/**
- * @title JusticeLedger
- * @notice Legal transparency, communal arbitration, restorative equity, and mythic dispute resolution.
- */
+/// @title JusticeLedger
+/// @notice Covenant contract to safeguard communities through recording truth‑anchored justice acts
 contract JusticeLedger {
-    address public admin;
+    address public overseer;
+    uint256 public justiceCount;
 
-    struct Case {
-        string title;
-        string parties;
-        string status;   // e.g., "Pending", "Resolved"
-        string resolution;
+    struct JusticeEntry {
+        uint256 id;
+        string actor;
+        string context;
+        string principle;
         uint256 timestamp;
     }
 
-    Case[] public cases;
+    mapping(uint256 => JusticeEntry) public justices;
 
-    event CaseLogged(string title, string parties, string status, string resolution, uint256 timestamp);
+    event JusticeLogged(uint256 indexed id, string actor, string context);
 
-    modifier onlyAdmin() {
-        require(msg.sender == admin, "Not admin");
+    modifier onlyOverseer() {
+        require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor() {
-        admin = msg.sender;
+    constructor(address _overseer) {
+        overseer = _overseer;
     }
 
-    function logCase(string calldata title, string calldata parties, string calldata status, string calldata resolution) external onlyAdmin {
-        cases.push(Case(title, parties, status, resolution, block.timestamp));
-        emit CaseLogged(title, parties, status, resolution, block.timestamp);
+    function logJustice(
+        string calldata actor,
+        string calldata context,
+        string calldata principle
+    ) external onlyOverseer {
+        justiceCount++;
+        justices[justiceCount] = JusticeEntry({
+            id: justiceCount,
+            actor: actor,
+            context: context,
+            principle: principle,
+            timestamp: block.timestamp
+        });
+        emit JusticeLogged(justiceCount, actor, context);
     }
 
-    function totalCases() external view returns (uint256) {
-        return cases.length;
-    }
-
-    function getCase(uint256 id) external view returns (Case memory) {
-        require(id < cases.length, "Invalid id");
-        return cases[id];
+    function viewJustice(uint256 id) external view returns (JusticeEntry memory) {
+        return justices[id];
     }
 }
