@@ -1,23 +1,24 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title IntegritySealLedger
-/// @notice Ledger covenant to seal authorship and authenticity of Vinvin's personal legacy
+/// @notice Covenant contract to encode systemic integrity seals for governance permanence
 contract IntegritySealLedger {
     address public overseer;
     uint256 public sealCount;
 
-    struct SealRecord {
+    struct SealEntry {
         uint256 id;
-        string domain;      // original history, personal milestone
-        string seal;        // authenticity seal, authorship seal
-        string notes;       // contextual application
+        string domain;
+        string sealType;
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => SealRecord) public records;
+    mapping(uint256 => SealEntry) public seals;
 
-    event SealLogged(uint256 indexed id, string domain, string seal);
+    event SealLogged(uint256 indexed id, string domain, string sealType, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -28,21 +29,23 @@ contract IntegritySealLedger {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs integrity seal record
-    function logSeal(string calldata domain, string calldata seal, string calldata notes) external onlyOverseer {
+    function logSeal(
+        string calldata domain,
+        string calldata sealType,
+        string calldata description
+    ) external onlyOverseer {
         sealCount++;
-        records[sealCount] = SealRecord({
+        seals[sealCount] = SealEntry({
             id: sealCount,
             domain: domain,
-            seal: seal,
-            notes: notes,
+            sealType: sealType,
+            description: description,
             timestamp: block.timestamp
         });
-        emit SealLogged(sealCount, domain, seal);
+        emit SealLogged(sealCount, domain, sealType, description);
     }
 
-    /// @notice Citizens can view integrity seal records
-    function viewSeal(uint256 id) external view returns (SealRecord memory) {
-        return records[id];
+    function viewSeal(uint256 id) external view returns (SealEntry memory) {
+        return seals[id];
     }
 }
