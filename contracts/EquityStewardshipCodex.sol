@@ -3,21 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title EquityStewardshipCodex
-/// @notice Covenant contract to encode fairness, dignity, accountability, and governance stewardship
+/// @notice Covenant contract to encode systemic equity stewardship
 contract EquityStewardshipCodex {
     address public overseer;
-    uint256 public codexCount;
+    uint256 public equityCount;
 
-    struct StewardshipEntry {
+    struct EquityEntry {
         uint256 id;
         string principle;
         string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => StewardshipEntry) public entries;
+    mapping(uint256 => EquityEntry) public equities;
 
-    event StewardshipLogged(uint256 indexed id, string principle, string description);
+    event EquityLogged(uint256 indexed id, string principle);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -28,21 +28,21 @@ contract EquityStewardshipCodex {
         overseer = _overseer;
     }
 
-    function logStewardship(
+    function logEquity(
         string calldata principle,
         string calldata description
     ) external onlyOverseer {
-        codexCount++;
-        entries[codexCount] = StewardshipEntry({
-            id: codexCount,
+        equityCount++;
+        equities[equityCount] = EquityEntry({
+            id: equityCount,
             principle: principle,
             description: description,
             timestamp: block.timestamp
         });
-        emit StewardshipLogged(codexCount, principle, description);
+        emit EquityLogged(equityCount, principle);
     }
 
-    function viewStewardship(uint256 id) external view returns (StewardshipEntry memory) {
-        return entries[id];
+    function viewEquity(uint256 id) external view returns (EquityEntry memory) {
+        return equities[id];
     }
 }
