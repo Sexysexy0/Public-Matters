@@ -3,21 +3,24 @@
 pragma solidity ^0.8.20;
 
 /// @title CommunityTrustFund
-/// @notice Covenant contract to establish a shared fund for collective community support
+/// @notice Covenant contract for collective resource stewardship
 contract CommunityTrustFund {
     address public overseer;
     uint256 public fundBalance;
+    uint256 public contributionCount;
 
-    struct ContributionRecord {
+    struct ContributionEntry {
+        uint256 id;
         address contributor;
         uint256 amount;
+        string notes;
         uint256 timestamp;
     }
 
-    mapping(address => ContributionRecord[]) public contributions;
+    mapping(uint256 => ContributionEntry) public contributions;
 
-    event ContributionReceived(address indexed contributor, uint256 amount, uint256 timestamp);
-    event FundAllocated(address indexed overseer, uint256 amount, uint256 timestamp);
+    event ContributionLogged(uint256 indexed id, address contributor, uint256 amount);
+    event WithdrawalExecuted(address overseer, uint256 amount);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -26,28 +29,30 @@ contract CommunityTrustFund {
 
     constructor(address _overseer) {
         overseer = _overseer;
-        fundBalance = 0;
     }
 
-    function contribute() external payable {
+    function contribute(string calldata notes) external payable {
         require(msg.value > 0, "Contribution must be greater than zero");
+        contributionCount++;
         fundBalance += msg.value;
-        contributions[msg.sender].push(ContributionRecord(msg.sender, msg.value, block.timestamp));
-        emit ContributionReceived(msg.sender, msg.value, block.timestamp);
+        contributions[contributionCount] = ContributionEntry({
+            id: contributionCount,
+            contributor: msg.sender,
+            amount: msg.value,
+            notes: notes,
+            timestamp: block.timestamp
+        });
+        emit ContributionLogged(contributionCount, msg.sender, msg.value);
     }
 
-    function allocate(uint256 amount, address payable recipient) external onlyOverseer {
+    function withdraw(uint256 amount) external onlyOverseer {
         require(amount <= fundBalance, "Insufficient funds");
         fundBalance -= amount;
-        recipient.transfer(amount);
-        emit FundAllocated(overseer, amount, block.timestamp);
+        payable(overseer).transfer(amount);
+        emit WithdrawalExecuted(overseer, amount);
     }
 
-    function viewContributor(address contributor) external view returns (ContributionRecord[] memory) {
-        return contributions[contributor];
-    }
-
-    function getBalance() external view returns (uint256) {
-        return fundBalance;
+    function viewContribution(uint256 id) external view returns (ContributionEntry memory) {
+        return contributions[id];
     }
 }
