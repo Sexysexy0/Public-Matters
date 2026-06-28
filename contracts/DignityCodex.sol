@@ -1,33 +1,24 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title DignityCodex
-/// @notice Covenant contract to encode respect, humane treatment, and dignity safeguards in governance actions
-/// @dev Provides structured rituals for dignity enforcement across governance layers
+/// @notice Covenant contract to safeguard communities through systemic anchoring of dignity principles
 contract DignityCodex {
     address public overseer;
-    uint256 public covenantCount;
+    uint256 public dignityCount;
 
-    struct DignityRule {
+    struct DignityEntry {
         uint256 id;
-        string principle;       // Dignity principle (e.g., respect, humane treatment, fairness)
-        bool respectful;        // True if respect safeguard is active
-        bool humane;            // True if humane treatment safeguard is active
-        bool fair;              // True if fairness safeguard is active
-        string notes;           // Governance notes
+        string actor;
+        string context;
+        string principle;
         uint256 timestamp;
     }
 
-    mapping(uint256 => DignityRule) public rules;
+    mapping(uint256 => DignityEntry) public dignities;
 
-    event DignityLogged(
-        uint256 indexed id,
-        string principle,
-        bool respectful,
-        bool humane,
-        bool fair,
-        string notes
-    );
+    event DignityLogged(uint256 indexed id, string actor, string context);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -38,30 +29,23 @@ contract DignityCodex {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs dignity principle with safeguards
-    function logRule(
-        string calldata principle,
-        bool respectful,
-        bool humane,
-        bool fair,
-        string calldata notes
+    function logDignity(
+        string calldata actor,
+        string calldata context,
+        string calldata principle
     ) external onlyOverseer {
-        covenantCount++;
-        rules[covenantCount] = DignityRule({
-            id: covenantCount,
+        dignityCount++;
+        dignities[dignityCount] = DignityEntry({
+            id: dignityCount,
+            actor: actor,
+            context: context,
             principle: principle,
-            respectful: respectful,
-            humane: humane,
-            fair: fair,
-            notes: notes,
             timestamp: block.timestamp
         });
-        emit DignityLogged(covenantCount, principle, respectful, humane, fair, notes);
+        emit DignityLogged(dignityCount, actor, context);
     }
 
-    /// @notice Governance rule: if respectful == false or humane == false, mark as dignity breach
-    function isDignityBreach(uint256 id) external view returns (bool) {
-        DignityRule memory r = rules[id];
-        return (!r.respectful || !r.humane);
+    function viewDignity(uint256 id) external view returns (DignityEntry memory) {
+        return dignities[id];
     }
 }
