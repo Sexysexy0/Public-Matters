@@ -3,22 +3,22 @@
 pragma solidity ^0.8.20;
 
 /// @title SacrificeLedger
-/// @notice Covenant contract to safeguard communities through recording of true sacrifices and offerings
+/// @notice Covenant contract to safeguard communities through recording true sacrifices and offerings
 contract SacrificeLedger {
     address public overseer;
     uint256 public sacrificeCount;
 
     struct SacrificeEntry {
         uint256 id;
-        string offeror;
-        string offering;
-        string quality;
+        string actor;
+        string typeOfSacrifice;
+        string intention;
         uint256 timestamp;
     }
 
     mapping(uint256 => SacrificeEntry) public sacrifices;
 
-    event SacrificeLogged(uint256 indexed id, string offeror, string offering);
+    event SacrificeLogged(uint256 indexed id, string actor, string typeOfSacrifice);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,19 +30,19 @@ contract SacrificeLedger {
     }
 
     function logSacrifice(
-        string calldata offeror,
-        string calldata offering,
-        string calldata quality
+        string calldata actor,
+        string calldata typeOfSacrifice,
+        string calldata intention
     ) external onlyOverseer {
         sacrificeCount++;
         sacrifices[sacrificeCount] = SacrificeEntry({
             id: sacrificeCount,
-            offeror: offeror,
-            offering: offering,
-            quality: quality,
+            actor: actor,
+            typeOfSacrifice: typeOfSacrifice,
+            intention: intention,
             timestamp: block.timestamp
         });
-        emit SacrificeLogged(sacrificeCount, offeror, offering);
+        emit SacrificeLogged(sacrificeCount, actor, typeOfSacrifice);
     }
 
     function viewSacrifice(uint256 id) external view returns (SacrificeEntry memory) {
