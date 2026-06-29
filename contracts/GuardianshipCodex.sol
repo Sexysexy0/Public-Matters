@@ -3,22 +3,22 @@
 pragma solidity ^0.8.20;
 
 /// @title GuardianshipCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of guardianship practices
+/// @notice Covenant contract to safeguard communities through systemic anchoring of guardianship safeguards
 contract GuardianshipCodex {
     address public overseer;
     uint256 public guardianshipCount;
 
     struct GuardianshipEntry {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string child;
+        string guardian;
+        string authority;
         uint256 timestamp;
     }
 
-    mapping(uint256 => GuardianshipEntry) public guardians;
+    mapping(uint256 => GuardianshipEntry) public guardianships;
 
-    event GuardianshipLogged(uint256 indexed id, string actor, string context);
+    event GuardianshipLogged(uint256 indexed id, string child, string guardian, string authority);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +30,22 @@ contract GuardianshipCodex {
     }
 
     function logGuardianship(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
+        string calldata child,
+        string calldata guardian,
+        string calldata authority
     ) external onlyOverseer {
         guardianshipCount++;
-        guardians[guardianshipCount] = GuardianshipEntry({
+        guardianships[guardianshipCount] = GuardianshipEntry({
             id: guardianshipCount,
-            actor: actor,
-            context: context,
-            principle: principle,
+            child: child,
+            guardian: guardian,
+            authority: authority,
             timestamp: block.timestamp
         });
-        emit GuardianshipLogged(guardianshipCount, actor, context);
+        emit GuardianshipLogged(guardianshipCount, child, guardian, authority);
     }
 
     function viewGuardianship(uint256 id) external view returns (GuardianshipEntry memory) {
-        return guardians[id];
+        return guardianships[id];
     }
 }
