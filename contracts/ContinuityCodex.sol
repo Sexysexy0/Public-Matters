@@ -1,23 +1,23 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title ContinuityCodex
-/// @notice Codex covenant to encode long-term preservation and archival integrity
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of continuity safeguards
 contract ContinuityCodex {
     address public overseer;
     uint256 public continuityCount;
 
-    struct ContinuityRecord {
+    struct ContinuityRule {
         uint256 id;
-        string domain;      // preservation, archival integrity, covenant sequence
-        string safeguard;   // continuity clause, archival clause
-        string notes;       // contextual application
+        string principle; // Operational Flow, Governance Cycle, Risk Buffer, Adaptive Response
+        uint256 threshold; // safeguard value
         uint256 timestamp;
     }
 
-    mapping(uint256 => ContinuityRecord) public records;
+    mapping(uint256 => ContinuityRule) public continuities;
 
-    event ContinuityLogged(uint256 indexed id, string domain, string safeguard);
+    event ContinuityLogged(uint256 indexed id, string principle, uint256 threshold);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -28,21 +28,21 @@ contract ContinuityCodex {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs continuity safeguard record
-    function logContinuity(string calldata domain, string calldata safeguard, string calldata notes) external onlyOverseer {
+    function logContinuity(
+        string calldata principle,
+        uint256 threshold
+    ) external onlyOverseer {
         continuityCount++;
-        records[continuityCount] = ContinuityRecord({
+        continuities[continuityCount] = ContinuityRule({
             id: continuityCount,
-            domain: domain,
-            safeguard: safeguard,
-            notes: notes,
+            principle: principle,
+            threshold: threshold,
             timestamp: block.timestamp
         });
-        emit ContinuityLogged(continuityCount, domain, safeguard);
+        emit ContinuityLogged(continuityCount, principle, threshold);
     }
 
-    /// @notice Citizens can view continuity safeguard records
-    function viewContinuity(uint256 id) external view returns (ContinuityRecord memory) {
-        return records[id];
+    function viewContinuity(uint256 id) external view returns (ContinuityRule memory) {
+        return continuities[id];
     }
 }
