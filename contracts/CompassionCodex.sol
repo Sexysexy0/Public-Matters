@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title CompassionCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of compassion practices
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of compassion safeguards
 contract CompassionCodex {
     address public overseer;
     uint256 public compassionCount;
 
-    struct CompassionEntry {
+    struct CompassionRule {
         uint256 id;
-        string actor;
-        string context;
-        string method;
+        string principle; // Empathy, Humane Care, Dignified Treatment, Inclusive Support
+        uint256 threshold; // safeguard value
         uint256 timestamp;
     }
 
-    mapping(uint256 => CompassionEntry) public compassions;
+    mapping(uint256 => CompassionRule) public compassions;
 
-    event CompassionLogged(uint256 indexed id, string actor, string context);
+    event CompassionLogged(uint256 indexed id, string principle, uint256 threshold);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract CompassionCodex {
     }
 
     function logCompassion(
-        string calldata actor,
-        string calldata context,
-        string calldata method
+        string calldata principle,
+        uint256 threshold
     ) external onlyOverseer {
         compassionCount++;
-        compassions[compassionCount] = CompassionEntry({
+        compassions[compassionCount] = CompassionRule({
             id: compassionCount,
-            actor: actor,
-            context: context,
-            method: method,
+            principle: principle,
+            threshold: threshold,
             timestamp: block.timestamp
         });
-        emit CompassionLogged(compassionCount, actor, context);
+        emit CompassionLogged(compassionCount, principle, threshold);
     }
 
-    function viewCompassion(uint256 id) external view returns (CompassionEntry memory) {
+    function viewCompassion(uint256 id) external view returns (CompassionRule memory) {
         return compassions[id];
     }
 }
