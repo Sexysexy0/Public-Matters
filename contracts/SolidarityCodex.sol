@@ -3,7 +3,7 @@
 pragma solidity ^0.8.20;
 
 /// @title SolidarityCodex
-/// @notice Covenant contract to safeguard communities through anchoring solidarity and collective strength
+/// @notice Covenant contract to safeguard communities through systemic anchoring of solidarity principles
 contract SolidarityCodex {
     address public overseer;
     uint256 public solidarityCount;
@@ -12,7 +12,7 @@ contract SolidarityCodex {
         uint256 id;
         string actor;
         string context;
-        string method;
+        string principle;
         uint256 timestamp;
     }
 
@@ -32,14 +32,14 @@ contract SolidarityCodex {
     function logSolidarity(
         string calldata actor,
         string calldata context,
-        string calldata method
+        string calldata principle
     ) external onlyOverseer {
         solidarityCount++;
         solidarities[solidarityCount] = SolidarityEntry({
             id: solidarityCount,
             actor: actor,
             context: context,
-            method: method,
+            principle: principle,
             timestamp: block.timestamp
         });
         emit SolidarityLogged(solidarityCount, actor, context);
