@@ -1,50 +1,48 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title ReasoningCodex
-/// @notice Codex covenant to document Euclidean reasoning principles for governance and strategy
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of pre-logic safeguards
 contract ReasoningCodex {
-    address public oversightCommittee;
-    uint256 public codexCount;
+    address public overseer;
+    uint256 public reasoningCount;
 
-    struct ReasoningPrinciple {
+    struct ReasoningRule {
         uint256 id;
-        string method;       // Axioms, Reductio, Dependency Chains, Proof by Cases
-        string stance;       // lawful, authentic, professional
-        string safeguard;    // no fabrication, no unlawful teaching
-        string notes;
+        string principle; // Good vs Bad Arguments, Everyday Intuition, Contextual Fairness, Basic Rationality
+        string description; // safeguard explanation
         uint256 timestamp;
     }
 
-    mapping(uint256 => ReasoningPrinciple) public principles;
+    mapping(uint256 => ReasoningRule) public reasonings;
 
-    event PrincipleLogged(uint256 indexed id, string method, string stance, string safeguard, string notes);
+    event ReasoningLogged(uint256 indexed id, string principle, string description);
 
-    modifier onlyOversight() {
-        require(msg.sender == oversightCommittee, "Not authorized");
+    modifier onlyOverseer() {
+        require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor(address _oversightCommittee) {
-        oversightCommittee = _oversightCommittee;
+    constructor(address _overseer) {
+        overseer = _overseer;
     }
 
-    /// @notice Oversight logs reasoning principle
-    function logPrinciple(string calldata method, string calldata stance, string calldata safeguard, string calldata notes) external onlyOversight {
-        codexCount++;
-        principles[codexCount] = ReasoningPrinciple({
-            id: codexCount,
-            method: method,
-            stance: stance,
-            safeguard: safeguard,
-            notes: notes,
+    function logReasoning(
+        string calldata principle,
+        string calldata description
+    ) external onlyOverseer {
+        reasoningCount++;
+        reasonings[reasoningCount] = ReasoningRule({
+            id: reasoningCount,
+            principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit PrincipleLogged(codexCount, method, stance, safeguard, notes);
+        emit ReasoningLogged(reasoningCount, principle, description);
     }
 
-    /// @notice Citizens can view reasoning principles
-    function viewPrinciple(uint256 id) external view returns (ReasoningPrinciple memory) {
-        return principles[id];
+    function viewReasoning(uint256 id) external view returns (ReasoningRule memory) {
+        return reasonings[id];
     }
 }
