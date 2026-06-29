@@ -1,33 +1,24 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title IntegrityCodex
-/// @notice Covenant contract to encode honesty, consistency, and integrity safeguards in governance rituals
-/// @dev Provides structured rituals for integrity enforcement across governance layers
+/// @notice Covenant contract to safeguard communities through systemic anchoring of integrity principles
 contract IntegrityCodex {
     address public overseer;
-    uint256 public covenantCount;
+    uint256 public integrityCount;
 
-    struct IntegrityRule {
+    struct IntegrityEntry {
         uint256 id;
-        string principle;       // Integrity principle (e.g., honesty, consistency, accountability)
-        bool honest;            // True if honesty safeguard is active
-        bool consistent;        // True if consistency safeguard is active
-        bool accountable;       // True if accountability safeguard is active
-        string notes;           // Governance notes
+        string actor;
+        string context;
+        string principle;
         uint256 timestamp;
     }
 
-    mapping(uint256 => IntegrityRule) public rules;
+    mapping(uint256 => IntegrityEntry) public integrities;
 
-    event IntegrityLogged(
-        uint256 indexed id,
-        string principle,
-        bool honest,
-        bool consistent,
-        bool accountable,
-        string notes
-    );
+    event IntegrityLogged(uint256 indexed id, string actor, string context);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -38,30 +29,23 @@ contract IntegrityCodex {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs integrity principle with safeguards
-    function logRule(
-        string calldata principle,
-        bool honest,
-        bool consistent,
-        bool accountable,
-        string calldata notes
+    function logIntegrity(
+        string calldata actor,
+        string calldata context,
+        string calldata principle
     ) external onlyOverseer {
-        covenantCount++;
-        rules[covenantCount] = IntegrityRule({
-            id: covenantCount,
+        integrityCount++;
+        integrities[integrityCount] = IntegrityEntry({
+            id: integrityCount,
+            actor: actor,
+            context: context,
             principle: principle,
-            honest: honest,
-            consistent: consistent,
-            accountable: accountable,
-            notes: notes,
             timestamp: block.timestamp
         });
-        emit IntegrityLogged(covenantCount, principle, honest, consistent, accountable, notes);
+        emit IntegrityLogged(integrityCount, actor, context);
     }
 
-    /// @notice Governance rule: if honest == false or consistent == false, mark as integrity breach
-    function isIntegrityBreach(uint256 id) external view returns (bool) {
-        IntegrityRule memory r = rules[id];
-        return (!r.honest || !r.consistent);
+    function viewIntegrity(uint256 id) external view returns (IntegrityEntry memory) {
+        return integrities[id];
     }
 }
