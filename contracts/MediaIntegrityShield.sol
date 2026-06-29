@@ -1,34 +1,51 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title MediaIntegrityShield
+/// @notice Covenant contract to safeguard communities through systemic anchoring of media integrity safeguards
 contract MediaIntegrityShield {
-    event JournalisticTransparency(string context, string safeguard);
-    event CasualtyReportingFairness(string arc, string safeguard);
-    event InformationResonance(string arc, string resonance);
-
     address public overseer;
+    uint256 public integrityCount;
 
-    constructor(address _overseer) {
-        overseer = _overseer;
+    struct IntegrityEntry {
+        uint256 id;
+        string actor;
+        string context;
+        string principle;
+        uint256 timestamp;
     }
+
+    mapping(uint256 => IntegrityEntry) public integrities;
+
+    event IntegrityLogged(uint256 indexed id, string actor, string context);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    function safeguardJournalisticTransparency(string memory context, string memory safeguard) external onlyOverseer {
-        emit JournalisticTransparency(context, safeguard);
-        // SHIELD: Encode safeguards for journalistic transparency (frontline access, fact verification, balanced coverage).
+    constructor(address _overseer) {
+        overseer = _overseer;
     }
 
-    function enforceCasualtyReportingFairness(string memory arc, string memory safeguard) external onlyOverseer {
-        emit CasualtyReportingFairness(arc, safeguard);
-        // SHIELD: Ritualize casualty reporting fairness safeguards (accurate figures, humane framing, equitable acknowledgment).
+    function logIntegrity(
+        string calldata actor,
+        string calldata context,
+        string calldata principle
+    ) external onlyOverseer {
+        integrityCount++;
+        integrities[integrityCount] = IntegrityEntry({
+            id: integrityCount,
+            actor: actor,
+            context: context,
+            principle: principle,
+            timestamp: block.timestamp
+        });
+        emit IntegrityLogged(integrityCount, actor, context);
     }
 
-    function resonateInformation(string memory arc, string memory resonance) external onlyOverseer {
-        emit InformationResonance(arc, resonance);
-        // SHIELD: Ritualize communal information resonance (open discourse, participatory monitoring, authentic narrative cycles).
+    function viewIntegrity(uint256 id) external view returns (IntegrityEntry memory) {
+        return integrities[id];
     }
 }
