@@ -1,33 +1,23 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title TransparencyCodex
-/// @notice Covenant contract to encode openness, auditability, and governance traceability
-/// @dev Provides structured rituals for transparent governance records
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of transparency safeguards
 contract TransparencyCodex {
     address public overseer;
-    uint256 public covenantCount;
+    uint256 public transparencyCount;
 
-    struct Record {
+    struct TransparencyRule {
         uint256 id;
-        string action;          // Governance action description
-        string actor;           // Actor responsible (e.g., overseer, citizen, provider)
-        bool auditable;         // True if record is auditable
-        bool traceable;         // True if record is traceable
-        string notes;           // Governance notes
+        string principle; // Open Records, Clear Communication, Honest Reporting, Accessible Governance
+        uint256 threshold; // safeguard value
         uint256 timestamp;
     }
 
-    mapping(uint256 => Record) public records;
+    mapping(uint256 => TransparencyRule) public transparencies;
 
-    event RecordLogged(
-        uint256 indexed id,
-        string action,
-        string actor,
-        bool auditable,
-        bool traceable,
-        string notes
-    );
+    event TransparencyLogged(uint256 indexed id, string principle, uint256 threshold);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -38,30 +28,21 @@ contract TransparencyCodex {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs governance record with transparency safeguards
-    function logRecord(
-        string calldata action,
-        string calldata actor,
-        bool auditable,
-        bool traceable,
-        string calldata notes
+    function logTransparency(
+        string calldata principle,
+        uint256 threshold
     ) external onlyOverseer {
-        covenantCount++;
-        records[covenantCount] = Record({
-            id: covenantCount,
-            action: action,
-            actor: actor,
-            auditable: auditable,
-            traceable: traceable,
-            notes: notes,
+        transparencyCount++;
+        transparencies[transparencyCount] = TransparencyRule({
+            id: transparencyCount,
+            principle: principle,
+            threshold: threshold,
             timestamp: block.timestamp
         });
-        emit RecordLogged(covenantCount, action, actor, auditable, traceable, notes);
+        emit TransparencyLogged(transparencyCount, principle, threshold);
     }
 
-    /// @notice Governance rule: if auditable == false or traceable == false, mark as opaque
-    function isOpaque(uint256 id) external view returns (bool) {
-        Record memory r = records[id];
-        return (!r.auditable || !r.traceable);
+    function viewTransparency(uint256 id) external view returns (TransparencyRule memory) {
+        return transparencies[id];
     }
 }
