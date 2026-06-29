@@ -3,7 +3,7 @@
 pragma solidity ^0.8.20;
 
 /// @title FreedomCodex
-/// @notice Covenant contract to safeguard communities through anchoring freedom against systemic oppression
+/// @notice Covenant contract to safeguard communities through systemic anchoring of freedom safeguards
 contract FreedomCodex {
     address public overseer;
     uint256 public freedomCount;
