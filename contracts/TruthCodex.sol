@@ -3,7 +3,7 @@
 pragma solidity ^0.8.20;
 
 /// @title TruthCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of truth against deception
+/// @notice Covenant contract to safeguard communities through systemic anchoring of truth safeguards
 contract TruthCodex {
     address public overseer;
     uint256 public truthCount;
