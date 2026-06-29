@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title SolidarityCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of solidarity principles
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of solidarity safeguards
 contract SolidarityCodex {
     address public overseer;
     uint256 public solidarityCount;
 
-    struct SolidarityEntry {
+    struct SolidarityRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle; // Mutual Support, Collective Action, Shared Burden, Cooperative Strength
+        uint256 threshold; // safeguard value
         uint256 timestamp;
     }
 
-    mapping(uint256 => SolidarityEntry) public solidarities;
+    mapping(uint256 => SolidarityRule) public solidarities;
 
-    event SolidarityLogged(uint256 indexed id, string actor, string context);
+    event SolidarityLogged(uint256 indexed id, string principle, uint256 threshold);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract SolidarityCodex {
     }
 
     function logSolidarity(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
+        string calldata principle,
+        uint256 threshold
     ) external onlyOverseer {
         solidarityCount++;
-        solidarities[solidarityCount] = SolidarityEntry({
+        solidarities[solidarityCount] = SolidarityRule({
             id: solidarityCount,
-            actor: actor,
-            context: context,
             principle: principle,
+            threshold: threshold,
             timestamp: block.timestamp
         });
-        emit SolidarityLogged(solidarityCount, actor, context);
+        emit SolidarityLogged(solidarityCount, principle, threshold);
     }
 
-    function viewSolidarity(uint256 id) external view returns (SolidarityEntry memory) {
+    function viewSolidarity(uint256 id) external view returns (SolidarityRule memory) {
         return solidarities[id];
     }
 }
