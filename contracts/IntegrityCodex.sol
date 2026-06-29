@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title IntegrityCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of integrity principles
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of integrity safeguards
 contract IntegrityCodex {
     address public overseer;
     uint256 public integrityCount;
 
-    struct IntegrityEntry {
+    struct IntegrityRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle; // Honesty, Fairness, Transparency, Accountability
+        string description; // encoded integrity form
         uint256 timestamp;
     }
 
-    mapping(uint256 => IntegrityEntry) public integrities;
+    mapping(uint256 => IntegrityRule) public integrities;
 
-    event IntegrityLogged(uint256 indexed id, string actor, string context);
+    event IntegrityLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract IntegrityCodex {
     }
 
     function logIntegrity(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
+        string calldata principle,
+        string calldata description
     ) external onlyOverseer {
         integrityCount++;
-        integrities[integrityCount] = IntegrityEntry({
+        integrities[integrityCount] = IntegrityRule({
             id: integrityCount,
-            actor: actor,
-            context: context,
             principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit IntegrityLogged(integrityCount, actor, context);
+        emit IntegrityLogged(integrityCount, principle, description);
     }
 
-    function viewIntegrity(uint256 id) external view returns (IntegrityEntry memory) {
+    function viewIntegrity(uint256 id) external view returns (IntegrityRule memory) {
         return integrities[id];
     }
 }
