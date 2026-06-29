@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title EquityCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of equity principles
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of equity safeguards
 contract EquityCodex {
     address public overseer;
     uint256 public equityCount;
 
-    struct EquityEntry {
+    struct EquityRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle; // Equal Opportunity, Fair Distribution, Inclusive Governance, Non-Bias
+        uint256 threshold; // safeguard value
         uint256 timestamp;
     }
 
-    mapping(uint256 => EquityEntry) public equities;
+    mapping(uint256 => EquityRule) public equities;
 
-    event EquityLogged(uint256 indexed id, string actor, string context);
+    event EquityLogged(uint256 indexed id, string principle, uint256 threshold);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract EquityCodex {
     }
 
     function logEquity(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
+        string calldata principle,
+        uint256 threshold
     ) external onlyOverseer {
         equityCount++;
-        equities[equityCount] = EquityEntry({
+        equities[equityCount] = EquityRule({
             id: equityCount,
-            actor: actor,
-            context: context,
             principle: principle,
+            threshold: threshold,
             timestamp: block.timestamp
         });
-        emit EquityLogged(equityCount, actor, context);
+        emit EquityLogged(equityCount, principle, threshold);
     }
 
-    function viewEquity(uint256 id) external view returns (EquityEntry memory) {
+    function viewEquity(uint256 id) external view returns (EquityRule memory) {
         return equities[id];
     }
 }
