@@ -3,7 +3,7 @@
 pragma solidity ^0.8.20;
 
 /// @title StewardshipCodex
-/// @notice Covenant contract to safeguard communities through responsible stewardship of resources and governance
+/// @notice Covenant contract to safeguard communities through systemic anchoring of stewardship practices
 contract StewardshipCodex {
     address public overseer;
     uint256 public stewardshipCount;
@@ -11,14 +11,14 @@ contract StewardshipCodex {
     struct StewardshipEntry {
         uint256 id;
         string actor;
-        string domain;
-        string method;
+        string context;
+        string principle;
         uint256 timestamp;
     }
 
-    mapping(uint256 => StewardshipEntry) public stewardships;
+    mapping(uint256 => StewardshipEntry) public stewards;
 
-    event StewardshipLogged(uint256 indexed id, string actor, string domain);
+    event StewardshipLogged(uint256 indexed id, string actor, string context);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -31,21 +31,21 @@ contract StewardshipCodex {
 
     function logStewardship(
         string calldata actor,
-        string calldata domain,
-        string calldata method
+        string calldata context,
+        string calldata principle
     ) external onlyOverseer {
         stewardshipCount++;
-        stewardships[stewardshipCount] = StewardshipEntry({
+        stewards[stewardshipCount] = StewardshipEntry({
             id: stewardshipCount,
             actor: actor,
-            domain: domain,
-            method: method,
+            context: context,
+            principle: principle,
             timestamp: block.timestamp
         });
-        emit StewardshipLogged(stewardshipCount, actor, domain);
+        emit StewardshipLogged(stewardshipCount, actor, context);
     }
 
     function viewStewardship(uint256 id) external view returns (StewardshipEntry memory) {
-        return stewardships[id];
+        return stewards[id];
     }
 }
