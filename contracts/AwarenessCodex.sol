@@ -1,33 +1,23 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title AwarenessCodex
-/// @notice Covenant contract to encode clarity, mindfulness, and awareness safeguards
-/// @dev Provides structured rituals for awareness enforcement across governance layers
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of awareness safeguards
 contract AwarenessCodex {
     address public overseer;
-    uint256 public covenantCount;
+    uint256 public awarenessCount;
 
     struct AwarenessRule {
         uint256 id;
-        string principle;       // Awareness principle (e.g., clarity, mindfulness, presence)
-        bool clear;             // True if clarity safeguard is active
-        bool mindful;           // True if mindfulness safeguard is active
-        bool present;           // True if presence safeguard is active
-        string notes;           // Governance notes
+        string principle; // Mindfulness, Situational Context, Reflective Awareness, Ethical Sensitivity
+        string description; // encoded awareness form
         uint256 timestamp;
     }
 
-    mapping(uint256 => AwarenessRule) public rules;
+    mapping(uint256 => AwarenessRule) public awarenessRules;
 
-    event AwarenessLogged(
-        uint256 indexed id,
-        string principle,
-        bool clear,
-        bool mindful,
-        bool present,
-        string notes
-    );
+    event AwarenessLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -38,30 +28,21 @@ contract AwarenessCodex {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs awareness principle with safeguards
-    function logRule(
+    function logAwareness(
         string calldata principle,
-        bool clear,
-        bool mindful,
-        bool present,
-        string calldata notes
+        string calldata description
     ) external onlyOverseer {
-        covenantCount++;
-        rules[covenantCount] = AwarenessRule({
-            id: covenantCount,
+        awarenessCount++;
+        awarenessRules[awarenessCount] = AwarenessRule({
+            id: awarenessCount,
             principle: principle,
-            clear: clear,
-            mindful: mindful,
-            present: present,
-            notes: notes,
+            description: description,
             timestamp: block.timestamp
         });
-        emit AwarenessLogged(covenantCount, principle, clear, mindful, present, notes);
+        emit AwarenessLogged(awarenessCount, principle, description);
     }
 
-    /// @notice Governance rule: if clear == false or mindful == false, mark as awareness breach
-    function isAwarenessBreach(uint256 id) external view returns (bool) {
-        AwarenessRule memory r = rules[id];
-        return (!r.clear || !r.mindful);
+    function viewAwareness(uint256 id) external view returns (AwarenessRule memory) {
+        return awarenessRules[id];
     }
 }
