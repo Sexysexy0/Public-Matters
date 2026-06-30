@@ -3,15 +3,15 @@
 pragma solidity ^0.8.20;
 
 /// @title HarmonyCodex
-/// @notice Covenant contract to safeguard portfolios through systemic anchoring of harmony safeguards
+/// @notice Covenant contract to safeguard leadership and projects through systemic anchoring of interpersonal balance and team unity
 contract HarmonyCodex {
     address public overseer;
     uint256 public harmonyCount;
 
     struct HarmonyRule {
         uint256 id;
-        string principle; // Unity, Balance, Cooperation, Mutual Respect
-        string description; // encoded harmony form
+        string principle; // Unity, Respect, Cooperation, Balance
+        string description; // encoded harmony safeguard
         uint256 timestamp;
     }
 
