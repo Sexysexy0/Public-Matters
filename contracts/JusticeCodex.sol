@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title JusticeCodex
-/// @notice Covenant contract to safeguard systemic fairness, legal equity, and dignified governance
+/// @notice Covenant contract to safeguard systemic fairness, dignified justice, and principled adjudication
 contract JusticeCodex {
     address public overseer;
     uint256 public justiceCount;
 
     struct JusticeRule {
         uint256 id;
-        string principle; // Fairness, Legal Equity, Governance Safeguards, Rights Protection
+        string principle; // Fairness, Justice, Accountability, Impartiality
         string description; // encoded justice safeguard
         uint256 timestamp;
     }
