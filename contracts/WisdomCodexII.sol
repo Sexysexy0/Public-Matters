@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title WisdomCodexII
-/// @notice Covenant contract to safeguard systemic advanced discernment, enlightened foresight, and dignified wisdom
+/// @notice Covenant contract to safeguard systemic discernment, principled wisdom, and dignified insight
 contract WisdomCodexII {
     address public overseer;
     uint256 public wisdomCount;
 
     struct WisdomRule {
         uint256 id;
-        string principle; // Discernment, Foresight, Prudence, Enlightenment
+        string principle; // Discernment, Insight, Prudence, Understanding
         string description; // encoded wisdom safeguard
         uint256 timestamp;
     }
