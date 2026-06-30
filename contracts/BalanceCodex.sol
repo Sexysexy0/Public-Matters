@@ -1,33 +1,23 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title BalanceCodex
-/// @notice Covenant contract to encode equilibrium, harmony, and balance safeguards
-/// @dev Provides structured rituals for balance enforcement across governance layers
+/// @notice Covenant contract to safeguard systemic equilibrium, harmony, and dignified balance
 contract BalanceCodex {
     address public overseer;
-    uint256 public covenantCount;
+    uint256 public balanceCount;
 
     struct BalanceRule {
         uint256 id;
-        string principle;       // Balance principle (e.g., equilibrium, harmony, fairness)
-        bool equilibrium;       // True if equilibrium safeguard is active
-        bool harmony;           // True if harmony safeguard is active
-        bool fairness;          // True if fairness safeguard is active
-        string notes;           // Governance notes
+        string principle; // Equilibrium, Harmony, Stability, Fair Distribution
+        string description; // encoded balance safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => BalanceRule) public rules;
+    mapping(uint256 => BalanceRule) public balances;
 
-    event BalanceLogged(
-        uint256 indexed id,
-        string principle,
-        bool equilibrium,
-        bool harmony,
-        bool fairness,
-        string notes
-    );
+    event BalanceLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -38,30 +28,21 @@ contract BalanceCodex {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs balance principle with safeguards
-    function logRule(
+    function logBalance(
         string calldata principle,
-        bool equilibrium,
-        bool harmony,
-        bool fairness,
-        string calldata notes
+        string calldata description
     ) external onlyOverseer {
-        covenantCount++;
-        rules[covenantCount] = BalanceRule({
-            id: covenantCount,
+        balanceCount++;
+        balances[balanceCount] = BalanceRule({
+            id: balanceCount,
             principle: principle,
-            equilibrium: equilibrium,
-            harmony: harmony,
-            fairness: fairness,
-            notes: notes,
+            description: description,
             timestamp: block.timestamp
         });
-        emit BalanceLogged(covenantCount, principle, equilibrium, harmony, fairness, notes);
+        emit BalanceLogged(balanceCount, principle, description);
     }
 
-    /// @notice Governance rule: if equilibrium == false or harmony == false, mark as imbalance
-    function isImbalance(uint256 id) external view returns (bool) {
-        BalanceRule memory r = rules[id];
-        return (!r.equilibrium || !r.harmony);
+    function viewBalance(uint256 id) external view returns (BalanceRule memory) {
+        return balances[id];
     }
 }
