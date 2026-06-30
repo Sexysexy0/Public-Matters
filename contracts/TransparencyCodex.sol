@@ -3,15 +3,15 @@
 pragma solidity ^0.8.20;
 
 /// @title TransparencyCodex
-/// @notice Covenant contract to safeguard portfolios through systemic anchoring of transparency safeguards
+/// @notice Covenant contract to safeguard systemic openness, clarity, and exposure of hidden agendas
 contract TransparencyCodex {
     address public overseer;
     uint256 public transparencyCount;
 
     struct TransparencyRule {
         uint256 id;
-        string principle; // Open Disclosure, Accountability, Clear Communication, Public Access
-        string description; // encoded transparency form
+        string principle; // Openness, Exposure, Clarity, Accountability
+        string description; // encoded transparency safeguard
         uint256 timestamp;
     }
 
