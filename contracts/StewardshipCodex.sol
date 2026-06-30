@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title StewardshipCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of stewardship practices
+/// @notice Covenant contract to symbolically safeguard responsible stewardship, long-term governance, and dignified custodianship
 contract StewardshipCodex {
     address public overseer;
     uint256 public stewardshipCount;
 
-    struct StewardshipEntry {
+    struct StewardshipRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle; // Responsible Stewardship, Long-Term Governance, Custodianship, Ethical Balance
+        string description; // encoded stewardship safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => StewardshipEntry) public stewards;
+    mapping(uint256 => StewardshipRule) public stewardships;
 
-    event StewardshipLogged(uint256 indexed id, string actor, string context);
+    event StewardshipLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract StewardshipCodex {
     }
 
     function logStewardship(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
+        string calldata principle,
+        string calldata description
     ) external onlyOverseer {
         stewardshipCount++;
-        stewards[stewardshipCount] = StewardshipEntry({
+        stewardships[stewardshipCount] = StewardshipRule({
             id: stewardshipCount,
-            actor: actor,
-            context: context,
             principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit StewardshipLogged(stewardshipCount, actor, context);
+        emit StewardshipLogged(stewardshipCount, principle, description);
     }
 
-    function viewStewardship(uint256 id) external view returns (StewardshipEntry memory) {
-        return stewards[id];
+    function viewStewardship(uint256 id) external view returns (StewardshipRule memory) {
+        return stewardships[id];
     }
 }
