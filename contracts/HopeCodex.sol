@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title HopeCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of hope against despair
+/// @notice Covenant contract to safeguard systemic resilience, optimism, and dignified hope
 contract HopeCodex {
     address public overseer;
     uint256 public hopeCount;
 
-    struct HopeEntry {
+    struct HopeRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle; // Resilience, Optimism, Dignified Hope, Collective Renewal
+        string description; // encoded hope safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => HopeEntry) public hopes;
+    mapping(uint256 => HopeRule) public hopes;
 
-    event HopeLogged(uint256 indexed id, string actor, string context);
+    event HopeLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract HopeCodex {
     }
 
     function logHope(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
+        string calldata principle,
+        string calldata description
     ) external onlyOverseer {
         hopeCount++;
-        hopes[hopeCount] = HopeEntry({
+        hopes[hopeCount] = HopeRule({
             id: hopeCount,
-            actor: actor,
-            context: context,
             principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit HopeLogged(hopeCount, actor, context);
+        emit HopeLogged(hopeCount, principle, description);
     }
 
-    function viewHope(uint256 id) external view returns (HopeEntry memory) {
+    function viewHope(uint256 id) external view returns (HopeRule memory) {
         return hopes[id];
     }
 }
