@@ -3,19 +3,19 @@
 pragma solidity ^0.8.20;
 
 /// @title PeaceCodex
-/// @notice Covenant contract to safeguard portfolios through systemic anchoring of peace safeguards
+/// @notice Covenant contract to safeguard systemic harmony, conflict resolution, and dignified peace
 contract PeaceCodex {
     address public overseer;
     uint256 public peaceCount;
 
     struct PeaceRule {
         uint256 id;
-        string principle; // Non-Violence, Harmony, Justice, Reconciliation
-        string description; // encoded peace form
+        string principle; // Harmony, Conflict Resolution, Nonviolence, Reconciliation
+        string description; // encoded peace safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => PeaceRule) public peaceRules;
+    mapping(uint256 => PeaceRule) public peaces;
 
     event PeaceLogged(uint256 indexed id, string principle, string description);
 
@@ -33,7 +33,7 @@ contract PeaceCodex {
         string calldata description
     ) external onlyOverseer {
         peaceCount++;
-        peaceRules[peaceCount] = PeaceRule({
+        peaces[peaceCount] = PeaceRule({
             id: peaceCount,
             principle: principle,
             description: description,
@@ -43,6 +43,6 @@ contract PeaceCodex {
     }
 
     function viewPeace(uint256 id) external view returns (PeaceRule memory) {
-        return peaceRules[id];
+        return peaces[id];
     }
 }
