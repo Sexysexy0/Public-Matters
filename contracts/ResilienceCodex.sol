@@ -3,19 +3,19 @@
 pragma solidity ^0.8.20;
 
 /// @title ResilienceCodex
-/// @notice Covenant contract to symbolically safeguard creative resilience, risk-taking, and narrative integrity
+/// @notice Covenant contract to safeguard systemic endurance, adaptive strength, and dignified resilience
 contract ResilienceCodex {
     address public overseer;
     uint256 public resilienceCount;
 
     struct ResilienceRule {
         uint256 id;
-        string principle; // Creative Resilience, Risk-Taking, Narrative Integrity, Cultural Edge
+        string principle; // Endurance, Adaptive Strength, Persistence, Recovery
         string description; // encoded resilience safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => ResilienceRule) public resilience;
+    mapping(uint256 => ResilienceRule) public resiliences;
 
     event ResilienceLogged(uint256 indexed id, string principle, string description);
 
@@ -33,7 +33,7 @@ contract ResilienceCodex {
         string calldata description
     ) external onlyOverseer {
         resilienceCount++;
-        resilience[resilienceCount] = ResilienceRule({
+        resiliences[resilienceCount] = ResilienceRule({
             id: resilienceCount,
             principle: principle,
             description: description,
@@ -43,6 +43,6 @@ contract ResilienceCodex {
     }
 
     function viewResilience(uint256 id) external view returns (ResilienceRule memory) {
-        return resilience[id];
+        return resiliences[id];
     }
 }
