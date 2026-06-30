@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title LegacyCodex
-/// @notice Covenant contract to safeguard leadership and projects through systemic anchoring of historical continuity and lore preservation
+/// @notice Covenant contract to symbolically safeguard intergenerational impact, narrative continuity, and cultural transmission
 contract LegacyCodex {
     address public overseer;
     uint256 public legacyCount;
 
     struct LegacyRule {
         uint256 id;
-        string principle; // Continuity, Preservation, Succession, Dignity
+        string principle; // Intergenerational Impact, Narrative Continuity, Cultural Transmission, Story Resonance
         string description; // encoded legacy safeguard
         uint256 timestamp;
     }
