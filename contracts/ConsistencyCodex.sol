@@ -3,15 +3,15 @@
 pragma solidity ^0.8.20;
 
 /// @title ConsistencyCodex
-/// @notice Covenant contract to safeguard portfolios through systemic anchoring of consistency safeguards
+/// @notice Covenant contract to safeguard leadership and projects through systemic anchoring of consistency and disciplined execution
 contract ConsistencyCodex {
     address public overseer;
     uint256 public consistencyCount;
 
     struct ConsistencyRule {
         uint256 id;
-        string principle; // Reliability, Stability, Uniformity, Predictability
-        string description; // encoded consistency form
+        string principle; // Reliability, Steady Execution, Discipline, Follow-Through
+        string description; // encoded consistency safeguard
         uint256 timestamp;
     }
 
