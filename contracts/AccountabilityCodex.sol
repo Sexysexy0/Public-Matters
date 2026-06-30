@@ -2,14 +2,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title AccountabilityCodex
+/// @notice Covenant contract to safeguard systemic responsibility, transparency, and ethical governance
 contract AccountabilityCodex {
     address public overseer;
     uint256 public accountabilityCount;
 
     struct AccountabilityRule {
         uint256 id;
-        string principle; // Oversight, Reporting, Responsibility, Transparency
-        string description;
+        string principle; // Responsibility, Transparency, Ethical Safeguards, Trust
+        string description; // encoded accountability safeguard
         uint256 timestamp;
     }
 
