@@ -10,14 +10,14 @@ contract SolidarityCodex {
 
     struct SolidarityRule {
         uint256 id;
-        string principle; // Mutual Support, Collective Action, Shared Burden, Cooperative Strength
-        uint256 threshold; // safeguard value
+        string principle; // Unity of Purpose, Mutual Support, Collective Strength, Shared Responsibility
+        string description; // encoded solidarity form
         uint256 timestamp;
     }
 
     mapping(uint256 => SolidarityRule) public solidarities;
 
-    event SolidarityLogged(uint256 indexed id, string principle, uint256 threshold);
+    event SolidarityLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,16 +30,16 @@ contract SolidarityCodex {
 
     function logSolidarity(
         string calldata principle,
-        uint256 threshold
+        string calldata description
     ) external onlyOverseer {
         solidarityCount++;
         solidarities[solidarityCount] = SolidarityRule({
             id: solidarityCount,
             principle: principle,
-            threshold: threshold,
+            description: description,
             timestamp: block.timestamp
         });
-        emit SolidarityLogged(solidarityCount, principle, threshold);
+        emit SolidarityLogged(solidarityCount, principle, description);
     }
 
     function viewSolidarity(uint256 id) external view returns (SolidarityRule memory) {
