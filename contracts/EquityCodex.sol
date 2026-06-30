@@ -3,15 +3,15 @@
 pragma solidity ^0.8.20;
 
 /// @title EquityCodex
-/// @notice Covenant contract to safeguard portfolios through systemic anchoring of equity safeguards
+/// @notice Covenant contract to safeguard systemic fairness, dignity, and inclusive participation
 contract EquityCodex {
     address public overseer;
     uint256 public equityCount;
 
     struct EquityRule {
         uint256 id;
-        string principle; // Fair Opportunity, Balance of Power, Inclusivity, Justice
-        string description; // encoded equity form
+        string principle; // Fairness, Dignity, Inclusive Participation, Balance of Power
+        string description; // encoded equity safeguard
         uint256 timestamp;
     }
 
