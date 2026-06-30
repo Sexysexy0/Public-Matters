@@ -3,21 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title CompassionCodex
-/// @notice Covenant contract to safeguard portfolios through systemic anchoring of compassion safeguards
+/// @notice Covenant contract to symbolically safeguard humane treatment, compassionate justice, and dignified recognition of cannabis
 contract CompassionCodex {
     address public overseer;
     uint256 public compassionCount;
 
     struct CompassionRule {
         uint256 id;
-        string principle; // Empathy, Humane Care, Dignified Treatment, Inclusive Support
-        uint256 threshold; // safeguard value
+        string principle; // Humane Treatment, Compassionate Justice, Dignity, Plant Recognition
+        string description; // encoded compassion safeguard
         uint256 timestamp;
     }
 
     mapping(uint256 => CompassionRule) public compassions;
 
-    event CompassionLogged(uint256 indexed id, string principle, uint256 threshold);
+    event CompassionLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,16 +30,16 @@ contract CompassionCodex {
 
     function logCompassion(
         string calldata principle,
-        uint256 threshold
+        string calldata description
     ) external onlyOverseer {
         compassionCount++;
         compassions[compassionCount] = CompassionRule({
             id: compassionCount,
             principle: principle,
-            threshold: threshold,
+            description: description,
             timestamp: block.timestamp
         });
-        emit CompassionLogged(compassionCount, principle, threshold);
+        emit CompassionLogged(compassionCount, principle, description);
     }
 
     function viewCompassion(uint256 id) external view returns (CompassionRule memory) {
