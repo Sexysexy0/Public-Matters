@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title VisionCodex
-/// @notice Covenant contract to safeguard leadership and projects through systemic anchoring of long-term vision and foresight
+/// @notice Covenant contract to symbolically safeguard foresight, imagination, and creative direction
 contract VisionCodex {
     address public overseer;
     uint256 public visionCount;
 
     struct VisionRule {
         uint256 id;
-        string principle; // Long-Term Direction, Foresight, Alignment, Clarity
+        string principle; // Foresight, Imagination, Creative Direction, Visual Resonance
         string description; // encoded vision safeguard
         uint256 timestamp;
     }
