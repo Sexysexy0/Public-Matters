@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title FaithCodex
-/// @notice Covenant contract to safeguard systemic trust, spiritual resilience, and dignified faith
+/// @notice Covenant contract to safeguard systemic trust, principled belief, and dignified conviction
 contract FaithCodex {
     address public overseer;
     uint256 public faithCount;
 
     struct FaithRule {
         uint256 id;
-        string principle; // Trust, Spiritual Resilience, Belief, Hope
+        string principle; // Trust, Belief, Conviction, Hope
         string description; // encoded faith safeguard
         uint256 timestamp;
     }
