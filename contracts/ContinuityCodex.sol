@@ -2,22 +2,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title ContinuityCodex
-/// @notice Covenant contract to safeguard portfolios through systemic anchoring of continuity safeguards
 contract ContinuityCodex {
     address public overseer;
     uint256 public continuityCount;
 
     struct ContinuityRule {
         uint256 id;
-        string principle; // Operational Flow, Governance Cycle, Risk Buffer, Adaptive Response
-        uint256 threshold; // safeguard value
+        string principle; // Stability, Long-Term Planning, Franchise Flow, Operational Integrity
+        string description;
         uint256 timestamp;
     }
 
     mapping(uint256 => ContinuityRule) public continuities;
 
-    event ContinuityLogged(uint256 indexed id, string principle, uint256 threshold);
+    event ContinuityLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,16 +28,16 @@ contract ContinuityCodex {
 
     function logContinuity(
         string calldata principle,
-        uint256 threshold
+        string calldata description
     ) external onlyOverseer {
         continuityCount++;
         continuities[continuityCount] = ContinuityRule({
             id: continuityCount,
             principle: principle,
-            threshold: threshold,
+            description: description,
             timestamp: block.timestamp
         });
-        emit ContinuityLogged(continuityCount, principle, threshold);
+        emit ContinuityLogged(continuityCount, principle, description);
     }
 
     function viewContinuity(uint256 id) external view returns (ContinuityRule memory) {

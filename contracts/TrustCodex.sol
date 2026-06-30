@@ -2,23 +2,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title TrustCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of trust safeguards
 contract TrustCodex {
     address public overseer;
     uint256 public trustCount;
 
-    struct TrustEntry {
+    struct TrustRule {
         uint256 id;
-        string actor;
-        string beneficiary;
-        string principle;
+        string principle; // Player Confidence, Reliability, Fairness, Transparency
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => TrustEntry) public trusts;
+    mapping(uint256 => TrustRule) public trusts;
 
-    event TrustLogged(uint256 indexed id, string actor, string beneficiary, string principle);
+    event TrustLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +27,20 @@ contract TrustCodex {
     }
 
     function logTrust(
-        string calldata actor,
-        string calldata beneficiary,
-        string calldata principle
+        string calldata principle,
+        string calldata description
     ) external onlyOverseer {
         trustCount++;
-        trusts[trustCount] = TrustEntry({
+        trusts[trustCount] = TrustRule({
             id: trustCount,
-            actor: actor,
-            beneficiary: beneficiary,
             principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit TrustLogged(trustCount, actor, beneficiary, principle);
+        emit TrustLogged(trustCount, principle, description);
     }
 
-    function viewTrust(uint256 id) external view returns (TrustEntry memory) {
+    function viewTrust(uint256 id) external view returns (TrustRule memory) {
         return trusts[id];
     }
 }
