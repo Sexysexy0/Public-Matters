@@ -3,15 +3,15 @@
 pragma solidity ^0.8.20;
 
 /// @title CultureCodex
-/// @notice Covenant contract to safeguard immersive gameplay through systemic anchoring of cultural authenticity and diversity
+/// @notice Covenant contract to symbolically safeguard cultural recognition, societal integration, and heritage acceptance
 contract CultureCodex {
     address public overseer;
     uint256 public cultureCount;
 
     struct CultureRule {
         uint256 id;
-        string principle; // Authenticity, Diversity, Respect, Depth
-        string description; // encoded cultural safeguard
+        string principle; // Cultural Recognition, Societal Integration, Heritage Acceptance, Human Dignity
+        string description; // encoded culture safeguard
         uint256 timestamp;
     }
 
