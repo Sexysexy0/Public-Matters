@@ -3,19 +3,19 @@
 pragma solidity ^0.8.20;
 
 /// @title AwarenessCodex
-/// @notice Covenant contract to safeguard portfolios through systemic anchoring of awareness safeguards
+/// @notice Covenant contract to symbolically safeguard media literacy, psychological resilience, and philosophical awakening
 contract AwarenessCodex {
     address public overseer;
     uint256 public awarenessCount;
 
     struct AwarenessRule {
         uint256 id;
-        string principle; // Mindfulness, Situational Context, Reflective Awareness, Ethical Sensitivity
-        string description; // encoded awareness form
+        string principle; // Media Literacy, Psychological Resilience, Philosophical Awakening
+        string description; // encoded awareness safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => AwarenessRule) public awarenessRules;
+    mapping(uint256 => AwarenessRule) public awareness;
 
     event AwarenessLogged(uint256 indexed id, string principle, string description);
 
@@ -33,7 +33,7 @@ contract AwarenessCodex {
         string calldata description
     ) external onlyOverseer {
         awarenessCount++;
-        awarenessRules[awarenessCount] = AwarenessRule({
+        awareness[awarenessCount] = AwarenessRule({
             id: awarenessCount,
             principle: principle,
             description: description,
@@ -43,6 +43,6 @@ contract AwarenessCodex {
     }
 
     function viewAwareness(uint256 id) external view returns (AwarenessRule memory) {
-        return awarenessRules[id];
+        return awareness[id];
     }
 }
