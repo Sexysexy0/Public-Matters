@@ -2,14 +2,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title SecurityCodex
+/// @notice Covenant contract to safeguard systemic internal safety, protective resilience, and dignified security
 contract SecurityCodex {
     address public overseer;
     uint256 public securityCount;
 
     struct SecurityRule {
         uint256 id;
-        string principle; // Data Protection, Access Control, Threat Mitigation, Compliance
-        string description;
+        string principle; // Safety, Resilience, Protection, Stability
+        string description; // encoded security safeguard
         uint256 timestamp;
     }
 
