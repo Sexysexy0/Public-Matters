@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title HopeCodex
-/// @notice Covenant contract to safeguard systemic resilience, optimism, and dignified hope
+/// @notice Covenant contract to safeguard systemic optimism, dignified future, and principled hope
 contract HopeCodex {
     address public overseer;
     uint256 public hopeCount;
 
     struct HopeRule {
         uint256 id;
-        string principle; // Resilience, Optimism, Dignified Hope, Collective Renewal
+        string principle; // Optimism, Future Vision, Renewal, Aspiration
         string description; // encoded hope safeguard
         uint256 timestamp;
     }
