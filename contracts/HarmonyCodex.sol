@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title HarmonyCodex
-/// @notice Covenant contract to safeguard systemic balance, coexistence, and dignified harmony
+/// @notice Covenant contract to safeguard systemic balance, principled harmony, and dignified coexistence
 contract HarmonyCodex {
     address public overseer;
     uint256 public harmonyCount;
 
     struct HarmonyRule {
         uint256 id;
-        string principle; // Balance, Coexistence, Unity, Equilibrium
+        string principle; // Balance, Coexistence, Reconciliation, Equilibrium
         string description; // encoded harmony safeguard
         uint256 timestamp;
     }
