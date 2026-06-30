@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title CourageCodex
-/// @notice Covenant contract to safeguard systemic bravery, principled resistance, and dignified courage
+/// @notice Covenant contract to safeguard systemic bravery, principled courage, and dignified valor
 contract CourageCodex {
     address public overseer;
     uint256 public courageCount;
 
     struct CourageRule {
         uint256 id;
-        string principle; // Bravery, Principled Resistance, Moral Strength, Fearless Action
+        string principle; // Bravery, Valor, Resolve, Fearlessness
         string description; // encoded courage safeguard
         uint256 timestamp;
     }
