@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title FreedomCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of freedom safeguards
+/// @notice Covenant contract to safeguard systemic liberty, dignified independence, and protection of rights
 contract FreedomCodex {
     address public overseer;
     uint256 public freedomCount;
 
-    struct FreedomEntry {
+    struct FreedomRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle; // Liberty, Independence, Rights Protection, Anti-Oppression
+        string description; // encoded freedom safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => FreedomEntry) public freedoms;
+    mapping(uint256 => FreedomRule) public freedoms;
 
-    event FreedomLogged(uint256 indexed id, string actor, string context);
+    event FreedomLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract FreedomCodex {
     }
 
     function logFreedom(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
+        string calldata principle,
+        string calldata description
     ) external onlyOverseer {
         freedomCount++;
-        freedoms[freedomCount] = FreedomEntry({
+        freedoms[freedomCount] = FreedomRule({
             id: freedomCount,
-            actor: actor,
-            context: context,
             principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit FreedomLogged(freedomCount, actor, context);
+        emit FreedomLogged(freedomCount, principle, description);
     }
 
-    function viewFreedom(uint256 id) external view returns (FreedomEntry memory) {
+    function viewFreedom(uint256 id) external view returns (FreedomRule memory) {
         return freedoms[id];
     }
 }
