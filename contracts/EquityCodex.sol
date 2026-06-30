@@ -10,14 +10,14 @@ contract EquityCodex {
 
     struct EquityRule {
         uint256 id;
-        string principle; // Equal Opportunity, Fair Distribution, Inclusive Governance, Non-Bias
-        uint256 threshold; // safeguard value
+        string principle; // Fair Opportunity, Balance of Power, Inclusivity, Justice
+        string description; // encoded equity form
         uint256 timestamp;
     }
 
     mapping(uint256 => EquityRule) public equities;
 
-    event EquityLogged(uint256 indexed id, string principle, uint256 threshold);
+    event EquityLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,16 +30,16 @@ contract EquityCodex {
 
     function logEquity(
         string calldata principle,
-        uint256 threshold
+        string calldata description
     ) external onlyOverseer {
         equityCount++;
         equities[equityCount] = EquityRule({
             id: equityCount,
             principle: principle,
-            threshold: threshold,
+            description: description,
             timestamp: block.timestamp
         });
-        emit EquityLogged(equityCount, principle, threshold);
+        emit EquityLogged(equityCount, principle, description);
     }
 
     function viewEquity(uint256 id) external view returns (EquityRule memory) {
