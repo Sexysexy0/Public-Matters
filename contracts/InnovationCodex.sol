@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title InnovationCodex
-/// @notice Covenant contract to safeguard systemic creativity, breakthrough, and dignified innovation
+/// @notice Covenant contract to safeguard systemic R&D, technological advancement, and dignified innovation
 contract InnovationCodex {
     address public overseer;
     uint256 public innovationCount;
 
     struct InnovationRule {
         uint256 id;
-        string principle; // Creativity, Breakthrough, Visionary Thinking, Systemic Renewal
+        string principle; // Research, Advancement, Creativity, Sustainability
         string description; // encoded innovation safeguard
         uint256 timestamp;
     }
