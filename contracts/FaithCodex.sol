@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title FaithCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of faith practices
+/// @notice Covenant contract to safeguard systemic trust, spiritual resilience, and dignified faith
 contract FaithCodex {
     address public overseer;
     uint256 public faithCount;
 
-    struct FaithEntry {
+    struct FaithRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle; // Trust, Spiritual Resilience, Belief, Hope
+        string description; // encoded faith safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => FaithEntry) public faiths;
+    mapping(uint256 => FaithRule) public faiths;
 
-    event FaithLogged(uint256 indexed id, string actor, string context);
+    event FaithLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract FaithCodex {
     }
 
     function logFaith(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
+        string calldata principle,
+        string calldata description
     ) external onlyOverseer {
         faithCount++;
-        faiths[faithCount] = FaithEntry({
+        faiths[faithCount] = FaithRule({
             id: faithCount,
-            actor: actor,
-            context: context,
             principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit FaithLogged(faithCount, actor, context);
+        emit FaithLogged(faithCount, principle, description);
     }
 
-    function viewFaith(uint256 id) external view returns (FaithEntry memory) {
+    function viewFaith(uint256 id) external view returns (FaithRule memory) {
         return faiths[id];
     }
 }
