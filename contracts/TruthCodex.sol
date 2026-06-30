@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title TruthCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of truth safeguards
+/// @notice Covenant contract to safeguard systemic integrity, factual clarity, and dignified truth
 contract TruthCodex {
     address public overseer;
     uint256 public truthCount;
 
-    struct TruthEntry {
+    struct TruthRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle; // Integrity, Factual Clarity, Transparency, Anti-Deception
+        string description; // encoded truth safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => TruthEntry) public truths;
+    mapping(uint256 => TruthRule) public truths;
 
-    event TruthLogged(uint256 indexed id, string actor, string context);
+    event TruthLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract TruthCodex {
     }
 
     function logTruth(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
+        string calldata principle,
+        string calldata description
     ) external onlyOverseer {
         truthCount++;
-        truths[truthCount] = TruthEntry({
+        truths[truthCount] = TruthRule({
             id: truthCount,
-            actor: actor,
-            context: context,
             principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit TruthLogged(truthCount, actor, context);
+        emit TruthLogged(truthCount, principle, description);
     }
 
-    function viewTruth(uint256 id) external view returns (TruthEntry memory) {
+    function viewTruth(uint256 id) external view returns (TruthRule memory) {
         return truths[id];
     }
 }
