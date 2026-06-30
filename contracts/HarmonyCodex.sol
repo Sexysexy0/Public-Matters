@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title HarmonyCodex
-/// @notice Covenant contract to safeguard leadership and projects through systemic anchoring of interpersonal balance and team unity
+/// @notice Covenant contract to symbolically safeguard music-story integration, emotional resonance, and creative immersion
 contract HarmonyCodex {
     address public overseer;
     uint256 public harmonyCount;
 
     struct HarmonyRule {
         uint256 id;
-        string principle; // Unity, Respect, Cooperation, Balance
+        string principle; // Music-Story Integration, Emotional Resonance, Creative Immersion, Relatability
         string description; // encoded harmony safeguard
         uint256 timestamp;
     }
