@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title RespectCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of respect and dignity safeguards
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of respect safeguards
 contract RespectCodex {
     address public overseer;
     uint256 public respectCount;
 
-    struct RespectEntry {
+    struct RespectRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle; // Dignity, Courtesy, Mutual Recognition, Human Rights
+        string description; // encoded respect form
         uint256 timestamp;
     }
 
-    mapping(uint256 => RespectEntry) public respects;
+    mapping(uint256 => RespectRule) public respects;
 
-    event RespectLogged(uint256 indexed id, string actor, string context);
+    event RespectLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract RespectCodex {
     }
 
     function logRespect(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
+        string calldata principle,
+        string calldata description
     ) external onlyOverseer {
         respectCount++;
-        respects[respectCount] = RespectEntry({
+        respects[respectCount] = RespectRule({
             id: respectCount,
-            actor: actor,
-            context: context,
             principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit RespectLogged(respectCount, actor, context);
+        emit RespectLogged(respectCount, principle, description);
     }
 
-    function viewRespect(uint256 id) external view returns (RespectEntry memory) {
+    function viewRespect(uint256 id) external view returns (RespectRule memory) {
         return respects[id];
     }
 }
