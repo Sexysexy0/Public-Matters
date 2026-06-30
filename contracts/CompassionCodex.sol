@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title CompassionCodex
-/// @notice Covenant contract to safeguard systemic empathy, humane governance, and dignified compassion
+/// @notice Covenant contract to safeguard systemic empathy, principled compassion, and dignified care
 contract CompassionCodex {
     address public overseer;
     uint256 public compassionCount;
 
     struct CompassionRule {
         uint256 id;
-        string principle; // Empathy, Humane Governance, Care, Solidarity
+        string principle; // Empathy, Care, Release, Humanity
         string description; // encoded compassion safeguard
         uint256 timestamp;
     }
