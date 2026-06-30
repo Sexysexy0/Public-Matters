@@ -10,7 +10,7 @@ contract CompassionCodex {
 
     struct CompassionRule {
         uint256 id;
-        string principle; // Empathy, Care, Release, Humanity
+        string principle; // Empathy, Care, Kindness, Understanding
         string description; // encoded compassion safeguard
         uint256 timestamp;
     }
