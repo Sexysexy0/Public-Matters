@@ -3,19 +3,19 @@
 pragma solidity ^0.8.20;
 
 /// @title JusticeCodex
-/// @notice Covenant contract to safeguard portfolios through systemic anchoring of justice safeguards
+/// @notice Covenant contract to safeguard systemic fairness, legal equity, and dignified governance
 contract JusticeCodex {
     address public overseer;
     uint256 public justiceCount;
 
     struct JusticeRule {
         uint256 id;
-        string principle; // Fairness, Due Process, Equity, Impartiality
-        string description; // encoded justice form
+        string principle; // Fairness, Legal Equity, Governance Safeguards, Rights Protection
+        string description; // encoded justice safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => JusticeRule) public justiceRules;
+    mapping(uint256 => JusticeRule) public justices;
 
     event JusticeLogged(uint256 indexed id, string principle, string description);
 
@@ -33,7 +33,7 @@ contract JusticeCodex {
         string calldata description
     ) external onlyOverseer {
         justiceCount++;
-        justiceRules[justiceCount] = JusticeRule({
+        justices[justiceCount] = JusticeRule({
             id: justiceCount,
             principle: principle,
             description: description,
@@ -43,6 +43,6 @@ contract JusticeCodex {
     }
 
     function viewJustice(uint256 id) external view returns (JusticeRule memory) {
-        return justiceRules[id];
+        return justices[id];
     }
 }
