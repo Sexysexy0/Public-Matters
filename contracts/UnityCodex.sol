@@ -3,21 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title UnityCodex
-/// @notice Covenant contract to safeguard portfolios through systemic anchoring of unity safeguards
+/// @notice Covenant contract to safeguard systemic solidarity, shared purpose, and collective strength
 contract UnityCodex {
     address public overseer;
     uint256 public unityCount;
 
     struct UnityRule {
         uint256 id;
-        string principle; // Solidarity, Cooperation, Collective Action, Shared Vision
-        uint256 threshold; // safeguard value
+        string principle; // Solidarity, Shared Purpose, Collective Strength, Harmony
+        string description; // encoded unity safeguard
         uint256 timestamp;
     }
 
     mapping(uint256 => UnityRule) public unities;
 
-    event UnityLogged(uint256 indexed id, string principle, uint256 threshold);
+    event UnityLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,16 +30,16 @@ contract UnityCodex {
 
     function logUnity(
         string calldata principle,
-        uint256 threshold
+        string calldata description
     ) external onlyOverseer {
         unityCount++;
         unities[unityCount] = UnityRule({
             id: unityCount,
             principle: principle,
-            threshold: threshold,
+            description: description,
             timestamp: block.timestamp
         });
-        emit UnityLogged(unityCount, principle, threshold);
+        emit UnityLogged(unityCount, principle, description);
     }
 
     function viewUnity(uint256 id) external view returns (UnityRule memory) {
