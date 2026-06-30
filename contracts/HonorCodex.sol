@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title HonorCodex
-/// @notice Covenant contract to safeguard systemic dignity, principled conduct, and honorable governance
+/// @notice Covenant contract to safeguard systemic dignity, principled honor, and grounded responsibility
 contract HonorCodex {
     address public overseer;
     uint256 public honorCount;
 
     struct HonorRule {
         uint256 id;
-        string principle; // Dignity, Principled Conduct, Respect, Integrity
+        string principle; // Dignity, Respect, Humility, Integrity
         string description; // encoded honor safeguard
         uint256 timestamp;
     }
