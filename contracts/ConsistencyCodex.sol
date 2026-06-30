@@ -10,7 +10,7 @@ contract ConsistencyCodex {
 
     struct ConsistencyRule {
         uint256 id;
-        string principle; // Logical Coherence, Non-Contradiction, Stability, Reliability
+        string principle; // Reliability, Stability, Uniformity, Predictability
         string description; // encoded consistency form
         uint256 timestamp;
     }
