@@ -2,20 +2,22 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title CreativeVisionCodex
+/// @notice Covenant contract to symbolically safeguard artistic leadership, innovation, and imagination
 contract CreativeVisionCodex {
     address public overseer;
-    uint256 public visionCount;
+    uint256 public creativeVisionCount;
 
-    struct VisionRule {
+    struct CreativeVisionRule {
         uint256 id;
-        string principle; // Narrative Alignment, Gameplay Identity, Franchise Continuity, Innovation
-        string description;
+        string principle; // Artistic Leadership, Innovation, Imagination, Hybrid Creativity
+        string description; // encoded creative vision safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => VisionRule) public visions;
+    mapping(uint256 => CreativeVisionRule) public creativeVisions;
 
-    event VisionLogged(uint256 indexed id, string principle, string description);
+    event CreativeVisionLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -26,21 +28,21 @@ contract CreativeVisionCodex {
         overseer = _overseer;
     }
 
-    function logVision(
+    function logCreativeVision(
         string calldata principle,
         string calldata description
     ) external onlyOverseer {
-        visionCount++;
-        visions[visionCount] = VisionRule({
-            id: visionCount,
+        creativeVisionCount++;
+        creativeVisions[creativeVisionCount] = CreativeVisionRule({
+            id: creativeVisionCount,
             principle: principle,
             description: description,
             timestamp: block.timestamp
         });
-        emit VisionLogged(visionCount, principle, description);
+        emit CreativeVisionLogged(creativeVisionCount, principle, description);
     }
 
-    function viewVision(uint256 id) external view returns (VisionRule memory) {
-        return visions[id];
+    function viewCreativeVision(uint256 id) external view returns (CreativeVisionRule memory) {
+        return creativeVisions[id];
     }
 }
