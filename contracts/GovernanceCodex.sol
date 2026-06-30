@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title GovernanceCodex
-/// @notice Master covenant to bundle authorship, transparency, and identity safeguards
+/// @notice Covenant contract to symbolically safeguard regulatory oversight, governance principles, and systemic cannabis policy integration
 contract GovernanceCodex {
     address public overseer;
-    uint256 public codexCount;
+    uint256 public governanceCount;
 
-    struct CodexEntry {
+    struct GovernanceRule {
         uint256 id;
-        string category;
-        address contractAddress;
-        string description;
+        string principle; // Regulatory Oversight, Governance Safeguards, Policy Integration, Justice Equity
+        string description; // encoded governance safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => CodexEntry) public codexEntries;
+    mapping(uint256 => GovernanceRule) public governance;
 
-    event CodexRegistered(uint256 indexed id, string category, address contractAddress, string description);
+    event GovernanceLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -29,23 +28,21 @@ contract GovernanceCodex {
         overseer = _overseer;
     }
 
-    function registerCodex(
-        string calldata category,
-        address contractAddress,
+    function logGovernance(
+        string calldata principle,
         string calldata description
     ) external onlyOverseer {
-        codexCount++;
-        codexEntries[codexCount] = CodexEntry({
-            id: codexCount,
-            category: category,
-            contractAddress: contractAddress,
+        governanceCount++;
+        governance[governanceCount] = GovernanceRule({
+            id: governanceCount,
+            principle: principle,
             description: description,
             timestamp: block.timestamp
         });
-        emit CodexRegistered(codexCount, category, contractAddress, description);
+        emit GovernanceLogged(governanceCount, principle, description);
     }
 
-    function viewCodex(uint256 id) external view returns (CodexEntry memory) {
-        return codexEntries[id];
+    function viewGovernance(uint256 id) external view returns (GovernanceRule memory) {
+        return governance[id];
     }
 }
