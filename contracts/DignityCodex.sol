@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title DignityCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of dignity principles
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of dignity safeguards
 contract DignityCodex {
     address public overseer;
     uint256 public dignityCount;
 
-    struct DignityEntry {
+    struct DignityRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle; // Human Worth, Respect, Integrity, Equal Value
+        string description; // encoded dignity form
         uint256 timestamp;
     }
 
-    mapping(uint256 => DignityEntry) public dignities;
+    mapping(uint256 => DignityRule) public dignities;
 
-    event DignityLogged(uint256 indexed id, string actor, string context);
+    event DignityLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract DignityCodex {
     }
 
     function logDignity(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
+        string calldata principle,
+        string calldata description
     ) external onlyOverseer {
         dignityCount++;
-        dignities[dignityCount] = DignityEntry({
+        dignities[dignityCount] = DignityRule({
             id: dignityCount,
-            actor: actor,
-            context: context,
             principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit DignityLogged(dignityCount, actor, context);
+        emit DignityLogged(dignityCount, principle, description);
     }
 
-    function viewDignity(uint256 id) external view returns (DignityEntry memory) {
+    function viewDignity(uint256 id) external view returns (DignityRule memory) {
         return dignities[id];
     }
 }
