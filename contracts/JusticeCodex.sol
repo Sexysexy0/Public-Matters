@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title JusticeCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of justice principles
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of justice safeguards
 contract JusticeCodex {
     address public overseer;
     uint256 public justiceCount;
 
-    struct JusticeEntry {
+    struct JusticeRule {
         uint256 id;
-        string actor;
-        string domain;
-        string principle;
+        string principle; // Fairness, Due Process, Equity, Impartiality
+        string description; // encoded justice form
         uint256 timestamp;
     }
 
-    mapping(uint256 => JusticeEntry) public justices;
+    mapping(uint256 => JusticeRule) public justiceRules;
 
-    event JusticeLogged(uint256 indexed id, string actor, string domain);
+    event JusticeLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract JusticeCodex {
     }
 
     function logJustice(
-        string calldata actor,
-        string calldata domain,
-        string calldata principle
+        string calldata principle,
+        string calldata description
     ) external onlyOverseer {
         justiceCount++;
-        justices[justiceCount] = JusticeEntry({
+        justiceRules[justiceCount] = JusticeRule({
             id: justiceCount,
-            actor: actor,
-            domain: domain,
             principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit JusticeLogged(justiceCount, actor, domain);
+        emit JusticeLogged(justiceCount, principle, description);
     }
 
-    function viewJustice(uint256 id) external view returns (JusticeEntry memory) {
-        return justices[id];
+    function viewJustice(uint256 id) external view returns (JusticeRule memory) {
+        return justiceRules[id];
     }
 }
