@@ -2,14 +2,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title InnovationCodex
+/// @notice Covenant contract to symbolically safeguard industrial innovation and economic potential of cannabis
 contract InnovationCodex {
     address public overseer;
     uint256 public innovationCount;
 
     struct InnovationRule {
         uint256 id;
-        string principle; // Creativity, Experimentation, Risk Management, Breakthroughs
-        string description;
+        string principle; // Industrial Innovation, Economic Potential, Sustainable Development, Resource Recognition
+        string description; // encoded innovation safeguard
         uint256 timestamp;
     }
 
