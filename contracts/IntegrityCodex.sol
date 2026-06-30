@@ -10,7 +10,7 @@ contract IntegrityCodex {
 
     struct IntegrityRule {
         uint256 id;
-        string principle; // Honesty, Fairness, Transparency, Accountability
+        string principle; // Honesty, Transparency, Consistency, Moral Responsibility
         string description; // encoded integrity form
         uint256 timestamp;
     }
