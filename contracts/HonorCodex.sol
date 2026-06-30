@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title HonorCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of honor principles
+/// @notice Covenant contract to safeguard systemic dignity, principled conduct, and honorable governance
 contract HonorCodex {
     address public overseer;
     uint256 public honorCount;
 
-    struct HonorEntry {
+    struct HonorRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle; // Dignity, Principled Conduct, Respect, Integrity
+        string description; // encoded honor safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => HonorEntry) public honors;
+    mapping(uint256 => HonorRule) public honors;
 
-    event HonorLogged(uint256 indexed id, string actor, string context);
+    event HonorLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract HonorCodex {
     }
 
     function logHonor(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
+        string calldata principle,
+        string calldata description
     ) external onlyOverseer {
         honorCount++;
-        honors[honorCount] = HonorEntry({
+        honors[honorCount] = HonorRule({
             id: honorCount,
-            actor: actor,
-            context: context,
             principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit HonorLogged(honorCount, actor, context);
+        emit HonorLogged(honorCount, principle, description);
     }
 
-    function viewHonor(uint256 id) external view returns (HonorEntry memory) {
+    function viewHonor(uint256 id) external view returns (HonorRule memory) {
         return honors[id];
     }
 }
