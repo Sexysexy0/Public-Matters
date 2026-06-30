@@ -10,14 +10,14 @@ contract TransparencyCodex {
 
     struct TransparencyRule {
         uint256 id;
-        string principle; // Open Records, Clear Communication, Honest Reporting, Accessible Governance
-        uint256 threshold; // safeguard value
+        string principle; // Open Disclosure, Accountability, Clear Communication, Public Access
+        string description; // encoded transparency form
         uint256 timestamp;
     }
 
     mapping(uint256 => TransparencyRule) public transparencies;
 
-    event TransparencyLogged(uint256 indexed id, string principle, uint256 threshold);
+    event TransparencyLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,16 +30,16 @@ contract TransparencyCodex {
 
     function logTransparency(
         string calldata principle,
-        uint256 threshold
+        string calldata description
     ) external onlyOverseer {
         transparencyCount++;
         transparencies[transparencyCount] = TransparencyRule({
             id: transparencyCount,
             principle: principle,
-            threshold: threshold,
+            description: description,
             timestamp: block.timestamp
         });
-        emit TransparencyLogged(transparencyCount, principle, threshold);
+        emit TransparencyLogged(transparencyCount, principle, description);
     }
 
     function viewTransparency(uint256 id) external view returns (TransparencyRule memory) {
