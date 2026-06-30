@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title CharityCodex
-/// @notice Covenant contract to safeguard systemic generosity, benevolence, and dignified charity
+/// @notice Covenant contract to safeguard systemic generosity, principled charity, and dignified giving
 contract CharityCodex {
     address public overseer;
     uint256 public charityCount;
 
     struct CharityRule {
         uint256 id;
-        string principle; // Generosity, Benevolence, Altruism, Shared Responsibility
+        string principle; // Generosity, Kindness, Service, Giving
         string description; // encoded charity safeguard
         uint256 timestamp;
     }
