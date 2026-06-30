@@ -10,7 +10,7 @@ contract JusticeCodex {
 
     struct JusticeRule {
         uint256 id;
-        string principle; // Fairness, Equity, Accountability, Integrity
+        string principle; // Fairness, Equity, Accountability, Impartiality
         string description; // encoded justice safeguard
         uint256 timestamp;
     }
