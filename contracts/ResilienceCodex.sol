@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title ResilienceCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of resilience against exhaustion
+/// @notice Covenant contract to safeguard leadership and projects through systemic anchoring of endurance, recovery, and adaptability
 contract ResilienceCodex {
     address public overseer;
     uint256 public resilienceCount;
 
-    struct ResilienceEntry {
+    struct ResilienceRule {
         uint256 id;
-        string actor;
-        string challenge;
-        string method;
+        string principle; // Endurance, Recovery, Adaptability, Persistence
+        string description; // encoded resilience safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => ResilienceEntry) public resiliences;
+    mapping(uint256 => ResilienceRule) public resiliences;
 
-    event ResilienceLogged(uint256 indexed id, string actor, string method);
+    event ResilienceLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract ResilienceCodex {
     }
 
     function logResilience(
-        string calldata actor,
-        string calldata challenge,
-        string calldata method
+        string calldata principle,
+        string calldata description
     ) external onlyOverseer {
         resilienceCount++;
-        resiliences[resilienceCount] = ResilienceEntry({
+        resiliences[resilienceCount] = ResilienceRule({
             id: resilienceCount,
-            actor: actor,
-            challenge: challenge,
-            method: method,
+            principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit ResilienceLogged(resilienceCount, actor, method);
+        emit ResilienceLogged(resilienceCount, principle, description);
     }
 
-    function viewResilience(uint256 id) external view returns (ResilienceEntry memory) {
+    function viewResilience(uint256 id) external view returns (ResilienceRule memory) {
         return resiliences[id];
     }
 }
