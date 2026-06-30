@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title CompassionCodex
-/// @notice Covenant contract to symbolically safeguard humane treatment, compassionate justice, and dignified recognition of cannabis
+/// @notice Covenant contract to safeguard systemic empathy, humane governance, and dignified compassion
 contract CompassionCodex {
     address public overseer;
     uint256 public compassionCount;
 
     struct CompassionRule {
         uint256 id;
-        string principle; // Humane Treatment, Compassionate Justice, Dignity, Plant Recognition
+        string principle; // Empathy, Humane Governance, Care, Solidarity
         string description; // encoded compassion safeguard
         uint256 timestamp;
     }
