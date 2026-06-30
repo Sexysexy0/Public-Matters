@@ -2,20 +2,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract InnovationCodex {
+contract FranchiseIdentityCodex {
     address public overseer;
-    uint256 public innovationCount;
+    uint256 public identityCount;
 
-    struct InnovationRule {
+    struct IdentityRule {
         uint256 id;
-        string principle; // Creativity, Experimentation, Risk Management, Breakthroughs
+        string principle; // Continuity, Legacy, Brand Alignment, Player Expectation
         string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => InnovationRule) public innovations;
+    mapping(uint256 => IdentityRule) public identities;
 
-    event InnovationLogged(uint256 indexed id, string principle, string description);
+    event IdentityLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -26,21 +26,21 @@ contract InnovationCodex {
         overseer = _overseer;
     }
 
-    function logInnovation(
+    function logIdentity(
         string calldata principle,
         string calldata description
     ) external onlyOverseer {
-        innovationCount++;
-        innovations[innovationCount] = InnovationRule({
-            id: innovationCount,
+        identityCount++;
+        identities[identityCount] = IdentityRule({
+            id: identityCount,
             principle: principle,
             description: description,
             timestamp: block.timestamp
         });
-        emit InnovationLogged(innovationCount, principle, description);
+        emit IdentityLogged(identityCount, principle, description);
     }
 
-    function viewInnovation(uint256 id) external view returns (InnovationRule memory) {
-        return innovations[id];
+    function viewIdentity(uint256 id) external view returns (IdentityRule memory) {
+        return identities[id];
     }
 }
