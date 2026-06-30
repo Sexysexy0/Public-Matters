@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title TruthCodex
-/// @notice Covenant contract to safeguard systemic transparency, incorruptible truth, and dignified honesty
+/// @notice Covenant contract to safeguard systemic honesty, principled truth, and dignified transparency
 contract TruthCodex {
     address public overseer;
     uint256 public truthCount;
 
     struct TruthRule {
         uint256 id;
-        string principle; // Transparency, Incorruptible Truth, Honesty, Clarity
+        string principle; // Honesty, Integrity, Transparency, Authenticity
         string description; // encoded truth safeguard
         uint256 timestamp;
     }
