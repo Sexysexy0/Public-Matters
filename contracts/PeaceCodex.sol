@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title PeaceCodex
-/// @notice Covenant contract to safeguard systemic reconciliation, dignified peace, and principled harmony
+/// @notice Covenant contract to safeguard systemic non-violence, principled peace, and dignified coexistence
 contract PeaceCodex {
     address public overseer;
     uint256 public peaceCount;
 
     struct PeaceRule {
         uint256 id;
-        string principle; // Reconciliation, Harmony, Nonviolence, Stability
+        string principle; // Non-violence, Harmony, Coexistence, Reconciliation
         string description; // encoded peace safeguard
         uint256 timestamp;
     }
