@@ -2,14 +2,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title TrustCodex
+/// @notice Covenant contract to safeguard leadership and projects through systemic anchoring of fairness, transparency, and integrity
 contract TrustCodex {
     address public overseer;
     uint256 public trustCount;
 
     struct TrustRule {
         uint256 id;
-        string principle; // Player Confidence, Reliability, Fairness, Transparency
-        string description;
+        string principle; // Fairness, Transparency, Integrity, Accountability
+        string description; // encoded trust safeguard
         uint256 timestamp;
     }
 
