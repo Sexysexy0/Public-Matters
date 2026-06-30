@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title StewardshipCodex
-/// @notice Covenant contract to safeguard dignified leadership, governance responsibility, and systemic stewardship
+/// @notice Covenant contract to safeguard systemic responsible care, dignified management, and principled stewardship
 contract StewardshipCodex {
     address public overseer;
     uint256 public stewardshipCount;
 
     struct StewardshipRule {
         uint256 id;
-        string principle; // Leadership Responsibility, Governance Stewardship, Ethical Authority, Service to People
+        string principle; // Responsible Care, Dignified Management, Accountability, Sustainability
         string description; // encoded stewardship safeguard
         uint256 timestamp;
     }
