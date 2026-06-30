@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title InnovationCodex
-/// @notice Covenant contract to symbolically safeguard industrial innovation and economic potential of cannabis
+/// @notice Covenant contract to safeguard systemic creativity, breakthrough, and dignified innovation
 contract InnovationCodex {
     address public overseer;
     uint256 public innovationCount;
 
     struct InnovationRule {
         uint256 id;
-        string principle; // Industrial Innovation, Economic Potential, Sustainable Development, Resource Recognition
+        string principle; // Creativity, Breakthrough, Visionary Thinking, Systemic Renewal
         string description; // encoded innovation safeguard
         uint256 timestamp;
     }
