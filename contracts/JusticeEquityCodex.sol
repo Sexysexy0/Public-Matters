@@ -3,21 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title JusticeEquityCodex
-/// @notice Covenant contract to encode systemic justice and equity safeguards
+/// @notice Covenant contract to symbolically safeguard fairness, bail equity, and criminal justice reform
 contract JusticeEquityCodex {
     address public overseer;
-    uint256 public codexCount;
+    uint256 public equityCount;
 
-    struct JusticeEntry {
+    struct EquityRule {
         uint256 id;
-        string principle;
-        string description;
+        string principle; // Fairness, Bail Equity, Justice Reform, Human Dignity
+        string description; // encoded justice safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => JusticeEntry) public entries;
+    mapping(uint256 => EquityRule) public equities;
 
-    event JusticeLogged(uint256 indexed id, string principle, string description);
+    event EquityLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -28,21 +28,21 @@ contract JusticeEquityCodex {
         overseer = _overseer;
     }
 
-    function logJustice(
+    function logEquity(
         string calldata principle,
         string calldata description
     ) external onlyOverseer {
-        codexCount++;
-        entries[codexCount] = JusticeEntry({
-            id: codexCount,
+        equityCount++;
+        equities[equityCount] = EquityRule({
+            id: equityCount,
             principle: principle,
             description: description,
             timestamp: block.timestamp
         });
-        emit JusticeLogged(codexCount, principle, description);
+        emit EquityLogged(equityCount, principle, description);
     }
 
-    function viewJustice(uint256 id) external view returns (JusticeEntry memory) {
-        return entries[id];
+    function viewEquity(uint256 id) external view returns (EquityRule memory) {
+        return equities[id];
     }
 }
