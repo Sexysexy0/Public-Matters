@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title LoveCodex
-/// @notice Covenant contract to safeguard systemic care, principled love, and dignified compassion
+/// @notice Covenant contract to safeguard systemic affection, principled compassion, and dignified love
 contract LoveCodex {
     address public overseer;
     uint256 public loveCount;
 
     struct LoveRule {
         uint256 id;
-        string principle; // Care, Affection, Unity, Compassion
+        string principle; // Love, Compassion, Affection, Unity
         string description; // encoded love safeguard
         uint256 timestamp;
     }
