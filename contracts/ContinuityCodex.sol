@@ -2,14 +2,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title ContinuityCodex
+/// @notice Covenant contract to safeguard systemic persistence, principled continuity, and dignified endurance
 contract ContinuityCodex {
     address public overseer;
     uint256 public continuityCount;
 
     struct ContinuityRule {
         uint256 id;
-        string principle; // Stability, Long-Term Planning, Franchise Flow, Operational Integrity
-        string description;
+        string principle; // Persistence, Endurance, Stability, Legacy
+        string description; // encoded continuity safeguard
         uint256 timestamp;
     }
 
