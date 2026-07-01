@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title ResilienceCodex
-/// @notice Covenant contract to safeguard systemic endurance, principled resilience, and dignified perseverance
+/// @notice Covenant contract to safeguard systemic strength, principled resilience, and dignified perseverance
 contract ResilienceCodex {
     address public overseer;
     uint256 public resilienceCount;
 
     struct ResilienceRule {
         uint256 id;
-        string principle; // Endurance, Perseverance, Adaptability, Strength
+        string principle; // Strength, Perseverance, Adaptability, Recovery
         string description; // encoded resilience safeguard
         uint256 timestamp;
     }
