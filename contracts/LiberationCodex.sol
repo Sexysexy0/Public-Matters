@@ -3,22 +3,21 @@
 pragma solidity ^0.8.20;
 
 /// @title LiberationCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of liberation principles
+/// @notice Covenant contract to safeguard systemic freedom, principled autonomy, and dignified liberation
 contract LiberationCodex {
     address public overseer;
     uint256 public liberationCount;
 
-    struct LiberationEntry {
+    struct LiberationRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle; // Freedom, Autonomy, Self-Remembering, Intentional Suffering
+        string description; // encoded liberation safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => LiberationEntry) public liberations;
+    mapping(uint256 => LiberationRule) public liberations;
 
-    event LiberationLogged(uint256 indexed id, string actor, string context);
+    event LiberationLogged(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,22 +29,20 @@ contract LiberationCodex {
     }
 
     function logLiberation(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
+        string calldata principle,
+        string calldata description
     ) external onlyOverseer {
         liberationCount++;
-        liberations[liberationCount] = LiberationEntry({
+        liberations[liberationCount] = LiberationRule({
             id: liberationCount,
-            actor: actor,
-            context: context,
             principle: principle,
+            description: description,
             timestamp: block.timestamp
         });
-        emit LiberationLogged(liberationCount, actor, context);
+        emit LiberationLogged(liberationCount, principle, description);
     }
 
-    function viewLiberation(uint256 id) external view returns (LiberationEntry memory) {
+    function viewLiberation(uint256 id) external view returns (LiberationRule memory) {
         return liberations[id];
     }
 }
