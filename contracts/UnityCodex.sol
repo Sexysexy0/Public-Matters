@@ -3,14 +3,14 @@
 pragma solidity ^0.8.20;
 
 /// @title UnityCodex
-/// @notice Covenant contract to safeguard systemic solidarity, principled unity, and dignified collective strength
+/// @notice Covenant contract to safeguard systemic cohesion, principled unity, and dignified solidarity
 contract UnityCodex {
     address public overseer;
     uint256 public unityCount;
 
     struct UnityRule {
         uint256 id;
-        string principle; // Solidarity, Cooperation, Harmony, Collective Strength
+        string principle; // Cohesion, Solidarity, Collective Strength, Harmony
         string description; // encoded unity safeguard
         uint256 timestamp;
     }
