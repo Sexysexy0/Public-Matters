@@ -2,47 +2,32 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title JusticeEquityCodex
-/// @notice Covenant contract to symbolically safeguard fairness, bail equity, and criminal justice reform
 contract JusticeEquityCodex {
     address public overseer;
-    uint256 public equityCount;
+    uint256 public entryCount;
 
-    struct EquityRule {
+    struct Entry {
         uint256 id;
-        string principle; // Fairness, Bail Equity, Justice Reform, Human Dignity
-        string description; // encoded justice safeguard
+        string principle;   // Justice, Equity, Fairness
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => EquityRule) public equities;
+    mapping(uint256 => Entry) public entries;
+    event EntryDeclared(uint256 indexed id, string principle, string description);
 
-    event EquityLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) {
+        overseer = _overseer;
+    }
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logEquity(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        equityCount++;
-        equities[equityCount] = EquityRule({
-            id: equityCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit EquityLogged(equityCount, principle, description);
-    }
-
-    function viewEquity(uint256 id) external view returns (EquityRule memory) {
-        return equities[id];
+    function declareEntry(string calldata principle, string calldata description) external onlyOverseer {
+        entryCount++;
+        entries[entryCount] = Entry(entryCount, principle, description, block.timestamp);
+        emit EntryDeclared(entryCount, principle, description);
     }
 }
