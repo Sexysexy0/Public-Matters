@@ -3,21 +3,22 @@
 pragma solidity ^0.8.20;
 
 /// @title AccountabilityCodex
-/// @notice Covenant contract to safeguard systemic responsibility, transparency, and ethical governance
+/// @notice Covenant contract to safeguard systemic accountability in governance,
+///         ensuring responsibility, transparency, and consequences for misuse.
 contract AccountabilityCodex {
     address public overseer;
     uint256 public accountabilityCount;
 
-    struct AccountabilityRule {
+    struct Accountability {
         uint256 id;
-        string principle; // Responsibility, Transparency, Ethical Safeguards, Trust
-        string description; // encoded accountability safeguard
+        string principle;   // Responsibility, Transparency, Checks, Consequences
+        string description; // Encoded safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => AccountabilityRule) public accountabilities;
+    mapping(uint256 => Accountability) public accountabilities;
 
-    event AccountabilityLogged(uint256 indexed id, string principle, string description);
+    event AccountabilityDeclared(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -28,21 +29,23 @@ contract AccountabilityCodex {
         overseer = _overseer;
     }
 
-    function logAccountability(
+    /// @notice Declare a new accountability safeguard
+    function declareAccountability(
         string calldata principle,
         string calldata description
     ) external onlyOverseer {
         accountabilityCount++;
-        accountabilities[accountabilityCount] = AccountabilityRule({
+        accountabilities[accountabilityCount] = Accountability({
             id: accountabilityCount,
             principle: principle,
             description: description,
             timestamp: block.timestamp
         });
-        emit AccountabilityLogged(accountabilityCount, principle, description);
+        emit AccountabilityDeclared(accountabilityCount, principle, description);
     }
 
-    function viewAccountability(uint256 id) external view returns (AccountabilityRule memory) {
+    /// @notice View a specific accountability safeguard
+    function viewAccountability(uint256 id) external view returns (Accountability memory) {
         return accountabilities[id];
     }
 }
