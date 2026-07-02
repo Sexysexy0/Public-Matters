@@ -27,6 +27,12 @@ const GovernanceModule = buildModule("GovernanceModule", (m) => {
   // Deploy EqualityScript
   const equalityScript = m.contract("EqualityScript", [initialAdmin]);
 
+  // Deploy DignityLedger
+  const dignityLedger = m.contract("DignityLedger", [initialAdmin]);
+
+  // Deploy ProgressChronicle
+  const progressChronicle = m.contract("ProgressChronicle", [initialAdmin]);
+
   return {
     securityGovernance,
     unityTreaty,
@@ -35,6 +41,8 @@ const GovernanceModule = buildModule("GovernanceModule", (m) => {
     balanceScroll,
     solidarityChain,
     equalityScript,
+    dignityLedger,
+    progressChronicle,
   };
 });
 
