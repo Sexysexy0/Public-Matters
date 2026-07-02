@@ -8,13 +8,13 @@ contract AccountabilityLedger {
 
     struct Record {
         uint256 id;
-        string action;   // Decision, Policy, Program
+        string principle;   // Accountability, Transparency, Responsibility
         string description;
         uint256 timestamp;
     }
 
     mapping(uint256 => Record) public records;
-    event RecordLogged(uint256 indexed id, string action, string description);
+    event RecordLogged(uint256 indexed id, string principle, string description);
 
     constructor(address _overseer) {
         overseer = _overseer;
@@ -25,9 +25,9 @@ contract AccountabilityLedger {
         _;
     }
 
-    function logRecord(string calldata action, string calldata description) external onlyOverseer {
+    function logRecord(string calldata principle, string calldata description) external onlyOverseer {
         recordCount++;
-        records[recordCount] = Record(recordCount, action, description, block.timestamp);
-        emit RecordLogged(recordCount, action, description);
+        records[recordCount] = Record(recordCount, principle, description, block.timestamp);
+        emit RecordLogged(recordCount, principle, description);
     }
 }
