@@ -3,16 +3,16 @@
 pragma solidity ^0.8.20;
 
 /// @title HarmonyTreaty
-/// @notice Covenant contract to safeguard unity and inter-community peace,
-///         ensuring cooperation, respect, and collective balance.
+/// @notice Covenant to safeguard balance and coexistence,
+///         ensuring peace, cooperation, and systemic alignment.
 contract HarmonyTreaty {
     address public overseer;
     uint256 public treatyCount;
 
     struct Treaty {
         uint256 id;
-        string principle;   // Unity, Peace, Cooperation, Respect
-        string description; // Encoded safeguard
+        string principle;   // Peace, Cooperation, Alignment
+        string description;
         uint256 timestamp;
     }
 
@@ -29,22 +29,12 @@ contract HarmonyTreaty {
         overseer = _overseer;
     }
 
-    /// @notice Declare a new harmony safeguard
-    function declareTreaty(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
+    function declareTreaty(string calldata principle, string calldata description) external onlyOverseer {
         treatyCount++;
-        treaties[treatyCount] = Treaty({
-            id: treatyCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
+        treaties[treatyCount] = Treaty(treatyCount, principle, description, block.timestamp);
         emit TreatyDeclared(treatyCount, principle, description);
     }
 
-    /// @notice View a specific harmony safeguard
     function viewTreaty(uint256 id) external view returns (Treaty memory) {
         return treaties[id];
     }
