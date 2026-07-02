@@ -21,12 +21,20 @@ const GovernanceModule = buildModule("GovernanceModule", (m) => {
   // Deploy BalanceScroll
   const balanceScroll = m.contract("BalanceScroll", [initialAdmin]);
 
+  // Deploy SolidarityChain
+  const solidarityChain = m.contract("SolidarityChain", [initialAdmin]);
+
+  // Deploy EqualityScript
+  const equalityScript = m.contract("EqualityScript", [initialAdmin]);
+
   return {
     securityGovernance,
     unityTreaty,
     justiceCodex,
     harmonyPact,
     balanceScroll,
+    solidarityChain,
+    equalityScript,
   };
 });
 
