@@ -15,7 +15,19 @@ const GovernanceModule = buildModule("GovernanceModule", (m) => {
   // Deploy JusticeCodex
   const justiceCodex = m.contract("JusticeCodex", [initialAdmin]);
 
-  return { securityGovernance, unityTreaty, justiceCodex };
+  // Deploy HarmonyPact
+  const harmonyPact = m.contract("HarmonyPact", [initialAdmin]);
+
+  // Deploy BalanceScroll
+  const balanceScroll = m.contract("BalanceScroll", [initialAdmin]);
+
+  return {
+    securityGovernance,
+    unityTreaty,
+    justiceCodex,
+    harmonyPact,
+    balanceScroll,
+  };
 });
 
 export default GovernanceModule;
