@@ -2,47 +2,32 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title TransparencyCodex
-/// @notice Covenant contract to safeguard systemic openness, clarity, and exposure of hidden agendas
 contract TransparencyCodex {
     address public overseer;
-    uint256 public transparencyCount;
+    uint256 public reportCount;
 
-    struct TransparencyRule {
+    struct Report {
         uint256 id;
-        string principle; // Openness, Exposure, Clarity, Accountability
-        string description; // encoded transparency safeguard
+        string subject;
+        string content;
         uint256 timestamp;
     }
 
-    mapping(uint256 => TransparencyRule) public transparencies;
+    mapping(uint256 => Report) public reports;
+    event ReportPublished(uint256 indexed id, string subject, string content);
 
-    event TransparencyLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) {
+        overseer = _overseer;
+    }
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logTransparency(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        transparencyCount++;
-        transparencies[transparencyCount] = TransparencyRule({
-            id: transparencyCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit TransparencyLogged(transparencyCount, principle, description);
-    }
-
-    function viewTransparency(uint256 id) external view returns (TransparencyRule memory) {
-        return transparencies[id];
+    function publishReport(string calldata subject, string calldata content) external onlyOverseer {
+        reportCount++;
+        reports[reportCount] = Report(reportCount, subject, content, block.timestamp);
+        emit ReportPublished(reportCount, subject, content);
     }
 }
