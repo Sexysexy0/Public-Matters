@@ -3,21 +3,22 @@
 pragma solidity ^0.8.20;
 
 /// @title JusticeCodex
-/// @notice Covenant contract to safeguard systemic fairness, principled justice, and dignified equity
+/// @notice Covenant contract to safeguard fairness and due process in governance,
+///         ensuring equality, justice, and protection against arbitrary actions.
 contract JusticeCodex {
     address public overseer;
     uint256 public justiceCount;
 
-    struct JusticeRule {
+    struct Justice {
         uint256 id;
-        string principle; // Fairness, Equity, Accountability, Impartiality
-        string description; // encoded justice safeguard
+        string principle;   // Fairness, DueProcess, Equality, Justice
+        string description; // Encoded safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => JusticeRule) public justices;
+    mapping(uint256 => Justice) public justices;
 
-    event JusticeLogged(uint256 indexed id, string principle, string description);
+    event JusticeDeclared(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -28,21 +29,23 @@ contract JusticeCodex {
         overseer = _overseer;
     }
 
-    function logJustice(
+    /// @notice Declare a new justice safeguard
+    function declareJustice(
         string calldata principle,
         string calldata description
     ) external onlyOverseer {
         justiceCount++;
-        justices[justiceCount] = JusticeRule({
+        justices[justiceCount] = Justice({
             id: justiceCount,
             principle: principle,
             description: description,
             timestamp: block.timestamp
         });
-        emit JusticeLogged(justiceCount, principle, description);
+        emit JusticeDeclared(justiceCount, principle, description);
     }
 
-    function viewJustice(uint256 id) external view returns (JusticeRule memory) {
+    /// @notice View a specific justice safeguard
+    function viewJustice(uint256 id) external view returns (Justice memory) {
         return justices[id];
     }
 }
