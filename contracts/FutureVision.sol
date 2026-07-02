@@ -3,16 +3,16 @@
 pragma solidity ^0.8.20;
 
 /// @title FutureVision
-/// @notice Covenant contract to safeguard long-term vision and sustainable governance,
-///         ensuring continuity, innovation, and readiness for future challenges.
+/// @notice Covenant to safeguard long-term vision,
+///         ensuring foresight, strategic planning, and sustainable direction.
 contract FutureVision {
     address public overseer;
     uint256 public visionCount;
 
     struct Vision {
         uint256 id;
-        string principle;   // Sustainability, Innovation, Continuity, FutureReadiness
-        string description; // Encoded safeguard
+        string principle;   // Foresight, StrategicPlanning, Sustainability
+        string description;
         uint256 timestamp;
     }
 
@@ -29,22 +29,12 @@ contract FutureVision {
         overseer = _overseer;
     }
 
-    /// @notice Declare a new future vision safeguard
-    function declareVision(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
+    function declareVision(string calldata principle, string calldata description) external onlyOverseer {
         visionCount++;
-        visions[visionCount] = Vision({
-            id: visionCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
+        visions[visionCount] = Vision(visionCount, principle, description, block.timestamp);
         emit VisionDeclared(visionCount, principle, description);
     }
 
-    /// @notice View a specific future vision safeguard
     function viewVision(uint256 id) external view returns (Vision memory) {
         return visions[id];
     }
