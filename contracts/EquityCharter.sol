@@ -3,22 +3,22 @@
 pragma solidity ^0.8.20;
 
 /// @title EquityCharter
-/// @notice Covenant contract to safeguard participatory justice and equitable opportunity,
-///         ensuring fairness, balance, and equal benefits for all citizens.
+/// @notice Covenant contract to safeguard equal opportunity and fairness,
+///         ensuring inclusion, justice, and dignity for all.
 contract EquityCharter {
     address public overseer;
     uint256 public charterCount;
 
-    struct Equity {
+    struct Charter {
         uint256 id;
-        string principle;   // EquitableOpportunity, Participation, Justice, Balance
+        string principle;   // EqualOpportunity, Inclusion, Fairness, Justice
         string description; // Encoded safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => Equity) public equities;
+    mapping(uint256 => Charter) public charters;
 
-    event EquityDeclared(uint256 indexed id, string principle, string description);
+    event CharterDeclared(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -29,23 +29,21 @@ contract EquityCharter {
         overseer = _overseer;
     }
 
-    /// @notice Declare a new equity safeguard
-    function declareEquity(
+    function declareCharter(
         string calldata principle,
         string calldata description
     ) external onlyOverseer {
         charterCount++;
-        equities[charterCount] = Equity({
+        charters[charterCount] = Charter({
             id: charterCount,
             principle: principle,
             description: description,
             timestamp: block.timestamp
         });
-        emit EquityDeclared(charterCount, principle, description);
+        emit CharterDeclared(charterCount, principle, description);
     }
 
-    /// @notice View a specific equity safeguard
-    function viewEquity(uint256 id) external view returns (Equity memory) {
-        return equities[id];
+    function viewCharter(uint256 id) external view returns (Charter memory) {
+        return charters[id];
     }
 }
