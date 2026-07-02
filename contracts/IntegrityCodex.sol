@@ -1,24 +1,23 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title IntegrityCodex
-/// @notice Covenant contract to safeguard transparency and moral governance,
-///         ensuring accountability, honesty, and dignity in all decisions.
+/// @notice Covenant to safeguard ethical governance,
+///         ensuring honesty, accountability, and transparency.
 contract IntegrityCodex {
     address public overseer;
-    uint256 public integrityCount;
+    uint256 public codexCount;
 
-    struct Integrity {
+    struct Codex {
         uint256 id;
-        string principle;   // Transparency, Accountability, Honesty, Dignity
-        string description; // Encoded safeguard
+        string principle;   // Honesty, Accountability, Transparency, Ethics
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => Integrity) public integrities;
+    mapping(uint256 => Codex) public codices;
 
-    event IntegrityDeclared(uint256 indexed id, string principle, string description);
+    event CodexDeclared(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -29,21 +28,13 @@ contract IntegrityCodex {
         overseer = _overseer;
     }
 
-    function declareIntegrity(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        integrityCount++;
-        integrities[integrityCount] = Integrity({
-            id: integrityCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit IntegrityDeclared(integrityCount, principle, description);
+    function declareCodex(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        codices[codexCount] = Codex(codexCount, principle, description, block.timestamp);
+        emit CodexDeclared(codexCount, principle, description);
     }
 
-    function viewIntegrity(uint256 id) external view returns (Integrity memory) {
-        return integrities[id];
+    function viewCodex(uint256 id) external view returns (Codex memory) {
+        return codices[id];
     }
 }
