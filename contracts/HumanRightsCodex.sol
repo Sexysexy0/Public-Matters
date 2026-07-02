@@ -2,47 +2,32 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title HumanRightsCodex
-/// @notice Covenant contract to safeguard portfolios through systemic anchoring of human rights safeguards
 contract HumanRightsCodex {
     address public overseer;
-    uint256 public rightsCount;
+    uint256 public articleCount;
 
-    struct RightsRule {
+    struct Article {
         uint256 id;
-        string principle; // Freedom, Equality, Justice, Security
-        string description; // encoded rights form
+        string principle;   // Dignity, Equality, Freedom
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => RightsRule) public rightsRules;
+    mapping(uint256 => Article) public articles;
+    event ArticleDeclared(uint256 indexed id, string principle, string description);
 
-    event RightsLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) {
+        overseer = _overseer;
+    }
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logRights(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        rightsCount++;
-        rightsRules[rightsCount] = RightsRule({
-            id: rightsCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit RightsLogged(rightsCount, principle, description);
-    }
-
-    function viewRights(uint256 id) external view returns (RightsRule memory) {
-        return rightsRules[id];
+    function declareArticle(string calldata principle, string calldata description) external onlyOverseer {
+        articleCount++;
+        articles[articleCount] = Article(articleCount, principle, description, block.timestamp);
+        emit ArticleDeclared(articleCount, principle, description);
     }
 }
