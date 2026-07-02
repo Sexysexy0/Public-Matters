@@ -3,21 +3,22 @@
 pragma solidity ^0.8.20;
 
 /// @title UnityCodex
-/// @notice Covenant contract to safeguard systemic cohesion, principled unity, and dignified solidarity
+/// @notice Covenant contract to safeguard collective unity and shared strength,
+///         ensuring solidarity, cooperation, and equal participation.
 contract UnityCodex {
     address public overseer;
     uint256 public unityCount;
 
-    struct UnityRule {
+    struct Unity {
         uint256 id;
-        string principle; // Cohesion, Solidarity, Collective Strength, Harmony
-        string description; // encoded unity safeguard
+        string principle;   // Solidarity, Cooperation, SharedStrength, EqualParticipation
+        string description; // Encoded safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => UnityRule) public unities;
+    mapping(uint256 => Unity) public unities;
 
-    event UnityLogged(uint256 indexed id, string principle, string description);
+    event UnityDeclared(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -28,21 +29,21 @@ contract UnityCodex {
         overseer = _overseer;
     }
 
-    function logUnity(
+    function declareUnity(
         string calldata principle,
         string calldata description
     ) external onlyOverseer {
         unityCount++;
-        unities[unityCount] = UnityRule({
+        unities[unityCount] = Unity({
             id: unityCount,
             principle: principle,
             description: description,
             timestamp: block.timestamp
         });
-        emit UnityLogged(unityCount, principle, description);
+        emit UnityDeclared(unityCount, principle, description);
     }
 
-    function viewUnity(uint256 id) external view returns (UnityRule memory) {
+    function viewUnity(uint256 id) external view returns (Unity memory) {
         return unities[id];
     }
 }
