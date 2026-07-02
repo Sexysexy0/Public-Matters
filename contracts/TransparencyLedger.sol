@@ -3,22 +3,22 @@
 pragma solidity ^0.8.20;
 
 /// @title TransparencyLedger
-/// @notice Covenant contract to log all data usage publicly,
-///         ensuring accountability, visibility, and trust in governance.
+/// @notice Covenant to safeguard open governance records,
+///         ensuring transparency, auditability, and public accountability.
 contract TransparencyLedger {
     address public overseer;
-    uint256 public logCount;
+    uint256 public recordCount;
 
-    struct Log {
+    struct Record {
         uint256 id;
-        string action;       // DataAccess, DataShare, DataStore, DataDelete
-        string description;  // Encoded transparency record
+        string action;       // GovernanceAction, CovenantDeployment, ResourceAllocation
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => Log) public logs;
+    mapping(uint256 => Record) public records;
 
-    event DataLogged(uint256 indexed id, string action, string description);
+    event RecordDeclared(uint256 indexed id, string action, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -29,23 +29,13 @@ contract TransparencyLedger {
         overseer = _overseer;
     }
 
-    /// @notice Record a new data usage log
-    function recordLog(
-        string calldata action,
-        string calldata description
-    ) external onlyOverseer {
-        logCount++;
-        logs[logCount] = Log({
-            id: logCount,
-            action: action,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit DataLogged(logCount, action, description);
+    function declareRecord(string calldata action, string calldata description) external onlyOverseer {
+        recordCount++;
+        records[recordCount] = Record(recordCount, action, description, block.timestamp);
+        emit RecordDeclared(recordCount, action, description);
     }
 
-    /// @notice View a specific log entry
-    function viewLog(uint256 id) external view returns (Log memory) {
-        return logs[id];
+    function viewRecord(uint256 id) external view returns (Record memory) {
+        return records[id];
     }
 }
