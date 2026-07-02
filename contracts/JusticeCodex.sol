@@ -3,22 +3,22 @@
 pragma solidity ^0.8.20;
 
 /// @title JusticeCodex
-/// @notice Covenant contract to safeguard fairness and due process in governance,
-///         ensuring equality, justice, and protection against arbitrary actions.
+/// @notice Covenant to safeguard systemic justice,
+///         ensuring fairness, accountability, and equal protection.
 contract JusticeCodex {
     address public overseer;
-    uint256 public justiceCount;
+    uint256 public codexCount;
 
-    struct Justice {
+    struct Codex {
         uint256 id;
-        string principle;   // Fairness, DueProcess, Equality, Justice
-        string description; // Encoded safeguard
+        string principle;   // Fairness, Accountability, EqualProtection
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => Justice) public justices;
+    mapping(uint256 => Codex) public codices;
 
-    event JusticeDeclared(uint256 indexed id, string principle, string description);
+    event CodexDeclared(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -29,23 +29,13 @@ contract JusticeCodex {
         overseer = _overseer;
     }
 
-    /// @notice Declare a new justice safeguard
-    function declareJustice(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        justiceCount++;
-        justices[justiceCount] = Justice({
-            id: justiceCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit JusticeDeclared(justiceCount, principle, description);
+    function declareCodex(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        codices[codexCount] = Codex(codexCount, principle, description, block.timestamp);
+        emit CodexDeclared(codexCount, principle, description);
     }
 
-    /// @notice View a specific justice safeguard
-    function viewJustice(uint256 id) external view returns (Justice memory) {
-        return justices[id];
+    function viewCodex(uint256 id) external view returns (Codex memory) {
+        return codices[id];
     }
 }
