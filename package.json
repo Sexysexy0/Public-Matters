@@ -37,8 +37,9 @@
     "hardhat": "^3.9.0"
   },
   "overrides": {
+    "js-yaml": "4.1.0",
     "ws": "^8.18.0",
-    "elliptic": "6.5.4",
+    "elliptic": "6.6.1",
     "serialize-javascript": "7.0.5",
     "tmp": "0.2.4",
     "undici": "^6.27.0",
