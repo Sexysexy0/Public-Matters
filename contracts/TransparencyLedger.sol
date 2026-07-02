@@ -1,25 +1,24 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title TransparencyLedger
-/// @notice Immutable ledger covenant to record authorship commits on-chain
+/// @notice Covenant contract to log all data usage publicly,
+///         ensuring accountability, visibility, and trust in governance.
 contract TransparencyLedger {
     address public overseer;
-    uint256 public entryCount;
+    uint256 public logCount;
 
-    struct LedgerEntry {
+    struct Log {
         uint256 id;
-        string author;
-        string workHash;
-        string project;
-        string safeguard;
-        string notes;
+        string action;       // DataAccess, DataShare, DataStore, DataDelete
+        string description;  // Encoded transparency record
         uint256 timestamp;
     }
 
-    mapping(uint256 => LedgerEntry) public entries;
+    mapping(uint256 => Log) public logs;
 
-    event EntryLogged(uint256 indexed id, string author, string workHash, string project, string safeguard, string notes);
+    event DataLogged(uint256 indexed id, string action, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -30,27 +29,23 @@ contract TransparencyLedger {
         overseer = _overseer;
     }
 
-    function logEntry(
-        string calldata author,
-        string calldata workHash,
-        string calldata project,
-        string calldata safeguard,
-        string calldata notes
+    /// @notice Record a new data usage log
+    function recordLog(
+        string calldata action,
+        string calldata description
     ) external onlyOverseer {
-        entryCount++;
-        entries[entryCount] = LedgerEntry({
-            id: entryCount,
-            author: author,
-            workHash: workHash,
-            project: project,
-            safeguard: safeguard,
-            notes: notes,
+        logCount++;
+        logs[logCount] = Log({
+            id: logCount,
+            action: action,
+            description: description,
             timestamp: block.timestamp
         });
-        emit EntryLogged(entryCount, author, workHash, project, safeguard, notes);
+        emit DataLogged(logCount, action, description);
     }
 
-    function viewEntry(uint256 id) external view returns (LedgerEntry memory) {
-        return entries[id];
+    /// @notice View a specific log entry
+    function viewLog(uint256 id) external view returns (Log memory) {
+        return logs[id];
     }
 }
