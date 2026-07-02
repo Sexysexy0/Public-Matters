@@ -3,22 +3,22 @@
 pragma solidity ^0.8.20;
 
 /// @title TransparencyLedger
-/// @notice Covenant to safeguard open governance records,
-///         ensuring transparency, auditability, and public accountability.
+/// @notice Covenant to safeguard systemic transparency,
+///         ensuring open records, disclosure, and public visibility.
 contract TransparencyLedger {
     address public overseer;
-    uint256 public recordCount;
+    uint256 public ledgerCount;
 
-    struct Record {
+    struct Ledger {
         uint256 id;
-        string action;       // GovernanceAction, CovenantDeployment, ResourceAllocation
+        string principle;   // OpenRecords, Disclosure, PublicVisibility
         string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => Record) public records;
+    mapping(uint256 => Ledger) public ledgers;
 
-    event RecordDeclared(uint256 indexed id, string action, string description);
+    event LedgerDeclared(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -29,13 +29,13 @@ contract TransparencyLedger {
         overseer = _overseer;
     }
 
-    function declareRecord(string calldata action, string calldata description) external onlyOverseer {
-        recordCount++;
-        records[recordCount] = Record(recordCount, action, description, block.timestamp);
-        emit RecordDeclared(recordCount, action, description);
+    function declareLedger(string calldata principle, string calldata description) external onlyOverseer {
+        ledgerCount++;
+        ledgers[ledgerCount] = Ledger(ledgerCount, principle, description, block.timestamp);
+        emit LedgerDeclared(ledgerCount, principle, description);
     }
 
-    function viewRecord(uint256 id) external view returns (Record memory) {
-        return records[id];
+    function viewLedger(uint256 id) external view returns (Ledger memory) {
+        return ledgers[id];
     }
 }
