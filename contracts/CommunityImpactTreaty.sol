@@ -1,5 +1,10 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
+
+/// @title CommunityImpactTreaty
+/// @notice Covenant encoding safeguards for local communities affected by AI data centers.
+/// @dev Protects water, land, and community equity.
 
 contract CommunityImpactTreaty {
     address public overseer;

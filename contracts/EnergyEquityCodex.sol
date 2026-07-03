@@ -1,5 +1,10 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
+
+/// @title EnergyEquityCodex
+/// @notice Covenant encoding fair allocation of electricity costs for AI data centers.
+/// @dev Ensures large-scale consumers bear responsibility, not households.
 
 contract EnergyEquityCodex {
     address public overseer;

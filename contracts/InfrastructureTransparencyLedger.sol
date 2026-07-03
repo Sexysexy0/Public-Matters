@@ -1,5 +1,10 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
+
+/// @title InfrastructureTransparencyLedger
+/// @notice Covenant encoding transparency in incentives, siting, and regulatory compliance.
+/// @dev Ensures accountability in infrastructure development.
 
 contract InfrastructureTransparencyLedger {
     address public overseer;
