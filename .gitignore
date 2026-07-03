@@ -36,3 +36,7 @@ cache/
 out/
 .env
 node_modules/
+
+# TLS client certificates and keys
+client.crt
+client.key

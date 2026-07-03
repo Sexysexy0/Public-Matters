@@ -1,24 +1,23 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title AccountabilityBridge
-/// @notice Bridge covenant to encode direct responsibility of executives and directors in cyber governance
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of accountability safeguards
 contract AccountabilityBridge {
     address public overseer;
     uint256 public accountabilityCount;
 
-    struct AccountabilityRecord {
+    struct AccountabilityRule {
         uint256 id;
-        string actor;       // executive, director, board committee
-        string decision;    // compliance, oversight, incident response
-        string safeguard;   // liability clause, accountability clause
-        string notes;       // contextual application
+        string principle; // Responsibility, Transparency, Answerability, Ethical Oversight
+        uint256 threshold; // safeguard value
         uint256 timestamp;
     }
 
-    mapping(uint256 => AccountabilityRecord) public records;
+    mapping(uint256 => AccountabilityRule) public accountabilities;
 
-    event AccountabilityLogged(uint256 indexed id, string actor, string decision, string safeguard);
+    event AccountabilityLogged(uint256 indexed id, string principle, uint256 threshold);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -29,22 +28,21 @@ contract AccountabilityBridge {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs accountability record
-    function logAccountability(string calldata actor, string calldata decision, string calldata safeguard, string calldata notes) external onlyOverseer {
+    function logAccountability(
+        string calldata principle,
+        uint256 threshold
+    ) external onlyOverseer {
         accountabilityCount++;
-        records[accountabilityCount] = AccountabilityRecord({
+        accountabilities[accountabilityCount] = AccountabilityRule({
             id: accountabilityCount,
-            actor: actor,
-            decision: decision,
-            safeguard: safeguard,
-            notes: notes,
+            principle: principle,
+            threshold: threshold,
             timestamp: block.timestamp
         });
-        emit AccountabilityLogged(accountabilityCount, actor, decision, safeguard);
+        emit AccountabilityLogged(accountabilityCount, principle, threshold);
     }
 
-    /// @notice Citizens can view accountability records
-    function viewAccountability(uint256 id) external view returns (AccountabilityRecord memory) {
-        return records[id];
+    function viewAccountability(uint256 id) external view returns (AccountabilityRule memory) {
+        return accountabilities[id];
     }
 }

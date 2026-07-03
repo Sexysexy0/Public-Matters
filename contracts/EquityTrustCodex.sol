@@ -1,50 +1,33 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title EquityTrustCodex
-/// @notice Codex covenant to document equity-trust principles in governance outcomes
 contract EquityTrustCodex {
     address public overseer;
-    uint256 public codexCount;
+    uint256 public entryCount;
 
-    struct EquityTrust {
+    struct Entry {
         uint256 id;
-        string principle;   // fairness, dignity, proportional representation
-        string safeguard;   // transparency, accountability, resilience
-        string outcome;     // healthcare, education, infrastructure
-        string notes;       // contextual application
+        string principle;   // Equity, Trust, Fairness
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => EquityTrust) public records;
+    mapping(uint256 => Entry) public entries;
+    event EntryDeclared(uint256 indexed id, string principle, string description);
 
-    event EquityTrustLogged(uint256 indexed id, string principle, string safeguard, string outcome, string notes);
+    constructor(address _overseer) {
+        overseer = _overseer;
+    }
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    /// @notice Overseer logs equity-trust principle
-    function logEquityTrust(string calldata principle, string calldata safeguard, string calldata outcome, string calldata notes) external onlyOverseer {
-        codexCount++;
-        records[codexCount] = EquityTrust({
-            id: codexCount,
-            principle: principle,
-            safeguard: safeguard,
-            outcome: outcome,
-            notes: notes,
-            timestamp: block.timestamp
-        });
-        emit EquityTrustLogged(codexCount, principle, safeguard, outcome, notes);
-    }
-
-    /// @notice Citizens can view equity-trust records
-    function viewEquityTrust(uint256 id) external view returns (EquityTrust memory) {
-        return records[id];
+    function declareEntry(string calldata principle, string calldata description) external onlyOverseer {
+        entryCount++;
+        entries[entryCount] = Entry(entryCount, principle, description, block.timestamp);
+        emit EntryDeclared(entryCount, principle, description);
     }
 }

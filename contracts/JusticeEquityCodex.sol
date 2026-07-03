@@ -2,47 +2,32 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title JusticeEquityCodex
-/// @notice Covenant contract to encode systemic justice and equity safeguards
 contract JusticeEquityCodex {
     address public overseer;
-    uint256 public codexCount;
+    uint256 public entryCount;
 
-    struct JusticeEntry {
+    struct Entry {
         uint256 id;
-        string principle;
+        string principle;   // Justice, Equity, Fairness
         string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => JusticeEntry) public entries;
+    mapping(uint256 => Entry) public entries;
+    event EntryDeclared(uint256 indexed id, string principle, string description);
 
-    event JusticeLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) {
+        overseer = _overseer;
+    }
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logJustice(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        codexCount++;
-        entries[codexCount] = JusticeEntry({
-            id: codexCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit JusticeLogged(codexCount, principle, description);
-    }
-
-    function viewJustice(uint256 id) external view returns (JusticeEntry memory) {
-        return entries[id];
+    function declareEntry(string calldata principle, string calldata description) external onlyOverseer {
+        entryCount++;
+        entries[entryCount] = Entry(entryCount, principle, description, block.timestamp);
+        emit EntryDeclared(entryCount, principle, description);
     }
 }

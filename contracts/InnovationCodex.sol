@@ -1,44 +1,48 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title InnovationCodex
-/// @notice Covenant contract encoding agility, analytics, leadership divergence, and IT scaffolding
+/// @notice Covenant contract to safeguard systemic R&D, technological advancement, and dignified innovation
 contract InnovationCodex {
-    address public owner;
+    address public overseer;
+    uint256 public innovationCount;
 
-    struct Safeguard {
-        uint256 reportId;   // linked to NetApp Innovation Report entry
-        string domain;      // e.g. "Agility", "Analytics", "Leadership", "IT Scaffolding"
-        string decree;      // safeguard decree text
+    struct InnovationRule {
+        uint256 id;
+        string principle; // Research, Advancement, Creativity, Sustainability
+        string description; // encoded innovation safeguard
         uint256 timestamp;
     }
 
-    Safeguard[] public safeguards;
+    mapping(uint256 => InnovationRule) public innovations;
 
-    event Decreed(uint256 reportId, string domain, string decree, uint256 timestamp);
+    event InnovationLogged(uint256 indexed id, string principle, string description);
 
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Not authorized");
+    modifier onlyOverseer() {
+        require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor() {
-        owner = msg.sender;
+    constructor(address _overseer) {
+        overseer = _overseer;
     }
 
-    /// @notice Encode innovation report into covenant safeguard
-    function decreeInnovation(uint256 reportId, string memory domain, string memory decree) public onlyOwner {
-        Safeguard memory newSafeguard = Safeguard(reportId, domain, decree, block.timestamp);
-        safeguards.push(newSafeguard);
-        emit Decreed(reportId, domain, decree, block.timestamp);
+    function logInnovation(
+        string calldata principle,
+        string calldata description
+    ) external onlyOverseer {
+        innovationCount++;
+        innovations[innovationCount] = InnovationRule({
+            id: innovationCount,
+            principle: principle,
+            description: description,
+            timestamp: block.timestamp
+        });
+        emit InnovationLogged(innovationCount, principle, description);
     }
 
-    function getSafeguard(uint256 index) public view returns (uint256, string memory, string memory, uint256) {
-        Safeguard memory s = safeguards[index];
-        return (s.reportId, s.domain, s.decree, s.timestamp);
-    }
-
-    function getSafeguardCount() public view returns (uint256) {
-        return safeguards.length;
+    function viewInnovation(uint256 id) external view returns (InnovationRule memory) {
+        return innovations[id];
     }
 }
