@@ -1,23 +1,23 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title CrisisManagementCodex
-/// @notice Codex covenant to encode structured response protocols and leadership accountability
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of crisis management safeguards
 contract CrisisManagementCodex {
     address public overseer;
     uint256 public crisisCount;
 
-    struct CrisisRecord {
+    struct CrisisRule {
         uint256 id;
-        string protocol;    // incident response, containment, communication
-        string safeguard;   // accountability clause
-        string notes;       // contextual application
+        string scenario; // Liquidity Freeze, Governance Failure, Market Crash, External Shock
+        string protocol; // Emergency Buffer, Circuit Breaker, Governance Reset, Hedge Activation
         uint256 timestamp;
     }
 
-    mapping(uint256 => CrisisRecord) public records;
+    mapping(uint256 => CrisisRule) public crises;
 
-    event CrisisLogged(uint256 indexed id, string protocol, string safeguard);
+    event CrisisLogged(uint256 indexed id, string scenario, string protocol);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -28,21 +28,21 @@ contract CrisisManagementCodex {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs crisis response protocol
-    function logCrisis(string calldata protocol, string calldata safeguard, string calldata notes) external onlyOverseer {
+    function logCrisis(
+        string calldata scenario,
+        string calldata protocol
+    ) external onlyOverseer {
         crisisCount++;
-        records[crisisCount] = CrisisRecord({
+        crises[crisisCount] = CrisisRule({
             id: crisisCount,
+            scenario: scenario,
             protocol: protocol,
-            safeguard: safeguard,
-            notes: notes,
             timestamp: block.timestamp
         });
-        emit CrisisLogged(crisisCount, protocol, safeguard);
+        emit CrisisLogged(crisisCount, scenario, protocol);
     }
 
-    /// @notice Citizens can view crisis response records
-    function viewCrisis(uint256 id) external view returns (CrisisRecord memory) {
-        return records[id];
+    function viewCrisis(uint256 id) external view returns (CrisisRule memory) {
+        return crises[id];
     }
 }

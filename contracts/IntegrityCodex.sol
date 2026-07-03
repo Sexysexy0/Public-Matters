@@ -2,32 +2,22 @@
 pragma solidity ^0.8.20;
 
 /// @title IntegrityCodex
-/// @notice Covenant contract to encode honesty, consistency, and integrity safeguards in governance rituals
-/// @dev Provides structured rituals for integrity enforcement across governance layers
+/// @notice Covenant to safeguard ethical governance,
+///         ensuring honesty, accountability, and transparency.
 contract IntegrityCodex {
     address public overseer;
-    uint256 public covenantCount;
+    uint256 public codexCount;
 
-    struct IntegrityRule {
+    struct Codex {
         uint256 id;
-        string principle;       // Integrity principle (e.g., honesty, consistency, accountability)
-        bool honest;            // True if honesty safeguard is active
-        bool consistent;        // True if consistency safeguard is active
-        bool accountable;       // True if accountability safeguard is active
-        string notes;           // Governance notes
+        string principle;   // Honesty, Accountability, Transparency, Ethics
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => IntegrityRule) public rules;
+    mapping(uint256 => Codex) public codices;
 
-    event IntegrityLogged(
-        uint256 indexed id,
-        string principle,
-        bool honest,
-        bool consistent,
-        bool accountable,
-        string notes
-    );
+    event CodexDeclared(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -38,30 +28,13 @@ contract IntegrityCodex {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs integrity principle with safeguards
-    function logRule(
-        string calldata principle,
-        bool honest,
-        bool consistent,
-        bool accountable,
-        string calldata notes
-    ) external onlyOverseer {
-        covenantCount++;
-        rules[covenantCount] = IntegrityRule({
-            id: covenantCount,
-            principle: principle,
-            honest: honest,
-            consistent: consistent,
-            accountable: accountable,
-            notes: notes,
-            timestamp: block.timestamp
-        });
-        emit IntegrityLogged(covenantCount, principle, honest, consistent, accountable, notes);
+    function declareCodex(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        codices[codexCount] = Codex(codexCount, principle, description, block.timestamp);
+        emit CodexDeclared(codexCount, principle, description);
     }
 
-    /// @notice Governance rule: if honest == false or consistent == false, mark as integrity breach
-    function isIntegrityBreach(uint256 id) external view returns (bool) {
-        IntegrityRule memory r = rules[id];
-        return (!r.honest || !r.consistent);
+    function viewCodex(uint256 id) external view returns (Codex memory) {
+        return codices[id];
     }
 }

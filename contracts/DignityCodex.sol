@@ -1,33 +1,24 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title DignityCodex
-/// @notice Covenant contract to encode respect, humane treatment, and dignity safeguards in governance actions
-/// @dev Provides structured rituals for dignity enforcement across governance layers
+/// @notice Covenant contract to safeguard dignified treatment and respect for all,
+///         ensuring equality, compassion, and moral governance.
 contract DignityCodex {
     address public overseer;
-    uint256 public covenantCount;
+    uint256 public dignityCount;
 
-    struct DignityRule {
+    struct Dignity {
         uint256 id;
-        string principle;       // Dignity principle (e.g., respect, humane treatment, fairness)
-        bool respectful;        // True if respect safeguard is active
-        bool humane;            // True if humane treatment safeguard is active
-        bool fair;              // True if fairness safeguard is active
-        string notes;           // Governance notes
+        string principle;   // Respect, Equality, Compassion, MoralGovernance
+        string description; // Encoded safeguard
         uint256 timestamp;
     }
 
-    mapping(uint256 => DignityRule) public rules;
+    mapping(uint256 => Dignity) public dignities;
 
-    event DignityLogged(
-        uint256 indexed id,
-        string principle,
-        bool respectful,
-        bool humane,
-        bool fair,
-        string notes
-    );
+    event DignityDeclared(uint256 indexed id, string principle, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -38,30 +29,21 @@ contract DignityCodex {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs dignity principle with safeguards
-    function logRule(
+    function declareDignity(
         string calldata principle,
-        bool respectful,
-        bool humane,
-        bool fair,
-        string calldata notes
+        string calldata description
     ) external onlyOverseer {
-        covenantCount++;
-        rules[covenantCount] = DignityRule({
-            id: covenantCount,
+        dignityCount++;
+        dignities[dignityCount] = Dignity({
+            id: dignityCount,
             principle: principle,
-            respectful: respectful,
-            humane: humane,
-            fair: fair,
-            notes: notes,
+            description: description,
             timestamp: block.timestamp
         });
-        emit DignityLogged(covenantCount, principle, respectful, humane, fair, notes);
+        emit DignityDeclared(dignityCount, principle, description);
     }
 
-    /// @notice Governance rule: if respectful == false or humane == false, mark as dignity breach
-    function isDignityBreach(uint256 id) external view returns (bool) {
-        DignityRule memory r = rules[id];
-        return (!r.respectful || !r.humane);
+    function viewDignity(uint256 id) external view returns (Dignity memory) {
+        return dignities[id];
     }
 }

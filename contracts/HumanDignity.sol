@@ -1,42 +1,41 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title HumanDignity
-/// @notice Covenant contract to affirm human uniqueness and dignity in the age of AI
+/// @notice Covenant to safeguard humane treatment,
+///         ensuring respect, compassion, and non-discrimination for all individuals.
 contract HumanDignity {
-    address public owner;
+    address public overseer;
+    uint256 public dignityCount;
 
-    struct Affirmation {
-        string principle;    // e.g. "Consciousness", "Moral Agency", "Image of God"
-        string safeguard;    // covenant safeguard description
+    struct Dignity {
+        uint256 id;
+        string principle;   // Respect, Compassion, NonDiscrimination
+        string description;
         uint256 timestamp;
     }
 
-    Affirmation[] public affirmations;
+    mapping(uint256 => Dignity) public dignities;
 
-    event AffirmationLogged(string principle, string safeguard, uint256 timestamp);
+    event DignityDeclared(uint256 indexed id, string principle, string description);
 
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Not authorized");
+    modifier onlyOverseer() {
+        require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    constructor() {
-        owner = msg.sender;
+    constructor(address _overseer) {
+        overseer = _overseer;
     }
 
-    function logAffirmation(string memory principle, string memory safeguard) public onlyOwner {
-        Affirmation memory newAffirmation = Affirmation(principle, safeguard, block.timestamp);
-        affirmations.push(newAffirmation);
-        emit AffirmationLogged(principle, safeguard, block.timestamp);
+    function declareDignity(string calldata principle, string calldata description) external onlyOverseer {
+        dignityCount++;
+        dignities[dignityCount] = Dignity(dignityCount, principle, description, block.timestamp);
+        emit DignityDeclared(dignityCount, principle, description);
     }
 
-    function getAffirmation(uint256 index) public view returns (string memory, string memory, uint256) {
-        Affirmation memory a = affirmations[index];
-        return (a.principle, a.safeguard, a.timestamp);
-    }
-
-    function getAffirmationCount() public view returns (uint256) {
-        return affirmations.length;
+    function viewDignity(uint256 id) external view returns (Dignity memory) {
+        return dignities[id];
     }
 }

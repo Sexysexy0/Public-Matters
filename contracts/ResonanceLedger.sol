@@ -1,0 +1,33 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract ResonanceLedger {
+    address public overseer;
+    uint256 public recordCount;
+
+    struct Record {
+        uint256 id;
+        string domain;   // Systems, Communities, Culture
+        string description;
+        uint256 timestamp;
+    }
+
+    mapping(uint256 => Record) public records;
+    event RecordLogged(uint256 indexed id, string domain, string description);
+
+    constructor(address _overseer) {
+        overseer = _overseer;
+    }
+
+    modifier onlyOverseer() {
+        require(msg.sender == overseer, "Not authorized");
+        _;
+    }
+
+    function logRecord(string calldata domain, string calldata description) external onlyOverseer {
+        recordCount++;
+        records[recordCount] = Record(recordCount, domain, description, block.timestamp);
+        emit RecordLogged(recordCount, domain, description);
+    }
+}

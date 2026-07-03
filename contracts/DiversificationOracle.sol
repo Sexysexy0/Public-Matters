@@ -1,46 +1,51 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title DiversificationOracle
-/// @notice Governance oracle to enforce portfolio diversification safeguards
+/// @notice Covenant contract to safeguard portfolios through systemic anchoring of diversification safeguards
 contract DiversificationOracle {
-    event DiversificationCheck(string assetClass, uint256 weight, string safeguard);
-    event ConcentrationAlert(string assetClass, uint256 weight, string alert);
-    event OracleBroadcast(string arc, string safeguard);
-
     address public overseer;
-    uint256 public maxConcentration; // e.g. 30% per asset class
+    uint256 public ruleCount;
 
-    constructor(address _overseer, uint256 _maxConcentration) {
-        overseer = _overseer;
-        maxConcentration = _maxConcentration;
+    struct DiversificationRule {
+        uint256 id;
+        string bucket; // Core, Satellite, Safety
+        uint256 maxAllocation; // percentage allocation cap
+        string rebalanceFrequency; // e.g., Monthly, Quarterly
+        uint256 timestamp;
     }
+
+    mapping(uint256 => DiversificationRule) public rules;
+
+    event RuleLogged(uint256 indexed id, string bucket, uint256 maxAllocation, string rebalanceFrequency);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
         _;
     }
 
-    /// @notice Ritualize diversification check
-    function checkDiversification(string memory assetClass, uint256 weight) external onlyOverseer {
-        if (weight > maxConcentration) {
-            emit ConcentrationAlert(assetClass, weight, "Concentration exceeds safeguard threshold");
-            // ORACLE: Ritualize safeguard — prevent overexposure to single asset class
-        } else {
-            emit DiversificationCheck(assetClass, weight, "Diversification within safeguard threshold");
-            // ORACLE: Encode safeguard — uphold balanced portfolio allocation
-        }
+    constructor(address _overseer) {
+        overseer = _overseer;
     }
 
-    /// @notice Ritualize codex broadcast
-    function broadcastOracle(string memory arc, string memory safeguard) external onlyOverseer {
-        emit OracleBroadcast(arc, safeguard);
-        // ORACLE: Ritualize broadcast safeguard — amplify diversification narrative as communal covenant
+    function logRule(
+        string calldata bucket,
+        uint256 maxAllocation,
+        string calldata rebalanceFrequency
+    ) external onlyOverseer {
+        ruleCount++;
+        rules[ruleCount] = DiversificationRule({
+            id: ruleCount,
+            bucket: bucket,
+            maxAllocation: maxAllocation,
+            rebalanceFrequency: rebalanceFrequency,
+            timestamp: block.timestamp
+        });
+        emit RuleLogged(ruleCount, bucket, maxAllocation, rebalanceFrequency);
     }
 
-    /// @notice Update concentration threshold
-    function updateThreshold(uint256 newThreshold) external onlyOverseer {
-        maxConcentration = newThreshold;
-        // ORACLE: Governance safeguard — overseer may adjust diversification threshold
+    function viewRule(uint256 id) external view returns (DiversificationRule memory) {
+        return rules[id];
     }
 }

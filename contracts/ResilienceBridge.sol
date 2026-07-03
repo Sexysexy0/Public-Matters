@@ -1,23 +1,24 @@
+// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title ResilienceBridge
-/// @notice Bridge covenant to encode operational integrity and crisis management safeguards
+/// @notice Covenant to safeguard systemic continuity,
+///         ensuring adaptive governance and long-term stability.
 contract ResilienceBridge {
     address public overseer;
-    uint256 public resilienceCount;
+    uint256 public bridgeCount;
 
-    struct ResilienceRecord {
+    struct Bridge {
         uint256 id;
-        string strategy;    // operational integrity, crisis response, recovery
-        string safeguard;   // accountability clause
-        string notes;       // contextual application
+        string safeguard;   // Continuity, AdaptiveResponse, Stability
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => ResilienceRecord) public records;
+    mapping(uint256 => Bridge) public bridges;
 
-    event ResilienceLogged(uint256 indexed id, string strategy, string safeguard);
+    event BridgeDeclared(uint256 indexed id, string safeguard, string description);
 
     modifier onlyOverseer() {
         require(msg.sender == overseer, "Not authorized");
@@ -28,21 +29,13 @@ contract ResilienceBridge {
         overseer = _overseer;
     }
 
-    /// @notice Overseer logs resilience strategy record
-    function logResilience(string calldata strategy, string calldata safeguard, string calldata notes) external onlyOverseer {
-        resilienceCount++;
-        records[resilienceCount] = ResilienceRecord({
-            id: resilienceCount,
-            strategy: strategy,
-            safeguard: safeguard,
-            notes: notes,
-            timestamp: block.timestamp
-        });
-        emit ResilienceLogged(resilienceCount, strategy, safeguard);
+    function declareBridge(string calldata safeguard, string calldata description) external onlyOverseer {
+        bridgeCount++;
+        bridges[bridgeCount] = Bridge(bridgeCount, safeguard, description, block.timestamp);
+        emit BridgeDeclared(bridgeCount, safeguard, description);
     }
 
-    /// @notice Citizens can view resilience strategy records
-    function viewResilience(uint256 id) external view returns (ResilienceRecord memory) {
-        return records[id];
+    function viewBridge(uint256 id) external view returns (Bridge memory) {
+        return bridges[id];
     }
 }

@@ -1,38 +1,40 @@
-// contracts/DigitalResilience.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/**
- * @title DigitalResilience
- * @notice Communal resilience against digital threats and validator-grade stewardship.
- */
+/// @title DigitalResilience
+/// @notice Covenant to safeguard digital systems against shocks,
+///         ensuring continuity, cybersecurity, and adaptive governance.
 contract DigitalResilience {
-    address public admin;
+    address public overseer;
+    uint256 public resilienceCount;
 
-    struct Strategy {
-        string name;        // "FirewallUpgrade", "IncidentResponse"
+    struct Resilience {
+        uint256 id;
+        string safeguard;   // CyberSecurity, Continuity, AdaptiveGovernance
         string description;
-        string status;      // "Active", "Draft"
         uint256 timestamp;
     }
 
-    Strategy[] public strategies;
+    mapping(uint256 => Resilience) public resiliences;
 
-    event StrategyLogged(string name, string description, string status, uint256 timestamp);
+    event ResilienceDeclared(uint256 indexed id, string safeguard, string description);
 
-    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
-
-    constructor() { admin = msg.sender; }
-
-    function logStrategy(string calldata name, string calldata description, string calldata status) external onlyAdmin {
-        strategies.push(Strategy(name, description, status, block.timestamp));
-        emit StrategyLogged(name, description, status, block.timestamp);
+    modifier onlyOverseer() {
+        require(msg.sender == overseer, "Not authorized");
+        _;
     }
 
-    function totalStrategies() external view returns (uint256) { return strategies.length; }
+    constructor(address _overseer) {
+        overseer = _overseer;
+    }
 
-    function getStrategy(uint256 id) external view returns (Strategy memory) {
-        require(id < strategies.length, "Invalid id");
-        return strategies[id];
+    function declareResilience(string calldata safeguard, string calldata description) external onlyOverseer {
+        resilienceCount++;
+        resiliences[resilienceCount] = Resilience(resilienceCount, safeguard, description, block.timestamp);
+        emit ResilienceDeclared(resilienceCount, safeguard, description);
+    }
+
+    function viewResilience(uint256 id) external view returns (Resilience memory) {
+        return resiliences[id];
     }
 }
