@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
 # Nilalagay natin ang global bypass env sa pinaka-itaas para sa Node 24 restriction override
 env:
   ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
