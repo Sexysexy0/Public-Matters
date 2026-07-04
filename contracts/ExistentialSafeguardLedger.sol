@@ -1,4 +1,4 @@
-pragma solidity ^0.8.20;
+ pragma solidity ^0.8.20;
 
 /// @title ExistentialSafeguardLedger
 /// @notice Encodes covenant for existential safeguards against AI dominance.
