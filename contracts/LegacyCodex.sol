@@ -1,48 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title LegacyCodex
-/// @notice Covenant contract to safeguard systemic heritage, principled legacy, and dignified continuity
 contract LegacyCodex {
     address public overseer;
-    uint256 public legacyCount;
+    uint256 public codexCount;
 
     struct LegacyRule {
         uint256 id;
-        string principle; // Heritage, Continuity, Responsibility, Memory
-        string description; // encoded legacy safeguard
+        string principle;   // Legacy, Inheritance, Lineage
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => LegacyRule) public legacies;
+    mapping(uint256 => LegacyRule) public rules;
+    event LegacyRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event LegacyLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logLegacy(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        legacyCount++;
-        legacies[legacyCount] = LegacyRule({
-            id: legacyCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit LegacyLogged(legacyCount, principle, description);
-    }
-
-    function viewLegacy(uint256 id) external view returns (LegacyRule memory) {
-        return legacies[id];
+    function declareLegacyRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = LegacyRule(codexCount, principle, description, block.timestamp);
+        emit LegacyRuleDeclared(codexCount, principle, description);
     }
 }
