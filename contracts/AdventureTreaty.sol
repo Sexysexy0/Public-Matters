@@ -6,7 +6,7 @@ contract AdventureTreaty {
 
     struct AdventureRule {
         uint256 id;
-        string principle;   // Courage, Risk, Leaving Comfort Zone
+        string principle;   // Courage, Exploration, Risk-Taking
         string description;
         uint256 timestamp;
     }
