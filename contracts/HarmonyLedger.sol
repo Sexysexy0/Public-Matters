@@ -6,7 +6,7 @@ contract HarmonyLedger {
 
     struct HarmonyRule {
         uint256 id;
-        string principle;   // Harmony, Unity, Benevolence
+        string principle;   // Balance, Unity, Coherence
         string description;
         uint256 timestamp;
     }
