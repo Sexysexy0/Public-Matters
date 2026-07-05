@@ -1,9 +1,5 @@
 pragma solidity ^0.8.20;
 
-/// @title EconomicFairnessTreaty
-/// @notice Covenant for fairness safeguards in backend economic systems.
-/// @dev Anchors equity, justice, and systemic renewal.
-
 contract EconomicFairnessTreaty {
     address public overseer;
     uint256 public treatyCount;
