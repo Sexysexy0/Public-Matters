@@ -6,7 +6,7 @@ contract ResilienceCodex {
 
     struct ResilienceRule {
         uint256 id;
-        string principle;   // Resilience, Continuity, Recovery
+        string principle;   // Resilience, Renewal, Toughness
         string description;
         uint256 timestamp;
     }
