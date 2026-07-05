@@ -6,7 +6,7 @@ contract TruthScroll {
 
     struct TruthRule {
         uint256 id;
-        string principle;   // Truth, Fairness, Honest Governance
+        string principle;   // Transparency, Honesty, Reality
         string description;
         uint256 timestamp;
     }
