@@ -6,7 +6,7 @@ contract SystemicCooperationScroll {
 
     struct CooperationRule {
         uint256 id;
-        string principle;   // Systemic Cooperation, Alliances
+        string principle;   // Systemic Cooperation, Confederated Alliances
         string description;
         uint256 timestamp;
     }
