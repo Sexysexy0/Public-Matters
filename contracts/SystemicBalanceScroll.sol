@@ -1,16 +1,12 @@
 pragma solidity ^0.8.20;
 
-/// @title SystemicBalanceScroll
-/// @notice Covenant for systemic balance safeguards.
-/// @dev Anchors fairness, equity, and governance in supply chains.
-
 contract SystemicBalanceScroll {
     address public overseer;
     uint256 public scrollCount;
 
     struct BalanceRule {
         uint256 id;
-        string principle;   // Systemic Balance, Equity, Governance
+        string principle;   // Systemic Balance, Equilibrium
         string description;
         uint256 timestamp;
     }
