@@ -1,5 +1,9 @@
 pragma solidity ^0.8.20;
 
+/// @title CommunityGreenScroll
+/// @notice Covenant for communal eco-gardens.
+/// @dev Anchors resilience, cooling, and equity.
+
 contract CommunityGreenScroll {
     address public overseer;
     uint256 public scrollCount;

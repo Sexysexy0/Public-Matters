@@ -1,5 +1,9 @@
 pragma solidity ^0.8.20;
 
+/// @title WorkerFairnessCodex
+/// @notice Covenant for worker protection against heat.
+/// @dev Anchors safety, equity, and resilience.
+
 contract WorkerFairnessCodex {
     address public overseer;
     uint256 public codexCount;
