@@ -1,5 +1,9 @@
 pragma solidity ^0.8.20;
 
+/// @title UrbanCoolingTreaty
+/// @notice Covenant for systemic passive cooling in cities.
+/// @dev Anchors ventilation, shade, and fairness.
+
 contract UrbanCoolingTreaty {
     address public overseer;
     uint256 public treatyCount;
