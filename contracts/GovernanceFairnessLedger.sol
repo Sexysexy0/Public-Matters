@@ -1,8 +1,9 @@
 pragma solidity ^0.8.20;
 
 /// @title GovernanceFairnessLedger
-/// @notice Covenant for governance fairness safeguards.
-/// @dev Anchors systemic balance, justice, and communal dignity.
+/// @notice Covenant para sa fairness safeguards sa governance.
+/// @dev Nakatuon sa transparency, accountability, at systemic integrity
+///      ng pamahalaan at mga institusyon.
 
 contract GovernanceFairnessLedger {
     address public overseer;
@@ -10,7 +11,7 @@ contract GovernanceFairnessLedger {
 
     struct FairnessRule {
         uint256 id;
-        string principle;   // Governance Fairness, Balance, Justice
+        string principle;   // Governance Fairness, Transparency, Accountability
         string description;
         uint256 timestamp;
     }
