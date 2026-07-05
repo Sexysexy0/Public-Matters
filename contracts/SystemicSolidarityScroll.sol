@@ -6,7 +6,7 @@ contract SystemicSolidarityScroll {
 
     struct SolidarityRule {
         uint256 id;
-        string principle;   // Systemic Solidarity, Collective Unity
+        string principle;   // Systemic Solidarity, Collective Strength
         string description;
         uint256 timestamp;
     }
