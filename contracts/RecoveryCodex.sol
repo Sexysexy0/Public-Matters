@@ -6,7 +6,7 @@ contract RecoveryCodex {
 
     struct RecoveryRule {
         uint256 id;
-        string principle;   // Recovery, Balance, Momentum
+        string principle;   // Recovery, Healing, Renewal
         string description;
         uint256 timestamp;
     }
