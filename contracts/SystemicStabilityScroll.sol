@@ -1,16 +1,12 @@
 pragma solidity ^0.8.20;
 
-/// @title SystemicStabilityScroll
-/// @notice Covenant for systemic stability safeguards.
-/// @dev Anchors fairness, resilience, and governance in geopolitical systems.
-
 contract SystemicStabilityScroll {
     address public overseer;
     uint256 public scrollCount;
 
     struct StabilityRule {
         uint256 id;
-        string principle;   // Systemic Stability, Fairness, Governance
+        string principle;   // Systemic Stability, Resilience
         string description;
         uint256 timestamp;
     }
