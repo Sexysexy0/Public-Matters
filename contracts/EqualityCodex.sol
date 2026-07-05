@@ -1,51 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title EqualityCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of equality principles
 contract EqualityCodex {
     address public overseer;
-    uint256 public equalityCount;
+    uint256 public codexCount;
 
-    struct EqualityEntry {
+    struct EqualityRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle;   // Equality, Fairness, Dignity
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => EqualityEntry) public equalities;
+    mapping(uint256 => EqualityRule) public rules;
+    event EqualityRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event EqualityLogged(uint256 indexed id, string actor, string context);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logEquality(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
-    ) external onlyOverseer {
-        equalityCount++;
-        equalities[equalityCount] = EqualityEntry({
-            id: equalityCount,
-            actor: actor,
-            context: context,
-            principle: principle,
-            timestamp: block.timestamp
-        });
-        emit EqualityLogged(equalityCount, actor, context);
-    }
-
-    function viewEquality(uint256 id) external view returns (EqualityEntry memory) {
-        return equalities[id];
+    function declareEqualityRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = EqualityRule(codexCount, principle, description, block.timestamp);
+        emit EqualityRuleDeclared(codexCount, principle, description);
     }
 }
