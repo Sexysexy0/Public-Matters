@@ -1,48 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title InnovationCodex
-/// @notice Covenant contract to safeguard systemic R&D, technological advancement, and dignified innovation
 contract InnovationCodex {
     address public overseer;
-    uint256 public innovationCount;
+    uint256 public codexCount;
 
     struct InnovationRule {
         uint256 id;
-        string principle; // Research, Advancement, Creativity, Sustainability
-        string description; // encoded innovation safeguard
+        string principle;   // Innovation, Breakthroughs, Future Vision
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => InnovationRule) public innovations;
+    mapping(uint256 => InnovationRule) public rules;
+    event InnovationRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event InnovationLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logInnovation(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        innovationCount++;
-        innovations[innovationCount] = InnovationRule({
-            id: innovationCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit InnovationLogged(innovationCount, principle, description);
-    }
-
-    function viewInnovation(uint256 id) external view returns (InnovationRule memory) {
-        return innovations[id];
+    function declareInnovationRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = InnovationRule(codexCount, principle, description, block.timestamp);
+        emit InnovationRuleDeclared(codexCount, principle, description);
     }
 }
