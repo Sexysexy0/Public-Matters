@@ -6,7 +6,7 @@ contract SystemicCoherenceLedger {
 
     struct CoherenceRule {
         uint256 id;
-        string principle;   // Systemic Coherence, Consistency
+        string principle;   // Systemic Coherence, Alignment
         string description;
         uint256 timestamp;
     }
