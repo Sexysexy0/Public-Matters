@@ -1,48 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title ResilienceCodex
-/// @notice Covenant contract to safeguard systemic strength, principled resilience, and dignified perseverance
 contract ResilienceCodex {
     address public overseer;
-    uint256 public resilienceCount;
+    uint256 public codexCount;
 
     struct ResilienceRule {
         uint256 id;
-        string principle; // Strength, Perseverance, Adaptability, Recovery
-        string description; // encoded resilience safeguard
+        string principle;   // Resilience, Continuity, Recovery
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => ResilienceRule) public resiliences;
+    mapping(uint256 => ResilienceRule) public rules;
+    event ResilienceRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event ResilienceLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logResilience(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        resilienceCount++;
-        resiliences[resilienceCount] = ResilienceRule({
-            id: resilienceCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit ResilienceLogged(resilienceCount, principle, description);
-    }
-
-    function viewResilience(uint256 id) external view returns (ResilienceRule memory) {
-        return resiliences[id];
+    function declareResilienceRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = ResilienceRule(codexCount, principle, description, block.timestamp);
+        emit ResilienceRuleDeclared(codexCount, principle, description);
     }
 }
