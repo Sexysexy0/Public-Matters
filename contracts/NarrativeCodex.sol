@@ -1,48 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title NarrativeCodex
-/// @notice Covenant contract to safeguard immersive gameplay through systemic anchoring of environmental storytelling and lore depth
 contract NarrativeCodex {
     address public overseer;
-    uint256 public narrativeCount;
+    uint256 public codexCount;
 
     struct NarrativeRule {
         uint256 id;
-        string principle; // Environmental Storytelling, Lore Depth, Player Agency, Immersion
-        string description; // encoded narrative safeguard
+        string principle;   // Narrative, Story Depth, Resonance
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => NarrativeRule) public narratives;
+    mapping(uint256 => NarrativeRule) public rules;
+    event NarrativeRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event NarrativeLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logNarrative(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        narrativeCount++;
-        narratives[narrativeCount] = NarrativeRule({
-            id: narrativeCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit NarrativeLogged(narrativeCount, principle, description);
-    }
-
-    function viewNarrative(uint256 id) external view returns (NarrativeRule memory) {
-        return narratives[id];
+    function declareNarrativeRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = NarrativeRule(codexCount, principle, description, block.timestamp);
+        emit NarrativeRuleDeclared(codexCount, principle, description);
     }
 }
