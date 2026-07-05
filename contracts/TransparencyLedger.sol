@@ -1,41 +1,29 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title TransparencyLedger
-/// @notice Covenant to safeguard systemic transparency,
-///         ensuring open records, disclosure, and public visibility.
+/// @notice Encodes transparency and accountability principles.
+/// @dev Anchors disclosure, access, and participation safeguards.
+
 contract TransparencyLedger {
     address public overseer;
-    uint256 public ledgerCount;
+    uint256 public entryCount;
 
-    struct Ledger {
+    struct TransparencyRule {
         uint256 id;
-        string principle;   // OpenRecords, Disclosure, PublicVisibility
+        string principle;   // Disclosure, Access, Participation
         string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => Ledger) public ledgers;
+    mapping(uint256 => TransparencyRule> public entries;
+    event TransparencyRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event LedgerDeclared(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function declareLedger(string calldata principle, string calldata description) external onlyOverseer {
-        ledgerCount++;
-        ledgers[ledgerCount] = Ledger(ledgerCount, principle, description, block.timestamp);
-        emit LedgerDeclared(ledgerCount, principle, description);
-    }
-
-    function viewLedger(uint256 id) external view returns (Ledger memory) {
-        return ledgers[id];
+    function declareTransparencyRule(string calldata principle, string calldata description) external onlyOverseer {
+        entryCount++;
+        entries[entryCount] = TransparencyRule(entryCount, principle, description, block.timestamp);
+        emit TransparencyRuleDeclared(entryCount, principle, description);
     }
 }
