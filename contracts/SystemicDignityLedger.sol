@@ -2,7 +2,7 @@ pragma solidity ^0.8.20;
 
 /// @title SystemicDignityLedger
 /// @notice Covenant for systemic dignity safeguards.
-/// @dev Anchors fairness, respect, and innovation equity.
+/// @dev Anchors fairness, respect, and balanced governance.
 
 contract SystemicDignityLedger {
     address public overseer;
