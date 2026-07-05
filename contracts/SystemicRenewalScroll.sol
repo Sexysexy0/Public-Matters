@@ -2,7 +2,7 @@ pragma solidity ^0.8.20;
 
 /// @title SystemicRenewalScroll
 /// @notice Covenant for systemic renewal safeguards.
-/// @dev Anchors fairness, equity, and governance in healing systems.
+/// @dev Anchors fairness, equity, and governance in backend systems.
 
 contract SystemicRenewalScroll {
     address public overseer;
