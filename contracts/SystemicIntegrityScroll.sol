@@ -1,16 +1,12 @@
 pragma solidity ^0.8.20;
 
-/// @title SystemicIntegrityScroll
-/// @notice Covenant for systemic integrity safeguards.
-/// @dev Anchors fairness, resilience, and governance in power systems.
-
 contract SystemicIntegrityScroll {
     address public overseer;
     uint256 public scrollCount;
 
     struct IntegrityRule {
         uint256 id;
-        string principle;   // Systemic Integrity, Fairness, Governance
+        string principle;   // Systemic Integrity, Clean Elections
         string description;
         uint256 timestamp;
     }
