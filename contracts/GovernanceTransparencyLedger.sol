@@ -1,16 +1,12 @@
 pragma solidity ^0.8.20;
 
-/// @title GovernanceTransparencyLedger
-/// @notice Covenant for transparency safeguards in governance systems.
-/// @dev Anchors fairness, openness, and systemic resilience.
-
 contract GovernanceTransparencyLedger {
     address public overseer;
     uint256 public entryCount;
 
     struct TransparencyRule {
         uint256 id;
-        string principle;   // Governance Transparency, Fairness, Openness
+        string principle;   // Governance Transparency, Accountability, Integrity
         string description;
         uint256 timestamp;
     }

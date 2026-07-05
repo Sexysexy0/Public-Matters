@@ -1,10 +1,5 @@
 pragma solidity ^0.8.20;
 
-/// @title EconomicJusticeTreaty
-/// @notice Covenant para sa economic justice safeguards.
-/// @dev Nakatuon sa patas na distribusyon ng yaman, proteksyon laban sa
-///      exploitation, at systemic fairness sa ekonomiya.
-
 contract EconomicJusticeTreaty {
     address public overseer;
     uint256 public treatyCount;
