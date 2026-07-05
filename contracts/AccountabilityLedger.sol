@@ -6,7 +6,7 @@ contract AccountabilityLedger {
 
     struct AccountabilityRule {
         uint256 id;
-        string principle;   // Accountability, Responsibility, Integrity
+        string principle;   // Transparency, Integrity, Responsibility
         string description;
         uint256 timestamp;
     }
