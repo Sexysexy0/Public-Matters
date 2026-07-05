@@ -6,7 +6,7 @@ contract ClarityScroll {
 
     struct ClarityRule {
         uint256 id;
-        string principle;   // Transparency, Precision, Truth
+        string principle;   // Transparency, Precision, Clear Governance
         string description;
         uint256 timestamp;
     }
