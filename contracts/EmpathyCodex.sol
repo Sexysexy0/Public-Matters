@@ -1,51 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title EmpathyCodex
-/// @notice Covenant contract to safeguard communities through systemic anchoring of empathy safeguards
 contract EmpathyCodex {
     address public overseer;
-    uint256 public empathyCount;
+    uint256 public codexCount;
 
-    struct EmpathyEntry {
+    struct EmpathyRule {
         uint256 id;
-        string actor;
-        string context;
-        string principle;
+        string principle;   // Empathy, Connection, Relational Harmony
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => EmpathyEntry) public empathies;
+    mapping(uint256 => EmpathyRule) public rules;
+    event EmpathyRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event EmpathyLogged(uint256 indexed id, string actor, string context);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logEmpathy(
-        string calldata actor,
-        string calldata context,
-        string calldata principle
-    ) external onlyOverseer {
-        empathyCount++;
-        empathies[empathyCount] = EmpathyEntry({
-            id: empathyCount,
-            actor: actor,
-            context: context,
-            principle: principle,
-            timestamp: block.timestamp
-        });
-        emit EmpathyLogged(empathyCount, actor, context);
-    }
-
-    function viewEmpathy(uint256 id) external view returns (EmpathyEntry memory) {
-        return empathies[id];
+    function declareEmpathyRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = EmpathyRule(codexCount, principle, description, block.timestamp);
+        emit EmpathyRuleDeclared(codexCount, principle, description);
     }
 }
