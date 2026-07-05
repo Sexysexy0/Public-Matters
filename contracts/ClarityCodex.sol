@@ -1,48 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title ClarityCodex
-/// @notice Covenant contract to safeguard systemic transparency, principled clarity, and dignified illumination
 contract ClarityCodex {
     address public overseer;
-    uint256 public clarityCount;
+    uint256 public codexCount;
 
     struct ClarityRule {
         uint256 id;
-        string principle; // Transparency, Illumination, Simplicity, Truth
-        string description; // encoded clarity safeguard
+        string principle;   // Clarity, Transparency, Truth
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => ClarityRule) public clarities;
+    mapping(uint256 => ClarityRule) public rules;
+    event ClarityRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event ClarityLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logClarity(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        clarityCount++;
-        clarities[clarityCount] = ClarityRule({
-            id: clarityCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit ClarityLogged(clarityCount, principle, description);
-    }
-
-    function viewClarity(uint256 id) external view returns (ClarityRule memory) {
-        return clarities[id];
+    function declareClarityRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = ClarityRule(codexCount, principle, description, block.timestamp);
+        emit ClarityRuleDeclared(codexCount, principle, description);
     }
 }
