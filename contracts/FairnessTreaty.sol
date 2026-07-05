@@ -6,7 +6,7 @@ contract FairnessTreaty {
 
     struct FairnessRule {
         uint256 id;
-        string principle;   // Fairness, Justice, Equality
+        string principle;   // Fairness, Equity, Balance
         string description;
         uint256 timestamp;
     }
