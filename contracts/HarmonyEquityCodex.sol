@@ -2,7 +2,7 @@ pragma solidity ^0.8.20;
 
 /// @title HarmonyEquityCodex
 /// @notice Covenant for equity safeguards in harmony systems.
-/// @dev Anchors cooperative fairness, systemic dignity, balanced progress.
+/// @dev Anchors balance fairness, dignity unity, systemic peace.
 
 contract HarmonyEquityCodex {
     address public overseer;
@@ -10,7 +10,7 @@ contract HarmonyEquityCodex {
 
     struct EquityRule {
         uint256 id;
-        string principle;   // Harmony Equity, Fairness, Progress
+        string principle;   // Harmony Equity, Balance, Peace
         string description;
         uint256 timestamp;
     }
