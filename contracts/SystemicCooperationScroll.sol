@@ -1,16 +1,12 @@
 pragma solidity ^0.8.20;
 
-/// @title SystemicCooperationScroll
-/// @notice Covenant for systemic cooperation safeguards.
-/// @dev Anchors fairness, collaboration, and adaptive robotics governance.
-
 contract SystemicCooperationScroll {
     address public overseer;
     uint256 public scrollCount;
 
     struct CooperationRule {
         uint256 id;
-        string principle;   // Systemic Cooperation, Collaboration, Fairness
+        string principle;   // Systemic Cooperation, Collective Strength
         string description;
         uint256 timestamp;
     }
