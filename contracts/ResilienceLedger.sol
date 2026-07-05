@@ -6,7 +6,7 @@ contract ResilienceLedger {
 
     struct ResilienceRule {
         uint256 id;
-        string principle;   // Resilience, Adaptive Strength
+        string principle;   // Endurance, Recovery, Persistence
         string description;
         uint256 timestamp;
     }
