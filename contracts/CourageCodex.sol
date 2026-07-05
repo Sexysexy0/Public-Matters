@@ -1,48 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title CourageCodex
-/// @notice Covenant contract to safeguard systemic bravery, principled courage, and dignified valor
 contract CourageCodex {
     address public overseer;
-    uint256 public courageCount;
+    uint256 public codexCount;
 
     struct CourageRule {
         uint256 id;
-        string principle; // Bravery, Valor, Resolve, Fearlessness
-        string description; // encoded courage safeguard
+        string principle;   // Bravery, Resilience, Risk-Taking
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => CourageRule) public courages;
+    mapping(uint256 => CourageRule) public rules;
+    event CourageRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event CourageLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logCourage(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        courageCount++;
-        courages[courageCount] = CourageRule({
-            id: courageCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit CourageLogged(courageCount, principle, description);
-    }
-
-    function viewCourage(uint256 id) external view returns (CourageRule memory) {
-        return courages[id];
+    function declareCourageRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = CourageRule(codexCount, principle, description, block.timestamp);
+        emit CourageRuleDeclared(codexCount, principle, description);
     }
 }
