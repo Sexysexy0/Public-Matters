@@ -1,16 +1,16 @@
 pragma solidity ^0.8.20;
 
-/// @title CommunalDignityLedger
-/// @notice Covenant for communal dignity safeguards.
-/// @dev Anchors fairness, respect, and systemic resilience.
+/// @title AntiOppressionDignityLedger
+/// @notice Covenant for dignity safeguards against oppression.
+/// @dev Anchors fairness, respect, and systemic liberation.
 
-contract CommunalDignityLedger {
+contract AntiOppressionDignityLedger {
     address public overseer;
     uint256 public entryCount;
 
     struct DignityRule {
         uint256 id;
-        string principle;   // Communal Dignity, Respect, Fairness
+        string principle;   // Anti-Oppression Dignity, Fairness, Liberation
         string description;
         uint256 timestamp;
     }
