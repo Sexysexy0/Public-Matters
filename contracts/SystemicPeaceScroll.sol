@@ -2,7 +2,7 @@ pragma solidity ^0.8.20;
 
 /// @title SystemicPeaceScroll
 /// @notice Covenant for systemic peace safeguards.
-/// @dev Anchors fairness, equity, and governance in harmony systems.
+/// @dev Anchors fairness, equity, and governance in harmony integration systems.
 
 contract SystemicPeaceScroll {
     address public overseer;
