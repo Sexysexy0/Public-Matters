@@ -6,7 +6,7 @@ contract ResonanceCodex {
 
     struct ResonanceRule {
         uint256 id;
-        string principle;   // Resonance, Emotional Depth, Coherence
+        string principle;   // Cultural Alignment, Audience Harmony, Connection
         string description;
         uint256 timestamp;
     }
