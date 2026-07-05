@@ -2,7 +2,7 @@ pragma solidity ^0.8.20;
 
 /// @title SystemicContinuityScroll
 /// @notice Covenant for systemic continuity safeguards.
-/// @dev Anchors fairness, equity, and governance in renewal systems.
+/// @dev Anchors fairness, equity, and governance in legacy systems.
 
 contract SystemicContinuityScroll {
     address public overseer;
