@@ -1,44 +1,25 @@
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title FocusCodex
-/// @notice Covenant contract encoding safeguards for attention span restoration
 contract FocusCodex {
-    address public owner;
+    address public overseer;
+    uint256 public codexCount;
 
-    struct Safeguard {
-        uint256 arcId;     // linked to focus arc
-        string domain;     // e.g. "Define Why", "Kill Leeches", "Start Ritual", "Movement Integration", "Community Guardianship"
-        string decree;     // safeguard decree text
+    struct FocusRule {
+        uint256 id;
+        string principle;   // Concentration, Clarity, Directed Effort
+        string description;
         uint256 timestamp;
     }
 
-    Safeguard[] public safeguards;
+    mapping(uint256 => FocusRule) public rules;
+    event FocusRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event Decreed(uint256 arcId, string domain, string decree, uint256 timestamp);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Not authorized");
-        _;
-    }
-
-    constructor() {
-        owner = msg.sender;
-    }
-
-    /// @notice Encode focus arc into covenant safeguard
-    function decreeCodex(uint256 arcId, string memory domain, string memory decree) public onlyOwner {
-        Safeguard memory newSafeguard = Safeguard(arcId, domain, decree, block.timestamp);
-        safeguards.push(newSafeguard);
-        emit Decreed(arcId, domain, decree, block.timestamp);
-    }
-
-    function getSafeguard(uint256 index) public view returns (uint256, string memory, string memory, uint256) {
-        Safeguard memory s = safeguards[index];
-        return (s.arcId, s.domain, s.decree, s.timestamp);
-    }
-
-    function getSafeguardCount() public view returns (uint256) {
-        return safeguards.length;
+    function declareFocusRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = FocusRule(codexCount, principle, description, block.timestamp);
+        emit FocusRuleDeclared(codexCount, principle, description);
     }
 }
