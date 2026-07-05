@@ -6,7 +6,7 @@ contract AlignmentTreaty {
 
     struct AlignmentRule {
         uint256 id;
-        string principle;   // Alignment, Balance
+        string principle;   // Harmony, Direction, Consistency
         string description;
         uint256 timestamp;
     }
