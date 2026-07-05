@@ -6,7 +6,7 @@ contract CourageLedger {
 
     struct CourageRule {
         uint256 id;
-        string principle;   // Courage, Bravery, Resilience
+        string principle;   // Bravery, Resilience, Fearless Pursuit
         string description;
         uint256 timestamp;
     }
