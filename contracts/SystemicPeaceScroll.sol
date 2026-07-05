@@ -1,16 +1,12 @@
 pragma solidity ^0.8.20;
 
-/// @title SystemicPeaceScroll
-/// @notice Covenant for systemic peace safeguards.
-/// @dev Anchors fairness, equity, and governance in harmony integration systems.
-
 contract SystemicPeaceScroll {
     address public overseer;
     uint256 public scrollCount;
 
     struct PeaceRule {
         uint256 id;
-        string principle;   // Systemic Peace, Fairness, Equity
+        string principle;   // Systemic Peace, Resonant Unity
         string description;
         uint256 timestamp;
     }
