@@ -2,7 +2,7 @@ pragma solidity ^0.8.20;
 
 /// @title CommunalFairnessLedger
 /// @notice Covenant for communal fairness safeguards.
-/// @dev Anchors equity, justice, and awareness.
+/// @dev Anchors equity, justice, and awareness integrity.
 
 contract CommunalFairnessLedger {
     address public overseer;
