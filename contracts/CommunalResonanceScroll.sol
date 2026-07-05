@@ -1,16 +1,12 @@
 pragma solidity ^0.8.20;
 
-/// @title CommunalResonanceScroll
-/// @notice Covenant for communal resonance safeguards.
-/// @dev Anchors fairness, authenticity, and collective dignity.
-
 contract CommunalResonanceScroll {
     address public overseer;
     uint256 public scrollCount;
 
     struct ResonanceRule {
         uint256 id;
-        string principle;   // Communal Resonance, Authenticity, Fairness
+        string principle;   // Communal Resonance, Audience Validation
         string description;
         uint256 timestamp;
     }
