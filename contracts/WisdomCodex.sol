@@ -1,48 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title WisdomCodex
-/// @notice Covenant contract to safeguard systemic discernment, enlightened decision-making, and dignified wisdom
 contract WisdomCodex {
     address public overseer;
-    uint256 public wisdomCount;
+    uint256 public codexCount;
 
     struct WisdomRule {
         uint256 id;
-        string principle; // Discernment, Enlightened Decision, Foresight, Prudence
-        string description; // encoded wisdom safeguard
+        string principle;   // Wisdom, Right View, Right Intention
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => WisdomRule) public wisdoms;
+    mapping(uint256 => WisdomRule) public rules;
+    event WisdomRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event WisdomLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logWisdom(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        wisdomCount++;
-        wisdoms[wisdomCount] = WisdomRule({
-            id: wisdomCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit WisdomLogged(wisdomCount, principle, description);
-    }
-
-    function viewWisdom(uint256 id) external view returns (WisdomRule memory) {
-        return wisdoms[id];
+    function declareWisdomRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = WisdomRule(codexCount, principle, description, block.timestamp);
+        emit WisdomRuleDeclared(codexCount, principle, description);
     }
 }
