@@ -1,16 +1,12 @@
 pragma solidity ^0.8.20;
 
-/// @title DemocraticResilienceScroll
-/// @notice Covenant for resilience safeguards in democratic systems.
-/// @dev Anchors fairness, equity, and governance in transformation systems.
-
 contract DemocraticResilienceScroll {
     address public overseer;
     uint256 public scrollCount;
 
     struct ResilienceRule {
         uint256 id;
-        string principle;   // Democratic Resilience, Fairness, Equity
+        string principle;   // Democratic Resilience, Participation, Integrity
         string description;
         uint256 timestamp;
     }
