@@ -6,7 +6,7 @@ contract DiscoveryLedger {
 
     struct DiscoveryRule {
         uint256 id;
-        string principle;   // Learning, Revelation, Insight
+        string principle;   // Revelation, Learning, Insight
         string description;
         uint256 timestamp;
     }
