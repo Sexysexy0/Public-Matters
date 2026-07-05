@@ -6,7 +6,7 @@ contract IntegrationCodex {
 
     struct IntegrationRule {
         uint256 id;
-        string principle;   // Integration, Wisdom+Ethics+Meditation
+        string principle;   // Integration, Unified Progress, Consolidation
         string description;
         uint256 timestamp;
     }
