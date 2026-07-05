@@ -1,48 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title BalanceCodex
-/// @notice Covenant contract to safeguard systemic equilibrium, principled balance, and dignified harmony
 contract BalanceCodex {
     address public overseer;
-    uint256 public balanceCount;
+    uint256 public codexCount;
 
     struct BalanceRule {
         uint256 id;
-        string principle; // Equilibrium, Moderation, Harmony, Stability
-        string description; // encoded balance safeguard
+        string principle;   // Balance, Fairness, Stability
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => BalanceRule) public balances;
+    mapping(uint256 => BalanceRule) public rules;
+    event BalanceRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event BalanceLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logBalance(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        balanceCount++;
-        balances[balanceCount] = BalanceRule({
-            id: balanceCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit BalanceLogged(balanceCount, principle, description);
-    }
-
-    function viewBalance(uint256 id) external view returns (BalanceRule memory) {
-        return balances[id];
+    function declareBalanceRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = BalanceRule(codexCount, principle, description, block.timestamp);
+        emit BalanceRuleDeclared(codexCount, principle, description);
     }
 }
