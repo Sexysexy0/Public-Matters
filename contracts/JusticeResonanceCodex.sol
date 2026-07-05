@@ -2,7 +2,7 @@ pragma solidity ^0.8.20;
 
 /// @title JusticeResonanceCodex
 /// @notice Covenant for resonance safeguards in justice systems.
-/// @dev Anchors equity enforcement, dignity protection, systemic fairness.
+/// @dev Anchors equity resonance, dignity balance, systemic trust.
 
 contract JusticeResonanceCodex {
     address public overseer;
@@ -10,7 +10,7 @@ contract JusticeResonanceCodex {
 
     struct ResonanceRule {
         uint256 id;
-        string principle;   // Justice Resonance, Fairness, Equity
+        string principle;   // Justice Resonance, Equity, Trust
         string description;
         uint256 timestamp;
     }
