@@ -16,8 +16,8 @@ contract DeployEcosystemTest is Test {
         // Hakbang 2: I-execute ang run loop na nakita natin sa iyong file
         // Gagamit tayo ng internal environment parameters para sa sandbox setup
         deploymentScript.run();
-        
-        // Dagdag na Forensic Verification Rules ay pwedeng ilagay rito 
+
+        // Dagdag na Forensic Verification Rules ay pwedeng ilagay rito
         // upang i-verify kung ang state parameters ng mga na-deploy na oracles ay active.
         assertTrue(true, "Deployment pipeline executed without revert sequence execution flags.");
     }
