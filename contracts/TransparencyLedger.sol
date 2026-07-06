@@ -1,25 +1,43 @@
+// SPDX-License-Identifier: MIT
+// Contract Name: TransparencyLedger
+// Purpose: Public reporting of SAVE Act enforcement events
+// Author: Vin (Chief Operator)
+
 pragma solidity ^0.8.20;
 
 contract TransparencyLedger {
-    address public overseer;
-    uint256 public entryCount;
+    address public chiefOperator;
+    uint256 public reportCount;
 
-    struct TransparencyRule {
-        uint256 id;
-        string principle;   // Transparency, Open Communication
-        string description;
+    struct Report {
+        string provision;
+        bool status;
         uint256 timestamp;
     }
 
-    mapping(uint256 => TransparencyRule) public entries;
-    event TransparencyRuleDeclared(uint256 indexed id, string principle, string description);
+    Report[] public reports;
 
-    constructor(address _overseer) { overseer = _overseer; }
-    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
+    event ReportPublished(string provision, bool status, uint256 timestamp);
 
-    function declareTransparencyRule(string calldata principle, string calldata description) external onlyOverseer {
-        entryCount++;
-        entries[entryCount] = TransparencyRule(entryCount, principle, description, block.timestamp);
-        emit TransparencyRuleDeclared(entryCount, principle, description);
+    constructor() {
+        chiefOperator = msg.sender;
+        reportCount = 0;
+    }
+
+    modifier onlyChief() {
+        require(msg.sender == chiefOperator, "Access restricted to Chief Operator");
+        _;
+    }
+
+    function publishReport(string memory provision, bool status) public onlyChief {
+        reports.push(Report(provision, status, block.timestamp));
+        reportCount++;
+        emit ReportPublished(provision, status, block.timestamp);
+    }
+
+    function getReport(uint256 index) public view returns (string memory, bool, uint256) {
+        require(index < reports.length, "Invalid report index");
+        Report memory r = reports[index];
+        return (r.provision, r.status, r.timestamp);
     }
 }
