@@ -1,29 +1,53 @@
+// SPDX-License-Identifier: MIT
+// Contract Name: JusticeResonanceCodex
+// Purpose: Encode fairness + dignity enforcement into governance matrix
+// Author: Vin (Chief Operator)
+
 pragma solidity ^0.8.20;
 
-/// @title JusticeResonanceCodex
-/// @notice Covenant for resonance safeguards in justice systems.
-/// @dev Anchors equity resonance, dignity balance, systemic trust.
-
 contract JusticeResonanceCodex {
-    address public overseer;
-    uint256 public codexCount;
+    address public chiefOperator;
+    uint256 public justiceActions;
 
-    struct ResonanceRule {
-        uint256 id;
-        string principle;   // Justice Resonance, Equity, Trust
-        string description;
+    struct JusticePrinciple {
+        string value;
         uint256 timestamp;
+        bool enforced;
     }
 
-    mapping(uint256 => ResonanceRule) public rules;
-    event ResonanceRuleDeclared(uint256 indexed id, string principle, string description);
+    JusticePrinciple[] public principles;
 
-    constructor(address _overseer) { overseer = _overseer; }
-    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
+    event PrincipleAdded(string value, uint256 timestamp);
+    event PrincipleEnforced(string value, uint256 timestamp);
 
-    function declareResonanceRule(string calldata principle, string calldata description) external onlyOverseer {
-        codexCount++;
-        rules[codexCount] = ResonanceRule(codexCount, principle, description, block.timestamp);
-        emit ResonanceRuleDeclared(codexCount, principle, description);
+    constructor() {
+        chiefOperator = msg.sender;
+        justiceActions = 0;
+    }
+
+    modifier onlyChief() {
+        require(msg.sender == chiefOperator, "Access restricted to Chief Operator");
+        _;
+    }
+
+    // Add new justice principle (e.g. dignity, fairness, equality)
+    function addPrinciple(string memory value) public onlyChief {
+        principles.push(JusticePrinciple(value, block.timestamp, false));
+        emit PrincipleAdded(value, block.timestamp);
+    }
+
+    // Enforce principle
+    function enforcePrinciple(uint256 index) public onlyChief {
+        require(index < principles.length, "Invalid principle index");
+        principles[index].enforced = true;
+        justiceActions++;
+        emit PrincipleEnforced(principles[index].value, block.timestamp);
+    }
+
+    // View principle details
+    function getPrinciple(uint256 index) public view returns (string memory, uint256, bool) {
+        require(index < principles.length, "Invalid principle index");
+        JusticePrinciple memory p = principles[index];
+        return (p.value, p.timestamp, p.enforced);
     }
 }
