@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: AccountabilityEnforcementCovenant
-// Purpose: Guarantee accountability and enforcement mechanisms
+// Purpose: Guarantee accountability and enforcement of responsibility
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,9 +10,9 @@ contract AccountabilityEnforcementCovenant {
     uint256 public covenantCount;
 
     struct Accountability {
-        string domain;             // e.g., Workplace, Community, Digital
-        string accountabilityRule; // e.g., Responsibility tracking, Compliance enforcement, Public reporting
-        string safeguard;          // e.g., Transparency log, Audit, Compliance check
+        string domain;              // e.g., Workplace, Community, Global
+        string accountabilityRule;  // e.g., Transparency, Responsibility tracking, Anti-impunity safeguard
+        string safeguard;           // e.g., Audit trail, Compliance check, Public record
         uint256 timestamp;
     }
 
