@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: PeacePreservationPact
-// Purpose: Guarantee peace and prevent conflict escalation
+// Purpose: Guarantee peace and protection against conflict
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,7 +11,7 @@ contract PeacePreservationPact {
 
     struct Peace {
         string domain;           // e.g., Workplace, Community, Global
-        string peaceRule;        // e.g., Non-violence, Mediation, Anti-escalation
+        string peaceRule;        // e.g., Non-violence, Reconciliation, Anti-escalation safeguard
         string safeguard;        // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
