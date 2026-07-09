@@ -10,9 +10,9 @@ contract SocialContractEnforcementCovenant {
     uint256 public covenantCount;
 
     struct SocialContract {
-        string domain;              // e.g., Workplace, Community, Global
-        string contractRule;        // e.g., Mutual obligation, Fairness safeguard, Anti-breach clause
-        string safeguard;           // e.g., Transparency log, Audit, Public record
+        string domain;          // e.g., Workplace, Community, Global
+        string contractRule;    // e.g., Mutual obligation, Fairness safeguard, Anti-breach clause
+        string safeguard;       // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
 
