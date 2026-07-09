@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: FairnessGuaranteePact
-// Purpose: Guarantee fairness across governance domains
+// Purpose: Guarantee fairness and equal treatment
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,9 +10,9 @@ contract FairnessGuaranteePact {
     uint256 public pactCount;
 
     struct Fairness {
-        string domain;          // e.g., Workplace, Community, Digital
-        string fairnessRule;    // e.g., Equal treatment, Non-discrimination, Transparency
-        string safeguard;       // e.g., Audit, Public log, Compliance check
+        string domain;           // e.g., Workplace, Community, Global
+        string fairnessRule;     // e.g., Impartiality, Equality, Anti-bias safeguard
+        string safeguard;        // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
 
