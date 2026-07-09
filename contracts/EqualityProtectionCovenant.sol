@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: EqualityProtectionCovenant
-// Purpose: Guarantee equality and equal opportunity
+// Purpose: Guarantee equality and non-discrimination
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,9 +10,9 @@ contract EqualityProtectionCovenant {
     uint256 public covenantCount;
 
     struct Equality {
-        string domain;           // e.g., Workplace, Community, Global
-        string equalityRule;     // e.g., Equal rights, Non-discrimination, Anti-inequality safeguard
-        string safeguard;        // e.g., Transparency log, Audit, Public record
+        string domain;            // e.g., Workplace, Community, Global
+        string equalityRule;      // e.g., Equal treatment, Inclusive safeguard, Anti-discrimination clause
+        string safeguard;         // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
 
