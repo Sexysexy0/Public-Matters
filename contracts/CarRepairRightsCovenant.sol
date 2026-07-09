@@ -1,27 +1,28 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: CarRepairRightsCovenant
-// Purpose: Safeguard motorists' right to repair, modify, and preserve vehicles
+// Purpose: Protect rights for vehicle repair and maintenance
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
 contract CarRepairRightsCovenant {
     address public chiefOperator;
-    uint256 public covenantCount;
+    uint256 public rightsCount;
 
-    struct Covenant {
-        string principle;
-        string repairMechanism;
+    struct Right {
+        string vehicleType;     // e.g., Car, Truck, Motorcycle
+        string repairAccess;    // e.g., Manuals, Tools, Diagnostics
+        string fairnessRule;    // e.g., Transparent pricing, Equal service
         uint256 timestamp;
     }
 
-    Covenant[] public covenants;
+    Right[] public rights;
 
-    event CovenantAdded(string principle, string repairMechanism, uint256 timestamp);
+    event RightAdded(string vehicleType, string repairAccess, string fairnessRule, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
-        covenantCount = 0;
+        rightsCount = 0;
     }
 
     modifier onlyChief() {
@@ -29,17 +30,17 @@ contract CarRepairRightsCovenant {
         _;
     }
 
-    // Add new car repair rights clause
-    function addCovenant(string memory principle, string memory repairMechanism) public onlyChief {
-        covenants.push(Covenant(principle, repairMechanism, block.timestamp));
-        covenantCount++;
-        emit CovenantAdded(principle, repairMechanism, block.timestamp);
+    // Add new repair right
+    function addRight(string memory vehicleType, string memory repairAccess, string memory fairnessRule) public onlyChief {
+        rights.push(Right(vehicleType, repairAccess, fairnessRule, block.timestamp));
+        rightsCount++;
+        emit RightAdded(vehicleType, repairAccess, fairnessRule, block.timestamp);
     }
 
-    // View covenant details
-    function getCovenant(uint256 index) public view returns (string memory, string memory, uint256) {
-        require(index < covenants.length, "Invalid covenant index");
-        Covenant memory c = covenants[index];
-        return (c.principle, c.repairMechanism, c.timestamp);
+    // View repair right details
+    function getRight(uint256 index) public view returns (string memory, string memory, string memory, uint256) {
+        require(index < rights.length, "Invalid right index");
+        Right memory r = rights[index];
+        return (r.vehicleType, r.repairAccess, r.fairnessRule, r.timestamp);
     }
 }
