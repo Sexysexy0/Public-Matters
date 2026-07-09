@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: SolidarityProtectionCovenant
-// Purpose: Guarantee solidarity and collective protection
+// Purpose: Guarantee solidarity and collective strength
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,7 +11,7 @@ contract SolidarityProtectionCovenant {
 
     struct Solidarity {
         string domain;             // e.g., Workplace, Community, Global
-        string solidarityRule;     // e.g., Mutual support, Shared defense, Anti-isolation safeguard
+        string solidarityRule;     // e.g., Unity of purpose, Mutual aid, Anti-fragmentation safeguard
         string safeguard;          // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
