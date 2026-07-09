@@ -11,8 +11,8 @@ contract TransparencyAssuranceCovenant {
 
     struct Transparency {
         string domain;             // e.g., Workplace, Community, Global
-        string transparencyRule;   // e.g., Open records, Disclosure, Anti-hidden manipulation
-        string safeguard;          // e.g., Transparency log, Audit, Public record
+        string transparencyRule;   // e.g., Openness, Disclosure, Anti-secrecy safeguard
+        string safeguard;          // e.g., Audit trail, Public record, Compliance check
         uint256 timestamp;
     }
 
