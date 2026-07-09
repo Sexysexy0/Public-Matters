@@ -1,27 +1,28 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: PreservationEquityProtocol
-// Purpose: Safeguard fair preservation rights across digital and physical media
+// Purpose: Safeguard equity in long-term governance and resource allocation
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
 contract PreservationEquityProtocol {
     address public chiefOperator;
-    uint256 public protocolCount;
+    uint256 public equityCount;
 
-    struct Protocol {
-        string principle;
-        string preservationMechanism;
+    struct Equity {
+        string resourceType;     // e.g., Funds, Assets, Opportunities
+        string preservationRule; // e.g., Equal distribution, Rotation system
+        string safeguard;        // e.g., Audit, Transparency report
         uint256 timestamp;
     }
 
-    Protocol[] public protocols;
+    Equity[] public equities;
 
-    event ProtocolAdded(string principle, string preservationMechanism, uint256 timestamp);
+    event EquityAdded(string resourceType, string preservationRule, string safeguard, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
-        protocolCount = 0;
+        equityCount = 0;
     }
 
     modifier onlyChief() {
@@ -29,17 +30,17 @@ contract PreservationEquityProtocol {
         _;
     }
 
-    // Add new preservation equity clause
-    function addProtocol(string memory principle, string memory preservationMechanism) public onlyChief {
-        protocols.push(Protocol(principle, preservationMechanism, block.timestamp));
-        protocolCount++;
-        emit ProtocolAdded(principle, preservationMechanism, block.timestamp);
+    // Add new equity safeguard
+    function addEquity(string memory resourceType, string memory preservationRule, string memory safeguard) public onlyChief {
+        equities.push(Equity(resourceType, preservationRule, safeguard, block.timestamp));
+        equityCount++;
+        emit EquityAdded(resourceType, preservationRule, safeguard, block.timestamp);
     }
 
-    // View protocol details
-    function getProtocol(uint256 index) public view returns (string memory, string memory, uint256) {
-        require(index < protocols.length, "Invalid protocol index");
-        Protocol memory p = protocols[index];
-        return (p.principle, p.preservationMechanism, p.timestamp);
+    // View equity details
+    function getEquity(uint256 index) public view returns (string memory, string memory, string memory, uint256) {
+        require(index < equities.length, "Invalid equity index");
+        Equity memory e = equities[index];
+        return (e.resourceType, e.preservationRule, e.safeguard, e.timestamp);
     }
 }
