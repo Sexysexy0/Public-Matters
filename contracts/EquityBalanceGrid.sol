@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: EquityBalanceGrid
-// Purpose: Encode systemic balance ensuring fairness across governance layers
+// Purpose: Ensure balanced resource distribution and fairness monitoring
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -9,15 +9,16 @@ contract EquityBalanceGrid {
     address public chiefOperator;
     uint256 public gridCount;
 
-    struct Grid {
-        string principle;
-        string balanceMechanism;
+    struct EquityMap {
+        string resource;        // e.g., Funds, Training, Opportunities
+        string distributionRule;// e.g., Equal share, Rotation, Merit-based
+        string safeguard;       // e.g., Audit, Transparency log
         uint256 timestamp;
     }
 
-    Grid[] public grids;
+    EquityMap[] public equityMaps;
 
-    event GridAdded(string principle, string balanceMechanism, uint256 timestamp);
+    event EquityMapAdded(string resource, string distributionRule, string safeguard, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -29,17 +30,17 @@ contract EquityBalanceGrid {
         _;
     }
 
-    // Add new equity balance clause
-    function addGrid(string memory principle, string memory balanceMechanism) public onlyChief {
-        grids.push(Grid(principle, balanceMechanism, block.timestamp));
+    // Add new equity mapping
+    function addEquityMap(string memory resource, string memory distributionRule, string memory safeguard) public onlyChief {
+        equityMaps.push(EquityMap(resource, distributionRule, safeguard, block.timestamp));
         gridCount++;
-        emit GridAdded(principle, balanceMechanism, block.timestamp);
+        emit EquityMapAdded(resource, distributionRule, safeguard, block.timestamp);
     }
 
-    // View grid details
-    function getGrid(uint256 index) public view returns (string memory, string memory, uint256) {
-        require(index < grids.length, "Invalid grid index");
-        Grid memory g = grids[index];
-        return (g.principle, g.balanceMechanism, g.timestamp);
+    // View equity map details
+    function getEquityMap(uint256 index) public view returns (string memory, string memory, string memory, uint256) {
+        require(index < equityMaps.length, "Invalid equity map index");
+        EquityMap memory e = equityMaps[index];
+        return (e.resource, e.distributionRule, e.safeguard, e.timestamp);
     }
 }
