@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: DignityPreservationCharter
-// Purpose: Guarantee preservation of human dignity
+// Purpose: Guarantee dignity and respect for human worth
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,9 +10,9 @@ contract DignityPreservationCharter {
     uint256 public charterCount;
 
     struct Dignity {
-        string domain;          // e.g., Workplace, Community, Digital
-        string dignityRule;     // e.g., Humane treatment, Respect, Equal recognition
-        string safeguard;       // e.g., Transparency log, Audit, Public record
+        string domain;           // e.g., Workplace, Community, Global
+        string dignityRule;      // e.g., Recognition of value, Humane treatment, Anti-degradation safeguard
+        string safeguard;        // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
 
