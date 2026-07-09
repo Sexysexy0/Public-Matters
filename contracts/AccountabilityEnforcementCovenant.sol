@@ -10,9 +10,9 @@ contract AccountabilityEnforcementCovenant {
     uint256 public covenantCount;
 
     struct Accountability {
-        string domain;              // e.g., Workplace, Community, Global
-        string accountabilityRule;  // e.g., Transparency, Responsibility tracking, Anti-impunity safeguard
-        string safeguard;           // e.g., Audit trail, Compliance check, Public record
+        string domain;             // e.g., Workplace, Community, Global
+        string accountabilityRule; // e.g., Answerability, Responsibility checks, Anti-impunity safeguard
+        string safeguard;          // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
 
