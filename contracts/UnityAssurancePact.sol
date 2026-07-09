@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: UnityAssurancePact
-// Purpose: Guarantee systemic unity and cohesion
+// Purpose: Guarantee unity, solidarity, and systemic cohesion
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,9 +10,9 @@ contract UnityAssurancePact {
     uint256 public pactCount;
 
     struct Unity {
-        string domain;          // e.g., Workplace, Community, Global
-        string unityRule;       // e.g., Cohesion safeguard, Harmony enforcement, Anti-division clause
-        string safeguard;       // e.g., Transparency log, Audit, Public record
+        string domain;        // e.g., Workplace, Community, Global
+        string unityRule;     // e.g., Solidarity safeguard, Cooperation clause, Anti-division protection
+        string safeguard;     // e.g., Audit log, Public record, Compliance check
         uint256 timestamp;
     }
 
