@@ -10,9 +10,9 @@ contract GlobalMediaMasterCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Movies, Anime, Music, Radio, Internet, Community Access, Episodes, Dubbing
+        string domain;        // Movies, Anime, Music, Radio, Internet, Community Access, Premium Cable
         string rule;          // e.g., Shared licensing, TV broadcast clause, dubbing rights
-        string safeguard;     // e.g., exclusivity period, partnership audit, language accessibility
+        string safeguard;     // e.g., exclusivity period, language accessibility, free signal expansion
         uint256 timestamp;
     }
 
