@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: OwnershipDignityShield
-// Purpose: Protect consumer ownership dignity against DRM, licensing, and repair restrictions
+// Purpose: Protect worker dignity and ownership rights
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,14 +10,15 @@ contract OwnershipDignityShield {
     uint256 public shieldCount;
 
     struct Shield {
-        string principle;
-        string dignityMechanism;
+        string rightType;       // e.g., Worker dignity, Ownership respect
+        string safeguard;       // e.g., Non-discrimination, Equal treatment
+        string enforcement;     // e.g., Audit, Complaint resolution
         uint256 timestamp;
     }
 
     Shield[] public shields;
 
-    event ShieldAdded(string principle, string dignityMechanism, uint256 timestamp);
+    event ShieldAdded(string rightType, string safeguard, string enforcement, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -29,17 +30,17 @@ contract OwnershipDignityShield {
         _;
     }
 
-    // Add new ownership dignity clause
-    function addShield(string memory principle, string memory dignityMechanism) public onlyChief {
-        shields.push(Shield(principle, dignityMechanism, block.timestamp));
+    // Add new dignity shield
+    function addShield(string memory rightType, string memory safeguard, string memory enforcement) public onlyChief {
+        shields.push(Shield(rightType, safeguard, enforcement, block.timestamp));
         shieldCount++;
-        emit ShieldAdded(principle, dignityMechanism, block.timestamp);
+        emit ShieldAdded(rightType, safeguard, enforcement, block.timestamp);
     }
 
     // View shield details
-    function getShield(uint256 index) public view returns (string memory, string memory, uint256) {
+    function getShield(uint256 index) public view returns (string memory, string memory, string memory, uint256) {
         require(index < shields.length, "Invalid shield index");
         Shield memory s = shields[index];
-        return (s.principle, s.dignityMechanism, s.timestamp);
+        return (s.rightType, s.safeguard, s.enforcement, s.timestamp);
     }
 }
