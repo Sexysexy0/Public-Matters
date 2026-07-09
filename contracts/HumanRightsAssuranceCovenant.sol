@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: HumanRightsAssuranceCovenant
-// Purpose: Guarantee protection of fundamental human rights
+// Purpose: Guarantee human rights and fundamental freedoms
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,9 +10,9 @@ contract HumanRightsAssuranceCovenant {
     uint256 public covenantCount;
 
     struct HumanRight {
-        string domain;            // e.g., Workplace, Community, Global
-        string rightRule;         // e.g., Life, Liberty, Dignity, Anti-abuse safeguard
-        string safeguard;         // e.g., Transparency log, Audit, Public record
+        string domain;           // e.g., Workplace, Community, Global
+        string rightRule;        // e.g., Freedom, Equality, Anti-abuse safeguard
+        string safeguard;        // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
 
