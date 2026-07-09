@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: JusticeEnforcementPact
-// Purpose: Guarantee justice and enforcement of fairness
+// Purpose: Guarantee justice and accountability enforcement
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,9 +10,9 @@ contract JusticeEnforcementPact {
     uint256 public pactCount;
 
     struct Justice {
-        string domain;           // e.g., Workplace, Community, Global
-        string justiceRule;      // e.g., Rule of law, Fairness enforcement, Anti-injustice safeguard
-        string safeguard;        // e.g., Transparency log, Audit, Public record
+        string domain;          // e.g., Workplace, Community, Global
+        string justiceRule;     // e.g., Fairness, Due process, Anti-impunity safeguard
+        string safeguard;       // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
 
