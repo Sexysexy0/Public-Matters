@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: EqualityAssurancePact
-// Purpose: Guarantee equality and equal access
+// Purpose: Guarantee equality assurance and non-discrimination
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,7 +11,7 @@ contract EqualityAssurancePact {
 
     struct Equality {
         string domain;           // e.g., Workplace, Community, Global
-        string equalityRule;     // e.g., Equal rights, Non-discrimination, Equal access
+        string equalityRule;     // e.g., Equal opportunity, Non-discrimination safeguard, Anti-inequality clause
         string safeguard;        // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
