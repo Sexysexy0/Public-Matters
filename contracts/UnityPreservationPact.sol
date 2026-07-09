@@ -10,9 +10,9 @@ contract UnityPreservationPact {
     uint256 public pactCount;
 
     struct Unity {
-        string domain;           // e.g., Workplace, Community, Global
-        string unityRule;        // e.g., Solidarity, Cohesion, Anti-division safeguard
-        string safeguard;        // e.g., Transparency log, Audit, Public record
+        string domain;          // e.g., Workplace, Community, Global
+        string unityRule;       // e.g., Collective harmony, Shared vision, Anti-division safeguard
+        string safeguard;       // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
 
