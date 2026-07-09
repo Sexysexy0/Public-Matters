@@ -11,7 +11,7 @@ contract ResponsibilityAssurancePact {
 
     struct Responsibility {
         string domain;             // e.g., Workplace, Community, Global
-        string responsibilityRule; // e.g., Obligation, Accountability, Anti-negligence safeguard
+        string responsibilityRule; // e.g., Accountability, Duty, Anti-negligence safeguard
         string safeguard;          // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
