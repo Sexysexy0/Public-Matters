@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: MutualRespectCovenant
-// Purpose: Guarantee mutual respect and dignified interaction
+// Purpose: Guarantee mutual respect and reciprocal recognition
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,9 +10,9 @@ contract MutualRespectCovenant {
     uint256 public covenantCount;
 
     struct Respect {
-        string domain;          // e.g., Workplace, Community, Digital
-        string respectRule;     // e.g., Equal voice, Non-discrimination, Humane treatment
-        string safeguard;       // e.g., Transparency log, Audit, Public record
+        string domain;           // e.g., Workplace, Community, Global
+        string respectRule;      // e.g., Reciprocal recognition, Respectful conduct, Anti-disrespect safeguard
+        string safeguard;        // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
 
