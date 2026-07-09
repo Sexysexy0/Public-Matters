@@ -1,33 +1,46 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
+// Contract Name: HumanRightsCharter
+// Purpose: Guarantee fundamental human rights protections
+// Author: Vin (Chief Operator)
+
 pragma solidity ^0.8.20;
 
 contract HumanRightsCharter {
-    address public overseer;
+    address public chiefOperator;
     uint256 public charterCount;
 
-    struct Charter {
-        uint256 id;
-        string right;   // Freedom, Equality, Dignity
-        string description;
+    struct Right {
+        string category;        // e.g., Life, Liberty, Security
+        string protectionRule;  // e.g., Equal treatment, Non-discrimination, Freedom safeguard
+        string safeguard;       // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
 
-    mapping(uint256 => Charter) public charters;
-    event RightDeclared(uint256 indexed id, string right, string description);
+    Right[] public rights;
 
-    constructor(address _overseer) {
-        overseer = _overseer;
+    event RightAdded(string category, string protectionRule, string safeguard, uint256 timestamp);
+
+    constructor() {
+        chiefOperator = msg.sender;
+        charterCount = 0;
     }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
+    modifier onlyChief() {
+        require(msg.sender == chiefOperator, "Access restricted to Chief Operator");
         _;
     }
 
-    function declareRight(string calldata right, string calldata description) external onlyOverseer {
+    // Add new human right
+    function addRight(string memory category, string memory protectionRule, string memory safeguard) public onlyChief {
+        rights.push(Right(category, protectionRule, safeguard, block.timestamp));
         charterCount++;
-        charters[charterCount] = Charter(charterCount, right, description, block.timestamp);
-        emit RightDeclared(charterCount, right, description);
+        emit RightAdded(category, protectionRule, safeguard, block.timestamp);
+    }
+
+    // View human right details
+    function getRight(uint256 index) public view returns (string memory, string memory, string memory, uint256) {
+        require(index < rights.length, "Invalid right index");
+        Right memory r = rights[index];
+        return (r.category, r.protectionRule, r.safeguard, r.timestamp);
     }
 }
