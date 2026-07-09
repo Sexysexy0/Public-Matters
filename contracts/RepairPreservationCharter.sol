@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: RepairPreservationCharter
-// Purpose: Safeguard right to repair and preserve physical copies
+// Purpose: Maintenance and preservation safeguards
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,14 +10,15 @@ contract RepairPreservationCharter {
     uint256 public charterCount;
 
     struct Charter {
-        string principle;
-        string safeguardMechanism;
+        string assetType;       // e.g., Equipment, Vehicles, Digital Systems
+        string repairRule;      // e.g., Scheduled maintenance, Emergency repair
+        string preservationPlan;// e.g., Rotation, Backup, Audit
         uint256 timestamp;
     }
 
     Charter[] public charters;
 
-    event CharterAdded(string principle, string safeguardMechanism, uint256 timestamp);
+    event CharterAdded(string assetType, string repairRule, string preservationPlan, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -29,17 +30,17 @@ contract RepairPreservationCharter {
         _;
     }
 
-    // Add new repair + preservation clause
-    function addCharter(string memory principle, string memory safeguardMechanism) public onlyChief {
-        charters.push(Charter(principle, safeguardMechanism, block.timestamp));
+    // Add new repair/preservation charter
+    function addCharter(string memory assetType, string memory repairRule, string memory preservationPlan) public onlyChief {
+        charters.push(Charter(assetType, repairRule, preservationPlan, block.timestamp));
         charterCount++;
-        emit CharterAdded(principle, safeguardMechanism, block.timestamp);
+        emit CharterAdded(assetType, repairRule, preservationPlan, block.timestamp);
     }
 
     // View charter details
-    function getCharter(uint256 index) public view returns (string memory, string memory, uint256) {
+    function getCharter(uint256 index) public view returns (string memory, string memory, string memory, uint256) {
         require(index < charters.length, "Invalid charter index");
         Charter memory c = charters[index];
-        return (c.principle, c.safeguardMechanism, c.timestamp);
+        return (c.assetType, c.repairRule, c.preservationPlan, c.timestamp);
     }
 }
