@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: DignityProtectionCovenant
-// Purpose: Guarantee dignity, respect, and human worth
+// Purpose: Guarantee dignity, respect, and systemic honor
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,9 +10,9 @@ contract DignityProtectionCovenant {
     uint256 public covenantCount;
 
     struct Dignity {
-        string domain;           // e.g., Workplace, Community, Global
-        string dignityRule;      // e.g., Respect safeguard, Human worth clause, Anti-humiliation protection
-        string safeguard;        // e.g., Transparency log, Audit, Public record
+        string domain;        // e.g., Workplace, Community, Global
+        string dignityRule;   // e.g., Respect safeguard, Human dignity clause, Anti-humiliation protection
+        string safeguard;     // e.g., Audit log, Public record, Compliance check
         uint256 timestamp;
     }
 
