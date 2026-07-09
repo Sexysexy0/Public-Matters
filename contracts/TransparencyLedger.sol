@@ -1,27 +1,27 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: TransparencyLedger
-// Purpose: Public reporting of SAVE Act enforcement events
+// Purpose: Record governance actions in a tamper-proof ledger
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
 contract TransparencyLedger {
     address public chiefOperator;
-    uint256 public reportCount;
+    uint256 public recordCount;
 
-    struct Report {
-        string provision;
-        bool status;
+    struct Record {
+        string action;
+        string actor;
         uint256 timestamp;
     }
 
-    Report[] public reports;
+    Record[] public records;
 
-    event ReportPublished(string provision, bool status, uint256 timestamp);
+    event RecordAdded(string action, string actor, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
-        reportCount = 0;
+        recordCount = 0;
     }
 
     modifier onlyChief() {
@@ -29,15 +29,17 @@ contract TransparencyLedger {
         _;
     }
 
-    function publishReport(string memory provision, bool status) public onlyChief {
-        reports.push(Report(provision, status, block.timestamp));
-        reportCount++;
-        emit ReportPublished(provision, status, block.timestamp);
+    // Add new governance record
+    function addRecord(string memory action, string memory actor) public onlyChief {
+        records.push(Record(action, actor, block.timestamp));
+        recordCount++;
+        emit RecordAdded(action, actor, block.timestamp);
     }
 
-    function getReport(uint256 index) public view returns (string memory, bool, uint256) {
-        require(index < reports.length, "Invalid report index");
-        Report memory r = reports[index];
-        return (r.provision, r.status, r.timestamp);
+    // View governance record details
+    function getRecord(uint256 index) public view returns (string memory, string memory, uint256) {
+        require(index < records.length, "Invalid record index");
+        Record memory r = records[index];
+        return (r.action, r.actor, r.timestamp);
     }
 }
