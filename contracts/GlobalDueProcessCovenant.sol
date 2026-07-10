@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalDueProcessCovenant
-// Purpose: Require humane, fair, transparent, and proper due process before any
-//          enforcement, surveillance, digital access, or institutional action.
+// Purpose: Establish fair procedures, lawful actions, and protections against
+//          arbitrary removals or sanctions across governance systems.
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,9 +11,9 @@ contract GlobalDueProcessCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Enforcement, Surveillance, Digital, Corporate, LGU, Substrate
+        string domain;        // Due Process, Fairness, Lawful Action, Governance
         string rule;          // Due process clause
-        string safeguard;     // Human review, transparency, anti-abuse mechanism
+        string safeguard;     // Fair procedures, lawful protections, anti-arbitrary safeguards
         uint256 timestamp;
     }
 
