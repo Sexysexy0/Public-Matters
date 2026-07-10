@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalAccountabilityAndSanctionsCovenant
-// Purpose: Enforce penalties, sanctions, and corrective measures against institutions,
-//          enforcement bodies, corporations, LGUs, or AI systems that violate covenants.
+// Purpose: Establish accountability mechanisms and fair sanctions for misconduct
+//          across governance systems.
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,9 +11,9 @@ contract GlobalAccountabilityAndSanctionsCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Enforcement, Surveillance, Digital, Corporate, LGU, AI
+        string domain;        // Accountability, Sanctions, Governance, Civilian, Institutional
         string rule;          // Accountability & sanctions clause
-        string safeguard;     // Penalty mechanism, corrective action, transparency
+        string safeguard;     // Fair sanctions, transparency, oversight
         uint256 timestamp;
     }
 
