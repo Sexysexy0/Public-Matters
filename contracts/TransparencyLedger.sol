@@ -1,29 +1,45 @@
+// SPDX-License-Identifier: MIT
+// Contract Name: TransparencyLedger
+// Purpose: Record governance actions in a tamper-proof ledger
+// Author: Vin (Chief Operator)
+
 pragma solidity ^0.8.20;
 
-/// @title TransparencyLedger
-/// @notice Encodes transparency and accountability principles.
-/// @dev Anchors disclosure, access, and participation safeguards.
-
 contract TransparencyLedger {
-    address public overseer;
-    uint256 public entryCount;
+    address public chiefOperator;
+    uint256 public recordCount;
 
-    struct TransparencyRule {
-        uint256 id;
-        string principle;   // Disclosure, Access, Participation
-        string description;
+    struct Record {
+        string action;
+        string actor;
         uint256 timestamp;
     }
 
-    mapping(uint256 => TransparencyRule> public entries;
-    event TransparencyRuleDeclared(uint256 indexed id, string principle, string description);
+    Record[] public records;
 
-    constructor(address _overseer) { overseer = _overseer; }
-    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
+    event RecordAdded(string action, string actor, uint256 timestamp);
 
-    function declareTransparencyRule(string calldata principle, string calldata description) external onlyOverseer {
-        entryCount++;
-        entries[entryCount] = TransparencyRule(entryCount, principle, description, block.timestamp);
-        emit TransparencyRuleDeclared(entryCount, principle, description);
+    constructor() {
+        chiefOperator = msg.sender;
+        recordCount = 0;
+    }
+
+    modifier onlyChief() {
+        require(msg.sender == chiefOperator, "Access restricted to Chief Operator");
+        _;
+    }
+
+    // Add new governance record
+    function addRecord(string memory action, string memory actor) public onlyChief {
+        records.push(Record(action, actor, block.timestamp));
+        recordCount++;
+        emit RecordAdded(action, actor, block.timestamp);
+    }
+
+    // View governance record details
+    function getRecord(uint256 index) public view returns (string memory, string memory, uint256) {
+        require(index < records.length, "Invalid record index");
+        Record memory r = records[index];
+        return (r.action, r.actor, r.timestamp);
     }
 }

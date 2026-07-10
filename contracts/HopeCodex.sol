@@ -1,48 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title HopeCodex
-/// @notice Covenant contract to safeguard systemic optimism, principled hope, and dignified resilience
 contract HopeCodex {
     address public overseer;
-    uint256 public hopeCount;
+    uint256 public codexCount;
 
     struct HopeRule {
         uint256 id;
-        string principle; // Optimism, Aspiration, Renewal, Light
-        string description; // encoded hope safeguard
+        string principle;   // Hope, Light, Renewal
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => HopeRule) public hopes;
+    mapping(uint256 => HopeRule) public rules;
+    event HopeRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event HopeLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logHope(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        hopeCount++;
-        hopes[hopeCount] = HopeRule({
-            id: hopeCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit HopeLogged(hopeCount, principle, description);
-    }
-
-    function viewHope(uint256 id) external view returns (HopeRule memory) {
-        return hopes[id];
+    function declareHopeRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = HopeRule(codexCount, principle, description, block.timestamp);
+        emit HopeRuleDeclared(codexCount, principle, description);
     }
 }

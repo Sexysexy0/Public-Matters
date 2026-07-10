@@ -1,48 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title VisionCodex
-/// @notice Covenant contract to safeguard systemic foresight, strategic clarity, and dignified vision
 contract VisionCodex {
     address public overseer;
-    uint256 public visionCount;
+    uint256 public codexCount;
 
     struct VisionRule {
         uint256 id;
-        string principle; // Foresight, Strategic Clarity, Long-term Planning, Guiding Vision
-        string description; // encoded vision safeguard
+        string principle;   // Vision, Foresight, Clarity
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => VisionRule) public visions;
+    mapping(uint256 => VisionRule) public rules;
+    event VisionRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event VisionLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logVision(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        visionCount++;
-        visions[visionCount] = VisionRule({
-            id: visionCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit VisionLogged(visionCount, principle, description);
-    }
-
-    function viewVision(uint256 id) external view returns (VisionRule memory) {
-        return visions[id];
+    function declareVisionRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = VisionRule(codexCount, principle, description, block.timestamp);
+        emit VisionRuleDeclared(codexCount, principle, description);
     }
 }

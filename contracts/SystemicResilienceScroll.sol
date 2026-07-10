@@ -1,16 +1,12 @@
 pragma solidity ^0.8.20;
 
-/// @title SystemicResilienceScroll
-/// @notice Covenant for systemic resilience safeguards.
-/// @dev Anchors fairness, restorative dignity, and adaptive strength.
-
 contract SystemicResilienceScroll {
     address public overseer;
     uint256 public scrollCount;
 
     struct ResilienceRule {
         uint256 id;
-        string principle;   // Systemic Resilience, Fairness, Strength
+        string principle;   // Systemic Resilience, Recovery Protocols
         string description;
         uint256 timestamp;
     }

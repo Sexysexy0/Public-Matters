@@ -1,16 +1,12 @@
 pragma solidity ^0.8.20;
 
-/// @title SystemicFairnessLedger
-/// @notice Covenant for systemic fairness safeguards.
-/// @dev Anchors balance, justice, and communal dignity.
-
 contract SystemicFairnessLedger {
     address public overseer;
     uint256 public entryCount;
 
     struct FairnessRule {
         uint256 id;
-        string principle;   // Systemic Fairness, Balance, Justice
+        string principle;   // Systemic Fairness, Equity
         string description;
         uint256 timestamp;
     }

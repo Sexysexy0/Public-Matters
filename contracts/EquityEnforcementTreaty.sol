@@ -1,29 +1,53 @@
+// SPDX-License-Identifier: MIT
+// Contract Name: EquityEnforcementTreaty
+// Purpose: Systemic balance protocols to ensure majority benefit
+// Author: Vin (Chief Operator)
+
 pragma solidity ^0.8.20;
 
-/// @title EquityEnforcementTreaty
-/// @notice Covenant for equity enforcement safeguards.
-/// @dev Anchors justice, fairness, and systemic dignity.
-
 contract EquityEnforcementTreaty {
-    address public overseer;
-    uint256 public treatyCount;
+    address public chiefOperator;
+    uint256 public equityActions;
 
-    struct EnforcementRule {
-        uint256 id;
-        string principle;   // Equity Enforcement, Justice, Fairness
-        string description;
+    struct EquityRule {
+        string principle;
         uint256 timestamp;
+        bool enforced;
     }
 
-    mapping(uint256 => EnforcementRule) public treaties;
-    event EnforcementRuleDeclared(uint256 indexed id, string principle, string description);
+    EquityRule[] public rules;
 
-    constructor(address _overseer) { overseer = _overseer; }
-    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
+    event EquityRuleAdded(string principle, uint256 timestamp);
+    event EquityRuleEnforced(string principle, uint256 timestamp);
 
-    function declareEnforcementRule(string calldata principle, string calldata description) external onlyOverseer {
-        treatyCount++;
-        treaties[treatyCount] = EnforcementRule(treatyCount, principle, description, block.timestamp);
-        emit EnforcementRuleDeclared(treatyCount, principle, description);
+    constructor() {
+        chiefOperator = msg.sender;
+        equityActions = 0;
+    }
+
+    modifier onlyChief() {
+        require(msg.sender == chiefOperator, "Access restricted to Chief Operator");
+        _;
+    }
+
+    // Add new equity principle
+    function addRule(string memory principle) public onlyChief {
+        rules.push(EquityRule(principle, block.timestamp, false));
+        emit EquityRuleAdded(principle, block.timestamp);
+    }
+
+    // Enforce equity principle
+    function enforceRule(uint256 index) public onlyChief {
+        require(index < rules.length, "Invalid rule index");
+        rules[index].enforced = true;
+        equityActions++;
+        emit EquityRuleEnforced(rules[index].principle, block.timestamp);
+    }
+
+    // View rule details
+    function getRule(uint256 index) public view returns (string memory, uint256, bool) {
+        require(index < rules.length, "Invalid rule index");
+        EquityRule memory r = rules[index];
+        return (r.principle, r.timestamp, r.enforced);
     }
 }

@@ -1,0 +1,25 @@
+pragma solidity ^0.8.20;
+
+contract TravelScroll {
+    address public overseer;
+    uint256 public scrollCount;
+
+    struct TravelRule {
+        uint256 id;
+        string principle;   // Movement, Purposeful Journey, Exploration
+        string description;
+        uint256 timestamp;
+    }
+
+    mapping(uint256 => TravelRule) public rules;
+    event TravelRuleDeclared(uint256 indexed id, string principle, string description);
+
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
+
+    function declareTravelRule(string calldata principle, string calldata description) external onlyOverseer {
+        scrollCount++;
+        rules[scrollCount] = TravelRule(scrollCount, principle, description, block.timestamp);
+        emit TravelRuleDeclared(scrollCount, principle, description);
+    }
+}

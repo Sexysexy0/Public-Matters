@@ -1,48 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title ExplorationCodex
-/// @notice Covenant contract to safeguard immersive gameplay through systemic anchoring of open-world exploration and discovery
 contract ExplorationCodex {
     address public overseer;
-    uint256 public explorationCount;
+    uint256 public codexCount;
 
     struct ExplorationRule {
         uint256 id;
-        string principle; // Freedom, Discovery, Environmental Storytelling, Player Agency
-        string description; // encoded exploration safeguard
+        string principle;   // Curiosity, Discovery, Expansion
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => ExplorationRule) public explorations;
+    mapping(uint256 => ExplorationRule) public rules;
+    event ExplorationRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event ExplorationLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logExploration(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        explorationCount++;
-        explorations[explorationCount] = ExplorationRule({
-            id: explorationCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit ExplorationLogged(explorationCount, principle, description);
-    }
-
-    function viewExploration(uint256 id) external view returns (ExplorationRule memory) {
-        return explorations[id];
+    function declareExplorationRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = ExplorationRule(codexCount, principle, description, block.timestamp);
+        emit ExplorationRuleDeclared(codexCount, principle, description);
     }
 }
