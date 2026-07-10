@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalNonPartisanshipCovenant
-// Purpose: Establish strict non-partisan safeguards, prohibiting political coercion
-//          and ensuring neutrality in governance systems.
+// Purpose: Establish strict non-partisanship safeguards to prevent political bias in governance
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,9 +10,9 @@ contract GlobalNonPartisanshipCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Non-Partisanship, Neutrality, Governance
-        string rule;          // Non-partisan clause
-        string safeguard;     // Impartiality, neutrality, anti-coercion
+        string domain;        // Non-Partisanship, Governance, Impartiality
+        string rule;          // Non-partisanship clause
+        string safeguard;     // Neutrality, fairness, mission focus
         uint256 timestamp;
     }
 
