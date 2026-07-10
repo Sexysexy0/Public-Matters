@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalEquityAndFairnessCovenant
-// Purpose: Ensure equity, fairness, and non-discrimination across enforcement,
-//          surveillance, digital systems, and institutional governance.
+// Purpose: Establish systemic equity, fairness, and equal treatment safeguards
+//          across governance systems.
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,9 +11,9 @@ contract GlobalEquityAndFairnessCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Enforcement, Surveillance, Digital, Corporate, LGU, Substrate
+        string domain;        // Equity, Fairness, Equal Treatment, Governance
         string rule;          // Equity & fairness clause
-        string safeguard;     // Anti-discrimination, proportionality, transparency
+        string safeguard;     // Equal opportunity, non-discrimination, transparency
         uint256 timestamp;
     }
 
