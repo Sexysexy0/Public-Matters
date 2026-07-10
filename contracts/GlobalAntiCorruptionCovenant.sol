@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalAntiCorruptionCovenant
-// Purpose: Establish absolute prohibition of corruption, bribery, favoritism,
-//          and abuse of authority across governance systems.
+// Purpose: Establish strict anti-corruption safeguards, prohibiting abuse of authority
+//          and ensuring clean governance systems.
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,9 +11,9 @@ contract GlobalAntiCorruptionCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Corruption, Bribery, Favoritism, Abuse of Authority
+        string domain;        // Anti-Corruption, Governance, Integrity
         string rule;          // Anti-corruption clause
-        string safeguard;     // Transparency, accountability, sanctions
+        string safeguard;     // Transparency, accountability, clean systems
         uint256 timestamp;
     }
 
