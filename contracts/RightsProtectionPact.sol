@@ -1,33 +1,46 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
+// Contract Name: RightsProtectionPact
+// Purpose: Guarantee protection of fundamental rights
+// Author: Vin (Chief Operator)
+
 pragma solidity ^0.8.20;
 
 contract RightsProtectionPact {
-    address public overseer;
+    address public chiefOperator;
     uint256 public pactCount;
 
-    struct Pact {
-        uint256 id;
-        string right;   // Freedom, Equality, Security
-        string description;
+    struct RightProtection {
+        string domain;          // e.g., Workplace, Community, Digital
+        string protectionRule;  // e.g., Equal safeguard, Non-violation, Enforcement clause
+        string safeguard;       // e.g., Transparency log, Audit, Public record
         uint256 timestamp;
     }
 
-    mapping(uint256 => Pact) public pacts;
-    event PactSigned(uint256 indexed id, string right, string description);
+    RightProtection[] public protections;
 
-    constructor(address _overseer) {
-        overseer = _overseer;
+    event ProtectionAdded(string domain, string protectionRule, string safeguard, uint256 timestamp);
+
+    constructor() {
+        chiefOperator = msg.sender;
+        pactCount = 0;
     }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
+    modifier onlyChief() {
+        require(msg.sender == chiefOperator, "Access restricted to Chief Operator");
         _;
     }
 
-    function signPact(string calldata right, string calldata description) external onlyOverseer {
+    // Add new rights protection pact
+    function addProtection(string memory domain, string memory protectionRule, string memory safeguard) public onlyChief {
+        protections.push(RightProtection(domain, protectionRule, safeguard, block.timestamp));
         pactCount++;
-        pacts[pactCount] = Pact(pactCount, right, description, block.timestamp);
-        emit PactSigned(pactCount, right, description);
+        emit ProtectionAdded(domain, protectionRule, safeguard, block.timestamp);
+    }
+
+    // View rights protection details
+    function getProtection(uint256 index) public view returns (string memory, string memory, string memory, uint256) {
+        require(index < protections.length, "Invalid protection index");
+        RightProtection memory rp = protections[index];
+        return (rp.domain, rp.protectionRule, rp.safeguard, rp.timestamp);
     }
 }

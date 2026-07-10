@@ -1,16 +1,12 @@
 pragma solidity ^0.8.20;
 
-/// @title SystemicContinuityScroll
-/// @notice Covenant for systemic continuity safeguards.
-/// @dev Anchors fairness, equity, and governance in legacy systems.
-
 contract SystemicContinuityScroll {
     address public overseer;
     uint256 public scrollCount;
 
     struct ContinuityRule {
         uint256 id;
-        string principle;   // Systemic Continuity, Fairness, Equity
+        string principle;   // Systemic Continuity, Governance Stability
         string description;
         uint256 timestamp;
     }

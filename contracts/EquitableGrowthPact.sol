@@ -1,33 +1,45 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
+// Contract Name: EquitableGrowthPact
+// Purpose: Ensure economic growth is fair and inclusive
+// Author: Vin (Chief Operator)
+
 pragma solidity ^0.8.20;
 
 contract EquitableGrowthPact {
-    address public overseer;
+    address public chiefOperator;
     uint256 public pactCount;
 
     struct Pact {
-        uint256 id;
-        string sector;   // Economy, Industry, Agriculture
-        string description;
+        string principle;
+        string growthMechanism;
         uint256 timestamp;
     }
 
-    mapping(uint256 => Pact) public pacts;
-    event PactSigned(uint256 indexed id, string sector, string description);
+    Pact[] public pacts;
 
-    constructor(address _overseer) {
-        overseer = _overseer;
+    event PactAdded(string principle, string growthMechanism, uint256 timestamp);
+
+    constructor() {
+        chiefOperator = msg.sender;
+        pactCount = 0;
     }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
+    modifier onlyChief() {
+        require(msg.sender == chiefOperator, "Access restricted to Chief Operator");
         _;
     }
 
-    function signPact(string calldata sector, string calldata description) external onlyOverseer {
+    // Add new equitable growth pact clause
+    function addPact(string memory principle, string memory growthMechanism) public onlyChief {
+        pacts.push(Pact(principle, growthMechanism, block.timestamp));
         pactCount++;
-        pacts[pactCount] = Pact(pactCount, sector, description, block.timestamp);
-        emit PactSigned(pactCount, sector, description);
+        emit PactAdded(principle, growthMechanism, block.timestamp);
+    }
+
+    // View pact details
+    function getPact(uint256 index) public view returns (string memory, string memory, uint256) {
+        require(index < pacts.length, "Invalid pact index");
+        Pact memory p = pacts[index];
+        return (p.principle, p.growthMechanism, p.timestamp);
     }
 }

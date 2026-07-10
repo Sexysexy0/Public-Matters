@@ -27,7 +27,7 @@ contract MockTarget {
 contract RoleAuthorityRegistryTest is Test {
     RoleAuthorityRegistry public registry;
     MockTarget public target;
-    
+
     // System identity parameters setup
     address public admin = address(0xAD);
     address public overseer = address(0x01);
@@ -38,10 +38,10 @@ contract RoleAuthorityRegistryTest is Test {
     function setUp() public {
         // Inisyal na pagluwal sa permission register ledger node
         registry = new RoleAuthorityRegistry(admin);
-        
+
         // I-set up ang custom mock protected system node gateway matrix
         target = new MockTarget(address(registry), registry.OVERSEER_ROLE());
-        
+
         // Pormal na pag-grant ng authorizations sa internal role registry
         vm.startPrank(admin);
         registry.grantRole(registry.OVERSEER_ROLE(), overseer);
@@ -65,19 +65,15 @@ contract RoleAuthorityRegistryTest is Test {
      */
     function test_Revert_UnauthorizedBypassAttempt() public {
         bytes32 requiredRole = registry.OVERSEER_ROLE();
-        
+
         // I-simulate ang pumasok na cross-contract message node gamit ang rogue profile context
         vm.prank(unauthorizedUser);
-        
+
         // Inaasahan natin na ang mismong panlabas na static call ay bumaril ng complete selector verification error
         vm.expectRevert(
-            abi.encodeWithSelector(
-                RoleAuthorityRegistry.UnauthorizedAccess.selector, 
-                unauthorizedUser, 
-                requiredRole
-            )
+            abi.encodeWithSelector(RoleAuthorityRegistry.UnauthorizedAccess.selector, unauthorizedUser, requiredRole)
         );
-        
+
         // Hakbang 3: I-execute ang pormal na external instruction loop check transaction call
         target.executeSecureAction();
     }

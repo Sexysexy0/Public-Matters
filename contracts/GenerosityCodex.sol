@@ -1,48 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title GenerosityCodex
-/// @notice Covenant contract to safeguard systemic giving, principled generosity, and dignified sharing
 contract GenerosityCodex {
     address public overseer;
-    uint256 public generosityCount;
+    uint256 public codexCount;
 
     struct GenerosityRule {
         uint256 id;
-        string principle; // Giving, Sharing, Abundance, Selflessness
-        string description; // encoded generosity safeguard
+        string principle;   // Generosity, Sharing, Uplift
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => GenerosityRule) public generosities;
+    mapping(uint256 => GenerosityRule) public rules;
+    event GenerosityRuleDeclared(uint256 indexed id, string principle, string description);
 
-    event GenerosityLogged(uint256 indexed id, string principle, string description);
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    function logGenerosity(
-        string calldata principle,
-        string calldata description
-    ) external onlyOverseer {
-        generosityCount++;
-        generosities[generosityCount] = GenerosityRule({
-            id: generosityCount,
-            principle: principle,
-            description: description,
-            timestamp: block.timestamp
-        });
-        emit GenerosityLogged(generosityCount, principle, description);
-    }
-
-    function viewGenerosity(uint256 id) external view returns (GenerosityRule memory) {
-        return generosities[id];
+    function declareGenerosityRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = GenerosityRule(codexCount, principle, description, block.timestamp);
+        emit GenerosityRuleDeclared(codexCount, principle, description);
     }
 }

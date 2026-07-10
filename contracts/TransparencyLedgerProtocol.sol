@@ -1,28 +1,45 @@
+// SPDX-License-Identifier: MIT
+// Contract Name: TransparencyLedgerProtocol
+// Purpose: Ensure visibility of fund transfers and indirect shares
+// Author: Vin (Chief Operator)
+
 pragma solidity ^0.8.20;
 
 contract TransparencyLedgerProtocol {
-    address public admin;
+    address public chiefOperator;
+    uint256 public recordCount;
 
     struct Record {
-        string action;        // e.g. vote, fund, deployment
-        string detail;        // description of the action
+        string transactionType;
+        string visibilityRule;
         uint256 timestamp;
     }
 
     Record[] public records;
 
-    event RecordLogged(string action, string detail, uint256 timestamp);
+    event RecordLogged(string transactionType, string visibilityRule, uint256 timestamp);
 
-    constructor() { admin = msg.sender; }
-
-    modifier onlyAdmin() { require(msg.sender == admin, "Not admin"); _; }
-
-    function logRecord(string calldata action, string calldata detail) external onlyAdmin {
-        records.push(Record(action, detail, block.timestamp));
-        emit RecordLogged(action, detail, block.timestamp);
+    constructor() {
+        chiefOperator = msg.sender;
+        recordCount = 0;
     }
 
-    function totalRecords() external view returns (uint256) {
-        return records.length;
+    modifier onlyChief() {
+        require(msg.sender == chiefOperator, "Access restricted to Chief Operator");
+        _;
+    }
+
+    // Log new transparency record
+    function logRecord(string memory transactionType, string memory visibilityRule) public onlyChief {
+        records.push(Record(transactionType, visibilityRule, block.timestamp));
+        recordCount++;
+        emit RecordLogged(transactionType, visibilityRule, block.timestamp);
+    }
+
+    // View record details
+    function getRecord(uint256 index) public view returns (string memory, string memory, uint256) {
+        require(index < records.length, "Invalid record index");
+        Record memory r = records[index];
+        return (r.transactionType, r.visibilityRule, r.timestamp);
     }
 }

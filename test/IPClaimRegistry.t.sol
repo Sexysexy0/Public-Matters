@@ -9,7 +9,7 @@ contract IPClaimRegistryTest is Test {
     address public guardianWallet = address(0x1111);
     address public assetOwner = address(0x2222);
     address public thirdPartyUser = address(0x3333);
-    
+
     // Inayos mula dummyIPHash patungong camelCase mixedCase style requirement
     bytes32 public dummyIpHash = keccak256(abi.encodePacked("MASTER_KEY_CORE_LOGIC"));
 

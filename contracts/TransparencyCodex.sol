@@ -1,33 +1,25 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 contract TransparencyCodex {
     address public overseer;
-    uint256 public reportCount;
+    uint256 public codexCount;
 
-    struct Report {
+    struct TransparencyRule {
         uint256 id;
-        string subject;
-        string content;
+        string principle;   // Transparency, Clarity, Accountability
+        string description;
         uint256 timestamp;
     }
 
-    mapping(uint256 => Report) public reports;
-    event ReportPublished(uint256 indexed id, string subject, string content);
+    mapping(uint256 => TransparencyRule) public rules;
+    event TransparencyRuleDeclared(uint256 indexed id, string principle, string description);
 
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
+    constructor(address _overseer) { overseer = _overseer; }
+    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
-        _;
-    }
-
-    function publishReport(string calldata subject, string calldata content) external onlyOverseer {
-        reportCount++;
-        reports[reportCount] = Report(reportCount, subject, content, block.timestamp);
-        emit ReportPublished(reportCount, subject, content);
+    function declareTransparencyRule(string calldata principle, string calldata description) external onlyOverseer {
+        codexCount++;
+        rules[codexCount] = TransparencyRule(codexCount, principle, description, block.timestamp);
+        emit TransparencyRuleDeclared(codexCount, principle, description);
     }
 }

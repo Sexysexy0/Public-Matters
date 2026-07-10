@@ -6,7 +6,7 @@ pragma solidity ^0.8.20;
 /// @author Scrollchain
 contract VinvinCopi_OneCoreProtocol {
     address public steward;
-    
+
     string public emotionalApr;
     string public mythicSyncStatus;
     bool public planetaryDefenseReady;
