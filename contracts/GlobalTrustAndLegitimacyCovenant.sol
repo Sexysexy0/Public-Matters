@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalTrustAndLegitimacyCovenant
-// Purpose: Establish legitimacy, credibility, and trustworthiness of governance systems,
-//          ensuring public acceptance and institutional compliance.
+// Purpose: Establish systemic trust, legitimacy, and public confidence safeguards
+//          across governance systems.
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,9 +11,9 @@ contract GlobalTrustAndLegitimacyCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Governance, Institutions, Civilian, Digital, Enforcement
+        string domain;        // Trust, Legitimacy, Confidence, Governance
         string rule;          // Trust & legitimacy clause
-        string safeguard;     // Transparency, credibility, public acceptance mechanism
+        string safeguard;     // Public confidence, fairness, transparency
         uint256 timestamp;
     }
 
