@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalWorkforceRetentionAndDevelopmentCovenant
-// Purpose: Establish fair retention, performance correction, and workforce development safeguards.
+// Purpose: Establish long-term retention, career development, and stability safeguards
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,9 +10,9 @@ contract GlobalWorkforceRetentionAndDevelopmentCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Retention, Performance, Development, Civilian, Institutional
-        string rule;          // Workforce retention & development clause
-        string safeguard;     // Fair retention, correction, separation, training
+        string domain;        // Workforce, Retention, Development, Governance
+        string rule;          // Retention & development clause
+        string safeguard;     // Career stability, training, fair opportunity
         uint256 timestamp;
     }
 
