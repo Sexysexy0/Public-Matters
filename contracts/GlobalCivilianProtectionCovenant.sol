@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalCivilianProtectionCovenant
-// Purpose: Protect civilians from abusive enforcement, surveillance, substrate overreach,
-//          corporate retaliation, and LGU weaponization.
+// Purpose: Establish strict safeguards for protecting civilians from harm, abuse,
+//          and systemic imbalance in governance systems.
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,9 +11,9 @@ contract GlobalCivilianProtectionCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Civilian Rights, Enforcement, Surveillance, Data, Community
-        string rule;          // Protection clause
-        string safeguard;     // Anti-abuse mechanism, oversight, transparency
+        string domain;        // Civilian, Protection, Governance, Rights
+        string rule;          // Civilian protection clause
+        string safeguard;     // Safety, fairness, dignity, impartiality
         uint256 timestamp;
     }
 
