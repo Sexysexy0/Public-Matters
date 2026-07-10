@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalPrivacyAndConstitutionalRightsCovenant
-// Purpose: Protect privacy, dignity, and constitutional rights across governance systems.
+// Purpose: Establish systemic privacy safeguards and constitutional rights protections
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,9 +10,9 @@ contract GlobalPrivacyAndConstitutionalRightsCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Privacy, Rights, Civilian, Institutional, Digital
+        string domain;        // Privacy, Rights, Governance, Civil Liberties
         string rule;          // Privacy & constitutional rights clause
-        string safeguard;     // Protection of dignity, fairness, transparency
+        string safeguard;     // Due process, free speech, protection from arbitrary action
         uint256 timestamp;
     }
 
