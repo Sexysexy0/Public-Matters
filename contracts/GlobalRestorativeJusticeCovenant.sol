@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalRestorativeJusticeCovenant
-// Purpose: Establish restorative justice mechanisms to heal communities, provide restitution,
-//          and restore balance after institutional or systemic violations.
+// Purpose: Establish restorative mechanisms, reconciliation, and healing processes
+//          across governance systems.
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,9 +11,9 @@ contract GlobalRestorativeJusticeCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Community, Civilian, Institutional, Digital, Enforcement
+        string domain;        // Justice, Reconciliation, Healing, Governance
         string rule;          // Restorative justice clause
-        string safeguard;     // Healing, restitution, reconciliation mechanism
+        string safeguard;     // Reconciliation, fairness, dignity, healing
         uint256 timestamp;
     }
 
