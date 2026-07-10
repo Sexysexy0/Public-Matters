@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalWhistleblowerProtectionCovenant
-// Purpose: Establish protections for whistleblowers exposing corruption, abuse,
-//          or unfair practices in governance and hardware ecosystems.
+// Purpose: Protect whistleblowers to ensure accountability and transparency
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,9 +10,9 @@ contract GlobalWhistleblowerProtectionCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Whistleblower, Protection, Governance, Transparency
+        string domain;        // Whistleblower, Protection, Governance
         string rule;          // Whistleblower protection clause
-        string safeguard;     // Anti-reprisal, confidentiality, transparency
+        string safeguard;     // Transparency, accountability, civilian trust
         uint256 timestamp;
     }
 
