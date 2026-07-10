@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalMeritAndIncentiveCovenant
-// Purpose: Ensure merit-based advancement, fair incentives, and anti-favoritism
-//          safeguards across governance systems.
+// Purpose: Establish merit-based rewards, fair incentives, and performance recognition systems.
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,9 +10,9 @@ contract GlobalMeritAndIncentiveCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Incentives, Merit, Performance, Recruitment, Retention
+        string domain;        // Merit, Incentive, Rewards, Governance
         string rule;          // Merit & incentive clause
-        string safeguard;     // Anti-favoritism, fair appraisal, transparent rewards
+        string safeguard;     // Fair rewards, performance recognition, anti-favoritism
         uint256 timestamp;
     }
 
