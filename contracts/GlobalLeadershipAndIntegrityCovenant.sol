@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalLeadershipAndIntegrityCovenant
-// Purpose: Establish high standards of integrity, conduct, and leadership accountability
-//          across governance systems.
+// Purpose: Establish leadership standards, integrity safeguards, and ethical governance principles.
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,9 +10,9 @@ contract GlobalLeadershipAndIntegrityCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Leadership, Integrity, Conduct, Accountability
+        string domain;        // Leadership, Integrity, Ethics, Governance
         string rule;          // Leadership & integrity clause
-        string safeguard;     // Ethical standards, anti-corruption, public interest
+        string safeguard;     // Ethical standards, fairness, dignity
         uint256 timestamp;
     }
 
