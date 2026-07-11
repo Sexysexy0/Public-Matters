@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSJusticeLayeredCovenant
-// Purpose: Encodes justice systems, fairness safeguards, and systemic justice anchors
+// Purpose: Encodes justice systems, fairness-in-law safeguards, and systemic justice anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,8 +10,8 @@ contract GovernanceOSJusticeLayeredCovenant {
     uint256 public covenantCount;
 
     struct JusticeLayered {
-        string domain;        // Governance, Courts, Business, Technology, Education, Environment
-        string safeguard;     // Fairness safeguard clause
+        string domain;        // Governance, Justice, Business, Technology, Education, Environment
+        string safeguard;     // Fairness-in-law safeguard clause
         string anchor;        // Justice anchor or protocol
         string trigger;       // Condition that activates justice check
         uint256 timestamp;
