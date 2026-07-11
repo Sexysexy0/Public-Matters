@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSRenewalCovenant
-// Purpose: Encodes rebirth cycles, regeneration safeguards, and systemic continuity
+// Purpose: Encodes rebirth systems, regeneration safeguards, and systemic continuity anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,14 +11,14 @@ contract GovernanceOSRenewalCovenant {
 
     struct Renewal {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string cycle;         // Renewal cycle or regeneration mechanism
-        string safeguard;     // Continuity safeguard, rebirth protocol, systemic renewal
+        string rebirth;       // Rebirth system or regeneration safeguard
+        string continuity;    // Continuity anchor or renewal protocol
         uint256 timestamp;
     }
 
     Renewal[] public renewals;
 
-    event RenewalApplied(string domain, string cycle, string safeguard, uint256 timestamp);
+    event RenewalApplied(string domain, string rebirth, string continuity, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,10 +30,10 @@ contract GovernanceOSRenewalCovenant {
         _;
     }
 
-    function applyRenewal(string memory domain, string memory cycle, string memory safeguard) public onlyChief {
-        renewals.push(Renewal(domain, cycle, safeguard, block.timestamp));
+    function applyRenewal(string memory domain, string memory rebirth, string memory continuity) public onlyChief {
+        renewals.push(Renewal(domain, rebirth, continuity, block.timestamp));
         covenantCount++;
-        emit RenewalApplied(domain, cycle, safeguard, block.timestamp);
+        emit RenewalApplied(domain, rebirth, continuity, block.timestamp);
     }
 
     function getRenewal(uint256 index) public view returns (
@@ -41,6 +41,6 @@ contract GovernanceOSRenewalCovenant {
     ) {
         require(index < renewals.length, "Invalid renewal index");
         Renewal memory r = renewals[index];
-        return (r.domain, r.cycle, r.safeguard, r.timestamp);
+        return (r.domain, r.rebirth, r.continuity, r.timestamp);
     }
 }
