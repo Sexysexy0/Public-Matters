@@ -1,22 +1,18 @@
 // SPDX-License-Identifier: MIT
-// Contract Name: GlobalPeaceAndSecurityCovenant
-// Purpose: Safeguards peace, security, and systemic stability
-=======
-// Purpose: Safeguards non-escalation, systemic balance, and cooperative security
+// Contract Name: GlobalHealthAndWellBeingCovenant
+// Purpose: Safeguards health, well-being, and systemic resilience
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
-contract GlobalPeaceAndSecurityCovenant {
+contract GlobalHealthAndWellBeingCovenant {
     address public chiefOperator;
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Peace, Security, Governance
+        string domain;        // Health, Well-Being, Governance
         string rule;          // Safeguard clause
-        string safeguard;     // Stability, dignity, resilience
-        string rule;          // Security safeguard clause
-        string safeguard;     // Non-escalation, balance, cooperation
+        string safeguard;     // Care, dignity, resilience
         uint256 timestamp;
     }
 

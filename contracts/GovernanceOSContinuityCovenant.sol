@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSContinuityCovenant
 // Purpose: Encodes persistence systems, long-term safeguards, and systemic permanence anchors
+// Purpose: Encodes long-term stability, succession safeguards, and systemic permanence
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -13,13 +14,15 @@ contract GovernanceOSContinuityCovenant {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
         string persistence;   // Persistence system or long-term safeguard
         string permanence;    // Permanence anchor or continuity protocol
+        string safeguard;     // Stability safeguard or succession mechanism
+        string permanence;    // Permanence protocol or continuity pathway
         uint256 timestamp;
     }
 
     Continuity[] public continuities;
 
     event ContinuityApplied(string domain, string persistence, string permanence, uint256 timestamp);
-
+    event ContinuityApplied(string domain, string safeguard, string permanence, uint256 timestamp);
     constructor() {
         chiefOperator = msg.sender;
         covenantCount = 0;
@@ -34,6 +37,10 @@ contract GovernanceOSContinuityCovenant {
         continuities.push(Continuity(domain, persistence, permanence, block.timestamp));
         covenantCount++;
         emit ContinuityApplied(domain, persistence, permanence, block.timestamp);
+    function applyContinuity(string memory domain, string memory safeguard, string memory permanence) public onlyChief {
+        continuities.push(Continuity(domain, safeguard, permanence, block.timestamp));
+        covenantCount++;
+        emit ContinuityApplied(domain, safeguard, permanence, block.timestamp);
     }
 
     function getContinuity(uint256 index) public view returns (
@@ -42,5 +49,6 @@ contract GovernanceOSContinuityCovenant {
         require(index < continuities.length, "Invalid continuity index");
         Continuity memory c = continuities[index];
         return (c.domain, c.persistence, c.permanence, c.timestamp);
+        return (c.domain, c.safeguard, c.permanence, c.timestamp);
     }
 }
