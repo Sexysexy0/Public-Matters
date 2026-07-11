@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSMemoryCovenant
-// Purpose: Encodes collective memory, archival safeguards, and systemic knowledge preservation
+// Purpose: Encodes remembrance systems, archival safeguards, and systemic knowledge anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,14 +11,14 @@ contract GovernanceOSMemoryCovenant {
 
     struct Memory {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string archive;       // Archival safeguard or collective memory mechanism
-        string preservation;  // Knowledge preservation or systemic memory anchor
+        string remembrance;   // Remembrance system or archival safeguard
+        string knowledge;     // Knowledge anchor or memory protocol
         uint256 timestamp;
     }
 
     Memory[] public memories;
 
-    event MemoryApplied(string domain, string archive, string preservation, uint256 timestamp);
+    event MemoryApplied(string domain, string remembrance, string knowledge, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,10 +30,10 @@ contract GovernanceOSMemoryCovenant {
         _;
     }
 
-    function applyMemory(string memory domain, string memory archive, string memory preservation) public onlyChief {
-        memories.push(Memory(domain, archive, preservation, block.timestamp));
+    function applyMemory(string memory domain, string memory remembrance, string memory knowledge) public onlyChief {
+        memories.push(Memory(domain, remembrance, knowledge, block.timestamp));
         covenantCount++;
-        emit MemoryApplied(domain, archive, preservation, block.timestamp);
+        emit MemoryApplied(domain, remembrance, knowledge, block.timestamp);
     }
 
     function getMemory(uint256 index) public view returns (
@@ -41,6 +41,6 @@ contract GovernanceOSMemoryCovenant {
     ) {
         require(index < memories.length, "Invalid memory index");
         Memory memory m = memories[index];
-        return (m.domain, m.archive, m.preservation, m.timestamp);
+        return (m.domain, m.remembrance, m.knowledge, m.timestamp);
     }
 }
