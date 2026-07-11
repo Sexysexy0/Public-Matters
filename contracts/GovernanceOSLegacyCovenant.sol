@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSLegacyCovenant
-// Purpose: Encodes heritage transmission, generational safeguards, and systemic memory anchors
+// Purpose: Encodes heritage systems, succession safeguards, and systemic inheritance anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,14 +11,14 @@ contract GovernanceOSLegacyCovenant {
 
     struct Legacy {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string transmission;  // Heritage transmission or generational safeguard
-        string anchor;        // Memory anchor or legacy mechanism
+        string heritage;      // Heritage system or succession safeguard
+        string inheritance;   // Inheritance anchor or legacy protocol
         uint256 timestamp;
     }
 
     Legacy[] public legacies;
 
-    event LegacyApplied(string domain, string transmission, string anchor, uint256 timestamp);
+    event LegacyApplied(string domain, string heritage, string inheritance, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,10 +30,10 @@ contract GovernanceOSLegacyCovenant {
         _;
     }
 
-    function applyLegacy(string memory domain, string memory transmission, string memory anchor) public onlyChief {
-        legacies.push(Legacy(domain, transmission, anchor, block.timestamp));
+    function applyLegacy(string memory domain, string memory heritage, string memory inheritance) public onlyChief {
+        legacies.push(Legacy(domain, heritage, inheritance, block.timestamp));
         covenantCount++;
-        emit LegacyApplied(domain, transmission, anchor, block.timestamp);
+        emit LegacyApplied(domain, heritage, inheritance, block.timestamp);
     }
 
     function getLegacy(uint256 index) public view returns (
@@ -41,6 +41,6 @@ contract GovernanceOSLegacyCovenant {
     ) {
         require(index < legacies.length, "Invalid legacy index");
         Legacy memory l = legacies[index];
-        return (l.domain, l.transmission, l.anchor, l.timestamp);
+        return (l.domain, l.heritage, l.inheritance, l.timestamp);
     }
 }
