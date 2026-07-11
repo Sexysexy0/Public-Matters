@@ -11,14 +11,14 @@ contract GovernanceOSKnowledgeCovenant {
 
     struct Knowledge {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string wisdom;        // Wisdom system or applied knowledge
-        string safeguard;     // Learning safeguard or intelligence anchor
+        string wisdom;        // Wisdom system or learning safeguard
+        string intelligence;  // Intelligence anchor or knowledge protocol
         uint256 timestamp;
     }
 
     Knowledge[] public knowledges;
 
-    event KnowledgeApplied(string domain, string wisdom, string safeguard, uint256 timestamp);
+    event KnowledgeApplied(string domain, string wisdom, string intelligence, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,10 +30,10 @@ contract GovernanceOSKnowledgeCovenant {
         _;
     }
 
-    function applyKnowledge(string memory domain, string memory wisdom, string memory safeguard) public onlyChief {
-        knowledges.push(Knowledge(domain, wisdom, safeguard, block.timestamp));
+    function applyKnowledge(string memory domain, string memory wisdom, string memory intelligence) public onlyChief {
+        knowledges.push(Knowledge(domain, wisdom, intelligence, block.timestamp));
         covenantCount++;
-        emit KnowledgeApplied(domain, wisdom, safeguard, block.timestamp);
+        emit KnowledgeApplied(domain, wisdom, intelligence, block.timestamp);
     }
 
     function getKnowledge(uint256 index) public view returns (
@@ -41,6 +41,6 @@ contract GovernanceOSKnowledgeCovenant {
     ) {
         require(index < knowledges.length, "Invalid knowledge index");
         Knowledge memory k = knowledges[index];
-        return (k.domain, k.wisdom, k.safeguard, k.timestamp);
+        return (k.domain, k.wisdom, k.intelligence, k.timestamp);
     }
 }
