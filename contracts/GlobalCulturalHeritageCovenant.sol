@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalCulturalHeritageCovenant
-// Purpose: Protect cultural heritage, traditions, and identity
+// Purpose: Safeguards cultural identity, traditions, and heritage
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,9 +10,9 @@ contract GlobalCulturalHeritageCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Cultural Heritage, Governance
-        string rule;          // Cultural heritage safeguard clause
-        string safeguard;     // Identity, authenticity, dignity
+        string domain;        // Culture, Heritage, Governance
+        string rule;          // Cultural safeguard clause
+        string safeguard;     // Identity, tradition, dignity
         uint256 timestamp;
     }
 
