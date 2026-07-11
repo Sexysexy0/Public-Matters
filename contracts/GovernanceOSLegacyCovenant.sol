@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSLegacyCovenant
-// Purpose: Preserves governance history, milestones, and institutional memory
+// Purpose: Encodes heritage transmission, generational safeguards, and systemic memory anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,14 +11,14 @@ contract GovernanceOSLegacyCovenant {
 
     struct Legacy {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string record;        // Milestone, decision, or historical safeguard
-        string safeguard;     // Preservation, continuity, learning
+        string transmission;  // Heritage transmission or generational safeguard
+        string anchor;        // Memory anchor or legacy mechanism
         uint256 timestamp;
     }
 
     Legacy[] public legacies;
 
-    event LegacyAdded(string domain, string record, string safeguard, uint256 timestamp);
+    event LegacyApplied(string domain, string transmission, string anchor, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,10 +30,10 @@ contract GovernanceOSLegacyCovenant {
         _;
     }
 
-    function addLegacy(string memory domain, string memory record, string memory safeguard) public onlyChief {
-        legacies.push(Legacy(domain, record, safeguard, block.timestamp));
+    function applyLegacy(string memory domain, string memory transmission, string memory anchor) public onlyChief {
+        legacies.push(Legacy(domain, transmission, anchor, block.timestamp));
         covenantCount++;
-        emit LegacyAdded(domain, record, safeguard, block.timestamp);
+        emit LegacyApplied(domain, transmission, anchor, block.timestamp);
     }
 
     function getLegacy(uint256 index) public view returns (
@@ -41,6 +41,6 @@ contract GovernanceOSLegacyCovenant {
     ) {
         require(index < legacies.length, "Invalid legacy index");
         Legacy memory l = legacies[index];
-        return (l.domain, l.record, l.safeguard, l.timestamp);
+        return (l.domain, l.transmission, l.anchor, l.timestamp);
     }
 }
