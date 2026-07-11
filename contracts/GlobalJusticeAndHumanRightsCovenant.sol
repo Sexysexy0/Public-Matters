@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalJusticeAndHumanRightsCovenant
-// Purpose: Safeguards dignity, equality, and protection of fundamental rights
+// Purpose: Safeguards fairness, dignity, and universal human rights
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,9 +10,9 @@ contract GlobalJusticeAndHumanRightsCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Justice, Rights, Governance
-        string rule;          // Human rights safeguard clause
-        string safeguard;     // Dignity, equality, protection
+        string domain;        // Justice, Human Rights, Governance
+        string rule;          // Justice safeguard clause
+        string safeguard;     // Fairness, dignity, rights
         uint256 timestamp;
     }
 
