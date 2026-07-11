@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalPeaceAndSecurityCovenant
 // Purpose: Safeguards peace, security, and systemic stability
+=======
+// Purpose: Safeguards non-escalation, systemic balance, and cooperative security
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -13,6 +15,8 @@ contract GlobalPeaceAndSecurityCovenant {
         string domain;        // Peace, Security, Governance
         string rule;          // Safeguard clause
         string safeguard;     // Stability, dignity, resilience
+        string rule;          // Security safeguard clause
+        string safeguard;     // Non-escalation, balance, cooperation
         uint256 timestamp;
     }
 

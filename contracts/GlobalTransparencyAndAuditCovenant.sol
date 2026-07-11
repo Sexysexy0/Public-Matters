@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalTransparencyAndAuditCovenant
-// Purpose: Require institutions to maintain audit logs, transparency reports,
-//          oversight mechanisms, and public accountability.
+// Purpose: Safeguards transparency, auditing, and verification in governance
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,9 +10,9 @@ contract GlobalTransparencyAndAuditCovenant {
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Enforcement, Surveillance, LGU, Corporate, Digital, Substrate
-        string rule;          // Transparency clause
-        string safeguard;     // Audit loop, public reporting, anti-manipulation
+        string domain;        // Transparency, Audit, Governance
+        string rule;          // Transparency safeguard clause
+        string safeguard;     // Verification, accountability, integrity
         uint256 timestamp;
     }
 

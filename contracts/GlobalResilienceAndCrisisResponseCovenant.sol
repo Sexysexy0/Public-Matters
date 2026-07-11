@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: MIT
-// Contract Name: GlobalDueProcessCovenant
-// Purpose: Establish fair procedures, lawful actions, and protections against
-//          arbitrary removals or sanctions across governance systems.
+// Contract Name: GlobalResilienceAndCrisisResponseCovenant
+// Purpose: Establish resilience and crisis response mechanisms to ensure governance
+//          systems can withstand shocks, recover quickly, and protect civilians.
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
-contract GlobalDueProcessCovenant {
+contract GlobalResilienceAndCrisisResponseCovenant {
     address public chiefOperator;
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Due Process, Fairness, Lawful Action, Governance
-        string rule;          // Due process clause
-        string safeguard;     // Fair procedures, lawful protections, anti-arbitrary safeguards
+        string domain;        // Crisis, Civilian, Institutional, Digital, Global
+        string rule;          // Resilience & crisis response clause
+        string safeguard;     // Rapid response, recovery, continuity mechanism
         uint256 timestamp;
     }
 

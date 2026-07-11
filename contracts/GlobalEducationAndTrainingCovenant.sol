@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: MIT
-// Contract Name: GlobalDueProcessCovenant
-// Purpose: Establish fair procedures, lawful actions, and protections against
-//          arbitrary removals or sanctions across governance systems.
+// Contract Name: GlobalEducationAndTrainingCovenant
+// Purpose: Establish continuous learning, executive development, and training safeguards
+//          to improve organizational and individual performance.
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
-contract GlobalDueProcessCovenant {
+contract GlobalEducationAndTrainingCovenant {
     address public chiefOperator;
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Due Process, Fairness, Lawful Action, Governance
-        string rule;          // Due process clause
-        string safeguard;     // Fair procedures, lawful protections, anti-arbitrary safeguards
+        string domain;        // Education, Training, Development, Governance, Civilian
+        string rule;          // Education & training clause
+        string safeguard;     // Continuous learning, skill development, fairness
         uint256 timestamp;
     }
 

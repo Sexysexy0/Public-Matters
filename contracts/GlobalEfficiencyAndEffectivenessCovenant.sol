@@ -1,19 +1,18 @@
 // SPDX-License-Identifier: MIT
-// Contract Name: GlobalDueProcessCovenant
-// Purpose: Establish fair procedures, lawful actions, and protections against
-//          arbitrary removals or sanctions across governance systems.
+// Contract Name: GlobalEfficiencyAndEffectivenessCovenant
+// Purpose: Ensure balanced efficiency, effective resource use, and systemic non-waste safeguards.
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
-contract GlobalDueProcessCovenant {
+contract GlobalEfficiencyAndEffectivenessCovenant {
     address public chiefOperator;
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Due Process, Fairness, Lawful Action, Governance
-        string rule;          // Due process clause
-        string safeguard;     // Fair procedures, lawful protections, anti-arbitrary safeguards
+        string domain;        // Efficiency, Effectiveness, Resource Use, Governance
+        string rule;          // Efficiency & effectiveness clause
+        string safeguard;     // Balanced use, non-waste, productivity safeguards
         uint256 timestamp;
     }
 
