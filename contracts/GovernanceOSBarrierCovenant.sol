@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSBarrierCovenant
-// Purpose: Encodes boundary systems, containment safeguards, and systemic limit anchors
+// Purpose: Encodes barrier systems, obstruction safeguards, and systemic barrier anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,14 +11,15 @@ contract GovernanceOSBarrierCovenant {
 
     struct Barrier {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string boundary;      // Boundary system or containment safeguard
-        string limit;         // Limit anchor or barrier protocol
+        string obstruction;   // Barrier system or obstruction safeguard
+        string safeguard;     // Obstruction safeguard
+        string anchor;        // Barrier anchor or protocol
         uint256 timestamp;
     }
 
     Barrier[] public barriers;
 
-    event BarrierApplied(string domain, string boundary, string limit, uint256 timestamp);
+    event BarrierApplied(string domain, string obstruction, string safeguard, string anchor, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,17 +31,17 @@ contract GovernanceOSBarrierCovenant {
         _;
     }
 
-    function applyBarrier(string memory domain, string memory boundary, string memory limit) public onlyChief {
-        barriers.push(Barrier(domain, boundary, limit, block.timestamp));
+    function applyBarrier(string memory domain, string memory obstruction, string memory safeguard, string memory anchor) public onlyChief {
+        barriers.push(Barrier(domain, obstruction, safeguard, anchor, block.timestamp));
         covenantCount++;
-        emit BarrierApplied(domain, boundary, limit, block.timestamp);
+        emit BarrierApplied(domain, obstruction, safeguard, anchor, block.timestamp);
     }
 
     function getBarrier(uint256 index) public view returns (
-        string memory, string memory, string memory, uint256
+        string memory, string memory, string memory, string memory, uint256
     ) {
         require(index < barriers.length, "Invalid barrier index");
         Barrier memory b = barriers[index];
-        return (b.domain, b.boundary, b.limit, b.timestamp);
+        return (b.domain, b.obstruction, b.safeguard, b.anchor, b.timestamp);
     }
 }
