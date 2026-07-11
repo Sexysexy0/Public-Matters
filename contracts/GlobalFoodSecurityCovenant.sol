@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalFoodSecurityCovenant
-// Purpose: Safeguards sustainable agriculture, fair distribution, and universal nutrition
+// Purpose: Safeguards sustainable agriculture, fair food distribution, and universal nutrition
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,7 +11,7 @@ contract GlobalFoodSecurityCovenant {
 
     struct Covenant {
         string domain;        // Food, Agriculture, Governance
-        string rule;          // Food security safeguard clause
+        string rule;          // Food safeguard clause
         string safeguard;     // Sustainability, fairness, nutrition
         uint256 timestamp;
     }
