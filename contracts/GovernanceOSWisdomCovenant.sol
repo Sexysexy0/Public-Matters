@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSWisdomCovenant
-// Purpose: Encodes applied wisdom, ethical learning, and systemic enlightenment protocols
+// Purpose: Encodes insight systems, foresight safeguards, and systemic enlightenment anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,14 +11,14 @@ contract GovernanceOSWisdomCovenant {
 
     struct Wisdom {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string application;   // Applied wisdom or ethical learning
-        string safeguard;     // Enlightenment safeguard or systemic wisdom anchor
+        string insight;       // Insight system or foresight safeguard
+        string enlightenment; // Enlightenment anchor or wisdom protocol
         uint256 timestamp;
     }
 
     Wisdom[] public wisdoms;
 
-    event WisdomApplied(string domain, string application, string safeguard, uint256 timestamp);
+    event WisdomApplied(string domain, string insight, string enlightenment, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,10 +30,10 @@ contract GovernanceOSWisdomCovenant {
         _;
     }
 
-    function applyWisdom(string memory domain, string memory application, string memory safeguard) public onlyChief {
-        wisdoms.push(Wisdom(domain, application, safeguard, block.timestamp));
+    function applyWisdom(string memory domain, string memory insight, string memory enlightenment) public onlyChief {
+        wisdoms.push(Wisdom(domain, insight, enlightenment, block.timestamp));
         covenantCount++;
-        emit WisdomApplied(domain, application, safeguard, block.timestamp);
+        emit WisdomApplied(domain, insight, enlightenment, block.timestamp);
     }
 
     function getWisdom(uint256 index) public view returns (
@@ -41,6 +41,6 @@ contract GovernanceOSWisdomCovenant {
     ) {
         require(index < wisdoms.length, "Invalid wisdom index");
         Wisdom memory w = wisdoms[index];
-        return (w.domain, w.application, w.safeguard, w.timestamp);
+        return (w.domain, w.insight, w.enlightenment, w.timestamp);
     }
 }
