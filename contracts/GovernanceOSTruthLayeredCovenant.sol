@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSTruthLayeredCovenant
-// Purpose: Encodes truth systems, transparency safeguards, and systemic truth anchors
+// Purpose: Encodes truth systems, honesty safeguards, and systemic truth anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,9 +11,9 @@ contract GovernanceOSTruthLayeredCovenant {
 
     struct TruthLayered {
         string domain;        // Governance, Justice, Business, Technology, Education, Environment
-        string safeguard;     // Transparency safeguard clause
+        string safeguard;     // Honesty safeguard clause
         string anchor;        // Truth anchor or protocol
-        string trigger;       // Condition that activates truth verification
+        string trigger;       // Condition that activates truth check
         uint256 timestamp;
     }
 
