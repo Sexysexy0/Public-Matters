@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSOlympusCovenant
-// Purpose: Encodes summit systems, peak safeguards, and systemic olympus anchors
+// Purpose: Encodes celestial systems, immortal safeguards, and systemic olympus anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,14 +11,14 @@ contract GovernanceOSOlympusCovenant {
 
     struct Olympus {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string summit;        // Summit system or peak safeguard
+        string celestial;     // Celestial system or immortal safeguard
         string anchor;        // Olympus anchor or protocol
         uint256 timestamp;
     }
 
-    Olympus[] public olympi;
+    Olympus[] public olympuses;
 
-    event OlympusApplied(string domain, string summit, string anchor, uint256 timestamp);
+    event OlympusApplied(string domain, string celestial, string anchor, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,17 +30,17 @@ contract GovernanceOSOlympusCovenant {
         _;
     }
 
-    function applyOlympus(string memory domain, string memory summit, string memory anchor) public onlyChief {
-        olympi.push(Olympus(domain, summit, anchor, block.timestamp));
+    function applyOlympus(string memory domain, string memory celestial, string memory anchor) public onlyChief {
+        olympuses.push(Olympus(domain, celestial, anchor, block.timestamp));
         covenantCount++;
-        emit OlympusApplied(domain, summit, anchor, block.timestamp);
+        emit OlympusApplied(domain, celestial, anchor, block.timestamp);
     }
 
     function getOlympus(uint256 index) public view returns (
         string memory, string memory, string memory, uint256
     ) {
-        require(index < olympi.length, "Invalid olympus index");
-        Olympus memory o = olympi[index];
-        return (o.domain, o.summit, o.anchor, o.timestamp);
+        require(index < olympuses.length, "Invalid olympus index");
+        Olympus memory o = olympuses[index];
+        return (o.domain, o.celestial, o.anchor, o.timestamp);
     }
 }
