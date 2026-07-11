@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: MIT
-// Contract Name: GlobalDueProcessCovenant
-// Purpose: Establish fair procedures, lawful actions, and protections against
-//          arbitrary removals or sanctions across governance systems.
+// Contract Name: GlobalUnityAndSolidarityCovenant
+// Purpose: Establish unity, cooperation, and solidarity across communities,
+//          institutions, and digital systems to ensure collective progress.
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
-contract GlobalDueProcessCovenant {
+contract GlobalUnityAndSolidarityCovenant {
     address public chiefOperator;
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Due Process, Fairness, Lawful Action, Governance
-        string rule;          // Due process clause
-        string safeguard;     // Fair procedures, lawful protections, anti-arbitrary safeguards
+        string domain;        // Community, Civilian, Institutional, Digital, Global
+        string rule;          // Unity & solidarity clause
+        string safeguard;     // Cooperation, non-fragmentation, collective progress
         uint256 timestamp;
     }
 

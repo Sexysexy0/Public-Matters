@@ -1,19 +1,18 @@
 // SPDX-License-Identifier: MIT
-// Contract Name: GlobalDueProcessCovenant
-// Purpose: Establish fair procedures, lawful actions, and protections against
-//          arbitrary removals or sanctions across governance systems.
+// Contract Name: GlobalEquityAndFairDistributionCovenant
+// Purpose: Ensure fair distribution of resources and opportunities
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
-contract GlobalDueProcessCovenant {
+contract GlobalEquityAndFairDistributionCovenant {
     address public chiefOperator;
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Due Process, Fairness, Lawful Action, Governance
-        string rule;          // Due process clause
-        string safeguard;     // Fair procedures, lawful protections, anti-arbitrary safeguards
+        string domain;        // Equity, Fair Distribution, Governance
+        string rule;          // Equity safeguard clause
+        string safeguard;     // Fairness, balance, dignity
         uint256 timestamp;
     }
 

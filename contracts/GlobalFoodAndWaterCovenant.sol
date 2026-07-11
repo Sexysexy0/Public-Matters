@@ -1,19 +1,18 @@
 // SPDX-License-Identifier: MIT
-// Contract Name: GlobalDueProcessCovenant
-// Purpose: Establish fair procedures, lawful actions, and protections against
-//          arbitrary removals or sanctions across governance systems.
+// Contract Name: GlobalFoodAndWaterCovenant
+// Purpose: Safeguards food security, clean water access, and sustainable agriculture
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
-contract GlobalDueProcessCovenant {
+contract GlobalFoodAndWaterCovenant {
     address public chiefOperator;
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Due Process, Fairness, Lawful Action, Governance
-        string rule;          // Due process clause
-        string safeguard;     // Fair procedures, lawful protections, anti-arbitrary safeguards
+        string domain;        // Food, Water, Governance
+        string rule;          // Food & water safeguard clause
+        string safeguard;     // Security, access, sustainability
         uint256 timestamp;
     }
 

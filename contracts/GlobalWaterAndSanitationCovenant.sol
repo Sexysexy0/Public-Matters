@@ -1,19 +1,18 @@
 // SPDX-License-Identifier: MIT
-// Contract Name: GlobalDueProcessCovenant
-// Purpose: Establish fair procedures, lawful actions, and protections against
-//          arbitrary removals or sanctions across governance systems.
+// Contract Name: GlobalWaterAndSanitationCovenant
+// Purpose: Safeguards clean water access, sanitation systems, and resilience against scarcity
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
-contract GlobalDueProcessCovenant {
+contract GlobalWaterAndSanitationCovenant {
     address public chiefOperator;
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Due Process, Fairness, Lawful Action, Governance
-        string rule;          // Due process clause
-        string safeguard;     // Fair procedures, lawful protections, anti-arbitrary safeguards
+        string domain;        // Water, Sanitation, Governance
+        string rule;          // Water safeguard clause
+        string safeguard;     // Clean access, resilience, dignity
         uint256 timestamp;
     }
 

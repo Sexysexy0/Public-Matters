@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: MIT
-// Contract Name: GlobalDueProcessCovenant
-// Purpose: Establish fair procedures, lawful actions, and protections against
-//          arbitrary removals or sanctions across governance systems.
+// Contract Name: GlobalOpenSourceHardwareCovenant
+// Purpose: Require open bootloader, source release, and dev-friendly specs
+//          across all consumer hardware (TV boxes, phones, routers, IoT).
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
-contract GlobalDueProcessCovenant {
+contract GlobalOpenSourceHardwareCovenant {
     address public chiefOperator;
     uint256 public covenantCount;
 
     struct Covenant {
-        string domain;        // Due Process, Fairness, Lawful Action, Governance
-        string rule;          // Due process clause
-        string safeguard;     // Fair procedures, lawful protections, anti-arbitrary safeguards
+        string domain;        // Hardware, Source, Bootloader, DevOps
+        string rule;          // Open-source hardware clause
+        string safeguard;     // Unlock freedom, fair specs, transparency
         uint256 timestamp;
     }
 
