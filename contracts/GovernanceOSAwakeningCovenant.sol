@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSAwakeningCovenant
-// Purpose: Encodes collective awakening, transformative safeguards, and systemic consciousness protocols
+// Purpose: Encodes awareness systems, consciousness safeguards, and systemic awakening anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,14 +11,14 @@ contract GovernanceOSAwakeningCovenant {
 
     struct Awakening {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string transformation;// Transformative safeguard or awakening mechanism
-        string consciousness; // Systemic consciousness anchor or awakening protocol
+        string awareness;     // Awareness system or consciousness safeguard
+        string awakening;     // Awakening anchor or awareness protocol
         uint256 timestamp;
     }
 
     Awakening[] public awakenings;
 
-    event AwakeningApplied(string domain, string transformation, string consciousness, uint256 timestamp);
+    event AwakeningApplied(string domain, string awareness, string awakening, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,10 +30,10 @@ contract GovernanceOSAwakeningCovenant {
         _;
     }
 
-    function applyAwakening(string memory domain, string memory transformation, string memory consciousness) public onlyChief {
-        awakenings.push(Awakening(domain, transformation, consciousness, block.timestamp));
+    function applyAwakening(string memory domain, string memory awareness, string memory awakening) public onlyChief {
+        awakenings.push(Awakening(domain, awareness, awakening, block.timestamp));
         covenantCount++;
-        emit AwakeningApplied(domain, transformation, consciousness, block.timestamp);
+        emit AwakeningApplied(domain, awareness, awakening, block.timestamp);
     }
 
     function getAwakening(uint256 index) public view returns (
@@ -41,6 +41,6 @@ contract GovernanceOSAwakeningCovenant {
     ) {
         require(index < awakenings.length, "Invalid awakening index");
         Awakening memory a = awakenings[index];
-        return (a.domain, a.transformation, a.consciousness, a.timestamp);
+        return (a.domain, a.awareness, a.awakening, a.timestamp);
     }
 }
