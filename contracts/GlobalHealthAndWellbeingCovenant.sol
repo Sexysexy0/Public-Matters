@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalHealthAndWellbeingCovenant
-// Purpose: Safeguards public health, disease prevention, and wellbeing improvements
+// Purpose: Safeguards universal healthcare, mental wellbeing, and equitable access
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -12,7 +12,7 @@ contract GlobalHealthAndWellbeingCovenant {
     struct Covenant {
         string domain;        // Health, Wellbeing, Governance
         string rule;          // Health safeguard clause
-        string safeguard;     // Prevention, dignity, resilience
+        string safeguard;     // Universal care, dignity, equity
         uint256 timestamp;
     }
 
