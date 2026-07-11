@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalEducationAndKnowledgeCovenant
-// Purpose: Safeguards universal education, knowledge sharing, and capacity building
+// Purpose: Safeguards universal education, fair access to knowledge, and lifelong learning
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -12,7 +12,7 @@ contract GlobalEducationAndKnowledgeCovenant {
     struct Covenant {
         string domain;        // Education, Knowledge, Governance
         string rule;          // Education safeguard clause
-        string safeguard;     // Learning, equity, empowerment
+        string safeguard;     // Access, fairness, lifelong learning
         uint256 timestamp;
     }
 
