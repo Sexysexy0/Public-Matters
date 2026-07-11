@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSAwarenessCovenant
-// Purpose: Encodes perception systems, vigilance safeguards, and systemic clarity anchors
+// Purpose: Encodes perception systems, vigilance safeguards, and systemic awareness anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -12,13 +12,13 @@ contract GovernanceOSAwarenessCovenant {
     struct Awareness {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
         string perception;    // Perception system or vigilance safeguard
-        string clarity;       // Clarity anchor or awareness protocol
+        string vigilance;     // Awareness anchor or protocol
         uint256 timestamp;
     }
 
     Awareness[] public awarenesses;
 
-    event AwarenessApplied(string domain, string perception, string clarity, uint256 timestamp);
+    event AwarenessApplied(string domain, string perception, string vigilance, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,10 +30,10 @@ contract GovernanceOSAwarenessCovenant {
         _;
     }
 
-    function applyAwareness(string memory domain, string memory perception, string memory clarity) public onlyChief {
-        awarenesses.push(Awareness(domain, perception, clarity, block.timestamp));
+    function applyAwareness(string memory domain, string memory perception, string memory vigilance) public onlyChief {
+        awarenesses.push(Awareness(domain, perception, vigilance, block.timestamp));
         covenantCount++;
-        emit AwarenessApplied(domain, perception, clarity, block.timestamp);
+        emit AwarenessApplied(domain, perception, vigilance, block.timestamp);
     }
 
     function getAwareness(uint256 index) public view returns (
@@ -41,6 +41,6 @@ contract GovernanceOSAwarenessCovenant {
     ) {
         require(index < awarenesses.length, "Invalid awareness index");
         Awareness memory a = awarenesses[index];
-        return (a.domain, a.perception, a.clarity, a.timestamp);
+        return (a.domain, a.perception, a.vigilance, a.timestamp);
     }
 }
