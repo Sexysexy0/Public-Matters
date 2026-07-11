@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSInfinityCovenant
-// Purpose: Safeguards perpetual sustainability, infinite continuity, and renewal of governance OS
+// Purpose: Encodes limitless systems, eternal safeguards, and systemic infinity anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,14 +11,14 @@ contract GovernanceOSInfinityCovenant {
 
     struct Infinity {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string renewal;       // Perpetual safeguard or sustainability clause
-        string safeguard;     // Continuity, renewal, sustainability
+        string limitless;     // Limitless system or eternal safeguard
+        string anchor;        // Infinity anchor or protocol
         uint256 timestamp;
     }
 
     Infinity[] public infinities;
 
-    event InfinityAdded(string domain, string renewal, string safeguard, uint256 timestamp);
+    event InfinityApplied(string domain, string limitless, string anchor, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,17 +30,17 @@ contract GovernanceOSInfinityCovenant {
         _;
     }
 
-    function addInfinity(string memory domain, string memory renewal, string memory safeguard) public onlyChief {
-        infinities.push(Infinity(domain, renewal, safeguard, block.timestamp));
+    function applyInfinity(string memory domain, string memory limitless, string memory anchor) public onlyChief {
+        infinities.push(Infinity(domain, limitless, anchor, block.timestamp));
         covenantCount++;
-        emit InfinityAdded(domain, renewal, safeguard, block.timestamp);
+        emit InfinityApplied(domain, limitless, anchor, block.timestamp);
     }
 
     function getInfinity(uint256 index) public view returns (
         string memory, string memory, string memory, uint256
     ) {
         require(index < infinities.length, "Invalid infinity index");
-        Infinity memory i = infinities[index];
-        return (i.domain, i.renewal, i.safeguard, i.timestamp);
+        Infinity memory inf = infinities[index];
+        return (inf.domain, inf.limitless, inf.anchor, inf.timestamp);
     }
 }
