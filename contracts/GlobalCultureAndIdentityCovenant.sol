@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalCultureAndIdentityCovenant
+// Purpose: Safeguards cultural diversity, identity equity, and systemic respect
 // Purpose: Safeguards cultural preservation, identity dignity, and intercultural cooperation
 // Author: Vin (Chief Operator)
 
@@ -11,6 +12,8 @@ contract GlobalCultureAndIdentityCovenant {
 
     struct Covenant {
         string domain;        // Culture, Identity, Governance
+        string rule;          // Safeguard clause
+        string safeguard;     // Diversity, dignity, respect
         string rule;          // Cultural safeguard clause
         string safeguard;     // Preservation, dignity, cooperation
         uint256 timestamp;
