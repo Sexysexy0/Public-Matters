@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalEconomicFairnessCovenant
-// Purpose: Safeguards fair trade, equitable resource distribution, and balanced economies
+// Purpose: Safeguards just trade, equitable wealth distribution, and sustainable economic systems
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -12,7 +12,7 @@ contract GlobalEconomicFairnessCovenant {
     struct Covenant {
         string domain;        // Economy, Fairness, Governance
         string rule;          // Economic safeguard clause
-        string safeguard;     // Equity, balance, sustainability
+        string safeguard;     // Justice, equity, sustainability
         uint256 timestamp;
     }
 
