@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSRecoveryCovenant
-// Purpose: Encodes systemic healing, restoration safeguards, and renewal protocols
+// Purpose: Encodes healing systems, restoration safeguards, and systemic renewal anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,14 +11,14 @@ contract GovernanceOSRecoveryCovenant {
 
     struct Recovery {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string safeguard;     // Healing safeguard or restoration mechanism
-        string renewal;       // Renewal protocol or systemic recovery pathway
+        string healing;       // Healing system or restoration safeguard
+        string renewal;       // Renewal anchor or recovery protocol
         uint256 timestamp;
     }
 
     Recovery[] public recoveries;
 
-    event RecoveryApplied(string domain, string safeguard, string renewal, uint256 timestamp);
+    event RecoveryApplied(string domain, string healing, string renewal, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,10 +30,10 @@ contract GovernanceOSRecoveryCovenant {
         _;
     }
 
-    function applyRecovery(string memory domain, string memory safeguard, string memory renewal) public onlyChief {
-        recoveries.push(Recovery(domain, safeguard, renewal, block.timestamp));
+    function applyRecovery(string memory domain, string memory healing, string memory renewal) public onlyChief {
+        recoveries.push(Recovery(domain, healing, renewal, block.timestamp));
         covenantCount++;
-        emit RecoveryApplied(domain, safeguard, renewal, block.timestamp);
+        emit RecoveryApplied(domain, healing, renewal, block.timestamp);
     }
 
     function getRecovery(uint256 index) public view returns (
@@ -41,6 +41,6 @@ contract GovernanceOSRecoveryCovenant {
     ) {
         require(index < recoveries.length, "Invalid recovery index");
         Recovery memory r = recoveries[index];
-        return (r.domain, r.safeguard, r.renewal, r.timestamp);
+        return (r.domain, r.healing, r.renewal, r.timestamp);
     }
 }
