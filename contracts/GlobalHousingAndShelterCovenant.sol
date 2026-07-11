@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GlobalHousingAndShelterCovenant
-// Purpose: Safeguards fair housing, resilient shelters, and universal access
+// Purpose: Safeguards fair housing, safe shelter, and dignity in living conditions
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -12,7 +12,7 @@ contract GlobalHousingAndShelterCovenant {
     struct Covenant {
         string domain;        // Housing, Shelter, Governance
         string rule;          // Housing safeguard clause
-        string safeguard;     // Fairness, resilience, dignity
+        string safeguard;     // Fairness, safety, dignity
         uint256 timestamp;
     }
 
