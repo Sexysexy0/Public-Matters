@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSShieldCovenant
-// Purpose: Encodes barrier systems, resilience safeguards, and systemic fortification anchors
+// Purpose: Encodes defense systems, protective safeguards, and systemic shield anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,14 +11,15 @@ contract GovernanceOSShieldCovenant {
 
     struct Shield {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string barrier;       // Barrier system or resilience safeguard
-        string fortification; // Fortification anchor or shield protocol
+        string defense;       // Defense system or protective mechanism
+        string safeguard;     // Protective safeguard
+        string anchor;        // Shield anchor or protocol
         uint256 timestamp;
     }
 
     Shield[] public shields;
 
-    event ShieldApplied(string domain, string barrier, string fortification, uint256 timestamp);
+    event ShieldApplied(string domain, string defense, string safeguard, string anchor, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,17 +31,17 @@ contract GovernanceOSShieldCovenant {
         _;
     }
 
-    function applyShield(string memory domain, string memory barrier, string memory fortification) public onlyChief {
-        shields.push(Shield(domain, barrier, fortification, block.timestamp));
+    function applyShield(string memory domain, string memory defense, string memory safeguard, string memory anchor) public onlyChief {
+        shields.push(Shield(domain, defense, safeguard, anchor, block.timestamp));
         covenantCount++;
-        emit ShieldApplied(domain, barrier, fortification, block.timestamp);
+        emit ShieldApplied(domain, defense, safeguard, anchor, block.timestamp);
     }
 
     function getShield(uint256 index) public view returns (
-        string memory, string memory, string memory, uint256
+        string memory, string memory, string memory, string memory, uint256
     ) {
         require(index < shields.length, "Invalid shield index");
         Shield memory s = shields[index];
-        return (s.domain, s.barrier, s.fortification, s.timestamp);
+        return (s.domain, s.defense, s.safeguard, s.anchor, s.timestamp);
     }
 }
