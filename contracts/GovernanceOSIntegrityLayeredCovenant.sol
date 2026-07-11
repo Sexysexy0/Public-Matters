@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSIntegrityLayeredCovenant
-// Purpose: Encodes systemic integrity safeguards and fairness anchors
+// Purpose: Encodes integrity systems, anti-corruption safeguards, and systemic integrity anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,8 +11,8 @@ contract GovernanceOSIntegrityLayeredCovenant {
 
     struct IntegrityLayered {
         string domain;        // Governance, Justice, Business, Technology, Education, Environment
-        string safeguard;     // Integrity safeguard clause
-        string anchor;        // Fairness anchor or protocol
+        string safeguard;     // Anti-corruption safeguard clause
+        string anchor;        // Integrity anchor or protocol
         string trigger;       // Condition that activates integrity check
         uint256 timestamp;
     }
