@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSInfinityCovenant
-// Purpose: Encodes limitless systems, eternal safeguards, and systemic infinity anchors
+// Purpose: Encodes limitless systems, boundless safeguards, and systemic infinity anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,7 +11,7 @@ contract GovernanceOSInfinityCovenant {
 
     struct Infinity {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string limitless;     // Limitless system or eternal safeguard
+        string limitless;     // Limitless system or boundless safeguard
         string anchor;        // Infinity anchor or protocol
         uint256 timestamp;
     }
@@ -40,7 +40,7 @@ contract GovernanceOSInfinityCovenant {
         string memory, string memory, string memory, uint256
     ) {
         require(index < infinities.length, "Invalid infinity index");
-        Infinity memory inf = infinities[index];
-        return (inf.domain, inf.limitless, inf.anchor, inf.timestamp);
+        Infinity memory i = infinities[index];
+        return (i.domain, i.limitless, i.anchor, i.timestamp);
     }
 }
