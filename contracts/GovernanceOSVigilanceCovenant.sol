@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSVigilanceCovenant
-// Purpose: Encodes watchfulness systems, alertness safeguards, and systemic risk-response anchors
+// Purpose: Encodes watch systems, protective safeguards, and systemic vigilance anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,14 +11,14 @@ contract GovernanceOSVigilanceCovenant {
 
     struct Vigilance {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string watchfulness;  // Watchfulness system or alertness safeguard
-        string response;      // Risk-response anchor or vigilance protocol
+        string watch;         // Watch system or protective safeguard
+        string anchor;        // Vigilance anchor or protocol
         uint256 timestamp;
     }
 
     Vigilance[] public vigilances;
 
-    event VigilanceApplied(string domain, string watchfulness, string response, uint256 timestamp);
+    event VigilanceApplied(string domain, string watch, string anchor, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,10 +30,10 @@ contract GovernanceOSVigilanceCovenant {
         _;
     }
 
-    function applyVigilance(string memory domain, string memory watchfulness, string memory response) public onlyChief {
-        vigilances.push(Vigilance(domain, watchfulness, response, block.timestamp));
+    function applyVigilance(string memory domain, string memory watch, string memory anchor) public onlyChief {
+        vigilances.push(Vigilance(domain, watch, anchor, block.timestamp));
         covenantCount++;
-        emit VigilanceApplied(domain, watchfulness, response, block.timestamp);
+        emit VigilanceApplied(domain, watch, anchor, block.timestamp);
     }
 
     function getVigilance(uint256 index) public view returns (
@@ -41,6 +41,6 @@ contract GovernanceOSVigilanceCovenant {
     ) {
         require(index < vigilances.length, "Invalid vigilance index");
         Vigilance memory v = vigilances[index];
-        return (v.domain, v.watchfulness, v.response, v.timestamp);
+        return (v.domain, v.watch, v.anchor, v.timestamp);
     }
 }
