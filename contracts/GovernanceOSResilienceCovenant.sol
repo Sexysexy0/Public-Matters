@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: GovernanceOSResilienceCovenant
-// Purpose: Encodes durability safeguards, adaptive strength, and systemic recovery protocols
+// Purpose: Encodes endurance systems, recovery safeguards, and systemic strength anchors
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -11,14 +11,14 @@ contract GovernanceOSResilienceCovenant {
 
     struct Resilience {
         string domain;        // Justice, Peace, Health, Education, Environment, Technology, Governance
-        string safeguard;     // Durability safeguard or adaptive strength
-        string recovery;      // Recovery protocol or resilience mechanism
+        string endurance;     // Endurance system or recovery safeguard
+        string strength;      // Strength anchor or resilience protocol
         uint256 timestamp;
     }
 
     Resilience[] public resiliences;
 
-    event ResilienceApplied(string domain, string safeguard, string recovery, uint256 timestamp);
+    event ResilienceApplied(string domain, string endurance, string strength, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -30,10 +30,10 @@ contract GovernanceOSResilienceCovenant {
         _;
     }
 
-    function applyResilience(string memory domain, string memory safeguard, string memory recovery) public onlyChief {
-        resiliences.push(Resilience(domain, safeguard, recovery, block.timestamp));
+    function applyResilience(string memory domain, string memory endurance, string memory strength) public onlyChief {
+        resiliences.push(Resilience(domain, endurance, strength, block.timestamp));
         covenantCount++;
-        emit ResilienceApplied(domain, safeguard, recovery, block.timestamp);
+        emit ResilienceApplied(domain, endurance, strength, block.timestamp);
     }
 
     function getResilience(uint256 index) public view returns (
@@ -41,6 +41,6 @@ contract GovernanceOSResilienceCovenant {
     ) {
         require(index < resiliences.length, "Invalid resilience index");
         Resilience memory r = resiliences[index];
-        return (r.domain, r.safeguard, r.recovery, r.timestamp);
+        return (r.domain, r.endurance, r.strength, r.timestamp);
     }
 }
