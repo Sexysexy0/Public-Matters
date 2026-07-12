@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: AccountabilityBridgeCovenant
-// Purpose: Encode systemic safeguards for oversight councils, responsibility charters, and corrective governance bridges
+// Purpose: Encode systemic safeguards for accountability councils, responsibility audits, and governance bridges for systemic trust
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -9,10 +9,10 @@ contract AccountabilityBridgeCovenant {
     address public chiefOperator;
 
     struct AccountabilityRecord {
-        string principle;   // e.g. Oversight councils, Responsibility charters, Corrective governance
-        string mechanism;   // e.g. Oversight boards, Responsibility audits, Corrective bridges
-        string sector;      // e.g. Gaming, Marketplace, Governance ecosystem
-        string outcome;     // e.g. Oversight ensured, Responsibility upheld, Governance corrected
+        string principle;   // e.g. Accountability councils, Responsibility audits, Governance bridges
+        string mechanism;   // e.g. Accountability boards, Responsibility reviews, Bridge frameworks
+        string sector;      // e.g. Governance, Marketplace, Tech ecosystem
+        string outcome;     // e.g. Accountability upheld, Responsibility ensured, Trust rebuilt
         uint256 timestamp;
     }
 
