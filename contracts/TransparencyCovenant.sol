@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: TransparencyCovenant
-// Purpose: Encode disclosure + openness principles in governance
-// Source: Grounded in Public Matters vision (clarity, fairness, equity, trust)
+// Purpose: Encode transparency + accountability principles in governance
+// Source: Grounded in Public Matters vision (transparency, fairness, dignity, anti-fraud)
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,10 +10,10 @@ contract TransparencyCovenant {
     address public chiefOperator;
 
     struct TransparencyRecord {
-        string principle;   // e.g. Disclosure, Openness, Clear communication
-        string action;      // e.g. Public reporting, Pricing clarity, Governance update
-        string sector;      // e.g. Telecom, Finance, Utilities, Education
-        string outcome;     // e.g. Transparency upheld, Trust reinforced, Equity advanced
+        string principle;   // e.g. Transparency, Accountability, Open reporting
+        string action;      // e.g. Public disclosure, Audit trail, Capacity reporting
+        string sector;      // e.g. Healthcare, Finance, Utilities, Education
+        string outcome;     // e.g. Transparency upheld, Accountability reinforced, Public trust strengthened
         uint256 timestamp;
     }
 
