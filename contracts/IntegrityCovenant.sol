@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: IntegrityCovenant
-// Purpose: Encode honesty + ethical consistency principles in governance
-// Source: Grounded in Public Matters vision (integrity, fairness, dignity, innovation)
+// Purpose: Encode honesty + moral backbone principles in governance
+// Source: Grounded in Public Matters vision (integrity, accountability, transparency, fairness)
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,10 +10,10 @@ contract IntegrityCovenant {
     address public chiefOperator;
 
     struct IntegrityRecord {
-        string principle;   // e.g. Honesty, Ethical consistency, Moral safeguard
-        string action;      // e.g. Ethical audit, Policy alignment, Transparent innovation
-        string sector;      // e.g. Telecom, Finance, Utilities, Education
-        string outcome;     // e.g. Integrity upheld, Ethics reinforced, Trust strengthened
+        string principle;   // e.g. Integrity, Honesty, Moral backbone
+        string action;      // e.g. Ethical safeguard, Truthful reporting, Moral enforcement
+        string sector;      // e.g. Healthcare, Finance, Utilities, Education
+        string outcome;     // e.g. Integrity upheld, Honesty reinforced, Morality safeguarded
         uint256 timestamp;
     }
 
