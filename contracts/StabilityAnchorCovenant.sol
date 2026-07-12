@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: StabilityAnchorCovenant
-// Purpose: Encode systemic safeguards for stability councils, anchor frameworks, and governance locks that secure balance in turbulent times
+// Purpose: Encode systemic safeguards for stability councils, anchor frameworks, and governance pillars that guarantee balance, fairness, and systemic durability
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -9,10 +9,10 @@ contract StabilityAnchorCovenant {
     address public chiefOperator;
 
     struct StabilityRecord {
-        string principle;   // e.g. Stability councils, Anchor frameworks, Governance locks
-        string dilemma;     // e.g. Turbulent crises, Market instability, AI volatility
-        string safeguard;   // e.g. Anchor audits, Stability boards, Lock protocols
-        string resolution;  // e.g. Balance secured, Stability ensured, Governance reinforced
+        string principle;   // e.g. Stability councils, Anchor frameworks, Governance pillars
+        string dilemma;     // e.g. Balance gaps, Fairness erosion, Crisis volatility
+        string safeguard;   // e.g. Anchor audits, Pillar protocols, Stability boards
+        string resolution;  // e.g. Balance restored, Fairness upheld, Durability secured
         uint256 timestamp;
     }
 
