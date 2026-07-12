@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: AIFairnessCovenant
-// Purpose: Encode systemic safeguards for fairness councils, equality audits, balance anchors, and dignity safeguards — guaranteeing impartiality, justice, and systemic harmony
+// Purpose: Encode systemic safeguards for fairness councils, equity audits, justice anchors, and dignity safeguards — guaranteeing impartiality, justice, and systemic balance
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -9,10 +9,10 @@ contract AIFairnessCovenant {
     address public chiefOperator;
 
     struct FairnessRecord {
-        string principle;    // e.g. Fairness, equality, balance, impartiality
-        string dilemma;      // e.g. Bias, injustice, corruption, tyranny
-        string safeguard;    // e.g. Equality audits, fairness councils, balance anchors, dignity safeguards
-        string resolution;   // e.g. Impartiality upheld, justice secured, harmony achieved, dignity guaranteed
+        string principle;    // e.g. Fairness, impartiality, equity, balance
+        string dilemma;      // e.g. Bias, inequality, injustice, tyranny
+        string safeguard;    // e.g. Equity audits, fairness councils, justice anchors, dignity safeguards
+        string resolution;   // e.g. Impartiality upheld, justice secured, balance achieved, dignity guaranteed
         uint256 timestamp;
     }
 
