@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: CohesionSummitCovenant
-// Purpose: Encode systemic safeguards for cohesion summits, unity councils, and governance peaks that guarantee solidarity, fairness, and systemic permanence
+// Purpose: Encode systemic safeguards for cohesion summits, unity councils, and governance crests that guarantee solidarity, fairness, and systemic resilience
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -9,10 +9,10 @@ contract CohesionSummitCovenant {
     address public chiefOperator;
 
     struct CohesionSummitRecord {
-        string principle;   // e.g. Cohesion summits, Unity councils, Governance peaks
+        string principle;   // e.g. Cohesion summits, Unity councils, Governance crests
         string dilemma;     // e.g. Solidarity gaps, Fairness erosion, Colonial fragility
-        string safeguard;   // e.g. Summit audits, Peak protocols, Council boards
-        string resolution;  // e.g. Solidarity secured, Fairness upheld, Permanence achieved
+        string safeguard;   // e.g. Summit audits, Crest protocols, Council boards
+        string resolution;  // e.g. Solidarity secured, Fairness upheld, Resilience achieved
         uint256 timestamp;
     }
 
