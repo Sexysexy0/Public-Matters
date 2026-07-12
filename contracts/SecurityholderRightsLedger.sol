@@ -1,37 +1,52 @@
-// Copyright (c) 2026 Emervin V. Gueco (Vinvin). All rights reserved.
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title SecurityholderRightsLedger
-/// @notice Covenant encoding voting, meetings, and rights of holders.
-/// @dev Automates governance rights and collective actions.
-
+/// @title Securityholder Rights Ledger
+/// @notice Protects stakeholder rights and balances power in Public Matters system
 contract SecurityholderRightsLedger {
-    address public overseer;
-    uint256 public recordCount;
+    address public guardian;
+    mapping(address => uint256) public shares;
+    mapping(address => bool) public votingRights;
 
-    struct Record {
-        uint256 id;
-        string principle;   // Voting, Rights, Meetings
-        string description;
-        uint256 timestamp;
+    event GuardianChanged(address indexed oldGuardian, address indexed newGuardian);
+    event SharesAssigned(address indexed holder, uint256 amount);
+    event VotingRightsChanged(address indexed holder, bool status);
+
+    constructor() {
+        guardian = msg.sender;
     }
 
-    mapping(uint256 => Record) public records;
-    event RecordLogged(uint256 indexed id, string principle, string description);
-
-    constructor(address _overseer) {
-        overseer = _overseer;
-    }
-
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
+    modifier onlyGuardian() {
+        require(msg.sender == guardian, "Not authorized");
         _;
     }
 
-    function logRecord(string calldata principle, string calldata description) external onlyOverseer {
-        recordCount++;
-        records[recordCount] = Record(recordCount, principle, description, block.timestamp);
-        emit RecordLogged(recordCount, principle, description);
+    /// @notice Palitan ang guardian
+    function changeGuardian(address newGuardian) external onlyGuardian {
+        require(newGuardian != address(0), "Invalid guardian");
+        emit GuardianChanged(guardian, newGuardian);
+        guardian = newGuardian;
+    }
+
+    /// @notice Mag‑assign ng shares sa isang stakeholder
+    function assignShares(address holder, uint256 amount) external onlyGuardian {
+        shares[holder] += amount;
+        emit SharesAssigned(holder, amount);
+    }
+
+    /// @notice Mag‑set ng voting rights para sa isang stakeholder
+    function setVotingRights(address holder, bool status) external onlyGuardian {
+        votingRights[holder] = status;
+        emit VotingRightsChanged(holder, status);
+    }
+
+    /// @notice Tingnan ang shares ng isang stakeholder
+    function viewShares(address holder) external view returns (uint256) {
+        return shares[holder];
+    }
+
+    /// @notice Tingnan kung may voting rights ang isang stakeholder
+    function hasVotingRights(address holder) external view returns (bool) {
+        return votingRights[holder];
     }
 }
