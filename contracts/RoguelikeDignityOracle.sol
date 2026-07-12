@@ -1,51 +1,48 @@
 // SPDX-License-Identifier: MIT
+// Contract Name: RoguelikeDignityOracle
+// Purpose: Encode exploit safeguards for roguelike fairness
+// Source: Inspired by Dungeon Baller exploits (Spiffing Brit alpha playtest)
+// Author: Vin (Chief Operator)
+
 pragma solidity ^0.8.20;
 
 contract RoguelikeDignityOracle {
-    event RoguelikeDignity(string principle, string safeguard);
-    event ProgressionFairness(string arc, string safeguard);
-    event PlayerAgencyEquity(string ritual, string safeguard);
-    event ContinuityResonance(string arc, string safeguard);
-    event OracleBroadcast(string arc, string safeguard);
+    address public chiefOperator;
 
-    address public overseer;
-
-    constructor(address _overseer) {
-        overseer = _overseer;
+    struct ExploitSafeguard {
+        string exploit;     // e.g. Infinite scaling, Tank invulnerability, Item overflow
+        string safeguard;   // e.g. Cap intelligence growth, Limit block chance, Item spawn throttle
+        string effect;      // e.g. Fair progression, Balanced combat, Stable engine
+        uint256 timestamp;
     }
 
-    modifier onlyOverseer() {
-        require(msg.sender == overseer, "Not authorized");
+    ExploitSafeguard[] public safeguards;
+
+    event SafeguardLogged(string exploit, string safeguard, string effect, uint256 timestamp);
+
+    constructor() {
+        chiefOperator = msg.sender;
+    }
+
+    modifier onlyChief() {
+        require(msg.sender == chiefOperator, "Access restricted to Chief Operator");
         _;
     }
 
-    // Safeguard: Encode roguelike dignity
-    function safeguardRoguelike(string memory principle, string memory safeguard) external onlyOverseer {
-        emit RoguelikeDignity(principle, safeguard);
-        // ORACLE: Ritualize dignity safeguard — affirm respect for roguelike progression and authentic challenge arcs.
+    function logSafeguard(
+        string memory exploit,
+        string memory safeguard,
+        string memory effect
+    ) public onlyChief {
+        safeguards.push(ExploitSafeguard(exploit, safeguard, effect, block.timestamp));
+        emit SafeguardLogged(exploit, safeguard, effect, block.timestamp);
     }
 
-    // Safeguard: Encode progression fairness
-    function enforceProgression(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ProgressionFairness(arc, safeguard);
-        // ORACLE: Encode fairness safeguard — ensure balanced progression without exploitative gating.
-    }
-
-    // Safeguard: Encode player agency equity
-    function preserveAgency(string memory ritual, string memory safeguard) external onlyOverseer {
-        emit PlayerAgencyEquity(ritual, safeguard);
-        // ORACLE: Ritualize equity safeguard — uphold player choice, autonomy, and systemic fairness.
-    }
-
-    // Safeguard: Encode continuity resonance
-    function sustainResonance(string memory arc, string memory safeguard) external onlyOverseer {
-        emit ContinuityResonance(arc, safeguard);
-        // ORACLE: Encode resonance safeguard — maintain continuity of roguelike dignity across expansions.
-    }
-
-    // Safeguard: Encode oracle broadcast
-    function broadcastOracle(string memory arc, string memory safeguard) external onlyOverseer {
-        emit OracleBroadcast(arc, safeguard);
-        // ORACLE: Ritualize broadcast safeguard — amplify roguelike dignity narrative as communal covenant.
+    function getSafeguard(uint256 index) public view returns (
+        string memory, string memory, string memory, uint256
+    ) {
+        require(index < safeguards.length, "Invalid safeguard index");
+        ExploitSafeguard memory es = safeguards[index];
+        return (es.exploit, es.safeguard, es.effect, es.timestamp);
     }
 }
