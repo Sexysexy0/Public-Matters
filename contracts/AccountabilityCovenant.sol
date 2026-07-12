@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: AccountabilityCovenant
-// Purpose: Encode responsibility + liability principles in governance
-// Source: Grounded in Public Matters vision (fairness, transparency, equity, trust)
+// Purpose: Encode accountability + enforceable consequence principles in governance
+// Source: Grounded in Public Matters vision (accountability, transparency, fairness, dignity)
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,10 +10,10 @@ contract AccountabilityCovenant {
     address public chiefOperator;
 
     struct AccountabilityRecord {
-        string principle;   // e.g. Responsibility, Liability, Answerability
-        string action;      // e.g. Compliance check, Service audit, Governance safeguard
-        string sector;      // e.g. Telecom, Finance, Utilities, Education
-        string outcome;     // e.g. Accountability upheld, Liability enforced, Trust reinforced
+        string principle;   // e.g. Accountability, Responsibility, Consequence
+        string action;      // e.g. Enforcement, Sanction, Corrective measure
+        string sector;      // e.g. Healthcare, Finance, Utilities, Education
+        string outcome;     // e.g. Accountability upheld, Responsibility enforced, Consequence applied
         uint256 timestamp;
     }
 
