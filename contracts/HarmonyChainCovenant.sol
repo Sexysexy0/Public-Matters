@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: HarmonyChainCovenant
-// Purpose: Encode systemic safeguards for cross-ecosystem cooperation, alliance building, and peace protocols
+// Purpose: Encode systemic safeguards for harmony councils, chain frameworks, and governance links that weave unity across diverse forces
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -9,16 +9,16 @@ contract HarmonyChainCovenant {
     address public chiefOperator;
 
     struct HarmonyRecord {
-        string principle;   // e.g. Cooperation, Alliance building, Peace protocols
-        string mechanism;   // e.g. Partnership treaties, Alliance councils, Peace audits
-        string sector;      // e.g. Gaming, Marketplace, Governance ecosystem
-        string outcome;     // e.g. Cooperation achieved, Alliances strengthened, Peace upheld
+        string principle;   // e.g. Harmony councils, Chain frameworks, Governance links
+        string dilemma;     // e.g. Fragmentation, Polarization, Systemic discord
+        string safeguard;   // e.g. Chain audits, Unity boards, Harmony protocols
+        string resolution;  // e.g. Unity woven, Harmony achieved, Discord resolved
         uint256 timestamp;
     }
 
     HarmonyRecord[] public records;
 
-    event HarmonyLogged(string principle, string mechanism, string sector, string outcome, uint256 timestamp);
+    event HarmonyLogged(string principle, string dilemma, string safeguard, string resolution, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
@@ -31,12 +31,12 @@ contract HarmonyChainCovenant {
 
     function logHarmony(
         string memory principle,
-        string memory mechanism,
-        string memory sector,
-        string memory outcome
+        string memory dilemma,
+        string memory safeguard,
+        string memory resolution
     ) public onlyChief {
-        records.push(HarmonyRecord(principle, mechanism, sector, outcome, block.timestamp));
-        emit HarmonyLogged(principle, mechanism, sector, outcome, block.timestamp);
+        records.push(HarmonyRecord(principle, dilemma, safeguard, resolution, block.timestamp));
+        emit HarmonyLogged(principle, dilemma, safeguard, resolution, block.timestamp);
     }
 
     function getHarmony(uint256 index) public view returns (
@@ -44,6 +44,6 @@ contract HarmonyChainCovenant {
     ) {
         require(index < records.length, "Invalid harmony index");
         HarmonyRecord memory hr = records[index];
-        return (hr.principle, hr.mechanism, hr.sector, hr.outcome, hr.timestamp);
+        return (hr.principle, hr.dilemma, hr.safeguard, hr.resolution, hr.timestamp);
     }
 }
