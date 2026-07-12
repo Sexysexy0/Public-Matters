@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: DignityCovenant
-// Purpose: Encode respect + dignity principles in governance
-// Source: Grounded in Public Matters vision (fairness, unity, dignity, daily progress)
+// Purpose: Encode human worth + respect principles in governance
+// Source: Grounded in Public Matters vision (dignity, fairness, unity, respect)
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,10 +10,10 @@ contract DignityCovenant {
     address public chiefOperator;
 
     struct DignityRecord {
-        string principle;   // e.g. Respect, Human dignity, Fair treatment
-        string action;      // e.g. Ethical safeguard, Inclusive policy, Service equity
-        string sector;      // e.g. Telecom, Finance, Utilities, Education
-        string outcome;     // e.g. Dignity upheld, Respect reinforced, Equality advanced
+        string principle;   // e.g. Dignity, Human worth, Respect
+        string action;      // e.g. Safeguard rights, Uphold respect, Protect value
+        string sector;      // e.g. Healthcare, Education, Technology, Public policy
+        string outcome;     // e.g. Dignity upheld, Respect reinforced, Worth safeguarded
         uint256 timestamp;
     }
 
