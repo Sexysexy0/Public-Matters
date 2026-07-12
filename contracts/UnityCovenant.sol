@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: UnityCovenant
-// Purpose: Encode unity + collective identity principles in governance
-// Source: Grounded in Public Matters vision (unity, cooperation, solidarity, fairness)
+// Purpose: Encode cooperation + collective harmony principles in governance
+// Source: Grounded in Public Matters vision (unity, harmony, fairness, dignity)
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,10 +10,10 @@ contract UnityCovenant {
     address public chiefOperator;
 
     struct UnityRecord {
-        string principle;   // e.g. Oneness, Collective identity, Cohesion
-        string action;      // e.g. Shared vision, Unified governance, Collective safeguard
-        string sector;      // e.g. Telecom, Finance, Utilities, Education
-        string outcome;     // e.g. Unity upheld, Cohesion reinforced, Identity shared
+        string principle;   // e.g. Unity, Cooperation, Collective harmony
+        string action;      // e.g. Collaborative effort, Shared governance, Harmonized policy
+        string sector;      // e.g. Academia, Healthcare, Technology, Public policy
+        string outcome;     // e.g. Unity upheld, Cooperation reinforced, Harmony achieved
         uint256 timestamp;
     }
 
