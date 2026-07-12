@@ -2,26 +2,26 @@
 pragma solidity ^0.8.20;
 
 /// @title Covenant Eternity
-/// @notice Perpetual legacy and timeless safeguard contract
+/// @notice Perpetual and timeless safeguard contract
 contract CovenantEternity {
     address public guardian;
-    uint256 public principleCount;
+    uint256 public eternityCount;
 
-    struct Principle {
+    struct Perpetuity {
         uint256 id;
-        string title;
-        string description;
-        bool eternal;
+        string subject;
+        string timelessPrinciple;
+        bool active;
     }
 
-    mapping(uint256 => Principle) public principles;
+    mapping(uint256 => Perpetuity) public perpetuities;
 
     event GuardianChanged(address indexed oldGuardian, address indexed newGuardian);
-    event PrincipleDeclared(uint256 indexed id, string title, bool eternal);
+    event EternityDeclared(uint256 indexed id, string subject, string timelessPrinciple);
 
     constructor() {
         guardian = msg.sender;
-        principleCount = 0;
+        eternityCount = 0;
     }
 
     modifier onlyGuardian() {
@@ -29,22 +29,19 @@ contract CovenantEternity {
         _;
     }
 
-    /// @notice Palitan ang guardian
     function changeGuardian(address newGuardian) external onlyGuardian {
         require(newGuardian != address(0), "Invalid guardian");
         emit GuardianChanged(guardian, newGuardian);
         guardian = newGuardian;
     }
 
-    /// @notice Mag‑declare ng eternal principle
-    function declarePrinciple(string calldata title, string calldata description, bool eternal) external onlyGuardian {
-        principleCount++;
-        principles[principleCount] = Principle(principleCount, title, description, eternal);
-        emit PrincipleDeclared(principleCount, title, eternal);
+    function declareEternity(string calldata subject, string calldata timelessPrinciple) external onlyGuardian {
+        eternityCount++;
+        perpetuities[eternityCount] = Perpetuity(eternityCount, subject, timelessPrinciple, true);
+        emit EternityDeclared(eternityCount, subject, timelessPrinciple);
     }
 
-    /// @notice Tingnan ang principle details
-    function viewPrinciple(uint256 id) external view returns (Principle memory) {
-        return principles[id];
+    function viewEternity(uint256 id) external view returns (Perpetuity memory) {
+        return perpetuities[id];
     }
 }
