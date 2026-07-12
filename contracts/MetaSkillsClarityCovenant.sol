@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: MetaSkillsClarityCovenant
-// Purpose: Encode clear communication + framework transparency in meta-skills governance
-// Source: Grounded in Public Matters vision (clarity, competition, fairness)
+// Purpose: Encode clarity + affordability + reliability + competitive revival
+// Source: Grounded in Public Matters vision (for the masa, low-price competition, premium parity)
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,10 +10,10 @@ contract MetaSkillsClarityCovenant {
     address public chiefOperator;
 
     struct ClarityRecord {
-        string principle;   // e.g. Clear communication, Market transparency, Competitive fairness
-        string action;      // e.g. Disclosure, Pricing clarity, Governance update
+        string principle;   // e.g. Affordability, Reliability, Competitive fairness
+        string action;      // e.g. Price transparency, Service revival, Market entry
         string sector;      // e.g. Telecom, Finance, Education, Providers
-        string outcome;     // e.g. Competition revived, Presence restored, Trust rebuilt
+        string outcome;     // e.g. Low-price competition, Premium parity, Mass benefit
         uint256 timestamp;
     }
 
