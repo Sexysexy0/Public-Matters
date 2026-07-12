@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: EquityCovenant
-// Purpose: Encode equitable distribution + equal opportunity principles in governance
-// Source: Grounded in Public Matters vision (equity, fairness, unity, dignity)
+// Purpose: Encode equity + fair opportunity principles in governance
+// Source: Grounded in Public Matters vision (equity, fairness, balance, dignity)
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,10 +10,10 @@ contract EquityCovenant {
     address public chiefOperator;
 
     struct EquityRecord {
-        string principle;   // e.g. Equity, Equal opportunity, Inclusive access
-        string action;      // e.g. Resource distribution, Service parity, Policy safeguard
-        string sector;      // e.g. Telecom, Finance, Utilities, Education
-        string outcome;     // e.g. Equity upheld, Opportunity expanded, Mass benefit ensured
+        string principle;   // e.g. Equity, Fair opportunity, Balanced distribution
+        string action;      // e.g. Resource allocation, Opportunity safeguard, Inclusive policy
+        string sector;      // e.g. Academia, Healthcare, Technology, Public policy
+        string outcome;     // e.g. Equity upheld, Balance reinforced, Opportunity achieved
         uint256 timestamp;
     }
 
