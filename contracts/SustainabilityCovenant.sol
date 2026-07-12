@@ -1,28 +1,28 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: SustainabilityCovenant
-// Purpose: Guarantee sustainability and ecological balance
+// Purpose: Encode sustainability + eco-responsibility principles in governance
+// Source: Grounded in Public Matters vision (long-term viability, fairness, resilience, dignity)
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
 contract SustainabilityCovenant {
     address public chiefOperator;
-    uint256 public covenantCount;
 
-    struct Sustainability {
-        string domain;             // e.g., Environment, Community, Digital
-        string sustainabilityRule; // e.g., Resource fairness, Ecological balance, Intergenerational equity
-        string safeguard;          // e.g., Transparency log, Audit, Compliance check
+    struct SustainabilityRecord {
+        string principle;   // e.g. Sustainability, Eco-responsibility, Long-term viability
+        string action;      // e.g. Green policy, Resource efficiency, Market longevity
+        string sector;      // e.g. Telecom, Finance, Utilities, Education
+        string outcome;     // e.g. Sustainability upheld, Eco balance achieved, Future secured
         uint256 timestamp;
     }
 
-    Sustainability[] public sustainabilities;
+    SustainabilityRecord[] public records;
 
-    event SustainabilityAdded(string domain, string sustainabilityRule, string safeguard, uint256 timestamp);
+    event SustainabilityLogged(string principle, string action, string sector, string outcome, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
-        covenantCount = 0;
     }
 
     modifier onlyChief() {
@@ -30,17 +30,21 @@ contract SustainabilityCovenant {
         _;
     }
 
-    // Add new sustainability covenant
-    function addSustainability(string memory domain, string memory sustainabilityRule, string memory safeguard) public onlyChief {
-        sustainabilities.push(Sustainability(domain, sustainabilityRule, safeguard, block.timestamp));
-        covenantCount++;
-        emit SustainabilityAdded(domain, sustainabilityRule, safeguard, block.timestamp);
+    function logSustainability(
+        string memory principle,
+        string memory action,
+        string memory sector,
+        string memory outcome
+    ) public onlyChief {
+        records.push(SustainabilityRecord(principle, action, sector, outcome, block.timestamp));
+        emit SustainabilityLogged(principle, action, sector, outcome, block.timestamp);
     }
 
-    // View sustainability covenant details
-    function getSustainability(uint256 index) public view returns (string memory, string memory, string memory, uint256) {
-        require(index < sustainabilities.length, "Invalid sustainability index");
-        Sustainability memory s = sustainabilities[index];
-        return (s.domain, s.sustainabilityRule, s.safeguard, s.timestamp);
+    function getSustainability(uint256 index) public view returns (
+        string memory, string memory, string memory, string memory, uint256
+    ) {
+        require(index < records.length, "Invalid sustainability index");
+        SustainabilityRecord memory sr = records[index];
+        return (sr.principle, sr.action, sr.sector, sr.outcome, sr.timestamp);
     }
 }
