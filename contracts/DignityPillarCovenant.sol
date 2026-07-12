@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: DignityPillarCovenant
-// Purpose: Encode systemic safeguards for human rights charters, dignity protocols, and ethical governance pillars
+// Purpose: Encode systemic safeguards for dignity councils, fairness audits, and governance pillars that uphold human worth
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -9,10 +9,10 @@ contract DignityPillarCovenant {
     address public chiefOperator;
 
     struct DignityRecord {
-        string principle;   // e.g. Human rights charters, Dignity protocols, Ethical governance
-        string mechanism;   // e.g. Rights councils, Ethical boards, Dignity audits
-        string sector;      // e.g. Gaming, Marketplace, Governance ecosystem
-        string outcome;     // e.g. Rights upheld, Dignity preserved, Ethics enforced
+        string principle;   // e.g. Dignity councils, Fairness audits, Human worth pillars
+        string mechanism;   // e.g. Dignity boards, Fairness reviews, Pillar frameworks
+        string sector;      // e.g. Governance, Marketplace, Tech ecosystem
+        string outcome;     // e.g. Dignity upheld, Fairness ensured, Worth protected
         uint256 timestamp;
     }
 
