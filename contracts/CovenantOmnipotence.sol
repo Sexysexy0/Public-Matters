@@ -35,7 +35,11 @@ contract CovenantOmnipotence {
         guardian = newGuardian;
     }
 
-    function declarePower(string calldata domain, string calldata capability, bool constrained) external onlyGuardian {
+    function declarePower(
+        string calldata domain,
+        string calldata capability,
+        bool constrained
+    ) external onlyGuardian {
         powerCount++;
         powers[powerCount] = Power(powerCount, domain, capability, constrained);
         emit PowerDeclared(powerCount, domain, capability);
