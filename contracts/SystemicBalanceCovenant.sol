@@ -1,28 +1,27 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: SystemicBalanceCovenant
-// Purpose: Guarantee systemic balance, harmony, and fairness
+// Purpose: Encode systemic safeguards for balance councils, equity audits, resilience protocols, and dignity boards — guaranteeing harmony, fairness, and systemic permanence
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
 
 contract SystemicBalanceCovenant {
     address public chiefOperator;
-    uint256 public covenantCount;
 
-    struct Balance {
-        string domain;        // e.g., Workplace, Community, Global
-        string balanceRule;   // e.g., Harmony safeguard, Equilibrium clause, Anti-imbalance protection
-        string safeguard;     // e.g., Audit log, Public record, Compliance check
+    struct BalanceRecord {
+        string principle;   // e.g. Balance councils, Equity audits, Resilience protocols, Dignity boards
+        string dilemma;     // e.g. Bias risk, inequity erosion, fragility, dignity collapse
+        string safeguard;   // e.g. Balance protocols, equity audits, resilience anchors, dignity councils
+        string resolution;  // e.g. Harmony secured, fairness upheld, resilience achieved, permanence guaranteed
         uint256 timestamp;
     }
 
-    Balance[] public balances;
+    BalanceRecord[] public records;
 
-    event BalanceAdded(string domain, string balanceRule, string safeguard, uint256 timestamp);
+    event BalanceLogged(string principle, string dilemma, string safeguard, string resolution, uint256 timestamp);
 
     constructor() {
         chiefOperator = msg.sender;
-        covenantCount = 0;
     }
 
     modifier onlyChief() {
@@ -30,17 +29,21 @@ contract SystemicBalanceCovenant {
         _;
     }
 
-    // Add new systemic balance covenant
-    function addBalance(string memory domain, string memory balanceRule, string memory safeguard) public onlyChief {
-        balances.push(Balance(domain, balanceRule, safeguard, block.timestamp));
-        covenantCount++;
-        emit BalanceAdded(domain, balanceRule, safeguard, block.timestamp);
+    function logBalance(
+        string memory principle,
+        string memory dilemma,
+        string memory safeguard,
+        string memory resolution
+    ) public onlyChief {
+        records.push(BalanceRecord(principle, dilemma, safeguard, resolution, block.timestamp));
+        emit BalanceLogged(principle, dilemma, safeguard, resolution, block.timestamp);
     }
 
-    // View systemic balance details
-    function getBalance(uint256 index) public view returns (string memory, string memory, string memory, uint256) {
-        require(index < balances.length, "Invalid balance index");
-        Balance memory b = balances[index];
-        return (b.domain, b.balanceRule, b.safeguard, b.timestamp);
+    function getBalance(uint256 index) public view returns (
+        string memory, string memory, string memory, string memory, uint256
+    ) {
+        require(index < records.length, "Invalid balance record index");
+        BalanceRecord memory br = records[index];
+        return (br.principle, br.dilemma, br.safeguard, br.resolution, br.timestamp);
     }
 }
