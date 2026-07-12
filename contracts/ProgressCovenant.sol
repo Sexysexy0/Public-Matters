@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: ProgressCovenant
-// Purpose: Encode daily progress + continuous uplift for masa and providers
-// Source: Grounded in Public Matters vision (unity, fairness, dignity, daily progress)
+// Purpose: Encode continuous progress + dignified advancement principles in governance
+// Source: Grounded in Public Matters vision (progress, fairness, dignity, systemic balance)
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -10,10 +10,10 @@ contract ProgressCovenant {
     address public chiefOperator;
 
     struct ProgressRecord {
-        string principle;   // e.g. Daily progress, Continuous uplift, Shared growth
-        string action;      // e.g. Service expansion, Innovation, Market competition
+        string principle;   // e.g. Continuous progress, Dignified advancement, Forward momentum
+        string action;      // e.g. Iterative upgrade, Policy refinement, System expansion
         string sector;      // e.g. Telecom, Finance, Utilities, Education
-        string outcome;     // e.g. Progress achieved, Equality advanced, Masa uplifted
+        string outcome;     // e.g. Progress upheld, Advancement achieved, Dignity reinforced
         uint256 timestamp;
     }
 
