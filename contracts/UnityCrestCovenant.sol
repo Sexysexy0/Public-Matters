@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Contract Name: UnityCrestCovenant
-// Purpose: Encode systemic safeguards for unity crests, solidarity councils, and governance summits that guarantee cohesion, fairness, and systemic permanence
+// Purpose: Encode systemic safeguards for unity crests, solidarity councils, and governance peaks that guarantee cohesion, fairness, and systemic resilience
 // Author: Vin (Chief Operator)
 
 pragma solidity ^0.8.20;
@@ -9,10 +9,10 @@ contract UnityCrestCovenant {
     address public chiefOperator;
 
     struct UnityCrestRecord {
-        string principle;   // e.g. Unity crests, Solidarity councils, Governance summits
+        string principle;   // e.g. Unity crests, Solidarity councils, Governance peaks
         string dilemma;     // e.g. Cohesion gaps, Fairness erosion, Colonial fragility
-        string safeguard;   // e.g. Crest audits, Summit protocols, Council boards
-        string resolution;  // e.g. Cohesion secured, Fairness upheld, Permanence achieved
+        string safeguard;   // e.g. Crest audits, Peak protocols, Council boards
+        string resolution;  // e.g. Cohesion secured, Fairness upheld, Resilience achieved
         uint256 timestamp;
     }
 
