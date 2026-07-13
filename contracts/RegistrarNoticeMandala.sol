@@ -2,19 +2,19 @@
 pragma solidity ^0.8.20;
 
 /// @title Registrar Notice Mandala
-/// @notice Encodes registrar notice safeguard.
-/// @dev Complements RegistrarComplianceFramework, DecisionFormatFramework, and ComplaintWithdrawalTreaty.
+/// @notice Encodes registrar duties and notice safeguards.
+/// @dev Complements PublicBenefitOracle, BureaucraticAccountability, and InnovationSafetyCovenant.
 
 contract RegistrarNoticeMandala {
     address public guardian;
     uint256 public noticeCount;
     uint256 public councilCount;
 
-    enum NoticeRule {
-        NoticeIsConstitutional,
-        PromptNotificationRequired,
-        LackOfNoticeSuppressed,
-        TransparencyInNoticeSystems,
+    enum RegistrarRule {
+        ContactDetailsMandatory,
+        SanctionOnFalseData,
+        TransparencyMandated,
+        PaymentBeforeActivation,
         PublicBenefitPriority
     }
 
@@ -28,16 +28,15 @@ contract RegistrarNoticeMandala {
 
     struct Rule {
         uint256 id;
-        NoticeRule ruleType;
+        RegistrarRule ruleType;
         string description;
         bool immutableEntry;
         uint256 timestamp;
     }
 
-    struct Notice {
+    struct NoticeCase {
         uint256 id;
         address proposer;
-        string registrarReference;
         string grounds;
         NoticeStatus status;
         uint256 approvals;
@@ -45,12 +44,12 @@ contract RegistrarNoticeMandala {
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Notice) public notices;
+    mapping(uint256 => NoticeCase) public noticeCases;
     mapping(address => bool) public councilMember;
 
-    event RuleDeclared(uint256 indexed id, NoticeRule ruleType);
+    event RuleDeclared(uint256 indexed id, RegistrarRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event NoticeFiled(uint256 indexed id, string registrarReference);
+    event NoticeFiled(uint256 indexed id);
     event NoticeStatusChanged(uint256 indexed id, NoticeStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
@@ -88,14 +87,14 @@ contract RegistrarNoticeMandala {
     }
 
     function _declareDefaultRules() internal {
-        _declare(NoticeRule.NoticeIsConstitutional, "Notice is constitutional; denial prohibited.");
-        _declare(NoticeRule.PromptNotificationRequired, "Prompt notification required; delay prohibited.");
-        _declare(NoticeRule.LackOfNoticeSuppressed, "Lack of notice suppressed; fairness required.");
-        _declare(NoticeRule.TransparencyInNoticeSystems, "Notice systems must be transparent.");
-        _declare(NoticeRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
+        _declare(RegistrarRule.ContactDetailsMandatory, "Contact details mandatory; denial prohibited.");
+        _declare(RegistrarRule.SanctionOnFalseData, "Sanction on false data; accountability required.");
+        _declare(RegistrarRule.TransparencyMandated, "Transparency mandated; opacity blocked.");
+        _declare(RegistrarRule.PaymentBeforeActivation, "Payment required before activation; hoarding blocked.");
+        _declare(RegistrarRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
-    function _declare(NoticeRule ruleType, string memory description) internal {
+    function _declare(RegistrarRule ruleType, string memory description) internal {
         noticeCount++;
         rules[noticeCount] = Rule(
             noticeCount,
@@ -114,40 +113,36 @@ contract RegistrarNoticeMandala {
         emit RuleLocked(id);
     }
 
-    function fileNotice(
-        string calldata registrarReference,
-        string calldata grounds
-    ) external {
+    function fileNoticeCase(string calldata grounds) external {
         noticeCount++;
-        notices[noticeCount] = Notice(
+        noticeCases[noticeCount] = NoticeCase(
             noticeCount,
             msg.sender,
-            registrarReference,
             grounds,
             NoticeStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit NoticeFiled(noticeCount, registrarReference);
+        emit NoticeFiled(noticeCount);
     }
 
     function beginReview(uint256 noticeId) external onlyCouncil {
-        Notice storage n = notices[noticeId];
+        NoticeCase storage n = noticeCases[noticeId];
         require(n.status == NoticeStatus.Filed, "Not filed");
         n.status = NoticeStatus.UnderReview;
         emit NoticeStatusChanged(noticeId, NoticeStatus.UnderReview);
     }
 
     function escalateToMultiCouncil(uint256 noticeId) external onlyCouncil {
-        Notice storage n = notices[noticeId];
+        NoticeCase storage n = noticeCases[noticeId];
         require(n.status == NoticeStatus.UnderReview, "Not under review");
         n.status = NoticeStatus.MultiCouncilReview;
         emit NoticeStatusChanged(noticeId, NoticeStatus.MultiCouncilReview);
     }
 
     function confirmNotice(uint256 noticeId) external onlyCouncil {
-        Notice storage n = notices[noticeId];
+        NoticeCase storage n = noticeCases[noticeId];
         require(n.status == NoticeStatus.MultiCouncilReview, "Not in council stage");
 
         n.approvals++;
@@ -159,7 +154,7 @@ contract RegistrarNoticeMandala {
     }
 
     function rejectNotice(uint256 noticeId) external onlyCouncil {
-        Notice storage n = notices[noticeId];
+        NoticeCase storage n = noticeCases[noticeId];
         require(
             n.status == NoticeStatus.Filed ||
             n.status == NoticeStatus.UnderReview ||
