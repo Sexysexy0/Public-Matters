@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title Panelist Quality
-/// @notice Encodes panelist accreditation and quality safeguards.
-/// @dev Complements AppealsMandala, RemedyCancellation, and JusticeMandala.
+/// @title Panelist Quality Framework
+/// @notice Encodes panelist accreditation and quality safeguard.
+/// @dev Complements CaseLawCodification, ExpeditedProcedureFramework, and AppealsMandala.
 
 contract PanelistQuality {
     address public guardian;
@@ -12,19 +12,18 @@ contract PanelistQuality {
 
     enum QualityRule {
         AccreditationIsConstitutional,
-        PerformanceReviewEnabled,
-        ContinuingEducationRequired,
+        TrainingMandated,
         BiasSuppressed,
         TransparencyInPanelistSystems,
         PublicBenefitPriority
     }
 
-    enum ReviewStatus {
+    enum QualityStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ReviewConfirmed
+        QualityConfirmed
     }
 
     struct Rule {
@@ -35,24 +34,23 @@ contract PanelistQuality {
         uint256 timestamp;
     }
 
-    struct Review {
+    struct QualityCase {
         uint256 id;
-        address complainant;
-        address panelist;
+        address proposer;
         string grounds;
-        ReviewStatus status;
+        QualityStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Review) public reviews;
+    mapping(uint256 => QualityCase) public qualityCases;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, QualityRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event ReviewFiled(uint256 indexed id, address panelist);
-    event ReviewStatusChanged(uint256 indexed id, ReviewStatus status);
+    event QualityFiled(uint256 indexed id);
+    event QualityStatusChanged(uint256 indexed id, QualityStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
@@ -90,9 +88,8 @@ contract PanelistQuality {
 
     function _declareDefaultRules() internal {
         _declare(QualityRule.AccreditationIsConstitutional, "Accreditation is constitutional; denial prohibited.");
-        _declare(QualityRule.PerformanceReviewEnabled, "Performance review enabled; oversight required.");
-        _declare(QualityRule.ContinuingEducationRequired, "Continuing education required; stagnation prohibited.");
-        _declare(QualityRule.BiasSuppressed, "Bias suppressed; impartiality required.");
+        _declare(QualityRule.TrainingMandated, "Training mandated; bias blocked.");
+        _declare(QualityRule.BiasSuppressed, "Bias suppressed; fairness required.");
         _declare(QualityRule.TransparencyInPanelistSystems, "Panelist systems must be transparent.");
         _declare(QualityRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
@@ -116,59 +113,55 @@ contract PanelistQuality {
         emit RuleLocked(id);
     }
 
-    function fileReview(
-        address panelist,
-        string calldata grounds
-    ) external {
+    function fileQualityCase(string calldata grounds) external {
         qualityCount++;
-        reviews[qualityCount] = Review(
+        qualityCases[qualityCount] = QualityCase(
             qualityCount,
             msg.sender,
-            panelist,
             grounds,
-            ReviewStatus.Filed,
+            QualityStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ReviewFiled(qualityCount, panelist);
+        emit QualityFiled(qualityCount);
     }
 
-    function beginReview(uint256 reviewId) external onlyCouncil {
-        Review storage r = reviews[reviewId];
-        require(r.status == ReviewStatus.Filed, "Not filed");
-        r.status = ReviewStatus.UnderReview;
-        emit ReviewStatusChanged(reviewId, ReviewStatus.UnderReview);
+    function beginReview(uint256 qualityId) external onlyCouncil {
+        QualityCase storage q = qualityCases[qualityId];
+        require(q.status == QualityStatus.Filed, "Not filed");
+        q.status = QualityStatus.UnderReview;
+        emit QualityStatusChanged(qualityId, QualityStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 reviewId) external onlyCouncil {
-        Review storage r = reviews[reviewId];
-        require(r.status == ReviewStatus.UnderReview, "Not under review");
-        r.status = ReviewStatus.MultiCouncilReview;
-        emit ReviewStatusChanged(reviewId, ReviewStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 qualityId) external onlyCouncil {
+        QualityCase storage q = qualityCases[qualityId];
+        require(q.status == QualityStatus.UnderReview, "Not under review");
+        q.status = QualityStatus.MultiCouncilReview;
+        emit QualityStatusChanged(qualityId, QualityStatus.MultiCouncilReview);
     }
 
-    function confirmReview(uint256 reviewId) external onlyCouncil {
-        Review storage r = reviews[reviewId];
-        require(r.status == ReviewStatus.MultiCouncilReview, "Not in council stage");
+    function confirmQuality(uint256 qualityId) external onlyCouncil {
+        QualityCase storage q = qualityCases[qualityId];
+        require(q.status == QualityStatus.MultiCouncilReview, "Not in council stage");
 
-        r.approvals++;
+        q.approvals++;
 
-        if (r.approvals * 2 > councilCount && councilCount > 0) {
-            r.status = ReviewStatus.ReviewConfirmed;
-            emit ReviewStatusChanged(reviewId, ReviewStatus.ReviewConfirmed);
+        if (q.approvals * 2 > councilCount && councilCount > 0) {
+            q.status = QualityStatus.QualityConfirmed;
+            emit QualityStatusChanged(qualityId, QualityStatus.QualityConfirmed);
         }
     }
 
-    function rejectReview(uint256 reviewId) external onlyCouncil {
-        Review storage r = reviews[reviewId];
+    function rejectQuality(uint256 qualityId) external onlyCouncil {
+        QualityCase storage q = qualityCases[qualityId];
         require(
-            r.status == ReviewStatus.Filed ||
-            r.status == ReviewStatus.UnderReview ||
-            r.status == ReviewStatus.MultiCouncilReview,
+            q.status == QualityStatus.Filed ||
+            q.status == QualityStatus.UnderReview ||
+            q.status == QualityStatus.MultiCouncilReview,
             "Invalid status"
         );
-        r.status = ReviewStatus.Rejected;
-        emit ReviewStatusChanged(reviewId, ReviewStatus.Rejected);
+        q.status = QualityStatus.Rejected;
+        emit QualityStatusChanged(qualityId, QualityStatus.Rejected);
     }
 }
