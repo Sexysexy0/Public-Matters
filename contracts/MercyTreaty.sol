@@ -3,32 +3,32 @@ pragma solidity ^0.8.20;
 
 /// @title Mercy Treaty
 /// @notice Unifies mercy commitments into treaty law.
-/// @dev Complements CompassionMandala, GraceFramework, and KindnessTreaty.
+/// @dev Complements CompassionMandala, GraceFramework, and HumanityCharter.
 
 contract MercyTreaty {
     address public guardian;
     uint256 public treatyCount;
     uint256 public violationCount;
-    uint256 public memberCount;
+    uint256 public councilCount;
 
     enum MercyRule {
         MercyIsConstitutional,
         ForgivenessAnchored,
         HumaneLeniencyProtected,
-        CompassionSafeguarded,
+        CompassionateJusticeSafeguarded,
         PublicBenefitPriority,
         MandatoryCouncilOversight,
-        TreatyBindingAcrossMembers
+        TransparencyInMercySystems
     }
 
     enum ViolationType {
         MercyDenial,
         ForgivenessSuppression,
-        LeniencyBlocked,
-        CompassionErasure,
+        HumaneLeniencyBlocked,
+        CompassionateJusticeErosion,
         CouncilBypass,
         PublicBenefitFailure,
-        TreatyBreach
+        TransparencyFailure
     }
 
     enum CaseStatus {
@@ -60,20 +60,20 @@ contract MercyTreaty {
 
     mapping(uint256 => Rule) public rules;
     mapping(uint256 => Violation) public violations;
-    mapping(address => bool) public treatyMembers;
+    mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, MercyRule ruleType);
     event RuleLocked(uint256 indexed id);
     event ViolationFiled(uint256 indexed id, ViolationType violationType);
     event CaseStatusChanged(uint256 indexed id, CaseStatus status);
-    event TreatyMemberAdded(address indexed member);
-    event TreatyMemberRemoved(address indexed member);
+    event CouncilMemberAdded(address indexed member);
+    event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
         treatyCount = 0;
         violationCount = 0;
-        memberCount = 0;
+        councilCount = 0;
 
         _declareDefaultRules();
     }
@@ -83,33 +83,33 @@ contract MercyTreaty {
         _;
     }
 
-    modifier onlyMember() {
-        require(treatyMembers[msg.sender], "Treaty member only");
+    modifier onlyCouncil() {
+        require(councilMember[msg.sender], "Council only");
         _;
     }
 
-    function addTreatyMember(address member) external onlyGuardian {
-        require(!treatyMembers[member], "Already member");
-        treatyMembers[member] = true;
-        memberCount++;
-        emit TreatyMemberAdded(member);
+    function addCouncilMember(address member) external onlyGuardian {
+        require(!councilMember[member], "Already council");
+        councilMember[member] = true;
+        councilCount++;
+        emit CouncilMemberAdded(member);
     }
 
-    function removeTreatyMember(address member) external onlyGuardian {
-        require(treatyMembers[member], "Not member");
-        treatyMembers[member] = false;
-        memberCount--;
-        emit TreatyMemberRemoved(member);
+    function removeCouncilMember(address member) external onlyGuardian {
+        require(councilMember[member], "Not council");
+        councilMember[member] = false;
+        councilCount--;
+        emit CouncilMemberRemoved(member);
     }
 
     function _declareDefaultRules() internal {
         _declare(MercyRule.MercyIsConstitutional, "Mercy is constitutional; denial prohibited.");
-        _declare(MercyRule.ForgivenessAnchored, "Forgiveness is anchored; suppression prohibited.");
+        _declare(MercyRule.ForgivenessAnchored, "Forgiveness anchored; suppression prohibited.");
         _declare(MercyRule.HumaneLeniencyProtected, "Humane leniency protected; blocking prohibited.");
-        _declare(MercyRule.CompassionSafeguarded, "Compassion safeguarded; erasure prohibited.");
+        _declare(MercyRule.CompassionateJusticeSafeguarded, "Compassionate justice safeguarded; erosion prohibited.");
         _declare(MercyRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
         _declare(MercyRule.MandatoryCouncilOversight, "Council oversight required for mercy enforcement.");
-        _declare(MercyRule.TreatyBindingAcrossMembers, "Treaty rules binding across all members.");
+        _declare(MercyRule.TransparencyInMercySystems, "Mercy systems must be transparent.");
     }
 
     function _declare(MercyRule ruleType, string memory description) internal {
@@ -151,33 +151,33 @@ contract MercyTreaty {
         emit ViolationFiled(violationCount, violationType);
     }
 
-    function beginReview(uint256 violationId) external onlyMember {
+    function beginReview(uint256 violationId) external onlyCouncil {
         Violation storage v = violations[violationId];
         require(v.status == CaseStatus.Filed, "Not filed");
         v.status = CaseStatus.UnderReview;
         emit CaseStatusChanged(violationId, CaseStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 violationId) external onlyMember {
+    function escalateToMultiCouncil(uint256 violationId) external onlyCouncil {
         Violation storage v = violations[violationId];
         require(v.status == CaseStatus.UnderReview, "Not under review");
         v.status = CaseStatus.MultiCouncilReview;
         emit CaseStatusChanged(violationId, CaseStatus.MultiCouncilReview);
     }
 
-    function approveViolation(uint256 violationId) external onlyMember {
+    function approveViolation(uint256 violationId) external onlyCouncil {
         Violation storage v = violations[violationId];
         require(v.status == CaseStatus.MultiCouncilReview, "Not in council stage");
 
         v.approvals++;
 
-        if (v.approvals * 2 > memberCount && memberCount > 0) {
+        if (v.approvals * 2 > councilCount && councilCount > 0) {
             v.status = CaseStatus.ConfirmedViolation;
             emit CaseStatusChanged(violationId, CaseStatus.ConfirmedViolation);
         }
     }
 
-    function rejectViolation(uint256 violationId) external onlyMember {
+    function rejectViolation(uint256 violationId) external onlyCouncil {
         Violation storage v = violations[violationId];
         require(
             v.status == CaseStatus.Filed ||
