@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 /// @title Public Benefit Oracle
-/// @notice Encodes public benefit safeguard.
+/// @notice Anchors all covenants to the principle of public benefit.
 /// @dev Complements InnovationSafetyCovenant, RiskContextReview, and BureaucraticAccountability.
 
 contract PublicBenefitOracle {
@@ -11,12 +11,11 @@ contract PublicBenefitOracle {
     uint256 public councilCount;
 
     enum BenefitRule {
-        BenefitIsConstitutional,
-        EliteCaptureSuppressed,
-        MasaFirstMandated,
-        OracleChecksRequired,
+        PublicBenefitIsConstitutional,
+        EquityMandated,
+        ExploitationSuppressed,
         TransparencyInBenefitSystems,
-        PublicBenefitPriority
+        MassPriority
     }
 
     enum BenefitStatus {
@@ -88,12 +87,11 @@ contract PublicBenefitOracle {
     }
 
     function _declareDefaultRules() internal {
-        _declare(BenefitRule.BenefitIsConstitutional, "Public benefit is constitutional; denial prohibited.");
-        _declare(BenefitRule.EliteCaptureSuppressed, "Elite capture suppressed; fairness required.");
-        _declare(BenefitRule.MasaFirstMandated, "Masa-first mandated; inequity prohibited.");
-        _declare(BenefitRule.OracleChecksRequired, "Oracle checks required; blind deployment blocked.");
+        _declare(BenefitRule.PublicBenefitIsConstitutional, "Public benefit is constitutional; denial prohibited.");
+        _declare(BenefitRule.EquityMandated, "Equity mandated; exploitation blocked.");
+        _declare(BenefitRule.ExploitationSuppressed, "Exploitation suppressed; fairness required.");
         _declare(BenefitRule.TransparencyInBenefitSystems, "Benefit systems must be transparent.");
-        _declare(BenefitRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
+        _declare(BenefitRule.MassPriority, "Mass priority overrides elite gain.");
     }
 
     function _declare(BenefitRule ruleType, string memory description) internal {
