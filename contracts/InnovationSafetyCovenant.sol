@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 /// @title Innovation Safety Covenant
-/// @notice Encodes innovation safety safeguard.
-/// @dev Complements RiskContextReview, InnovationMeritShield, and BureaucraticAccountability.
+/// @notice Encodes safeguard balancing innovation and systemic safety.
+/// @dev Complements DataOracle, AITransparencyMandala, and BureaucraticAccountability.
 
 contract InnovationSafetyCovenant {
     address public guardian;
@@ -11,11 +11,10 @@ contract InnovationSafetyCovenant {
     uint256 public councilCount;
 
     enum SafetyRule {
-        SafetyIsConstitutional,
-        RecklessInnovationSuppressed,
-        RiskChecksRequired,
-        ResponsibleDeploymentMandated,
-        TransparencyInSafetySystems,
+        InnovationIsConstitutional,
+        SafetyMandated,
+        RiskSuppressed,
+        TransparencyInInnovationSystems,
         PublicBenefitPriority
     }
 
@@ -88,11 +87,10 @@ contract InnovationSafetyCovenant {
     }
 
     function _declareDefaultRules() internal {
-        _declare(SafetyRule.SafetyIsConstitutional, "Safety is constitutional; denial prohibited.");
-        _declare(SafetyRule.RecklessInnovationSuppressed, "Reckless innovation suppressed; risk required.");
-        _declare(SafetyRule.RiskChecksRequired, "Risk checks required; blind deployment blocked.");
-        _declare(SafetyRule.ResponsibleDeploymentMandated, "Responsible deployment mandated; fairness required.");
-        _declare(SafetyRule.TransparencyInSafetySystems, "Safety systems must be transparent.");
+        _declare(SafetyRule.InnovationIsConstitutional, "Innovation is constitutional; denial prohibited.");
+        _declare(SafetyRule.SafetyMandated, "Safety mandated; risk blocked.");
+        _declare(SafetyRule.RiskSuppressed, "Risk suppressed; fairness required.");
+        _declare(SafetyRule.TransparencyInInnovationSystems, "Innovation systems must be transparent.");
         _declare(SafetyRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
