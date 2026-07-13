@@ -49,6 +49,7 @@ contract CrisisLeadershipFramework {
     enum CrisisStatus {
         Filed,
         UnderReview,
+        HearingScheduled,
         MultiCouncilReview,
         Rejected,
         ConfirmedViolation
@@ -74,7 +75,7 @@ contract CrisisLeadershipFramework {
     }
 
     mapping(uint256 => Protocol) public protocols;
-    mapping(uint256 => CrisisCase) public crises;
+    mapping<uint256 => CrisisCase> public crises;
     mapping(address => RoleType) public roles;
     mapping(address => bool) public councilMember;
 
@@ -181,9 +182,16 @@ contract CrisisLeadershipFramework {
         emit CrisisStatusChanged(crisisId, CrisisStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 crisisId) external onlyCouncil {
+    function scheduleHearing(uint256 crisisId) external onlyCouncil {
         CrisisCase storage c = crises[crisisId];
         require(c.status == CrisisStatus.UnderReview, "Not under review");
+        c.status = CrisisStatus.HearingScheduled;
+        emit CrisisStatusChanged(crisisId, CrisisStatus.HearingScheduled);
+    }
+
+    function escalateToMultiCouncil(uint256 crisisId) external onlyCouncil {
+        CrisisCase storage c = crises[crisisId];
+        require(c.status == CrisisStatus.HearingScheduled, "Not scheduled");
         c.status = CrisisStatus.MultiCouncilReview;
         emit CrisisStatusChanged(crisisId, CrisisStatus.MultiCouncilReview);
     }
@@ -205,6 +213,7 @@ contract CrisisLeadershipFramework {
         require(
             c.status == CrisisStatus.Filed ||
             c.status == CrisisStatus.UnderReview ||
+            c.status == CrisisStatus.HearingScheduled ||
             c.status == CrisisStatus.MultiCouncilReview,
             "Invalid status"
         );
