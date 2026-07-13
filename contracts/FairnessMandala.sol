@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /// @title Fairness Mandala
 /// @notice Weaves fairness into mandala resonance.
-/// @dev Complements IntegrityCharter, EquityFramework, and AccountabilityFramework.
+/// @dev Complements HonestyFramework, IntegrityTreaty, and ResponsibilityMandala.
 
 contract FairnessMandala {
     address public guardian;
@@ -13,9 +13,9 @@ contract FairnessMandala {
 
     enum FairnessRule {
         FairnessIsConstitutional,
-        JusticeAnchored,
-        EqualityProtected,
-        ImpartialitySafeguarded,
+        EqualityAnchored,
+        BiasProhibited,
+        UnjustTreatmentBlocked,
         PublicBenefitPriority,
         MandatoryCouncilOversight,
         TransparencyInFairnessSystems
@@ -23,9 +23,9 @@ contract FairnessMandala {
 
     enum ViolationType {
         FairnessDenial,
-        JusticeSuppression,
-        EqualityBlocked,
-        ImpartialityDistorted,
+        EqualityFailure,
+        Bias,
+        UnjustTreatment,
         CouncilBypass,
         PublicBenefitFailure,
         TransparencyFailure
@@ -104,9 +104,9 @@ contract FairnessMandala {
 
     function _declareDefaultRules() internal {
         _declare(FairnessRule.FairnessIsConstitutional, "Fairness is constitutional; denial prohibited.");
-        _declare(FairnessRule.JusticeAnchored, "Justice anchored; suppression prohibited.");
-        _declare(FairnessRule.EqualityProtected, "Equality protected; blocking prohibited.");
-        _declare(FairnessRule.ImpartialitySafeguarded, "Impartiality safeguarded; distortion prohibited.");
+        _declare(FairnessRule.EqualityAnchored, "Equality anchored; failure prohibited.");
+        _declare(FairnessRule.BiasProhibited, "Bias prohibited; violation blocked.");
+        _declare(FairnessRule.UnjustTreatmentBlocked, "Unjust treatment blocked; breach prohibited.");
         _declare(FairnessRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
         _declare(FairnessRule.MandatoryCouncilOversight, "Council oversight required for fairness enforcement.");
         _declare(FairnessRule.TransparencyInFairnessSystems, "Fairness systems must be transparent.");
