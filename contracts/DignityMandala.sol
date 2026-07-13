@@ -2,41 +2,28 @@
 pragma solidity ^0.8.20;
 
 /// @title Dignity Mandala
-/// @notice Weaves dignity into mandala resonance.
-/// @dev Complements HumanityCharter, JusticeMandala, and CultureRevivalMandala.
+/// @notice Encodes safeguard for systemic dignity — non-negotiable covenant across all systems.
+/// @dev Complements HumanityOracle, StrangersMandala, TransparencyMandala, and PublicBenefitMandala.
 
 contract DignityMandala {
     address public guardian;
     uint256 public mandalaCount;
-    uint256 public violationCount;
     uint256 public councilCount;
 
     enum DignityRule {
         DignityIsConstitutional,
-        RespectAnchored,
-        HumaneTreatmentProtected,
-        EqualitySafeguarded,
-        PublicBenefitPriority,
-        MandatoryCouncilOversight,
-        TransparencyInDignitySystems
+        HumanityMandated,
+        StrangersProtected,
+        AbuseReboundsOnAbuser,
+        CollectivePriorityAnchored
     }
 
-    enum ViolationType {
-        DignityDenial,
-        RespectSuppression,
-        HumaneTreatmentBlocked,
-        EqualityErosion,
-        CouncilBypass,
-        PublicBenefitFailure,
-        TransparencyFailure
-    }
-
-    enum CaseStatus {
+    enum DignityStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedViolation
+        DignityConfirmed
     }
 
     struct Rule {
@@ -47,32 +34,29 @@ contract DignityMandala {
         uint256 timestamp;
     }
 
-    struct Violation {
+    struct DignityCase {
         uint256 id;
-        address accuser;
-        address accused;
-        ViolationType violationType;
-        string details;
-        CaseStatus status;
+        address proposer;
+        string grounds;
+        DignityStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Violation) public violations;
+    mapping(uint256 => DignityCase) public dignityCases;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, DignityRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event ViolationFiled(uint256 indexed id, ViolationType violationType);
-    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
+    event DignityFiled(uint256 indexed id);
+    event DignityStatusChanged(uint256 indexed id, DignityStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
         mandalaCount = 0;
-        violationCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -104,12 +88,10 @@ contract DignityMandala {
 
     function _declareDefaultRules() internal {
         _declare(DignityRule.DignityIsConstitutional, "Dignity is constitutional; denial prohibited.");
-        _declare(DignityRule.RespectAnchored, "Respect anchored; suppression prohibited.");
-        _declare(DignityRule.HumaneTreatmentProtected, "Humane treatment protected; blocking prohibited.");
-        _declare(DignityRule.EqualitySafeguarded, "Equality safeguarded; erosion prohibited.");
-        _declare(DignityRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
-        _declare(DignityRule.MandatoryCouncilOversight, "Council oversight required for dignity enforcement.");
-        _declare(DignityRule.TransparencyInDignitySystems, "Dignity systems must be transparent.");
+        _declare(DignityRule.HumanityMandated, "Humanity mandated; systemic fairness enforced.");
+        _declare(DignityRule.StrangersProtected, "Strangers protected; dignity extended to outsiders.");
+        _declare(DignityRule.AbuseReboundsOnAbuser, "Abuse rebounds on abuser; violence cycles back.");
+        _declare(DignityRule.CollectivePriorityAnchored, "Collective priority anchored; masa protected.");
     }
 
     function _declare(DignityRule ruleType, string memory description) internal {
@@ -131,61 +113,55 @@ contract DignityMandala {
         emit RuleLocked(id);
     }
 
-    function fileViolation(
-        address accused,
-        ViolationType violationType,
-        string calldata details
-    ) external {
-        violationCount++;
-        violations[violationCount] = Violation(
-            violationCount,
+    function fileDignityCase(string calldata grounds) external {
+        mandalaCount++;
+        dignityCases[mandalaCount] = DignityCase(
+            mandalaCount,
             msg.sender,
-            accused,
-            violationType,
-            details,
-            CaseStatus.Filed,
+            grounds,
+            DignityStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ViolationFiled(violationCount, violationType);
+        emit DignityFiled(mandalaCount);
     }
 
-    function beginReview(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.Filed, "Not filed");
-        v.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(violationId, CaseStatus.UnderReview);
+    function beginReview(uint256 dignityId) external onlyCouncil {
+        DignityCase storage d = dignityCases[dignityId];
+        require(d.status == DignityStatus.Filed, "Not filed");
+        d.status = DignityStatus.UnderReview;
+        emit DignityStatusChanged(dignityId, DignityStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.UnderReview, "Not under review");
-        v.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(violationId, CaseStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 dignityId) external onlyCouncil {
+        DignityCase storage d = dignityCases[dignityId];
+        require(d.status == DignityStatus.UnderReview, "Not under review");
+        d.status = DignityStatus.MultiCouncilReview;
+        emit DignityStatusChanged(dignityId, DignityStatus.MultiCouncilReview);
     }
 
-    function approveViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.MultiCouncilReview, "Not in council stage");
+    function confirmDignity(uint256 dignityId) external onlyCouncil {
+        DignityCase storage d = dignityCases[dignityId];
+        require(d.status == DignityStatus.MultiCouncilReview, "Not in council stage");
 
-        v.approvals++;
+        d.approvals++;
 
-        if (v.approvals * 2 > councilCount && councilCount > 0) {
-            v.status = CaseStatus.ConfirmedViolation;
-            emit CaseStatusChanged(violationId, CaseStatus.ConfirmedViolation);
+        if (d.approvals * 2 > councilCount && councilCount > 0) {
+            d.status = DignityStatus.DignityConfirmed;
+            emit DignityStatusChanged(dignityId, DignityStatus.DignityConfirmed);
         }
     }
 
-    function rejectViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
+    function rejectDignity(uint256 dignityId) external onlyCouncil {
+        DignityCase storage d = dignityCases[dignityId];
         require(
-            v.status == CaseStatus.Filed ||
-            v.status == CaseStatus.UnderReview ||
-            v.status == CaseStatus.MultiCouncilReview,
+            d.status == DignityStatus.Filed ||
+            d.status == DignityStatus.UnderReview ||
+            d.status == DignityStatus.MultiCouncilReview,
             "Invalid status"
         );
-        v.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(violationId, CaseStatus.Rejected);
+        d.status = DignityStatus.Rejected;
+        emit DignityStatusChanged(dignityId, DignityStatus.Rejected);
     }
 }
