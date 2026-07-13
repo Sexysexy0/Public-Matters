@@ -2,42 +2,28 @@
 pragma solidity ^0.8.20;
 
 /// @title Compassion Framework
-/// @notice Encodes compassion safeguards.
-/// @dev Complements AgencyTreaty, RespectMandala, and DignityTreaty.
+/// @notice Encodes compassion safeguard.
+/// @dev Complements CareTreaty, EmpathyMandala, and KindnessFramework.
 
 contract CompassionFramework {
     address public guardian;
-    uint256 public frameworkCount;
-    uint256 public violationCount;
+    uint256 public compassionCount;
     uint256 public councilCount;
 
     enum CompassionRule {
         CompassionIsConstitutional,
-        EmpathyAnchored,
-        CrueltyProhibited,
-        IndifferenceBlocked,
-        NeglectSuppressed,
-        PublicBenefitPriority,
-        TransparencyInCompassionSystems
+        MercyMandated,
+        HarshnessSuppressed,
+        TransparencyInCompassionSystems,
+        PublicBenefitPriority
     }
 
-    enum ViolationType {
-        CompassionDenial,
-        EmpathyFailure,
-        Cruelty,
-        Indifference,
-        Neglect,
-        CouncilBypass,
-        PublicBenefitFailure,
-        TransparencyFailure
-    }
-
-    enum CaseStatus {
+    enum CompassionStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedViolation
+        CompassionConfirmed
     }
 
     struct Rule {
@@ -48,32 +34,29 @@ contract CompassionFramework {
         uint256 timestamp;
     }
 
-    struct Violation {
+    struct CompassionCase {
         uint256 id;
-        address accuser;
-        address accused;
-        ViolationType violationType;
-        string details;
-        CaseStatus status;
+        address proposer;
+        string grounds;
+        CompassionStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Violation) public violations;
+    mapping(uint256 => CompassionCase) public compassionCases;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, CompassionRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event ViolationFiled(uint256 indexed id, ViolationType violationType);
-    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
+    event CompassionFiled(uint256 indexed id);
+    event CompassionStatusChanged(uint256 indexed id, CompassionStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
-        frameworkCount = 0;
-        violationCount = 0;
+        compassionCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -105,24 +88,22 @@ contract CompassionFramework {
 
     function _declareDefaultRules() internal {
         _declare(CompassionRule.CompassionIsConstitutional, "Compassion is constitutional; denial prohibited.");
-        _declare(CompassionRule.EmpathyAnchored, "Empathy anchored; failure prohibited.");
-        _declare(CompassionRule.CrueltyProhibited, "Cruelty prohibited; violation blocked.");
-        _declare(CompassionRule.IndifferenceBlocked, "Indifference blocked; breach prohibited.");
-        _declare(CompassionRule.NeglectSuppressed, "Neglect suppressed; abdication prohibited.");
-        _declare(CompassionRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
+        _declare(CompassionRule.MercyMandated, "Mercy mandated; harshness blocked.");
+        _declare(CompassionRule.HarshnessSuppressed, "Harshness suppressed; fairness required.");
         _declare(CompassionRule.TransparencyInCompassionSystems, "Compassion systems must be transparent.");
+        _declare(CompassionRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
     function _declare(CompassionRule ruleType, string memory description) internal {
-        frameworkCount++;
-        rules[frameworkCount] = Rule(
-            frameworkCount,
+        compassionCount++;
+        rules[compassionCount] = Rule(
+            compassionCount,
             ruleType,
             description,
             false,
             block.timestamp
         );
-        emit RuleDeclared(frameworkCount, ruleType);
+        emit RuleDeclared(compassionCount, ruleType);
     }
 
     function lockRule(uint256 id) external onlyGuardian {
@@ -132,61 +113,55 @@ contract CompassionFramework {
         emit RuleLocked(id);
     }
 
-    function fileViolation(
-        address accused,
-        ViolationType violationType,
-        string calldata details
-    ) external {
-        violationCount++;
-        violations[violationCount] = Violation(
-            violationCount,
+    function fileCompassionCase(string calldata grounds) external {
+        compassionCount++;
+        compassionCases[compassionCount] = CompassionCase(
+            compassionCount,
             msg.sender,
-            accused,
-            violationType,
-            details,
-            CaseStatus.Filed,
+            grounds,
+            CompassionStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ViolationFiled(violationCount, violationType);
+        emit CompassionFiled(compassionCount);
     }
 
-    function beginReview(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.Filed, "Not filed");
-        v.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(violationId, CaseStatus.UnderReview);
+    function beginReview(uint256 compassionId) external onlyCouncil {
+        CompassionCase storage c = compassionCases[compassionId];
+        require(c.status == CompassionStatus.Filed, "Not filed");
+        c.status = CompassionStatus.UnderReview;
+        emit CompassionStatusChanged(compassionId, CompassionStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.UnderReview, "Not under review");
-        v.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(violationId, CaseStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 compassionId) external onlyCouncil {
+        CompassionCase storage c = compassionCases[compassionId];
+        require(c.status == CompassionStatus.UnderReview, "Not under review");
+        c.status = CompassionStatus.MultiCouncilReview;
+        emit CompassionStatusChanged(compassionId, CompassionStatus.MultiCouncilReview);
     }
 
-    function approveViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.MultiCouncilReview, "Not in council stage");
+    function confirmCompassion(uint256 compassionId) external onlyCouncil {
+        CompassionCase storage c = compassionCases[compassionId];
+        require(c.status == CompassionStatus.MultiCouncilReview, "Not in council stage");
 
-        v.approvals++;
+        c.approvals++;
 
-        if (v.approvals * 2 > councilCount && councilCount > 0) {
-            v.status = CaseStatus.ConfirmedViolation;
-            emit CaseStatusChanged(violationId, CaseStatus.ConfirmedViolation);
+        if (c.approvals * 2 > councilCount && councilCount > 0) {
+            c.status = CompassionStatus.CompassionConfirmed;
+            emit CompassionStatusChanged(compassionId, CompassionStatus.CompassionConfirmed);
         }
     }
 
-    function rejectViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
+    function rejectCompassion(uint256 compassionId) external onlyCouncil {
+        CompassionCase storage c = compassionCases[compassionId];
         require(
-            v.status == CaseStatus.Filed ||
-            v.status == CaseStatus.UnderReview ||
-            v.status == CaseStatus.MultiCouncilReview,
+            c.status == CompassionStatus.Filed ||
+            c.status == CompassionStatus.UnderReview ||
+            c.status == CompassionStatus.MultiCouncilReview,
             "Invalid status"
         );
-        v.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(violationId, CaseStatus.Rejected);
+        c.status = CompassionStatus.Rejected;
+        emit CompassionStatusChanged(compassionId, CompassionStatus.Rejected);
     }
 }
