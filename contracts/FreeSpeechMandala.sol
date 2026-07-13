@@ -3,38 +3,27 @@ pragma solidity ^0.8.20;
 
 /// @title Free Speech Mandala
 /// @notice Encodes free speech safeguard.
-/// @dev Complements CaseLawCodification, PanelistQuality, and JusticeMandala.
+/// @dev Complements AppealsMandala, ComplaintWithdrawalTreaty, and PublicBenefitOracle.
 
 contract FreeSpeechMandala {
     address public guardian;
     uint256 public mandalaCount;
-    uint256 public violationCount;
     uint256 public councilCount;
 
     enum SpeechRule {
         FreeSpeechIsConstitutional,
-        NonCommercialProtected,
-        OverreachBlocked,
-        JurisprudenceClarified,
+        ExpressionMandated,
+        CensorshipSuppressed,
         TransparencyInSpeechSystems,
         PublicBenefitPriority
     }
 
-    enum ViolationType {
-        SpeechDenial,
-        Overreach,
-        Misapplication,
-        CouncilBypass,
-        PublicBenefitFailure,
-        TransparencyFailure
-    }
-
-    enum CaseStatus {
+    enum SpeechStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedViolation
+        SpeechConfirmed
     }
 
     struct Rule {
@@ -45,32 +34,29 @@ contract FreeSpeechMandala {
         uint256 timestamp;
     }
 
-    struct Violation {
+    struct SpeechCase {
         uint256 id;
-        address accuser;
-        address accused;
-        ViolationType violationType;
-        string details;
-        CaseStatus status;
+        address proposer;
+        string grounds;
+        SpeechStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Violation) public violations;
+    mapping(uint256 => SpeechCase) public speechCases;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, SpeechRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event ViolationFiled(uint256 indexed id, ViolationType violationType);
-    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
+    event SpeechFiled(uint256 indexed id);
+    event SpeechStatusChanged(uint256 indexed id, SpeechStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
         mandalaCount = 0;
-        violationCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -102,9 +88,8 @@ contract FreeSpeechMandala {
 
     function _declareDefaultRules() internal {
         _declare(SpeechRule.FreeSpeechIsConstitutional, "Free speech is constitutional; denial prohibited.");
-        _declare(SpeechRule.NonCommercialProtected, "Non-commercial speech protected; overreach prohibited.");
-        _declare(SpeechRule.OverreachBlocked, "Overreach blocked; fairness required.");
-        _declare(SpeechRule.JurisprudenceClarified, "Jurisprudence clarified; consistency required.");
+        _declare(SpeechRule.ExpressionMandated, "Expression mandated; censorship blocked.");
+        _declare(SpeechRule.CensorshipSuppressed, "Censorship suppressed; fairness required.");
         _declare(SpeechRule.TransparencyInSpeechSystems, "Speech systems must be transparent.");
         _declare(SpeechRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
@@ -128,61 +113,55 @@ contract FreeSpeechMandala {
         emit RuleLocked(id);
     }
 
-    function fileViolation(
-        address accused,
-        ViolationType violationType,
-        string calldata details
-    ) external {
-        violationCount++;
-        violations[violationCount] = Violation(
-            violationCount,
+    function fileSpeechCase(string calldata grounds) external {
+        mandalaCount++;
+        speechCases[mandalaCount] = SpeechCase(
+            mandalaCount,
             msg.sender,
-            accused,
-            violationType,
-            details,
-            CaseStatus.Filed,
+            grounds,
+            SpeechStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ViolationFiled(violationCount, violationType);
+        emit SpeechFiled(mandalaCount);
     }
 
-    function beginReview(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.Filed, "Not filed");
-        v.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(violationId, CaseStatus.UnderReview);
+    function beginReview(uint256 speechId) external onlyCouncil {
+        SpeechCase storage s = speechCases[speechId];
+        require(s.status == SpeechStatus.Filed, "Not filed");
+        s.status = SpeechStatus.UnderReview;
+        emit SpeechStatusChanged(speechId, SpeechStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.UnderReview, "Not under review");
-        v.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(violationId, CaseStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 speechId) external onlyCouncil {
+        SpeechCase storage s = speechCases[speechId];
+        require(s.status == SpeechStatus.UnderReview, "Not under review");
+        s.status = SpeechStatus.MultiCouncilReview;
+        emit SpeechStatusChanged(speechId, SpeechStatus.MultiCouncilReview);
     }
 
-    function approveViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.MultiCouncilReview, "Not in council stage");
+    function confirmSpeech(uint256 speechId) external onlyCouncil {
+        SpeechCase storage s = speechCases[speechId];
+        require(s.status == SpeechStatus.MultiCouncilReview, "Not in council stage");
 
-        v.approvals++;
+        s.approvals++;
 
-        if (v.approvals * 2 > councilCount && councilCount > 0) {
-            v.status = CaseStatus.ConfirmedViolation;
-            emit CaseStatusChanged(violationId, CaseStatus.ConfirmedViolation);
+        if (s.approvals * 2 > councilCount && councilCount > 0) {
+            s.status = SpeechStatus.SpeechConfirmed;
+            emit SpeechStatusChanged(speechId, SpeechStatus.SpeechConfirmed);
         }
     }
 
-    function rejectViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
+    function rejectSpeech(uint256 speechId) external onlyCouncil {
+        SpeechCase storage s = speechCases[speechId];
         require(
-            v.status == CaseStatus.Filed ||
-            v.status == CaseStatus.UnderReview ||
-            v.status == CaseStatus.MultiCouncilReview,
+            s.status == SpeechStatus.Filed ||
+            s.status == SpeechStatus.UnderReview ||
+            s.status == SpeechStatus.MultiCouncilReview,
             "Invalid status"
         );
-        v.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(violationId, CaseStatus.Rejected);
+        s.status = SpeechStatus.Rejected;
+        emit SpeechStatusChanged(speechId, SpeechStatus.Rejected);
     }
 }
