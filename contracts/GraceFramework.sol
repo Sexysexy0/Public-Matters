@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /// @title Grace Framework
 /// @notice Encodes grace and humane governance safeguards.
-/// @dev Complements EquilibriumTreaty, HopeMandala, and CompassionFramework.
+/// @dev Complements UnityFramework, CompassionMandala, and HumanityCharter.
 
 contract GraceFramework {
     address public guardian;
@@ -13,9 +13,9 @@ contract GraceFramework {
 
     enum GraceRule {
         GraceIsConstitutional,
-        ForgivenessAnchored,
-        HumaneTreatmentProtected,
-        CompassionSafeguarded,
+        CompassionAnchored,
+        HumilityProtected,
+        HumaneGovernanceSafeguarded,
         PublicBenefitPriority,
         MandatoryCouncilOversight,
         TransparencyInGraceSystems
@@ -23,9 +23,9 @@ contract GraceFramework {
 
     enum ViolationType {
         GraceDenial,
-        ForgivenessSuppression,
-        HumaneTreatmentBlocked,
-        CompassionErasure,
+        CompassionSuppression,
+        HumilityBlocked,
+        HumaneGovernanceErosion,
         CouncilBypass,
         PublicBenefitFailure,
         TransparencyFailure
@@ -104,9 +104,9 @@ contract GraceFramework {
 
     function _declareDefaultRules() internal {
         _declare(GraceRule.GraceIsConstitutional, "Grace is constitutional; denial prohibited.");
-        _declare(GraceRule.ForgivenessAnchored, "Forgiveness is anchored; suppression prohibited.");
-        _declare(GraceRule.HumaneTreatmentProtected, "Humane treatment is protected; blocking prohibited.");
-        _declare(GraceRule.CompassionSafeguarded, "Compassion safeguarded; erasure prohibited.");
+        _declare(GraceRule.CompassionAnchored, "Compassion anchored; suppression prohibited.");
+        _declare(GraceRule.HumilityProtected, "Humility protected; blocking prohibited.");
+        _declare(GraceRule.HumaneGovernanceSafeguarded, "Humane governance safeguarded; erosion prohibited.");
         _declare(GraceRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
         _declare(GraceRule.MandatoryCouncilOversight, "Council oversight required for grace enforcement.");
         _declare(GraceRule.TransparencyInGraceSystems, "Grace systems must be transparent.");
