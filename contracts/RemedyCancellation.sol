@@ -1,67 +1,62 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title Remedy Cancellation
+/// @title Remedy Cancellation Framework
 /// @notice Encodes true cancellation remedy safeguard.
-/// @dev Complements AppealsMandala, JusticeMandala, and ResponsibilityMandala.
+/// @dev Complements PanelistQuality, CaseLawCodification, and AppealsMandala.
 
 contract RemedyCancellation {
     address public guardian;
-    uint256 public cancellationCount;
+    uint256 public remedyCount;
     uint256 public councilCount;
 
-    enum CancellationRule {
+    enum RemedyRule {
         CancellationIsConstitutional,
+        RemedyMandated,
         AbuseSuppressed,
-        LegitimateReRegistrationEnabled,
-        DueProcessProtected,
-        PanelOversightRequired,
-        PublicBenefitPriority,
-        TransparencyInCancellationSystems
+        TransparencyInRemedySystems,
+        PublicBenefitPriority
     }
 
-    enum CancellationStatus {
+    enum RemedyStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        CancellationGranted,
-        CancellationDenied
+        RemedyConfirmed
     }
 
     struct Rule {
         uint256 id;
-        CancellationRule ruleType;
+        RemedyRule ruleType;
         string description;
         bool immutableEntry;
         uint256 timestamp;
     }
 
-    struct Cancellation {
+    struct RemedyCase {
         uint256 id;
-        address complainant;
-        address respondent;
-        string domainName;
+        address proposer;
         string grounds;
-        CancellationStatus status;
+        RemedyStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Cancellation) public cancellations;
+    mapping(uint256 => RemedyCase) public remedies;
     mapping(address => bool) public councilMember;
 
-    event RuleDeclared(uint256 indexed id, CancellationRule ruleType);
+    event RuleDeclared(uint256 indexed id, RemedyRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event CancellationFiled(uint256 indexed id, string domainName);
-    event CancellationStatusChanged(uint256 indexed id, CancellationStatus status);
+    event RemedyFiled(uint256 indexed id);
+    event RemedyStatusChanged(uint256 indexed id, RemedyStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
-        cancellationCount = 0;
+        remedyCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -92,19 +87,23 @@ contract RemedyCancellation {
     }
 
     function _declareDefaultRules() internal {
-        _declare(CancellationRule.CancellationIsConstitutional, "Cancellation is constitutional; denial prohibited.");
-        _declare(CancellationRule.AbuseSuppressed, "Abuse suppressed; cybersquatting blocked.");
-        _declare(CancellationRule.LegitimateReRegistrationEnabled, "Legitimate re-registration enabled; fairness required.");
-        _declare(CancellationRule.DueProcessProtected, "Due process protected; violation blocked.");
-        _declare(CancellationRule.PanelOversightRequired, "Panel oversight required; collective governance.");
-        _declare(CancellationRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
-        _declare(CancellationRule.TransparencyInCancellationSystems, "Cancellation systems must be transparent.");
+        _declare(RemedyRule.CancellationIsConstitutional, "Cancellation is constitutional; denial prohibited.");
+        _declare(RemedyRule.RemedyMandated, "Remedy mandated; abuse blocked.");
+        _declare(RemedyRule.AbuseSuppressed, "Abuse suppressed; fairness required.");
+        _declare(RemedyRule.TransparencyInRemedySystems, "Remedy systems must be transparent.");
+        _declare(RemedyRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
-    function _declare(CancellationRule ruleType, string memory description) internal {
-        uint256 id = cancellationCount + 1;
-        rules[id] = Rule(id, ruleType, description, false, block.timestamp);
-        emit RuleDeclared(id, ruleType);
+    function _declare(RemedyRule ruleType, string memory description) internal {
+        remedyCount++;
+        rules[remedyCount] = Rule(
+            remedyCount,
+            ruleType,
+            description,
+            false,
+            block.timestamp
+        );
+        emit RuleDeclared(remedyCount, ruleType);
     }
 
     function lockRule(uint256 id) external onlyGuardian {
@@ -114,61 +113,55 @@ contract RemedyCancellation {
         emit RuleLocked(id);
     }
 
-    function fileCancellation(
-        address respondent,
-        string calldata domainName,
-        string calldata grounds
-    ) external {
-        cancellationCount++;
-        cancellations[cancellationCount] = Cancellation(
-            cancellationCount,
+    function fileRemedyCase(string calldata grounds) external {
+        remedyCount++;
+        remedies[remedyCount] = RemedyCase(
+            remedyCount,
             msg.sender,
-            respondent,
-            domainName,
             grounds,
-            CancellationStatus.Filed,
+            RemedyStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit CancellationFiled(cancellationCount, domainName);
+        emit RemedyFiled(remedyCount);
     }
 
-    function beginReview(uint256 cancellationId) external onlyCouncil {
-        Cancellation storage c = cancellations[cancellationId];
-        require(c.status == CancellationStatus.Filed, "Not filed");
-        c.status = CancellationStatus.UnderReview;
-        emit CancellationStatusChanged(cancellationId, CancellationStatus.UnderReview);
+    function beginReview(uint256 remedyId) external onlyCouncil {
+        RemedyCase storage r = remedies[remedyId];
+        require(r.status == RemedyStatus.Filed, "Not filed");
+        r.status = RemedyStatus.UnderReview;
+        emit RemedyStatusChanged(remedyId, RemedyStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 cancellationId) external onlyCouncil {
-        Cancellation storage c = cancellations[cancellationId];
-        require(c.status == CancellationStatus.UnderReview, "Not under review");
-        c.status = CancellationStatus.MultiCouncilReview;
-        emit CancellationStatusChanged(cancellationId, CancellationStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 remedyId) external onlyCouncil {
+        RemedyCase storage r = remedies[remedyId];
+        require(r.status == RemedyStatus.UnderReview, "Not under review");
+        r.status = RemedyStatus.MultiCouncilReview;
+        emit RemedyStatusChanged(remedyId, RemedyStatus.MultiCouncilReview);
     }
 
-    function grantCancellation(uint256 cancellationId) external onlyCouncil {
-        Cancellation storage c = cancellations[cancellationId];
-        require(c.status == CancellationStatus.MultiCouncilReview, "Not in council stage");
+    function confirmRemedy(uint256 remedyId) external onlyCouncil {
+        RemedyCase storage r = remedies[remedyId];
+        require(r.status == RemedyStatus.MultiCouncilReview, "Not in council stage");
 
-        c.approvals++;
+        r.approvals++;
 
-        if (c.approvals * 2 > councilCount && councilCount > 0) {
-            c.status = CancellationStatus.CancellationGranted;
-            emit CancellationStatusChanged(cancellationId, CancellationStatus.CancellationGranted);
+        if (r.approvals * 2 > councilCount && councilCount > 0) {
+            r.status = RemedyStatus.RemedyConfirmed;
+            emit RemedyStatusChanged(remedyId, RemedyStatus.RemedyConfirmed);
         }
     }
 
-    function denyCancellation(uint256 cancellationId) external onlyCouncil {
-        Cancellation storage c = cancellations[cancellationId];
+    function rejectRemedy(uint256 remedyId) external onlyCouncil {
+        RemedyCase storage r = remedies[remedyId];
         require(
-            c.status == CancellationStatus.Filed ||
-            c.status == CancellationStatus.UnderReview ||
-            c.status == CancellationStatus.MultiCouncilReview,
+            r.status == RemedyStatus.Filed ||
+            r.status == RemedyStatus.UnderReview ||
+            r.status == RemedyStatus.MultiCouncilReview,
             "Invalid status"
         );
-        c.status = CancellationStatus.CancellationDenied;
-        emit CancellationStatusChanged(cancellationId, CancellationStatus.CancellationDenied);
+        r.status = RemedyStatus.Rejected;
+        emit RemedyStatusChanged(remedyId, RemedyStatus.Rejected);
     }
 }
