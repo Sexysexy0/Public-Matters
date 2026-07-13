@@ -1,50 +1,34 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title Transparency Culture Covenant
-/// @notice Establishes radical transparency as a constitutional governance principle.
-/// @dev Works with InternalFeedbackLoop and ReputationRiskProtocol to ensure openness, accountability, and fearless culture.
+/// @title Transparency Culture
+/// @notice Encodes radical transparency and whistleblower protection.
+/// @dev Complements DeceptionAuditFramework, FeedbackOracle, and RiskContextReview.
 
 contract TransparencyCulture {
     address public guardian;
-    uint256 public principleCount;
-    uint256 public caseCount;
+    uint256 public charterCount;
+    uint256 public violationCount;
     uint256 public councilCount;
 
-    enum RoleType {
-        Leader,
-        Founder,
-        Innovator,
-        PublicServant,
-        Employee,
-        Council,
-        Oversight,
-        FutureEntity
-    }
-
-    enum TransparencyPrinciple {
-        NoDataSuppression,
-        NoHiddenMistakes,
-        NoRetaliationAgainstWhistleblowers,
-        MandatoryPublicDisclosure,
-        MandatoryRootCausePublication,
+    enum TransparencyRule {
+        TransparencyIsConstitutional,
+        PricingClarityAnchored,
+        LocationAuthenticityProtected,
+        WhistleblowerSafeguarded,
+        PublicBenefitPriority,
         MandatoryCouncilOversight,
-        CriticismIsProtected,
-        TransparencyOverNarrativeControl,
-        AccountabilityOverImage,
-        RadicalTransparencyIsConstitutional
+        TransparencyBindingAcrossMembers
     }
 
-    enum TransparencyViolation {
-        DataSuppression,
-        HiddenMistake,
+    enum ViolationType {
+        TransparencyDenial,
+        PricingObfuscation,
+        FakeLocationClaim,
         WhistleblowerRetaliation,
-        DisclosureFailure,
-        RootCauseHidden,
-        OversightBypassed,
-        CriticismSilenced,
-        NarrativeManipulation,
-        ImageOverAccountability
+        CouncilBypass,
+        PublicBenefitFailure,
+        TransparencyBreach
     }
 
     enum CaseStatus {
@@ -55,9 +39,9 @@ contract TransparencyCulture {
         ConfirmedViolation
     }
 
-    struct Principle {
+    struct Rule {
         uint256 id;
-        TransparencyPrinciple principleType;
+        TransparencyRule ruleType;
         string description;
         bool immutableEntry;
         uint256 timestamp;
@@ -67,32 +51,31 @@ contract TransparencyCulture {
         uint256 id;
         address accuser;
         address accused;
-        TransparencyViolation violationType;
+        ViolationType violationType;
         string details;
         CaseStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
-    mapping(uint256 => Principle) public principles;
-    mapping<uint256 => Violation) public violations;
-    mapping(address => RoleType) public roles;
+    mapping(uint256 => Rule) public rules;
+    mapping(uint256 => Violation) public violations;
     mapping(address => bool) public councilMember;
 
-    event PrincipleDeclared(uint256 indexed id, TransparencyPrinciple principleType);
-    event PrincipleLocked(uint256 indexed id);
-    event ViolationFiled(uint256 indexed id, TransparencyViolation violationType);
+    event RuleDeclared(uint256 indexed id, TransparencyRule ruleType);
+    event RuleLocked(uint256 indexed id);
+    event ViolationFiled(uint256 indexed id, ViolationType violationType);
     event CaseStatusChanged(uint256 indexed id, CaseStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
-        principleCount = 0;
-        caseCount = 0;
+        charterCount = 0;
+        violationCount = 0;
         councilCount = 0;
 
-        _declareDefaultPrinciples();
+        _declareDefaultRules();
     }
 
     modifier onlyGuardian() {
@@ -103,10 +86,6 @@ contract TransparencyCulture {
     modifier onlyCouncil() {
         require(councilMember[msg.sender], "Council only");
         _;
-    }
-
-    function assignRole(address account, RoleType role) external onlyGuardian {
-        roles[account] = role;
     }
 
     function addCouncilMember(address member) external onlyGuardian {
@@ -123,46 +102,43 @@ contract TransparencyCulture {
         emit CouncilMemberRemoved(member);
     }
 
-    function _declareDefaultPrinciples() internal {
-        _declare(TransparencyPrinciple.NoDataSuppression, "Data cannot be suppressed.");
-        _declare(TransparencyPrinciple.NoHiddenMistakes, "Mistakes cannot be hidden.");
-        _declare(TransparencyPrinciple.NoRetaliationAgainstWhistleblowers, "Whistleblowers cannot be retaliated against.");
-        _declare(TransparencyPrinciple.MandatoryPublicDisclosure, "Public disclosure is mandatory for systemic issues.");
-        _declare(TransparencyPrinciple.MandatoryRootCausePublication, "Root cause analysis must be published.");
-        _declare(TransparencyPrinciple.MandatoryCouncilOversight, "Council oversight is mandatory.");
-        _declare(TransparencyPrinciple.CriticismIsProtected, "Criticism is protected speech.");
-        _declare(TransparencyPrinciple.TransparencyOverNarrativeControl, "Transparency overrides narrative control.");
-        _declare(TransparencyPrinciple.AccountabilityOverImage, "Accountability overrides brand image management.");
-        _declare(TransparencyPrinciple.RadicalTransparencyIsConstitutional, "Radical transparency is constitutional.");
+    function _declareDefaultRules() internal {
+        _declare(TransparencyRule.TransparencyIsConstitutional, "Transparency is constitutional; denial prohibited.");
+        _declare(TransparencyRule.PricingClarityAnchored, "Pricing clarity anchored; obfuscation prohibited.");
+        _declare(TransparencyRule.LocationAuthenticityProtected, "Location authenticity protected; fake claims prohibited.");
+        _declare(TransparencyRule.WhistleblowerSafeguarded, "Whistleblower safeguarded; retaliation prohibited.");
+        _declare(TransparencyRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
+        _declare(TransparencyRule.MandatoryCouncilOversight, "Council oversight required for transparency enforcement.");
+        _declare(TransparencyRule.TransparencyBindingAcrossMembers, "Transparency rules binding across all members.");
     }
 
-    function _declare(TransparencyPrinciple principleType, string memory description) internal {
-        principleCount++;
-        principles[principleCount] = Principle(
-            principleCount,
-            principleType,
+    function _declare(TransparencyRule ruleType, string memory description) internal {
+        charterCount++;
+        rules[charterCount] = Rule(
+            charterCount,
+            ruleType,
             description,
             false,
             block.timestamp
         );
-        emit PrincipleDeclared(principleCount, principleType);
+        emit RuleDeclared(charterCount, ruleType);
     }
 
-    function lockPrinciple(uint256 id) external onlyGuardian {
-        Principle storage p = principles[id];
-        require(!p.immutableEntry, "Already immutable");
-        p.immutableEntry = true;
-        emit PrincipleLocked(id);
+    function lockRule(uint256 id) external onlyGuardian {
+        Rule storage r = rules[id];
+        require(!r.immutableEntry, "Already immutable");
+        r.immutableEntry = true;
+        emit RuleLocked(id);
     }
 
     function fileViolation(
         address accused,
-        TransparencyViolation violationType,
+        ViolationType violationType,
         string calldata details
     ) external {
-        caseCount++;
-        violations[caseCount] = Violation(
-            caseCount,
+        violationCount++;
+        violations[violationCount] = Violation(
+            violationCount,
             msg.sender,
             accused,
             violationType,
@@ -172,37 +148,37 @@ contract TransparencyCulture {
             block.timestamp
         );
 
-        emit ViolationFiled(caseCount, violationType);
+        emit ViolationFiled(violationCount, violationType);
     }
 
-    function beginReview(uint256 caseId) external onlyCouncil {
-        Violation storage v = violations[caseId];
+    function beginReview(uint256 violationId) external onlyCouncil {
+        Violation storage v = violations[violationId];
         require(v.status == CaseStatus.Filed, "Not filed");
         v.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(caseId, CaseStatus.UnderReview);
+        emit CaseStatusChanged(violationId, CaseStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 caseId) external onlyCouncil {
-        Violation storage v = violations[caseId];
+    function escalateToMultiCouncil(uint256 violationId) external onlyCouncil {
+        Violation storage v = violations[violationId];
         require(v.status == CaseStatus.UnderReview, "Not under review");
         v.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(caseId, CaseStatus.MultiCouncilReview);
+        emit CaseStatusChanged(violationId, CaseStatus.MultiCouncilReview);
     }
 
-    function approveViolation(uint256 caseId) external onlyCouncil {
-        Violation storage v = violations[caseId];
+    function approveViolation(uint256 violationId) external onlyCouncil {
+        Violation storage v = violations[violationId];
         require(v.status == CaseStatus.MultiCouncilReview, "Not in council stage");
 
         v.approvals++;
 
         if (v.approvals * 2 > councilCount && councilCount > 0) {
             v.status = CaseStatus.ConfirmedViolation;
-            emit CaseStatusChanged(caseId, CaseStatus.ConfirmedViolation);
+            emit CaseStatusChanged(violationId, CaseStatus.ConfirmedViolation);
         }
     }
 
-    function rejectCase(uint256 caseId) external onlyCouncil {
-        Violation storage v = violations[caseId];
+    function rejectViolation(uint256 violationId) external onlyCouncil {
+        Violation storage v = violations[violationId];
         require(
             v.status == CaseStatus.Filed ||
             v.status == CaseStatus.UnderReview ||
@@ -210,6 +186,6 @@ contract TransparencyCulture {
             "Invalid status"
         );
         v.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(caseId, CaseStatus.Rejected);
+        emit CaseStatusChanged(violationId, CaseStatus.Rejected);
     }
 }
