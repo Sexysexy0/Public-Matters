@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /// @title Dignity Treaty
 /// @notice Unifies dignity commitments into treaty law.
-/// @dev Complements JusticeMandala, TrustTreaty, and FairnessMandala.
+/// @dev Complements VisionCharter, JusticeMandala, and ResponsibilityMandala.
 
 contract DignityTreaty {
     address public guardian;
@@ -14,7 +14,7 @@ contract DignityTreaty {
     enum DignityRule {
         DignityIsConstitutional,
         RespectAnchored,
-        HumiliationProhibited,
+        DehumanizationProhibited,
         ExploitationBlocked,
         PublicBenefitPriority,
         MandatoryCouncilOversight,
@@ -24,7 +24,7 @@ contract DignityTreaty {
     enum ViolationType {
         DignityDenial,
         RespectFailure,
-        Humiliation,
+        Dehumanization,
         Exploitation,
         CouncilBypass,
         PublicBenefitFailure,
@@ -105,8 +105,8 @@ contract DignityTreaty {
     function _declareDefaultRules() internal {
         _declare(DignityRule.DignityIsConstitutional, "Dignity is constitutional; denial prohibited.");
         _declare(DignityRule.RespectAnchored, "Respect anchored; failure prohibited.");
-        _declare(DignityRule.HumiliationProhibited, "Humiliation prohibited; violation blocked.");
-        _declare(DignityRule.ExploitationBlocked, "Exploitation blocked; abuse prohibited.");
+        _declare(DignityRule.DehumanizationProhibited, "Dehumanization prohibited; violation blocked.");
+        _declare(DignityRule.ExploitationBlocked, "Exploitation blocked; breach prohibited.");
         _declare(DignityRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
         _declare(DignityRule.MandatoryCouncilOversight, "Council oversight required for dignity enforcement.");
         _declare(DignityRule.TransparencyInDignitySystems, "Dignity systems must be transparent.");
