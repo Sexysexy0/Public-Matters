@@ -2,63 +2,61 @@
 pragma solidity ^0.8.20;
 
 /// @title Case Law Codification
-/// @notice Encodes pan-Provider jurisprudence safeguard.
-/// @dev Complements PanelistQuality, AppealsMandala, and RemedyCancellation.
+/// @notice Encodes pan-provider jurisprudence safeguard.
+/// @dev Complements ExpeditedProcedureFramework, AppealsMandala, and PanelistQuality.
 
 contract CaseLawCodification {
     address public guardian;
-    uint256 public codificationCount;
+    uint256 public codexCount;
     uint256 public councilCount;
 
-    enum CodificationRule {
+    enum JurisRule {
         JurisprudenceIsConstitutional,
-        ConsistencyRequired,
-        PanProviderBindingEnabled,
-        BiasSuppressed,
-        TransparencyInCodificationSystems,
+        PrecedentMandated,
+        InconsistencySuppressed,
+        TransparencyInJurisSystems,
         PublicBenefitPriority
     }
 
-    enum CodificationStatus {
+    enum JurisStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        CodificationConfirmed
+        JurisConfirmed
     }
 
     struct Rule {
         uint256 id;
-        CodificationRule ruleType;
+        JurisRule ruleType;
         string description;
         bool immutableEntry;
         uint256 timestamp;
     }
 
-    struct Codification {
+    struct JurisCase {
         uint256 id;
         address proposer;
-        string caseReference;
         string grounds;
-        CodificationStatus status;
+        JurisStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Codification) public codifications;
+    mapping(uint256 => JurisCase) public jurisprudence;
     mapping(address => bool) public councilMember;
 
-    event RuleDeclared(uint256 indexed id, CodificationRule ruleType);
+    event RuleDeclared(uint256 indexed id, JurisRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event CodificationFiled(uint256 indexed id, string caseReference);
-    event CodificationStatusChanged(uint256 indexed id, CodificationStatus status);
+    event JurisFiled(uint256 indexed id);
+    event JurisStatusChanged(uint256 indexed id, JurisStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
-        codificationCount = 0;
+        codexCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -89,24 +87,23 @@ contract CaseLawCodification {
     }
 
     function _declareDefaultRules() internal {
-        _declare(CodificationRule.JurisprudenceIsConstitutional, "Jurisprudence is constitutional; denial prohibited.");
-        _declare(CodificationRule.ConsistencyRequired, "Consistency required; divergence prohibited.");
-        _declare(CodificationRule.PanProviderBindingEnabled, "Pan-Provider binding enabled; uniformity required.");
-        _declare(CodificationRule.BiasSuppressed, "Bias suppressed; impartiality required.");
-        _declare(CodificationRule.TransparencyInCodificationSystems, "Codification systems must be transparent.");
-        _declare(CodificationRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
+        _declare(JurisRule.JurisprudenceIsConstitutional, "Jurisprudence is constitutional; denial prohibited.");
+        _declare(JurisRule.PrecedentMandated, "Precedent mandated; inconsistency blocked.");
+        _declare(JurisRule.InconsistencySuppressed, "Inconsistency suppressed; fairness required.");
+        _declare(JurisRule.TransparencyInJurisSystems, "Jurisprudence systems must be transparent.");
+        _declare(JurisRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
-    function _declare(CodificationRule ruleType, string memory description) internal {
-        codificationCount++;
-        rules[codificationCount] = Rule(
-            codificationCount,
+    function _declare(JurisRule ruleType, string memory description) internal {
+        codexCount++;
+        rules[codexCount] = Rule(
+            codexCount,
             ruleType,
             description,
             false,
             block.timestamp
         );
-        emit RuleDeclared(codificationCount, ruleType);
+        emit RuleDeclared(codexCount, ruleType);
     }
 
     function lockRule(uint256 id) external onlyGuardian {
@@ -116,59 +113,55 @@ contract CaseLawCodification {
         emit RuleLocked(id);
     }
 
-    function fileCodification(
-        string calldata caseReference,
-        string calldata grounds
-    ) external {
-        codificationCount++;
-        codifications[codificationCount] = Codification(
-            codificationCount,
+    function fileJurisCase(string calldata grounds) external {
+        codexCount++;
+        jurisprudence[codexCount] = JurisCase(
+            codexCount,
             msg.sender,
-            caseReference,
             grounds,
-            CodificationStatus.Filed,
+            JurisStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit CodificationFiled(codificationCount, caseReference);
+        emit JurisFiled(codexCount);
     }
 
-    function beginReview(uint256 codificationId) external onlyCouncil {
-        Codification storage c = codifications[codificationId];
-        require(c.status == CodificationStatus.Filed, "Not filed");
-        c.status = CodificationStatus.UnderReview;
-        emit CodificationStatusChanged(codificationId, CodificationStatus.UnderReview);
+    function beginReview(uint256 jurisId) external onlyCouncil {
+        JurisCase storage j = jurisprudence[jurisId];
+        require(j.status == JurisStatus.Filed, "Not filed");
+        j.status = JurisStatus.UnderReview;
+        emit JurisStatusChanged(jurisId, JurisStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 codificationId) external onlyCouncil {
-        Codification storage c = codifications[codificationId];
-        require(c.status == CodificationStatus.UnderReview, "Not under review");
-        c.status = CodificationStatus.MultiCouncilReview;
-        emit CodificationStatusChanged(codificationId, CodificationStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 jurisId) external onlyCouncil {
+        JurisCase storage j = jurisprudence[jurisId];
+        require(j.status == JurisStatus.UnderReview, "Not under review");
+        j.status = JurisStatus.MultiCouncilReview;
+        emit JurisStatusChanged(jurisId, JurisStatus.MultiCouncilReview);
     }
 
-    function confirmCodification(uint256 codificationId) external onlyCouncil {
-        Codification storage c = codifications[codificationId];
-        require(c.status == CodificationStatus.MultiCouncilReview, "Not in council stage");
+    function confirmJuris(uint256 jurisId) external onlyCouncil {
+        JurisCase storage j = jurisprudence[jurisId];
+        require(j.status == JurisStatus.MultiCouncilReview, "Not in council stage");
 
-        c.approvals++;
+        j.approvals++;
 
-        if (c.approvals * 2 > councilCount && councilCount > 0) {
-            c.status = CodificationStatus.CodificationConfirmed;
-            emit CodificationStatusChanged(codificationId, CodificationStatus.CodificationConfirmed);
+        if (j.approvals * 2 > councilCount && councilCount > 0) {
+            j.status = JurisStatus.JurisConfirmed;
+            emit JurisStatusChanged(jurisId, JurisStatus.JurisConfirmed);
         }
     }
 
-    function rejectCodification(uint256 codificationId) external onlyCouncil {
-        Codification storage c = codifications[codificationId];
+    function rejectJuris(uint256 jurisId) external onlyCouncil {
+        JurisCase storage j = jurisprudence[jurisId];
         require(
-            c.status == CodificationStatus.Filed ||
-            c.status == CodificationStatus.UnderReview ||
-            c.status == CodificationStatus.MultiCouncilReview,
+            j.status == JurisStatus.Filed ||
+            j.status == JurisStatus.UnderReview ||
+            j.status == JurisStatus.MultiCouncilReview,
             "Invalid status"
         );
-        c.status = CodificationStatus.Rejected;
-        emit CodificationStatusChanged(codificationId, CodificationStatus.Rejected);
+        j.status = JurisStatus.Rejected;
+        emit JurisStatusChanged(jurisId, JurisStatus.Rejected);
     }
 }
