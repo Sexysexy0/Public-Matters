@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /// @title Resonance Framework
 /// @notice Encodes resonance as systemic safeguard.
-/// @dev Complements MercyTreaty, HopeMandala, and BalanceFramework.
+/// @dev Complements SpandaFramework, MahakalaCovenant, and UnityFramework.
 
 contract ResonanceFramework {
     address public guardian;
@@ -13,9 +13,9 @@ contract ResonanceFramework {
 
     enum ResonanceRule {
         ResonanceIsConstitutional,
-        AlignmentAnchored,
-        CoherenceProtected,
-        HarmonySafeguarded,
+        HarmonyAnchored,
+        CycleAlignmentProtected,
+        VibrationalIntegritySafeguarded,
         PublicBenefitPriority,
         MandatoryCouncilOversight,
         TransparencyInResonanceSystems
@@ -23,9 +23,9 @@ contract ResonanceFramework {
 
     enum ViolationType {
         ResonanceDenial,
-        AlignmentSuppression,
-        CoherenceBlocked,
-        HarmonyErasure,
+        HarmonySuppression,
+        CycleMisalignment,
+        VibrationalDistortion,
         CouncilBypass,
         PublicBenefitFailure,
         TransparencyFailure
@@ -104,9 +104,9 @@ contract ResonanceFramework {
 
     function _declareDefaultRules() internal {
         _declare(ResonanceRule.ResonanceIsConstitutional, "Resonance is constitutional; denial prohibited.");
-        _declare(ResonanceRule.AlignmentAnchored, "Alignment is anchored; suppression prohibited.");
-        _declare(ResonanceRule.CoherenceProtected, "Coherence is protected; blocking prohibited.");
-        _declare(ResonanceRule.HarmonySafeguarded, "Harmony safeguarded; erasure prohibited.");
+        _declare(ResonanceRule.HarmonyAnchored, "Harmony anchored; suppression prohibited.");
+        _declare(ResonanceRule.CycleAlignmentProtected, "Cycle alignment protected; misalignment prohibited.");
+        _declare(ResonanceRule.VibrationalIntegritySafeguarded, "Vibrational integrity safeguarded; distortion prohibited.");
         _declare(ResonanceRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
         _declare(ResonanceRule.MandatoryCouncilOversight, "Council oversight required for resonance enforcement.");
         _declare(ResonanceRule.TransparencyInResonanceSystems, "Resonance systems must be transparent.");
