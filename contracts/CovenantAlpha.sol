@@ -14,7 +14,7 @@ contract CovenantAlpha {
         bool anchored;
     }
 
-    mapping(uint256 => Origin) public origins;
+    mapping(uint256 => Origin> public origins;
 
     event GuardianChanged(address indexed oldGuardian, address indexed newGuardian);
     event AlphaDeclared(uint256 indexed id, string name, string principle);
@@ -35,7 +35,11 @@ contract CovenantAlpha {
         guardian = newGuardian;
     }
 
-    function declareAlpha(string calldata name, string calldata principle, bool anchored) external onlyGuardian {
+    function declareAlpha(
+        string calldata name,
+        string calldata principle,
+        bool anchored
+    ) external onlyGuardian {
         alphaCount++;
         origins[alphaCount] = Origin(alphaCount, name, principle, anchored);
         emit AlphaDeclared(alphaCount, name, principle);
