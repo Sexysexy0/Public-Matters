@@ -35,7 +35,11 @@ contract CovenantOmniscience {
         guardian = newGuardian;
     }
 
-    function declareKnowledge(string calldata subject, string calldata insight, bool verified) external onlyGuardian {
+    function declareKnowledge(
+        string calldata subject,
+        string calldata insight,
+        bool verified
+    ) external onlyGuardian {
         knowledgeCount++;
         knowledges[knowledgeCount] = Knowledge(knowledgeCount, subject, insight, verified);
         emit KnowledgeDeclared(knowledgeCount, subject, insight);
