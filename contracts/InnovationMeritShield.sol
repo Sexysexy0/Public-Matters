@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 /// @title Innovation Merit Shield
-/// @notice Encodes merit safeguard.
-/// @dev Complements BureaucraticAccountability, InnovationConstitution, and InnovationFreedomCharter.
+/// @notice Encodes merit and fairness safeguard in innovation ecosystems.
+/// @dev Complements PublicBenefitOracle, InnovationSafetyCovenant, and BureaucraticAccountability.
 
 contract InnovationMeritShield {
     address public guardian;
@@ -12,8 +12,8 @@ contract InnovationMeritShield {
 
     enum MeritRule {
         MeritIsConstitutional,
-        FavoritismSuppressed,
-        EqualOpportunityRequired,
+        FairnessMandated,
+        BiasSuppressed,
         TransparencyInMeritSystems,
         PublicBenefitPriority
     }
@@ -34,7 +34,7 @@ contract InnovationMeritShield {
         uint256 timestamp;
     }
 
-    struct Merit {
+    struct MeritCase {
         uint256 id;
         address proposer;
         string grounds;
@@ -44,7 +44,7 @@ contract InnovationMeritShield {
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Merit) public merits;
+    mapping(uint256 => MeritCase) public meritCases;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, MeritRule ruleType);
@@ -88,8 +88,8 @@ contract InnovationMeritShield {
 
     function _declareDefaultRules() internal {
         _declare(MeritRule.MeritIsConstitutional, "Merit is constitutional; denial prohibited.");
-        _declare(MeritRule.FavoritismSuppressed, "Favoritism suppressed; unfair advantage blocked.");
-        _declare(MeritRule.EqualOpportunityRequired, "Equal opportunity required; discrimination prohibited.");
+        _declare(MeritRule.FairnessMandated, "Fairness mandated; bias blocked.");
+        _declare(MeritRule.BiasSuppressed, "Bias suppressed; fairness required.");
         _declare(MeritRule.TransparencyInMeritSystems, "Merit systems must be transparent.");
         _declare(MeritRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
@@ -113,9 +113,9 @@ contract InnovationMeritShield {
         emit RuleLocked(id);
     }
 
-    function fileMerit(string calldata grounds) external {
+    function fileMeritCase(string calldata grounds) external {
         shieldCount++;
-        merits[shieldCount] = Merit(
+        meritCases[shieldCount] = MeritCase(
             shieldCount,
             msg.sender,
             grounds,
@@ -128,21 +128,21 @@ contract InnovationMeritShield {
     }
 
     function beginReview(uint256 meritId) external onlyCouncil {
-        Merit storage m = merits[meritId];
+        MeritCase storage m = meritCases[meritId];
         require(m.status == MeritStatus.Filed, "Not filed");
         m.status = MeritStatus.UnderReview;
         emit MeritStatusChanged(meritId, MeritStatus.UnderReview);
     }
 
     function escalateToMultiCouncil(uint256 meritId) external onlyCouncil {
-        Merit storage m = merits[meritId];
+        MeritCase storage m = meritCases[meritId];
         require(m.status == MeritStatus.UnderReview, "Not under review");
         m.status = MeritStatus.MultiCouncilReview;
         emit MeritStatusChanged(meritId, MeritStatus.MultiCouncilReview);
     }
 
     function confirmMerit(uint256 meritId) external onlyCouncil {
-        Merit storage m = merits[meritId];
+        MeritCase storage m = meritCases[meritId];
         require(m.status == MeritStatus.MultiCouncilReview, "Not in council stage");
 
         m.approvals++;
@@ -154,7 +154,7 @@ contract InnovationMeritShield {
     }
 
     function rejectMerit(uint256 meritId) external onlyCouncil {
-        Merit storage m = merits[meritId];
+        MeritCase storage m = meritCases[meritId];
         require(
             m.status == MeritStatus.Filed ||
             m.status == MeritStatus.UnderReview ||
