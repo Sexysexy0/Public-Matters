@@ -1,21 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title Public Benefit Oracle
-/// @notice Encodes safeguard for anchoring all systemic transformations to public benefit.
-/// @dev Complements CollectiveMetamorphosisOracle, TransformationMandala, and BureaucraticAccountability.
+/// @title Public Benefit Mandala
+/// @notice Encodes safeguard for systemic public benefit — anchor across all oracles.
+/// @dev Complements DataSovereigntyOracle, AIPrivacyMandala, InnovationConstitution, and DormantCodeOracle.
 
-contract PublicBenefitOracle {
+contract PublicBenefitMandala {
     address public guardian;
-    uint256 public oracleCount;
+    uint256 public mandalaCount;
     uint256 public councilCount;
 
     enum BenefitRule {
         PublicBenefitIsConstitutional,
-        AnchorMandated,
         EliteGainSuppressed,
-        TransparencyInBenefitSystems,
-        CollectivePriority
+        CollectivePriorityMandated,
+        TransparencyMandated,
+        DormantSafeguardsActivated
     }
 
     enum BenefitStatus {
@@ -56,7 +56,7 @@ contract PublicBenefitOracle {
 
     constructor() {
         guardian = msg.sender;
-        oracleCount = 0;
+        mandalaCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -88,22 +88,22 @@ contract PublicBenefitOracle {
 
     function _declareDefaultRules() internal {
         _declare(BenefitRule.PublicBenefitIsConstitutional, "Public benefit is constitutional; denial prohibited.");
-        _declare(BenefitRule.AnchorMandated, "Anchor mandated; all transformations tied to public benefit.");
-        _declare(BenefitRule.EliteGainSuppressed, "Elite gain suppressed; fairness required.");
-        _declare(BenefitRule.TransparencyInBenefitSystems, "Benefit systems must be transparent.");
-        _declare(BenefitRule.CollectivePriority, "Collective priority overrides individual exploitation.");
+        _declare(BenefitRule.EliteGainSuppressed, "Elite gain suppressed; collective fairness mandated.");
+        _declare(BenefitRule.CollectivePriorityMandated, "Collective priority mandated; masa protected.");
+        _declare(BenefitRule.TransparencyMandated, "Public benefit systems must be auditable.");
+        _declare(BenefitRule.DormantSafeguardsActivated, "Dormant safeguards activated under systemic stress.");
     }
 
     function _declare(BenefitRule ruleType, string memory description) internal {
-        oracleCount++;
-        rules[oracleCount] = Rule(
-            oracleCount,
+        mandalaCount++;
+        rules[mandalaCount] = Rule(
+            mandalaCount,
             ruleType,
             description,
             false,
             block.timestamp
         );
-        emit RuleDeclared(oracleCount, ruleType);
+        emit RuleDeclared(mandalaCount, ruleType);
     }
 
     function lockRule(uint256 id) external onlyGuardian {
@@ -114,9 +114,9 @@ contract PublicBenefitOracle {
     }
 
     function fileBenefitCase(string calldata grounds) external {
-        oracleCount++;
-        benefitCases[oracleCount] = BenefitCase(
-            oracleCount,
+        mandalaCount++;
+        benefitCases[mandalaCount] = BenefitCase(
+            mandalaCount,
             msg.sender,
             grounds,
             BenefitStatus.Filed,
@@ -124,7 +124,7 @@ contract PublicBenefitOracle {
             block.timestamp
         );
 
-        emit BenefitFiled(oracleCount);
+        emit BenefitFiled(mandalaCount);
     }
 
     function beginReview(uint256 benefitId) external onlyCouncil {

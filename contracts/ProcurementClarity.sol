@@ -2,51 +2,29 @@
 pragma solidity ^0.8.20;
 
 /// @title Procurement Clarity Covenant
-/// @notice Establishes clear, objective, measurable procurement rules to prevent vague interpretation, political weaponization, and arbitrary corruption charges.
-/// @dev This contract pairs with InnovationSafetyCovenant to ensure innovators and public servants cannot be punished for good-faith procurement decisions.
+/// @notice Encodes procurement clarity safeguard.
+/// @dev Complements AntiWeaponization, PublicBenefitOracle, and BureaucraticAccountability.
 
 contract ProcurementClarity {
     address public guardian;
-    uint256 public ruleCount;
-    uint256 public reviewCount;
-
-    enum RoleType {
-        ProcurementOfficer,
-        Auditor,
-        Innovator,
-        PublicServant,
-        Council,
-        FutureEntity
-    }
+    uint256 public clarityCount;
+    uint256 public councilCount;
 
     enum ClarityRule {
-        ObjectiveSpecsRequired,
-        MultiVendorCompatibility,
-        TransparentCriteria,
-        PublicJustificationRequired,
-        IndependentAuditRequired,
-        NoRetroactiveRuleChange,
-        NoSpecManipulation,
-        NoPoliticalInterference,
-        RiskContextRequired,
-        PublicBenefitRequired
+        ProcurementIsConstitutional,
+        TransparencyMandated,
+        OpaqueContractsSuppressed,
+        FairAllocationRequired,
+        AccountabilityEnforced,
+        PublicBenefitPriority
     }
 
-    enum ReviewType {
-        SpecChallenge,
-        VendorChallenge,
-        CriteriaChallenge,
-        AuditChallenge,
-        PoliticalInterference,
-        RetroactiveManipulation
-    }
-
-    enum ReviewStatus {
+    enum ClarityStatus {
         Filed,
         UnderReview,
-        CouncilReview,
+        MultiCouncilReview,
         Rejected,
-        ConfirmedViolation
+        ClarityConfirmed
     }
 
     struct Rule {
@@ -57,35 +35,29 @@ contract ProcurementClarity {
         uint256 timestamp;
     }
 
-    struct Review {
+    struct ClarityCase {
         uint256 id;
-        address accuser;
-        address accused;
-        ReviewType reviewType;
-        string details;
-        ReviewStatus status;
+        address proposer;
+        string grounds;
+        ClarityStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Review) public reviews;
-    mapping(address => RoleType) public roles;
+    mapping(uint256 => ClarityCase) public clarityCases;
     mapping(address => bool) public councilMember;
-
-    uint256 public councilCount;
 
     event RuleDeclared(uint256 indexed id, ClarityRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event ReviewFiled(uint256 indexed id, ReviewType reviewType);
-    event ReviewStatusChanged(uint256 indexed id, ReviewStatus status);
+    event ClarityFiled(uint256 indexed id);
+    event ClarityStatusChanged(uint256 indexed id, ClarityStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
-        ruleCount = 0;
-        reviewCount = 0;
+        clarityCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -99,10 +71,6 @@ contract ProcurementClarity {
     modifier onlyCouncil() {
         require(councilMember[msg.sender], "Council only");
         _;
-    }
-
-    function assignRole(address account, RoleType role) external onlyGuardian {
-        roles[account] = role;
     }
 
     function addCouncilMember(address member) external onlyGuardian {
@@ -120,58 +88,24 @@ contract ProcurementClarity {
     }
 
     function _declareDefaultRules() internal {
-        _declareRule(
-            ClarityRule.ObjectiveSpecsRequired,
-            "All procurement specifications must be objective, measurable, and testable."
-        );
-        _declareRule(
-            ClarityRule.MultiVendorCompatibility,
-            "Specs must allow multiple vendors unless technically impossible."
-        );
-        _declareRule(
-            ClarityRule.TransparentCriteria,
-            "Evaluation criteria must be published publicly before tender."
-        );
-        _declareRule(
-            ClarityRule.PublicJustificationRequired,
-            "Any single-vendor decision requires public justification."
-        );
-        _declareRule(
-            ClarityRule.IndependentAuditRequired,
-            "Independent audit required before any corruption allegation."
-        );
-        _declareRule(
-            ClarityRule.NoRetroactiveRuleChange,
-            "Procurement rules cannot be changed retroactively."
-        );
-        _declareRule(
-            ClarityRule.NoSpecManipulation,
-            "Specs cannot be manipulated to favor or harm any vendor."
-        );
-        _declareRule(
-            ClarityRule.NoPoliticalInterference,
-            "Political actors cannot interfere with procurement decisions."
-        );
-        _declareRule(
-            ClarityRule.RiskContextRequired,
-            "Risk context must be evaluated before any judgment."
-        );
-        _declareRule(
-            ClarityRule.PublicBenefitRequired,
-            "Public benefit must be considered in all procurement decisions."
-        );
+        _declare(ClarityRule.ProcurementIsConstitutional, "Procurement is constitutional; denial prohibited.");
+        _declare(ClarityRule.TransparencyMandated, "Transparency mandated; opacity blocked.");
+        _declare(ClarityRule.OpaqueContractsSuppressed, "Opaque contracts suppressed; fairness required.");
+        _declare(ClarityRule.FairAllocationRequired, "Fair allocation required; inequity prohibited.");
+        _declare(ClarityRule.AccountabilityEnforced, "Accountability enforced; neglect prohibited.");
+        _declare(ClarityRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
-    function _declareRule(ClarityRule ruleType, string memory description) internal {
-        ruleCount++;
-        rules[ruleCount] = Rule(
-            ruleCount,
+    function _declare(ClarityRule ruleType, string memory description) internal {
+        clarityCount++;
+        rules[clarityCount] = Rule(
+            clarityCount,
             ruleType,
             description,
             false,
             block.timestamp
         );
-        emit RuleDeclared(ruleCount, ruleType);
+        emit RuleDeclared(clarityCount, ruleType);
     }
 
     function lockRule(uint256 id) external onlyGuardian {
@@ -181,51 +115,55 @@ contract ProcurementClarity {
         emit RuleLocked(id);
     }
 
-    function fileReview(
-        address accused,
-        ReviewType reviewType,
-        string calldata details
-    ) external {
-        reviewCount++;
-        reviews[reviewCount] = Review(
-            reviewCount,
+    function fileClarityCase(string calldata grounds) external {
+        clarityCount++;
+        clarityCases[clarityCount] = ClarityCase(
+            clarityCount,
             msg.sender,
-            accused,
-            reviewType,
-            details,
-            ReviewStatus.Filed,
+            grounds,
+            ClarityStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ReviewFiled(reviewCount, reviewType);
+        emit ClarityFiled(clarityCount);
     }
 
-    function beginReview(uint256 reviewId) external onlyCouncil {
-        Review storage r = reviews[reviewId];
-        require(r.status == ReviewStatus.Filed, "Not filed");
-        r.status = ReviewStatus.UnderReview;
-        emit ReviewStatusChanged(reviewId, ReviewStatus.UnderReview);
+    function beginReview(uint256 clarityId) external onlyCouncil {
+        ClarityCase storage c = clarityCases[clarityId];
+        require(c.status == ClarityStatus.Filed, "Not filed");
+        c.status = ClarityStatus.UnderReview;
+        emit ClarityStatusChanged(clarityId, ClarityStatus.UnderReview);
     }
 
-    function escalateToCouncil(uint256 reviewId) external onlyCouncil {
-        Review storage r = reviews[reviewId];
-        require(r.status == ReviewStatus.UnderReview, "Not under review");
-        r.status = ReviewStatus.CouncilReview;
-        emit ReviewStatusChanged(reviewId, ReviewStatus.CouncilReview);
+    function escalateToMultiCouncil(uint256 clarityId) external onlyCouncil {
+        ClarityCase storage c = clarityCases[clarityId];
+        require(c.status == ClarityStatus.UnderReview, "Not under review");
+        c.status = ClarityStatus.MultiCouncilReview;
+        emit ClarityStatusChanged(clarityId, ClarityStatus.MultiCouncilReview);
     }
 
-    function approveViolation(uint256 reviewId) external onlyCouncil {
-        Review storage r = reviews[reviewId];
-        require(r.status == ReviewStatus.CouncilReview, "Not in council stage");
+    function confirmClarity(uint256 clarityId) external onlyCouncil {
+        ClarityCase storage c = clarityCases[clarityId];
+        require(c.status == ClarityStatus.MultiCouncilReview, "Not in council stage");
 
-        r.approvals++;
+        c.approvals++;
 
-        if (r.approvals * 2 > councilCount && councilCount > 0) {
-            r.status = ReviewStatus.ConfirmedViolation;
-            emit ReviewStatusChanged(reviewId, ReviewStatus.ConfirmedViolation);
+        if (c.approvals * 2 > councilCount && councilCount > 0) {
+            c.status = ClarityStatus.ClarityConfirmed;
+            emit ClarityStatusChanged(clarityId, ClarityStatus.ClarityConfirmed);
         }
     }
 
-    function rejectReview(uint256 reviewId) external onlyCouncil {
-        Review storage r
+    function rejectClarity(uint256 clarityId) external onlyCouncil {
+        ClarityCase storage c = clarityCases[clarityId];
+        require(
+            c.status == ClarityStatus.Filed ||
+            c.status == ClarityStatus.UnderReview ||
+            c.status == ClarityStatus.MultiCouncilReview,
+            "Invalid status"
+        );
+        c.status = ClarityStatus.Rejected;
+        emit ClarityStatusChanged(clarityId, ClarityStatus.Rejected);
+    }
+}
