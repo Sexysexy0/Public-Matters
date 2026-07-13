@@ -1,95 +1,63 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title Bureaucratic Accountability Covenant
-/// @notice Holds bureaucrats, auditors, investigators, and enforcement bodies accountable for selective enforcement, political targeting, malicious interpretation, and abuse of discretion.
-/// @dev Works with InnovationSafetyCovenant, ProcurementClarity, AntiWeaponization, RiskContextReview, PublicBenefitOracle, and InnovationMeritShield.
+/// @title Bureaucratic Accountability
+/// @notice Encodes bureaucratic accountability safeguard.
+/// @dev Complements InnovationConstitution, InnovationFreedomCharter, and PublicBenefitOracle.
 
 contract BureaucraticAccountability {
     address public guardian;
-    uint256 public ruleCount;
-    uint256 public caseCount;
+    uint256 public accountabilityCount;
     uint256 public councilCount;
 
-    enum RoleType {
-        Bureaucrat,
-        Auditor,
-        Investigator,
-        PublicServant,
-        Innovator,
-        Council,
-        Oversight,
-        FutureEntity
+    enum BureauRule {
+        AccountabilityIsConstitutional,
+        ChecksAndBalancesRequired,
+        TransparencyMandated,
+        ResponsibilityClarified,
+        AbuseSuppressed,
+        PublicBenefitPriority
     }
 
-    enum AccountabilityRule {
-        NoSelectiveEnforcement,
-        NoMaliciousInterpretation,
-        NoPoliticalTargeting,
-        NoRetroactivePunishment,
-        NoEvidenceSuppression,
-        NoRiskMisclassification,
-        NoMeritSuppression,
-        NoPublicBenefitSuppression,
-        MandatoryTransparency,
-        MandatoryMultiCouncilOversight
-    }
-
-    enum AbuseType {
-        SelectiveEnforcement,
-        MaliciousInterpretation,
-        PoliticalTargeting,
-        RetroactivePunishment,
-        EvidenceSuppression,
-        RiskMisclassification,
-        MeritSuppression,
-        PublicBenefitSuppression,
-        AbuseOfDiscretion
-    }
-
-    enum CaseStatus {
+    enum BureauStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedAbuse
+        AccountabilityConfirmed
     }
 
     struct Rule {
         uint256 id;
-        AccountabilityRule ruleType;
+        BureauRule ruleType;
         string description;
         bool immutableEntry;
         uint256 timestamp;
     }
 
-    struct AbuseCase {
+    struct Accountability {
         uint256 id;
-        address accuser;
-        address accused;
-        AbuseType abuseType;
-        string details;
-        CaseStatus status;
+        address proposer;
+        string grounds;
+        BureauStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => AbuseCase) public cases;
-    mapping(address => RoleType) public roles;
+    mapping(uint256 => Accountability) public accountabilities;
     mapping(address => bool) public councilMember;
 
-    event RuleDeclared(uint256 indexed id, AccountabilityRule ruleType);
+    event RuleDeclared(uint256 indexed id, BureauRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event AbuseFiled(uint256 indexed id, AbuseType abuseType);
-    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
+    event AccountabilityFiled(uint256 indexed id);
+    event BureauStatusChanged(uint256 indexed id, BureauStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
-        ruleCount = 0;
-        caseCount = 0;
+        accountabilityCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -103,10 +71,6 @@ contract BureaucraticAccountability {
     modifier onlyCouncil() {
         require(councilMember[msg.sender], "Council only");
         _;
-    }
-
-    function assignRole(address account, RoleType role) external onlyGuardian {
-        roles[account] = role;
     }
 
     function addCouncilMember(address member) external onlyGuardian {
@@ -124,28 +88,24 @@ contract BureaucraticAccountability {
     }
 
     function _declareDefaultRules() internal {
-        _declareRule(AccountabilityRule.NoSelectiveEnforcement, "Bureaucrats cannot selectively enforce laws.");
-        _declareRule(AccountabilityRule.NoMaliciousInterpretation, "Rules cannot be interpreted maliciously.");
-        _declareRule(AccountabilityRule.NoPoliticalTargeting, "Bureaucrats cannot target individuals politically.");
-        _declareRule(AccountabilityRule.NoRetroactivePunishment, "No retroactive punishment allowed.");
-        _declareRule(AccountabilityRule.NoEvidenceSuppression, "Evidence cannot be hidden or suppressed.");
-        _declareRule(AccountabilityRule.NoRiskMisclassification, "Risk cannot be misclassified as wrongdoing.");
-        _declareRule(AccountabilityRule.NoMeritSuppression, "Merit cannot be ignored or suppressed.");
-        _declareRule(AccountabilityRule.NoPublicBenefitSuppression, "Public benefit cannot be ignored.");
-        _declareRule(AccountabilityRule.MandatoryTransparency, "All actions must be transparent.");
-        _declareRule(AccountabilityRule.MandatoryMultiCouncilOversight, "All abuse cases require multi-council oversight.");
+        _declare(BureauRule.AccountabilityIsConstitutional, "Accountability is constitutional; denial prohibited.");
+        _declare(BureauRule.ChecksAndBalancesRequired, "Checks and balances required; overreach prohibited.");
+        _declare(BureauRule.TransparencyMandated, "Transparency mandated; opacity blocked.");
+        _declare(BureauRule.ResponsibilityClarified, "Responsibility clarified; neglect prohibited.");
+        _declare(BureauRule.AbuseSuppressed, "Abuse suppressed; fairness required.");
+        _declare(BureauRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
-    function _declareRule(AccountabilityRule ruleType, string memory description) internal {
-        ruleCount++;
-        rules[ruleCount] = Rule(
-            ruleCount,
+    function _declare(BureauRule ruleType, string memory description) internal {
+        accountabilityCount++;
+        rules[accountabilityCount] = Rule(
+            accountabilityCount,
             ruleType,
             description,
             false,
             block.timestamp
         );
-        emit RuleDeclared(ruleCount, ruleType);
+        emit RuleDeclared(accountabilityCount, ruleType);
     }
 
     function lockRule(uint256 id) external onlyGuardian {
@@ -155,61 +115,55 @@ contract BureaucraticAccountability {
         emit RuleLocked(id);
     }
 
-    function fileAbuse(
-        address accused,
-        AbuseType abuseType,
-        string calldata details
-    ) external {
-        caseCount++;
-        cases[caseCount] = AbuseCase(
-            caseCount,
+    function fileAccountability(string calldata grounds) external {
+        accountabilityCount++;
+        accountabilities[accountabilityCount] = Accountability(
+            accountabilityCount,
             msg.sender,
-            accused,
-            abuseType,
-            details,
-            CaseStatus.Filed,
+            grounds,
+            BureauStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit AbuseFiled(caseCount, abuseType);
+        emit AccountabilityFiled(accountabilityCount);
     }
 
-    function beginReview(uint256 caseId) external onlyCouncil {
-        AbuseCase storage c = cases[caseId];
-        require(c.status == CaseStatus.Filed, "Not filed");
-        c.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(caseId, CaseStatus.UnderReview);
+    function beginReview(uint256 accountabilityId) external onlyCouncil {
+        Accountability storage a = accountabilities[accountabilityId];
+        require(a.status == BureauStatus.Filed, "Not filed");
+        a.status = BureauStatus.UnderReview;
+        emit BureauStatusChanged(accountabilityId, BureauStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 caseId) external onlyCouncil {
-        AbuseCase storage c = cases[caseId];
-        require(c.status == CaseStatus.UnderReview, "Not under review");
-        c.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(caseId, CaseStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 accountabilityId) external onlyCouncil {
+        Accountability storage a = accountabilities[accountabilityId];
+        require(a.status == BureauStatus.UnderReview, "Not under review");
+        a.status = BureauStatus.MultiCouncilReview;
+        emit BureauStatusChanged(accountabilityId, BureauStatus.MultiCouncilReview);
     }
 
-    function approveAbuse(uint256 caseId) external onlyCouncil {
-        AbuseCase storage c = cases[caseId];
-        require(c.status == CaseStatus.MultiCouncilReview, "Not in council stage");
+    function confirmAccountability(uint256 accountabilityId) external onlyCouncil {
+        Accountability storage a = accountabilities[accountabilityId];
+        require(a.status == BureauStatus.MultiCouncilReview, "Not in council stage");
 
-        c.approvals++;
+        a.approvals++;
 
-        if (c.approvals * 2 > councilCount && councilCount > 0) {
-            c.status = CaseStatus.ConfirmedAbuse;
-            emit CaseStatusChanged(caseId, CaseStatus.ConfirmedAbuse);
+        if (a.approvals * 2 > councilCount && councilCount > 0) {
+            a.status = BureauStatus.AccountabilityConfirmed;
+            emit BureauStatusChanged(accountabilityId, BureauStatus.AccountabilityConfirmed);
         }
     }
 
-    function rejectCase(uint256 caseId) external onlyCouncil {
-        AbuseCase storage c = cases[caseId];
+    function rejectAccountability(uint256 accountabilityId) external onlyCouncil {
+        Accountability storage a = accountabilities[accountabilityId];
         require(
-            c.status == CaseStatus.Filed ||
-            c.status == CaseStatus.UnderReview ||
-            c.status == CaseStatus.MultiCouncilReview,
+            a.status == BureauStatus.Filed ||
+            a.status == BureauStatus.UnderReview ||
+            a.status == BureauStatus.MultiCouncilReview,
             "Invalid status"
         );
-        c.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(caseId, CaseStatus.Rejected);
+        a.status = BureauStatus.Rejected;
+        emit BureauStatusChanged(accountabilityId, BureauStatus.Rejected);
     }
 }
