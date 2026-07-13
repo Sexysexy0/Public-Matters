@@ -3,18 +3,17 @@ pragma solidity ^0.8.20;
 
 /// @title Complaint Withdrawal Treaty
 /// @notice Encodes complaint withdrawal safeguard.
-/// @dev Complements RegistrarNoticeMandala, RegistrarComplianceFramework, and DecisionFormatFramework.
+/// @dev Complements AppealsMandala, RegistrarNoticeMandala, and DecisionFormatFramework.
 
 contract ComplaintWithdrawalTreaty {
     address public guardian;
     uint256 public treatyCount;
-    uint256 public withdrawalCount;
     uint256 public councilCount;
 
     enum WithdrawalRule {
         WithdrawalIsConstitutional,
-        UniformProcedureRequired,
-        AbuseSuppressed,
+        CoercionSuppressed,
+        VoluntaryWithdrawalRequired,
         TransparencyInWithdrawalSystems,
         PublicBenefitPriority
     }
@@ -59,7 +58,6 @@ contract ComplaintWithdrawalTreaty {
     constructor() {
         guardian = msg.sender;
         treatyCount = 0;
-        withdrawalCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -91,8 +89,8 @@ contract ComplaintWithdrawalTreaty {
 
     function _declareDefaultRules() internal {
         _declare(WithdrawalRule.WithdrawalIsConstitutional, "Withdrawal is constitutional; denial prohibited.");
-        _declare(WithdrawalRule.UniformProcedureRequired, "Uniform procedure required; inconsistency prohibited.");
-        _declare(WithdrawalRule.AbuseSuppressed, "Abuse suppressed; tactical misuse blocked.");
+        _declare(WithdrawalRule.CoercionSuppressed, "Coercion suppressed; fairness required.");
+        _declare(WithdrawalRule.VoluntaryWithdrawalRequired, "Voluntary withdrawal required; forced abandonment blocked.");
         _declare(WithdrawalRule.TransparencyInWithdrawalSystems, "Withdrawal systems must be transparent.");
         _declare(WithdrawalRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
@@ -120,9 +118,9 @@ contract ComplaintWithdrawalTreaty {
         string calldata caseReference,
         string calldata grounds
     ) external {
-        withdrawalCount++;
-        withdrawals[withdrawalCount] = Withdrawal(
-            withdrawalCount,
+        treatyCount++;
+        withdrawals[treatyCount] = Withdrawal(
+            treatyCount,
             msg.sender,
             caseReference,
             grounds,
@@ -131,7 +129,7 @@ contract ComplaintWithdrawalTreaty {
             block.timestamp
         );
 
-        emit WithdrawalFiled(withdrawalCount, caseReference);
+        emit WithdrawalFiled(treatyCount, caseReference);
     }
 
     function beginReview(uint256 withdrawalId) external onlyCouncil {
