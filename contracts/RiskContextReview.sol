@@ -1,56 +1,42 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title Risk Context Review Covenant
-/// @notice Ensures that risk-taking in innovation, procurement, and governance is evaluated fairly and cannot be misclassified as corruption.
-/// @dev Works with InnovationSafetyCovenant, ProcurementClarity, and AntiWeaponization to prevent wrongful prosecution.
+/// @title Risk Context Review
+/// @notice Covenant for systemic risk scanning.
+/// @dev Complements FeedbackOracle, DelegationFramework, and LeadershipCharter.
 
 contract RiskContextReview {
     address public guardian;
-    uint256 public ruleCount;
     uint256 public reviewCount;
+    uint256 public violationCount;
     uint256 public councilCount;
 
-    enum RoleType {
-        Innovator,
-        PublicServant,
-        ProcurementOfficer,
-        Auditor,
-        Council,
-        Oversight,
-        FutureEntity
-    }
-
     enum RiskRule {
-        RiskIsNotCorruption,
-        RiskMustBeMeasured,
-        RiskMustBeContextualized,
-        MarketConditionsRequired,
-        UrgencyContextRequired,
-        PublicBenefitContextRequired,
-        AlternativeAnalysisRequired,
-        NoPunishmentForCalculatedRisk,
-        NoPunishmentForGoodFaithRisk,
-        MandatoryMultiCouncilRiskReview
+        RiskReviewIsConstitutional,
+        BlindSpotAnchored,
+        OversightProtected,
+        AccountabilitySafeguarded,
+        PublicBenefitPriority,
+        MandatoryCouncilOversight,
+        TransparencyInRiskSystems
     }
 
-    enum RiskIssue {
-        MisclassifiedRisk,
-        IgnoredContext,
-        IgnoredMarketConditions,
-        IgnoredUrgency,
-        IgnoredAlternatives,
-        IgnoredPublicBenefit,
-        PunishedCalculatedRisk,
-        PunishedGoodFaithRisk
+    enum ViolationType {
+        RiskReviewDenial,
+        BlindSpotSuppression,
+        OversightBlocked,
+        AccountabilityErasure,
+        CouncilBypass,
+        PublicBenefitFailure,
+        TransparencyFailure
     }
 
-    enum ReviewStatus {
+    enum CaseStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedMisclassification
+        ConfirmedViolation
     }
 
     struct Rule {
@@ -61,33 +47,32 @@ contract RiskContextReview {
         uint256 timestamp;
     }
 
-    struct RiskReview {
+    struct Violation {
         uint256 id;
         address accuser;
         address accused;
-        RiskIssue issueType;
+        ViolationType violationType;
         string details;
-        ReviewStatus status;
+        CaseStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => RiskReview) public reviews;
-    mapping(address => RoleType) public roles;
+    mapping(uint256 => Violation) public violations;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, RiskRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event ReviewFiled(uint256 indexed id, RiskIssue issueType);
-    event ReviewStatusChanged(uint256 indexed id, ReviewStatus status);
+    event ViolationFiled(uint256 indexed id, ViolationType violationType);
+    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
-        ruleCount = 0;
         reviewCount = 0;
+        violationCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -101,10 +86,6 @@ contract RiskContextReview {
     modifier onlyCouncil() {
         require(councilMember[msg.sender], "Council only");
         _;
-    }
-
-    function assignRole(address account, RoleType role) external onlyGuardian {
-        roles[account] = role;
     }
 
     function addCouncilMember(address member) external onlyGuardian {
@@ -122,28 +103,25 @@ contract RiskContextReview {
     }
 
     function _declareDefaultRules() internal {
-        _declareRule(RiskRule.RiskIsNotCorruption, "Risk-taking cannot be treated as corruption.");
-        _declareRule(RiskRule.RiskMustBeMeasured, "Risk must be measured objectively.");
-        _declareRule(RiskRule.RiskMustBeContextualized, "Risk must be evaluated in full context.");
-        _declareRule(RiskRule.MarketConditionsRequired, "Market conditions must be considered.");
-        _declareRule(RiskRule.UrgencyContextRequired, "Urgency context must be evaluated.");
-        _declareRule(RiskRule.PublicBenefitContextRequired, "Public benefit must be weighed.");
-        _declareRule(RiskRule.AlternativeAnalysisRequired, "Alternatives must be reviewed.");
-        _declareRule(RiskRule.NoPunishmentForCalculatedRisk, "Calculated risk cannot be punished.");
-        _declareRule(RiskRule.NoPunishmentForGoodFaithRisk, "Good-faith risk cannot be punished.");
-        _declareRule(RiskRule.MandatoryMultiCouncilRiskReview, "Risk misclassification requires multi-council review.");
+        _declare(RiskRule.RiskReviewIsConstitutional, "Risk review is constitutional; denial prohibited.");
+        _declare(RiskRule.BlindSpotAnchored, "Blind spots must be anchored; suppression prohibited.");
+        _declare(RiskRule.OversightProtected, "Oversight protected; blocking prohibited.");
+        _declare(RiskRule.AccountabilitySafeguarded, "Accountability safeguarded; erasure prohibited.");
+        _declare(RiskRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
+        _declare(RiskRule.MandatoryCouncilOversight, "Council oversight required for risk enforcement.");
+        _declare(RiskRule.TransparencyInRiskSystems, "Risk systems must be transparent.");
     }
 
-    function _declareRule(RiskRule ruleType, string memory description) internal {
-        ruleCount++;
-        rules[ruleCount] = Rule(
-            ruleCount,
+    function _declare(RiskRule ruleType, string memory description) internal {
+        reviewCount++;
+        rules[reviewCount] = Rule(
+            reviewCount,
             ruleType,
             description,
             false,
             block.timestamp
         );
-        emit RuleDeclared(ruleCount, ruleType);
+        emit RuleDeclared(reviewCount, ruleType);
     }
 
     function lockRule(uint256 id) external onlyGuardian {
@@ -153,61 +131,61 @@ contract RiskContextReview {
         emit RuleLocked(id);
     }
 
-    function fileRiskReview(
+    function fileViolation(
         address accused,
-        RiskIssue issueType,
+        ViolationType violationType,
         string calldata details
     ) external {
-        reviewCount++;
-        reviews[reviewCount] = RiskReview(
-            reviewCount,
+        violationCount++;
+        violations[violationCount] = Violation(
+            violationCount,
             msg.sender,
             accused,
-            issueType,
+            violationType,
             details,
-            ReviewStatus.Filed,
+            CaseStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ReviewFiled(reviewCount, issueType);
+        emit ViolationFiled(violationCount, violationType);
     }
 
-    function beginReview(uint256 reviewId) external onlyCouncil {
-        RiskReview storage r = reviews[reviewId];
-        require(r.status == ReviewStatus.Filed, "Not filed");
-        r.status = ReviewStatus.UnderReview;
-        emit ReviewStatusChanged(reviewId, ReviewStatus.UnderReview);
+    function beginReview(uint256 violationId) external onlyCouncil {
+        Violation storage v = violations[violationId];
+        require(v.status == CaseStatus.Filed, "Not filed");
+        v.status = CaseStatus.UnderReview;
+        emit CaseStatusChanged(violationId, CaseStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 reviewId) external onlyCouncil {
-        RiskReview storage r = reviews[reviewId];
-        require(r.status == ReviewStatus.UnderReview, "Not under review");
-        r.status = ReviewStatus.MultiCouncilReview;
-        emit ReviewStatusChanged(reviewId, ReviewStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 violationId) external onlyCouncil {
+        Violation storage v = violations[violationId];
+        require(v.status == CaseStatus.UnderReview, "Not under review");
+        v.status = CaseStatus.MultiCouncilReview;
+        emit CaseStatusChanged(violationId, CaseStatus.MultiCouncilReview);
     }
 
-    function approveMisclassification(uint256 reviewId) external onlyCouncil {
-        RiskReview storage r = reviews[reviewId];
-        require(r.status == ReviewStatus.MultiCouncilReview, "Not in council stage");
+    function approveViolation(uint256 violationId) external onlyCouncil {
+        Violation storage v = violations[violationId];
+        require(v.status == CaseStatus.MultiCouncilReview, "Not in council stage");
 
-        r.approvals++;
+        v.approvals++;
 
-        if (r.approvals * 2 > councilCount && councilCount > 0) {
-            r.status = ReviewStatus.ConfirmedMisclassification;
-            emit ReviewStatusChanged(reviewId, ReviewStatus.ConfirmedMisclassification);
+        if (v.approvals * 2 > councilCount && councilCount > 0) {
+            v.status = CaseStatus.ConfirmedViolation;
+            emit CaseStatusChanged(violationId, CaseStatus.ConfirmedViolation);
         }
     }
 
-    function rejectReview(uint256 reviewId) external onlyCouncil {
-        RiskReview storage r = reviews[reviewId];
+    function rejectViolation(uint256 violationId) external onlyCouncil {
+        Violation storage v = violations[violationId];
         require(
-            r.status == ReviewStatus.Filed ||
-            r.status == ReviewStatus.UnderReview ||
-            r.status == ReviewStatus.MultiCouncilReview,
+            v.status == CaseStatus.Filed ||
+            v.status == CaseStatus.UnderReview ||
+            v.status == CaseStatus.MultiCouncilReview,
             "Invalid status"
         );
-        r.status = ReviewStatus.Rejected;
-        emit ReviewStatusChanged(reviewId, ReviewStatus.Rejected);
+        v.status = CaseStatus.Rejected;
+        emit CaseStatusChanged(violationId, CaseStatus.Rejected);
     }
 }
