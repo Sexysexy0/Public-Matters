@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /// @title Respect Mandala
 /// @notice Weaves respect into mandala resonance.
-/// @dev Complements DignityTreaty, JusticeMandala, and IntegrityCharter.
+/// @dev Complements DignityTreaty, AutonomyFramework, and VisionCharter.
 
 contract RespectMandala {
     address public guardian;
@@ -13,19 +13,20 @@ contract RespectMandala {
 
     enum RespectRule {
         RespectIsConstitutional,
-        HonorAnchored,
+        MutualRegardAnchored,
         DisrespectProhibited,
-        DishonorBlocked,
+        DegradationBlocked,
+        ExploitationSuppressed,
         PublicBenefitPriority,
-        MandatoryCouncilOversight,
         TransparencyInRespectSystems
     }
 
     enum ViolationType {
         RespectDenial,
-        HonorFailure,
+        MutualRegardFailure,
         Disrespect,
-        Dishonor,
+        Degradation,
+        Exploitation,
         CouncilBypass,
         PublicBenefitFailure,
         TransparencyFailure
@@ -104,11 +105,11 @@ contract RespectMandala {
 
     function _declareDefaultRules() internal {
         _declare(RespectRule.RespectIsConstitutional, "Respect is constitutional; denial prohibited.");
-        _declare(RespectRule.HonorAnchored, "Honor anchored; failure prohibited.");
+        _declare(RespectRule.MutualRegardAnchored, "Mutual regard anchored; failure prohibited.");
         _declare(RespectRule.DisrespectProhibited, "Disrespect prohibited; violation blocked.");
-        _declare(RespectRule.DishonorBlocked, "Dishonor blocked; breach prohibited.");
+        _declare(RespectRule.DegradationBlocked, "Degradation blocked; breach prohibited.");
+        _declare(RespectRule.ExploitationSuppressed, "Exploitation suppressed; manipulation prohibited.");
         _declare(RespectRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
-        _declare(RespectRule.MandatoryCouncilOversight, "Council oversight required for respect enforcement.");
         _declare(RespectRule.TransparencyInRespectSystems, "Respect systems must be transparent.");
     }
 
