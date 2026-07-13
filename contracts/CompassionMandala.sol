@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /// @title Compassion Mandala
 /// @notice Weaves compassion into mandala resonance.
-/// @dev Complements GraceFramework, KindnessTreaty, and UnityCharter.
+/// @dev Complements GraceFramework, HumanityCharter, and SolidarityMandala.
 
 contract CompassionMandala {
     address public guardian;
@@ -15,7 +15,7 @@ contract CompassionMandala {
         CompassionIsConstitutional,
         EmpathyAnchored,
         CareProtected,
-        SolidaritySafeguarded,
+        HumaneResponseSafeguarded,
         PublicBenefitPriority,
         MandatoryCouncilOversight,
         TransparencyInCompassionSystems
@@ -25,7 +25,7 @@ contract CompassionMandala {
         CompassionDenial,
         EmpathySuppression,
         CareBlocked,
-        SolidarityErasure,
+        HumaneResponseErosion,
         CouncilBypass,
         PublicBenefitFailure,
         TransparencyFailure
@@ -104,9 +104,9 @@ contract CompassionMandala {
 
     function _declareDefaultRules() internal {
         _declare(CompassionRule.CompassionIsConstitutional, "Compassion is constitutional; denial prohibited.");
-        _declare(CompassionRule.EmpathyAnchored, "Empathy is anchored; suppression prohibited.");
-        _declare(CompassionRule.CareProtected, "Care is protected; blocking prohibited.");
-        _declare(CompassionRule.SolidaritySafeguarded, "Solidarity safeguarded; erasure prohibited.");
+        _declare(CompassionRule.EmpathyAnchored, "Empathy anchored; suppression prohibited.");
+        _declare(CompassionRule.CareProtected, "Care protected; blocking prohibited.");
+        _declare(CompassionRule.HumaneResponseSafeguarded, "Humane response safeguarded; erosion prohibited.");
         _declare(CompassionRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
         _declare(CompassionRule.MandatoryCouncilOversight, "Council oversight required for compassion enforcement.");
         _declare(CompassionRule.TransparencyInCompassionSystems, "Compassion systems must be transparent.");
