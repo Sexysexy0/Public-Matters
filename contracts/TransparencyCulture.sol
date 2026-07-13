@@ -75,7 +75,7 @@ contract TransparencyCulture {
     }
 
     mapping(uint256 => Principle) public principles;
-    mapping(uint256 => Violation) public violations;
+    mapping<uint256 => Violation) public violations;
     mapping(address => RoleType) public roles;
     mapping(address => bool) public councilMember;
 
