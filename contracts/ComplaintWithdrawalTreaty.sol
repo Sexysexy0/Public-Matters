@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 /// @title Complaint Withdrawal Treaty
-/// @notice Encodes complaint withdrawal safeguard.
-/// @dev Complements AppealsMandala, RegistrarNoticeMandala, and DecisionFormatFramework.
+/// @notice Encodes safeguard for withdrawal of complaints in domain dispute resolution.
+/// @dev Complements AppealsMandala, RegistrarComplianceFramework, and PublicBenefitOracle.
 
 contract ComplaintWithdrawalTreaty {
     address public guardian;
@@ -12,9 +12,9 @@ contract ComplaintWithdrawalTreaty {
 
     enum WithdrawalRule {
         WithdrawalIsConstitutional,
-        CoercionSuppressed,
-        VoluntaryWithdrawalRequired,
-        TransparencyInWithdrawalSystems,
+        TransparencyMandated,
+        AbuseSuppressed,
+        RespectForCourtMandated,
         PublicBenefitPriority
     }
 
@@ -34,10 +34,9 @@ contract ComplaintWithdrawalTreaty {
         uint256 timestamp;
     }
 
-    struct Withdrawal {
+    struct WithdrawalCase {
         uint256 id;
-        address complainant;
-        string caseReference;
+        address proposer;
         string grounds;
         WithdrawalStatus status;
         uint256 approvals;
@@ -45,12 +44,12 @@ contract ComplaintWithdrawalTreaty {
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Withdrawal) public withdrawals;
+    mapping(uint256 => WithdrawalCase) public withdrawalCases;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, WithdrawalRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event WithdrawalFiled(uint256 indexed id, string caseReference);
+    event WithdrawalFiled(uint256 indexed id);
     event WithdrawalStatusChanged(uint256 indexed id, WithdrawalStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
@@ -89,9 +88,9 @@ contract ComplaintWithdrawalTreaty {
 
     function _declareDefaultRules() internal {
         _declare(WithdrawalRule.WithdrawalIsConstitutional, "Withdrawal is constitutional; denial prohibited.");
-        _declare(WithdrawalRule.CoercionSuppressed, "Coercion suppressed; fairness required.");
-        _declare(WithdrawalRule.VoluntaryWithdrawalRequired, "Voluntary withdrawal required; forced abandonment blocked.");
-        _declare(WithdrawalRule.TransparencyInWithdrawalSystems, "Withdrawal systems must be transparent.");
+        _declare(WithdrawalRule.TransparencyMandated, "Transparency mandated; abuse blocked.");
+        _declare(WithdrawalRule.AbuseSuppressed, "Abuse suppressed; fairness required.");
+        _declare(WithdrawalRule.RespectForCourtMandated, "Respect for court mandated; supremacy recognized.");
         _declare(WithdrawalRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
@@ -114,40 +113,36 @@ contract ComplaintWithdrawalTreaty {
         emit RuleLocked(id);
     }
 
-    function fileWithdrawal(
-        string calldata caseReference,
-        string calldata grounds
-    ) external {
+    function fileWithdrawalCase(string calldata grounds) external {
         treatyCount++;
-        withdrawals[treatyCount] = Withdrawal(
+        withdrawalCases[treatyCount] = WithdrawalCase(
             treatyCount,
             msg.sender,
-            caseReference,
             grounds,
             WithdrawalStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit WithdrawalFiled(treatyCount, caseReference);
+        emit WithdrawalFiled(treatyCount);
     }
 
     function beginReview(uint256 withdrawalId) external onlyCouncil {
-        Withdrawal storage w = withdrawals[withdrawalId];
+        WithdrawalCase storage w = withdrawalCases[withdrawalId];
         require(w.status == WithdrawalStatus.Filed, "Not filed");
         w.status = WithdrawalStatus.UnderReview;
         emit WithdrawalStatusChanged(withdrawalId, WithdrawalStatus.UnderReview);
     }
 
     function escalateToMultiCouncil(uint256 withdrawalId) external onlyCouncil {
-        Withdrawal storage w = withdrawals[withdrawalId];
+        WithdrawalCase storage w = withdrawalCases[withdrawalId];
         require(w.status == WithdrawalStatus.UnderReview, "Not under review");
         w.status = WithdrawalStatus.MultiCouncilReview;
         emit WithdrawalStatusChanged(withdrawalId, WithdrawalStatus.MultiCouncilReview);
     }
 
     function confirmWithdrawal(uint256 withdrawalId) external onlyCouncil {
-        Withdrawal storage w = withdrawals[withdrawalId];
+        WithdrawalCase storage w = withdrawalCases[withdrawalId];
         require(w.status == WithdrawalStatus.MultiCouncilReview, "Not in council stage");
 
         w.approvals++;
@@ -159,7 +154,7 @@ contract ComplaintWithdrawalTreaty {
     }
 
     function rejectWithdrawal(uint256 withdrawalId) external onlyCouncil {
-        Withdrawal storage w = withdrawals[withdrawalId];
+        WithdrawalCase storage w = withdrawalCases[withdrawalId];
         require(
             w.status == WithdrawalStatus.Filed ||
             w.status == WithdrawalStatus.UnderReview ||
