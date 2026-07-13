@@ -2,90 +2,94 @@
 pragma solidity ^0.8.20;
 
 /// @title Internal Feedback Loop Covenant
-/// @notice Establishes a safe, transparent, and structured feedback mechanism inside organizations.
-/// @dev Prevents retaliation, ensures feedback is treated as diagnostic data, and requires multi-council review for serious issues.
+/// @notice Establishes a protected internal system where team members can safely report issues, imbalances, or leadership risks without fear.
+/// @dev Prevents external scandals by ensuring internal criticism is safe, constructive, and protected.
 
 contract InternalFeedbackLoop {
     address public guardian;
-    uint256 public channelCount;
-    uint256 public feedbackCount;
+    uint256 public ruleCount;
+    uint256 public reportCount;
     uint256 public councilCount;
 
     enum RoleType {
-        Employee,
-        Innovator,
-        PublicServant,
+        TeamMember,
+        Leader,
         Founder,
+        Auditor,
         Council,
         Oversight,
         FutureEntity
     }
 
-    enum FeedbackChannel {
-        AnonymousSubmission,
-        DirectCouncilSubmission,
-        TeamReview,
-        PublicTransparencyBoard,
-        CrisisFlag
+    enum FeedbackRule {
+        NoRetaliation,
+        NoPunishmentForCriticism,
+        AnonymousFeedbackAllowed,
+        MandatoryRootCauseAnalysis,
+        MandatoryLeadershipReview,
+        MandatoryTransparencyToCouncil,
+        CriticismIsDiagnosticData,
+        FeedbackMustBeProtected,
+        IssuesMustBeAcknowledged,
+        ResolutionMustBeTracked
     }
 
-    enum FeedbackType {
-        SystemImbalance,
-        GovernanceGap,
+    enum ReportType {
         LeadershipIssue,
-        RetaliationRisk,
-        TransparencyFailure,
-        PanicDecision,
+        SystemFlaw,
+        CulturalImbalance,
+        RiskyDecision,
+        PanicBehavior,
         SuppressionAttempt,
-        CulturalDrift
+        TransparencyFailure,
+        TeamConcern
     }
 
-    enum FeedbackStatus {
+    enum ReportStatus {
         Filed,
         UnderReview,
-        MultiCouncilReview,
+        CouncilReview,
         Resolved,
-        Escalated,
         Rejected
     }
 
-    struct Channel {
+    struct Rule {
         uint256 id;
-        FeedbackChannel channelType;
+        FeedbackRule ruleType;
         string description;
         bool immutableEntry;
         uint256 timestamp;
     }
 
-    struct Feedback {
+    struct Report {
         uint256 id;
-        address submitter;
-        FeedbackType feedbackType;
+        address reporter;
+        address subject;
+        ReportType reportType;
         string details;
-        FeedbackStatus status;
-        uint256 approvals;
+        ReportStatus status;
         uint256 timestamp;
     }
 
-    mapping(uint256 => Channel) public channels;
-    mapping(uint256 => Feedback) public feedbacks;
+    mapping(uint256 => Rule) public rules;
+    mapping(uint256 => Report) public reports;
     mapping(address => RoleType) public roles;
     mapping(address => bool) public councilMember;
 
-    event ChannelDeclared(uint256 indexed id, FeedbackChannel channelType);
-    event ChannelLocked(uint256 indexed id);
-    event FeedbackFiled(uint256 indexed id, FeedbackType feedbackType);
-    event FeedbackStatusChanged(uint256 indexed id, FeedbackStatus status);
+    event RuleDeclared(uint256 indexed id, FeedbackRule ruleType);
+    event RuleLocked(uint256 indexed id);
+    event ReportFiled(uint256 indexed id, ReportType reportType);
+    event ReportStatusChanged(uint256 indexed id, ReportStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
-        channelCount = 0;
-        feedbackCount = 0;
+        ruleCount = 0;
+        reportCount = 0;
         councilCount = 0;
 
-        _declareDefaultChannels();
+        _declareDefaultRules();
     }
 
     modifier onlyGuardian() {
@@ -116,86 +120,91 @@ contract InternalFeedbackLoop {
         emit CouncilMemberRemoved(member);
     }
 
-    function _declareDefaultChannels() internal {
-        _declareChannel(FeedbackChannel.AnonymousSubmission, "Anonymous safe channel for feedback.");
-        _declareChannel(FeedbackChannel.DirectCouncilSubmission, "Direct submission to council oversight.");
-        _declareChannel(FeedbackChannel.TeamReview, "Team-level review channel.");
-        _declareChannel(FeedbackChannel.PublicTransparencyBoard, "Public transparency board for systemic issues.");
-        _declareChannel(FeedbackChannel.CrisisFlag, "Immediate flag for crisis or panic decisions.");
+    function _declareDefaultRules() internal {
+        _declareRule(FeedbackRule.NoRetaliation, "No retaliation for internal criticism.");
+        _declareRule(FeedbackRule.NoPunishmentForCriticism, "Criticism cannot be punished.");
+        _declareRule(FeedbackRule.AnonymousFeedbackAllowed, "Anonymous feedback is allowed.");
+        _declareRule(FeedbackRule.MandatoryRootCauseAnalysis, "Root cause analysis is mandatory.");
+        _declareRule(FeedbackRule.MandatoryLeadershipReview, "Leadership must review all reports.");
+        _declareRule(FeedbackRule.MandatoryTransparencyToCouncil, "Council must see all feedback.");
+        _declareRule(FeedbackRule.CriticismIsDiagnosticData, "Criticism is diagnostic data.");
+        _declareRule(FeedbackRule.FeedbackMustBeProtected, "Feedback must be protected.");
+        _declareRule(FeedbackRule.IssuesMustBeAcknowledged, "Issues must be acknowledged.");
+        _declareRule(FeedbackRule.ResolutionMustBeTracked, "Resolution must be tracked.");
     }
 
-    function _declareChannel(FeedbackChannel channelType, string memory description) internal {
-        channelCount++;
-        channels[channelCount] = Channel(
-            channelCount,
-            channelType,
+    function _declareRule(FeedbackRule ruleType, string memory description) internal {
+        ruleCount++;
+        rules[ruleCount] = Rule(
+            ruleCount,
+            ruleType,
             description,
             false,
             block.timestamp
         );
-        emit ChannelDeclared(channelCount, channelType);
+        emit RuleDeclared(ruleCount, ruleType);
     }
 
-    function lockChannel(uint256 id) external onlyGuardian {
-        Channel storage c = channels[id];
-        require(!c.immutableEntry, "Already immutable");
-        c.immutableEntry = true;
-        emit ChannelLocked(id);
+    function lockRule(uint256 id) external onlyGuardian {
+        Rule storage r = rules[id];
+        require(!r.immutableEntry, "Already immutable");
+        r.immutableEntry = true;
+        emit RuleLocked(id);
     }
 
-    function fileFeedback(
-        FeedbackType feedbackType,
+    function fileReport(
+        address subject,
+        ReportType reportType,
         string calldata details
     ) external {
-        feedbackCount++;
-        feedbacks[feedbackCount] = Feedback(
-            feedbackCount,
+        reportCount++;
+        reports[reportCount] = Report(
+            reportCount,
             msg.sender,
-            feedbackType,
+            subject,
+            reportType,
             details,
-            FeedbackStatus.Filed,
-            0,
+            ReportStatus.Filed,
             block.timestamp
         );
 
-        emit FeedbackFiled(feedbackCount, feedbackType);
+        emit ReportFiled(reportCount, reportType);
     }
 
-    function beginReview(uint256 feedbackId) external onlyCouncil {
-        Feedback storage f = feedbacks[feedbackId];
-        require(f.status == FeedbackStatus.Filed, "Not filed");
-        f.status = FeedbackStatus.UnderReview;
-        emit FeedbackStatusChanged(feedbackId, FeedbackStatus.UnderReview);
+    function beginReview(uint256 reportId) external onlyCouncil {
+        Report storage r = reports[reportId];
+        require(r.status == ReportStatus.Filed, "Not filed");
+        r.status = ReportStatus.UnderReview;
+        emit ReportStatusChanged(reportId, ReportStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 feedbackId) external onlyCouncil {
-        Feedback storage f = feedbacks[feedbackId];
-        require(f.status == FeedbackStatus.UnderReview, "Not under review");
-        f.status = FeedbackStatus.MultiCouncilReview;
-        emit FeedbackStatusChanged(feedbackId, FeedbackStatus.MultiCouncilReview);
+    function escalateToCouncil(uint256 reportId) external onlyCouncil {
+        Report storage r = reports[reportId];
+        require(r.status == ReportStatus.UnderReview, "Not under review");
+        r.status = ReportStatus.CouncilReview;
+        emit ReportStatusChanged(reportId, ReportStatus.CouncilReview);
     }
 
-    function resolveFeedback(uint256 feedbackId) external onlyCouncil {
-        Feedback storage f = feedbacks[feedbackId];
-        require(f.status == FeedbackStatus.MultiCouncilReview, "Not in council stage");
-
-        f.approvals++;
-
-        if (f.approvals * 2 > councilCount && councilCount > 0) {
-            f.status = FeedbackStatus.Resolved;
-            emit FeedbackStatusChanged(feedbackId, FeedbackStatus.Resolved);
-        }
-    }
-
-    function rejectFeedback(uint256 feedbackId) external onlyCouncil {
-        Feedback storage f = feedbacks[feedbackId];
+    function resolveReport(uint256 reportId) external onlyCouncil {
+        Report storage r = reports[reportId];
         require(
-            f.status == FeedbackStatus.Filed ||
-            f.status == FeedbackStatus.UnderReview ||
-            f.status == FeedbackStatus.MultiCouncilReview,
+            r.status == ReportStatus.UnderReview ||
+            r.status == ReportStatus.CouncilReview,
             "Invalid status"
         );
-        f.status = FeedbackStatus.Rejected;
-        emit FeedbackStatusChanged(feedbackId, FeedbackStatus.Rejected);
+        r.status = ReportStatus.Resolved;
+        emit ReportStatusChanged(reportId, ReportStatus.Resolved);
+    }
+
+    function rejectReport(uint256 reportId) external onlyCouncil {
+        Report storage r = reports[reportId];
+        require(
+            r.status == ReportStatus.Filed ||
+            r.status == ReportStatus.UnderReview ||
+            r.status == ReportStatus.CouncilReview,
+            "Invalid status"
+        );
+        r.status = ReportStatus.Rejected;
+        emit ReportStatusChanged(reportId, ReportStatus.Rejected);
     }
 }
