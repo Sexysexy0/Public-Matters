@@ -3,39 +3,28 @@ pragma solidity ^0.8.20;
 
 /// @title Registrar Compliance Framework
 /// @notice Encodes registrar compliance safeguard.
-/// @dev Complements LachesCodification, DecisionFormatFramework, and SupplementalFilingsTreaty.
+/// @dev Complements DecisionFormatFramework, ProcurementClarity, and RegistrarNoticeMandala.
 
 contract RegistrarComplianceFramework {
     address public guardian;
     uint256 public frameworkCount;
-    uint256 public violationCount;
     uint256 public councilCount;
 
     enum ComplianceRule {
         ComplianceIsConstitutional,
-        RegistrarDutyEnforced,
-        TrainingRequired,
-        VerificationClarified,
+        RegistrarAccountabilityRequired,
+        WeakComplianceSuppressed,
+        ICANNOversightMandated,
         TransparencyInComplianceSystems,
         PublicBenefitPriority
     }
 
-    enum ViolationType {
-        NonCompliance,
-        DutyNeglect,
-        TrainingFailure,
-        VerificationFailure,
-        CouncilBypass,
-        PublicBenefitFailure,
-        TransparencyFailure
-    }
-
-    enum CaseStatus {
+    enum ComplianceStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedViolation
+        ComplianceConfirmed
     }
 
     struct Rule {
@@ -46,32 +35,30 @@ contract RegistrarComplianceFramework {
         uint256 timestamp;
     }
 
-    struct Violation {
+    struct Compliance {
         uint256 id;
-        address accuser;
-        address registrar;
-        ViolationType violationType;
-        string details;
-        CaseStatus status;
+        address proposer;
+        string registrarReference;
+        string grounds;
+        ComplianceStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Violation) public violations;
+    mapping(uint256 => Compliance) public compliances;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, ComplianceRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event ViolationFiled(uint256 indexed id, ViolationType violationType);
-    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
+    event ComplianceFiled(uint256 indexed id, string registrarReference);
+    event ComplianceStatusChanged(uint256 indexed id, ComplianceStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
         frameworkCount = 0;
-        violationCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -103,9 +90,9 @@ contract RegistrarComplianceFramework {
 
     function _declareDefaultRules() internal {
         _declare(ComplianceRule.ComplianceIsConstitutional, "Compliance is constitutional; denial prohibited.");
-        _declare(ComplianceRule.RegistrarDutyEnforced, "Registrar duty enforced; neglect prohibited.");
-        _declare(ComplianceRule.TrainingRequired, "Training required; ignorance prohibited.");
-        _declare(ComplianceRule.VerificationClarified, "Verification clarified; discrepancies blocked.");
+        _declare(ComplianceRule.RegistrarAccountabilityRequired, "Registrar accountability required; neglect prohibited.");
+        _declare(ComplianceRule.WeakComplianceSuppressed, "Weak compliance suppressed; fairness required.");
+        _declare(ComplianceRule.ICANNOversightMandated, "ICANN oversight mandated; opacity blocked.");
         _declare(ComplianceRule.TransparencyInComplianceSystems, "Compliance systems must be transparent.");
         _declare(ComplianceRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
@@ -129,61 +116,59 @@ contract RegistrarComplianceFramework {
         emit RuleLocked(id);
     }
 
-    function fileViolation(
-        address registrar,
-        ViolationType violationType,
-        string calldata details
+    function fileCompliance(
+        string calldata registrarReference,
+        string calldata grounds
     ) external {
-        violationCount++;
-        violations[violationCount] = Violation(
-            violationCount,
+        frameworkCount++;
+        compliances[frameworkCount] = Compliance(
+            frameworkCount,
             msg.sender,
-            registrar,
-            violationType,
-            details,
-            CaseStatus.Filed,
+            registrarReference,
+            grounds,
+            ComplianceStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ViolationFiled(violationCount, violationType);
+        emit ComplianceFiled(frameworkCount, registrarReference);
     }
 
-    function beginReview(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.Filed, "Not filed");
-        v.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(violationId, CaseStatus.UnderReview);
+    function beginReview(uint256 complianceId) external onlyCouncil {
+        Compliance storage c = compliances[complianceId];
+        require(c.status == ComplianceStatus.Filed, "Not filed");
+        c.status = ComplianceStatus.UnderReview;
+        emit ComplianceStatusChanged(complianceId, ComplianceStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.UnderReview, "Not under review");
-        v.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(violationId, CaseStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 complianceId) external onlyCouncil {
+        Compliance storage c = compliances[complianceId];
+        require(c.status == ComplianceStatus.UnderReview, "Not under review");
+        c.status = ComplianceStatus.MultiCouncilReview;
+        emit ComplianceStatusChanged(complianceId, ComplianceStatus.MultiCouncilReview);
     }
 
-    function approveViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.MultiCouncilReview, "Not in council stage");
+    function confirmCompliance(uint256 complianceId) external onlyCouncil {
+        Compliance storage c = compliances[complianceId];
+        require(c.status == ComplianceStatus.MultiCouncilReview, "Not in council stage");
 
-        v.approvals++;
+        c.approvals++;
 
-        if (v.approvals * 2 > councilCount && councilCount > 0) {
-            v.status = CaseStatus.ConfirmedViolation;
-            emit CaseStatusChanged(violationId, CaseStatus.ConfirmedViolation);
+        if (c.approvals * 2 > councilCount && councilCount > 0) {
+            c.status = ComplianceStatus.ComplianceConfirmed;
+            emit ComplianceStatusChanged(complianceId, ComplianceStatus.ComplianceConfirmed);
         }
     }
 
-    function rejectViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
+    function rejectCompliance(uint256 complianceId) external onlyCouncil {
+        Compliance storage c = compliances[complianceId];
         require(
-            v.status == CaseStatus.Filed ||
-            v.status == CaseStatus.UnderReview ||
-            v.status == CaseStatus.MultiCouncilReview,
+            c.status == ComplianceStatus.Filed ||
+            c.status == ComplianceStatus.UnderReview ||
+            c.status == ComplianceStatus.MultiCouncilReview,
             "Invalid status"
         );
-        v.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(violationId, CaseStatus.Rejected);
+        c.status = ComplianceStatus.Rejected;
+        emit ComplianceStatusChanged(complianceId, ComplianceStatus.Rejected);
     }
 }
