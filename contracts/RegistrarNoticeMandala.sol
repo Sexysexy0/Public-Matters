@@ -3,37 +3,27 @@ pragma solidity ^0.8.20;
 
 /// @title Registrar Notice Mandala
 /// @notice Encodes registrar notice safeguard.
-/// @dev Complements RegistrarComplianceFramework, LachesCodification, and DecisionFormatFramework.
+/// @dev Complements RegistrarComplianceFramework, DecisionFormatFramework, and ComplaintWithdrawalTreaty.
 
 contract RegistrarNoticeMandala {
     address public guardian;
     uint256 public noticeCount;
-    uint256 public violationCount;
     uint256 public councilCount;
 
     enum NoticeRule {
         NoticeIsConstitutional,
-        AdditionalEmailRequired,
-        DueProcessProtected,
+        PromptNotificationRequired,
+        LackOfNoticeSuppressed,
         TransparencyInNoticeSystems,
         PublicBenefitPriority
     }
 
-    enum ViolationType {
-        NoticeFailure,
-        EmailNotSent,
-        DueProcessBreach,
-        CouncilBypass,
-        PublicBenefitFailure,
-        TransparencyFailure
-    }
-
-    enum CaseStatus {
+    enum NoticeStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedViolation
+        NoticeConfirmed
     }
 
     struct Rule {
@@ -44,32 +34,30 @@ contract RegistrarNoticeMandala {
         uint256 timestamp;
     }
 
-    struct Violation {
+    struct Notice {
         uint256 id;
-        address accuser;
-        address registrar;
-        ViolationType violationType;
-        string details;
-        CaseStatus status;
+        address proposer;
+        string registrarReference;
+        string grounds;
+        NoticeStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Violation) public violations;
+    mapping(uint256 => Notice) public notices;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, NoticeRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event ViolationFiled(uint256 indexed id, ViolationType violationType);
-    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
+    event NoticeFiled(uint256 indexed id, string registrarReference);
+    event NoticeStatusChanged(uint256 indexed id, NoticeStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
         noticeCount = 0;
-        violationCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -101,8 +89,8 @@ contract RegistrarNoticeMandala {
 
     function _declareDefaultRules() internal {
         _declare(NoticeRule.NoticeIsConstitutional, "Notice is constitutional; denial prohibited.");
-        _declare(NoticeRule.AdditionalEmailRequired, "Additional email required; due process enforced.");
-        _declare(NoticeRule.DueProcessProtected, "Due process protected; violation blocked.");
+        _declare(NoticeRule.PromptNotificationRequired, "Prompt notification required; delay prohibited.");
+        _declare(NoticeRule.LackOfNoticeSuppressed, "Lack of notice suppressed; fairness required.");
         _declare(NoticeRule.TransparencyInNoticeSystems, "Notice systems must be transparent.");
         _declare(NoticeRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
@@ -126,61 +114,59 @@ contract RegistrarNoticeMandala {
         emit RuleLocked(id);
     }
 
-    function fileViolation(
-        address registrar,
-        ViolationType violationType,
-        string calldata details
+    function fileNotice(
+        string calldata registrarReference,
+        string calldata grounds
     ) external {
-        violationCount++;
-        violations[violationCount] = Violation(
-            violationCount,
+        noticeCount++;
+        notices[noticeCount] = Notice(
+            noticeCount,
             msg.sender,
-            registrar,
-            violationType,
-            details,
-            CaseStatus.Filed,
+            registrarReference,
+            grounds,
+            NoticeStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ViolationFiled(violationCount, violationType);
+        emit NoticeFiled(noticeCount, registrarReference);
     }
 
-    function beginReview(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.Filed, "Not filed");
-        v.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(violationId, CaseStatus.UnderReview);
+    function beginReview(uint256 noticeId) external onlyCouncil {
+        Notice storage n = notices[noticeId];
+        require(n.status == NoticeStatus.Filed, "Not filed");
+        n.status = NoticeStatus.UnderReview;
+        emit NoticeStatusChanged(noticeId, NoticeStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.UnderReview, "Not under review");
-        v.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(violationId, CaseStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 noticeId) external onlyCouncil {
+        Notice storage n = notices[noticeId];
+        require(n.status == NoticeStatus.UnderReview, "Not under review");
+        n.status = NoticeStatus.MultiCouncilReview;
+        emit NoticeStatusChanged(noticeId, NoticeStatus.MultiCouncilReview);
     }
 
-    function approveViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.MultiCouncilReview, "Not in council stage");
+    function confirmNotice(uint256 noticeId) external onlyCouncil {
+        Notice storage n = notices[noticeId];
+        require(n.status == NoticeStatus.MultiCouncilReview, "Not in council stage");
 
-        v.approvals++;
+        n.approvals++;
 
-        if (v.approvals * 2 > councilCount && councilCount > 0) {
-            v.status = CaseStatus.ConfirmedViolation;
-            emit CaseStatusChanged(violationId, CaseStatus.ConfirmedViolation);
+        if (n.approvals * 2 > councilCount && councilCount > 0) {
+            n.status = NoticeStatus.NoticeConfirmed;
+            emit NoticeStatusChanged(noticeId, NoticeStatus.NoticeConfirmed);
         }
     }
 
-    function rejectViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
+    function rejectNotice(uint256 noticeId) external onlyCouncil {
+        Notice storage n = notices[noticeId];
         require(
-            v.status == CaseStatus.Filed ||
-            v.status == CaseStatus.UnderReview ||
-            v.status == CaseStatus.MultiCouncilReview,
+            n.status == NoticeStatus.Filed ||
+            n.status == NoticeStatus.UnderReview ||
+            n.status == NoticeStatus.MultiCouncilReview,
             "Invalid status"
         );
-        v.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(violationId, CaseStatus.Rejected);
+        n.status = NoticeStatus.Rejected;
+        emit NoticeStatusChanged(noticeId, NoticeStatus.Rejected);
     }
 }
