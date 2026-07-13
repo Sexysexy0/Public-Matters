@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /// @title Solidarity Mandala
 /// @notice Weaves solidarity into mandala resonance.
-/// @dev Complements HumanityCharter, MercyTreaty, and CommunalHarmonyTreaty.
+/// @dev Complements CooperationTreaty, HarmonyTreaty, and MoralStandingFramework.
 
 contract SolidarityMandala {
     address public guardian;
@@ -14,8 +14,8 @@ contract SolidarityMandala {
     enum SolidarityRule {
         SolidarityIsConstitutional,
         UnityAnchored,
-        CooperationProtected,
-        MutualAidSafeguarded,
+        DivisionProhibited,
+        CollectiveStrengthSafeguarded,
         PublicBenefitPriority,
         MandatoryCouncilOversight,
         TransparencyInSolidaritySystems
@@ -23,9 +23,9 @@ contract SolidarityMandala {
 
     enum ViolationType {
         SolidarityDenial,
-        UnitySuppression,
-        CooperationBlocked,
-        MutualAidErasure,
+        UnityFailure,
+        Division,
+        CollectiveStrengthBreach,
         CouncilBypass,
         PublicBenefitFailure,
         TransparencyFailure
@@ -104,9 +104,9 @@ contract SolidarityMandala {
 
     function _declareDefaultRules() internal {
         _declare(SolidarityRule.SolidarityIsConstitutional, "Solidarity is constitutional; denial prohibited.");
-        _declare(SolidarityRule.UnityAnchored, "Unity is anchored; suppression prohibited.");
-        _declare(SolidarityRule.CooperationProtected, "Cooperation is protected; blocking prohibited.");
-        _declare(SolidarityRule.MutualAidSafeguarded, "Mutual aid safeguarded; erasure prohibited.");
+        _declare(SolidarityRule.UnityAnchored, "Unity anchored; division prohibited.");
+        _declare(SolidarityRule.DivisionProhibited, "Division prohibited; violation blocked.");
+        _declare(SolidarityRule.CollectiveStrengthSafeguarded, "Collective strength safeguarded; breach prohibited.");
         _declare(SolidarityRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
         _declare(SolidarityRule.MandatoryCouncilOversight, "Council oversight required for solidarity enforcement.");
         _declare(SolidarityRule.TransparencyInSolidaritySystems, "Solidarity systems must be transparent.");
