@@ -2,94 +2,64 @@
 pragma solidity ^0.8.20;
 
 /// @title Innovation Merit Shield
-/// @notice Protects innovators, founders, creators, and public servants whose work demonstrates merit, public benefit, or societal value.
-/// @dev Prevents punishment, targeting, or prosecution of individuals whose contributions meet merit thresholds.
+/// @notice Encodes merit safeguard.
+/// @dev Complements BureaucraticAccountability, InnovationConstitution, and InnovationFreedomCharter.
 
 contract InnovationMeritShield {
     address public guardian;
-    uint256 public meritCount;
-    uint256 public caseCount;
+    uint256 public shieldCount;
     uint256 public councilCount;
 
-    enum RoleType {
-        Innovator,
-        Creator,
-        Engineer,
-        PublicServant,
-        Council,
-        Oversight,
-        FutureEntity
+    enum MeritRule {
+        MeritIsConstitutional,
+        FavoritismSuppressed,
+        EqualOpportunityRequired,
+        TransparencyInMeritSystems,
+        PublicBenefitPriority
     }
 
-    enum MeritMetric {
-        JobCreation,
-        EconomicContribution,
-        TechnologyAdvancement,
-        EducationImpact,
-        PublicServiceImprovement,
-        SystemModernization,
-        SocialBenefit,
-        CulturalContribution,
-        LongTermValue,
-        CrisisContribution
-    }
-
-    enum MeritCaseType {
-        MeritIgnored,
-        MeritPunished,
-        MeritMisclassified,
-        MeritUndervalued,
-        MeritWeaponized
-    }
-
-    enum CaseStatus {
+    enum MeritStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedMeritAbuse
+        MeritConfirmed
     }
 
-    struct Merit {
+    struct Rule {
         uint256 id;
-        MeritMetric metricType;
+        MeritRule ruleType;
         string description;
-        uint256 score; // 0–100 merit score
         bool immutableEntry;
         uint256 timestamp;
     }
 
-    struct MeritCase {
+    struct Merit {
         uint256 id;
-        address accuser;
-        address accused;
-        MeritCaseType caseType;
-        string details;
-        uint256 meritScore;
-        CaseStatus status;
+        address proposer;
+        string grounds;
+        MeritStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
+    mapping(uint256 => Rule) public rules;
     mapping(uint256 => Merit) public merits;
-    mapping(uint256 => MeritCase) public cases;
-    mapping(address => RoleType) public roles;
     mapping(address => bool) public councilMember;
 
-    event MeritDeclared(uint256 indexed id, MeritMetric metricType);
-    event MeritLocked(uint256 indexed id);
-    event MeritCaseFiled(uint256 indexed id, MeritCaseType caseType);
-    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
+    event RuleDeclared(uint256 indexed id, MeritRule ruleType);
+    event RuleLocked(uint256 indexed id);
+    event MeritFiled(uint256 indexed id);
+    event MeritStatusChanged(uint256 indexed id, MeritStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
-        meritCount = 0;
-        caseCount = 0;
+        shieldCount = 0;
         councilCount = 0;
 
-        _declareDefaultMerits();
+        _declareDefaultRules();
     }
 
     modifier onlyGuardian() {
@@ -100,10 +70,6 @@ contract InnovationMeritShield {
     modifier onlyCouncil() {
         require(councilMember[msg.sender], "Council only");
         _;
-    }
-
-    function assignRole(address account, RoleType role) external onlyGuardian {
-        roles[account] = role;
     }
 
     function addCouncilMember(address member) external onlyGuardian {
@@ -120,102 +86,82 @@ contract InnovationMeritShield {
         emit CouncilMemberRemoved(member);
     }
 
-    function _declareDefaultMerits() internal {
-        _declareMerit(MeritMetric.JobCreation, "Created jobs and economic opportunities.", 80);
-        _declareMerit(MeritMetric.EconomicContribution, "Contributed significantly to the economy.", 75);
-        _declareMerit(MeritMetric.TechnologyAdvancement, "Advanced national or global technology.", 85);
-        _declareMerit(MeritMetric.EducationImpact, "Improved education systems or access.", 70);
-        _declareMerit(MeritMetric.PublicServiceImprovement, "Improved public services.", 65);
-        _declareMerit(MeritMetric.SystemModernization, "Modernized outdated systems.", 80);
-        _declareMerit(MeritMetric.SocialBenefit, "Created social or community benefit.", 60);
-        _declareMerit(MeritMetric.CulturalContribution, "Contributed to cultural progress.", 55);
-        _declareMerit(MeritMetric.LongTermValue, "Created long-term national value.", 75);
-        _declareMerit(MeritMetric.CrisisContribution, "Helped during crisis or emergency.", 85);
+    function _declareDefaultRules() internal {
+        _declare(MeritRule.MeritIsConstitutional, "Merit is constitutional; denial prohibited.");
+        _declare(MeritRule.FavoritismSuppressed, "Favoritism suppressed; unfair advantage blocked.");
+        _declare(MeritRule.EqualOpportunityRequired, "Equal opportunity required; discrimination prohibited.");
+        _declare(MeritRule.TransparencyInMeritSystems, "Merit systems must be transparent.");
+        _declare(MeritRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
-    function _declareMerit(
-        MeritMetric metricType,
-        string memory description,
-        uint256 score
-    ) internal {
-        meritCount++;
-        merits[meritCount] = Merit(
-            meritCount,
-            metricType,
+    function _declare(MeritRule ruleType, string memory description) internal {
+        shieldCount++;
+        rules[shieldCount] = Rule(
+            shieldCount,
+            ruleType,
             description,
-            score,
             false,
             block.timestamp
         );
-        emit MeritDeclared(meritCount, metricType);
+        emit RuleDeclared(shieldCount, ruleType);
     }
 
-    function lockMerit(uint256 id) external onlyGuardian {
-        Merit storage m = merits[id];
-        require(!m.immutableEntry, "Already immutable");
-        m.immutableEntry = true;
-        emit MeritLocked(id);
+    function lockRule(uint256 id) external onlyGuardian {
+        Rule storage r = rules[id];
+        require(!r.immutableEntry, "Already immutable");
+        r.immutableEntry = true;
+        emit RuleLocked(id);
     }
 
-    function fileMeritCase(
-        address accused,
-        MeritCaseType caseType,
-        string calldata details,
-        uint256 meritScore
-    ) external {
-        require(meritScore <= 100, "Score must be 0–100");
-
-        caseCount++;
-        cases[caseCount] = MeritCase(
-            caseCount,
+    function fileMerit(string calldata grounds) external {
+        shieldCount++;
+        merits[shieldCount] = Merit(
+            shieldCount,
             msg.sender,
-            accused,
-            caseType,
-            details,
-            meritScore,
-            CaseStatus.Filed,
+            grounds,
+            MeritStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit MeritCaseFiled(caseCount, caseType);
+        emit MeritFiled(shieldCount);
     }
 
-    function beginReview(uint256 caseId) external onlyCouncil {
-        MeritCase storage c = cases[caseId];
-        require(c.status == CaseStatus.Filed, "Not filed");
-        c.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(caseId, CaseStatus.UnderReview);
+    function beginReview(uint256 meritId) external onlyCouncil {
+        Merit storage m = merits[meritId];
+        require(m.status == MeritStatus.Filed, "Not filed");
+        m.status = MeritStatus.UnderReview;
+        emit MeritStatusChanged(meritId, MeritStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 caseId) external onlyCouncil {
-        MeritCase storage c = cases[caseId];
-        require(c.status == CaseStatus.UnderReview, "Not under review");
-        c.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(caseId, CaseStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 meritId) external onlyCouncil {
+        Merit storage m = merits[meritId];
+        require(m.status == MeritStatus.UnderReview, "Not under review");
+        m.status = MeritStatus.MultiCouncilReview;
+        emit MeritStatusChanged(meritId, MeritStatus.MultiCouncilReview);
     }
 
-    function approveMeritAbuse(uint256 caseId) external onlyCouncil {
-        MeritCase storage c = cases[caseId];
-        require(c.status == CaseStatus.MultiCouncilReview, "Not in council stage");
+    function confirmMerit(uint256 meritId) external onlyCouncil {
+        Merit storage m = merits[meritId];
+        require(m.status == MeritStatus.MultiCouncilReview, "Not in council stage");
 
-        c.approvals++;
+        m.approvals++;
 
-        if (c.approvals * 2 > councilCount && councilCount > 0 && c.meritScore >= 60) {
-            c.status = CaseStatus.ConfirmedMeritAbuse;
-            emit CaseStatusChanged(caseId, CaseStatus.ConfirmedMeritAbuse);
+        if (m.approvals * 2 > councilCount && councilCount > 0) {
+            m.status = MeritStatus.MeritConfirmed;
+            emit MeritStatusChanged(meritId, MeritStatus.MeritConfirmed);
         }
     }
 
-    function rejectCase(uint256 caseId) external onlyCouncil {
-        MeritCase storage c = cases[caseId];
+    function rejectMerit(uint256 meritId) external onlyCouncil {
+        Merit storage m = merits[meritId];
         require(
-            c.status == CaseStatus.Filed ||
-            c.status == CaseStatus.UnderReview ||
-            c.status == CaseStatus.MultiCouncilReview,
+            m.status == MeritStatus.Filed ||
+            m.status == MeritStatus.UnderReview ||
+            m.status == MeritStatus.MultiCouncilReview,
             "Invalid status"
         );
-        c.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(caseId, CaseStatus.Rejected);
+        m.status = MeritStatus.Rejected;
+        emit MeritStatusChanged(meritId, MeritStatus.Rejected);
     }
 }
