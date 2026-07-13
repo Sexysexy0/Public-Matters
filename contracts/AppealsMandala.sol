@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 /// @title Appeals Mandala
-/// @notice Encodes appeals safeguard.
-/// @dev Complements RegistrarNoticeMandala, RegistrarComplianceFramework, and ComplaintWithdrawalTreaty.
+/// @notice Encodes safeguard for appeals in domain dispute resolution.
+/// @dev Complements RegistrarComplianceFramework, BureaucraticAccountability, and PublicBenefitOracle.
 
 contract AppealsMandala {
     address public guardian;
@@ -12,9 +12,8 @@ contract AppealsMandala {
 
     enum AppealsRule {
         AppealsIsConstitutional,
-        RightToReviewMandated,
-        DenialOfAppealSuppressed,
-        MultiCouncilAppealsRequired,
+        CourtRespectMandated,
+        PanelLimitsSuppressed,
         TransparencyInAppealsSystems,
         PublicBenefitPriority
     }
@@ -24,7 +23,7 @@ contract AppealsMandala {
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        AppealConfirmed
+        AppealsConfirmed
     }
 
     struct Rule {
@@ -35,10 +34,9 @@ contract AppealsMandala {
         uint256 timestamp;
     }
 
-    struct Appeal {
+    struct AppealsCase {
         uint256 id;
-        address appellant;
-        string caseReference;
+        address proposer;
         string grounds;
         AppealsStatus status;
         uint256 approvals;
@@ -46,13 +44,13 @@ contract AppealsMandala {
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Appeal) public appeals;
+    mapping(uint256 => AppealsCase) public appealsCases;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, AppealsRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event AppealFiled(uint256 indexed id, string caseReference);
-    event AppealStatusChanged(uint256 indexed id, AppealsStatus status);
+    event AppealsFiled(uint256 indexed id);
+    event AppealsStatusChanged(uint256 indexed id, AppealsStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
@@ -90,9 +88,8 @@ contract AppealsMandala {
 
     function _declareDefaultRules() internal {
         _declare(AppealsRule.AppealsIsConstitutional, "Appeals are constitutional; denial prohibited.");
-        _declare(AppealsRule.RightToReviewMandated, "Right to review mandated; fairness required.");
-        _declare(AppealsRule.DenialOfAppealSuppressed, "Denial of appeal suppressed; dignity required.");
-        _declare(AppealsRule.MultiCouncilAppealsRequired, "Multi-council appeals required; systemic clarity enforced.");
+        _declare(AppealsRule.CourtRespectMandated, "Court respect mandated; supremacy recognized.");
+        _declare(AppealsRule.PanelLimitsSuppressed, "Panel limits suppressed; fairness required.");
         _declare(AppealsRule.TransparencyInAppealsSystems, "Appeals systems must be transparent.");
         _declare(AppealsRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
@@ -116,52 +113,48 @@ contract AppealsMandala {
         emit RuleLocked(id);
     }
 
-    function fileAppeal(
-        string calldata caseReference,
-        string calldata grounds
-    ) external {
+    function fileAppealsCase(string calldata grounds) external {
         appealsCount++;
-        appeals[appealsCount] = Appeal(
+        appealsCases[appealsCount] = AppealsCase(
             appealsCount,
             msg.sender,
-            caseReference,
             grounds,
             AppealsStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit AppealFiled(appealsCount, caseReference);
+        emit AppealsFiled(appealsCount);
     }
 
-    function beginReview(uint256 appealId) external onlyCouncil {
-        Appeal storage a = appeals[appealId];
+    function beginReview(uint256 appealsId) external onlyCouncil {
+        AppealsCase storage a = appealsCases[appealsId];
         require(a.status == AppealsStatus.Filed, "Not filed");
         a.status = AppealsStatus.UnderReview;
-        emit AppealStatusChanged(appealId, AppealsStatus.UnderReview);
+        emit AppealsStatusChanged(appealsId, AppealsStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 appealId) external onlyCouncil {
-        Appeal storage a = appeals[appealId];
+    function escalateToMultiCouncil(uint256 appealsId) external onlyCouncil {
+        AppealsCase storage a = appealsCases[appealsId];
         require(a.status == AppealsStatus.UnderReview, "Not under review");
         a.status = AppealsStatus.MultiCouncilReview;
-        emit AppealStatusChanged(appealId, AppealsStatus.MultiCouncilReview);
+        emit AppealsStatusChanged(appealsId, AppealsStatus.MultiCouncilReview);
     }
 
-    function confirmAppeal(uint256 appealId) external onlyCouncil {
-        Appeal storage a = appeals[appealId];
+    function confirmAppeals(uint256 appealsId) external onlyCouncil {
+        AppealsCase storage a = appealsCases[appealsId];
         require(a.status == AppealsStatus.MultiCouncilReview, "Not in council stage");
 
         a.approvals++;
 
         if (a.approvals * 2 > councilCount && councilCount > 0) {
-            a.status = AppealsStatus.AppealConfirmed;
-            emit AppealStatusChanged(appealId, AppealsStatus.AppealConfirmed);
+            a.status = AppealsStatus.AppealsConfirmed;
+            emit AppealsStatusChanged(appealsId, AppealsStatus.AppealsConfirmed);
         }
     }
 
-    function rejectAppeal(uint256 appealId) external onlyCouncil {
-        Appeal storage a = appeals[appealId];
+    function rejectAppeals(uint256 appealsId) external onlyCouncil {
+        AppealsCase storage a = appealsCases[appealsId];
         require(
             a.status == AppealsStatus.Filed ||
             a.status == AppealsStatus.UnderReview ||
@@ -169,6 +162,6 @@ contract AppealsMandala {
             "Invalid status"
         );
         a.status = AppealsStatus.Rejected;
-        emit AppealStatusChanged(appealId, AppealsStatus.Rejected);
+        emit AppealsStatusChanged(appealsId, AppealsStatus.Rejected);
     }
 }
