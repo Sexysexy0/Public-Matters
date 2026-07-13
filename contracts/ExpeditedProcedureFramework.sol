@@ -3,18 +3,17 @@ pragma solidity ^0.8.20;
 
 /// @title Expedited Procedure Framework
 /// @notice Encodes expedited procedure safeguard.
-/// @dev Complements SupplementalFilingsTreaty, DecisionFormatFramework, and AppealsMandala.
+/// @dev Complements AppealsMandala, FreeSpeechMandala, and CaseLawCodification.
 
 contract ExpeditedProcedureFramework {
     address public guardian;
-    uint256 public procedureCount;
+    uint256 public frameworkCount;
     uint256 public councilCount;
 
     enum ProcedureRule {
         ExpeditedIsConstitutional,
+        SpeedMandated,
         DelaySuppressed,
-        EfficiencyAnchored,
-        DueProcessProtected,
         TransparencyInExpeditedSystems,
         PublicBenefitPriority
     }
@@ -35,11 +34,9 @@ contract ExpeditedProcedureFramework {
         uint256 timestamp;
     }
 
-    struct Procedure {
+    struct ProcedureCase {
         uint256 id;
-        address complainant;
-        address respondent;
-        string domainName;
+        address proposer;
         string grounds;
         ProcedureStatus status;
         uint256 approvals;
@@ -47,19 +44,19 @@ contract ExpeditedProcedureFramework {
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Procedure) public procedures;
+    mapping(uint256 => ProcedureCase) public procedures;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, ProcedureRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event ProcedureFiled(uint256 indexed id, string domainName);
+    event ProcedureFiled(uint256 indexed id);
     event ProcedureStatusChanged(uint256 indexed id, ProcedureStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
-        procedureCount = 0;
+        frameworkCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -91,23 +88,22 @@ contract ExpeditedProcedureFramework {
 
     function _declareDefaultRules() internal {
         _declare(ProcedureRule.ExpeditedIsConstitutional, "Expedited procedure is constitutional; denial prohibited.");
-        _declare(ProcedureRule.DelaySuppressed, "Delay suppressed; efficiency required.");
-        _declare(ProcedureRule.EfficiencyAnchored, "Efficiency anchored; fairness required.");
-        _declare(ProcedureRule.DueProcessProtected, "Due process protected; violation blocked.");
+        _declare(ProcedureRule.SpeedMandated, "Speed mandated; delay blocked.");
+        _declare(ProcedureRule.DelaySuppressed, "Delay suppressed; fairness required.");
         _declare(ProcedureRule.TransparencyInExpeditedSystems, "Expedited systems must be transparent.");
         _declare(ProcedureRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
     function _declare(ProcedureRule ruleType, string memory description) internal {
-        procedureCount++;
-        rules[procedureCount] = Rule(
-            procedureCount,
+        frameworkCount++;
+        rules[frameworkCount] = Rule(
+            frameworkCount,
             ruleType,
             description,
             false,
             block.timestamp
         );
-        emit RuleDeclared(procedureCount, ruleType);
+        emit RuleDeclared(frameworkCount, ruleType);
     }
 
     function lockRule(uint256 id) external onlyGuardian {
@@ -117,42 +113,36 @@ contract ExpeditedProcedureFramework {
         emit RuleLocked(id);
     }
 
-    function fileProcedure(
-        address respondent,
-        string calldata domainName,
-        string calldata grounds
-    ) external {
-        procedureCount++;
-        procedures[procedureCount] = Procedure(
-            procedureCount,
+    function fileProcedureCase(string calldata grounds) external {
+        frameworkCount++;
+        procedures[frameworkCount] = ProcedureCase(
+            frameworkCount,
             msg.sender,
-            respondent,
-            domainName,
             grounds,
             ProcedureStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ProcedureFiled(procedureCount, domainName);
+        emit ProcedureFiled(frameworkCount);
     }
 
     function beginReview(uint256 procedureId) external onlyCouncil {
-        Procedure storage p = procedures[procedureId];
+        ProcedureCase storage p = procedures[procedureId];
         require(p.status == ProcedureStatus.Filed, "Not filed");
         p.status = ProcedureStatus.UnderReview;
         emit ProcedureStatusChanged(procedureId, ProcedureStatus.UnderReview);
     }
 
     function escalateToMultiCouncil(uint256 procedureId) external onlyCouncil {
-        Procedure storage p = procedures[procedureId];
+        ProcedureCase storage p = procedures[procedureId];
         require(p.status == ProcedureStatus.UnderReview, "Not under review");
         p.status = ProcedureStatus.MultiCouncilReview;
         emit ProcedureStatusChanged(procedureId, ProcedureStatus.MultiCouncilReview);
     }
 
     function confirmExpedited(uint256 procedureId) external onlyCouncil {
-        Procedure storage p = procedures[procedureId];
+        ProcedureCase storage p = procedures[procedureId];
         require(p.status == ProcedureStatus.MultiCouncilReview, "Not in council stage");
 
         p.approvals++;
@@ -163,8 +153,8 @@ contract ExpeditedProcedureFramework {
         }
     }
 
-    function rejectProcedure(uint256 procedureId) external onlyCouncil {
-        Procedure storage p = procedures[procedureId];
+    function rejectExpedited(uint256 procedureId) external onlyCouncil {
+        ProcedureCase storage p = procedures[procedureId];
         require(
             p.status == ProcedureStatus.Filed ||
             p.status == ProcedureStatus.UnderReview ||
