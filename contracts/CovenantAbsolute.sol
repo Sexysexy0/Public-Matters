@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+,// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 /// @title Covenant Absolute
@@ -35,7 +35,11 @@ contract CovenantAbsolute {
         guardian = newGuardian;
     }
 
-    function declareAbsolute(string calldata subject, string calldata totalPrinciple, bool binding) external onlyGuardian {
+    function declareAbsolute(
+        string calldata subject,
+        string calldata totalPrinciple,
+        bool binding
+    ) external onlyGuardian {
         absoluteCount++;
         totalities[absoluteCount] = Totality(absoluteCount, subject, totalPrinciple, binding);
         emit AbsoluteDeclared(absoluteCount, subject, totalPrinciple);
