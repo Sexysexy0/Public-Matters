@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 /// @title Public Benefit Oracle
-/// @notice Anchors all covenants to the principle of public benefit.
-/// @dev Complements InnovationSafetyCovenant, RiskContextReview, and BureaucraticAccountability.
+/// @notice Encodes safeguard for anchoring all systemic transformations to public benefit.
+/// @dev Complements CollectiveMetamorphosisOracle, TransformationMandala, and BureaucraticAccountability.
 
 contract PublicBenefitOracle {
     address public guardian;
@@ -12,10 +12,10 @@ contract PublicBenefitOracle {
 
     enum BenefitRule {
         PublicBenefitIsConstitutional,
-        EquityMandated,
-        ExploitationSuppressed,
+        AnchorMandated,
+        EliteGainSuppressed,
         TransparencyInBenefitSystems,
-        MassPriority
+        CollectivePriority
     }
 
     enum BenefitStatus {
@@ -88,10 +88,10 @@ contract PublicBenefitOracle {
 
     function _declareDefaultRules() internal {
         _declare(BenefitRule.PublicBenefitIsConstitutional, "Public benefit is constitutional; denial prohibited.");
-        _declare(BenefitRule.EquityMandated, "Equity mandated; exploitation blocked.");
-        _declare(BenefitRule.ExploitationSuppressed, "Exploitation suppressed; fairness required.");
+        _declare(BenefitRule.AnchorMandated, "Anchor mandated; all transformations tied to public benefit.");
+        _declare(BenefitRule.EliteGainSuppressed, "Elite gain suppressed; fairness required.");
         _declare(BenefitRule.TransparencyInBenefitSystems, "Benefit systems must be transparent.");
-        _declare(BenefitRule.MassPriority, "Mass priority overrides elite gain.");
+        _declare(BenefitRule.CollectivePriority, "Collective priority overrides individual exploitation.");
     }
 
     function _declare(BenefitRule ruleType, string memory description) internal {
