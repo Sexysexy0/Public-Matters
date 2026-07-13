@@ -74,10 +74,10 @@ contract BrandTrustCovenant {
         uint256 timestamp;
     }
 
-    mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Violation) public violations;
-    mapping(address => RoleType) public roles;
-    mapping(address => bool) public councilMember;
+    mapping(uint256 => Rule> public rules;
+    mapping(uint256 => Violation> public violations;
+    mapping(address => RoleType> public roles;
+    mapping(address => bool> public councilMember;
 
     event RuleDeclared(uint256 indexed id, TrustRule ruleType);
     event RuleLocked(uint256 indexed id);
