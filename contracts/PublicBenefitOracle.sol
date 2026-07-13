@@ -2,85 +2,65 @@
 pragma solidity ^0.8.20;
 
 /// @title Public Benefit Oracle
-/// @notice Evaluates whether a decision, procurement, or innovation produced public benefit.
-/// @dev If public benefit is confirmed, the decision cannot be criminalized or weaponized.
+/// @notice Encodes public benefit safeguard.
+/// @dev Complements InnovationSafetyCovenant, RiskContextReview, and BureaucraticAccountability.
 
 contract PublicBenefitOracle {
     address public guardian;
-    uint256 public metricCount;
-    uint256 public evaluationCount;
+    uint256 public oracleCount;
     uint256 public councilCount;
 
-    enum RoleType {
-        Innovator,
-        PublicServant,
-        ProcurementOfficer,
-        Auditor,
-        Council,
-        Oversight,
-        FutureEntity
+    enum BenefitRule {
+        BenefitIsConstitutional,
+        EliteCaptureSuppressed,
+        MasaFirstMandated,
+        OracleChecksRequired,
+        TransparencyInBenefitSystems,
+        PublicBenefitPriority
     }
 
-    enum BenefitMetric {
-        JobCreation,
-        CostReduction,
-        EfficiencyIncrease,
-        EducationImprovement,
-        TechnologyAdvancement,
-        PublicAccessIncrease,
-        ServiceQualityIncrease,
-        TransparencyIncrease,
-        LongTermBenefit,
-        EmergencyResponseBenefit
-    }
-
-    enum EvaluationStatus {
+    enum BenefitStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedPublicBenefit
+        BenefitConfirmed
     }
 
-    struct Metric {
+    struct Rule {
         uint256 id;
-        BenefitMetric metricType;
+        BenefitRule ruleType;
         string description;
         bool immutableEntry;
         uint256 timestamp;
     }
 
-    struct Evaluation {
+    struct BenefitCase {
         uint256 id;
-        address evaluator;
-        address subject;
-        BenefitMetric metricType;
-        string details;
-        uint256 score; // 0–100 public benefit score
-        EvaluationStatus status;
+        address proposer;
+        string grounds;
+        BenefitStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
-    mapping(uint256 => Metric) public metrics;
-    mapping(uint256 => Evaluation) public evaluations;
-    mapping(address => RoleType) public roles;
+    mapping(uint256 => Rule) public rules;
+    mapping(uint256 => BenefitCase) public benefitCases;
     mapping(address => bool) public councilMember;
 
-    event MetricDeclared(uint256 indexed id, BenefitMetric metricType);
-    event MetricLocked(uint256 indexed id);
-    event EvaluationFiled(uint256 indexed id, BenefitMetric metricType);
-    event EvaluationStatusChanged(uint256 indexed id, EvaluationStatus status);
+    event RuleDeclared(uint256 indexed id, BenefitRule ruleType);
+    event RuleLocked(uint256 indexed id);
+    event BenefitFiled(uint256 indexed id);
+    event BenefitStatusChanged(uint256 indexed id, BenefitStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
-        metricCount = 0;
-        evaluationCount = 0;
+        oracleCount = 0;
         councilCount = 0;
 
-        _declareDefaultMetrics();
+        _declareDefaultRules();
     }
 
     modifier onlyGuardian() {
@@ -91,10 +71,6 @@ contract PublicBenefitOracle {
     modifier onlyCouncil() {
         require(councilMember[msg.sender], "Council only");
         _;
-    }
-
-    function assignRole(address account, RoleType role) external onlyGuardian {
-        roles[account] = role;
     }
 
     function addCouncilMember(address member) external onlyGuardian {
@@ -111,97 +87,83 @@ contract PublicBenefitOracle {
         emit CouncilMemberRemoved(member);
     }
 
-    function _declareDefaultMetrics() internal {
-        _declareMetric(BenefitMetric.JobCreation, "Decision created jobs.");
-        _declareMetric(BenefitMetric.CostReduction, "Decision reduced costs.");
-        _declareMetric(BenefitMetric.EfficiencyIncrease, "Decision increased efficiency.");
-        _declareMetric(BenefitMetric.EducationImprovement, "Decision improved education outcomes.");
-        _declareMetric(BenefitMetric.TechnologyAdvancement, "Decision advanced technology.");
-        _declareMetric(BenefitMetric.PublicAccessIncrease, "Decision increased public access.");
-        _declareMetric(BenefitMetric.ServiceQualityIncrease, "Decision improved service quality.");
-        _declareMetric(BenefitMetric.TransparencyIncrease, "Decision increased transparency.");
-        _declareMetric(BenefitMetric.LongTermBenefit, "Decision produced long-term benefit.");
-        _declareMetric(BenefitMetric.EmergencyResponseBenefit, "Decision improved emergency response.");
+    function _declareDefaultRules() internal {
+        _declare(BenefitRule.BenefitIsConstitutional, "Public benefit is constitutional; denial prohibited.");
+        _declare(BenefitRule.EliteCaptureSuppressed, "Elite capture suppressed; fairness required.");
+        _declare(BenefitRule.MasaFirstMandated, "Masa-first mandated; inequity prohibited.");
+        _declare(BenefitRule.OracleChecksRequired, "Oracle checks required; blind deployment blocked.");
+        _declare(BenefitRule.TransparencyInBenefitSystems, "Benefit systems must be transparent.");
+        _declare(BenefitRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
-    function _declareMetric(BenefitMetric metricType, string memory description) internal {
-        metricCount++;
-        metrics[metricCount] = Metric(
-            metricCount,
-            metricType,
+    function _declare(BenefitRule ruleType, string memory description) internal {
+        oracleCount++;
+        rules[oracleCount] = Rule(
+            oracleCount,
+            ruleType,
             description,
             false,
             block.timestamp
         );
-        emit MetricDeclared(metricCount, metricType);
+        emit RuleDeclared(oracleCount, ruleType);
     }
 
-    function lockMetric(uint256 id) external onlyGuardian {
-        Metric storage m = metrics[id];
-        require(!m.immutableEntry, "Already immutable");
-        m.immutableEntry = true;
-        emit MetricLocked(id);
+    function lockRule(uint256 id) external onlyGuardian {
+        Rule storage r = rules[id];
+        require(!r.immutableEntry, "Already immutable");
+        r.immutableEntry = true;
+        emit RuleLocked(id);
     }
 
-    function fileEvaluation(
-        address subject,
-        BenefitMetric metricType,
-        string calldata details,
-        uint256 score
-    ) external {
-        require(score <= 100, "Score must be 0–100");
-
-        evaluationCount++;
-        evaluations[evaluationCount] = Evaluation(
-            evaluationCount,
+    function fileBenefitCase(string calldata grounds) external {
+        oracleCount++;
+        benefitCases[oracleCount] = BenefitCase(
+            oracleCount,
             msg.sender,
-            subject,
-            metricType,
-            details,
-            score,
-            EvaluationStatus.Filed,
+            grounds,
+            BenefitStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit EvaluationFiled(evaluationCount, metricType);
+        emit BenefitFiled(oracleCount);
     }
 
-    function beginReview(uint256 evalId) external onlyCouncil {
-        Evaluation storage e = evaluations[evalId];
-        require(e.status == EvaluationStatus.Filed, "Not filed");
-        e.status = EvaluationStatus.UnderReview;
-        emit EvaluationStatusChanged(evalId, EvaluationStatus.UnderReview);
+    function beginReview(uint256 benefitId) external onlyCouncil {
+        BenefitCase storage b = benefitCases[benefitId];
+        require(b.status == BenefitStatus.Filed, "Not filed");
+        b.status = BenefitStatus.UnderReview;
+        emit BenefitStatusChanged(benefitId, BenefitStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 evalId) external onlyCouncil {
-        Evaluation storage e = evaluations[evalId];
-        require(e.status == EvaluationStatus.UnderReview, "Not under review");
-        e.status = EvaluationStatus.MultiCouncilReview;
-        emit EvaluationStatusChanged(evalId, EvaluationStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 benefitId) external onlyCouncil {
+        BenefitCase storage b = benefitCases[benefitId];
+        require(b.status == BenefitStatus.UnderReview, "Not under review");
+        b.status = BenefitStatus.MultiCouncilReview;
+        emit BenefitStatusChanged(benefitId, BenefitStatus.MultiCouncilReview);
     }
 
-    function approvePublicBenefit(uint256 evalId) external onlyCouncil {
-        Evaluation storage e = evaluations[evalId];
-        require(e.status == EvaluationStatus.MultiCouncilReview, "Not in council stage");
+    function confirmBenefit(uint256 benefitId) external onlyCouncil {
+        BenefitCase storage b = benefitCases[benefitId];
+        require(b.status == BenefitStatus.MultiCouncilReview, "Not in council stage");
 
-        e.approvals++;
+        b.approvals++;
 
-        if (e.approvals * 2 > councilCount && councilCount > 0 && e.score >= 60) {
-            e.status = EvaluationStatus.ConfirmedPublicBenefit;
-            emit EvaluationStatusChanged(evalId, EvaluationStatus.ConfirmedPublicBenefit);
+        if (b.approvals * 2 > councilCount && councilCount > 0) {
+            b.status = BenefitStatus.BenefitConfirmed;
+            emit BenefitStatusChanged(benefitId, BenefitStatus.BenefitConfirmed);
         }
     }
 
-    function rejectEvaluation(uint256 evalId) external onlyCouncil {
-        Evaluation storage e = evaluations[evalId];
+    function rejectBenefit(uint256 benefitId) external onlyCouncil {
+        BenefitCase storage b = benefitCases[benefitId];
         require(
-            e.status == EvaluationStatus.Filed ||
-            e.status == EvaluationStatus.UnderReview ||
-            e.status == EvaluationStatus.MultiCouncilReview,
+            b.status == BenefitStatus.Filed ||
+            b.status == BenefitStatus.UnderReview ||
+            b.status == BenefitStatus.MultiCouncilReview,
             "Invalid status"
         );
-        e.status = EvaluationStatus.Rejected;
-        emit EvaluationStatusChanged(evalId, EvaluationStatus.Rejected);
+        b.status = BenefitStatus.Rejected;
+        emit BenefitStatusChanged(benefitId, BenefitStatus.Rejected);
     }
 }
