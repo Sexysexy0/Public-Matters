@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 /// @title Compassion Framework
-/// @notice Encodes compassion as systemic safeguard.
-/// @dev Complements CommunalHarmonyTreaty, JusticeEquilibrium, and DignityCharter.
+/// @notice Encodes compassion safeguards.
+/// @dev Complements AgencyTreaty, RespectMandala, and DignityTreaty.
 
 contract CompassionFramework {
     address public guardian;
@@ -14,18 +14,19 @@ contract CompassionFramework {
     enum CompassionRule {
         CompassionIsConstitutional,
         EmpathyAnchored,
-        CareProtected,
-        SolidaritySafeguarded,
+        CrueltyProhibited,
+        IndifferenceBlocked,
+        NeglectSuppressed,
         PublicBenefitPriority,
-        MandatoryCouncilOversight,
         TransparencyInCompassionSystems
     }
 
     enum ViolationType {
         CompassionDenial,
-        EmpathySuppression,
-        CareErasure,
-        SolidarityBlocked,
+        EmpathyFailure,
+        Cruelty,
+        Indifference,
+        Neglect,
         CouncilBypass,
         PublicBenefitFailure,
         TransparencyFailure
@@ -104,11 +105,11 @@ contract CompassionFramework {
 
     function _declareDefaultRules() internal {
         _declare(CompassionRule.CompassionIsConstitutional, "Compassion is constitutional; denial prohibited.");
-        _declare(CompassionRule.EmpathyAnchored, "Empathy is anchored; suppression prohibited.");
-        _declare(CompassionRule.CareProtected, "Care is protected; erasure prohibited.");
-        _declare(CompassionRule.SolidaritySafeguarded, "Solidarity safeguarded; blocking prohibited.");
+        _declare(CompassionRule.EmpathyAnchored, "Empathy anchored; failure prohibited.");
+        _declare(CompassionRule.CrueltyProhibited, "Cruelty prohibited; violation blocked.");
+        _declare(CompassionRule.IndifferenceBlocked, "Indifference blocked; breach prohibited.");
+        _declare(CompassionRule.NeglectSuppressed, "Neglect suppressed; abdication prohibited.");
         _declare(CompassionRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
-        _declare(CompassionRule.MandatoryCouncilOversight, "Council oversight required for compassion enforcement.");
         _declare(CompassionRule.TransparencyInCompassionSystems, "Compassion systems must be transparent.");
     }
 
