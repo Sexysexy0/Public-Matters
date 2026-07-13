@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /// @title Justice Mandala
 /// @notice Weaves justice into mandala resonance.
-/// @dev Complements HopeCharter, EqualityTreaty, and HumanityCharter.
+/// @dev Complements TrustTreaty, FairnessMandala, and IntegrityCharter.
 
 contract JusticeMandala {
     address public guardian;
@@ -13,9 +13,9 @@ contract JusticeMandala {
 
     enum JusticeRule {
         JusticeIsConstitutional,
-        FairnessAnchored,
-        AccountabilityProtected,
-        DignitySafeguarded,
+        DignityAnchored,
+        LawfulBalanceProtected,
+        ImpartialJudgmentSafeguarded,
         PublicBenefitPriority,
         MandatoryCouncilOversight,
         TransparencyInJusticeSystems
@@ -23,9 +23,9 @@ contract JusticeMandala {
 
     enum ViolationType {
         JusticeDenial,
-        FairnessSuppression,
-        AccountabilityBlocked,
-        DignityErasure,
+        DignitySuppression,
+        LawfulBalanceDistorted,
+        ImpartialityBreach,
         CouncilBypass,
         PublicBenefitFailure,
         TransparencyFailure
@@ -104,9 +104,9 @@ contract JusticeMandala {
 
     function _declareDefaultRules() internal {
         _declare(JusticeRule.JusticeIsConstitutional, "Justice is constitutional; denial prohibited.");
-        _declare(JusticeRule.FairnessAnchored, "Fairness is anchored; suppression prohibited.");
-        _declare(JusticeRule.AccountabilityProtected, "Accountability protected; blocking prohibited.");
-        _declare(JusticeRule.DignitySafeguarded, "Dignity safeguarded; erasure prohibited.");
+        _declare(JusticeRule.DignityAnchored, "Dignity anchored; suppression prohibited.");
+        _declare(JusticeRule.LawfulBalanceProtected, "Lawful balance protected; distortion prohibited.");
+        _declare(JusticeRule.ImpartialJudgmentSafeguarded, "Impartial judgment safeguarded; breach prohibited.");
         _declare(JusticeRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
         _declare(JusticeRule.MandatoryCouncilOversight, "Council oversight required for justice enforcement.");
         _declare(JusticeRule.TransparencyInJusticeSystems, "Justice systems must be transparent.");
