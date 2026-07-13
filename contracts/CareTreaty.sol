@@ -3,41 +3,27 @@ pragma solidity ^0.8.20;
 
 /// @title Care Treaty
 /// @notice Unifies care commitments into treaty law.
-/// @dev Complements CompassionFramework, EmpathyMandala, and DignityTreaty.
+/// @dev Complements EmpathyMandala, KindnessFramework, and CompassionFramework.
 
 contract CareTreaty {
     address public guardian;
     uint256 public treatyCount;
-    uint256 public violationCount;
     uint256 public councilCount;
 
     enum CareRule {
         CareIsConstitutional,
-        NurtureAnchored,
-        NeglectProhibited,
-        AbandonmentBlocked,
-        IndifferenceSuppressed,
-        PublicBenefitPriority,
-        TransparencyInCareSystems
+        NurtureMandated,
+        NeglectSuppressed,
+        TransparencyInCareSystems,
+        PublicBenefitPriority
     }
 
-    enum ViolationType {
-        CareDenial,
-        NurtureFailure,
-        Neglect,
-        Abandonment,
-        Indifference,
-        CouncilBypass,
-        PublicBenefitFailure,
-        TransparencyFailure
-    }
-
-    enum CaseStatus {
+    enum CareStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedViolation
+        CareConfirmed
     }
 
     struct Rule {
@@ -48,32 +34,29 @@ contract CareTreaty {
         uint256 timestamp;
     }
 
-    struct Violation {
+    struct CareCase {
         uint256 id;
-        address accuser;
-        address accused;
-        ViolationType violationType;
-        string details;
-        CaseStatus status;
+        address proposer;
+        string grounds;
+        CareStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Violation) public violations;
+    mapping(uint256 => CareCase) public careCases;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, CareRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event ViolationFiled(uint256 indexed id, ViolationType violationType);
-    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
+    event CareFiled(uint256 indexed id);
+    event CareStatusChanged(uint256 indexed id, CareStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
         treatyCount = 0;
-        violationCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -105,12 +88,10 @@ contract CareTreaty {
 
     function _declareDefaultRules() internal {
         _declare(CareRule.CareIsConstitutional, "Care is constitutional; denial prohibited.");
-        _declare(CareRule.NurtureAnchored, "Nurture anchored; failure prohibited.");
-        _declare(CareRule.NeglectProhibited, "Neglect prohibited; violation blocked.");
-        _declare(CareRule.AbandonmentBlocked, "Abandonment blocked; breach prohibited.");
-        _declare(CareRule.IndifferenceSuppressed, "Indifference suppressed; abdication prohibited.");
-        _declare(CareRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
+        _declare(CareRule.NurtureMandated, "Nurture mandated; neglect blocked.");
+        _declare(CareRule.NeglectSuppressed, "Neglect suppressed; fairness required.");
         _declare(CareRule.TransparencyInCareSystems, "Care systems must be transparent.");
+        _declare(CareRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
     function _declare(CareRule ruleType, string memory description) internal {
@@ -132,61 +113,55 @@ contract CareTreaty {
         emit RuleLocked(id);
     }
 
-    function fileViolation(
-        address accused,
-        ViolationType violationType,
-        string calldata details
-    ) external {
-        violationCount++;
-        violations[violationCount] = Violation(
-            violationCount,
+    function fileCareCase(string calldata grounds) external {
+        treatyCount++;
+        careCases[treatyCount] = CareCase(
+            treatyCount,
             msg.sender,
-            accused,
-            violationType,
-            details,
-            CaseStatus.Filed,
+            grounds,
+            CareStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ViolationFiled(violationCount, violationType);
+        emit CareFiled(treatyCount);
     }
 
-    function beginReview(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.Filed, "Not filed");
-        v.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(violationId, CaseStatus.UnderReview);
+    function beginReview(uint256 careId) external onlyCouncil {
+        CareCase storage c = careCases[careId];
+        require(c.status == CareStatus.Filed, "Not filed");
+        c.status = CareStatus.UnderReview;
+        emit CareStatusChanged(careId, CareStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.UnderReview, "Not under review");
-        v.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(violationId, CaseStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 careId) external onlyCouncil {
+        CareCase storage c = careCases[careId];
+        require(c.status == CareStatus.UnderReview, "Not under review");
+        c.status = CareStatus.MultiCouncilReview;
+        emit CareStatusChanged(careId, CareStatus.MultiCouncilReview);
     }
 
-    function approveViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.MultiCouncilReview, "Not in council stage");
+    function confirmCare(uint256 careId) external onlyCouncil {
+        CareCase storage c = careCases[careId];
+        require(c.status == CareStatus.MultiCouncilReview, "Not in council stage");
 
-        v.approvals++;
+        c.approvals++;
 
-        if (v.approvals * 2 > councilCount && councilCount > 0) {
-            v.status = CaseStatus.ConfirmedViolation;
-            emit CaseStatusChanged(violationId, CaseStatus.ConfirmedViolation);
+        if (c.approvals * 2 > councilCount && councilCount > 0) {
+            c.status = CareStatus.CareConfirmed;
+            emit CareStatusChanged(careId, CareStatus.CareConfirmed);
         }
     }
 
-    function rejectViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
+    function rejectCare(uint256 careId) external onlyCouncil {
+        CareCase storage c = careCases[careId];
         require(
-            v.status == CaseStatus.Filed ||
-            v.status == CaseStatus.UnderReview ||
-            v.status == CaseStatus.MultiCouncilReview,
+            c.status == CareStatus.Filed ||
+            c.status == CareStatus.UnderReview ||
+            c.status == CareStatus.MultiCouncilReview,
             "Invalid status"
         );
-        v.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(violationId, CaseStatus.Rejected);
+        c.status = CareStatus.Rejected;
+        emit CareStatusChanged(careId, CareStatus.Rejected);
     }
 }
