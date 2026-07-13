@@ -35,7 +35,11 @@ contract CovenantOmnipresence {
         guardian = newGuardian;
     }
 
-    function declarePresence(string calldata realm, string calldata mode, bool active) external onlyGuardian {
+    function declarePresence(
+        string calldata realm,
+        string calldata mode,
+        bool active
+    ) external onlyGuardian {
         presenceCount++;
         presences[presenceCount] = Presence(presenceCount, realm, mode, active);
         emit PresenceDeclared(presenceCount, realm, mode);
