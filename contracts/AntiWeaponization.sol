@@ -1,94 +1,62 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title Anti Weaponization Covenant
-/// @notice Prevents political actors, agencies, or bureaucrats from weaponizing laws, audits, procurement rules, or enforcement mechanisms.
-/// @dev Works together with InnovationSafetyCovenant and ProcurementClarity to ensure governance cannot be used as a political weapon.
+/// @title Anti-Weaponization Covenant
+/// @notice Encodes anti-weaponization safeguard.
+/// @dev Complements PublicBenefitOracle, InnovationSafetyCovenant, and RiskContextReview.
 
 contract AntiWeaponization {
     address public guardian;
-    uint256 public ruleCount;
-    uint256 public caseCount;
+    uint256 public covenantCount;
     uint256 public councilCount;
 
-    enum RoleType {
-        Innovator,
-        PublicServant,
-        Auditor,
-        Investigator,
-        Council,
-        Oversight,
-        FutureEntity
+    enum WeaponRule {
+        WeaponizationIsProhibited,
+        PeaceMandated,
+        ExploitationSuppressed,
+        TransparencyInWeaponizationSystems,
+        PublicBenefitPriority
     }
 
-    enum WeaponizationRule {
-        NoSelectiveEnforcement,
-        NoPoliticalTargeting,
-        NoMaliciousInterpretation,
-        NoRetroactivePunishment,
-        NoMediaManipulation,
-        NoProcurementWeaponization,
-        NoAuditWeaponization,
-        MandatoryIndependentOversight,
-        MandatoryMultiCouncilReview,
-        MandatoryIntentVerification
-    }
-
-    enum AbuseType {
-        SelectiveEnforcement,
-        PoliticalTargeting,
-        MaliciousInterpretation,
-        RetroactivePunishment,
-        MediaWeaponization,
-        ProcurementWeaponization,
-        AuditWeaponization,
-        IntentIgnored,
-        EvidenceIgnored
-    }
-
-    enum CaseStatus {
+    enum WeaponStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedAbuse
+        WeaponizationBlocked
     }
 
     struct Rule {
         uint256 id;
-        WeaponizationRule ruleType;
+        WeaponRule ruleType;
         string description;
         bool immutableEntry;
         uint256 timestamp;
     }
 
-    struct AbuseCase {
+    struct WeaponCase {
         uint256 id;
-        address accuser;
-        address accused;
-        AbuseType abuseType;
-        string details;
-        CaseStatus status;
+        address proposer;
+        string grounds;
+        WeaponStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => AbuseCase) public cases;
-    mapping(address => RoleType) public roles;
+    mapping(uint256 => WeaponCase) public weaponCases;
     mapping(address => bool) public councilMember;
 
-    event RuleDeclared(uint256 indexed id, WeaponizationRule ruleType);
+    event RuleDeclared(uint256 indexed id, WeaponRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event AbuseFiled(uint256 indexed id, AbuseType abuseType);
-    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
+    event WeaponFiled(uint256 indexed id);
+    event WeaponStatusChanged(uint256 indexed id, WeaponStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
-        ruleCount = 0;
-        caseCount = 0;
+        covenantCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -102,10 +70,6 @@ contract AntiWeaponization {
     modifier onlyCouncil() {
         require(councilMember[msg.sender], "Council only");
         _;
-    }
-
-    function assignRole(address account, RoleType role) external onlyGuardian {
-        roles[account] = role;
     }
 
     function addCouncilMember(address member) external onlyGuardian {
@@ -123,58 +87,23 @@ contract AntiWeaponization {
     }
 
     function _declareDefaultRules() internal {
-        _declareRule(
-            WeaponizationRule.NoSelectiveEnforcement,
-            "Laws cannot be selectively enforced against specific individuals."
-        );
-        _declareRule(
-            WeaponizationRule.NoPoliticalTargeting,
-            "Legal tools cannot be used for political targeting."
-        );
-        _declareRule(
-            WeaponizationRule.NoMaliciousInterpretation,
-            "Rules cannot be interpreted maliciously to create artificial violations."
-        );
-        _declareRule(
-            WeaponizationRule.NoRetroactivePunishment,
-            "No retroactive punishment for rules that did not exist at the time."
-        );
-        _declareRule(
-            WeaponizationRule.NoMediaManipulation,
-            "Media narratives cannot be weaponized to influence legal outcomes."
-        );
-        _declareRule(
-            WeaponizationRule.NoProcurementWeaponization,
-            "Procurement rules cannot be twisted to frame innovators."
-        );
-        _declareRule(
-            WeaponizationRule.NoAuditWeaponization,
-            "Audits cannot be weaponized for political or personal gain."
-        );
-        _declareRule(
-            WeaponizationRule.MandatoryIndependentOversight,
-            "Independent oversight required for all major allegations."
-        );
-        _declareRule(
-            WeaponizationRule.MandatoryMultiCouncilReview,
-            "All abuse cases require multi-council approval."
-        );
-        _declareRule(
-            WeaponizationRule.MandatoryIntentVerification,
-            "Intent must be verified before any punitive action."
-        );
+        _declare(WeaponRule.WeaponizationIsProhibited, "Weaponization prohibited; denial required.");
+        _declare(WeaponRule.PeaceMandated, "Peace mandated; violence blocked.");
+        _declare(WeaponRule.ExploitationSuppressed, "Exploitation suppressed; fairness required.");
+        _declare(WeaponRule.TransparencyInWeaponizationSystems, "Weaponization systems must be transparent.");
+        _declare(WeaponRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
-    function _declareRule(WeaponizationRule ruleType, string memory description) internal {
-        ruleCount++;
-        rules[ruleCount] = Rule(
-            ruleCount,
+    function _declare(WeaponRule ruleType, string memory description) internal {
+        covenantCount++;
+        rules[covenantCount] = Rule(
+            covenantCount,
             ruleType,
             description,
             false,
             block.timestamp
         );
-        emit RuleDeclared(ruleCount, ruleType);
+        emit RuleDeclared(covenantCount, ruleType);
     }
 
     function lockRule(uint256 id) external onlyGuardian {
@@ -184,61 +113,55 @@ contract AntiWeaponization {
         emit RuleLocked(id);
     }
 
-    function fileAbuse(
-        address accused,
-        AbuseType abuseType,
-        string calldata details
-    ) external {
-        caseCount++;
-        cases[caseCount] = AbuseCase(
-            caseCount,
+    function fileWeaponCase(string calldata grounds) external {
+        covenantCount++;
+        weaponCases[covenantCount] = WeaponCase(
+            covenantCount,
             msg.sender,
-            accused,
-            abuseType,
-            details,
-            CaseStatus.Filed,
+            grounds,
+            WeaponStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit AbuseFiled(caseCount, abuseType);
+        emit WeaponFiled(covenantCount);
     }
 
-    function beginReview(uint256 caseId) external onlyCouncil {
-        AbuseCase storage c = cases[caseId];
-        require(c.status == CaseStatus.Filed, "Not filed");
-        c.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(caseId, CaseStatus.UnderReview);
+    function beginReview(uint256 weaponId) external onlyCouncil {
+        WeaponCase storage w = weaponCases[weaponId];
+        require(w.status == WeaponStatus.Filed, "Not filed");
+        w.status = WeaponStatus.UnderReview;
+        emit WeaponStatusChanged(weaponId, WeaponStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 caseId) external onlyCouncil {
-        AbuseCase storage c = cases[caseId];
-        require(c.status == CaseStatus.UnderReview, "Not under review");
-        c.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(caseId, CaseStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 weaponId) external onlyCouncil {
+        WeaponCase storage w = weaponCases[weaponId];
+        require(w.status == WeaponStatus.UnderReview, "Not under review");
+        w.status = WeaponStatus.MultiCouncilReview;
+        emit WeaponStatusChanged(weaponId, WeaponStatus.MultiCouncilReview);
     }
 
-    function approveAbuse(uint256 caseId) external onlyCouncil {
-        AbuseCase storage c = cases[caseId];
-        require(c.status == CaseStatus.MultiCouncilReview, "Not in council stage");
+    function confirmWeaponizationBlocked(uint256 weaponId) external onlyCouncil {
+        WeaponCase storage w = weaponCases[weaponId];
+        require(w.status == WeaponStatus.MultiCouncilReview, "Not in council stage");
 
-        c.approvals++;
+        w.approvals++;
 
-        if (c.approvals * 2 > councilCount && councilCount > 0) {
-            c.status = CaseStatus.ConfirmedAbuse;
-            emit CaseStatusChanged(caseId, CaseStatus.ConfirmedAbuse);
+        if (w.approvals * 2 > councilCount && councilCount > 0) {
+            w.status = WeaponStatus.WeaponizationBlocked;
+            emit WeaponStatusChanged(weaponId, WeaponStatus.WeaponizationBlocked);
         }
     }
 
-    function rejectCase(uint256 caseId) external onlyCouncil {
-        AbuseCase storage c = cases[caseId];
+    function rejectWeaponCase(uint256 weaponId) external onlyCouncil {
+        WeaponCase storage w = weaponCases[weaponId];
         require(
-            c.status == CaseStatus.Filed ||
-            c.status == CaseStatus.UnderReview ||
-            c.status == CaseStatus.MultiCouncilReview,
+            w.status == WeaponStatus.Filed ||
+            w.status == WeaponStatus.UnderReview ||
+            w.status == WeaponStatus.MultiCouncilReview,
             "Invalid status"
         );
-        c.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(caseId, CaseStatus.Rejected);
+        w.status = WeaponStatus.Rejected;
+        emit WeaponStatusChanged(weaponId, WeaponStatus.Rejected);
     }
 }
