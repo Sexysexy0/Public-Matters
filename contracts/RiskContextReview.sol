@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 /// @title Risk Context Review
-/// @notice Encodes risk context safeguard.
-/// @dev Complements InnovationMeritShield, BureaucraticAccountability, and InnovationSafetyCovenant.
+/// @notice Encodes systemic risk assessment safeguard.
+/// @dev Complements InnovationSafetyCovenant, DataOracle, and BureaucraticAccountability.
 
 contract RiskContextReview {
     address public guardian;
@@ -11,9 +11,9 @@ contract RiskContextReview {
     uint256 public councilCount;
 
     enum RiskRule {
-        RiskReviewIsConstitutional,
-        BlindDecisionSuppressed,
-        MultiLayerReviewRequired,
+        RiskAssessmentIsConstitutional,
+        ContextMandated,
+        HazardSuppressed,
         TransparencyInRiskSystems,
         PublicBenefitPriority
     }
@@ -87,9 +87,9 @@ contract RiskContextReview {
     }
 
     function _declareDefaultRules() internal {
-        _declare(RiskRule.RiskReviewIsConstitutional, "Risk review is constitutional; denial prohibited.");
-        _declare(RiskRule.BlindDecisionSuppressed, "Blind decision suppressed; reckless governance blocked.");
-        _declare(RiskRule.MultiLayerReviewRequired, "Multi-layer review required; systemic clarity enforced.");
+        _declare(RiskRule.RiskAssessmentIsConstitutional, "Risk assessment is constitutional; denial prohibited.");
+        _declare(RiskRule.ContextMandated, "Context mandated; hazard blocked.");
+        _declare(RiskRule.HazardSuppressed, "Hazard suppressed; fairness required.");
         _declare(RiskRule.TransparencyInRiskSystems, "Risk systems must be transparent.");
         _declare(RiskRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
