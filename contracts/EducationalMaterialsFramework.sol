@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 /// @title Educational Materials Framework
-/// @notice Encodes educational materials safeguard.
-/// @dev Complements ICANNContributionMandala, ComplaintWithdrawalTreaty, and RegistrarNoticeMandala.
+/// @notice Encodes educational safeguard.
+/// @dev Complements PublicBenefitOracle, FreeSpeechMandala, and AppealsMandala.
 
 contract EducationalMaterialsFramework {
     address public guardian;
@@ -12,8 +12,8 @@ contract EducationalMaterialsFramework {
 
     enum EducationRule {
         EducationIsConstitutional,
-        MaterialsRequired,
-        AwarenessAnchored,
+        AwarenessMandated,
+        IgnoranceSuppressed,
         TransparencyInEducationSystems,
         PublicBenefitPriority
     }
@@ -34,10 +34,9 @@ contract EducationalMaterialsFramework {
         uint256 timestamp;
     }
 
-    struct Education {
+    struct EducationCase {
         uint256 id;
         address proposer;
-        string materialReference;
         string grounds;
         EducationStatus status;
         uint256 approvals;
@@ -45,12 +44,12 @@ contract EducationalMaterialsFramework {
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Education) public educations;
+    mapping(uint256 => EducationCase) public educationCases;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, EducationRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event EducationFiled(uint256 indexed id, string materialReference);
+    event EducationFiled(uint256 indexed id);
     event EducationStatusChanged(uint256 indexed id, EducationStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
@@ -89,8 +88,8 @@ contract EducationalMaterialsFramework {
 
     function _declareDefaultRules() internal {
         _declare(EducationRule.EducationIsConstitutional, "Education is constitutional; denial prohibited.");
-        _declare(EducationRule.MaterialsRequired, "Materials required; ignorance prohibited.");
-        _declare(EducationRule.AwarenessAnchored, "Awareness anchored; fairness required.");
+        _declare(EducationRule.AwarenessMandated, "Awareness mandated; ignorance blocked.");
+        _declare(EducationRule.IgnoranceSuppressed, "Ignorance suppressed; fairness required.");
         _declare(EducationRule.TransparencyInEducationSystems, "Education systems must be transparent.");
         _declare(EducationRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
@@ -114,40 +113,36 @@ contract EducationalMaterialsFramework {
         emit RuleLocked(id);
     }
 
-    function fileEducation(
-        string calldata materialReference,
-        string calldata grounds
-    ) external {
+    function fileEducationCase(string calldata grounds) external {
         frameworkCount++;
-        educations[frameworkCount] = Education(
+        educationCases[frameworkCount] = EducationCase(
             frameworkCount,
             msg.sender,
-            materialReference,
             grounds,
             EducationStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit EducationFiled(frameworkCount, materialReference);
+        emit EducationFiled(frameworkCount);
     }
 
     function beginReview(uint256 educationId) external onlyCouncil {
-        Education storage e = educations[educationId];
+        EducationCase storage e = educationCases[educationId];
         require(e.status == EducationStatus.Filed, "Not filed");
         e.status = EducationStatus.UnderReview;
         emit EducationStatusChanged(educationId, EducationStatus.UnderReview);
     }
 
     function escalateToMultiCouncil(uint256 educationId) external onlyCouncil {
-        Education storage e = educations[educationId];
+        EducationCase storage e = educationCases[educationId];
         require(e.status == EducationStatus.UnderReview, "Not under review");
         e.status = EducationStatus.MultiCouncilReview;
         emit EducationStatusChanged(educationId, EducationStatus.MultiCouncilReview);
     }
 
     function confirmEducation(uint256 educationId) external onlyCouncil {
-        Education storage e = educations[educationId];
+        EducationCase storage e = educationCases[educationId];
         require(e.status == EducationStatus.MultiCouncilReview, "Not in council stage");
 
         e.approvals++;
@@ -159,7 +154,7 @@ contract EducationalMaterialsFramework {
     }
 
     function rejectEducation(uint256 educationId) external onlyCouncil {
-        Education storage e = educations[educationId];
+        EducationCase storage e = educationCases[educationId];
         require(
             e.status == EducationStatus.Filed ||
             e.status == EducationStatus.UnderReview ||
