@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 /// @title Free Speech Mandala
-/// @notice Encodes free speech safeguard.
-/// @dev Complements AppealsMandala, ComplaintWithdrawalTreaty, and PublicBenefitOracle.
+/// @notice Encodes safeguard for free speech in domain disputes.
+/// @dev Complements ComplaintWithdrawalTreaty, AppealsMandala, and PublicBenefitOracle.
 
 contract FreeSpeechMandala {
     address public guardian;
