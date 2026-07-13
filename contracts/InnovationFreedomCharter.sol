@@ -2,77 +2,62 @@
 pragma solidity ^0.8.20;
 
 /// @title Innovation Freedom Charter
-/// @notice Firewall for innovation freedom.
-/// @dev Complements CultureRevivalMandala, RiskContextReview, and DelegationFramework.
+/// @notice Encodes innovation freedom safeguard.
+/// @dev Complements ProviderAccountabilityMandala, InnovationConstitution, and PublicBenefitOracle.
 
 contract InnovationFreedomCharter {
     address public guardian;
     uint256 public charterCount;
-    uint256 public violationCount;
     uint256 public councilCount;
 
-    enum InnovationRule {
-        InnovationFreedomIsConstitutional,
-        ExperimentAnchored,
-        CreativityProtected,
-        BoldnessSafeguarded,
-        PublicBenefitPriority,
-        MandatoryCouncilOversight,
-        TransparencyInInnovationSystems
+    enum FreedomRule {
+        InnovationIsConstitutional,
+        BureaucraticOverreachBlocked,
+        ExperimentationEncouraged,
+        RenewalEnabled,
+        TransparencyInInnovationSystems,
+        PublicBenefitPriority
     }
 
-    enum ViolationType {
-        InnovationDenial,
-        ExperimentSuppression,
-        CreativityBlocked,
-        BoldnessErosion,
-        CouncilBypass,
-        PublicBenefitFailure,
-        TransparencyFailure
-    }
-
-    enum CaseStatus {
+    enum FreedomStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedViolation
+        FreedomConfirmed
     }
 
     struct Rule {
         uint256 id;
-        InnovationRule ruleType;
+        FreedomRule ruleType;
         string description;
         bool immutableEntry;
         uint256 timestamp;
     }
 
-    struct Violation {
+    struct Freedom {
         uint256 id;
-        address accuser;
-        address accused;
-        ViolationType violationType;
-        string details;
-        CaseStatus status;
+        address proposer;
+        string grounds;
+        FreedomStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Violation) public violations;
+    mapping(uint256 => Freedom) public freedoms;
     mapping(address => bool) public councilMember;
 
-    event RuleDeclared(uint256 indexed id, InnovationRule ruleType);
+    event RuleDeclared(uint256 indexed id, FreedomRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event ViolationFiled(uint256 indexed id, ViolationType violationType);
-    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
+    event FreedomFiled(uint256 indexed id);
+    event FreedomStatusChanged(uint256 indexed id, FreedomStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
         charterCount = 0;
-        violationCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -103,16 +88,15 @@ contract InnovationFreedomCharter {
     }
 
     function _declareDefaultRules() internal {
-        _declare(InnovationRule.InnovationFreedomIsConstitutional, "Innovation freedom is constitutional; denial prohibited.");
-        _declare(InnovationRule.ExperimentAnchored, "Experiment anchored; suppression prohibited.");
-        _declare(InnovationRule.CreativityProtected, "Creativity protected; blocking prohibited.");
-        _declare(InnovationRule.BoldnessSafeguarded, "Boldness safeguarded; erosion prohibited.");
-        _declare(InnovationRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
-        _declare(InnovationRule.MandatoryCouncilOversight, "Council oversight required for innovation enforcement.");
-        _declare(InnovationRule.TransparencyInInnovationSystems, "Innovation systems must be transparent.");
+        _declare(FreedomRule.InnovationIsConstitutional, "Innovation is constitutional; denial prohibited.");
+        _declare(FreedomRule.BureaucraticOverreachBlocked, "Bureaucratic overreach blocked; fairness required.");
+        _declare(FreedomRule.ExperimentationEncouraged, "Experimentation encouraged; stagnation prohibited.");
+        _declare(FreedomRule.RenewalEnabled, "Renewal enabled; systemic vitality required.");
+        _declare(FreedomRule.TransparencyInInnovationSystems, "Innovation systems must be transparent.");
+        _declare(FreedomRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
-    function _declare(InnovationRule ruleType, string memory description) internal {
+    function _declare(FreedomRule ruleType, string memory description) internal {
         charterCount++;
         rules[charterCount] = Rule(
             charterCount,
@@ -131,61 +115,55 @@ contract InnovationFreedomCharter {
         emit RuleLocked(id);
     }
 
-    function fileViolation(
-        address accused,
-        ViolationType violationType,
-        string calldata details
-    ) external {
-        violationCount++;
-        violations[violationCount] = Violation(
-            violationCount,
+    function fileFreedom(string calldata grounds) external {
+        charterCount++;
+        freedoms[charterCount] = Freedom(
+            charterCount,
             msg.sender,
-            accused,
-            violationType,
-            details,
-            CaseStatus.Filed,
+            grounds,
+            FreedomStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ViolationFiled(violationCount, violationType);
+        emit FreedomFiled(charterCount);
     }
 
-    function beginReview(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.Filed, "Not filed");
-        v.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(violationId, CaseStatus.UnderReview);
+    function beginReview(uint256 freedomId) external onlyCouncil {
+        Freedom storage f = freedoms[freedomId];
+        require(f.status == FreedomStatus.Filed, "Not filed");
+        f.status = FreedomStatus.UnderReview;
+        emit FreedomStatusChanged(freedomId, FreedomStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.UnderReview, "Not under review");
-        v.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(violationId, CaseStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 freedomId) external onlyCouncil {
+        Freedom storage f = freedoms[freedomId];
+        require(f.status == FreedomStatus.UnderReview, "Not under review");
+        f.status = FreedomStatus.MultiCouncilReview;
+        emit FreedomStatusChanged(freedomId, FreedomStatus.MultiCouncilReview);
     }
 
-    function approveViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.MultiCouncilReview, "Not in council stage");
+    function confirmFreedom(uint256 freedomId) external onlyCouncil {
+        Freedom storage f = freedoms[freedomId];
+        require(f.status == FreedomStatus.MultiCouncilReview, "Not in council stage");
 
-        v.approvals++;
+        f.approvals++;
 
-        if (v.approvals * 2 > councilCount && councilCount > 0) {
-            v.status = CaseStatus.ConfirmedViolation;
-            emit CaseStatusChanged(violationId, CaseStatus.ConfirmedViolation);
+        if (f.approvals * 2 > councilCount && councilCount > 0) {
+            f.status = FreedomStatus.FreedomConfirmed;
+            emit FreedomStatusChanged(freedomId, FreedomStatus.FreedomConfirmed);
         }
     }
 
-    function rejectViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
+    function rejectFreedom(uint256 freedomId) external onlyCouncil {
+        Freedom storage f = freedoms[freedomId];
         require(
-            v.status == CaseStatus.Filed ||
-            v.status == CaseStatus.UnderReview ||
-            v.status == CaseStatus.MultiCouncilReview,
+            f.status == FreedomStatus.Filed ||
+            f.status == FreedomStatus.UnderReview ||
+            f.status == FreedomStatus.MultiCouncilReview,
             "Invalid status"
         );
-        v.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(violationId, CaseStatus.Rejected);
+        f.status = FreedomStatus.Rejected;
+        emit FreedomStatusChanged(freedomId, FreedomStatus.Rejected);
     }
 }
