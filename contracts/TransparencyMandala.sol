@@ -2,41 +2,28 @@
 pragma solidity ^0.8.20;
 
 /// @title Transparency Mandala
-/// @notice Weaves transparency into mandala resonance.
-/// @dev Complements AccountabilityTreaty, DialogueCharter, and IntegrityCharter.
+/// @notice Encodes safeguard for systemic transparency — accountability across all contracts.
+/// @dev Complements CollectivePriorityOracle, PublicBenefitMandala, DataSovereigntyOracle, and InnovationConstitution.
 
 contract TransparencyMandala {
     address public guardian;
     uint256 public mandalaCount;
-    uint256 public violationCount;
     uint256 public councilCount;
 
     enum TransparencyRule {
         TransparencyIsConstitutional,
-        VisibilityAnchored,
-        OpacityProhibited,
-        HiddenRiskBlocked,
-        PublicBenefitPriority,
-        MandatoryCouncilOversight,
-        TransparencyInSystemsRequired
+        AccountabilityMandated,
+        DormantSafeguardsVisible,
+        PublicAuditEnabled,
+        CollectivePriorityAnchored
     }
 
-    enum ViolationType {
-        TransparencyDenial,
-        VisibilityFailure,
-        Opacity,
-        HiddenRisk,
-        CouncilBypass,
-        PublicBenefitFailure,
-        TransparencyFailure
-    }
-
-    enum CaseStatus {
+    enum TransparencyStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedViolation
+        TransparencyConfirmed
     }
 
     struct Rule {
@@ -47,32 +34,29 @@ contract TransparencyMandala {
         uint256 timestamp;
     }
 
-    struct Violation {
+    struct TransparencyCase {
         uint256 id;
-        address accuser;
-        address accused;
-        ViolationType violationType;
-        string details;
-        CaseStatus status;
+        address proposer;
+        string grounds;
+        TransparencyStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Violation) public violations;
+    mapping(uint256 => TransparencyCase) public transparencyCases;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, TransparencyRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event ViolationFiled(uint256 indexed id, ViolationType violationType);
-    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
+    event TransparencyFiled(uint256 indexed id);
+    event TransparencyStatusChanged(uint256 indexed id, TransparencyStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
         mandalaCount = 0;
-        violationCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -104,12 +88,10 @@ contract TransparencyMandala {
 
     function _declareDefaultRules() internal {
         _declare(TransparencyRule.TransparencyIsConstitutional, "Transparency is constitutional; denial prohibited.");
-        _declare(TransparencyRule.VisibilityAnchored, "Visibility anchored; failure prohibited.");
-        _declare(TransparencyRule.OpacityProhibited, "Opacity prohibited; concealment blocked.");
-        _declare(TransparencyRule.HiddenRiskBlocked, "Hidden risks blocked; breach prohibited.");
-        _declare(TransparencyRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
-        _declare(TransparencyRule.MandatoryCouncilOversight, "Council oversight required for transparency enforcement.");
-        _declare(TransparencyRule.TransparencyInSystemsRequired, "Transparency required in all systems.");
+        _declare(TransparencyRule.AccountabilityMandated, "Accountability mandated; systemic fairness enforced.");
+        _declare(TransparencyRule.DormantSafeguardsVisible, "Dormant safeguards visible; hidden clauses auditable.");
+        _declare(TransparencyRule.PublicAuditEnabled, "Public audit enabled; systems open to scrutiny.");
+        _declare(TransparencyRule.CollectivePriorityAnchored, "Collective priority anchored; masa protected.");
     }
 
     function _declare(TransparencyRule ruleType, string memory description) internal {
@@ -131,61 +113,55 @@ contract TransparencyMandala {
         emit RuleLocked(id);
     }
 
-    function fileViolation(
-        address accused,
-        ViolationType violationType,
-        string calldata details
-    ) external {
-        violationCount++;
-        violations[violationCount] = Violation(
-            violationCount,
+    function fileTransparencyCase(string calldata grounds) external {
+        mandalaCount++;
+        transparencyCases[mandalaCount] = TransparencyCase(
+            mandalaCount,
             msg.sender,
-            accused,
-            violationType,
-            details,
-            CaseStatus.Filed,
+            grounds,
+            TransparencyStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ViolationFiled(violationCount, violationType);
+        emit TransparencyFiled(mandalaCount);
     }
 
-    function beginReview(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.Filed, "Not filed");
-        v.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(violationId, CaseStatus.UnderReview);
+    function beginReview(uint256 transparencyId) external onlyCouncil {
+        TransparencyCase storage t = transparencyCases[transparencyId];
+        require(t.status == TransparencyStatus.Filed, "Not filed");
+        t.status = TransparencyStatus.UnderReview;
+        emit TransparencyStatusChanged(transparencyId, TransparencyStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.UnderReview, "Not under review");
-        v.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(violationId, CaseStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 transparencyId) external onlyCouncil {
+        TransparencyCase storage t = transparencyCases[transparencyId];
+        require(t.status == TransparencyStatus.UnderReview, "Not under review");
+        t.status = TransparencyStatus.MultiCouncilReview;
+        emit TransparencyStatusChanged(transparencyId, TransparencyStatus.MultiCouncilReview);
     }
 
-    function approveViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.MultiCouncilReview, "Not in council stage");
+    function confirmTransparency(uint256 transparencyId) external onlyCouncil {
+        TransparencyCase storage t = transparencyCases[transparencyId];
+        require(t.status == TransparencyStatus.MultiCouncilReview, "Not in council stage");
 
-        v.approvals++;
+        t.approvals++;
 
-        if (v.approvals * 2 > councilCount && councilCount > 0) {
-            v.status = CaseStatus.ConfirmedViolation;
-            emit CaseStatusChanged(violationId, CaseStatus.ConfirmedViolation);
+        if (t.approvals * 2 > councilCount && councilCount > 0) {
+            t.status = TransparencyStatus.TransparencyConfirmed;
+            emit TransparencyStatusChanged(transparencyId, TransparencyStatus.TransparencyConfirmed);
         }
     }
 
-    function rejectViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
+    function rejectTransparency(uint256 transparencyId) external onlyCouncil {
+        TransparencyCase storage t = transparencyCases[transparencyId];
         require(
-            v.status == CaseStatus.Filed ||
-            v.status == CaseStatus.UnderReview ||
-            v.status == CaseStatus.MultiCouncilReview,
+            t.status == TransparencyStatus.Filed ||
+            t.status == TransparencyStatus.UnderReview ||
+            t.status == TransparencyStatus.MultiCouncilReview,
             "Invalid status"
         );
-        v.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(violationId, CaseStatus.Rejected);
+        t.status = TransparencyStatus.Rejected;
+        emit TransparencyStatusChanged(transparencyId, TransparencyStatus.Rejected);
     }
 }

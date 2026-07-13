@@ -1,20 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title Bureaucratic Accountability Covenant
-/// @notice Encodes board alignment and leadership accountability safeguard.
-/// @dev Complements DataOracle, AITransparencyMandala, and InnovationSafetyCovenant.
+/// @title Provider Accountability Mandala
+/// @notice Encodes provider accountability safeguard.
+/// @dev Complements NameRedactionFramework, MediationTreaty, and RegistrarComplianceFramework.
 
-contract BureaucraticAccountability {
+contract ProviderAccountabilityMandala {
     address public guardian;
     uint256 public accountabilityCount;
     uint256 public councilCount;
 
     enum AccountabilityRule {
-        AlignmentIsConstitutional,
-        TransparencyMandated,
-        DisconnectSuppressed,
-        AccountabilityInLeadershipSystems,
+        AccountabilityIsConstitutional,
+        OversightRequired,
+        ReportingMandated,
+        CorrectiveMeasuresEnabled,
+        TransparencyInAccountabilitySystems,
         PublicBenefitPriority
     }
 
@@ -34,9 +35,10 @@ contract BureaucraticAccountability {
         uint256 timestamp;
     }
 
-    struct AccountabilityCase {
+    struct Accountability {
         uint256 id;
         address proposer;
+        string providerReference;
         string grounds;
         AccountabilityStatus status;
         uint256 approvals;
@@ -44,12 +46,12 @@ contract BureaucraticAccountability {
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => AccountabilityCase) public accountabilityCases;
+    mapping(uint256 => Accountability) public accountabilities;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, AccountabilityRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event AccountabilityFiled(uint256 indexed id);
+    event AccountabilityFiled(uint256 indexed id, string providerReference);
     event AccountabilityStatusChanged(uint256 indexed id, AccountabilityStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
@@ -87,10 +89,11 @@ contract BureaucraticAccountability {
     }
 
     function _declareDefaultRules() internal {
-        _declare(AccountabilityRule.AlignmentIsConstitutional, "Alignment is constitutional; denial prohibited.");
-        _declare(AccountabilityRule.TransparencyMandated, "Transparency mandated; disconnect blocked.");
-        _declare(AccountabilityRule.DisconnectSuppressed, "Disconnect suppressed; fairness required.");
-        _declare(AccountabilityRule.AccountabilityInLeadershipSystems, "Leadership systems must be accountable.");
+        _declare(AccountabilityRule.AccountabilityIsConstitutional, "Accountability is constitutional; denial prohibited.");
+        _declare(AccountabilityRule.OversightRequired, "Oversight required; neglect prohibited.");
+        _declare(AccountabilityRule.ReportingMandated, "Reporting mandated; opacity blocked.");
+        _declare(AccountabilityRule.CorrectiveMeasuresEnabled, "Corrective measures enabled; abuse suppressed.");
+        _declare(AccountabilityRule.TransparencyInAccountabilitySystems, "Accountability systems must be transparent.");
         _declare(AccountabilityRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
@@ -113,36 +116,40 @@ contract BureaucraticAccountability {
         emit RuleLocked(id);
     }
 
-    function fileAccountabilityCase(string calldata grounds) external {
+    function fileAccountability(
+        string calldata providerReference,
+        string calldata grounds
+    ) external {
         accountabilityCount++;
-        accountabilityCases[accountabilityCount] = AccountabilityCase(
+        accountabilities[accountabilityCount] = Accountability(
             accountabilityCount,
             msg.sender,
+            providerReference,
             grounds,
             AccountabilityStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit AccountabilityFiled(accountabilityCount);
+        emit AccountabilityFiled(accountabilityCount, providerReference);
     }
 
     function beginReview(uint256 accountabilityId) external onlyCouncil {
-        AccountabilityCase storage a = accountabilityCases[accountabilityId];
+        Accountability storage a = accountabilities[accountabilityId];
         require(a.status == AccountabilityStatus.Filed, "Not filed");
         a.status = AccountabilityStatus.UnderReview;
         emit AccountabilityStatusChanged(accountabilityId, AccountabilityStatus.UnderReview);
     }
 
     function escalateToMultiCouncil(uint256 accountabilityId) external onlyCouncil {
-        AccountabilityCase storage a = accountabilityCases[accountabilityId];
+        Accountability storage a = accountabilities[accountabilityId];
         require(a.status == AccountabilityStatus.UnderReview, "Not under review");
         a.status = AccountabilityStatus.MultiCouncilReview;
         emit AccountabilityStatusChanged(accountabilityId, AccountabilityStatus.MultiCouncilReview);
     }
 
     function confirmAccountability(uint256 accountabilityId) external onlyCouncil {
-        AccountabilityCase storage a = accountabilityCases[accountabilityId];
+        Accountability storage a = accountabilities[accountabilityId];
         require(a.status == AccountabilityStatus.MultiCouncilReview, "Not in council stage");
 
         a.approvals++;
@@ -154,7 +161,7 @@ contract BureaucraticAccountability {
     }
 
     function rejectAccountability(uint256 accountabilityId) external onlyCouncil {
-        AccountabilityCase storage a = accountabilityCases[accountabilityId];
+        Accountability storage a = accountabilities[accountabilityId];
         require(
             a.status == AccountabilityStatus.Filed ||
             a.status == AccountabilityStatus.UnderReview ||

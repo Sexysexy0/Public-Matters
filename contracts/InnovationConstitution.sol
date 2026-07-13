@@ -2,115 +2,65 @@
 pragma solidity ^0.8.20;
 
 /// @title Innovation Constitution
-/// @notice Unifies all innovation protections, rights, safeguards, and governance rules into one constitutional covenant.
-/// @dev Integrates InnovationSafetyCovenant, ProcurementClarity, AntiWeaponization, RiskContextReview,
-///      PublicBenefitOracle, InnovationMeritShield, BureaucraticAccountability, and InnovationFreedomCharter.
+/// @notice Encodes innovation constitution safeguard.
+/// @dev Complements InnovationFreedomCharter, ProviderAccountabilityMandala, and PublicBenefitOracle.
 
 contract InnovationConstitution {
     address public guardian;
-    uint256 public articleCount;
-    uint256 public violationCount;
+    uint256 public constitutionCount;
     uint256 public councilCount;
 
-    enum RoleType {
-        Innovator,
-        Creator,
-        Engineer,
-        Founder,
-        PublicServant,
-        Council,
-        Oversight,
-        FutureEntity
+    enum ConstitutionRule {
+        InnovationIsConstitutional,
+        RenewalMandated,
+        StagnationSuppressed,
+        CyclesEnabled,
+        TransparencyInInnovationConstitution,
+        PublicBenefitPriority
     }
 
-    enum Article {
-        InnovationIsAConstitutionalRight,
-        InnovationMustBeProtected,
-        InnovationCannotBeCriminalized,
-        GoodFaithIsPresumed,
-        RiskIsNotCorruption,
-        MeritMustBeRecognized,
-        PublicBenefitOverridesPunishment,
-        ProcurementMustBeClear,
-        GovernanceCannotBeWeaponized,
-        BureaucracyMustBeAccountable,
-        TransparencyIsMandatory,
-        MultiCouncilReviewRequired,
-        NoSelectiveEnforcement,
-        NoPoliticalTargeting,
-        NoMaliciousInterpretation,
-        NoRetroactivePunishment,
-        NoSuppressionOfInnovation,
-        NoRetaliationAgainstInnovators,
-        NoFearBasedGovernance,
-        UnifiedInnovationProtection
-    }
-
-    enum ViolationType {
-        InnovationSuppression,
-        Retaliation,
-        FearInducement,
-        WeaponizedGovernance,
-        MeritErasure,
-        PublicBenefitErasure,
-        RiskMisclassification,
-        ProcurementAbuse,
-        BureaucraticAbuse,
-        GoodFaithIgnored,
-        TransparencyViolation,
-        SelectiveEnforcement,
-        PoliticalTargeting,
-        MaliciousInterpretation,
-        RetroactivePunishment,
-        ConstitutionalViolation
-    }
-
-    enum CaseStatus {
+    enum ConstitutionStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedViolation
+        ConstitutionConfirmed
     }
 
-    struct ArticleEntry {
+    struct Rule {
         uint256 id;
-        Article articleType;
+        ConstitutionRule ruleType;
         string description;
         bool immutableEntry;
         uint256 timestamp;
     }
 
-    struct Violation {
+    struct Constitution {
         uint256 id;
-        address accuser;
-        address accused;
-        ViolationType violationType;
-        string details;
-        CaseStatus status;
+        address proposer;
+        string grounds;
+        ConstitutionStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
-    mapping(uint256 => ArticleEntry) public articles;
-    mapping(uint256 => Violation) public violations;
-    mapping(address => RoleType) public roles;
+    mapping(uint256 => Rule) public rules;
+    mapping(uint256 => Constitution) public constitutions;
     mapping(address => bool) public councilMember;
 
-    event ArticleDeclared(uint256 indexed id, Article articleType);
-    event ArticleLocked(uint256 indexed id);
-    event ViolationFiled(uint256 indexed id, ViolationType violationType);
-    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
+    event RuleDeclared(uint256 indexed id, ConstitutionRule ruleType);
+    event RuleLocked(uint256 indexed id);
+    event ConstitutionFiled(uint256 indexed id);
+    event ConstitutionStatusChanged(uint256 indexed id, ConstitutionStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
-        articleCount = 0;
-        violationCount = 0;
+        constitutionCount = 0;
         councilCount = 0;
 
-        _declareArticles();
+        _declareDefaultRules();
     }
 
     modifier onlyGuardian() {
@@ -121,10 +71,6 @@ contract InnovationConstitution {
     modifier onlyCouncil() {
         require(councilMember[msg.sender], "Council only");
         _;
-    }
-
-    function assignRole(address account, RoleType role) external onlyGuardian {
-        roles[account] = role;
     }
 
     function addCouncilMember(address member) external onlyGuardian {
@@ -141,103 +87,83 @@ contract InnovationConstitution {
         emit CouncilMemberRemoved(member);
     }
 
-    function _declareArticles() internal {
-        _declare(Article.InnovationIsAConstitutionalRight, "Innovation is a constitutional right.");
-        _declare(Article.InnovationMustBeProtected, "Innovation must be protected at all levels.");
-        _declare(Article.InnovationCannotBeCriminalized, "Innovation cannot be criminalized.");
-        _declare(Article.GoodFaithIsPresumed, "Good faith is the default presumption.");
-        _declare(Article.RiskIsNotCorruption, "Risk-taking is not corruption.");
-        _declare(Article.MeritMustBeRecognized, "Merit must be recognized and protected.");
-        _declare(Article.PublicBenefitOverridesPunishment, "Public benefit overrides punitive action.");
-        _declare(Article.ProcurementMustBeClear, "Procurement rules must be clear and objective.");
-        _declare(Article.GovernanceCannotBeWeaponized, "Governance cannot be weaponized.");
-        _declare(Article.BureaucracyMustBeAccountable, "Bureaucracy must be accountable.");
-        _declare(Article.TransparencyIsMandatory, "Transparency is mandatory.");
-        _declare(Article.MultiCouncilReviewRequired, "Multi-council review is required for all cases.");
-        _declare(Article.NoSelectiveEnforcement, "Selective enforcement is prohibited.");
-        _declare(Article.NoPoliticalTargeting, "Political targeting is prohibited.");
-        _declare(Article.NoMaliciousInterpretation, "Malicious interpretation is prohibited.");
-        _declare(Article.NoRetroactivePunishment, "Retroactive punishment is prohibited.");
-        _declare(Article.NoSuppressionOfInnovation, "Innovation cannot be suppressed.");
-        _declare(Article.NoRetaliationAgainstInnovators, "Retaliation against innovators is prohibited.");
-        _declare(Article.NoFearBasedGovernance, "Fear-based governance is prohibited.");
-        _declare(Article.UnifiedInnovationProtection, "All innovation protections are unified under this constitution.");
+    function _declareDefaultRules() internal {
+        _declare(ConstitutionRule.InnovationIsConstitutional, "Innovation is constitutional; denial prohibited.");
+        _declare(ConstitutionRule.RenewalMandated, "Renewal mandated; stagnation prohibited.");
+        _declare(ConstitutionRule.StagnationSuppressed, "Stagnation suppressed; vitality required.");
+        _declare(ConstitutionRule.CyclesEnabled, "Cycles enabled; systemic renewal required.");
+        _declare(ConstitutionRule.TransparencyInInnovationConstitution, "Innovation constitution must be transparent.");
+        _declare(ConstitutionRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
-    function _declare(Article articleType, string memory description) internal {
-        articleCount++;
-        articles[articleCount] = ArticleEntry(
-            articleCount,
-            articleType,
+    function _declare(ConstitutionRule ruleType, string memory description) internal {
+        constitutionCount++;
+        rules[constitutionCount] = Rule(
+            constitutionCount,
+            ruleType,
             description,
             false,
             block.timestamp
         );
-        emit ArticleDeclared(articleCount, articleType);
+        emit RuleDeclared(constitutionCount, ruleType);
     }
 
-    function lockArticle(uint256 id) external onlyGuardian {
-        ArticleEntry storage a = articles[id];
-        require(!a.immutableEntry, "Already immutable");
-        a.immutableEntry = true;
-        emit ArticleLocked(id);
+    function lockRule(uint256 id) external onlyGuardian {
+        Rule storage r = rules[id];
+        require(!r.immutableEntry, "Already immutable");
+        r.immutableEntry = true;
+        emit RuleLocked(id);
     }
 
-    function fileViolation(
-        address accused,
-        ViolationType violationType,
-        string calldata details
-    ) external {
-        violationCount++;
-        violations[violationCount] = Violation(
-            violationCount,
+    function fileConstitution(string calldata grounds) external {
+        constitutionCount++;
+        constitutions[constitutionCount] = Constitution(
+            constitutionCount,
             msg.sender,
-            accused,
-            violationType,
-            details,
-            CaseStatus.Filed,
+            grounds,
+            ConstitutionStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ViolationFiled(violationCount, violationType);
+        emit ConstitutionFiled(constitutionCount);
     }
 
-    function beginReview(uint256 caseId) external onlyCouncil {
-        Violation storage v = violations[caseId];
-        require(v.status == CaseStatus.Filed, "Not filed");
-        v.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(caseId, CaseStatus.UnderReview);
+    function beginReview(uint256 constitutionId) external onlyCouncil {
+        Constitution storage c = constitutions[constitutionId];
+        require(c.status == ConstitutionStatus.Filed, "Not filed");
+        c.status = ConstitutionStatus.UnderReview;
+        emit ConstitutionStatusChanged(constitutionId, ConstitutionStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 caseId) external onlyCouncil {
-        Violation storage v = violations[caseId];
-        require(v.status == CaseStatus.UnderReview, "Not under review");
-        v.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(caseId, CaseStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 constitutionId) external onlyCouncil {
+        Constitution storage c = constitutions[constitutionId];
+        require(c.status == ConstitutionStatus.UnderReview, "Not under review");
+        c.status = ConstitutionStatus.MultiCouncilReview;
+        emit ConstitutionStatusChanged(constitutionId, ConstitutionStatus.MultiCouncilReview);
     }
 
-    function approveViolation(uint256 caseId) external onlyCouncil {
-        Violation storage v = violations[caseId];
-        require(v.status == CaseStatus.MultiCouncilReview, "Not in council stage");
+    function confirmConstitution(uint256 constitutionId) external onlyCouncil {
+        Constitution storage c = constitutions[constitutionId];
+        require(c.status == ConstitutionStatus.MultiCouncilReview, "Not in council stage");
 
-        v.approvals++;
+        c.approvals++;
 
-        if (v.approvals * 2 > councilCount && councilCount > 0) {
-            v.status = CaseStatus.ConfirmedViolation;
-            emit CaseStatusChanged(caseId, CaseStatus.ConfirmedViolation);
+        if (c.approvals * 2 > councilCount && councilCount > 0) {
+            c.status = ConstitutionStatus.ConstitutionConfirmed;
+            emit ConstitutionStatusChanged(constitutionId, ConstitutionStatus.ConstitutionConfirmed);
         }
     }
 
-    function rejectCase(uint256 caseId) external onlyCouncil {
-        Violation storage v = violations[caseId];
+    function rejectConstitution(uint256 constitutionId) external onlyCouncil {
+        Constitution storage c = constitutions[constitutionId];
         require(
-            v.status == CaseStatus.Filed ||
-            v.status == CaseStatus.UnderReview ||
-            v.status == CaseStatus.MultiCouncilReview,
+            c.status == ConstitutionStatus.Filed ||
+            c.status == ConstitutionStatus.UnderReview ||
+            c.status == ConstitutionStatus.MultiCouncilReview,
             "Invalid status"
         );
-        v.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(caseId, CaseStatus.Rejected);
+        c.status = ConstitutionStatus.Rejected;
+        emit ConstitutionStatusChanged(constitutionId, ConstitutionStatus.Rejected);
     }
 }

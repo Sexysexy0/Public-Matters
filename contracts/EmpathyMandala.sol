@@ -2,42 +2,28 @@
 pragma solidity ^0.8.20;
 
 /// @title Empathy Mandala
-/// @notice Weaves empathy into mandala resonance.
-/// @dev Complements CareTreaty, CompassionFramework, and DignityTreaty.
+/// @notice Encodes empathy resonance safeguard.
+/// @dev Complements KindnessFramework, CareTreaty, and CompassionFramework.
 
 contract EmpathyMandala {
     address public guardian;
     uint256 public mandalaCount;
-    uint256 public violationCount;
     uint256 public councilCount;
 
     enum EmpathyRule {
         EmpathyIsConstitutional,
-        CompassionAnchored,
-        CrueltyProhibited,
-        IndifferenceBlocked,
-        NeglectSuppressed,
-        PublicBenefitPriority,
-        TransparencyInEmpathySystems
+        ResonanceMandated,
+        ApathySuppressed,
+        TransparencyInEmpathySystems,
+        PublicBenefitPriority
     }
 
-    enum ViolationType {
-        EmpathyDenial,
-        CompassionFailure,
-        Cruelty,
-        Indifference,
-        Neglect,
-        CouncilBypass,
-        PublicBenefitFailure,
-        TransparencyFailure
-    }
-
-    enum CaseStatus {
+    enum EmpathyStatus {
         Filed,
         UnderReview,
         MultiCouncilReview,
         Rejected,
-        ConfirmedViolation
+        EmpathyConfirmed
     }
 
     struct Rule {
@@ -48,32 +34,29 @@ contract EmpathyMandala {
         uint256 timestamp;
     }
 
-    struct Violation {
+    struct EmpathyCase {
         uint256 id;
-        address accuser;
-        address accused;
-        ViolationType violationType;
-        string details;
-        CaseStatus status;
+        address proposer;
+        string grounds;
+        EmpathyStatus status;
         uint256 approvals;
         uint256 timestamp;
     }
 
     mapping(uint256 => Rule) public rules;
-    mapping(uint256 => Violation) public violations;
+    mapping(uint256 => EmpathyCase) public empathyCases;
     mapping(address => bool) public councilMember;
 
     event RuleDeclared(uint256 indexed id, EmpathyRule ruleType);
     event RuleLocked(uint256 indexed id);
-    event ViolationFiled(uint256 indexed id, ViolationType violationType);
-    event CaseStatusChanged(uint256 indexed id, CaseStatus status);
+    event EmpathyFiled(uint256 indexed id);
+    event EmpathyStatusChanged(uint256 indexed id, EmpathyStatus status);
     event CouncilMemberAdded(address indexed member);
     event CouncilMemberRemoved(address indexed member);
 
     constructor() {
         guardian = msg.sender;
         mandalaCount = 0;
-        violationCount = 0;
         councilCount = 0;
 
         _declareDefaultRules();
@@ -105,12 +88,10 @@ contract EmpathyMandala {
 
     function _declareDefaultRules() internal {
         _declare(EmpathyRule.EmpathyIsConstitutional, "Empathy is constitutional; denial prohibited.");
-        _declare(EmpathyRule.CompassionAnchored, "Compassion anchored; failure prohibited.");
-        _declare(EmpathyRule.CrueltyProhibited, "Cruelty prohibited; violation blocked.");
-        _declare(EmpathyRule.IndifferenceBlocked, "Indifference blocked; breach prohibited.");
-        _declare(EmpathyRule.NeglectSuppressed, "Neglect suppressed; abdication prohibited.");
-        _declare(EmpathyRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
+        _declare(EmpathyRule.ResonanceMandated, "Resonance mandated; apathy blocked.");
+        _declare(EmpathyRule.ApathySuppressed, "Apathy suppressed; fairness required.");
         _declare(EmpathyRule.TransparencyInEmpathySystems, "Empathy systems must be transparent.");
+        _declare(EmpathyRule.PublicBenefitPriority, "Public benefit overrides elite gain.");
     }
 
     function _declare(EmpathyRule ruleType, string memory description) internal {
@@ -132,61 +113,55 @@ contract EmpathyMandala {
         emit RuleLocked(id);
     }
 
-    function fileViolation(
-        address accused,
-        ViolationType violationType,
-        string calldata details
-    ) external {
-        violationCount++;
-        violations[violationCount] = Violation(
-            violationCount,
+    function fileEmpathyCase(string calldata grounds) external {
+        mandalaCount++;
+        empathyCases[mandalaCount] = EmpathyCase(
+            mandalaCount,
             msg.sender,
-            accused,
-            violationType,
-            details,
-            CaseStatus.Filed,
+            grounds,
+            EmpathyStatus.Filed,
             0,
             block.timestamp
         );
 
-        emit ViolationFiled(violationCount, violationType);
+        emit EmpathyFiled(mandalaCount);
     }
 
-    function beginReview(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.Filed, "Not filed");
-        v.status = CaseStatus.UnderReview;
-        emit CaseStatusChanged(violationId, CaseStatus.UnderReview);
+    function beginReview(uint256 empathyId) external onlyCouncil {
+        EmpathyCase storage e = empathyCases[empathyId];
+        require(e.status == EmpathyStatus.Filed, "Not filed");
+        e.status = EmpathyStatus.UnderReview;
+        emit EmpathyStatusChanged(empathyId, EmpathyStatus.UnderReview);
     }
 
-    function escalateToMultiCouncil(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.UnderReview, "Not under review");
-        v.status = CaseStatus.MultiCouncilReview;
-        emit CaseStatusChanged(violationId, CaseStatus.MultiCouncilReview);
+    function escalateToMultiCouncil(uint256 empathyId) external onlyCouncil {
+        EmpathyCase storage e = empathyCases[empathyId];
+        require(e.status == EmpathyStatus.UnderReview, "Not under review");
+        e.status = EmpathyStatus.MultiCouncilReview;
+        emit EmpathyStatusChanged(empathyId, EmpathyStatus.MultiCouncilReview);
     }
 
-    function approveViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
-        require(v.status == CaseStatus.MultiCouncilReview, "Not in council stage");
+    function confirmEmpathy(uint256 empathyId) external onlyCouncil {
+        EmpathyCase storage e = empathyCases[empathyId];
+        require(e.status == EmpathyStatus.MultiCouncilReview, "Not in council stage");
 
-        v.approvals++;
+        e.approvals++;
 
-        if (v.approvals * 2 > councilCount && councilCount > 0) {
-            v.status = CaseStatus.ConfirmedViolation;
-            emit CaseStatusChanged(violationId, CaseStatus.ConfirmedViolation);
+        if (e.approvals * 2 > councilCount && councilCount > 0) {
+            e.status = EmpathyStatus.EmpathyConfirmed;
+            emit EmpathyStatusChanged(empathyId, EmpathyStatus.EmpathyConfirmed);
         }
     }
 
-    function rejectViolation(uint256 violationId) external onlyCouncil {
-        Violation storage v = violations[violationId];
+    function rejectEmpathy(uint256 empathyId) external onlyCouncil {
+        EmpathyCase storage e = empathyCases[empathyId];
         require(
-            v.status == CaseStatus.Filed ||
-            v.status == CaseStatus.UnderReview ||
-            v.status == CaseStatus.MultiCouncilReview,
+            e.status == EmpathyStatus.Filed ||
+            e.status == EmpathyStatus.UnderReview ||
+            e.status == EmpathyStatus.MultiCouncilReview,
             "Invalid status"
         );
-        v.status = CaseStatus.Rejected;
-        emit CaseStatusChanged(violationId, CaseStatus.Rejected);
+        e.status = EmpathyStatus.Rejected;
+        emit EmpathyStatusChanged(empathyId, EmpathyStatus.Rejected);
     }
 }
