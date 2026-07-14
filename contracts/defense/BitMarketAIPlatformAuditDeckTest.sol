@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Mythic-License
 pragma solidity ^0.8.0;
 
-import "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 
 contract BitMarketAIPlatformAuditDeckTest is Test {
     struct PlatformAudit {

@@ -32,7 +32,7 @@
     "@nomicfoundation/hardhat-ethers": "^4.0.13",
     "@nomicfoundation/hardhat-toolbox": "^7.0.0",
     "chai": "^4.3.8",
-    "ethers": "^6.16.0",
+    "ethers": "^6.17.0",
     "ganache": "^6.4.5",
     "hardhat": "^3.9.0"
   },
