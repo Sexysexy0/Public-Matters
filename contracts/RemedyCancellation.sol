@@ -11,14 +11,15 @@ contract RemedyCancellation {
         uint domainId;
         uint cancelTime;
         bool burned;
+        address lifter;
     }
 
     mapping(uint => Cancellation) public cancellations;
     address public admin;
 
     event DomainCancelled(uint indexed domainId, uint cancelTime);
-    event DomainLiftRequested(uint indexed domainId, uint requestTime);
-    event DomainLifted(uint indexed domainId);
+    event DomainLiftRequested(uint indexed domainId, address indexed requester, uint requestTime);
+    event DomainLifted(uint indexed domainId, address indexed lifter);
 
     modifier onlyAdmin() {
         require(msg.sender == admin, "Only admin can execute");
@@ -30,21 +31,24 @@ contract RemedyCancellation {
     }
 
     function cancelDomain(uint _domainId) public onlyAdmin {
-        cancellations[_domainId] = Cancellation(_domainId, block.timestamp, true);
+        cancellations[_domainId] = Cancellation(_domainId, block.timestamp, true, address(0));
         emit DomainCancelled(_domainId, block.timestamp);
     }
 
-    function requestLift(uint _domainId) public onlyAdmin {
+    function requestLift(uint _domainId, address _requester) public onlyAdmin {
         Cancellation storage c = cancellations[_domainId];
         require(c.burned, "Domain not burned");
         require(block.timestamp <= c.cancelTime + LIFT_REQUEST_WINDOW, "Lift window expired");
-        emit DomainLiftRequested(_domainId, block.timestamp);
+        c.lifter = _requester;
+        emit DomainLiftRequested(_domainId, _requester, block.timestamp);
     }
 
     function liftDomain(uint _domainId) public onlyAdmin {
         Cancellation storage c = cancellations[_domainId];
         require(c.burned, "Domain not burned");
+        require(c.lifter != address(0), "No lift requested");
         c.burned = false;
-        emit DomainLifted(_domainId);
+        emit DomainLifted(_domainId, c.lifter);
+        c.lifter = address(0); // Reset placeholder
     }
 }
