@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 /// @title AppealsMandala
-/// @notice Smart contract safeguard para sa appeals process na may strict timeout
+/// @notice Smart contract safeguard para sa appeals process na may strict timeout alinsunod sa WIPO-ICA 2025
 contract AppealsMandala {
 
     uint public constant APPEALS_TIMEOUT = 30 days;
