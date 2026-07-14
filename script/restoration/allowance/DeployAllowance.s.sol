@@ -8,7 +8,7 @@ contract DeployAllowance is Script {
     function run() external {
         vm.startBroadcast();
 
-        SovereignAllowanceProtocol allowance = new SovereignAllowanceProtocol();
+        new SovereignAllowanceProtocol();
 
         vm.stopBroadcast();
     }

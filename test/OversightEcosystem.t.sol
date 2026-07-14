@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 import "contracts/AutonomousComplianceEscrowRouter.sol";
 import "contracts/CompliantIdentityRevealer.sol";
 import "contracts/EcosystemShutdown.sol";

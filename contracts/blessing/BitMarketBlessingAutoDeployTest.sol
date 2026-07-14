@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "contracts/BitMarketBudgetSanctumRouter.sol";
-import "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 import "../contracts/BitMarketBlessingAutoDeploy.sol";
 
 contract BitMarketBlessingAutoDeployTest is Test {
