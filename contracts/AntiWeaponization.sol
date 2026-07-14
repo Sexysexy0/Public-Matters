@@ -10,6 +10,15 @@ contract AntiWeaponization {
     uint256 public covenantCount;
     uint256 public councilCount;
 
+    // --- Role management (added for tests / governance) ---
+    enum RoleType { None, Admin, Innovator, Auditor, Operator }
+
+    mapping(address => RoleType) public roles;
+
+    event RoleAssigned(address indexed who, RoleType role);
+    event RoleRevoked(address indexed who);
+
+    // --- Weaponization rules and status ---
     enum WeaponRule {
         WeaponizationIsProhibited,
         PeaceMandated,
@@ -60,6 +69,9 @@ contract AntiWeaponization {
         councilCount = 0;
 
         _declareDefaultRules();
+        // bootstrap guardian role
+        roles[guardian] = RoleType.Admin;
+        emit RoleAssigned(guardian, RoleType.Admin);
     }
 
     modifier onlyGuardian() {
@@ -72,6 +84,30 @@ contract AntiWeaponization {
         _;
     }
 
+    modifier onlyRole(RoleType _role) {
+        require(roles[msg.sender] == _role, "Insufficient role");
+        _;
+    }
+
+    // --- Role management functions ---
+    /// @notice Assign a role to an address
+    function assignRole(address who, RoleType role) external onlyGuardian {
+        roles[who] = role;
+        emit RoleAssigned(who, role);
+    }
+
+    /// @notice Revoke role (set to None)
+    function revokeRole(address who) external onlyGuardian {
+        roles[who] = RoleType.None;
+        emit RoleRevoked(who);
+    }
+
+    /// @notice Helper to check role
+    function hasRole(address who, RoleType role) public view returns (bool) {
+        return roles[who] == role;
+    }
+
+    // --- Council management ---
     function addCouncilMember(address member) external onlyGuardian {
         require(!councilMember[member], "Already council");
         councilMember[member] = true;
@@ -86,6 +122,7 @@ contract AntiWeaponization {
         emit CouncilMemberRemoved(member);
     }
 
+    // --- Rule declaration ---
     function _declareDefaultRules() internal {
         _declare(WeaponRule.WeaponizationIsProhibited, "Weaponization prohibited; denial required.");
         _declare(WeaponRule.PeaceMandated, "Peace mandated; violence blocked.");
@@ -113,6 +150,7 @@ contract AntiWeaponization {
         emit RuleLocked(id);
     }
 
+    // --- Weapon case lifecycle ---
     function fileWeaponCase(string calldata grounds) external {
         covenantCount++;
         weaponCases[covenantCount] = WeaponCase(
