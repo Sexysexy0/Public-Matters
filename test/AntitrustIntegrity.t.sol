@@ -21,29 +21,42 @@ contract AntitrustIntegrityTest is Test {
         submitter = address(0x5);
         reporter = address(0x6);
 
+        // deploy contract as guardian
         vm.prank(guardian);
         address[] memory initialCouncil = new address[](2);
         initialCouncil[0] = councilA;
         initialCouncil[1] = councilB;
         ai = new AntitrustIntegrity(initialCouncil, 2);
 
+        // assign auditor role
         vm.prank(guardian);
         ai.assignRole(auditor, AntitrustIntegrity.Role.Auditor);
     }
 
     function testFileWhistleAndPayBounty() public {
+        // 1) file a whistle without bounty (case 1)
         vm.prank(reporter);
-        uint caseId = ai.fileWhistle(bytes32("QmExampleHash"));
+        uint caseId1 = ai.fileWhistle(bytes32("QmExampleHash"));
 
+        // 2) fund the test contract so it can send value with the next call
         vm.deal(address(this), 1 ether);
+
+        // 3) file a whistle with bounty (case 2) — value is sent from the test contract
         vm.prank(reporter);
-        ai.fileWhistle{value: 0.1 ether}(bytes32("QmExampleHash2"));
+        uint caseId2 = ai.fileWhistle{value: 0.1 ether}(bytes32("QmExampleHash2"));
 
+        // 4) auditor validates and pays the bounty for the case that actually has the bounty
         vm.prank(auditor);
-        ai.validateAndPayBounty(caseId, payable(reporter), 0.1 ether);
+        ai.validateAndPayBounty(caseId2, payable(reporter), 0.1 ether);
 
-        ( , , bytes32 evidenceHash, uint bounty, bool validated, ) = ai.whistleCases(caseId);
-        assertEq(evidenceHash, bytes32("QmExampleHash"));
+        // 5) assert stored evidence for case1 (unchanged) and that case2 bounty exists
+        ( , , bytes32 evidenceHash1, uint bounty1, bool validated1, ) = ai.whistleCases(caseId1);
+        ( , , bytes32 evidenceHash2, uint bounty2, bool validated2, ) = ai.whistleCases(caseId2);
+
+        assertEq(evidenceHash1, bytes32("QmExampleHash"));
+        assertEq(evidenceHash2, bytes32("QmExampleHash2"));
+        assertEq(bounty2, 0.1 ether);
+        assertTrue(validated2);
     }
 
     function testSubmitMergerAndCouncilApprove() public {
