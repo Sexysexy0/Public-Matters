@@ -38,10 +38,10 @@ contract AntitrustIntegrityTest is Test {
         vm.prank(reporter);
         uint caseId1 = ai.fileWhistle(bytes32("QmExampleHash"));
 
-        // 2) fund the test contract so it can send value with the next call
-        vm.deal(address(this), 1 ether);
+        // 2) fund the reporter so it can send value with the next call
+        vm.deal(reporter, 1 ether);
 
-        // 3) file a whistle with bounty (case 2) — value is sent from the test contract
+        // 3) file a whistle with bounty (case 2) — value is sent from reporter
         vm.prank(reporter);
         uint caseId2 = ai.fileWhistle{value: 0.1 ether}(bytes32("QmExampleHash2"));
 
@@ -49,7 +49,7 @@ contract AntitrustIntegrityTest is Test {
         vm.prank(auditor);
         ai.validateAndPayBounty(caseId2, payable(reporter), 0.1 ether);
 
-        // 5) assert stored evidence for case1 (unchanged) and that case2 bounty exists
+        // 5) assert stored evidence for case1 (unchanged) and that case2 bounty exists and validated
         ( , , bytes32 evidenceHash1, uint bounty1, bool validated1, ) = ai.whistleCases(caseId1);
         ( , , bytes32 evidenceHash2, uint bounty2, bool validated2, ) = ai.whistleCases(caseId2);
 
