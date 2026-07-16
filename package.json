@@ -34,7 +34,8 @@
     "chai": "^4.3.8",
     "ethers": "^6.17.0",
     "ganache": "^6.4.5",
-    "hardhat": "^3.9.0"
+    "hardhat": "^3.9.0",
+    "postcss": "8.5.19"
   },
   "overrides": {
     "js-yaml": "4.1.0",
