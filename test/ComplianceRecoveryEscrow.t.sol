@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 import {Test} from "forge-std/Test.sol";
-import "../contracts/ComplianceRecoveryEscrow.sol";
-import "../contracts/PublicBenefitGrant.sol";
+import { } from "../contracts/ComplianceRecoveryEscrow.sol";
+import { } from "../contracts/PublicBenefitGrant.sol";
 
 contract ComplianceRecoveryEscrowTest is Test {
     ComplianceRecoveryEscrow public escrow;

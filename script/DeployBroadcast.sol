@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.30;
 
-import "forge-std/Script.sol";
-import "../contracts/broadcast/GlobalResonanceBroadcast.sol";
+import { } from "forge-std/Script.sol";
+import { } from "../contracts/broadcast/GlobalResonanceBroadcast.sol";
 
 contract DeployBroadcast is Script {
     function run() external {
