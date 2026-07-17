@@ -2,18 +2,18 @@
 pragma solidity ^0.8.20;
 
 import {Test} from "forge-std/Test.sol";
-import { } from "../contracts/FinancialIndexReconstitutionOracle.sol";
-import { } from "../contracts/WipoContentExpertDetermination.sol";
-import { } from "../contracts/QualityAssuranceSelfAssessment.sol";
-import { } from "../contracts/FoundationGovernanceLedger.sol";
-import { } from "../contracts/AcademicAccreditationSAROracle.sol";
-import { } from "../contracts/HolisticCompetencyRegistry.sol";
-import { } from "../contracts/NetworkEngineerPerformanceAudit.sol";
-import { } from "../contracts/IetTechnicalReportRegistry.sol";
-import { } from "../contracts/PersonalGrowthBetEscrow.sol";
-import { } from "../contracts/SovereignSupplierEsourcingRouter.sol";
-import { } from "../contracts/ForceMajeureMdrOracle.sol";
-import { } from "../contracts/InstitutionalAuditHistory.sol";
+import "../contracts/FinancialIndexReconstitutionOracle.sol";
+import "../contracts/WipoContentExpertDetermination.sol";
+import "../contracts/QualityAssuranceSelfAssessment.sol";
+import "../contracts/FoundationGovernanceLedger.sol";
+import "../contracts/AcademicAccreditationSAROracle.sol";
+import "../contracts/HolisticCompetencyRegistry.sol";
+import "../contracts/NetworkEngineerPerformanceAudit.sol";
+import "../contracts/IetTechnicalReportRegistry.sol";
+import "../contracts/PersonalGrowthBetEscrow.sol";
+import "../contracts/SovereignSupplierEsourcingRouter.sol";
+import "../contracts/ForceMajeureMdrOracle.sol";
+import "../contracts/InstitutionalAuditHistory.sol";
 
 contract SovereignGrcEcosystemTest is Test {
     FinancialIndexReconstitutionOracle public indexOracle;

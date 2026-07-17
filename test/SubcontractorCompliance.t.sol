@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 import {Test} from "forge-std/Test.sol";
-import { } from "../contracts/SubcontractorComplianceEscrow.sol";
-import { } from "../contracts/InstitutionalAuditHistory.sol";
+import "../contracts/SubcontractorComplianceEscrow.sol";
+import "../contracts/InstitutionalAuditHistory.sol";
 
 contract SubcontractorComplianceTest is Test {
     SubcontractorComplianceEscrow public complianceVault;

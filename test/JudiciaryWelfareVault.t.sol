@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 import {Test} from "forge-std/Test.sol";
-import { } from "../contracts/JudiciaryWelfareVault.sol";
-import { } from "../contracts/InstitutionalAuditHistory.sol";
+import "../contracts/JudiciaryWelfareVault.sol";
+import "../contracts/InstitutionalAuditHistory.sol";
 
 contract JudiciaryWelfareVaultTest is Test {
     JudiciaryWelfareVault public vault;
