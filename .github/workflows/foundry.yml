@@ -1,0 +1,38 @@
+name: Foundry CI + Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Install Foundry
+      uses: foundry-rs/foundry-toolchain@v1
+      with:
+        version: nightly
+    - name: Build contracts
+      run: forge build
+    - name: Run tests
+      run: forge test -vvv
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Install Foundry
+      uses: foundry-rs/foundry-toolchain@v1
+      with:
+        version: nightly
+    - name: Deploy contract
+      run: forge create contracts/InfrastructureTransparency.sol:InfrastructureTransparency \
+        --rpc-url ${{ secrets.RPC_URL }} \
+        --private-key ${{ secrets.PRIVATE_KEY }}
