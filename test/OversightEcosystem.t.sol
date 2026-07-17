@@ -2,9 +2,9 @@
 pragma solidity ^0.8.20;
 
 import {Test} from "forge-std/Test.sol";
-import "contracts/AutonomousComplianceEscrowRouter.sol";
-import "contracts/CompliantIdentityRevealer.sol";
-import "contracts/EcosystemShutdown.sol";
+import { } from "contracts/AutonomousComplianceEscrowRouter.sol";
+import { } from "contracts/CompliantIdentityRevealer.sol";
+import { } from "contracts/EcosystemShutdown.sol";
 
 contract OversightEcosystemTest is Test {
     // Mga dummy addresses para sa simulation

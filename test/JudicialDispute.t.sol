@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 import {Test} from "forge-std/Test.sol";
-import "../contracts/JudicialDisputeRouter.sol";
-import "../contracts/InstitutionalAuditHistory.sol";
+import { } from "../contracts/JudicialDisputeRouter.sol";
+import { } from "../contracts/InstitutionalAuditHistory.sol";
 
 contract JudicialDisputeTest is Test {
     JudicialDisputeRouter public router;

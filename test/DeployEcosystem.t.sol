@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import {Test} from "forge-std/Test.sol";
-import "../script/Deploy.s.sol";
+import { } from "../script/Deploy.s.sol";
 
 contract DeployEcosystemTest is Test {
     DeployEcosystem public deploymentScript;
