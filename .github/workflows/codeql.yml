@@ -1,3 +1,13 @@
+name: "CodeQL + Slither Security Scan"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '19 17 * * 2'
+
 jobs:
   analyze:
     name: Analyze (${{ matrix.language }})
@@ -37,4 +47,4 @@ jobs:
       run: |
         pip install slither-analyzer
     - name: Run Slither Analysis
-      run: slither ./contracts --solc-remaps "forge-std/=lib/forge-std/src/"
+      run: slither ./contracts --solc-remaps "forge-std/=lib/forge-std/src/" --fail-high
