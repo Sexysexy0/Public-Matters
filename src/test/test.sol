@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
 
 import {Test} from "forge-std/Test.sol";
-import { } from "../VinvinCopi_OneCoreProtocol.sol";
+import "../VinvinCopi_OneCoreProtocol.sol";
 
 contract CopiProtocolTest is Test {
     VinvinCopi_OneCoreProtocol protocol;

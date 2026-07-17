@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 import {Test} from "forge-std/Test.sol";
-import { } from "../contracts/ShariahComplianceRouter.sol";
-import { } from "../contracts/InstitutionalAuditHistory.sol";
+import "../contracts/ShariahComplianceRouter.sol";
+import "../contracts/InstitutionalAuditHistory.sol";
 
 contract ShariahComplianceRouterTest is Test {
     ShariahComplianceRouter public router;

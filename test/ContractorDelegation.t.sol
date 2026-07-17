@@ -2,8 +2,8 @@
 pragma solidity ^0.8.20;
 
 import {Test} from "forge-std/Test.sol";
-import { } from "../contracts/ContractorDelegationRegistry.sol";
-import { } from "../contracts/InstitutionalAuditHistory.sol";
+import "../contracts/ContractorDelegationRegistry.sol";
+import "../contracts/InstitutionalAuditHistory.sol";
 
 contract ContractorDelegationTest is Test {
     ContractorDelegationRegistry public registry;

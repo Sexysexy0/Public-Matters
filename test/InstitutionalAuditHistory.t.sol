@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 import {Test} from "forge-std/Test.sol";
-import { } from "../contracts/InstitutionalAuditHistory.sol";
-import { } from "../contracts/WhistleblowerSanctuary.sol";
-import { } from "../contracts/ComplianceRecoveryEscrow.sol";
-import { } from "../contracts/PublicBenefitGrant.sol";
+import "../contracts/InstitutionalAuditHistory.sol";
+import "../contracts/WhistleblowerSanctuary.sol";
+import "../contracts/ComplianceRecoveryEscrow.sol";
+import "../contracts/PublicBenefitGrant.sol";
 
 contract InstitutionalAuditHistoryTest is Test {
     InstitutionalAuditHistory public auditHistory;
