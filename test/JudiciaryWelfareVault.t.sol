@@ -28,7 +28,8 @@ contract JudiciaryWelfareVaultTest is Test {
         vm.stopPrank();
 
         // Ligtas na mag-seed ng liquidity sa welfare vault pool
-        payable(address(vault)).transfer(10 ether);
+        (bool success, ) = payable(address(vault)).call{value: 10 ether}("");
+        require(success, "Funding failed");
 
         vm.deal(courtStaff, 5 ether);
     }
