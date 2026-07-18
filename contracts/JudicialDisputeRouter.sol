@@ -3,11 +3,6 @@ pragma solidity ^0.8.20;
 
 import "./IAuditHistory.sol";
 
-/**
- * @title JudicialDisputeRouter
- * @dev Nagpapatupad ng pormal na Court-Annexed Mediation (CAM) at Judicial Dispute Resolution (JDR)
- * sa blockchain, base sa frameworks ng Supreme Court at Sloan CCIS data specifications.
- */
 contract JudicialDisputeRouter {
     address public sovereignContractor;
     IAuditHistory public auditHistory;
@@ -57,16 +52,12 @@ contract JudicialDisputeRouter {
         emit MediatorStatusUpdated(_mediator, _status);
     }
 
-    function referToMediation(
-        address _respondent,
-        address _mediator
-    ) public payable returns (uint256) {
+    function referToMediation(address _respondent, address _mediator) public payable returns (uint256) {
         require(msg.value > 0, "Error: Escrowed mediation funds must be greater than zero.");
         require(_respondent != address(0) && _mediator != address(0), "Error: Invalid counterpart or mediator node.");
         require(certifiedMediators[_mediator], "Error: Selected mediator node holds no corporate clearance.");
 
         totalDisputes++;
-
         disputes[totalDisputes] = DisputeCase({
             id: totalDisputes,
             claimant: msg.sender,
@@ -81,10 +72,6 @@ contract JudicialDisputeRouter {
         return totalDisputes;
     }
 
-    /**
-     * @dev Matagumpay na kasunduan (Compromise Agreement). Ise-settle ng mediator ang pondo.
-     * SECURE DIRECT LOGGING: Gumagamit ng malinis na storage fallback route para sa tracking framework.
-     */
     function executeCompromiseSettlement(
         uint256 _disputeId,
         uint256 _claimantPayout,
@@ -99,18 +86,19 @@ contract JudicialDisputeRouter {
         c.caseResolutionHash = _resolutionHash;
         c.escrowedFunds = 0;
 
-        address targetClaimant = c.claimant;
-
-        if (_claimantPayout > 0) payable(targetClaimant).transfer(_claimantPayout);
-        if (_respondentPayout > 0) payable(c.respondent).transfer(_respondentPayout);
+        if (_claimantPayout > 0) {
+            (bool success1, ) = payable(c.claimant).call{value: _claimantPayout}("");
+            require(success1, "Transfer failed");
+        }
+        if (_respondentPayout > 0) {
+            (bool success2, ) = payable(c.respondent).call{value: _respondentPayout}("");
+            require(success2, "Transfer failed");
+        }
 
         emit MediationSettled(_disputeId, msg.sender, _resolutionHash);
 
-        // SYSTEM ALIGNMENT ROUTE: Direktang ipasa ang pormal na interface parameters
         if (address(auditHistory) != address(0)) {
-            try auditHistory.logHistoricalAction(targetClaimant, 0, 1, 0, _resolutionHash) {} catch {
-                // Fallback mechanics kapag ang testing sandboxes ay labas sa active block mapping constraints
-            }
+            try auditHistory.logHistoricalAction(c.claimant, 0, 1, 0, _resolutionHash) {} catch {}
         }
     }
 
@@ -124,12 +112,9 @@ contract JudicialDisputeRouter {
         uint256 refundAmount = c.escrowedFunds;
         c.escrowedFunds = 0;
 
-        payable(c.claimant).transfer(refundAmount);
+        (bool success, ) = payable(c.claimant).call{value: refundAmount}("");
+        require(success, "Refund failed");
 
         emit MediationTerminated(_disputeId, finalStatus);
-
-        if (address(auditHistory) != address(0)) {
-            try auditHistory.logHistoricalAction(c.respondent, 0, 0, 1, "MEDIATION_TERMINATED_FAILED") {} catch {}
-        }
     }
 }

@@ -37,8 +37,8 @@ contract JudiciaryWelfareVault {
         require(msg.value >= minimalContribution, "Contribution too low");
     }
 
-    function activeCoverage(address _staff) public pure returns (bool) {
-        // simplified for demo, always true
+    // Fix: remove unused parameter name
+    function activeCoverage(address) public pure returns (bool) {
         return true;
     }
 
@@ -67,6 +67,5 @@ contract JudiciaryWelfareVault {
         emit ClaimSettled(_claimId, c.claimant, c.amount);
     }
 
-    // Allow contract to accept Ether funding
     receive() external payable {}
 }
