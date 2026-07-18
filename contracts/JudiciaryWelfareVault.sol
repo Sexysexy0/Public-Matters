@@ -37,8 +37,9 @@ contract JudiciaryWelfareVault {
         require(msg.value >= minimalContribution, "Contribution too low");
     }
 
-    function activeCoverage(address _staff) public view returns (bool) {
-        return true; // simplified for demo
+    function activeCoverage(address _staff) public pure returns (bool) {
+        // simplified for demo, always true
+        return true;
     }
 
     function fileWelfareClaim(uint256 _amount, bytes32 _medicalHash) public returns (uint256) {
@@ -65,4 +66,7 @@ contract JudiciaryWelfareVault {
 
         emit ClaimSettled(_claimId, c.claimant, c.amount);
     }
+
+    // Allow contract to accept Ether funding
+    receive() external payable {}
 }
