@@ -3,12 +3,6 @@ pragma solidity ^0.8.20;
 
 import "./IAuditHistory.sol";
 
-/**
- * @title ForceMajeureMdrOracle
- * @dev Hango sa GNLU SRDC ADR Magazine at Richard Holden Model (University of Chicago).
- * Nilulutas ang banggaan ng Obligatory at Remedial frameworks sa pamamagitan ng 
- * pag-embed ng staged negotiation, mediation, at neutral arbitration oracles.
- */
 contract ForceMajeureMdrOracle {
     address public sovereignContractor;
     IAuditHistory public auditHistory;
@@ -53,11 +47,6 @@ contract ForceMajeureMdrOracle {
         auditHistory = IAuditHistory(_auditHistoryAddress);
     }
 
-    /**
-     * @dev TIME-LOCKED ENFORCEMENT FREEZE: Kapag ang isang apektadong node ay sinalpakan 
-     * ng sakuna (Force Majeure), awtomatikong ifre-freeze ng system ang target capital 
-     * upang harangin ang automatic legacy forfeiture habang gumugulong ang mandatory review.
-     */
     function flagForceMajeureIncident(
         address _affectedNode,
         address _arbitrator,
@@ -84,16 +73,11 @@ contract ForceMajeureMdrOracle {
     function escalateToMediation(uint256 _disputeId) public {
         DisputeProfile storage d = disputes[_disputeId];
         require(d.currentState == DisputeState.ActiveLock, "Error: Invalid transaction order sequence.");
-        
+
         d.currentState = DisputeState.MediationStage;
         emit MediationEscalated(_disputeId, d.mediationDeadlineBlock);
     }
 
-    /**
-     * @dev HOLDEN & SZABO RESOLUTION ENGINE: Tanging ang pinagkakatiwalaang neutral expert 
-     * oracle ang makakapag-submit ng pinal na cryptographic decision hash upang kilalanin 
-     * kung ito ay isang "Legitimate Adaptation" o isang "Illegitimate Holdup".
-     */
     function resolveMdrDispute(
         uint256 _disputeId,
         bool _isLegitimateAdaptation,
@@ -107,16 +91,17 @@ contract ForceMajeureMdrOracle {
 
         if (_isLegitimateAdaptation) {
             d.currentState = DisputeState.ResolvedAdaptation;
-            payable(d.affectedPartyNode).transfer(settlementCapital);
+            (bool success1, ) = payable(d.affectedPartyNode).call{value: settlementCapital}("");
+            require(success1, "Transfer failed");
         } else {
             d.currentState = DisputeState.RejectedHoldup;
-            payable(sovereignContractor).transfer(settlementCapital);
-            
+            (bool success2, ) = payable(sovereignContractor).call{value: settlementCapital}("");
+            require(success2, "Transfer failed");
+
             if (address(auditHistory) != address(0)) {
                 try auditHistory.logHistoricalAction(d.affectedPartyNode, 0, 0, 1, "FORCE_MAJEURE_HOLDUP_REJECTED") {} catch {}
             }
         }
-
         emit DisputeSettledByOracle(_disputeId, d.currentState, _resolutionHash);
     }
 }

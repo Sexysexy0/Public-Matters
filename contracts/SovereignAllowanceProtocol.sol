@@ -13,9 +13,10 @@ contract SovereignAllowanceProtocol {
     event AllowanceClaimed(address indexed beneficiary, uint256 amount);
 
     function configureAllowance(address _beneficiary, uint256 _amount) public {
+        // Fix: allow immediate first claim
         allowances[_beneficiary] = Allowance({
             amountPerCycle: _amount,
-            lastClaimed: block.timestamp // initialize to now for timelock
+            lastClaimed: 0
         });
         emit AllowanceConfigured(_beneficiary, _amount);
     }
@@ -24,8 +25,9 @@ contract SovereignAllowanceProtocol {
         Allowance storage alloc = allowances[msg.sender];
         require(alloc.amountPerCycle > 0, "No allowance configured");
 
-        // Timelock enforcement: 1 day minimum between claims
-        require(block.timestamp > alloc.lastClaimed + 1 days, "Cycle timelock active.");
+        if (alloc.lastClaimed != 0) {
+            require(block.timestamp > alloc.lastClaimed + 1 days, "Cycle timelock active.");
+        }
 
         alloc.lastClaimed = block.timestamp;
 

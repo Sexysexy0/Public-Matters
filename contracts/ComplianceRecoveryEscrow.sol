@@ -6,7 +6,7 @@ import "./IAuditHistory.sol";
 contract ComplianceRecoveryEscrow {
     address public guardian;
     address public publicBenefitVault;
-    IAuditHistory public auditHistory; 
+    IAuditHistory public auditHistory;
     uint256 public totalCases;
 
     struct RecoveryCase {
@@ -44,7 +44,6 @@ contract ComplianceRecoveryEscrow {
         uint256 _durationInSeconds
     ) public payable returns (uint256) {
         require(msg.value > 0, "Collateral must be greater than zero.");
-        
         totalCases++;
         cases[totalCases] = RecoveryCase({
             institution: msg.sender,
@@ -64,7 +63,8 @@ contract ComplianceRecoveryEscrow {
         require(!c.isResolved, "Error: Case already resolved.");
 
         c.isResolved = true;
-        payable(publicBenefitVault).transfer(c.collateralAmount);
+        (bool success, ) = payable(publicBenefitVault).call{value: c.collateralAmount}("");
+        require(success, "Transfer failed");
 
         emit RecoveryApproved(_caseId, c.collateralAmount);
     }
@@ -79,7 +79,9 @@ contract ComplianceRecoveryEscrow {
         address penaltyTarget = c.institution;
         uint256 amount = c.collateralAmount;
 
-        payable(publicBenefitVault).transfer(amount);
+        (bool success, ) = payable(publicBenefitVault).call{value: amount}("");
+        require(success, "Transfer failed");
+
         emit CollateralForfeited(_caseId, penaltyTarget, amount);
 
         if (address(auditHistory) != address(0)) {
