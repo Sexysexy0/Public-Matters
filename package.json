@@ -1,0 +1,14 @@
+{
+  "name": "public-matters",
+  "version": "1.0.0",
+  "description": "Smart Contract project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"Build script not configured\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {}
+}
