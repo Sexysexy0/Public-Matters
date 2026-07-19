@@ -10,7 +10,7 @@ contract SovereignAllowanceProtocolTest is Test {
     function setUp() public {
         protocol = new SovereignAllowanceProtocol();
         // Fix: use call instead of transfer
-        (bool success, ) = payable(address(protocol)).call{value: 10 ether}("");
+        (bool success,) = payable(address(protocol)).call{value: 10 ether}("");
         require(success, "Funding failed");
     }
 
