@@ -36,14 +36,22 @@ contract ElephantStrategyCodex {
     }
 
     /// @notice Record a strategic rule
-    function recordRule(string memory ruleName, string memory description, bool enforced) public onlyStrategist {
+    function recordRule(
+        string memory ruleName,
+        string memory description,
+        bool enforced
+    ) public onlyStrategist {
         RuleArc memory arc = RuleArc(ruleName, description, block.timestamp, enforced);
         rules.push(arc);
         emit RuleRecorded(ruleName, description, block.timestamp, enforced);
     }
 
     /// @notice Retrieve a rule by index
-    function getRule(uint256 index) public view returns (string memory, string memory, uint256, bool) {
+    function getRule(uint256 index)
+        public
+        view
+        returns (string memory, string memory, uint256, bool)
+    {
         RuleArc memory arc = rules[index];
         return (arc.ruleName, arc.description, arc.timestamp, arc.enforced);
     }
