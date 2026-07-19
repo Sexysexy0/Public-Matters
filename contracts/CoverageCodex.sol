@@ -2,43 +2,57 @@
 pragma solidity ^0.8.20;
 
 /// @title CoverageCodex
-/// @notice Covenant contract encoding safeguards for maintaining ≥90% coverage across governance, compliance, and oversight arcs
+/// @notice Covenant contract encoding safeguards for test coverage discipline
 contract CoverageCodex {
     address public owner;
+    uint256 public minimumCoverage; // threshold in percent
 
-    struct Safeguard {
-        uint256 arcId;     // linked to coverage arc
-        string domain;     // e.g. "Governance Coverage", "Compliance Coverage", "Oversight Coverage", "Signal Coverage", "Audit Coverage"
-        string decree;     // safeguard decree text
+    struct CoverageArc {
+        string contractName;
+        uint256 lineCoverage;
+        uint256 statementCoverage;
+        uint256 branchCoverage;
+        uint256 functionCoverage;
         uint256 timestamp;
     }
 
-    Safeguard[] public safeguards;
+    CoverageArc[] public coverageArcs;
 
-    event Decreed(uint256 arcId, string domain, string decree, uint256 timestamp);
+    event CoverageRecorded(string contractName, uint256 lineCoverage, uint256 statementCoverage, uint256 branchCoverage, uint256 functionCoverage, uint256 timestamp);
+    event ThresholdUpdated(uint256 newThreshold, uint256 timestamp);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Not authorized");
         _;
     }
 
-    constructor() {
+    constructor(uint256 _minimumCoverage) {
         owner = msg.sender;
+        minimumCoverage = _minimumCoverage;
     }
 
-    /// @notice Encode coverage arc into covenant safeguard
-    function decreeCodex(uint256 arcId, string memory domain, string memory decree) public onlyOwner {
-        Safeguard memory newSafeguard = Safeguard(arcId, domain, decree, block.timestamp);
-        safeguards.push(newSafeguard);
-        emit Decreed(arcId, domain, decree, block.timestamp);
+    /// @notice Update minimum coverage threshold
+    function updateThreshold(uint256 _newThreshold) public onlyOwner {
+        minimumCoverage = _newThreshold;
+        emit ThresholdUpdated(_newThreshold, block.timestamp);
     }
 
-    function getSafeguard(uint256 index) public view returns (uint256, string memory, string memory, uint256) {
-        Safeguard memory s = safeguards[index];
-        return (s.arcId, s.domain, s.decree, s.timestamp);
+    /// @notice Record coverage metrics for a contract
+    function recordCoverage(string memory contractName, uint256 lineCoverage, uint256 statementCoverage, uint256 branchCoverage, uint256 functionCoverage) public onlyOwner {
+        CoverageArc memory arc = CoverageArc(contractName, lineCoverage, statementCoverage, branchCoverage, functionCoverage, block.timestamp);
+        coverageArcs.push(arc);
+        emit CoverageRecorded(contractName, lineCoverage, statementCoverage, branchCoverage, functionCoverage, block.timestamp);
+        require(lineCoverage >= minimumCoverage, "Line coverage below threshold");
+        require(statementCoverage >= minimumCoverage, "Statement coverage below threshold");
+        require(functionCoverage >= minimumCoverage, "Function coverage below threshold");
     }
 
-    function getSafeguardCount() public view returns (uint256) {
-        return safeguards.length;
+    function getCoverageArc(uint256 index) public view returns (string memory, uint256, uint256, uint256, uint256, uint256) {
+        CoverageArc memory arc = coverageArcs[index];
+        return (arc.contractName, arc.lineCoverage, arc.statementCoverage, arc.branchCoverage, arc.functionCoverage, arc.timestamp);
+    }
+
+    function getCoverageCount() public view returns (uint256) {
+        return coverageArcs.length;
     }
 }
