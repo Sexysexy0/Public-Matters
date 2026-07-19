@@ -15,8 +15,8 @@ contract AcademicAccreditationSAROracleTest is Test {
     function testProcessAccreditationSuccess() public {
         uint256 id = oracle.processProgramAccreditationSAR(
             "Tier-I",
-            80,   // CO score
-            85,   // PO score
+            80, // CO score
+            85, // PO score
             keccak256("evidence")
         );
         // check na may report na na-log
@@ -30,32 +30,17 @@ contract AcademicAccreditationSAROracleTest is Test {
 
     function testRevertOnLowCOScore() public {
         vm.expectRevert(); // dahil <70% floor
-        oracle.processProgramAccreditationSAR(
-            "Tier-I",
-            60,
-            80,
-            keccak256("badEvidence")
-        );
+        oracle.processProgramAccreditationSAR("Tier-I", 60, 80, keccak256("badEvidence"));
     }
 
     function testRevertOnInvalidPercentages() public {
         vm.expectRevert(); // >100% invalid
-        oracle.processProgramAccreditationSAR(
-            "Tier-I",
-            120,
-            90,
-            keccak256("invalid")
-        );
+        oracle.processProgramAccreditationSAR("Tier-I", 120, 90, keccak256("invalid"));
     }
 
     function testOnlyContractorCanProcess() public {
         vm.prank(address(0xBEEF));
         vm.expectRevert("Error: Only Sovereign Contractor access.");
-        oracle.processProgramAccreditationSAR(
-            "Tier-I",
-            80,
-            85,
-            keccak256("evidence")
-        );
+        oracle.processProgramAccreditationSAR("Tier-I", 80, 85, keccak256("evidence"));
     }
 }

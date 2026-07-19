@@ -22,9 +22,8 @@ contract JudiciaryWelfareVaultTest is Test {
         vm.deal(address(0x1111), 5 ether);
 
         // Fund vault itself
-        (bool success, ) = payable(address(vault)).call{value: 5 ether}("");
-        (bool success,) = payable(address(vault)).call{value: 5 ether}("");
-        require(success, "Funding failed");
+        (bool success1,) = payable(address(vault)).call{value: 5 ether}("");
+        require(success1, "Funding failed");
     }
 
     function test_WelfarePlanHydrationAndClaimSettlement() public {
@@ -32,15 +31,14 @@ contract JudiciaryWelfareVaultTest is Test {
         vault.depositContribution{value: 0.05 ether}();
 
         vm.prank(address(0x7777));
-        uint claimId = vault.fileWelfareClaim(1 ether, keccak256("MedicalHash"));
-        uint256 claimId = vault.fileWelfareClaim(1 ether, keccak256("MedicalHash"));
-        vm.prank(address(0x1111));
-        vault.settleWelfareClaim(claimId);
+        uint256 claimId1 = vault.fileWelfareClaim(1 ether, keccak256("MedicalHash"));
 
-        ( , address claimant, uint amount, , , bool settled) = vault.claims(claimId);
-        (, address claimant, uint256 amount,,, bool settled) = vault.claims(claimId);
-        assertEq(claimant, address(0x7777));
-        assertEq(amount, 1 ether);
-        assertTrue(settled);
+        vm.prank(address(0x1111));
+        vault.settleWelfareClaim(claimId1);
+
+        (, address claimant1, uint256 amount1,,, bool settled1) = vault.claims(claimId1);
+        assertEq(claimant1, address(0x7777));
+        assertEq(amount1, 1 ether);
+        assertTrue(settled1);
     }
 }

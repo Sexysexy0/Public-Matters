@@ -9,10 +9,12 @@ contract SovereignAllowanceProtocolTest is Test {
 
     function setUp() public {
         protocol = new SovereignAllowanceProtocol();
-        // Fix: use call instead of transfer
-        (bool success, ) = payable(address(protocol)).call{value: 10 ether}("");
-        (bool success,) = payable(address(protocol)).call{value: 10 ether}("");
-        require(success, "Funding failed");
+        // ✅ unique variable names for funding calls
+        (bool success1,) = payable(address(protocol)).call{value: 10 ether}("");
+        require(success1, "Funding failed");
+
+        (bool success2,) = payable(address(protocol)).call{value: 10 ether}("");
+        require(success2, "Funding failed");
     }
 
     function test_ConfigureAndClaimAllowance() public {
