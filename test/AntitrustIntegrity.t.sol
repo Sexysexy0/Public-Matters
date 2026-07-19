@@ -10,6 +10,10 @@ contract AntitrustIntegrity {
         bytes32[] evidenceHashes;   // audit trail of all evidences
         bool paid;
         uint votes;
+        uint256 id;
+        bytes32[] evidenceHashes; // audit trail of all evidences
+        bool paid;
+        uint256 votes;
         bool accepted;
         address whistleblower;
     }
@@ -22,6 +26,14 @@ contract AntitrustIntegrity {
     event GuardianVote(uint indexed caseId, address guardian);
     event CaseAccepted(uint indexed caseId);
     event BountyReleased(uint indexed caseId, address whistleblower, uint amount);
+    mapping(uint256 => Case) public cases;
+    uint256 public totalCases;
+
+    event WhistleFiled(uint256 indexed id, bytes32 evidenceHash, address whistleblower);
+    event EvidenceAdded(uint256 indexed id, bytes32 evidenceHash);
+    event GuardianVote(uint256 indexed caseId, address guardian);
+    event CaseAccepted(uint256 indexed caseId);
+    event BountyReleased(uint256 indexed caseId, address whistleblower, uint256 amount);
 
     constructor(address[] memory _guardians, uint256 _bountyAmount) {
         guardians = _guardians;
@@ -30,6 +42,7 @@ contract AntitrustIntegrity {
 
     // File a new whistle case
     function fileWhistle(bytes32 _evidenceHash) public payable returns (uint) {
+    function fileWhistle(bytes32 _evidenceHash) public payable returns (uint256) {
         totalCases++;
         Case storage c = cases[totalCases];
         c.id = totalCases;
@@ -45,6 +58,7 @@ contract AntitrustIntegrity {
 
     // Add more evidence to an existing case (audit trail)
     function addEvidence(uint caseId, bytes32 _evidenceHash) public {
+    function addEvidence(uint256 caseId, bytes32 _evidenceHash) public {
         require(msg.sender == cases[caseId].whistleblower, "Only whistleblower can add");
         cases[caseId].evidenceHashes.push(_evidenceHash);
         emit EvidenceAdded(caseId, _evidenceHash);
@@ -52,6 +66,7 @@ contract AntitrustIntegrity {
 
     // Guardian voting
     function voteOnCase(uint caseId) public {
+    function voteOnCase(uint256 caseId) public {
         require(isGuardian(msg.sender), "Not a guardian");
         require(!cases[caseId].accepted, "Already accepted");
 
@@ -65,6 +80,7 @@ contract AntitrustIntegrity {
             // ✅ Release bounty if paid
             if (cases[caseId].paid) {
                 (bool sent, ) = payable(cases[caseId].whistleblower).call{value: bountyAmount}("");
+                (bool sent,) = payable(cases[caseId].whistleblower).call{value: bountyAmount}("");
                 require(sent, "Bounty transfer failed");
                 emit BountyReleased(caseId, cases[caseId].whistleblower, bountyAmount);
             }
@@ -73,6 +89,7 @@ contract AntitrustIntegrity {
 
     function isGuardian(address addr) internal view returns (bool) {
         for (uint i = 0; i < guardians.length; i++) {
+        for (uint256 i = 0; i < guardians.length; i++) {
             if (guardians[i] == addr) return true;
         }
         return false;
@@ -84,6 +101,11 @@ contract AntitrustIntegrity {
     }
 
     function isAccepted(uint caseId) public view returns (bool) {
+    function getEvidence(uint256 caseId) public view returns (bytes32[] memory) {
+        return cases[caseId].evidenceHashes;
+    }
+
+    function isAccepted(uint256 caseId) public view returns (bool) {
         return cases[caseId].accepted;
     }
 }

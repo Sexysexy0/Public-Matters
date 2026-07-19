@@ -17,6 +17,11 @@ contract InfrastructureTransparencyTest is Test {
         assertEq(name, "Flood Control Phase 1");
         assertEq(location, "Malolos");
         assertEq(uint(status), uint(InfrastructureTransparency.Status.Pending));
+        (string memory name, string memory location, InfrastructureTransparency.Status status, uint256 lastUpdate) =
+            infra.projects(1);
+        assertEq(name, "Flood Control Phase 1");
+        assertEq(location, "Malolos");
+        assertEq(uint256(status), uint256(InfrastructureTransparency.Status.Pending));
         assertGt(lastUpdate, 0);
     }
 
@@ -25,6 +30,8 @@ contract InfrastructureTransparencyTest is Test {
         infra.updateStatus(1, InfrastructureTransparency.Status.Ongoing);
         (, , InfrastructureTransparency.Status status, ) = infra.projects(1);
         assertEq(uint(status), uint(InfrastructureTransparency.Status.Ongoing));
+        (,, InfrastructureTransparency.Status status,) = infra.projects(1);
+        assertEq(uint256(status), uint256(InfrastructureTransparency.Status.Ongoing));
     }
 
     function testUrgentActionFlag() public {

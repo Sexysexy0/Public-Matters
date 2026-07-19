@@ -1,0 +1,28 @@
+name: Deploy Contracts (Goerli Testnet)
+
+on:
+  workflow_dispatch:   # manual trigger
+
+jobs:
+  deploy-testnet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Run deployment script on Goerli
+        env:
+          RPC_URL: https://eth-goerli.g.alchemy.com/v2/YOUR_TESTNET_KEY
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          DEST_ADDR: ${{ secrets.DEST_ADDR }}
+        run: |
+          forge script script/Deploy.s.sol:Deploy \
+            --rpc-url $RPC_URL \
+            --private-key $PRIVATE_KEY \
+            --broadcast

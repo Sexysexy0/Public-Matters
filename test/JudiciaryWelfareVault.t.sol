@@ -23,6 +23,7 @@ contract JudiciaryWelfareVaultTest is Test {
 
         // Fund vault itself
         (bool success, ) = payable(address(vault)).call{value: 5 ether}("");
+        (bool success,) = payable(address(vault)).call{value: 5 ether}("");
         require(success, "Funding failed");
     }
 
@@ -32,11 +33,12 @@ contract JudiciaryWelfareVaultTest is Test {
 
         vm.prank(address(0x7777));
         uint claimId = vault.fileWelfareClaim(1 ether, keccak256("MedicalHash"));
-
+        uint256 claimId = vault.fileWelfareClaim(1 ether, keccak256("MedicalHash"));
         vm.prank(address(0x1111));
         vault.settleWelfareClaim(claimId);
 
         ( , address claimant, uint amount, , , bool settled) = vault.claims(claimId);
+        (, address claimant, uint256 amount,,, bool settled) = vault.claims(claimId);
         assertEq(claimant, address(0x7777));
         assertEq(amount, 1 ether);
         assertTrue(settled);
