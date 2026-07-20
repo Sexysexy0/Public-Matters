@@ -1,8 +1,8 @@
 {
   "name": "public-matters",
   "version": "1.0.0",
-  "description": "Smart Contract project",
-  "main": "index.js",
+  "description": "An advanced, decentralized framework engineered to deploy, test, and maintain global Governance, Risk, and Compliance (GRC) architectures, financial oracle integrations, and automated legal escrow smart contracts.",
+  "main": "hardhat.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "echo \"Build script not configured\""
@@ -10,9 +10,6 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {}
-  "description": "An advanced, decentralized framework engineered to deploy, test, and maintain global Governance, Risk, and Compliance (GRC) architectures, financial oracle integrations, and automated legal escrow smart contracts.",
-  "main": "hardhat.config.js",
   "directories": {
     "doc": "docs",
     "lib": "lib",
@@ -100,11 +97,5 @@
     "undici-types": "^6.19.8",
     "ws": "^8.21.1",
     "zod": "^3.25.76"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }
