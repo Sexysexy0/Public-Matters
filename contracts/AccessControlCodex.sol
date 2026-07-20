@@ -11,24 +11,35 @@ contract AccessControlCodex is AccessControl {
     bytes32 public constant DAMAY_TRIGGER_ROLE = keccak256("DAMAY_TRIGGER_ROLE");
     bytes32 public constant AUDITOR_ROLE = keccak256("AUDITOR_ROLE");
 
-    // Events
-    event RoleGranted(address indexed account, bytes32 role, address indexed granter);
-    event RoleRevoked(address indexed account, bytes32 role, address indexed revoker);
+    // Multi-sig overseer governance
+    uint256 public requiredApprovals = 2;
+    mapping(bytes32 => mapping(address => bool)) public approvals;
+    mapping(bytes32 => uint256) public approvalCount;
+
+    // Slashing conditions
+    mapping(address => uint256) public validatorStake;
+    event Slashed(address indexed validator, uint256 amount, string reason);
 
     constructor(address overseer) {
         _grantRole(DEFAULT_ADMIN_ROLE, overseer);
         _grantRole(OVERSEER_ROLE, overseer);
     }
 
-    // Governance: only overseer can assign roles
-    function grantCodexRole(bytes32 role, address account) external onlyRole(OVERSEER_ROLE) {
-        _grantRole(role, account);
-        emit RoleGranted(account, role, msg.sender);
+    // Multi-sig approval for role grants
+    function approveRoleGrant(bytes32 role, address account) external onlyRole(OVERSEER_ROLE) {
+        require(!approvals[role][account], "Already approved");
+        approvals[role][account] = true;
+        approvalCount[role]++;
+        if (approvalCount[role] >= requiredApprovals) {
+            _grantRole(role, account);
+        }
     }
 
-    function revokeCodexRole(bytes32 role, address account) external onlyRole(OVERSEER_ROLE) {
-        _revokeRole(role, account);
-        emit RoleRevoked(account, role, msg.sender);
+    // Slashing mechanism
+    function slashValidator(address validator, uint256 amount, string calldata reason) external onlyRole(OVERSEER_ROLE) {
+        require(validatorStake[validator] >= amount, "Insufficient stake");
+        validatorStake[validator] -= amount;
+        emit Slashed(validator, amount, reason);
     }
 
     // Example protected functions
