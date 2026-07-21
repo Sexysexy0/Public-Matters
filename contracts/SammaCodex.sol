@@ -1,25 +1,58 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SammaCodex {
-    address public overseer;
-    uint256 public codexCount;
+import "@openzeppelin/contracts/access/AccessControl.sol";
 
-    struct SammaRule {
+contract SammaCodex is AccessControl {
+    bytes32 public constant OVERSEER_ROLE = keccak256("OVERSEER_ROLE");
+
+    struct Principle {
         uint256 id;
-        string principle;   // Sammā, Alignment, Harmony
+        string name;
         string description;
         uint256 timestamp;
+        bool active;
     }
 
-    mapping(uint256 => SammaRule) public rules;
-    event SammaRuleDeclared(uint256 indexed id, string principle, string description);
+    uint256 public principleCount;
+    mapping(uint256 => Principle) public principles;
 
-    constructor(address _overseer) { overseer = _overseer; }
-    modifier onlyOverseer() { require(msg.sender == overseer, "Not authorized"); _; }
+    event PrincipleDeclared(uint256 id, string name, string description);
+    event PrincipleRevoked(uint256 id, string reason);
 
-    function declareSammaRule(string calldata principle, string calldata description) external onlyOverseer {
-        codexCount++;
-        rules[codexCount] = SammaRule(codexCount, principle, description, block.timestamp);
-        emit SammaRuleDeclared(codexCount, principle, description);
+    constructor(address overseer) {
+        _grantRole(DEFAULT_ADMIN_ROLE, overseer);
+        _grantRole(OVERSEER_ROLE, overseer);
+    }
+
+    // Declare a new principle (e.g. "Academic Freedom", "Least Privilege")
+    function declarePrinciple(string calldata name, string calldata description)
+        external
+        onlyRole(OVERSEER_ROLE)
+    {
+        principleCount++;
+        principles[principleCount] = Principle({
+            id: principleCount,
+            name: name,
+            description: description,
+            timestamp: block.timestamp,
+            active: true
+        });
+        emit PrincipleDeclared(principleCount, name, description);
+    }
+
+    // Revoke principle if violated or outdated
+    function revokePrinciple(uint256 id, string calldata reason)
+        external
+        onlyRole(OVERSEER_ROLE)
+    {
+        require(principles[id].active, "Principle not active");
+        principles[id].active = false;
+        emit PrincipleRevoked(id, reason);
+    }
+
+    // Check if principle is active
+    function isActive(uint256 id) external view returns (bool) {
+        return principles[id].active;
     }
 }

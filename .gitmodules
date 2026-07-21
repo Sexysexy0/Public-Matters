@@ -19,3 +19,6 @@
 [submodule "upgrades/entropiq-design"]
 	path = upgrades/entropiq-design
 	url = https://github.com/mercicle/entropiq
+[submodule "lib/openzeppelin-contracts"]
+	path = lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
