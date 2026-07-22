@@ -2,55 +2,36 @@
 pragma solidity ^0.8.20;
 
 contract DamayStateMachine {
-    enum DamayPhase { None, Alert, Negotiation, Settlement, Recovery }
-    struct ExchangeStatus {
+    enum DamayPhase { Neutral, Solidarity, Alert, Conflict }
+
+    struct Exchange {
         DamayPhase phase;
-        uint256 assets;
-        uint256 liabilities;
-        bool insolvent;
+        uint256 timestamp;
     }
 
-    mapping(address => ExchangeStatus) public exchanges;
-    event DamayPhaseChanged(address indexed exchange, DamayPhase newPhase);
-    event DamayTriggered(address indexed exchange, string message);
+    mapping(address => Exchange) public exchanges;
 
-    modifier onlyInPhase(address exchange, DamayPhase required) {
-        require(exchanges[exchange].phase == required, "Invalid phase");
-        _;
+    event StateChanged(address indexed actor, DamayPhase phase);
+
+    /// ^|^e Simplified state check
+    function checkState(address actor) external view returns (bool) {
+        Exchange memory ex = exchanges[actor];
+        // Default to Neutral if not set
+        if (ex.timestamp == 0) {
+            return true;
+        }
+        return ex.phase != DamayPhase.Conflict;
     }
 
-    function triggerAlert(address exchange, uint256 assets, uint256 liabilities) external {
-        exchanges[exchange] = ExchangeStatus({
-            phase: DamayPhase.Alert,
-            assets: assets,
-            liabilities: liabilities,
-            insolvent: liabilities > assets
-        });
-        emit DamayPhaseChanged(exchange, DamayPhase.Alert);
-        emit DamayTriggered(exchange, "Alert triggered: insolvency suspected");
+    /// ^|^e Allow manual state setting for testing
+    function setState(address actor, DamayPhase newPhase) external {
+        exchanges[actor] = Exchange({phase: newPhase, timestamp: block.timestamp});
+        emit StateChanged(actor, newPhase);
     }
 
-    function startNegotiation(address exchange)
-        external
-        onlyInPhase(exchange, DamayPhase.Alert)
-    {
-        exchanges[exchange].phase = DamayPhase.Negotiation;
-        emit DamayPhaseChanged(exchange, DamayPhase.Negotiation);
-    }
-
-    function settle(address exchange)
-        external
-        onlyInPhase(exchange, DamayPhase.Negotiation)
-    {
-        exchanges[exchange].phase = DamayPhase.Settlement;
-        emit DamayPhaseChanged(exchange, DamayPhase.Settlement);
-    }
-
-    function recover(address exchange)
-        external
-        onlyInPhase(exchange, DamayPhase.Settlement)
-    {
-        exchanges[exchange].phase = DamayPhase.Recovery;
-        emit DamayPhaseChanged(exchange, DamayPhase.Recovery);
+    /// ^|^e Trigger Alert phase automatically (used by EmotionalAPR)
+    function triggerAlert(address actor) external {
+        exchanges[actor] = Exchange({phase: DamayPhase.Alert, timestamp: block.timestamp});
+        emit StateChanged(actor, DamayPhase.Alert);
     }
 }
