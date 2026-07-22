@@ -1,13 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-<<<<<<< HEAD
 contract ValidatorRegistry {
     struct Validator {
         address account;
         uint256 stake;
         uint256 reputation;
-=======
 /// @title ValidatorRegistry
 /// @notice Covenant contract to register and manage validators with stake
 contract ValidatorRegistry {
@@ -15,13 +13,11 @@ contract ValidatorRegistry {
 
     struct Validator {
         uint256 stake;
->>>>>>> 059fd20fd2a891bd9d23cd61757d16ad0f073b3c
         bool active;
     }
 
     mapping(address => Validator) public validators;
 
-<<<<<<< HEAD
     event ValidatorRegistered(address indexed account, uint256 stake);
     event ValidatorSlashed(address indexed account, uint256 amount, string reason);
     event ReputationUpdated(address indexed account, uint256 newReputation);
@@ -65,7 +61,6 @@ contract ValidatorRegistry {
 
     function isActive(address account) external view returns (bool) {
         return validators[account].active;
-=======
     event ValidatorRegistered(address indexed account, uint256 stake, bool active);
 
     modifier onlyContractor() {
@@ -87,6 +82,5 @@ contract ValidatorRegistry {
     /// @notice Fetch validator details
     function getValidator(address account) public view returns (Validator memory) {
         return validators[account];
->>>>>>> 059fd20fd2a891bd9d23cd61757d16ad0f073b3c
     }
 }
