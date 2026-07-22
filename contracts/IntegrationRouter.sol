@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+<<<<<<< HEAD
 import "./AccessControlCodex.sol";
 import "./DueProcessCodex.sol";
 import "./DamayStateMachine.sol";
@@ -53,5 +54,25 @@ contract IntegrationRouter {
         }
 
         return damay.checkState(actor);
+=======
+/// @title IntegrationRouter
+/// @notice Covenant contract to route governance and compliance flows
+contract IntegrationRouter {
+    address public sovereignContractor;
+
+    event RouteExecuted(string route, address executor);
+
+    modifier onlyContractor() {
+        require(msg.sender == sovereignContractor, "Error: Only Sovereign Contractor access.");
+        _;
+    }
+
+    constructor() {
+        sovereignContractor = msg.sender;
+    }
+
+    function executeRoute(string memory _route) public onlyContractor {
+        emit RouteExecuted(_route, msg.sender);
+>>>>>>> 059fd20fd2a891bd9d23cd61757d16ad0f073b3c
     }
 }
