@@ -3,6 +3,7 @@ pragma solidity ^0.8.20;
 
 import "forge-std/Test.sol";
 import "../contracts/InflationIndexedSavings.sol";
+import "@openzeppelin/contracts/mocks/ERC20Mock.sol";
 
 contract MockOracle is IInflationOracle {
     uint256 public rate;
@@ -17,19 +18,19 @@ contract MockOracle is IInflationOracle {
 contract InflationIndexedSavingsTest is Test {
     InflationIndexedSavings savings;
     MockOracle oracle;
-    IERC20 stable;
+    ERC20Mock stable;
 
     address user = address(0x123);
 
     function setUp() public {
         // deploy mock stablecoin
-        stable = IERC20(address(new ERC20Mock("MockUSD", "MUSD", user, 1_000_000 ether)));
+        stable = new ERC20Mock("MockUSD", "MUSD", user, 1_000_000 ether);
         oracle = new MockOracle();
         savings = new InflationIndexedSavings(address(stable), address(oracle));
 
         // approve contract
         vm.startPrank(user);
-        ERC20Mock(address(stable)).approve(address(savings), type(uint256).max);
+        stable.approve(address(savings), type(uint256).max);
         vm.stopPrank();
     }
 
