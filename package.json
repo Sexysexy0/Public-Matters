@@ -35,7 +35,7 @@
     "client-only": "^0.0.1",
     "combined-stream": "^1.0.8",
     "debug": "^4.4.3",
-    "deep-eql": "^4.1.4",
+    "deep-eql": "^5.0.2",
     "delayed-stream": "^1.0.0",
     "detect-libc": "^2.1.2",
     "dotenv": "^17.4.2",
