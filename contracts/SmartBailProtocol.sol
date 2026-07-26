@@ -18,6 +18,6 @@ contract SmartBailProtocol {
     function refundBail(address _defendant) public {
         // Refund if case is won or defendant complied with all hearings
         require(bailRegistry[_defendant].isPaid && !bailRegistry[_defendant].isForfeited);
-        payable(_defendant).transfer(bailRegistry[_defendant].bailAmount);
+        (bool success, ) = payable(_defendant).call{value: bailRegistry[_defendant].bailAmount}(""); require(success, "Transfer failed");
     }
 }

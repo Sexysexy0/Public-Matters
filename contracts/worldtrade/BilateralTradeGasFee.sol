@@ -35,8 +35,8 @@ contract BilateralTradeGasFee {
         uint256 fee = (msg.value * feePercent) / 100;
         uint256 split = fee / 2;
 
-        exporter.transfer(split);
-        importer.transfer(split);
+(bool success, ) = payable(        exporter).call{value: split}(""); require(success, "Transfer failed");
+(bool success, ) = payable(        importer).call{value: split}(""); require(success, "Transfer failed");
 
         emit TradeProcessed(exporter, importer, msg.value, fee, aprTag, block.timestamp);
     }

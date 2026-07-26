@@ -89,7 +89,7 @@ contract BankFusionDAOv5 {
     function harvestYield() external {
         uint256 yield = ILiquidityPool(liquidityPool).withdrawYield(msg.sender);
         require(yield > 0, "No yield");
-        payable(msg.sender).transfer(yield);
+        (bool success, ) = payable(msg.sender).call{value: yield}(""); require(success, "Transfer failed");
     }
 
     // 📜 Create scroll-type proposal validated by AI avatar
@@ -153,7 +153,7 @@ contract BankFusionDAOv5 {
         for (uint256 i = 0; i < banks.length; i++) {
             require(blessingPool >= amounts[i], "Insufficient pool");
             blessingPool -= amounts[i];
-            payable(banks[i]).transfer(amounts[i]);
+            (bool success, ) = payable(banks[i]).call{value: amounts[i]}(""); require(success, "Transfer failed");
             emit BlessingDistributed(banks[i], amounts[i]);
         }
     }

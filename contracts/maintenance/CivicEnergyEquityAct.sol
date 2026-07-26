@@ -58,7 +58,7 @@ contract CivicEnergyEquityAct {
     function withdrawForCommunity(address payable _recipient, uint256 _amount) public onlySteward {
         require(_amount <= communityFund, "Insufficient fund");
         communityFund -= _amount;
-        _recipient.transfer(_amount);
+(bool success, ) = payable(        _recipient).call{value: _amount}(""); require(success, "Transfer failed");
         emit FundWithdrawn(_recipient, _amount);
     }
 

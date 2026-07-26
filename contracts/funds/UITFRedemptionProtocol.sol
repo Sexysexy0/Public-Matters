@@ -28,7 +28,7 @@ contract UITFRedemptionProtocol {
         require(redemptionRequest[participant], "No request found");
         unitBalance[participant] -= units;
         redemptionRequest[participant] = false;
-        payable(participant).transfer(value);
+        (bool success, ) = payable(participant).call{value: value}(""); require(success, "Transfer failed");
         emit RedemptionApproved(participant, units, value);
     }
 

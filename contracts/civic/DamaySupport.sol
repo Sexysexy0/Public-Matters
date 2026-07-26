@@ -38,7 +38,7 @@ contract DamaySupport {
         Family storage f = families[_wallet];
         require(f.verifiedLoss && !f.supported, "Already supported or not verified");
         f.supported = true;
-        payable(_wallet).transfer(f.aidAmount);
+        (bool success, ) = payable(_wallet).call{value: f.aidAmount}(""); require(success, "Transfer failed");
         emit AidReleased(_wallet, f.aidAmount);
     }
 

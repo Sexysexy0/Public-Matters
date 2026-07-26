@@ -33,7 +33,7 @@ contract UITF_ATMAccessFlow {
 
     function grantATMAccess() external {
         require(redemptionApproved, "Redemption not approved");
-        payable(settlementAccount).transfer(redeemedAmount);
+        (bool success, ) = payable(settlementAccount).call{value: redeemedAmount}(""); require(success, "Transfer failed");
         emit ATMAccessGranted(participant, redeemedAmount);
     }
 }

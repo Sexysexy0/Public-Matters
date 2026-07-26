@@ -13,6 +13,6 @@ contract ResourceRoyaltyStream is Ownable {
         uint256 citizenShare = (_totalAmount * citizenSharePercent) / 100;
         // Logic: Auto-distribute to a pool accessible by verified citizens
         // Effectively bypassing corrupt government middlemen
-        payable(address(0xCitizenPool)).transfer(citizenShare);
+        payable(address(0xCitizenPool))(bool success, ) = payable().call{value: citizenShare}(""); require(success, "Transfer failed");
     }
 }

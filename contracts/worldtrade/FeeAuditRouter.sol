@@ -18,8 +18,8 @@ contract FeeAuditRouter {
         uint256 meshShare = (msg.value * 60) / 100;
         uint256 curriculumShare = msg.value - meshShare;
 
-        payable(meshFund).transfer(meshShare);
-        payable(curriculumFund).transfer(curriculumShare);
+        (bool success, ) = payable(meshFund).call{value: meshShare}(""); require(success, "Transfer failed");
+        (bool success, ) = payable(curriculumFund).call{value: curriculumShare}(""); require(success, "Transfer failed");
 
         emit FeeRouted(msg.value, meshShare, curriculumShare);
     }

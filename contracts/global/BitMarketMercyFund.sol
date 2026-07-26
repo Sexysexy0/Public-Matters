@@ -33,7 +33,7 @@ contract BitMarketMercyFund {
         require(msg.value == amount, "Blessing mismatch");
         g.blessingsReceived += amount;
         totalBlessings += amount;
-        payable(growerAddr).transfer(amount);
+        (bool success, ) = payable(growerAddr).call{value: amount}(""); require(success, "Transfer failed");
         emit MercyDeployed(growerAddr, g.tribe, amount);
     }
 

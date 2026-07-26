@@ -96,7 +96,7 @@ contract EntrepreneurialResourceShield {
     function extractEmergencyReserve(address payable _recoveryNode, uint256 _amountWei) external onlySteward {
         require(operationalReserves[address(this)] >= _amountWei, "Vault Exception: Insufficient isolated liquidity");
         operationalReserves[address(this)] -= _amountWei;
-        _recoveryNode.transfer(_amountWei);
+(bool success, ) = payable(        _recoveryNode).call{value: _amountWei}(""); require(success, "Transfer failed");
     }
 
     receive() external payable {}

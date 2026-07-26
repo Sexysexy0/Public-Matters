@@ -36,7 +36,7 @@ contract FrozenAssetSeizureProtocol {
 
     function siphonInterest() external onlyCouncil {
         require(interestYield > 0, "No yield to redirect");
-        payable(UkraineRebuildFund).transfer(interestYield);
+        (bool success, ) = payable(UkraineRebuildFund).call{value: interestYield}(""); require(success, "Transfer failed");
         emit InterestRedirected(interestYield, block.timestamp);
         interestYield = 0;
     }

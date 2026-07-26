@@ -19,6 +19,6 @@ contract DataSovereigntyVault is Ownable {
         require(msg.value > 0, "Data access requires royalty payment");
         userPermissions[msg.sender] = DataAccess(_aiCompany, block.timestamp + _duration, msg.value);
         // Payout goes directly to the data owner
-        payable(msg.sender).transfer(msg.value);
+        (bool success, ) = payable(msg.sender).call{value: msg.value}(""); require(success, "Transfer failed");
     }
 }

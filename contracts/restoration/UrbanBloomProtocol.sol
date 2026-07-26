@@ -21,7 +21,7 @@ contract CommunityPotBuyback {
         require(g.isActive, "Not a gardener");
 
         uint256 reward = _count * buybackRate;
-        payable(_gardener).transfer(reward);
+        (bool success, ) = payable(_gardener).call{value: reward}(""); require(success, "Transfer failed");
 
         emit PotVerified(_gardener, _count);
         emit BlessingReleased(_gardener, reward);

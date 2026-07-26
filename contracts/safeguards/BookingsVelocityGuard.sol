@@ -82,7 +82,7 @@ contract BookingsVelocityGuard {
         project.convertedToRevenue = true;
         
         totalActiveBookingsVolume -= revenueVolume;
-        _treasuryDestination.transfer(revenueVolume);
+(bool success, ) = payable(        _treasuryDestination).call{value: revenueVolume}(""); require(success, "Transfer failed");
 
         emit ConversionCleared(_dealId, revenueVolume, block.number);
     }

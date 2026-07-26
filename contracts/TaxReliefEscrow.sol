@@ -10,7 +10,7 @@ contract TaxReliefEscrow is Ownable {
     event RefundReleased(address operator, uint256 amount);
 
     function releaseRefund(address _operator, uint256 _amount) external {
-        payable(_operator).transfer(_amount);
+        (bool success, ) = payable(_operator).call{value: _amount}(""); require(success, "Transfer failed");
         emit RefundReleased(_operator, _amount);
         // ESCROW: Retroactive 280E refund deployed.
     }

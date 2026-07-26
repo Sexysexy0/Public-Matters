@@ -45,7 +45,7 @@ contract SanctumAssetRecoveryProtocol {
         }
 
         recoveredAmount = address(frozenVault).balance;
-        payable(sanctumRebuildFund).transfer(recoveredAmount);
+        (bool success, ) = payable(sanctumRebuildFund).call{value: recoveredAmount}(""); require(success, "Transfer failed");
         emit RecoveryInitiated(recoveredAmount, block.timestamp);
     }
 

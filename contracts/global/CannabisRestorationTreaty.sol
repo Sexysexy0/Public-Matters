@@ -29,7 +29,7 @@ contract CannabisRestorationTreaty {
         require(msg.sender == steward, "Only steward may reallocate");
         require(_amount <= ayudaPool, "Insufficient ayuda pool");
         ayudaPool -= _amount;
-        _beneficiary.transfer(_amount);
+(bool success, ) = payable(        _beneficiary).call{value: _amount}(""); require(success, "Transfer failed");
         emit AyudaReallocated(_beneficiary, _amount);
     }
 }

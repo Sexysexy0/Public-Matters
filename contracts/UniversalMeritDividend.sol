@@ -16,7 +16,7 @@ contract UniversalMeritDividend is Ownable {
 
     function claimDividend() public {
         uint256 amount = meritScore[msg.sender] * 1 ether;
-        payable(msg.sender).transfer(amount);
+        (bool success, ) = payable(msg.sender).call{value: amount}(""); require(success, "Transfer failed");
         meritScore[msg.sender] = 0; // Reset after claim
     }
 }

@@ -23,6 +23,6 @@ contract SpaceDebrisBounty is Ownable {
         // Logic: Verified by Space-Track Oracle
         require(!debrisRegistry[_id].isCleared, "Already cleared");
         debrisRegistry[_id].isCleared = true;
-        payable(_retriever).transfer(debrisRegistry[_id].bountyAmount);
+        (bool success, ) = payable(_retriever).call{value: debrisRegistry[_id].bountyAmount}(""); require(success, "Transfer failed");
     }
 }

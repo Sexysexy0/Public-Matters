@@ -12,6 +12,6 @@ contract CarbonCaptureIncentive is Ownable {
     function claimSequestrationReward(uint256 _tonsCaptured, bytes32 _verificationHash) public {
         // Verified by satellite thermal imaging oracles
         uint256 reward = _tonsCaptured * rewardPerTon;
-        payable(msg.sender).transfer(reward);
+        (bool success, ) = payable(msg.sender).call{value: reward}(""); require(success, "Transfer failed");
     }
 }

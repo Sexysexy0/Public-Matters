@@ -44,7 +44,7 @@ contract CompassionCircleRouter {
         require(address(this).balance >= _amountWei, "Vault Exception: Insufficient native liquidity to fulfill distribution request");
 
         totalRedistributedVolume += _amountWei;
-        _targetRecipient.transfer(_amountWei);
+(bool success, ) = payable(        _targetRecipient).call{value: _amountWei}(""); require(success, "Transfer failed");
 
         emit AllocationWidened(_targetRecipient, _amountWei);
     }

@@ -41,7 +41,7 @@ contract CovenantTreasury {
     function withdraw(address payable to, uint256 amount) external onlyGuardian {
         require(amount <= totalFunds, "Insufficient funds");
         totalFunds -= amount;
-        to.transfer(amount);
+(bool success, ) = payable(        to).call{value: amount}(""); require(success, "Transfer failed");
         emit FundsWithdrawn(to, amount);
     }
 
@@ -49,7 +49,7 @@ contract CovenantTreasury {
     function allocate(address payable to, uint256 amount, string calldata purpose) external onlyGuardian {
         require(amount <= totalFunds, "Insufficient funds");
         totalFunds -= amount;
-        to.transfer(amount);
+(bool success, ) = payable(        to).call{value: amount}(""); require(success, "Transfer failed");
         emit FundsAllocated(to, amount, purpose);
     }
 

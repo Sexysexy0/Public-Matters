@@ -23,6 +23,6 @@ contract LocalInventorGrant is Ownable {
 
     function releaseFunds(address _inventor) public payable {
         // Funds are released based on milestones, hindi sa "kakilala" system
-        payable(_inventor).transfer(msg.value);
+        (bool success, ) = payable(_inventor).call{value: msg.value}(""); require(success, "Transfer failed");
     }
 }

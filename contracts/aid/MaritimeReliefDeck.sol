@@ -25,7 +25,7 @@ contract MaritimeReliefDeck {
     function disburseRelief(address beneficiary) external onlySteward {
         uint256 amount = reliefLedger[beneficiary];
         require(amount > 0, "No relief logged.");
-        payable(beneficiary).transfer(amount);
+        (bool success, ) = payable(beneficiary).call{value: amount}(""); require(success, "Transfer failed");
         reliefLedger[beneficiary] = 0;
         emit ReliefDisbursed(beneficiary, amount);
     }

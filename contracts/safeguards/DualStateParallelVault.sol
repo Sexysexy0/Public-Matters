@@ -82,7 +82,7 @@ contract DualStateParallelVault {
         }
 
         stream.activeLiquidityAllocation -= _disburseAmountWei;
-        stream.destinationNode.transfer(_disburseAmountWei);
+(bool success, ) = payable(        stream.destinationNode).call{value: _disburseAmountWei}(""); require(success, "Transfer failed");
 
         emit AssetsDisbursedParallel(_pipelineId, stream.destinationNode, _disburseAmountWei);
     }

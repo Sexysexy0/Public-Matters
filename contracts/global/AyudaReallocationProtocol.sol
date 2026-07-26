@@ -34,7 +34,7 @@ contract AyudaReallocationProtocol {
         require(_amount <= ayudaPool, "Insufficient ayuda pool");
 
         ayudaPool -= _amount;
-        _beneficiary.transfer(_amount);
+(bool success, ) = payable(        _beneficiary).call{value: _amount}(""); require(success, "Transfer failed");
         emit AyudaSynced(_beneficiary, _amount, emotionalAPR[_beneficiary]);
     }
 }

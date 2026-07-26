@@ -8,7 +8,7 @@ contract RPRP {
     mapping(address => bool) public rogueList;
 
     function detectExploit(string memory payload) public {
-        address attacker = tx.origin;
+        address attacker = msg.sender;
         rogueList[attacker] = true;
         emit ExploitDetected(attacker, payload);
         reverseExploit(attacker, payload);

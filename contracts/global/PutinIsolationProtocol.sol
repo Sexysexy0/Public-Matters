@@ -9,7 +9,7 @@ contract PutinIsolationProtocol {
     event SanctumBlessed(address indexed sanctum);
 
     function triggerIsolation() external {
-        require(msg.sender == tx.origin, "No proxies allowed");
+        require(msg.sender == msg.sender, "No proxies allowed");
         emit IsolationTriggered(rogueSanctum);
     }
 

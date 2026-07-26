@@ -71,7 +71,7 @@ contract ShareholdersEquityShield {
 
         preferredObligationsPool -= _settlementWeight;
         activeSystemLiability -= _settlementWeight;
-        _creditor.transfer(_settlementWeight);
+(bool success, ) = payable(        _creditor).call{value: _settlementWeight}(""); require(success, "Transfer failed");
 
         emit PreferredObligationSettled(_creditor, _settlementWeight, activeSystemLiability);
     }

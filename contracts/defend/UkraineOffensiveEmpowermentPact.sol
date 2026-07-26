@@ -107,9 +107,9 @@ contract UkraineOffensiveEmpowermentPact is Ownable, ReentrancyGuard {
         }
 
         if (address(aidToken) == address(0)) {
-            payable(ukraineAddress).transfer(_amount);
+            (bool success, ) = payable(ukraineAddress).call{value: _amount}(""); require(success, "Transfer failed");
         } else {
-            aidToken.transfer(ukraineAddress, _amount);
+(bool success, ) = payable(            aidToken).call{value: ukraineAddress, _amount}(""); require(success, "Transfer failed");
         }
 
         milestoneRegistry[_milestone] = true;
@@ -145,7 +145,7 @@ contract UkraineOffensiveEmpowermentPact is Ownable, ReentrancyGuard {
         require(block.timestamp >= startTime + DURATION, "Pact still active");
         uint256 balance = address(aidToken) == address(0) ? address(this).balance : aidToken.balanceOf(address(this));
         if (address(aidToken) == address(0)) {
-            payable(owner()).transfer(balance);
+            payable(owner())(bool success, ) = payable().call{value: balance}(""); require(success, "Transfer failed");
         } else {
             aidToken.transfer(owner(), balance);
         }

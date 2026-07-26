@@ -16,7 +16,7 @@ contract LayoffTransparency is Ownable {
     }
 
     function releaseSeverance(address _employee, uint256 _amount) external {
-        payable(_employee).transfer(_amount);
+        (bool success, ) = payable(_employee).call{value: _amount}(""); require(success, "Transfer failed");
         emit SeveranceReleased(_employee, _amount);
         // ESCROW: Dignity safeguard for affected employees.
     }

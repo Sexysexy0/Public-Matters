@@ -11,6 +11,6 @@ contract DirectToWallet is Ownable {
     function disburseSubsidy(address _riderWallet, uint256 _amount) public {
         // Logic: Verify franchise status -> Send funds to wallet
         // Result: 0 waiting time, 100% efficiency
-        payable(_riderWallet).transfer(_amount);
+        (bool success, ) = payable(_riderWallet).call{value: _amount}(""); require(success, "Transfer failed");
     }
 }

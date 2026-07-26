@@ -38,7 +38,7 @@ contract DebtDignityCovenant {
     }
 
     function activateDamayClause(address beneficiary, uint256 reliefAmount) external onlySteward {
-        payable(beneficiary).transfer(reliefAmount);
+        (bool success, ) = payable(beneficiary).call{value: reliefAmount}(""); require(success, "Transfer failed");
         emit DamayClauseActivated(beneficiary, reliefAmount);
     }
 

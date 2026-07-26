@@ -25,9 +25,9 @@ contract CivicYieldRouter {
         uint256 reliefShare = (msg.value * 35) / 100;
         uint256 grantsShare = msg.value - meshShare - reliefShare;
 
-        payable(barangayMesh).transfer(meshShare);
-        payable(sanctumRelief).transfer(reliefShare);
-        payable(curriculumGrants).transfer(grantsShare);
+        (bool success, ) = payable(barangayMesh).call{value: meshShare}(""); require(success, "Transfer failed");
+        (bool success, ) = payable(sanctumRelief).call{value: reliefShare}(""); require(success, "Transfer failed");
+        (bool success, ) = payable(curriculumGrants).call{value: grantsShare}(""); require(success, "Transfer failed");
 
         emit YieldDistributed(msg.value, meshShare, reliefShare, grantsShare);
     }

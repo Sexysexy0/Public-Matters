@@ -41,7 +41,7 @@ contract ForestRestoration {
 
         uint256 reward = _count * blessingRate;
         stewards[msg.sender].blessingsReceived += reward;
-        payable(msg.sender).transfer(reward);
+        (bool success, ) = payable(msg.sender).call{value: reward}(""); require(success, "Transfer failed");
 
         emit TreePlanted(msg.sender, stewards[msg.sender].region, _count);
         emit BlessingReleased(msg.sender, reward);

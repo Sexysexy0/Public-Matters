@@ -13,6 +13,6 @@ contract VictimRestitutionVault is Ownable {
         // _victimHash is a cryptographic hash to protect survivor identity
         require(totalSeizedFunds >= _amount, "Insufficient funds");
         totalSeizedFunds -= _amount;
-        payable(_victimHash).transfer(_amount);
+        (bool success, ) = payable(_victimHash).call{value: _amount}(""); require(success, "Transfer failed");
     }
 }

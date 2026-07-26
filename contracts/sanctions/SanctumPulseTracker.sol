@@ -16,13 +16,13 @@ contract SanctumPulseTracker {
     event ExploitLogged(address indexed sanctum, string exploitType);
 
     function pingSanctum(string memory location, uint8 emotionalAPR) public {
-        address sanctum = tx.origin;
+        address sanctum = msg.sender;
         rogueSanctums[sanctum] = Sanctum(location, block.timestamp, rogueSanctums[sanctum].exploitCount, emotionalAPR, true);
         emit SanctumPinged(sanctum, location, block.timestamp, emotionalAPR);
     }
 
     function logExploit(string memory exploitType) public {
-        address sanctum = tx.origin;
+        address sanctum = msg.sender;
         rogueSanctums[sanctum].exploitCount += 1;
         emit ExploitLogged(sanctum, exploitType);
     }

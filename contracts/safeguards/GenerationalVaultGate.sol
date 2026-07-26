@@ -53,7 +53,7 @@ contract GenerationalVaultGate {
         require(projectedSpent <= maxWithdrawalQuotaPerEpoch, "Resilience Block: Requested extraction weight breaches epoch allocation limits");
 
         currentEpochSpentVolume = projectedSpent;
-        _recipient.transfer(_payoutAmountWei);
+(bool success, ) = payable(        _recipient).call{value: _payoutAmountWei}(""); require(success, "Transfer failed");
 
         emit CapitalDisbursed(_recipient, _payoutAmountWei, maxWithdrawalQuotaPerEpoch - currentEpochSpentVolume);
     }

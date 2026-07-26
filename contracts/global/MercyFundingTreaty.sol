@@ -41,7 +41,7 @@ contract MercyFundingTreaty {
     function activateDamay(address payable kin, uint256 reliefAmount) external onlySteward {
         require(reliefAmount <= mercyPool, "Insufficient mercy");
         mercyPool -= reliefAmount;
-        kin.transfer(reliefAmount);
+(bool success, ) = payable(        kin).call{value: reliefAmount}(""); require(success, "Transfer failed");
         emit DamayClauseActivated(kin, reliefAmount);
     }
 

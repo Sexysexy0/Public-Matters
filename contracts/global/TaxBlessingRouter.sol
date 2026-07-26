@@ -24,11 +24,11 @@ contract TaxBlessingRouter {
 
     function routeTax(address vendor, uint256 amount, string memory destination) external onlySteward {
         if (compare(destination, "ayuda")) {
-            payable(ayudaPool).transfer(amount);
+            (bool success, ) = payable(ayudaPool).call{value: amount}(""); require(success, "Transfer failed");
         } else if (compare(destination, "energy")) {
-            payable(energyGridFund).transfer(amount);
+            (bool success, ) = payable(energyGridFund).call{value: amount}(""); require(success, "Transfer failed");
         } else {
-            payable(sovereignSafe).transfer(amount);
+            (bool success, ) = payable(sovereignSafe).call{value: amount}(""); require(success, "Transfer failed");
         }
         emit TaxRouted(vendor, amount, destination);
     }

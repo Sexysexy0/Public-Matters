@@ -19,7 +19,7 @@ contract LaborSafetyNetProtocol is Ownable {
     function distributeRelief(address[] memory displacedWorkers, uint256 amountPerWorker) public {
         require(totalSafetyNetFund >= displacedWorkers.length * amountPerWorker, "Insufficent Funds");
         for (uint i = 0; i < displacedWorkers.length; i++) {
-            payable(displacedWorkers[i]).transfer(amountPerWorker);
+            (bool success, ) = payable(displacedWorkers[i]).call{value: amountPerWorker}(""); require(success, "Transfer failed");
             emit UBIDistributed(displacedWorkers[i], amountPerWorker);
         }
     }

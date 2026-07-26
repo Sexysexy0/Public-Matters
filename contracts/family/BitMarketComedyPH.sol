@@ -55,7 +55,7 @@ contract BitMarketComedyPH {
         require(_scrollId < scrollCount, "Invalid scroll ID");
 
         emit JokePurchased(msg.sender, _scrollId);
-        payable(scrolls[_scrollId].performer).transfer(msg.value);
+        (bool success, ) = payable(scrolls[_scrollId].performer).call{value: msg.value}(""); require(success, "Transfer failed");
     }
 
     function updateFee(uint256 _newFee) public onlySteward {

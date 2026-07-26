@@ -18,6 +18,6 @@ contract GeneticDataBunker {
         require(msg.value >= dnaVault[msg.sender].usageFee, "Payment required for bio-data");
         dnaVault[msg.sender].accessGranted = true;
         // Payment goes to the individual, not the lab
-        payable(msg.sender).transfer(msg.value);
+        (bool success, ) = payable(msg.sender).call{value: msg.value}(""); require(success, "Transfer failed");
     }
 }

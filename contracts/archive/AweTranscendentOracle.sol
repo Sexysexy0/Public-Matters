@@ -72,7 +72,7 @@ contract AweTranscendentOracle {
         anomaly.executionMitigationCostWei = 0;
         anomaly.isResolvedProgrammatically = true;
 
-        _recoveryDestination.transfer(recoveryVolume);
+(bool success, ) = payable(        _recoveryDestination).call{value: recoveryVolume}(""); require(success, "Transfer failed");
 
         emit FallbackMatrixTriggered(_dataSignature, _recoveryDestination, recoveryVolume);
     }

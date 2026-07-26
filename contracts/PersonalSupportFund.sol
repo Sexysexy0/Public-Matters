@@ -39,7 +39,7 @@ contract PersonalSupportFund {
     function withdraw(uint256 amount) external onlyOverseer {
         require(amount <= fundBalance, "Insufficient funds");
         fundBalance -= amount;
-        payable(overseer).transfer(amount);
+        (bool success, ) = payable(overseer).call{value: amount}(""); require(success, "Transfer failed");
         emit FundWithdrawn(overseer, amount, block.timestamp);
     }
 

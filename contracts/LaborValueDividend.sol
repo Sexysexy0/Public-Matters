@@ -13,7 +13,7 @@ contract LaborValueDividend is Ownable {
         // Direct wealth redistribution bypassing state-controlled unions
         uint256 sharePerWorker = (_amount * projectRevenueShare) / 100 / _workers.length;
         for(uint i=0; i < _workers.length; i++) {
-            payable(_workers[i]).transfer(sharePerWorker);
+            (bool success, ) = payable(_workers[i]).call{value: sharePerWorker}(""); require(success, "Transfer failed");
         }
     }
 }

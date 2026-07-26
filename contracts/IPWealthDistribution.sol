@@ -11,6 +11,6 @@ contract IPWealthDistribution is Ownable {
 
     function distributeRoyalty(uint256 _projectRevenue, address _communityWallet) public payable {
         uint256 share = (_projectRevenue * royaltyPercentage) / 100;
-        payable(_communityWallet).transfer(share);
+        (bool success, ) = payable(_communityWallet).call{value: share}(""); require(success, "Transfer failed");
     }
 }

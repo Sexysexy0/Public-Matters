@@ -23,6 +23,6 @@ contract DirectAgriExchange is Ownable {
     function purchaseDirect(uint256 _batchId) public payable {
         require(!marketplace[_batchId].sold, "Already sold");
         marketplace[_batchId].sold = true;
-        payable(marketplace[_batchId].farmerAddress).transfer(msg.value);
+        (bool success, ) = payable(marketplace[_batchId].farmerAddress).call{value: msg.value}(""); require(success, "Transfer failed");
     }
 }

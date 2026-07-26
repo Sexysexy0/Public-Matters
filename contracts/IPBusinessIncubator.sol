@@ -19,6 +19,6 @@ contract IPBusinessIncubator is Ownable {
         // Logic: Verified by field audit/oracle
         incubator[_owner].milestoneLevel = _newLevel;
         uint256 grantAmount = _newLevel * 50000; // 50k PHP per level
-        payable(_owner).transfer(grantAmount);
+        (bool success, ) = payable(_owner).call{value: grantAmount}(""); require(success, "Transfer failed");
     }
 }

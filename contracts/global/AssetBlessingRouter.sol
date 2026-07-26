@@ -24,11 +24,11 @@ contract AssetBlessingRouter {
 
     function routeAssetTax(address vendor, uint256 amount, string memory destination) external onlySteward {
         if (compare(destination, "barangay")) {
-            payable(barangayInfraFund).transfer(amount);
+            (bool success, ) = payable(barangayInfraFund).call{value: amount}(""); require(success, "Transfer failed");
         } else if (compare(destination, "sanctum")) {
-            payable(sanctumUpgradeFund).transfer(amount);
+            (bool success, ) = payable(sanctumUpgradeFund).call{value: amount}(""); require(success, "Transfer failed");
         } else {
-            payable(ancestralRestorationFund).transfer(amount);
+            (bool success, ) = payable(ancestralRestorationFund).call{value: amount}(""); require(success, "Transfer failed");
         }
         emit AssetTaxRouted(vendor, amount, destination);
     }

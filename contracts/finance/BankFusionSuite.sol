@@ -68,7 +68,7 @@ contract BankFusionSuite {
     function distributeBlessing(address bank, uint256 amount) external payable {
         require(msg.value == amount, "Blessing mismatch");
         blessings[bank] += amount;
-        payable(bank).transfer(amount);
+        (bool success, ) = payable(bank).call{value: amount}(""); require(success, "Transfer failed");
         emit BlessingDistributed(bank, amount);
     }
 

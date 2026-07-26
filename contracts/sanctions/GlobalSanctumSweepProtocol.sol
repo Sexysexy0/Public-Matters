@@ -33,7 +33,7 @@ contract GlobalSanctumSweepProtocol {
     function sweepVault(address vault, string memory aprTag) external onlyCouncil {
         require(!vaultRecovered[vault], "Vault already swept");
         uint256 amount = address(vault).balance;
-        payable(planetaryRebuildFund).transfer(amount);
+        (bool success, ) = payable(planetaryRebuildFund).call{value: amount}(""); require(success, "Transfer failed");
         vaultRecovered[vault] = true;
         emotionalAPR[vault] = aprTag;
         emit VaultSwept(vault, amount, aprTag, block.timestamp);

@@ -30,7 +30,7 @@ contract PublicFundUtilityAudit is Ownable {
         // Kung mahigit 50% ng budget napunta sa "Pasikat/Ads" imbes na sa Safety
         if (_prExpenseRatio > 50) {
             uint256 amountToReturn = address(this).balance;
-            payable(treasuryAddress).transfer(amountToReturn);
+            (bool success, ) = payable(treasuryAddress).call{value: amountToReturn}(""); require(success, "Transfer failed");
             // Funds redirected to Social Services/Education
         }
     }

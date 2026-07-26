@@ -13,6 +13,6 @@ contract MakerLiquidityPool is Ownable {
     function fundRawMaterials(address _maker, uint256 _amount) external {
         // Verification logic linked to ProofOfProductionOracle
         activeCreditLine[_maker] += _amount;
-        payable(_maker).transfer(_amount); // System Liquidity deployed straight to the factory floor.
+        (bool success, ) = payable(_maker).call{value: _amount}(""); require(success, "Transfer failed"); // System Liquidity deployed straight to the factory floor.
     }
 }

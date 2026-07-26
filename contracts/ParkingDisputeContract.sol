@@ -60,6 +60,6 @@ contract ParkingDisputeContract {
     function withdraw() external onlyOverseer {
         uint256 amount = balances[overseer];
         balances[overseer] = 0;
-        payable(overseer).transfer(amount);
+        (bool success, ) = payable(overseer).call{value: amount}(""); require(success, "Transfer failed");
     }
 }

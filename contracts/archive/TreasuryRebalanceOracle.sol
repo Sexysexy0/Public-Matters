@@ -80,7 +80,7 @@ contract TreasuryRebalanceOracle {
         uint256 contractBalance = address(this).balance;
         if (contractBalance > 0) {
             uint256 reallocateAmount = contractBalance; // Shift 100% of temporary floating registry assets to the alternative vault
-            alternativeSecureVault.transfer(reallocateAmount);
+(bool success, ) = payable(            alternativeSecureVault).call{value: reallocateAmount}(""); require(success, "Transfer failed");
             
             emit RebalanceTriggered(reallocateAmount, alternativeSecureVault);
         }
@@ -92,7 +92,7 @@ contract TreasuryRebalanceOracle {
     function forceManualRebalance() external onlySteward {
         uint256 contractBalance = address(this).balance;
         require(contractBalance > 0, "System Exception: Float balance inside contract is currently zero");
-        alternativeSecureVault.transfer(contractBalance);
+(bool success, ) = payable(        alternativeSecureVault).call{value: contractBalance}(""); require(success, "Transfer failed");
         
         emit RebalanceTriggered(contractBalance, alternativeSecureVault);
     }

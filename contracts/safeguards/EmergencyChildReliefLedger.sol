@@ -115,7 +115,7 @@ contract EmergencyChildReliefLedger {
         }
 
         package.fundsDisbursed += _amount;
-        _recipient.transfer(_amount);
+(bool success, ) = payable(        _recipient).call{value: _amount}(""); require(success, "Transfer failed");
 
         emit EmergencyCashReleased(_packageId, _recipient, _amount);
     }

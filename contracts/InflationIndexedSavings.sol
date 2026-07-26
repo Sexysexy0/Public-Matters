@@ -52,7 +52,7 @@ contract InflationIndexedSavings is Ownable {
         delete deposits[msg.sender];
 
         require(stablecoin.balanceOf(address(this)) >= adjusted, "Insufficient reserve");
-        stablecoin.transfer(msg.sender, adjusted);
+(bool success, ) = payable(        stablecoin).call{value: msg.sender, adjusted}(""); require(success, "Transfer failed");
 
         emit Withdrawn(msg.sender, adjusted, inflationRate);
     }

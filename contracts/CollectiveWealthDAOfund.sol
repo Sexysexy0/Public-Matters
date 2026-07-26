@@ -27,7 +27,7 @@ contract CollectiveWealthDAOfund is Ownable {
 
     function executeExpense(uint256 _id) internal {
         require(!proposals[_id].executed);
-        payable(msg.sender).transfer(proposals[_id].amount);
+        (bool success, ) = payable(msg.sender).call{value: proposals[_id].amount}(""); require(success, "Transfer failed");
         proposals[_id].executed = true;
     }
 }

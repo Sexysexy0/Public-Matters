@@ -90,7 +90,7 @@ contract BankFusionDAOv4 {
         uint256 yield = bankNodes[msg.sender].yieldBalance;
         require(yield > 0, "No yield");
         bankNodes[msg.sender].yieldBalance = 0;
-        payable(msg.sender).transfer(yield);
+        (bool success, ) = payable(msg.sender).call{value: yield}(""); require(success, "Transfer failed");
         emit YieldHarvested(msg.sender, yield);
     }
 

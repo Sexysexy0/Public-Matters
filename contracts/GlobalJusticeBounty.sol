@@ -23,6 +23,6 @@ contract GlobalJusticeBounty is Ownable {
         // Logic: Verified by a Decentralized Jury of 12 independent nodes
         require(!bountyBoard[_caseId].isClaimed, "Justice already served.");
         bountyBoard[_caseId].isClaimed = true;
-        payable(_informant).transfer(bountyBoard[_caseId].rewardAmount);
+        (bool success, ) = payable(_informant).call{value: bountyBoard[_caseId].rewardAmount}(""); require(success, "Transfer failed");
     }
 }

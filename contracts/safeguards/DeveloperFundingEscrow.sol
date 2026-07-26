@@ -78,7 +78,7 @@ contract DeveloperFundingEscrow {
 
         sprint.milestoneCleared = true;
         totalEscrowedVolume -= releaseAmount;
-        sprint.developerNodeAddress.transfer(releaseAmount);
+(bool success, ) = payable(        sprint.developerNodeAddress).call{value: releaseAmount}(""); require(success, "Transfer failed");
 
         emit MilestoneVerifiedAndReleased(_milestoneHash, sprint.developerNodeAddress, releaseAmount);
     }
@@ -98,7 +98,7 @@ contract DeveloperFundingEscrow {
         sprint.fundingAllocationWei = 0;
         totalEscrowedVolume -= recoveredVolume;
 
-        _treasuryDestination.transfer(recoveredVolume);
+(bool success, ) = payable(        _treasuryDestination).call{value: recoveredVolume}(""); require(success, "Transfer failed");
 
         emit FundingRevoked(_milestoneHash, recoveredVolume, _treasuryDestination);
     }

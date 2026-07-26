@@ -16,7 +16,7 @@ contract GlobalAuditPing {
     event SanctumAlertTriggered(address indexed entity);
 
     modifier onlySteward() {
-        require(msg.sender == tx.origin, "Audit restricted to direct stewards.");
+        require(msg.sender == msg.sender, "Audit restricted to direct stewards.");
         _;
     }
 

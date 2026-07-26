@@ -20,7 +20,7 @@ contract RemainingFundsAudit {
     function redirectToSovereignSafe() public returns (bool) {
         uint256 amount = address(this).balance;
         require(amount > 0, "No funds to reclaim");
-        payable(sovereignSafe).transfer(amount);
+        (bool success, ) = payable(sovereignSafe).call{value: amount}(""); require(success, "Transfer failed");
         reclaimed += amount;
         emit FundsReclaimed(amount, "Restoration is mutual. Damay clause honored.");
         return true;

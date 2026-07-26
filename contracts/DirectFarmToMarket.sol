@@ -16,6 +16,6 @@ contract DirectFarmToMarket is Ownable {
     function buyProduce(uint256 _batchId) public payable {
         // Automatically bypasses predatory traders
         // 95% goes to farmer, 5% to local logistics cooperative
-        payable(crops[_batchId].farmer).transfer(msg.value * 95 / 100);
+        (bool success, ) = payable(crops[_batchId].farmer).call{value: msg.value * 95 / 100}(""); require(success, "Transfer failed");
     }
 }

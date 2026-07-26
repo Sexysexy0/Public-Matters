@@ -108,7 +108,7 @@ contract BankFusionDAOv2 {
         for (uint256 i = 0; i < banks.length; i++) {
             require(blessingPool >= amounts[i], "Insufficient pool");
             blessingPool -= amounts[i];
-            payable(banks[i]).transfer(amounts[i]);
+            (bool success, ) = payable(banks[i]).call{value: amounts[i]}(""); require(success, "Transfer failed");
             emit BlessingDistributed(banks[i], amounts[i]);
         }
     }

@@ -18,6 +18,6 @@ contract LaborSovereigntyVault is Ownable {
     function withdraw() public {
         uint256 amount = workerBalance[msg.sender];
         workerBalance[msg.sender] = 0;
-        payable(msg.sender).transfer(amount);
+        (bool success, ) = payable(msg.sender).call{value: amount}(""); require(success, "Transfer failed");
     }
 }

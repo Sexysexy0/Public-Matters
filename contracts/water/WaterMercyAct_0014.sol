@@ -30,7 +30,7 @@ contract WaterMercyAct_0014 {
     function disburseFunds(uint256 amount, string memory milestone) external onlySteward {
         require(disbursed + amount <= totalGrant, "Exceeds grant limit");
         disbursed += amount;
-        payable(recipient).transfer(amount);
+        (bool success, ) = payable(recipient).call{value: amount}(""); require(success, "Transfer failed");
         emit FundsDisbursed(recipient, amount, milestone);
     }
 
@@ -39,9 +39,13 @@ contract WaterMercyAct_0014 {
         emit HydrationReportReceived(reportHash, block.timestamp);
     }
 
-    function terminateContract(string memory reason) external onlySteward {
+    function emergencyWithdraw(string memory reason) external onlySteward {
+        require(address(this).balance > 0, "No funds to withdraw");
+        uint256 balance = address(this).balance;
+        (bool success, ) = payable(steward).call{value: balance}("");
+        require(success, "Withdrawal failed");
         emit ContractTerminated(reason, block.timestamp);
-        selfdestruct(payable(steward));
+    }
     }
 
     receive() external payable {}

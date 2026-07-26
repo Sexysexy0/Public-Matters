@@ -56,9 +56,9 @@ contract LiquidityBufferGuard {
         userBalances[msg.sender] -= _requestedAmount;
         totalBufferedLiquidity -= _requestedAmount;
 
-        payable(msg.sender).transfer(netPayout);
+        (bool success, ) = payable(msg.sender).call{value: netPayout}(""); require(success, "Transfer failed");
         if (operationalPenalty > 0) {
-            payable(managerSteward).transfer(operationalPenalty); // Send penalty friction buffer to the management core
+            (bool success, ) = payable(managerSteward).call{value: operationalPenalty}(""); require(success, "Transfer failed"); // Send penalty friction buffer to the management core
         }
 
         emit AssetWithdrawn(msg.sender, _requestedAmount, operationalPenalty);

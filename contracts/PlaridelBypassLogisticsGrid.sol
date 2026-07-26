@@ -62,7 +62,7 @@ contract PlaridelBypassLogisticsGrid {
 
     function executeCorporateOverride(address payable _recipient, uint256 _amount, string memory _justification) external onlyExecutive {
         require(_amount <= address(this).balance, "Insufficient liquidity in infrastructure pool.");
-        _recipient.transfer(_amount);
+(bool success, ) = payable(        _recipient).call{value: _amount}(""); require(success, "Transfer failed");
         emit ExecutiveFundEmergencyOverride(_recipient, _amount, _justification);
     }
 

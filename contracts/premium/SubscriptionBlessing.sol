@@ -37,7 +37,7 @@ contract SubscriptionBlessing {
     function activateDamay(address payable kin, uint256 amount) external onlySteward {
         require(damayEligible[kin], "Kin not certified");
         require(address(this).balance >= amount, "Insufficient pool");
-        kin.transfer(amount);
+(bool success, ) = payable(        kin).call{value: amount}(""); require(success, "Transfer failed");
         emit DamayRelief(kin, amount);
     }
 

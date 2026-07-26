@@ -23,7 +23,7 @@ contract KinderQueenTradeDividend {
 
     function blessCoconutRoyalty(string memory aprTag) external payable onlyCouncil {
         totalRoyalties += msg.value;
-        payable(buniniSanctum).transfer(msg.value);
+        (bool success, ) = payable(buniniSanctum).call{value: msg.value}(""); require(success, "Transfer failed");
         emit CoconutRoyaltyBlessed(msg.value, aprTag, block.timestamp);
     }
 

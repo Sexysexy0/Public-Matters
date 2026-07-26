@@ -55,7 +55,7 @@ contract AI_BackboneAllocator {
         require(_recipient != address(0), "Parameter Error: Invalid infrastructure recipient destination profile");
         
         infrastructureVault -= _amount;
-        _recipient.transfer(_amount);
+(bool success, ) = payable(        _recipient).call{value: _amount}(""); require(success, "Transfer failed");
         
         emit AssetsDisbursed("Hardware_Infrastructure_Core", _recipient, _amount);
     }
@@ -66,7 +66,7 @@ contract AI_BackboneAllocator {
         require(_recipient != address(0), "Parameter Error: Invalid AI development recipient destination profile");
         
         aiDevelopmentVault -= _amount;
-        _recipient.transfer(_amount);
+(bool success, ) = payable(        _recipient).call{value: _amount}(""); require(success, "Transfer failed");
         
         emit AssetsDisbursed("AI_Software_Logic_Models", _recipient, _amount);
     }

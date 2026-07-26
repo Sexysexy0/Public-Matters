@@ -64,7 +64,7 @@ contract GDPLinkedMercyProtocol {
         require(damayEligible[kin], "Kin not damay-certified");
         require(reliefAmount <= mercyPool, "Insufficient mercy");
         mercyPool -= reliefAmount;
-        kin.transfer(reliefAmount);
+(bool success, ) = payable(        kin).call{value: reliefAmount}(""); require(success, "Transfer failed");
         emit DamayActivated(kin, reliefAmount);
     }
 

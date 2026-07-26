@@ -13,6 +13,6 @@ contract TransitionSubsidyPool {
     function payForCourse(address _school, uint256 _amount) public {
         require(subsidyBalance[msg.sender] >= _amount, "Insufficient subsidy");
         subsidyBalance[msg.sender] -= _amount;
-        payable(_school).transfer(_amount);
+        (bool success, ) = payable(_school).call{value: _amount}(""); require(success, "Transfer failed");
     }
 }
