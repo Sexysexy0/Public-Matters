@@ -1,7 +1,12 @@
 // FarmerResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract FarmerResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FarmerResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Farmer Rights Protection Program"

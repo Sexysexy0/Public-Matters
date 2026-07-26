@@ -1,7 +1,12 @@
 // GameOptimizationAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract GameOptimizationAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GameOptimizationAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Game Optimization"

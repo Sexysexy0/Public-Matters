@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LegacyNostalgiaShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LegacyNostalgiaShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event NostalgiaEvent(address player, string feature);
 
     function logNostalgia(address player, string memory feature) external {

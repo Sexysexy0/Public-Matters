@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AmbienceBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AmbienceBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AmbienceRecord(string feature, string detail);
 
     function logAmbience(string memory feature, string memory detail) external {

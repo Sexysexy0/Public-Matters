@@ -1,7 +1,12 @@
 // DigitalDemocracySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract DigitalDemocracySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DigitalDemocracySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect E-Governance Integrity"

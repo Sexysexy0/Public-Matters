@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PacingBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PacingBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PacingRecord(string sequence, string tempo);
 
     function logPacing(string memory sequence, string memory tempo) external {

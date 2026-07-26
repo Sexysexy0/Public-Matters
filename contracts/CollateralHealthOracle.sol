@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CollateralHealthOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CollateralHealthOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Prevent Bad Debt Injection]
     function updateBorrowingPower(address _asset) public {
         if (checkBridgeIntegrity(_asset) == false) {

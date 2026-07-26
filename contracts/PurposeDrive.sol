@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PurposeDrive {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PurposeDrive is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Strength through Internal Truth]
     function calculateWillpower(uint256 _hp, bool _isFightingForPurpose) public pure returns (uint256) {
         if (_isFightingForPurpose && _hp < 20) {

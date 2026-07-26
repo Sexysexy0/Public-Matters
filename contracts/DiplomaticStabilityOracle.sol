@@ -1,7 +1,12 @@
 // DiplomaticStabilityOracle.sol
 pragma solidity ^0.8.0;
 
-contract DiplomaticStabilityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DiplomaticStabilityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public isStraitOpen;
     bool public nuclearEnrichmentStopped;
     uint256 public regionalPeaceIndex;

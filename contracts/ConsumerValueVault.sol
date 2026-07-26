@@ -1,7 +1,12 @@
 // ConsumerValueVault.sol
 pragma solidity ^0.8.0;
 
-contract ConsumerValueVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ConsumerValueVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public consumerEquity;
 
     function rewardSmartChoice(address _consumer, uint256 _amount) public {

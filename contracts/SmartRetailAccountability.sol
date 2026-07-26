@@ -1,7 +1,12 @@
 // SmartRetailAccountability.sol
 pragma solidity ^0.8.0;
 
-contract SmartRetailAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SmartRetailAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct RenoProject {
         uint256 budget;
         string department; // e.g., "Beauty", "Electronics"

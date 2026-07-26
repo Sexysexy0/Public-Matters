@@ -1,7 +1,12 @@
 // FoodSecuritySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract FoodSecuritySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FoodSecuritySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Commodity {
         string name;
         uint256 currentStock;

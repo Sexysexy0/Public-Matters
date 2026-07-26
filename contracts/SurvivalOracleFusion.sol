@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SurvivalOracleFusion {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SurvivalOracleFusion is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SurvivalRecord(string domain, string measure);
 
     function logSurvival(string memory domain, string memory measure) external {

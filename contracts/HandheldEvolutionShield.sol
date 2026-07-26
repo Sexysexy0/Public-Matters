@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HandheldEvolutionShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HandheldEvolutionShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EvolutionSeal(string device, string status);
 
     function logEvolution(string memory device, string memory status) external {

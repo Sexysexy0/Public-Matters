@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FranchiseContinuityVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FranchiseContinuityVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct FranchisePath {
         address actor;
         string franchise;

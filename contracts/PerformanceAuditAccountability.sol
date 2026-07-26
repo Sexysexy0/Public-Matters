@@ -1,7 +1,12 @@
 // PerformanceAuditAccountability.sol
 pragma solidity ^0.8.0;
 
-contract PerformanceAuditAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PerformanceAuditAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct OutputAudit {
         uint256 weekNumber;
         uint256 criticalTasksCompleted;

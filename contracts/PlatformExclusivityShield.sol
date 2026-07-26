@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PlatformExclusivityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PlatformExclusivityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ExclusivitySeal(string factor, string status);
 
     function logExclusivity(string memory factor, string memory status) external {

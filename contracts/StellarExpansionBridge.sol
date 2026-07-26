@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract StellarExpansionBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StellarExpansionBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Expansion {
         address studio;
         string title;

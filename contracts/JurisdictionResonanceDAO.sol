@@ -1,7 +1,12 @@
 // JurisdictionResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract JurisdictionResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract JurisdictionResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "14th Amendment Clarification Program"

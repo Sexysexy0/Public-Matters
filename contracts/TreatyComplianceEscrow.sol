@@ -1,7 +1,12 @@
 // TreatyComplianceEscrow.sol
 pragma solidity ^0.8.0;
 
-contract TreatyComplianceEscrow {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TreatyComplianceEscrow is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     address public partnerNation;
     uint256 public tradeFund;
     bool public violationDetected;

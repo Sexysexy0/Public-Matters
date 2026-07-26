@@ -1,7 +1,12 @@
 // PublicLiteracyProtocol.sol
 pragma solidity ^0.8.0;
 
-contract PublicLiteracyProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PublicLiteracyProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Program {
         uint256 id;
         string initiative; // e.g. "Media Literacy Curriculum"

@@ -1,7 +1,12 @@
 // EmpathyCovenantGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract EmpathyCovenantGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EmpathyCovenantGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Establish community programs to protect vulnerable groups"

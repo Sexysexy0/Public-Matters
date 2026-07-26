@@ -1,7 +1,12 @@
 // SegregationSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract SegregationSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SegregationSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Waste Segregation Charter"

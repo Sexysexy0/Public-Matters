@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract InterestRateEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InterestRateEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RateDecision(uint256 rate, string context);
 
     function logRateDecision(uint256 rate, string memory context) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TacticalLoadoutSentry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TacticalLoadoutSentry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Loadout {
         uint8 longGuns;  // Max 2
         uint8 handguns;  // Max 2

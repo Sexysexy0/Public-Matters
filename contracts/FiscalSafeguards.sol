@@ -1,7 +1,12 @@
 // FiscalSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract FiscalSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FiscalSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Anti-Corruption Audit"

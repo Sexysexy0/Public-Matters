@@ -1,7 +1,12 @@
 // FiscalRollbackSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract FiscalRollbackSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FiscalRollbackSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Fair Taxation Rollback"

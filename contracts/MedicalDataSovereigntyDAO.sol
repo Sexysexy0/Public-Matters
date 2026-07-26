@@ -1,7 +1,12 @@
 // MedicalDataSovereigntyDAO.sol
 pragma solidity ^0.8.0;
 
-contract MedicalDataSovereigntyDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MedicalDataSovereigntyDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ResearchQuery {
         string diseaseTarget;
         uint256 bidAmount;

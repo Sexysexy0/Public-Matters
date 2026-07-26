@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract VictimSovereigntyVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VictimSovereigntyVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Survivor {
         bytes32 caseHash;
         bool needsMedicalRelief;

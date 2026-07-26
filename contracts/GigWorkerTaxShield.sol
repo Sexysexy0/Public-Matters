@@ -2,7 +2,12 @@
 // Logic: Protecting Household Income
 pragma solidity ^0.8.0;
 
-contract GigWorkerTaxShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GigWorkerTaxShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function processPayment(uint256 _basePay, uint256 _tip) public pure returns (uint256) {
         // Goal: 100% Tips stay with the worker.
         // Tax is ONLY applied to the base pay, Tip is SACRED.

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TicketEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TicketEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TicketEquitySeal(string eventName, uint256 price);
 
     function logTicketPrice(string memory eventName, uint256 price) external {

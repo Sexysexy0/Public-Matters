@@ -1,4 +1,4 @@
-contract XiAggressionAuditLog {
+contract XiAggressionAuditLog is Ownable {
     address public steward = msg.sender;
 
     struct AggressionEvent {
@@ -10,7 +10,7 @@ contract XiAggressionAuditLog {
 
     AggressionEvent[] public events;
 
-    constructor() {
+    constructor() Ownable(msg.sender) {
         events.push(AggressionEvent("West PH Sea", "Water cannon assault on BRP Sierra Madre", "2025-08-20", "Trust breach, sovereignty violation"));
         events.push(AggressionEvent("Ayungin Shoal", "Drone surveillance and signal jamming", "2025-08-21", "Emotional APR disruption"));
         events.push(AggressionEvent("Panatag Shoal", "Deployment of drone mothership Zhu Hai Yun", "2025-08-22", "Sanctum intimidation"));

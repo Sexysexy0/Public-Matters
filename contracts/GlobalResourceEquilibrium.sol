@@ -1,7 +1,12 @@
 // GlobalResourceEquilibrium.sol
 pragma solidity ^0.8.0;
 
-contract GlobalResourceEquilibrium {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalResourceEquilibrium is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public planetaryHealthIndex; // 1-100
 
     function syncPlanetaryData(uint256 _newIndex) public {

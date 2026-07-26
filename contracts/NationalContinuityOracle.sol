@@ -4,7 +4,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract NationalContinuityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NationalContinuityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ContinuityArc {
         address steward;
         string nation;

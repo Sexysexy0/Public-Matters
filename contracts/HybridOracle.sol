@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HybridOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HybridOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event HybridRecord(string mechanic, string balance);
 
     function logHybridEquity(string memory mechanic, string memory balance) external {

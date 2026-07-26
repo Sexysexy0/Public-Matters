@@ -1,7 +1,12 @@
 // ProofOfInstitutionalIntegrity.sol
 pragma solidity ^0.8.0;
 
-contract ProofOfInstitutionalIntegrity {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProofOfInstitutionalIntegrity is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Transaction { uint256 amount; string purpose; bool verified; }
     Transaction[] public publicLedger;
 

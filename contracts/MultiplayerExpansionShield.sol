@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MultiplayerExpansionShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MultiplayerExpansionShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ExpansionSeal(string mode, string status);
 
     function logExpansion(string memory mode, string memory status) external {

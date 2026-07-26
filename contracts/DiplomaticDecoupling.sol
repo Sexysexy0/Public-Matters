@@ -2,7 +2,12 @@
 // Logic: Automatic Alliance Audit
 pragma solidity ^0.8.0;
 
-contract DiplomaticDecoupling {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DiplomaticDecoupling is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     enum AllianceStrength { FULL, PARTIAL, DECOUPLED }
     
     struct Treaty {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MentorshipBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MentorshipBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MentorshipRecord(string element, string detail);
 
     function logMentorship(string memory element, string memory detail) external {

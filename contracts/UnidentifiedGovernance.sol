@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract UnidentifiedGovernance {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UnidentifiedGovernance is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Governance without Exposure]
     function signDirective(bytes32 _directiveHash) external pure returns (string memory) {
         // Logic: Authenticate command via private key.

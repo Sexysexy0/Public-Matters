@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AbyssGearSocketsBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AbyssGearSocketsBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct GearSocket {
         address player;
         string gearType;

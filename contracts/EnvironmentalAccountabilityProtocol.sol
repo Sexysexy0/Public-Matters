@@ -1,7 +1,12 @@
 // EnvironmentalAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract EnvironmentalAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EnvironmentalAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in environmental policies"

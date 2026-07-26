@@ -1,7 +1,12 @@
 // WorkweekSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract WorkweekSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WorkweekSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Compressed Workweek Charter"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WageEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WageEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WageRecord(string element, string detail);
 
     function logWage(string memory element, string memory detail) external {

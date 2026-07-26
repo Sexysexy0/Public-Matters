@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FashionEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FashionEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FashionSeal(string item, string status);
 
     function logFashion(string memory item, string memory status) external {

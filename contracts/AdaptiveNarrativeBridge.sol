@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AdaptiveNarrativeBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AdaptiveNarrativeBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event NarrativeRecord(string element, string detail);
 
     function logNarrative(string memory element, string memory detail) external {

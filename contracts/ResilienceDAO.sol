@@ -1,7 +1,12 @@
 // ResilienceDAO.sol
 pragma solidity ^0.8.0;
 
-contract ResilienceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResilienceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Measure {
         uint256 id;
         string domain;   // e.g. "Mobile Security"

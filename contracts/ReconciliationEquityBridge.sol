@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ReconciliationEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ReconciliationEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ReconciliationStep(string step, string status);
 
     function logReconciliation(string memory step, string memory status) external {

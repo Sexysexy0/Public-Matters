@@ -1,7 +1,12 @@
 // TransparencyResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract TransparencyResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransparencyResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Ethical Journalism Campaign"

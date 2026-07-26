@@ -1,7 +1,12 @@
 // SovereignWealthDistribution.sol
 pragma solidity ^0.8.0;
 
-contract SovereignWealthDistribution {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereignWealthDistribution is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Shareholder {
         uint256 equityPoints;
         uint256 lastDividendWithdrawal;

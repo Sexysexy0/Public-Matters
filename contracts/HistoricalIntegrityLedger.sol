@@ -1,7 +1,12 @@
 // HistoricalIntegrityLedger.sol
 pragma solidity ^0.8.0;
 
-contract HistoricalIntegrityLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HistoricalIntegrityLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Event { uint256 timestamp; string description; bytes32 proofHash; }
     Event[] public history;
 

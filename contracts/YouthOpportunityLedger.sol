@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract YouthOpportunityLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract YouthOpportunityLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Graduate {
         address applicant;
         uint256 timestamp;

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FriendshipDignityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FriendshipDignityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RelationshipRecord(string pirate, string status);
 
     function logRelationship(string memory pirate, string memory status) external {

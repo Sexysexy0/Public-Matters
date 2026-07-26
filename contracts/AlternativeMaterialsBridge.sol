@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AlternativeMaterialsBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AlternativeMaterialsBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AlternativeRecord(string material, string adoption);
 
     function logAlternative(string memory material, string memory adoption) external {

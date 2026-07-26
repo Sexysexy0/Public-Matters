@@ -1,7 +1,12 @@
 // GenerationalAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract GenerationalAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GenerationalAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Lesson {
         uint256 id;
         string history;    // e.g. "Colonial exploitation"

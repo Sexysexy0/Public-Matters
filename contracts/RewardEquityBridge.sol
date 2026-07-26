@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RewardEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RewardEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RewardDistributed(string item, uint256 value);
 
     function distributeReward(string memory item, uint256 value) external {

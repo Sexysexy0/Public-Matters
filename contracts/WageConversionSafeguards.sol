@@ -1,7 +1,12 @@
 // WageConversionSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract WageConversionSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WageConversionSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Redirect Aid to Wages"

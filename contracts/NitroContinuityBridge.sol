@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract NitroContinuityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NitroContinuityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Benefit {
         address subscriber;
         string service;

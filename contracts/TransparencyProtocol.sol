@@ -1,7 +1,12 @@
 // TransparencyProtocol.sol
 pragma solidity ^0.8.0;
 
-contract TransparencyProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransparencyProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Record {
         uint256 id;
         string session;   // e.g. "House Plenary Debate"

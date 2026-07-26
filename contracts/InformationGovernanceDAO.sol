@@ -1,7 +1,12 @@
 // InformationGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract InformationGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InformationGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance free speech with societal trust in information governance"

@@ -1,7 +1,12 @@
 // OilPriceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract OilPriceGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OilPriceGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure energy governance balances market stability with consumer protection via ₱40–₱60 oil price band"

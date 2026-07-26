@@ -1,7 +1,12 @@
 // EpochGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract EpochGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EpochGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         string title;
         uint256 voteCount;

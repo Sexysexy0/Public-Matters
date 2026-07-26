@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HardwareEnforcementShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HardwareEnforcementShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Enforcement {
         address offender;
         string franchise;

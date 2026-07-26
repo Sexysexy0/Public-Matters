@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AntiFakeNewsOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiFakeNewsOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TruthRecord(string source, string measure);
 
     function logTruth(string memory source, string memory measure) external {

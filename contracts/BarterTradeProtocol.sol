@@ -1,7 +1,12 @@
 // BarterTradeProtocol.sol
 pragma solidity ^0.8.0;
 
-contract BarterTradeProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BarterTradeProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct BarterAgreement {
         string commodityExchanged; // e.g., "Rice", "Nickel", "Coconut Oil"
         uint256 commodityQuantity;

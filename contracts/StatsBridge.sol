@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract StatsBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StatsBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event StatsRecord(string player, string stat);
 
     function logStats(string memory player, string memory stat) external {

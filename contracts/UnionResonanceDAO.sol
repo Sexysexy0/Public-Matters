@@ -1,7 +1,12 @@
 // UnionResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract UnionResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UnionResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Collective Bargaining Agreement"

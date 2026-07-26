@@ -1,7 +1,12 @@
 // SupernaturalWorldDiscovery.sol
 pragma solidity ^0.8.0;
 
-contract SupernaturalWorldDiscovery {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SupernaturalWorldDiscovery is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct LoreEntry {
         string entityType; // e.g., "Undead", "Supernatural Force"
         string locationFound;

@@ -1,7 +1,12 @@
 // LogisticsCoordinationDAO.sol
 pragma solidity ^0.8.0;
 
-contract LogisticsCoordinationDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LogisticsCoordinationDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct RouteProposal {
         uint256 id;
         string destination;

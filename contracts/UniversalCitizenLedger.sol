@@ -1,7 +1,12 @@
 // UniversalCitizenLedger.sol
 pragma solidity ^0.8.0;
 
-contract UniversalCitizenLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UniversalCitizenLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CitizenRights {
         bool accessToHealthcare;
         bool accessToEducation;

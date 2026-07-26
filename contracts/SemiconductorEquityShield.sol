@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SemiconductorEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SemiconductorEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SemiconductorSeal(string factor, string status);
 
     function logSemiconductor(string memory factor, string memory status) external {

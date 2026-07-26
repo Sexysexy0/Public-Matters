@@ -1,7 +1,12 @@
 // IPAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract IPAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IPAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in AI training datasets"

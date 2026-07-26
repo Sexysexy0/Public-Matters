@@ -1,7 +1,12 @@
 // TraffickingFlowAnalyzer.sol
 pragma solidity ^0.8.0;
 
-contract TraffickingFlowAnalyzer {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TraffickingFlowAnalyzer is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => bool) public isBlacklisted;
 
     function analyzeTransaction(address _from, address _to, uint256 _amount) public {

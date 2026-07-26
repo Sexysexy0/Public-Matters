@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PlayStationIdentityProtocols {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PlayStationIdentityProtocols is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event IdentityShield(string safeguard, uint256 timestamp);
     event LiveServiceOracle(string safeguard, uint256 timestamp);
     event BudgetEquityBridge(string safeguard, uint256 timestamp);

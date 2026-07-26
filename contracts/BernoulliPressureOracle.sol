@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BernoulliPressureOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BernoulliPressureOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public outdoorTemp;
     uint256 public absorberPlateTemp;
 

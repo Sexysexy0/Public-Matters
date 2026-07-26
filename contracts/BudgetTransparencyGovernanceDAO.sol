@@ -1,7 +1,12 @@
 // BudgetTransparencyGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract BudgetTransparencyGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BudgetTransparencyGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Citizen oversight of SARO issuance and prioritization of programmed appropriations"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ZeroStutterProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ZeroStutterProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: 60FPS Integrity]
     function maintainFluidity(uint256 _currentFPS) external pure returns (string memory) {
         if (_currentFPS < 60) {

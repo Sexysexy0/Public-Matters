@@ -1,7 +1,12 @@
 // BankingSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract BankingSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BankingSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Deposit Protection Charter"

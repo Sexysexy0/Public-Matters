@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MeritocraticEngine {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MeritocraticEngine is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Validation through Real Adoption]
     function calculateTrueSuccess(uint256 _playerCount, uint256 _sales) external pure returns (bool) {
         // Logic: If players are growing, the game is a Masterpiece.

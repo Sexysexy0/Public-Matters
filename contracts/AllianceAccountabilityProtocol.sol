@@ -1,7 +1,12 @@
 // AllianceAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract AllianceAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AllianceAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Alliance Governance"

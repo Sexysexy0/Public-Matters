@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SSDUpgradeShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SSDUpgradeShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event UpgradeSeal(string device, string status);
 
     function logUpgrade(string memory _device, string memory _status) external {

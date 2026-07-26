@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommunityImpactBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityImpactBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ImpactSeal(string factor, string status);
 
     function logImpact(string memory factor, string memory status) external {

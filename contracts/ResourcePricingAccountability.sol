@@ -1,7 +1,12 @@
 // ResourcePricingAccountability.sol
 pragma solidity ^0.8.0;
 
-contract ResourcePricingAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourcePricingAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Material {
         string title;
         uint256 maxFairPrice;

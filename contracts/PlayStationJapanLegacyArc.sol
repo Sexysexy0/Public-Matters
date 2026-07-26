@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PlayStationJapanLegacyArc {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PlayStationJapanLegacyArc is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CreativeStewardship(string context, string safeguard, uint256 timestamp);
     event GlobalDrift(string context, string safeguard, uint256 timestamp);
     event FranchiseRevival(string franchise, string safeguard, uint256 timestamp);

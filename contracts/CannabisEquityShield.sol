@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CannabisEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CannabisEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CannabisSeal(string state, string status);
 
     function logCannabis(string memory state, string memory status) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PocketDesktopShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PocketDesktopShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DesktopSeal(string device, string status);
 
     function logDesktopMode(string memory _device, string memory _status) external {

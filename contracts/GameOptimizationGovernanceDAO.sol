@@ -1,7 +1,12 @@
 // GameOptimizationGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract GameOptimizationGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GameOptimizationGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of storage optimization and player accessibility"

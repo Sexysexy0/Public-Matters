@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract UniversalTruthOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UniversalTruthOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [TRUTHTELLING CAPACITY] 
     // Securing information from Calais to Tehran
     function finalizeRecord(bytes32 _eventHash, string memory _report) public {

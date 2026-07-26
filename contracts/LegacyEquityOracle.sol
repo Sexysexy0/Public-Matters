@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LegacyEquityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LegacyEquityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct LegacyRequest {
         address player;
         string title;

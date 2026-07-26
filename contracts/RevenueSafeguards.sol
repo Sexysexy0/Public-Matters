@@ -1,7 +1,12 @@
 // RevenueSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract RevenueSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RevenueSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Balanced Tariff-Income Mix"

@@ -1,7 +1,12 @@
 // HyperBridgeFirewall.sol
 pragma solidity ^0.8.0;
 
-contract HyperBridgeFirewall {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HyperBridgeFirewall is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public mintLimit = 1000000; // Hard cap per transaction
 
     function validateMint(uint256 _amount) public {

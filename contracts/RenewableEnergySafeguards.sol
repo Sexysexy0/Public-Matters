@@ -1,7 +1,12 @@
 // RenewableEnergySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract RenewableEnergySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RenewableEnergySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct TechGrant {
         address operator;
         string conversionType; // e.g., "Diesel to Electric"

@@ -1,7 +1,12 @@
 // AssetGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract AssetGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AssetGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance innovation with regulation in asset governance"

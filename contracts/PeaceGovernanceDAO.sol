@@ -1,7 +1,12 @@
 // PeaceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract PeaceGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PeaceGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement community-driven oversight of peace negotiations and conflict resolution"

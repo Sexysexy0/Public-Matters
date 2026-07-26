@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ExpectationOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ExpectationOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ExpectationEvent(string theme, string outcome);
 
     function monitorExpectation(string memory theme, string memory outcome) external {

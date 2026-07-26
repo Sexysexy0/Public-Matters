@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract IndustrialGenesisDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IndustrialGenesisDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Shift from consumerism to localized industrial production]
     struct Proposal {
         uint256 id;

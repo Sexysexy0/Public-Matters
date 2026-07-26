@@ -1,7 +1,12 @@
 // HomeownershipSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract HomeownershipSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HomeownershipSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Ban Corporate Home Purchases"

@@ -1,7 +1,12 @@
 // FinancialSustainabilityDAO.sol
 pragma solidity ^0.8.0;
 
-contract FinancialSustainabilityDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FinancialSustainabilityDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string measure;   // e.g. "Diversify funding sources"

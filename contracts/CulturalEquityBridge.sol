@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CulturalEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CulturalEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CulturalShift(string region, string trend, string sentiment);
     event EquitySafeguard(string studio, bool safeguarded);
 

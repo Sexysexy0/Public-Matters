@@ -1,7 +1,12 @@
 // AttentionTaxProtocol.sol
 pragma solidity ^0.8.0;
 
-contract AttentionTaxProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AttentionTaxProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public retentionThreshold = 95; // Percentage
 
     function levyTax(uint256 _retentionRate) public {

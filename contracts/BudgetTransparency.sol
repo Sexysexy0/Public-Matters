@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BudgetTransparency {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BudgetTransparency is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AllocationMade(string purpose, uint256 amount, address recipient);
 
     // [Goal: Absolute Financial Honesty]

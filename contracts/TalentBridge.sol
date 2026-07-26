@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TalentBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TalentBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TalentRecord(string actor, string integration);
 
     function logTalent(string memory actor, string memory integration) external {

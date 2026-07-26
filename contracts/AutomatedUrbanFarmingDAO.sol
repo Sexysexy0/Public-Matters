@@ -1,7 +1,12 @@
 // AutomatedUrbanFarmingDAO.sol
 pragma solidity ^0.8.0;
 
-contract AutomatedUrbanFarmingDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AutomatedUrbanFarmingDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CropCycle {
         string cropName;
         uint256 harvestDate;

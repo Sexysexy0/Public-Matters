@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HeritageOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HeritageOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event HeritageRecord(string factor, string status);
 
     function logHeritageRecord(string memory factor, string memory status) external {

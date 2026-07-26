@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TransitionFairnessBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransitionFairnessBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TransitionLogged(string soulName, string outcome);
 
     function logTransition(string memory soulName, string memory outcome) external {

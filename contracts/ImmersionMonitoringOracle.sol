@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ImmersionMonitoringOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ImmersionMonitoringOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ImmersionEvent(string context, string depth);
 
     function monitorImmersion(string memory context, string memory depth) external {

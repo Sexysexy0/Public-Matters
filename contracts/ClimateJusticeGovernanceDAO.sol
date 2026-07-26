@@ -1,7 +1,12 @@
 // ClimateJusticeGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract ClimateJusticeGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ClimateJusticeGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement carbon-neutral infrastructure projects in developing nations"

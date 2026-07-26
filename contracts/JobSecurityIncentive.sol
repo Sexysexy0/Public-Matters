@@ -2,7 +2,12 @@
 // Logic: Linking Hiring Status to Loan Priority
 pragma solidity ^0.8.0;
 
-contract JobSecurityIncentive {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract JobSecurityIncentive is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function verifyHiringStatus(bool _isHiringFreezeActive) public pure returns (string memory) {
         if (!_isHiringFreezeActive) {
             return "PRIORITY_GRANTED: ACCESS TO DOLE STANDBY FUNDS & SOFT LOANS";

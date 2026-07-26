@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DigitalIdentityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DigitalIdentityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event IdentitySeal(string system, string status);
 
     function logIdentitySignal(string memory system, bool enforced) external {

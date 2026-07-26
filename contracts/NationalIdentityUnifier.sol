@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract NationalIdentityUnifier {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NationalIdentityUnifier is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Social Stability & Unity]
     function unifyCitizenry() external {
         // Logic: Abolish divisive labels. 

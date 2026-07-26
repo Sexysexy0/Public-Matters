@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AntiSanitizationProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiSanitizationProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     string public originalManifesto;
     bool public isLocked = true;
 

@@ -1,7 +1,12 @@
 // SpaceDebrisBounty.sol
 pragma solidity ^0.8.0;
 
-contract SpaceDebrisBounty {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SpaceDebrisBounty is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Junk {
         string description;
         uint256 bountyAmount;

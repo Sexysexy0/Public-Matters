@@ -1,7 +1,12 @@
 // InfluenceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract InfluenceGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InfluenceGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Promote uplifting narratives in media and education"

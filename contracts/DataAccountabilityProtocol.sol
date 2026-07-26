@@ -1,7 +1,12 @@
 // DataAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract DataAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DataAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure ethical use of citizen data"

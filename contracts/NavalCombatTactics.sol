@@ -1,7 +1,12 @@
 // NavalCombatTactics.sol
 pragma solidity ^0.8.0;
 
-contract NavalCombatTactics {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NavalCombatTactics is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ShipStatus {
         uint256 hullIntegrity;
         uint256 cannonReadyState;

@@ -4,7 +4,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GlobalResonanceVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalResonanceVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Resonance {
         address steward;
         string region;

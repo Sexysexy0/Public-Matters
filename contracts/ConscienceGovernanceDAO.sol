@@ -1,7 +1,12 @@
 // ConscienceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract ConscienceGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ConscienceGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Awaken conscience to detect lies"

@@ -1,7 +1,12 @@
 // EnergyTransitionAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract EnergyTransitionAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EnergyTransitionAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Energy Transition"

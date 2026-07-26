@@ -1,7 +1,12 @@
 // LearningSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract LearningSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LearningSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Universal Access to Education"

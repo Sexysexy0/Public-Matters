@@ -1,7 +1,12 @@
 // NickelSovereignBattery.sol
 pragma solidity ^0.8.0;
 
-contract NickelSovereignBattery {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NickelSovereignBattery is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function trackBatch(uint256 _serialNumber) public pure returns (string memory) {
         // Goal: Resource Nationalism.
         // From Philippine Mines to Philippine EVs. Total Independence.

@@ -1,7 +1,12 @@
 // CrossBorderEquityDAO.sol
 pragma solidity ^0.8.0;
 
-contract CrossBorderEquityDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CrossBorderEquityDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ResourceSwap {
         uint256 nodeA_ID;
         uint256 nodeB_ID;

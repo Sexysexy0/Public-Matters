@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ResilienceRecovery {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResilienceRecovery is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Survival over Perfection]
     function recoverFromDefeat(uint256 _lossCount) external pure returns (string memory) {
         // Logic: Accept the problem that belongs to you.

@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract AllowanceSystemProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AllowanceSystemProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AllowanceActivation(string driver, uint256 amount);
 
     function checkExpenses(string memory driver, uint256 expenses) public {

@@ -1,7 +1,12 @@
 // DataPermissionDAO.sol
 pragma solidity ^0.8.0;
 
-contract DataPermissionDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DataPermissionDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct UsageProposal {
         string appName;
         string dataRequested;

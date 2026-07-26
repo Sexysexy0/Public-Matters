@@ -1,7 +1,12 @@
 // CarbonTaxAutomator.sol
 pragma solidity ^0.8.0;
 
-contract CarbonTaxAutomator {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CarbonTaxAutomator is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant TAX_PER_TON = 5000; // 5000 PHP per excess ton
     
     struct CorpProfile {

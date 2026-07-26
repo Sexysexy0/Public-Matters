@@ -1,7 +1,12 @@
 // RevivalInvestmentAgreement.sol
 pragma solidity ^0.8.0;
 
-contract RevivalInvestmentAgreement {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RevivalInvestmentAgreement is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Investment {
         uint256 id;
         string company;       // e.g. "Closed Factory A"

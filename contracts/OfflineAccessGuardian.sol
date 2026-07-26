@@ -1,7 +1,12 @@
 // OfflineAccessGuardian.sol
 pragma solidity ^0.8.0;
 
-contract OfflineAccessGuardian {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OfflineAccessGuardian is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct PlayerLicense {
         bool isPermanentlyUnlocked;
         uint256 lastValidation;

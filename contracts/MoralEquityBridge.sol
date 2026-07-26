@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MoralEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MoralEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MoralRecord(string element, string detail);
 
     function logMoral(string memory element, string memory detail) external {

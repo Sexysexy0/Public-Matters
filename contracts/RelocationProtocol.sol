@@ -1,7 +1,12 @@
 // RelocationProtocol.sol
 pragma solidity ^0.8.0;
 
-contract RelocationProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RelocationProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Site {
         uint256 id;
         string location;   // e.g. "Desert Zone"

@@ -1,7 +1,12 @@
 // GlobalEnergyDealRegistry.sol
 pragma solidity ^0.8.0;
 
-contract GlobalEnergyDealRegistry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalEnergyDealRegistry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct AccountabilityLog {
         string stakeholder; // e.g., "Transport Sector", "Energy Grid"
         uint256 subsidizedRate;

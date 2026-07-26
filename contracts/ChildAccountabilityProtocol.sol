@@ -1,7 +1,12 @@
 // ChildAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ChildAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ChildAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure offenders face justice"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ExecutionOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ExecutionOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ExecutionSeal(string branch, string status);
 
     function logBranchExecution(string memory branch, string memory status) external {

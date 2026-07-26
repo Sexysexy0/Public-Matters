@@ -1,7 +1,12 @@
 // TheSovereignPulse.sol
 pragma solidity ^0.8.0;
 
-contract TheSovereignPulse {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TheSovereignPulse is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function getNationalVitalSigns() public view returns (uint256 _wellbeing, uint256 _security) {
         // Goal: Radical Awareness.
         // The Admin sees the truth of the nation, beyond the propaganda.

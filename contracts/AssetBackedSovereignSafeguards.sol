@@ -1,7 +1,12 @@
 // AssetBackedSovereignSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract AssetBackedSovereignSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AssetBackedSovereignSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct SovereignAsset {
         string assetType; // e.g., "Natural Resources"
         uint256 valuation;

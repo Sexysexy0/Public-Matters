@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SailingOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SailingOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SailingRecord(string ship, string status);
 
     function logSailing(string memory ship, string memory status) external {

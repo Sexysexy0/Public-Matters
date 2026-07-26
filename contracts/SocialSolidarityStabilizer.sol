@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SocialSolidarityStabilizer {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SocialSolidarityStabilizer is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // Balances the gap between the Ultra-Wealthy and the Working Class
     function balanceTheBond(uint256 _trustLevel) public pure returns (string memory) {
         if (_trustLevel < 40) {

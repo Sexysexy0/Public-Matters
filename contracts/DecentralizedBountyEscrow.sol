@@ -1,7 +1,12 @@
 // DecentralizedBountyEscrow.sol
 pragma solidity ^0.8.0;
 
-contract DecentralizedBountyEscrow {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DecentralizedBountyEscrow is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Bounty {
         uint256 reward;
         bool isResolved;

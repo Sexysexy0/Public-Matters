@@ -1,7 +1,12 @@
 // RentalPriceSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract RentalPriceSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RentalPriceSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct RentalUnit {
         uint256 currentRent;
         uint256 lastIncreaseDate;

@@ -1,7 +1,12 @@
 // DirectOilSovereignty.sol
 pragma solidity ^0.8.0;
 
-contract DirectOilSovereignty {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DirectOilSovereignty is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct EnergyDeal {
         uint256 dealId;
         string partnerNation; // e.g., "Russia", "USA"

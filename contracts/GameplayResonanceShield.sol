@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GameplayResonanceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GameplayResonanceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MechanicLogged(string mechanic, string balance);
 
     function logMechanic(string memory mechanic, string memory balance) external {

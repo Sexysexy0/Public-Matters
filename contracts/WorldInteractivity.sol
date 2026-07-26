@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WorldInteractivity {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WorldInteractivity is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Depth over Surface Level Graphics]
     function interactWithEnvironment(uint256 _skillID) external pure returns (string memory) {
         // Logic: Deep mechanical interaction between the player and Malolos.

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ScrapEconomy {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ScrapEconomy is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Resilience and Recovery]
     function salvageMechParts(uint256 _damageLevel) external pure returns (uint256) {
         // Logic: Convert combat damage into usable raw materials.

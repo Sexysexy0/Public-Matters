@@ -1,7 +1,12 @@
 // PipelineResilienceAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract PipelineResilienceAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PipelineResilienceAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Pipeline Resilience"

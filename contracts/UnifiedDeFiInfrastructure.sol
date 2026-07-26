@@ -1,7 +1,12 @@
 // UnifiedDeFiInfrastructure.sol
 pragma solidity ^0.8.0;
 
-contract UnifiedDeFiInfrastructure {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UnifiedDeFiInfrastructure is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // Stablecoin Collateral (CDP)
     mapping(address => uint256) public stablecoinCollateral;
     event MintStablecoin(address indexed user, uint256 amount);

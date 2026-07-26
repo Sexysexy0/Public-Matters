@@ -1,7 +1,12 @@
 // DecentralizedMeshNetwork.sol
 pragma solidity ^0.8.0;
 
-contract DecentralizedMeshNetwork {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DecentralizedMeshNetwork is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Node {
         address provider;
         uint256 bandwidth;

@@ -1,7 +1,12 @@
 // MigrationEquitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract MigrationEquitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MigrationEquitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Diaspora Dignity"

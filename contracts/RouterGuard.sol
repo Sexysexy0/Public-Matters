@@ -2,10 +2,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 import "./InvariantGuard.sol";
 import "./ResilienceRegistry.sol";
 
-contract RouterGuard {
+contract RouterGuard is Ownable {
     using InvariantGuard for address;
 
     ResilienceRegistry public registry;

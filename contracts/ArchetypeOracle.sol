@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ArchetypeOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ArchetypeOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ArchetypeEvent(string symbol, string meaning);
 
     function monitorArchetype(string memory symbol, string memory meaning) external {

@@ -2,6 +2,8 @@
 // Logic: Prioritizing the Local Table
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 contract ExportMarginAudit {
     function calculatePriority(uint256 _exportProfit, uint256 _domesticNeed) public pure returns (string memory) {
         // If domestic supply is in the "Danger Zone", increase export tax.

@@ -1,7 +1,12 @@
 // TextualTraditionGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract TextualTraditionGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TextualTraditionGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure sacred texts are preserved while responsibly reinterpreted for evolving contexts"

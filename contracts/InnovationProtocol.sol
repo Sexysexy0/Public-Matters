@@ -1,7 +1,12 @@
 // InnovationProtocol.sol
 pragma solidity ^0.8.0;
 
-contract InnovationProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InnovationProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Idea {
         uint256 id;
         string domain;       // e.g. "Fintech"

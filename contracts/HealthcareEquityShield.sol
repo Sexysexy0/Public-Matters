@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HealthcareEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HealthcareEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event HealthcareEquitySeal(string provider, uint256 price);
 
     function logHealthcarePrice(string memory provider, uint256 price) external {

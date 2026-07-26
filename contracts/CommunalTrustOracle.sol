@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommunalTrustOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunalTrustOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TrustRecord(string alliance, string measure);
 
     function logCommunalTrust(string memory alliance, string memory measure) external {

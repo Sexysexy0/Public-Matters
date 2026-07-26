@@ -1,7 +1,12 @@
 // ComfortBuffEngine.sol
 pragma solidity ^0.8.0;
 
-contract ComfortBuffEngine {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ComfortBuffEngine is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public comfortLevel;
 
     function applyDecoration(string memory _itemType) public {

@@ -1,7 +1,12 @@
 // LaborEquityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract LaborEquityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LaborEquityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Labor Governance"

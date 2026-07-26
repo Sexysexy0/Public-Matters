@@ -1,7 +1,12 @@
 // BasisStepUpMonitor.sol
 pragma solidity ^0.8.0;
 
-contract BasisStepUpMonitor {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BasisStepUpMonitor is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function calculateHeirTax(uint256 _originalPrice, uint256 _deathValue) public pure returns (uint256) {
         // Logic: Eliminates the "Step-up" loophole.
         // Tax is calculated on the total appreciation (_deathValue - _originalPrice)

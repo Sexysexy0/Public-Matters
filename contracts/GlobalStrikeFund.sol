@@ -1,7 +1,12 @@
 // GlobalStrikeFund.sol
 pragma solidity ^0.8.0;
 
-contract GlobalStrikeFund {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalStrikeFund is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Strike {
         string sector;
         uint256 dailyStipend;

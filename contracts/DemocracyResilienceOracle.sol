@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DemocracyResilienceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DemocracyResilienceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DemocracyEvent(string actor, string action);
 
     function monitorDemocracy(string memory actor, string memory action) external {

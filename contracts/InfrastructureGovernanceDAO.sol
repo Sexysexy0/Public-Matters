@@ -1,7 +1,12 @@
 // InfrastructureGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract InfrastructureGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InfrastructureGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement transparent contractor bidding and equitable project distribution"

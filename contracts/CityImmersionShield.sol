@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CityImmersionShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CityImmersionShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CitySeal(string factor, string status);
 
     function logCity(string memory factor, string memory status) external {

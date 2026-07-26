@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CulturalPreservationShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CulturalPreservationShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PreservationSeal(string factor, string status);
 
     function logPreservation(string memory factor, string memory status) external {

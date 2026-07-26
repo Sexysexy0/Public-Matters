@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LaborRightsBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LaborRightsBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LaborRecord(string element, string detail);
 
     function logLabor(string memory element, string memory detail) external {

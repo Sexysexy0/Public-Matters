@@ -1,7 +1,12 @@
 // AntiTaxLobbyAccountability.sol
 pragma solidity ^0.8.0;
 
-contract AntiTaxLobbyAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiTaxLobbyAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant MAX_WORKER_TAX = 0; // The goal: Zero Tax for Workers
 
     function auditLegislation(uint256 _proposedTaxRate) public pure returns (bool) {

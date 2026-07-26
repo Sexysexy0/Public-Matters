@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SubsidyFairnessBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SubsidyFairnessBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SubsidyLogged(string beneficiary, uint256 amount);
 
     function logSubsidy(string memory beneficiary, uint256 amount) external {

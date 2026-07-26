@@ -1,7 +1,12 @@
 // CarbonOffsetAccountability.sol
 pragma solidity ^0.8.0;
 
-contract CarbonOffsetAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CarbonOffsetAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct EmissionRecord {
         uint256 lastReading;
         uint256 reductionTotal;

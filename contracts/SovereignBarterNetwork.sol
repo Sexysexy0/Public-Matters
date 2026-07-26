@@ -1,7 +1,12 @@
 // SovereignBarterNetwork.sol
 pragma solidity ^0.8.0;
 
-contract SovereignBarterNetwork {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereignBarterNetwork is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct TradeOffer {
         address offerer;
         string itemOffered;

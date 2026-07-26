@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ConquestShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ConquestShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ConquestSeal(string base, string status);
 
     function logConquest(string memory base, string memory status) external {

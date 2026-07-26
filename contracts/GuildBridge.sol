@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GuildBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GuildBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event GuildRecord(string activity, string outcome);
 
     function logGuildActivity(string memory activity, string memory outcome) external {

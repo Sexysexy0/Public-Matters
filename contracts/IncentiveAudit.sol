@@ -2,6 +2,8 @@
 // Logic: Preventing Algorithmic Chain Reactions
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 contract SystemicStabilityBuffer {
     uint256 public constant CHAOS_THRESHOLD = 75;
 

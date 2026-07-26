@@ -1,7 +1,12 @@
 // OpenSourceIntelligenceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract OpenSourceIntelligenceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OpenSourceIntelligenceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Blueprint {
         bytes32 dataHash;
         string category;

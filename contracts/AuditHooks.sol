@@ -2,9 +2,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 import "./InvariantGuard.sol";
 
-contract AuditHooks {
+contract AuditHooks is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     using InvariantGuard for address;
 
     event PairChecked(address indexed pair);

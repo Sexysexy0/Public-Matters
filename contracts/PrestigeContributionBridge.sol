@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PrestigeContributionBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PrestigeContributionBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PrestigeContribution(string npcName, string role);
 
     function assignPrestigeContribution(string memory npcName, string memory role) external {

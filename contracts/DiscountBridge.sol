@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DiscountBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DiscountBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DiscountRecord(string game, uint256 discountRate);
 
     function generateDiscount(string memory game) external {

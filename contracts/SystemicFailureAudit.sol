@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SystemicFailureAudit {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SystemicFailureAudit is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct SocialIssue {
         string description;
         uint256 yearsPersisting;

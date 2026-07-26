@@ -1,7 +1,12 @@
 // SocialHousingLedger.sol
 pragma solidity ^0.8.0;
 
-contract SocialHousingLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SocialHousingLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Beneficiary {
         string name;
         uint256 incomeBracket;

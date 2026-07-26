@@ -1,7 +1,12 @@
 // ShareholderProtectionSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ShareholderProtectionSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ShareholderProtectionSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Stakeholder {
         bool isActive;
         uint256 lastInquiryTime;

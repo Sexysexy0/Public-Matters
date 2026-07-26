@@ -1,7 +1,12 @@
 // SubsidyAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract SubsidyAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SubsidyAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Subsidy Governance"

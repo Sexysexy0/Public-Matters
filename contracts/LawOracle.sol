@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LawOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LawOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LawRecord(string caseName, string detail);
 
     function logLawRecord(string memory caseName, string memory detail) external {

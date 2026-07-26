@@ -1,7 +1,12 @@
 // PressFreedomLedger.sol
 pragma solidity ^0.8.0;
 
-contract PressFreedomLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PressFreedomLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct DetentionRecord {
         string journalistName;
         uint256 timestamp;

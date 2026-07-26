@@ -1,7 +1,12 @@
 // DisasterAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract DisasterAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DisasterAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in disaster governance"

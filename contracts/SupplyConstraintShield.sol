@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SupplyConstraintShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SupplyConstraintShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct SupplyConstraint {
         address overseer;
         string context;

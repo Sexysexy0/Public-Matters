@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract QoLOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract QoLOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event QoLRecord(string factor, string status);
 
     function logQoLRecord(string memory factor, string memory status) external {

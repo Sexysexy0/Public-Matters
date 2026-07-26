@@ -1,7 +1,12 @@
 // IPBusinessIncubator.sol
 pragma solidity ^0.8.0;
 
-contract IPBusinessIncubator {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IPBusinessIncubator is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct IPBusiness {
         string businessName;
         uint256 milestoneLevel;

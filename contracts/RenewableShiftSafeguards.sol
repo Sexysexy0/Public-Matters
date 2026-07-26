@@ -1,7 +1,12 @@
 // RenewableShiftSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract RenewableShiftSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RenewableShiftSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Shift to Renewables"

@@ -2,7 +2,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CivicFeedback {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CivicFeedback is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Feedback {
         address citizen;
         string message;

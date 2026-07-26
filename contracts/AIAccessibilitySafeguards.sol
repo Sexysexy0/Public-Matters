@@ -1,7 +1,12 @@
 // AIAccessibilitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract AIAccessibilitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AIAccessibilitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct DigitalGrant {
         uint256 creditBalance;
         uint256 expiryDate;

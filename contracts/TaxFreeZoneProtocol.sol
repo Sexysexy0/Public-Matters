@@ -1,7 +1,12 @@
 // TaxFreeZoneProtocol.sol
 pragma solidity ^0.8.0;
 
-contract TaxFreeZoneProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TaxFreeZoneProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => bool) public isProtectedCitizen;
 
     function enrollCitizen(address _citizen) public {

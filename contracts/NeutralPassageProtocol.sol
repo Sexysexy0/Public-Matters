@@ -1,7 +1,12 @@
 // NeutralPassageProtocol.sol
 pragma solidity ^0.8.0;
 
-contract NeutralPassageProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NeutralPassageProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public usBlockadeLifted;
     bool public straitOpen;
 

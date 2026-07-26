@@ -1,7 +1,12 @@
 // JointExplorationGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract JointExplorationGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract JointExplorationGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "55-45 split with PH priority"

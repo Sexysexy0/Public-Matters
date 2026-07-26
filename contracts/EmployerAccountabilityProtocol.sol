@@ -1,7 +1,12 @@
 // EmployerAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract EmployerAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EmployerAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Enforce compliance with labor laws"

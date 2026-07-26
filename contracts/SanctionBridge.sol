@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SanctionBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SanctionBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SanctionRecord(string plaintiff, string sanction);
 
     function logSanction(string memory plaintiff, string memory sanction) external {

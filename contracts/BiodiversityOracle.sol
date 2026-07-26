@@ -1,7 +1,12 @@
 // BiodiversityOracle.sol
 pragma solidity ^0.8.0;
 
-contract BiodiversityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BiodiversityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct RegionHealth {
         uint256 speciesCount;
         uint256 forestDensity;

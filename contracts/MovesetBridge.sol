@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MovesetBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MovesetBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MovesetRecord(string boss, string move);
 
     function logMoveset(string memory boss, string memory move) external {

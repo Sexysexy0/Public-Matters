@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GamePassPremiumBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GamePassPremiumBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PremiumSeal(string subscriber, string duration);
 
     function logPremium(string memory subscriber, string memory duration) external {

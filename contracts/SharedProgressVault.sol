@@ -1,7 +1,12 @@
 // SharedProgressVault.sol
 pragma solidity ^0.8.0;
 
-contract SharedProgressVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SharedProgressVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct TeamProgress {
         uint256 totalResources;
         uint256 shipHealth;

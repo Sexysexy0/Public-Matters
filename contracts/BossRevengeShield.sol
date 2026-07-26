@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BossRevengeShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BossRevengeShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RevengeSeal(string boss, string trigger);
 
     function logRevenge(string memory boss, string memory trigger) external {

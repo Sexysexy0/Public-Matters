@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BallotIntegrityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BallotIntegrityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event IntegrityRecord(address voter, string status);
 
     function logBallot(address voter, string memory status) external {

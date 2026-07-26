@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract PlayerRightsCharter {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PlayerRightsCharter is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RightsViolation(string game, string issue);
 
     function auditGame(string memory game, uint256 fps, uint256 microtransactions) public {

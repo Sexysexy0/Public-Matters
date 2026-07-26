@@ -1,7 +1,12 @@
 // PrivacySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract PrivacySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PrivacySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Personal Data Protection"

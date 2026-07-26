@@ -1,7 +1,12 @@
 // DecencyGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract DecencyGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DecencyGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of decency enforcement boundaries and citizen rights"

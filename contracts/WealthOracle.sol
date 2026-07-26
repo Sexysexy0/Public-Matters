@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WealthOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WealthOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WealthRecord(string sector, string impact);
 
     function logWealthConcentration(string memory sector, string memory impact) external {

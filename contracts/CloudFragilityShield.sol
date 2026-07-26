@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CloudFragilityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CloudFragilityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FallbackMode(string game, string method);
 
     function activateFallback(string memory _game, string memory _method) external {

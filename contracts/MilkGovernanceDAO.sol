@@ -1,7 +1,12 @@
 // MilkGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract MilkGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MilkGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of milk governance and dairy safeguards"

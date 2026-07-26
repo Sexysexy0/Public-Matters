@@ -1,7 +1,12 @@
 // ContentCoreFocus.sol
 pragma solidity ^0.8.0;
 
-contract ContentCoreFocus {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ContentCoreFocus is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public originalContentBudget;
     bool public isDealDistractionActive;
 

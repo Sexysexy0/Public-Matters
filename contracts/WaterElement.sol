@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WaterElement {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WaterElement is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WaterSeal(address player, string move);
 
     function castWater(address _player, string memory _move) external {

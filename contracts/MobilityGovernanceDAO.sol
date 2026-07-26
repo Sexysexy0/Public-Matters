@@ -1,7 +1,12 @@
 // MobilityGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract MobilityGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MobilityGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement community-driven oversight of transit systems and equitable mobility policies"

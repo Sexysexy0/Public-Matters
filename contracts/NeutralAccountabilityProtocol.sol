@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract NeutralAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NeutralAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // "Ensure transparency in global aid governance"

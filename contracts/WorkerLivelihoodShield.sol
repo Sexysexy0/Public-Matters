@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract WorkerLivelihoodShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WorkerLivelihoodShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LivelihoodAlert(string sector, string issue);
 
     function detectSuppression(string memory sector, bool suppression) public {

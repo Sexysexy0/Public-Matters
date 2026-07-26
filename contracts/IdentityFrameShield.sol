@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract IdentityFrameShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IdentityFrameShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FrameRecord(string player, string frame);
 
     function logFrame(string memory player, string memory frame) external {

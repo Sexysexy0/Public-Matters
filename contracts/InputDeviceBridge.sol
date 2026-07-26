@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract InputDeviceBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InputDeviceBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event InputRecord(string device, string status);
 
     function logInput(string memory device, string memory status) external {

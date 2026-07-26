@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CollaborationOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CollaborationOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CollaborationRecord(string project, string outcome);
 
     function logCollaborationOutcome(string memory project, string memory outcome) external {

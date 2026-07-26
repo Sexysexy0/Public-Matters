@@ -1,7 +1,12 @@
 // CriticalThinkingIncentive.sol
 pragma solidity ^0.8.0;
 
-contract CriticalThinkingIncentive {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CriticalThinkingIncentive is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public researchPoints;
 
     function awardResearch(address _thinker, uint256 _depthScore) public {

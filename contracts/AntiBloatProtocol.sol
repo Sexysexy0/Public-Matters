@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AntiBloatProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiBloatProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Prevent Budget Waste and Corporate Interference]
     function validateFeature(string memory _featureName, uint256 _cost) external pure returns (bool) {
         // Logic: If (Cost > UtilityValue), then REJECT.

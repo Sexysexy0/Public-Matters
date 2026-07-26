@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LeptonEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LeptonEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LeptonSeal(string app, string status);
 
     function logContainerIntegration(string memory app, bool integrated) external {

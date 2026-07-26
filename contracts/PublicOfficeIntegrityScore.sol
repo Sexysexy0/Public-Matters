@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PublicOfficeIntegrityScore {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PublicOfficeIntegrityScore is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public integrityPoints;
 
     // Edu: "Refuse to reward failure" [2:08]

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EconomicResilienceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EconomicResilienceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EconomicSeal(string factor, string status);
 
     function logEconomic(string memory factor, string memory status) external {

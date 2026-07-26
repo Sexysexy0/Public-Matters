@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WorldStreamer {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WorldStreamer is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Zero Loading Screens]
     function streamEnvironment(uint256 _playerX, uint256 _playerY) external {
         // Logic: Dynamically load assets based on proximity.

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BossRaidOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BossRaidOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RaidRecord(string boss, string status);
 
     function logRaid(string memory boss, string memory status) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TechShowcaseBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TechShowcaseBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ShowcaseRecord(string technology, string feature);
 
     function logShowcase(string memory technology, string memory feature) external {

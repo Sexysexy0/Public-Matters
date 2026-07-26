@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract InnovationEquityVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InnovationEquityVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Innovation {
         address innovator;
         string description;

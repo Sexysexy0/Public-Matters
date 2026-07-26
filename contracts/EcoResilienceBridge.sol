@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EcoResilienceBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EcoResilienceBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EcoRecord(string element, string detail);
 
     function logEco(string memory element, string memory detail) external {

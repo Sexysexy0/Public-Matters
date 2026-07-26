@@ -1,7 +1,12 @@
 // UniversalProductivityIncentive.sol
 pragma solidity ^0.8.0;
 
-contract UniversalProductivityIncentive {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UniversalProductivityIncentive is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public productivityScore;
 
     function rewardEffort(address _worker, uint256 _score) public {

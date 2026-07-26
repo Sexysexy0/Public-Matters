@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ConsumerChoiceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ConsumerChoiceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ChoiceEvent(string option, string status);
 
     function monitorChoice(string memory option, string memory status) external {

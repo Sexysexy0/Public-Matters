@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CampingFreedomShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CampingFreedomShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CampingSeal(string community, string safeguard);
 
     function logCamping(string memory community, string memory safeguard) external {

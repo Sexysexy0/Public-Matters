@@ -1,7 +1,12 @@
 // FaithCriticismAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract FaithCriticismAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FaithCriticismAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Faith-Criticism"

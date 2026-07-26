@@ -1,7 +1,12 @@
 // GlobalNodeIntegration.sol
 pragma solidity ^0.8.0;
 
-contract GlobalNodeIntegration {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalNodeIntegration is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CommunityNode {
         string nodeName;
         bool followsZeroTaxPolicy;

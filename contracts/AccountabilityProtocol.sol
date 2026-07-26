@@ -1,7 +1,12 @@
 // AccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract AccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Action {
         uint256 id;
         string safeguard;  // e.g. "Frame news as context, not panic"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BossRematchShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BossRematchShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RematchSeal(string boss, uint256 level);
 
     function logRematch(string memory boss, uint256 level) external {

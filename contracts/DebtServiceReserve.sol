@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DebtServiceReserve {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DebtServiceReserve is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public totalInterestSaved;
 
     // Bumabawas sa principal/interest liability gamit ang refund

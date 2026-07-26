@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CaretakerEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CaretakerEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EmpathyLogged(string spirit, string status);
 
     function logEmpathy(string memory spirit, string memory status) external {

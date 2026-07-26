@@ -1,9 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 /// @title ContentIntegrityShield
 /// @notice Covenant contract to safeguard human-generated content
-contract ContentIntegrityShield {
+contract ContentIntegrityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Content {
         address creator;
         string uri;

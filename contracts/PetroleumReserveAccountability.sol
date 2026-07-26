@@ -1,7 +1,12 @@
 // PetroleumReserveAccountability.sol
 pragma solidity ^0.8.0;
 
-contract PetroleumReserveAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PetroleumReserveAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ReserveStatus {
         uint256 currentLiters;
         uint256 minimumRequirement;

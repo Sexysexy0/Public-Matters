@@ -1,7 +1,12 @@
 // TransparencyEquitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract TransparencyEquitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransparencyEquitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Open Governance"

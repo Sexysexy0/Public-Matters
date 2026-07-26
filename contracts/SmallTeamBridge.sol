@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SmallTeamBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SmallTeamBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TeamRecord(string element, string detail);
 
     function logTeam(string memory element, string memory detail) external {

@@ -1,7 +1,12 @@
 // ArcticSovereigntyRegistry.sol
 pragma solidity ^0.8.0;
 
-contract ArcticSovereigntyRegistry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ArcticSovereigntyRegistry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ShippingLane {
         string routeName;
         uint256 transitFee;

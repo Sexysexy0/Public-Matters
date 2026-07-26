@@ -1,7 +1,12 @@
 // DecentralizedIdentityVault.sol
 pragma solidity ^0.8.0;
 
-contract DecentralizedIdentityVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DecentralizedIdentityVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CitizenID { bytes32 identityHash; bool isActive; }
     mapping(address => CitizenID) private vault;
 

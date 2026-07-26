@@ -1,7 +1,12 @@
 // SovereignFiscalPolicy.sol (v4.0 - The Abrea Reform)
 pragma solidity ^0.8.0;
 
-contract SovereignFiscalPolicy {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereignFiscalPolicy is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // 1 Million Pesos Tax-Free Threshold (in base units)
     uint256 public constant TAX_FREE_THRESHOLD = 1000000; 
     

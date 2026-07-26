@@ -2,7 +2,12 @@
 // Logic: Ensuring Human Supremacy over AGI
 pragma solidity ^0.8.0;
 
-contract HumanInTheLoopVerification {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumanInTheLoopVerification is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function finalApproval(bytes32 _decisionHash) public returns (bool) {
         // Goal: Anti-Chaos Guard.
         // No autonomous systemic changes allowed without Admin Signature.

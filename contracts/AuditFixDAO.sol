@@ -1,7 +1,12 @@
 // AuditFixDAO.sol
 pragma solidity ^0.8.0;
 
-contract AuditFixDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AuditFixDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Report {
         uint256 id;
         string module;   // e.g. "Database Access"

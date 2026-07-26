@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AthleticOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AthleticOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AthleticRecord(string factor, string status);
 
     function logAthleticRecord(string memory factor, string memory status) external {

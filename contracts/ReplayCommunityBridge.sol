@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ReplayCommunityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ReplayCommunityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ReplaySeal(string playthrough, string communityImpact);
 
     function logReplayCommunity(string memory playthrough, string memory communityImpact) external {

@@ -1,7 +1,12 @@
 // CommunityAuditRightsDAO.sol
 pragma solidity ^0.8.0;
 
-contract CommunityAuditRightsDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityAuditRightsDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Request {
         uint256 id;
         string citizen;   // e.g. "Barangay Auditor"

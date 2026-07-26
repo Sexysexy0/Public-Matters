@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommunityJoyShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityJoyShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event JoySeal(string factor, string status);
 
     function logJoy(string memory factor, string memory status) external {

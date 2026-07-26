@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DecriminalizationEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DecriminalizationEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DecriminalizationSeal(string factor, string status);
 
     function logDecriminalization(string memory factor, string memory status) external {

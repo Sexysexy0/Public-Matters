@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract StructuralOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StructuralOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event StructureEvent(string structure, string status);
 
     function monitorStructure(string memory structure, string memory status) external {

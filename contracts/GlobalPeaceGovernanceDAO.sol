@@ -1,7 +1,12 @@
 // GlobalPeaceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract GlobalPeaceGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalPeaceGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Establish multilateral AI ethics council for military tech"

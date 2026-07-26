@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RivalryBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RivalryBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RivalryRecord(string rival, string outcome);
 
     function logRivalry(string memory rival, string memory outcome) external {

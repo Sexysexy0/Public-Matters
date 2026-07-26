@@ -1,7 +1,12 @@
 // FreedomOracleRegistry.sol
 pragma solidity ^0.8.0;
 
-contract FreedomOracleRegistry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FreedomOracleRegistry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Prisoner {
         string name;
         uint256 detentionDate;

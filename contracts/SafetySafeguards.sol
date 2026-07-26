@@ -1,7 +1,12 @@
 // SafetySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract SafetySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SafetySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Neighborhood Watch Charter"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ParallelProgressSync {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ParallelProgressSync is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public humanityRestorePercent;
 
     // Every seed vault found by either player counts for both [1:00:28]

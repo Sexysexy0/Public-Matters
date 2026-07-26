@@ -1,7 +1,12 @@
 // PeaceResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract PeaceResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PeaceResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Accord {
         uint256 id;
         string region;    // e.g. "Border Zone"

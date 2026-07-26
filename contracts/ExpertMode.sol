@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ExpertMode {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ExpertMode is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Boss { uint256 hp; uint256 parryWindow; uint256 dodgeWindow; }
     mapping(uint256 => Boss) public bosses;
 

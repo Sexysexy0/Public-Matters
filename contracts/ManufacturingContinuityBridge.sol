@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ManufacturingContinuityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ManufacturingContinuityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ManufacturingContinuity {
         address steward;
         string context;

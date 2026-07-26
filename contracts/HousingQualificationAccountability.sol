@@ -1,7 +1,12 @@
 // HousingQualificationAccountability.sol
 pragma solidity ^0.8.0;
 
-contract HousingQualificationAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HousingQualificationAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Applicant {
         bytes32 identityHash;
         uint256 incomeLevel;

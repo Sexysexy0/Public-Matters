@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PlayStationFranchiseRevivalsArc {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PlayStationFranchiseRevivalsArc is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RevivalCandidate(string franchise, string safeguard, uint256 timestamp);
     event DormantIPSafeguard(string franchise, string safeguard, uint256 timestamp);
     event RemakeEquity(string franchise, string safeguard, uint256 timestamp);

@@ -1,7 +1,12 @@
 // OutcomeResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract OutcomeResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OutcomeResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Outcome {
         uint256 id;
         string domain;    // e.g. "Internet Freedom"

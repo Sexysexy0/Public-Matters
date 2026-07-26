@@ -1,7 +1,12 @@
 // DesignGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract DesignGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DesignGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance aesthetics with functionality in commuter rail design"

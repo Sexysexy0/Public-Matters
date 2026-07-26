@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ConsumerRepairShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ConsumerRepairShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RepairEquitySeal(string sector, string safeguard);
 
     function logRepairEquity(string memory sector, string memory safeguard) external {

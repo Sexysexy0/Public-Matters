@@ -1,7 +1,12 @@
 // CrisisGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CrisisGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CrisisGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement fuel rationing with Senate oversight"

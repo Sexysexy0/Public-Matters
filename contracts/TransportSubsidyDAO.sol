@@ -1,7 +1,12 @@
 // TransportSubsidyDAO.sol
 pragma solidity ^0.8.0;
 
-contract TransportSubsidyDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransportSubsidyDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Allocation {
         uint256 id;
         string transportSector; // e.g. "Jeepney Operators"

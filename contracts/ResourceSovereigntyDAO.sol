@@ -1,7 +1,12 @@
 // ResourceSovereigntyDAO.sol
 pragma solidity ^0.8.0;
 
-contract ResourceSovereigntyDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourceSovereigntyDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Project {
         string description;
         uint256 votesFor;

@@ -1,7 +1,12 @@
 // LeakageAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract LeakageAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LeakageAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct FundBatch {
         uint256 totalAmount;
         uint256 claimedAmount;

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DLCBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DLCBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DLCRecord(string element, string detail);
 
     function logDLC(string memory element, string memory detail) external {

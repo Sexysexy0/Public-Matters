@@ -1,7 +1,12 @@
 // ASEANEnergyGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract ASEANEnergyGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ASEANEnergyGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Establish ASEAN Energy Security Pact for collective bargaining"

@@ -1,7 +1,12 @@
 // GameGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract GameGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GameGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of game governance and fairness in optimization"

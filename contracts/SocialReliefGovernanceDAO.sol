@@ -1,7 +1,12 @@
 // SocialReliefGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract SocialReliefGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SocialReliefGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Expand aid programs to include excluded vulnerable groups"

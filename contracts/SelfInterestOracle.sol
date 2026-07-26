@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SelfInterestOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SelfInterestOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BiasRecord(string actor, string bias);
 
     function logBias(string memory actor, string memory bias) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ExciseTaxSuspender {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ExciseTaxSuspender is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [2:21-4:02] Suspend excise taxes during supply shocks
     function checkTaxExemption(uint256 _globalOilPrice) public pure returns (string memory) {
         if (_globalOilPrice > 100) { // Example threshold: $100/barrel

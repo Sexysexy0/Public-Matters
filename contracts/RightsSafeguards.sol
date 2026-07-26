@@ -1,7 +1,12 @@
 // RightsSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract RightsSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RightsSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Label Accuracy Enforcement"

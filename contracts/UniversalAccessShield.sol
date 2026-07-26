@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract UniversalAccessShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UniversalAccessShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AccessRecord(string subscriber, string game);
 
     function logAccess(string memory subscriber, string memory game) external {

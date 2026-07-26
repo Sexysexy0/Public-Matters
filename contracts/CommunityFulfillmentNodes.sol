@@ -1,7 +1,12 @@
 // CommunityFulfillmentNodes.sol
 pragma solidity ^0.8.0;
 
-contract CommunityFulfillmentNodes {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityFulfillmentNodes is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Node { bool isActive; uint256 storageCapacity; }
     mapping(uint256 => Node) public microHubs;
 

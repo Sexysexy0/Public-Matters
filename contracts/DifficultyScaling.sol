@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DifficultyScaling {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DifficultyScaling is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Balance Mass Success with Elite Challenge]
     function setChallengeLevel(uint256 _playerSkill) external pure returns (string memory) {
         if (_playerSkill > 9000) {

@@ -1,7 +1,12 @@
 // EmpathicWeatherSync.sol
 pragma solidity ^0.8.0;
 
-contract EmpathicWeatherSync {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EmpathicWeatherSync is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     enum CollectiveMood { Exhausted, Joyful, Melancholic, Productive }
 
     function syncAtmosphere(CollectiveMood _currentMood) public {

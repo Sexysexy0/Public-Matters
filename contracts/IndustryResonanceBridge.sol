@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract IndustryResonanceBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IndustryResonanceBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event StudioResonance(string studio, string action, string sentiment);
     event FanTrust(string studio, bool safeguarded);
 

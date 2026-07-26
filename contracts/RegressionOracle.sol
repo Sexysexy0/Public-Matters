@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RegressionOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RegressionOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RegressionRecord(string factor, string status);
 
     function logRegressionRecord(string memory factor, string memory status) external {

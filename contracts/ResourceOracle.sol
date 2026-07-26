@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ResourceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ResourceRecord(string resource, string allocation);
 
     function logResourceAllocation(string memory resource, string memory allocation) external {

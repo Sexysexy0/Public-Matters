@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HeroismEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HeroismEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event HeroismSeal(string trait, string status);
 
     function logHeroism(string memory trait, string memory status) external {

@@ -1,7 +1,12 @@
 // ClimateSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ClimateSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ClimateSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Climate Resilience"

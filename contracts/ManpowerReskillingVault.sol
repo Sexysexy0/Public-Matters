@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ManpowerReskillingVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ManpowerReskillingVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant AUTOMATION_TAX_RATE = 5; // 5% of automation cost goes to training
 
     // [COMMENT: "AI robotics... total disaster for manpower"]

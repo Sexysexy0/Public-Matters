@@ -1,7 +1,12 @@
 // FleetEquityDistributor.sol
 pragma solidity ^0.8.0;
 
-contract FleetEquityDistributor {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FleetEquityDistributor is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public dailyRevenue;
     mapping(address => uint256) public driverDividends;
 

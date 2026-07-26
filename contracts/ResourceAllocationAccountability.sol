@@ -1,7 +1,12 @@
 // ResourceAllocationAccountability.sol
 pragma solidity ^0.8.0;
 
-contract ResourceAllocationAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourceAllocationAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct HospitalStock {
         uint256 availableBeds;
         uint256 oxygenLevel; // percentage

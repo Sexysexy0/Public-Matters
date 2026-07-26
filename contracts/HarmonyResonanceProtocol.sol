@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract HarmonyResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HarmonyResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Suggestion {
         uint256 id;
         string partner;

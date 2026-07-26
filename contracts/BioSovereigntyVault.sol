@@ -1,7 +1,12 @@
 // BioSovereigntyVault.sol
 pragma solidity ^0.8.0;
 
-contract BioSovereigntyVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BioSovereigntyVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => bytes32) private dnaHash;
     mapping(address => bool) public researchAccess;
 

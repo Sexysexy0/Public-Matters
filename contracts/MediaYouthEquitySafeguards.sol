@@ -1,7 +1,12 @@
 // MediaYouthEquitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract MediaYouthEquitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MediaYouthEquitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Youth Access to Truthful Media"

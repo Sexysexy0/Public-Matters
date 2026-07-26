@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LoyaltyBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LoyaltyBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LoyaltyRecord(string program, string detail);
 
     function logLoyalty(string memory program, string memory detail) external {

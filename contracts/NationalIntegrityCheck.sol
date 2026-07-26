@@ -2,7 +2,12 @@
 // Logic: The Great Sieve (Election Integrity)
 pragma solidity ^0.8.0;
 
-contract NationalIntegrityCheck {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NationalIntegrityCheck is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public integrityScore; // 0 to 100
 
     function auditCandidate(address _candidate) public view returns (bool) {

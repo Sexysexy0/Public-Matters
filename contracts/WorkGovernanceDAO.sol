@@ -1,7 +1,12 @@
 // WorkGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract WorkGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WorkGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Reduce commute burden, increase family equity time"

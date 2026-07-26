@@ -1,7 +1,12 @@
 // NationalIdentityResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract NationalIdentityResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NationalIdentityResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Identity {
         uint256 id;
         string symbol;     // e.g. "Shared Filipino Identity"

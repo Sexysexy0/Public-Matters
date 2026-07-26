@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AdvancementBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AdvancementBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AdvancementRecord(string feature, string detail);
 
     function logAdvancement(string memory feature, string memory detail) external {

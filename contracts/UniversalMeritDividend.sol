@@ -1,7 +1,12 @@
 // UniversalMeritDividend.sol
 pragma solidity ^0.8.0;
 
-contract UniversalMeritDividend {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UniversalMeritDividend is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public meritScore;
 
     function rewardContribution(address _citizen, uint256 _points) public {

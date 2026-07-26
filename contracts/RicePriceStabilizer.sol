@@ -1,7 +1,12 @@
 // RicePriceStabilizer.sol
 pragma solidity ^0.8.0;
 
-contract RicePriceStabilizer {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RicePriceStabilizer is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant TARGET_PRICE = 30; // 30 PHP per KG
     uint256 public bufferStockLevels;
 

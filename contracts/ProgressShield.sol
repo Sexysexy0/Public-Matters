@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ProgressShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProgressShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ProgressRecord(string player, string progress);
 
     function logProgress(string memory player, string memory progress) external {

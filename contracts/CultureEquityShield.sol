@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CultureEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CultureEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CultureLogged(string tradition, string status);
 
     function logCulture(string memory tradition, string memory status) external {

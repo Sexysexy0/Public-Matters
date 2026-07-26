@@ -1,7 +1,12 @@
 // EconomicGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract EconomicGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EconomicGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance affordability with sovereignty in trade agreements"

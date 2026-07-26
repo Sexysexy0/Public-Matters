@@ -1,7 +1,12 @@
 // NationalEnergyEmergencySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract NationalEnergyEmergencySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NationalEnergyEmergencySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect National Energy Security"

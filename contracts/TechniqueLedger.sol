@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TechniqueLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TechniqueLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TechniqueSeal(string character, string move);
 
     function logTechnique(string memory _character, string memory _move) external {

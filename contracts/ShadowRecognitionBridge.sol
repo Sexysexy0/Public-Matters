@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ShadowRecognitionBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ShadowRecognitionBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ShadowRecord(string conflict, string lesson);
 
     function logShadow(string memory conflict, string memory lesson) external {

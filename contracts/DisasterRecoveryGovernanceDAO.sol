@@ -1,7 +1,12 @@
 // DisasterRecoveryGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract DisasterRecoveryGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DisasterRecoveryGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Allocate funds for rebuilding typhoon-damaged schools"

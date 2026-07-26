@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract InvasionTriggerBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InvasionTriggerBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TriggerRecord(string condition, string effect);
 
     function logTrigger(string memory condition, string memory effect) external {

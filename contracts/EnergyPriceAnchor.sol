@@ -1,7 +1,12 @@
 // EnergyPriceAnchor.sol
 pragma solidity ^0.8.0;
 
-contract EnergyPriceAnchor {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EnergyPriceAnchor is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public globalOilPrice; // Galing sa Energy Oracle
     uint256 public transportFareCap;
 

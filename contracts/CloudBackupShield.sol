@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CloudBackupShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CloudBackupShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BackupSeal(string account, string status);
 
     function logBackup(string memory _account, string memory _status) external {

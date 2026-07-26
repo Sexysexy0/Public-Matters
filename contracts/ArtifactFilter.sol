@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ArtifactFilter {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ArtifactFilter is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Visual Clarity in Extreme Scenarios]
     function renderHUD(uint256 _renderLayer) external pure {
         // Logic: Protect HUD from AI-prediction artifacts.

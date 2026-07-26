@@ -1,7 +1,12 @@
 // LegacyVisionEscrow.sol
 pragma solidity ^0.8.0;
 
-contract LegacyVisionEscrow {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LegacyVisionEscrow is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     string public immutable CORE_VISION = "Protect Ancestral Lands & IP Rights";
     uint256 public constant AMENDMENT_THRESHOLD = 90; // 90% required
 

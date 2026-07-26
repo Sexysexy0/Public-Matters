@@ -1,7 +1,12 @@
 // PriceCeilingOracle.sol
 pragma solidity ^0.8.0;
 
-contract PriceCeilingOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PriceCeilingOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant MAX_PRICE = 70;
     
     struct GasStation {

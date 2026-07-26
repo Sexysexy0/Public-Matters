@@ -1,7 +1,12 @@
 // FinanceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract FinanceGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FinanceGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct PolicyProposal {
         uint256 id;
         string description; // e.g. "Redirect funds to Free Energy R&D"

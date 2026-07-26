@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GachaBalanceBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GachaBalanceBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event GachaResult(address player, uint256 points, string tier);
 
     function logResult(address player, uint256 points, string memory tier) external {

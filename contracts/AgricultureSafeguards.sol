@@ -1,7 +1,12 @@
 // AgricultureSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract AgricultureSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AgricultureSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Food Production"

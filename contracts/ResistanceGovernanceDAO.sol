@@ -1,7 +1,12 @@
 // ResistanceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract ResistanceGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResistanceGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance local struggle with global solidarity in resistance governance"

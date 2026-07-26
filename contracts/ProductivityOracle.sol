@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ProductivityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProductivityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ProductivityRecord(string study, string outcome);
 
     function logOutcome(string memory _study, string memory _outcome) external {

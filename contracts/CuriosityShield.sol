@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CuriosityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CuriosityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CuriosityRecord(string feature, string status);
 
     function logCuriosityEquity(string memory feature, string memory status) external {

@@ -1,7 +1,12 @@
 // DecentralizedMediaRegistry.sol
 pragma solidity ^0.8.0;
 
-contract DecentralizedMediaRegistry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DecentralizedMediaRegistry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Archive { address author; string contentLink; bool isCensored; }
     mapping(uint256 => Archive) public historyLogs;
 

@@ -1,7 +1,12 @@
 // AnalogTimeReserve.sol
 pragma solidity ^0.8.0;
 
-contract AnalogTimeReserve {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AnalogTimeReserve is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public isAnalogHourActive;
 
     function activateQuietTime() public {

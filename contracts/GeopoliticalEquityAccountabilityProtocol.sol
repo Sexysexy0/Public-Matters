@@ -1,7 +1,12 @@
 // GeopoliticalEquityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract GeopoliticalEquityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GeopoliticalEquityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Geopolitical Governance"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract JobMatchOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract JobMatchOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event JobMatched(address applicant, string company);
 
     function matchGraduate(address _applicant, string memory _company) external {

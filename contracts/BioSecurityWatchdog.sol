@@ -1,7 +1,12 @@
 // BioSecurityWatchdog.sol
 pragma solidity ^0.8.0;
 
-contract BioSecurityWatchdog {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BioSecurityWatchdog is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public dangerLevelThreshold = 90;
 
     event BiologicalThreatAlert(address buyer, string sequenceID);

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TransparencyTrustShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransparencyTrustShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AccountabilityLogged(string actor, string action);
 
     function logAccountability(string memory actor, string memory action) external {

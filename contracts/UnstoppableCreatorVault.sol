@@ -1,7 +1,12 @@
 // UnstoppableCreatorVault.sol
 pragma solidity ^0.8.0;
 
-contract UnstoppableCreatorVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UnstoppableCreatorVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Content {
         string title;
         string contentCID; // IPFS hash

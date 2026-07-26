@@ -1,7 +1,12 @@
 // TradeDisruptionInsuranceDAO.sol
 pragma solidity ^0.8.0;
 
-contract TradeDisruptionInsuranceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TradeDisruptionInsuranceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public blockadeDetected;
 
     function triggerAutomaticPayout() public {

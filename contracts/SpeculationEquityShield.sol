@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SpeculationEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SpeculationEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Theory {
         address participant;
         string theme;

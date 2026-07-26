@@ -1,7 +1,12 @@
 // UptimeAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract UptimeAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UptimeAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CriticalTask {
         uint256 taskId;
         uint256 deadline;

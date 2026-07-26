@@ -1,7 +1,12 @@
 // GenerationalStewardshipProtocol.sol
 pragma solidity ^0.8.0;
 
-contract GenerationalStewardshipProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GenerationalStewardshipProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Commitment {
         uint256 id;
         string resource;   // e.g. "Forests"

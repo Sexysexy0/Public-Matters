@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ChaoticPlayBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ChaoticPlayBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ChaosRecord(string element, string detail);
 
     function logChaos(string memory element, string memory detail) external {

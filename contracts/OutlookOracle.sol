@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract OutlookOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OutlookOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event OutlookRecord(string factor, string status);
 
     function logOutlookRecord(string memory factor, string memory status) external {

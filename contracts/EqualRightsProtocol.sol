@@ -1,7 +1,12 @@
 // EqualRightsProtocol.sol
 pragma solidity ^0.8.0;
 
-contract EqualRightsProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EqualRightsProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // Track direct employment (no endo, no agency restrictions)
     mapping(address => bool) public directEmployees;
 

@@ -1,7 +1,12 @@
 // EquityDistributionAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract EquityDistributionAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EquityDistributionAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Global Equity Distribution"

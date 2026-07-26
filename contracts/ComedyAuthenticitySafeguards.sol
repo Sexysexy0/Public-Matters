@@ -1,7 +1,12 @@
 // ComedyAuthenticitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ComedyAuthenticitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ComedyAuthenticitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Preserve Authenticity in Stand-Up Comedy"

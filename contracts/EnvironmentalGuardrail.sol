@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EnvironmentalGuardrail {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EnvironmentalGuardrail is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant MAX_POLLUTION_LEVEL = 10;
 
     // [Safeguard for local communities]

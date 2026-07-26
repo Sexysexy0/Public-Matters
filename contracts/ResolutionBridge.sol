@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ResolutionBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResolutionBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ResolutionRecord(string barangay, string action);
 
     function resolveComplaint(string memory _barangay, string memory _action) external {

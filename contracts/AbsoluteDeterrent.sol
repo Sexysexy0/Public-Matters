@@ -2,7 +2,12 @@
 // Logic: Maximum Penalty for Heinous Crimes
 pragma solidity ^0.8.0;
 
-contract AbsoluteDeterrent {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AbsoluteDeterrent is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     enum PenaltyType { LIFE_IMPRISONMENT, HARD_LABOR, CAPITAL_PUNISHMENT }
 
     function authorizeExecution(string memory _crimeID, uint256 _evidenceCertainty) public pure returns (PenaltyType) {

@@ -1,7 +1,12 @@
 // AntiExtortionAuditProtocol.sol
 pragma solidity ^0.8.0;
 
-contract AntiExtortionAuditProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiExtortionAuditProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public nationalTreasuryBalance;
     uint256 public wastefulSpendingThreshold;
 

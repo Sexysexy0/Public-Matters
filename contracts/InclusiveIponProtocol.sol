@@ -1,7 +1,12 @@
 // InclusiveIponProtocol.sol
 pragma solidity ^0.8.0;
 
-contract InclusiveIponProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InclusiveIponProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public iponBalance;
 
     event IponAdded(address indexed worker, uint256 amount);

@@ -2,7 +2,12 @@
 // Logic: Connecting the Tool to the Hand
 pragma solidity ^0.8.0;
 
-contract MastermindTrace {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MastermindTrace is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct TransactionAudit {
         address sender;
         uint256 amount;

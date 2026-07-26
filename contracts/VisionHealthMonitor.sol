@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract VisionHealthMonitor {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VisionHealthMonitor is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant CLARITY_THRESHOLD = 85; // Percent clarity required
 
     // [17:49-19:15] Monitoring for off-gassing haze and visual obstructions

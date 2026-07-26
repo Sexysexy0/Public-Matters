@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TruthLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TruthLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EvidenceUnmasked(string truth, address perpetrator);
 
     // [Goal: Expose the Real Masterminds]

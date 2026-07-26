@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 /// @title SimpleTimelock
 /// @notice Queue transactions with enforced delay to allow review/cancellation
-contract SimpleTimelock {
+contract SimpleTimelock is Ownable {
     uint public delay;
     mapping(bytes32 => uint) public queued; // txHash -> executeAfter
 
@@ -11,7 +13,7 @@ contract SimpleTimelock {
     event Executed(bytes32 indexed txHash);
     event Cancelled(bytes32 indexed txHash);
 
-    constructor(uint _delay) { delay = _delay; }
+    constructor(uint _delay) Ownable(msg.sender) { delay = _delay; }
 
     function queue(address to, uint value, bytes calldata data, uint salt) external returns (bytes32) {
         bytes32 h = keccak256(abi.encode(to, value, data, salt));

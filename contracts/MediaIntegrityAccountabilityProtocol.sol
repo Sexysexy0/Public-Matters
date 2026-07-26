@@ -1,7 +1,12 @@
 // MediaIntegrityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract MediaIntegrityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MediaIntegrityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Media Integrity"

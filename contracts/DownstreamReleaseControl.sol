@@ -1,7 +1,12 @@
 // DownstreamReleaseControl.sol
 pragma solidity ^0.8.0;
 
-contract DownstreamReleaseControl {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DownstreamReleaseControl is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public safetyVerified;
 
     function releaseWater() public view {

@@ -1,7 +1,12 @@
 // DirectAgriExchange.sol
 pragma solidity ^0.8.0;
 
-contract DirectAgriExchange {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DirectAgriExchange is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CropBatch {
         string cropType;
         uint256 pricePerUnit;

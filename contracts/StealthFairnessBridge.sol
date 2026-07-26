@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract StealthFairnessBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StealthFairnessBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event StealthLogged(string tactic, string outcome);
 
     function logStealth(string memory tactic, string memory outcome) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CompetitionOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CompetitionOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CompetitionRecord(string factor, string status);
 
     function logCompetitionRecord(string memory factor, string memory status) external {

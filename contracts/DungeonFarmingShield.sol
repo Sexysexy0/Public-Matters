@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DungeonFarmingShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DungeonFarmingShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DungeonFarmingSeal(string factor, string status);
 
     function logDungeonFarming(string memory factor, string memory status) external {

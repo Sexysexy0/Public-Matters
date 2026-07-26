@@ -1,7 +1,12 @@
 // SubterraneanScannerDAO.sol
 pragma solidity ^0.8.0;
 
-contract SubterraneanScannerDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SubterraneanScannerDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ResourceDeposit {
         string mineralType;
         uint256 depth;

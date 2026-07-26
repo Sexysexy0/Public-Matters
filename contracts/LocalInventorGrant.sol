@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LocalInventorGrant {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LocalInventorGrant is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Inventor {
         string name;
         string inventionType; // e.g., "Plastic-to-Fuel", "Water-Hydrogen"

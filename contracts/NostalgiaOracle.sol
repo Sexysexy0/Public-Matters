@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract NostalgiaOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NostalgiaOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event NostalgiaRecord(string factor, string status);
 
     function logNostalgiaRecord(string memory factor, string memory status) external {

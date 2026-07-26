@@ -1,7 +1,12 @@
 // ParticipatoryOversightProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ParticipatoryOversightProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ParticipatoryOversightProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Feedback {
         uint256 id;
         string citizen;   // e.g. "Community Member"

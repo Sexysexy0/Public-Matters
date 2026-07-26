@@ -1,7 +1,12 @@
 // PublicSpaceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract PublicSpaceGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PublicSpaceGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance modernization with cultural identity in public space design"

@@ -1,7 +1,12 @@
 // PolicyReformGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract PolicyReformGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PolicyReformGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Amend constitutional ownership restrictions"

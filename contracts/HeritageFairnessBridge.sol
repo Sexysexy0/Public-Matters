@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HeritageFairnessBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HeritageFairnessBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event HeritageLogged(string practice, string outcome);
 
     function logHeritage(string memory practice, string memory outcome) external {

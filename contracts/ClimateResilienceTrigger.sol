@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract ClimateResilienceTrigger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ClimateResilienceTrigger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event Alert(string hazard, string action);
 
     function checkHazard(uint256 temp, uint256 rainfall) public {

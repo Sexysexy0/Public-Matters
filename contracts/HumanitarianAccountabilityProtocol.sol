@@ -1,7 +1,12 @@
 // HumanitarianAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract HumanitarianAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumanitarianAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Aid Delivery"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CastleOwnershipShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CastleOwnershipShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CastleClaim(address owner, string castleName);
     event BiomeHouseClaim(address owner, string biome);
 

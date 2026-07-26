@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ModEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ModEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EquitySeal(string modder, string contribution, string status);
 
     function logContribution(string memory modder, string memory contribution, string memory status) external {

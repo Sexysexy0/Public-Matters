@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RetaliationOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RetaliationOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RetaliationRecord(string boss, string status);
 
     function logRetaliation(string memory boss, string memory status) external {

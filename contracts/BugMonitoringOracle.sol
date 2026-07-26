@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BugMonitoringOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BugMonitoringOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BugEvent(string context, string severity);
 
     function monitorBug(string memory context, string memory severity) external {

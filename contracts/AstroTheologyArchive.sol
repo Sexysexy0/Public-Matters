@@ -1,7 +1,12 @@
 // AstroTheologyArchive.sol
 pragma solidity ^0.8.0;
 
-contract AstroTheologyArchive {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AstroTheologyArchive is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CelestialEvent {
         string eventName;
         uint256 planetaryAlignment; // Saturn, Jupiter, Sun data

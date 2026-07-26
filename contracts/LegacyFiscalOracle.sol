@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LegacyFiscalOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LegacyFiscalOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LegacyFiscalRecord(string factor, string status);
 
     function logLegacyFiscalRecord(string memory factor, string memory status) external {

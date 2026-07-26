@@ -1,9 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 /// @title ResonanceEquityMesh
 /// @notice Covenant contract to safeguard resonance equity, governance flows, communal foresight, and dignity continuity
-contract ResonanceEquityMesh {
+contract ResonanceEquityMesh is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct MeshArc {
         address steward;
         string domain;

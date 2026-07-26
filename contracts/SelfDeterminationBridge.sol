@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SelfDeterminationBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SelfDeterminationBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SelfDeterminationRecord(string community, string decision);
 
     function logSelfDetermination(string memory community, string memory decision) external {

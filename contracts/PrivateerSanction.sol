@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PrivateerSanction {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PrivateerSanction is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => int256) public reputation;
 
     // Logic: Missions that define your path.

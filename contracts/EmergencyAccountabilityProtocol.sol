@@ -1,7 +1,12 @@
 // EmergencyAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract EmergencyAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EmergencyAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure oversight in emergency taxation powers"

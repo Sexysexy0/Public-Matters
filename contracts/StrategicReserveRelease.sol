@@ -1,7 +1,12 @@
 // StrategicReserveRelease.sol
 pragma solidity ^0.8.0;
 
-contract StrategicReserveRelease {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StrategicReserveRelease is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public globalOilPrice; // Feed from Oracles
 
     function emergencyRelease() public {

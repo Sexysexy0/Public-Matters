@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract OSResilienceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OSResilienceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event OSResilienceEvent(string context, string resilience);
 
     function monitorOS(string memory context, string memory resilience) external {

@@ -1,7 +1,12 @@
 // BoardAccountabilitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract BoardAccountabilitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BoardAccountabilitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Ensure Board Accountability"

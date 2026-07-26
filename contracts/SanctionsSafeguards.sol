@@ -1,7 +1,12 @@
 // SanctionsSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract SanctionsSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SanctionsSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Strategic Sanctions Charter"

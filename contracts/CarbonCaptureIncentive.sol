@@ -1,7 +1,12 @@
 // CarbonCaptureIncentive.sol
 pragma solidity ^0.8.0;
 
-contract CarbonCaptureIncentive {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CarbonCaptureIncentive is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public rewardPerTon = 50; // $50 reward for every ton of CO2 removed
 
     function claimSequestrationReward(uint256 _tonsCaptured, bytes32 _verificationHash) public {

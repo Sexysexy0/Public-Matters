@@ -1,7 +1,12 @@
 // AntiAusterityDAO.sol
 pragma solidity ^0.8.0;
 
-contract AntiAusterityDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiAusterityDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Measure {
         uint256 id;
         string policy;   // e.g. "Subsidize renewable energy"

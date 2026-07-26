@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract OpenGamingShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OpenGamingShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event OpenGamingSeal(string platform, string status);
 
     function logOpenGaming(string memory platform, string memory status) external {

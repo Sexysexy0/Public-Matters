@@ -1,7 +1,12 @@
 // CannabisPolicyGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CannabisPolicyGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CannabisPolicyGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Expand medical cannabis access with regulated THC limits"

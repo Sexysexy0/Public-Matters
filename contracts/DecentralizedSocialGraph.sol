@@ -1,7 +1,12 @@
 // DecentralizedSocialGraph.sol
 pragma solidity ^0.8.0;
 
-contract DecentralizedSocialGraph {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DecentralizedSocialGraph is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => address[]) public followers;
 
     function follow(address _target) public {

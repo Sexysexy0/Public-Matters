@@ -1,7 +1,12 @@
 // PeaceMandateEnforcer.sol
 pragma solidity ^0.8.0;
 
-contract PeaceMandateEnforcer {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PeaceMandateEnforcer is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AggressionDetected(address node, uint256 severity);
 
     function enforcePeace(address _node) public {

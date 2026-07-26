@@ -1,7 +1,12 @@
 // DeFiEquityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract DeFiEquityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DeFiEquityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in DeFi Governance"

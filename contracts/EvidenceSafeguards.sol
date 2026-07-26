@@ -1,7 +1,12 @@
 // EvidenceSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract EvidenceSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EvidenceSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Record {
         uint256 id;
         string type;       // e.g. "Bank Records"

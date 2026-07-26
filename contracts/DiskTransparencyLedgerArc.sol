@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DiskTransparencyLedgerArc {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DiskTransparencyLedgerArc is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DiskLaunch(address indexed player, string gameId, string artHash, uint256 timestamp);
     event ArtAuthenticity(string gameId, string artHash, bool verified);
     event PreservationLog(string gameId, string contributor, uint256 timestamp);

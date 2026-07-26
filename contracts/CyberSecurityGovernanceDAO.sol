@@ -1,7 +1,12 @@
 // CyberSecurityGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CyberSecurityGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CyberSecurityGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement mandatory penetration testing for government systems"

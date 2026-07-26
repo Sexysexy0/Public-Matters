@@ -1,7 +1,12 @@
 // PostElectionAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract PostElectionAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PostElectionAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in post-election audits"

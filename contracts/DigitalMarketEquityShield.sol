@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DigitalMarketEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DigitalMarketEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EquitySeal(string platform, uint256 commission, string status);
 
     function logCommission(string memory platform, uint256 commission) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FossilResilienceBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FossilResilienceBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FossilSupport(string resource, string status);
 
     function logFossilSupport(string memory resource, string memory status) external {

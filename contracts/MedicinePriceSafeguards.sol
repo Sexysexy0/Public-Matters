@@ -1,7 +1,12 @@
 // MedicinePriceSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract MedicinePriceSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MedicinePriceSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Medicine {
         string name;
         uint256 baseCost;

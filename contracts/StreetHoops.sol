@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract StreetHoops {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StreetHoops is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Community Engagement through Sports]
     function shootBall(uint256 _timing) external pure returns (string memory) {
         if (_timing > 90) {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BountyChoice {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BountyChoice is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Strategic Mercy vs. Hard Profit]
     function decideFate(bool _showMercy) external pure returns (string memory) {
         if (_showMercy) {

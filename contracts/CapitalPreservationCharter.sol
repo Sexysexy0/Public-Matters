@@ -1,7 +1,12 @@
 // CapitalPreservationCharter.sol
 pragma solidity ^0.8.0;
 
-contract CapitalPreservationCharter {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CapitalPreservationCharter is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Reserve {
         uint256 id;
         string asset;      // e.g. "Emergency Fund"

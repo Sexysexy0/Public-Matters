@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LiquidityCircuitBreaker {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LiquidityCircuitBreaker is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public hourlyLimit;
     uint256 public currentWithdrawals;
 

@@ -1,7 +1,12 @@
 // JudicialIndependenceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract JudicialIndependenceGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract JudicialIndependenceGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure judicial nominees affirm factual independence and resist political pressure"

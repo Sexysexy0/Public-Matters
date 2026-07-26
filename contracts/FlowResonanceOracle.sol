@@ -2,7 +2,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FlowResonanceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FlowResonanceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FlowLogged(string mechanic, string sentiment);
     event AdaptiveSafeguard(string system, bool safeguarded);
     event DifficultyMonitoring(string studio, string mechanic);

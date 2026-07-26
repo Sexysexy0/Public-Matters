@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DataSovereignAudit {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DataSovereignAudit is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Real-Time Privacy Auditing]
     function auditDataAccess(address _company, string memory _purpose) external {
         // Logic: If purpose != "Functional Utility"

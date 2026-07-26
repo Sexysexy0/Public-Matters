@@ -1,7 +1,12 @@
 // DirectFarmToMarket.sol
 pragma solidity ^0.8.0;
 
-contract DirectFarmToMarket {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DirectFarmToMarket is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CropBatch {
         address farmer;
         uint256 priceFloor; // Minimum price set by the farmer

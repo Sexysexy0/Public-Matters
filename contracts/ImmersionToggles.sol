@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ImmersionToggles {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ImmersionToggles is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public hideBackWeapons;
 
     // [Goal: Enhance Visual Immersion]

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RebootCritiqueOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RebootCritiqueOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CritiqueRecord(string entry, string issue);
 
     function logCritique(string memory _entry, string memory _issue) external {

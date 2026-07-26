@@ -1,7 +1,12 @@
 // CyberSecuritySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract CyberSecuritySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CyberSecuritySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect Digital Infrastructure"

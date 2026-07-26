@@ -1,7 +1,12 @@
 // EnvironmentalSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract EnvironmentalSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EnvironmentalSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Waste-to-Energy Plant Oversight"

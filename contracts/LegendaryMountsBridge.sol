@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LegendaryMountsBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LegendaryMountsBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Mount {
         address tamer;
         string species;

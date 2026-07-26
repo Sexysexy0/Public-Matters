@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract OwnershipLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OwnershipLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event OwnershipSeal(address player, string game);
 
     function grantOwnership(address _player, string memory _game) external {

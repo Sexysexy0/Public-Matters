@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CyberOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CyberOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CyberRecord(string factor, string status);
 
     function logCyberRecord(string memory factor, string memory status) external {

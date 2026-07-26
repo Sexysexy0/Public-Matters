@@ -1,7 +1,12 @@
 // NeuralPrivacyGuard.sol
 pragma solidity ^0.8.0;
 
-contract NeuralPrivacyGuard {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NeuralPrivacyGuard is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => bytes32) private neuralEncryptionKey;
 
     function lockNeuralData(bytes32 _key) public {

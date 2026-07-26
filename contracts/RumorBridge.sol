@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RumorBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RumorBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RumorRecord(string source, string detail);
 
     function logRumor(string memory source, string memory detail) external {

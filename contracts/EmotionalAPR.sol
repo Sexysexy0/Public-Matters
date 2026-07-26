@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 import "./DamayStateMachine.sol";
 
-contract EmotionalAPR {
+contract EmotionalAPR is Ownable {
     int256 public currentAPR;
     DamayStateMachine public damay;
 
-    constructor(address damayAddress) {
+    constructor(address damayAddress) Ownable(msg.sender) {
         currentAPR = 0;
         damay = DamayStateMachine(damayAddress);
     }

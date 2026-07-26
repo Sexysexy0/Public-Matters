@@ -1,7 +1,12 @@
 // NormalizationResistanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract NormalizationResistanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NormalizationResistanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Event {
         uint256 id;
         string ritual;     // e.g. "Public Ceremony"

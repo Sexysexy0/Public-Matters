@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ProjectFundClawback {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProjectFundClawback is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Recover funds from stalled projects]
     function triggerClawback(uint256 _projectID) public {
         // Logic: If (ProjectInactivity > 60 days)

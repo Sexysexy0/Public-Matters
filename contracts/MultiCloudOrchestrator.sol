@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MultiCloudOrchestrator {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MultiCloudOrchestrator is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Interoperability] 
     // Instead of naming "AWS", we define "Cloud Provider Capabilities"
     struct ProviderSpecs {

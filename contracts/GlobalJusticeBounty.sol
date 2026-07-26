@@ -1,7 +1,12 @@
 // GlobalJusticeBounty.sol
 pragma solidity ^0.8.0;
 
-contract GlobalJusticeBounty {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalJusticeBounty is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Bounty {
         string targetCase;
         uint256 rewardAmount;

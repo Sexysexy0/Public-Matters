@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PirateCityExpansionShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PirateCityExpansionShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ExpansionSeal(string feature, string status);
 
     function logExpansion(string memory feature, string memory status) external {

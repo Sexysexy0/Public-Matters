@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract UpdateSafetyShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UpdateSafetyShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SafetyAlert(string updateId, string status);
 
     function flagUpdate(string memory _updateId, string memory _status) external {

@@ -1,7 +1,12 @@
 // TourismGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract TourismGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TourismGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement sustainable tourism programs with community equity"

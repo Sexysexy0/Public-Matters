@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LeakDefenseLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LeakDefenseLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Incident {
         address offender;
         string description;

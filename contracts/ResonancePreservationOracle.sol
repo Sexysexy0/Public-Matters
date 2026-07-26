@@ -4,7 +4,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ResonancePreservationOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResonancePreservationOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ResonanceRecord {
         address curator;
         string arc;

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RiderEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RiderEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RiderRecord(string element, string detail);
 
     function logRider(string memory element, string memory detail) external {

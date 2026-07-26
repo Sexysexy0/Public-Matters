@@ -2,7 +2,12 @@
 // Logic: Monitoring the Human-to-Robot Ratio
 pragma solidity ^0.8.0;
 
-contract LaborResilienceTracker {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LaborResilienceTracker is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct BusinessNode { uint256 humanStaff; uint256 robotStaff; }
     mapping(address => BusinessNode) public industryAudit;
 

@@ -1,7 +1,12 @@
 // ServiceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract ServiceGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ServiceGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance deployment speed with humane IT service governance"

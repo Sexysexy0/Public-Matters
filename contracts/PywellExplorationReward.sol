@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PywellExplorationReward {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PywellExplorationReward is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Reward the Curious]
     function discoverHiddenValue(bytes32 _secretKey) external {
         // Logic: If the user finds a hidden city/utility in the code:

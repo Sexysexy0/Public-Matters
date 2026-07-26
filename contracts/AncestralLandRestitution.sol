@@ -1,7 +1,12 @@
 // AncestralLandRestitution.sol
 pragma solidity ^0.8.0;
 
-contract AncestralLandRestitution {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AncestralLandRestitution is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct RestitutionClaim {
         string communityName;
         uint256 yearDisplaced;

@@ -1,7 +1,12 @@
 // RecoveryProtocol.sol
 pragma solidity ^0.8.0;
 
-contract RecoveryProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RecoveryProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Action {
         uint256 id;
         string domain;       // e.g. "Database"

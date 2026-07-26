@@ -1,7 +1,12 @@
 // PeaceFirstProtocol.sol
 pragma solidity ^0.8.0;
 
-contract PeaceFirstProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PeaceFirstProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string approach;   // e.g. "Diplomatic Negotiation"

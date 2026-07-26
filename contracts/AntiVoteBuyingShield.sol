@@ -1,7 +1,12 @@
 // AntiVoteBuyingShield.sol
 pragma solidity ^0.8.0;
 
-contract AntiVoteBuyingShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiVoteBuyingShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public suspiciousThreshold = 1000; // Limit of small transfers in 24h
     uint256 public transferCount;
 

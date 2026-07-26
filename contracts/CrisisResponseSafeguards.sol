@@ -1,7 +1,12 @@
 // CrisisResponseSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract CrisisResponseSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CrisisResponseSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     enum CrisisLevel { Normal, Elevated, Critical }
     
     struct DepartmentStatus {

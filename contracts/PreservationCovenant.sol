@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PreservationCovenant {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PreservationCovenant is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Ownership {
         address consumer;
         string asset;

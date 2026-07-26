@@ -1,7 +1,12 @@
 // TradeGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract TradeGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TradeGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement fair trade certification for exports"

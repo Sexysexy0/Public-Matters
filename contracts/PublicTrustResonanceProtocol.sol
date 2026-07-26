@@ -1,7 +1,12 @@
 // PublicTrustResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract PublicTrustResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PublicTrustResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Audit {
         uint256 id;
         string reform;    // e.g. "Anti-Political Dynasty Bill"

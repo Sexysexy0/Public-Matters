@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TrustEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TrustEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TrustLogged(string developer, string platform, string sentiment);
     event DeveloperFairness(string platform, bool safeguarded);
     event PlatformMonitoring(string platform, string status);

@@ -1,7 +1,12 @@
 // GovernanceAccountabilityDAO.sol
 pragma solidity ^0.8.0;
 
-contract GovernanceAccountabilityDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GovernanceAccountabilityDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Suspend congressional salaries until TSA funding is passed"

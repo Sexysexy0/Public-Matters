@@ -1,7 +1,12 @@
 // ServiceAccessibilityDAO.sol
 pragma solidity ^0.8.0;
 
-contract ServiceAccessibilityDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ServiceAccessibilityDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct PerformanceAudit {
         string agencyName;
         uint256 unresolvedInquiries;

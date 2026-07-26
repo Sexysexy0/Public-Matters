@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EvolutionBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EvolutionBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EvolutionRecord(string project, string milestone);
 
     function logEvolution(string memory project, string memory milestone) external {

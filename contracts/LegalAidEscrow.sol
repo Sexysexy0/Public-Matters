@@ -1,7 +1,12 @@
 // LegalAidEscrow.sol
 pragma solidity ^0.8.0;
 
-contract LegalAidEscrow {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LegalAidEscrow is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Representation {
         address lawyer;
         address client;

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BlockadeEscrowMediator {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BlockadeEscrowMediator is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public isUsBlockadeActive;
     uint256 public tradeFunds;
 

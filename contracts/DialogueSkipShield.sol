@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DialogueSkipShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DialogueSkipShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DialogueSkipped(string npc, string scene);
     event CutsceneSkipped(string scene, string reason);
 

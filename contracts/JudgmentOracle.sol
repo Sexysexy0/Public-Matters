@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract JudgmentOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract JudgmentOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event JudgmentRecord(string factor, string status);
 
     function logJudgmentRecord(string memory factor, string memory status) external {

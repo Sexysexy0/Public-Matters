@@ -1,7 +1,12 @@
 // ConflictOfInterestDAO.sol
 pragma solidity ^0.8.0;
 
-contract ConflictOfInterestDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ConflictOfInterestDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Disclosure {
         uint256 id;
         string member;    // e.g. "Rep. Garin"

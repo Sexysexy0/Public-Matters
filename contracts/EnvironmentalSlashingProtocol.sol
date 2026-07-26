@@ -1,7 +1,12 @@
 // EnvironmentalSlashingProtocol.sol
 pragma solidity ^0.8.0;
 
-contract EnvironmentalSlashingProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EnvironmentalSlashingProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Factory {
         address owner;
         uint256 pollutionThreshold;

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FranchiseContinuityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FranchiseContinuityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Continuity {
         address overseer;
         string franchise;

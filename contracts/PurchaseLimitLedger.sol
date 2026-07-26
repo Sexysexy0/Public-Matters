@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PurchaseLimitLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PurchaseLimitLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LimitSeal(address buyer, string status);
 
     function enforceLimit(address _buyer, string memory _status) external {

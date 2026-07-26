@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DirectToWallet {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DirectToWallet is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [AGENDA LOGIC] Eliminating physical queues via direct disbursement
     function disburseSubsidy(address _riderWallet, uint256 _amount) public {
         // Logic: Verify franchise status -> Send funds to wallet

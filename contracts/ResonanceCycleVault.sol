@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ResonanceCycleVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResonanceCycleVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Cycle {
         address steward;
         string arc;

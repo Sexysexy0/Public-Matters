@@ -2,7 +2,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DifficultyEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DifficultyEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FlowSafeguard(string system, string sentiment);
     event AdaptiveFairness(string mechanic, bool safeguarded);
     event TransparencyLogged(string studio, string mechanic);

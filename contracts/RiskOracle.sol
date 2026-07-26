@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RiskOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RiskOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RiskRecord(string jurisdiction, string riskLevel);
 
     function logRisk(string memory jurisdiction, string memory riskLevel) external {

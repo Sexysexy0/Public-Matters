@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DueProcessCodex {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DueProcessCodex is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Accusation {
         uint256 id;
         address accuser;

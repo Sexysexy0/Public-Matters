@@ -1,7 +1,12 @@
 // DoctrineResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract DoctrineResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DoctrineResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Donroe Doctrine Reinforcement Program"

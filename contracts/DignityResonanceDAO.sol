@@ -1,7 +1,12 @@
 // DignityResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract DignityResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DignityResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Anti-Monopoly Reform Program"

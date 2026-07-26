@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SustainabilityDignityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SustainabilityDignityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SustainabilityRecord(string element, string detail);
 
     function logSustainability(string memory element, string memory detail) external {

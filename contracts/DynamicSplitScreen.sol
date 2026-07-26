@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DynamicSplitScreen {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DynamicSplitScreen is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Total Freedom of Movement]
     function toggleSplit(uint256 _distance) external pure returns (string memory) {
         if (_distance > 50) {

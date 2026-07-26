@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ExplorationImmersionShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ExplorationImmersionShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ExplorationSeal(string factor, string status);
 
     function logExploration(string memory factor, string memory status) external {

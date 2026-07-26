@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DashboardFreedomShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DashboardFreedomShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DashboardSeal(string player, string mode);
 
     function logDashboardChoice(string memory player, string memory mode) external {

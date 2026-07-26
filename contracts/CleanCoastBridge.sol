@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CleanCoastBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CleanCoastBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CleanRecord(string location, string measure);
 
     function logClean(string memory location, string memory measure) external {

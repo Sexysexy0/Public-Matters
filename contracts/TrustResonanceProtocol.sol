@@ -1,7 +1,12 @@
 // TrustResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract TrustResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TrustResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Assurance {
         uint256 id;
         string principle; // e.g. "No disturbance to communities"

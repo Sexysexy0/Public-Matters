@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MarketTruthOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MarketTruthOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Objective Performance over Subjective Bias]
     function verifySuccess(uint256 _salesCount) public pure returns (bool) {
         // Logic: Does the market support the product?

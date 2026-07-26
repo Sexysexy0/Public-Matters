@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FreeToPlayBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FreeToPlayBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FreeRecord(string title, string status);
 
     function logFreeTransition(string memory title, string memory status) external {

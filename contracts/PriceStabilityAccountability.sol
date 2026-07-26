@@ -1,7 +1,12 @@
 // PriceStabilityAccountability.sol
 pragma solidity ^0.8.0;
 
-contract PriceStabilityAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PriceStabilityAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct PricePact {
         string commodity;
         uint256 agreedPrice;

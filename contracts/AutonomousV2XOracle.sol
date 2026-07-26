@@ -1,7 +1,12 @@
 // AutonomousV2XOracle.sol
 pragma solidity ^0.8.0;
 
-contract AutonomousV2XOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AutonomousV2XOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct RoadHazard {
         uint256 latitude;
         uint256 longitude;

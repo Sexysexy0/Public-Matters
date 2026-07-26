@@ -1,7 +1,12 @@
 // CooperativeLendingDAO.sol
 pragma solidity ^0.8.0;
 
-contract CooperativeLendingDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CooperativeLendingDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct LoanRequest {
         address borrower;
         uint256 amount;

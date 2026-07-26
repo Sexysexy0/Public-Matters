@@ -1,7 +1,12 @@
 // UnityResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract UnityResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UnityResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string community; // e.g. "Regional Bloc"

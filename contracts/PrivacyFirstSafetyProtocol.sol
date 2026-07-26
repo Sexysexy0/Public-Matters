@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PrivacyFirstSafetyProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PrivacyFirstSafetyProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct SecurityData {
         bytes32 incidentHash;
         uint256 timestamp;

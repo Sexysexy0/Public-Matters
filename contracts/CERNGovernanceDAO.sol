@@ -1,7 +1,12 @@
 // CERNGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CERNGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CERNGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement community-driven oversight of global science governance and equitable research access"

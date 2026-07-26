@@ -2,7 +2,12 @@
 // Logic: Immutable Portion Verification
 pragma solidity ^0.8.0;
 
-contract TransparentNutrientLog {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransparentNutrientLog is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function verifyServing(uint256 _expectedWeight, uint256 _actualWeight) public pure returns (string memory) {
         // Goal: Stop the "Portion Wars".
         // No more "Protein Cup" exit signs.

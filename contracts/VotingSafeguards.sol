@@ -1,7 +1,12 @@
 // VotingSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract VotingSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VotingSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Ballot Integrity Check"

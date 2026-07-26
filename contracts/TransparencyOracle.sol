@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TransparencyOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransparencyOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Record {
         address contributor;
         string provenance;

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CitizenAuditorRegistry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CitizenAuditorRegistry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Investigation {
         address reporter;
         string IPFS_EvidenceHash; // Link to photos/docs on decentralized storage

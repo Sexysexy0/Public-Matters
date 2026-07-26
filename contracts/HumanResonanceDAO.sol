@@ -1,7 +1,12 @@
 // HumanResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract HumanResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumanResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Human-Centric Innovation Program"

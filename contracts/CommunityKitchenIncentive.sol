@@ -2,7 +2,12 @@
 // Logic: Incentivizing Affordable High-Protein Meals
 pragma solidity ^0.8.0;
 
-contract CommunityKitchenIncentive {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityKitchenIncentive is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public sovereignCredits;
 
     function logHealthyMeal(address _kitchen, uint256 _proteinGrams, uint256 _price) public {

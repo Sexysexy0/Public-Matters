@@ -1,7 +1,12 @@
 // LegacyRetirementSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract LegacyRetirementSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LegacyRetirementSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Agency {
         string name;
         bool isAutomated;

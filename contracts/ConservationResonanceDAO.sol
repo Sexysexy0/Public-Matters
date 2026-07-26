@@ -1,7 +1,12 @@
 // ConservationResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract ConservationResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ConservationResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Water Conservation Program"

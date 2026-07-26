@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FanProjectPreservationArc {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FanProjectPreservationArc is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FanProjectLogged(string project, string safeguard, uint256 timestamp);
     event CommunitySafeguard(address indexed contributor, string project, string safeguard);
     event ArchivalRitual(string project, string safeguard, uint256 timestamp);

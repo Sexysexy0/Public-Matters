@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SimulationLayer {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SimulationLayer is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Deep World Responsiveness]
     function updateEconomy(uint256 _playerReputation, uint256 _localSupply) external pure returns (uint256) {
         // Logic: Simulate supply/demand and world physics.

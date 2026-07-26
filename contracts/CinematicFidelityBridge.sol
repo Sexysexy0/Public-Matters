@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CinematicFidelityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CinematicFidelityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FidelityLogged(string element, string quality);
 
     function logFidelity(string memory element, string memory quality) external {

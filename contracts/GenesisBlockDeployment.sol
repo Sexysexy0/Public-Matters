@@ -1,7 +1,12 @@
 // GenesisBlockDeployment.sol
 pragma solidity ^0.8.0;
 
-contract GenesisBlockDeployment {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GenesisBlockDeployment is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public isLive = false;
 
     function activateGenesis() public {

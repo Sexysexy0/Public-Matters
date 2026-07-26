@@ -1,7 +1,12 @@
 // LocalIndustryShield.sol
 pragma solidity ^0.8.0;
 
-contract LocalIndustryShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LocalIndustryShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function auditMarketDominance(string memory _sector) public pure returns (string memory) {
         // If foreign ownership leads to 90% market control:
         // Trigger "MSME Protection Levy" to fund local cooperatives

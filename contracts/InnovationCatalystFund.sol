@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract InnovationCatalystFund {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InnovationCatalystFund is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public grants;
 
     function supportStudio(address studio, bool proprietary) public {

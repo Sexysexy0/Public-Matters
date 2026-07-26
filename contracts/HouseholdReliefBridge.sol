@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HouseholdReliefBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HouseholdReliefBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ReliefRecord(string household, string status);
 
     function grantRelief(string memory _household, string memory _status) external {

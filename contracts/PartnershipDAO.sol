@@ -1,7 +1,12 @@
 // PartnershipDAO.sol
 pragma solidity ^0.8.0;
 
-contract PartnershipDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PartnershipDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Alliance {
         uint256 id;
         string partner;   // e.g. "Local Distributor"

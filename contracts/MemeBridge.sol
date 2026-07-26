@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MemeBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MemeBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MemeRecord(string element, string detail);
 
     function logMeme(string memory element, string memory detail) external {

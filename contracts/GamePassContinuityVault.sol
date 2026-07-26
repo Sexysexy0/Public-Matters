@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GamePassContinuityVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GamePassContinuityVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct EssentialDrop {
         address subscriber;
         string title;

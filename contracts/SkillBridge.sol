@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SkillBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SkillBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ScholarshipVoucher(address applicant, string program);
 
     function issueVoucher(address _applicant, string memory _program) external {

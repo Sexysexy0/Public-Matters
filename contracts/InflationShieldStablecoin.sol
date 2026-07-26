@@ -1,7 +1,12 @@
 // InflationShieldStablecoin.sol
 pragma solidity ^0.8.0;
 
-contract InflationShieldStablecoin {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InflationShieldStablecoin is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public stabilityBalance;
     uint256 public consumerPriceIndex; // Feed from internal market oracles
 

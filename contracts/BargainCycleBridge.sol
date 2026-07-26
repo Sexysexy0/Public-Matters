@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BargainCycleBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BargainCycleBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BargainRecord(string community, string discount);
 
     function logBargain(string memory community, string discount) external {

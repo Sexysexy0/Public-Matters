@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CompensationPlusShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CompensationPlusShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CompensationPlusSeal(address worker, uint256 basePay, uint256 extraPay);
 
     function releasePayment(address worker, uint256 basePay) external {

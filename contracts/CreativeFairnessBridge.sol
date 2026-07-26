@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CreativeFairnessBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CreativeFairnessBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CreativeLogged(string project, string outcome);
 
     function logCreative(string memory project, string memory outcome) external {

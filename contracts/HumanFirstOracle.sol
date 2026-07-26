@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HumanFirstOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumanFirstOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event HumanRecord(string factor, string status);
 
     function logHumanRecord(string memory factor, string memory status) external {

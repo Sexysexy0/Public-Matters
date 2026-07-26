@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MediaDisconnectBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MediaDisconnectBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DisconnectRecord(string outlet, string issue);
 
     function logMediaDisconnect(string memory outlet, string memory issue) external {

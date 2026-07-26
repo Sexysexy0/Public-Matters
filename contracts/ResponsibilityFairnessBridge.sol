@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ResponsibilityFairnessBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResponsibilityFairnessBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DutyLogged(string task, string outcome);
 
     function logDuty(string memory task, string memory outcome) external {

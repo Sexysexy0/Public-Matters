@@ -1,7 +1,12 @@
 // PollutionOracleGuard.sol
 pragma solidity ^0.8.0;
 
-contract PollutionOracleGuard {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PollutionOracleGuard is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public toxicityThreshold = 75; // 75% toxicity limit
     bool public operationalPermitStatus = true;
 

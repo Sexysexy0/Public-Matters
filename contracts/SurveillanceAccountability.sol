@@ -1,7 +1,12 @@
 // SurveillanceAccountability.sol
 pragma solidity ^0.8.0;
 
-contract SurveillanceAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SurveillanceAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct RequestLog {
         address requester;
         uint256 timestamp;

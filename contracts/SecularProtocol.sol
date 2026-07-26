@@ -1,7 +1,12 @@
 // SecularProtocol.sol
 pragma solidity ^0.8.0;
 
-contract SecularProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SecularProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Principle {
         uint256 id;
         string clause;       // e.g. "No religious framing in governance"

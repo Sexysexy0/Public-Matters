@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EventOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EventOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EventRecord(string eventName, string status);
 
     function logEventPricing(string memory eventName, string memory status) external {

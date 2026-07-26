@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MemoryEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MemoryEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MemoryLogged(address player, string memoryFeature);
 
     function logMemory(address player, string memoryFeature) external {

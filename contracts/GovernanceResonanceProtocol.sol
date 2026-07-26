@@ -1,7 +1,12 @@
 // GovernanceResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract GovernanceResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GovernanceResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string domain;    // e.g. "Civil Security"

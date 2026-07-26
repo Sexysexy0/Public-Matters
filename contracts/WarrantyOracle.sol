@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WarrantyOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WarrantyOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WarrantyRecord(string factor, string status);
 
     function logWarrantyRecord(string memory factor, string memory status) external {

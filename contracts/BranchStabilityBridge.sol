@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BranchStabilityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BranchStabilityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BranchLogged(string branchName, string stability);
 
     function logBranch(string memory branchName, string memory stability) external {

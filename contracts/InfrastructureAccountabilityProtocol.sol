@@ -1,7 +1,12 @@
 // InfrastructureAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract InfrastructureAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InfrastructureAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in infrastructure projects"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ProductionDignityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProductionDignityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ProductionSeal(string factor, string status);
 
     function logProduction(string memory factor, string memory status) external {

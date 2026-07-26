@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PreservationContinuityVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PreservationContinuityVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Legacy {
         address curator;
         string title;

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TaxpayerAuditOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TaxpayerAuditOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Grant {
         uint256 amount;
         string organizationName;

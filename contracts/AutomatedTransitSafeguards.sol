@@ -1,7 +1,12 @@
 // AutomatedTransitSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract AutomatedTransitSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AutomatedTransitSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct TransitNode {
         bool isActive;
         uint256 occupancyRate;

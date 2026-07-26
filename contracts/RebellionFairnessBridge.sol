@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RebellionFairnessBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RebellionFairnessBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RebellionLogged(string cause, string outcome);
 
     function logRebellion(string memory cause, string memory outcome) external {

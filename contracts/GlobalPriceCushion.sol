@@ -2,7 +2,12 @@
 // Logic: Mitigating Global Volatility
 pragma solidity ^0.8.0;
 
-contract GlobalPriceCushion {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalPriceCushion is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public strategicReserve;
 
     function activateCushion(uint256 _globalPriceIndex) public returns (string memory) {

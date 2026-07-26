@@ -1,7 +1,12 @@
 // ImmutableEnforcementProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ImmutableEnforcementProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ImmutableEnforcementProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public reputationScore;
 
     function penaltySlash(address _offender, uint256 _severity) public {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DiscoveryBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DiscoveryBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DiscoveryRecord(string element, string detail);
 
     function logDiscovery(string memory element, string memory detail) external {

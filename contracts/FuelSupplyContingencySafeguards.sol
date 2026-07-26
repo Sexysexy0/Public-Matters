@@ -1,7 +1,12 @@
 // FuelSupplyContingencySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract FuelSupplyContingencySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FuelSupplyContingencySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect Emergency Fuel Imports"

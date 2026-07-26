@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MutualBenefitOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MutualBenefitOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BenefitRecord(string partner, string status);
 
     function logBenefit(string memory _partner, string memory _status) external {

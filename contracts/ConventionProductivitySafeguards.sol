@@ -1,7 +1,12 @@
 // ConventionProductivitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ConventionProductivitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ConventionProductivitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Ensure Focus in Conventions"

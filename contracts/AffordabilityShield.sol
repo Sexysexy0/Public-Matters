@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AffordabilityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AffordabilityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AffordabilitySeal(string product, string safeguard);
 
     function logAffordability(string memory product, string memory safeguard) external {

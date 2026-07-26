@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CreativityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CreativityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CreativityRecord(string mod, string detail);
 
     function logCreativityRecord(string memory mod, string memory detail) external {

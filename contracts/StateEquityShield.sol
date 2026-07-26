@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract StateEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StateEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct StateEquity {
         address overseer;
         string context;

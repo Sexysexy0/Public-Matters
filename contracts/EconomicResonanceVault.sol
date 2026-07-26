@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EconomicResonanceVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EconomicResonanceVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Shift {
         address participant;
         string factor;

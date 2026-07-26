@@ -1,7 +1,12 @@
 // CivilRightsGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CivilRightsGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CivilRightsGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure rights governance balances justice with equality"

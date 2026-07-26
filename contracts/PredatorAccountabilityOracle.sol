@@ -1,7 +1,12 @@
 // PredatorAccountabilityOracle.sol
 pragma solidity ^0.8.0;
 
-contract PredatorAccountabilityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PredatorAccountabilityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct PersonOfInterest {
         string name;
         string role;

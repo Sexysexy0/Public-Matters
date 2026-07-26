@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DarkPatternBlocker {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DarkPatternBlocker is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Block Deceptive Tracking]
     function filterRequest(string memory _metadataType) public pure returns (bool) {
         // Logic: If request includes (Location, AdID, or BrowserFingerprint)

@@ -1,7 +1,12 @@
 // HumanitarianProtocol.sol
 pragma solidity ^0.8.0;
 
-contract HumanitarianProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumanitarianProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Mission {
         uint256 id;
         string region;       // e.g. "Flood Zone"

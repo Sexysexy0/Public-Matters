@@ -1,7 +1,12 @@
 // ImpactResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ImpactResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ImpactResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Effect {
         uint256 id;
         string domain;    // e.g. "Community Development"

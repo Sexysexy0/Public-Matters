@@ -1,7 +1,12 @@
 // AgencyAbsorptionProtocol.sol
 pragma solidity ^0.8.0;
 
-contract AgencyAbsorptionProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AgencyAbsorptionProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Recruit {
         address worker;
         address agency;

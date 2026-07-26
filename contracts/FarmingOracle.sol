@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FarmingOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FarmingOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FarmingRecord(string factor, string status);
 
     function logFarmingRecord(string memory factor, string memory status) external {

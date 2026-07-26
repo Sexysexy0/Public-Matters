@@ -1,7 +1,12 @@
 // SovereignTradeLedger.sol
 pragma solidity ^0.8.0;
 
-contract SovereignTradeLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereignTradeLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct StrategicAsset {
         string assetName;
         uint256 volume;

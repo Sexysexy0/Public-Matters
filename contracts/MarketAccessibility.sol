@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MarketAccessibility {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MarketAccessibility is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Success through Inclusion]
     function optimizeForUsers(uint256 _complexity) external pure returns (string memory) {
         if (_complexity < 50) {

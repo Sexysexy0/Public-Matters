@@ -1,7 +1,12 @@
 // KnowledgeResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract KnowledgeResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract KnowledgeResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Future Skills Curriculum Program"

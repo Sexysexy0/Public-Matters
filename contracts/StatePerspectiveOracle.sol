@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract StatePerspectiveOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StatePerspectiveOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PerspectiveRecord(string state, string stance);
 
     function logPerspective(string memory _state, string memory _stance) external {

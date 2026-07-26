@@ -1,7 +1,12 @@
 // YouthDigitalAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract YouthDigitalAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract YouthDigitalAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Youth Digital Empowerment"

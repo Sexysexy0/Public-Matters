@@ -1,7 +1,12 @@
 // GreenGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract GreenGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GreenGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance affordability with sustainability in energy transition"

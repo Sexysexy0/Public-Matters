@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FinancialDignityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FinancialDignityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FinancialRecord(string element, string detail);
 
     function logFinancial(string memory element, string memory detail) external {

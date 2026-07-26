@@ -1,7 +1,12 @@
 // ClimateUrbanEquityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ClimateUrbanEquityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ClimateUrbanEquityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Climate-Urban Governance"

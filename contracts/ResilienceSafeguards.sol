@@ -1,7 +1,12 @@
 // ResilienceSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ResilienceSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResilienceSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Climate & Disaster Resilience"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HumanSoulShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumanSoulShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SoulSeal(string factor, string status);
 
     function logSoul(string memory factor, string memory status) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RefundMonitoringOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RefundMonitoringOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RefundEvent(string context, string feedback);
 
     function monitorRefund(string memory context, string memory feedback) external {

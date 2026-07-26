@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AthleticBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AthleticBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AthleticRecord(string country, string detail);
 
     function logAthletic(string memory country, string memory detail) external {

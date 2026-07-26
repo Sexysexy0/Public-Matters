@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PlayerRelationProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PlayerRelationProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Feedback { uint256 severity; string issue; }
     Feedback[] public activePatches;
 

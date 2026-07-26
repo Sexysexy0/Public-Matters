@@ -1,7 +1,12 @@
 // VictimRestitutionVault.sol
 pragma solidity ^0.8.0;
 
-contract VictimRestitutionVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VictimRestitutionVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public totalSeizedFunds;
     
     function distributeAid(address _victimHash, uint256 _amount) public {

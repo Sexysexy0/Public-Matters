@@ -1,7 +1,12 @@
 // RentControlAutomator.sol
 pragma solidity ^0.8.0;
 
-contract RentControlAutomator {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RentControlAutomator is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant MAX_INCREASE_PERCENT = 3; // 3% max annual increase
     
     struct Lease {

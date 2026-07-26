@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract AudienceIntegrityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AudienceIntegrityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event IntegrityAlert(string channel, string issue);
 
     function flagHiddenInfluence(string memory channel, bool hiddenOwnership) public {

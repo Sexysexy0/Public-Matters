@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GameArtRegistryArc {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GameArtRegistryArc is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ArtRegistered(string gameId, string artHash, address contributor, uint256 timestamp);
     event ReputationEarned(address indexed contributor, uint256 points);
     event ArtVerified(string gameId, string artHash, bool verified);

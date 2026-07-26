@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AIEncroachmentBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AIEncroachmentBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AIRecord(string element, string detail);
 
     function logAI(string memory element, string memory detail) external {

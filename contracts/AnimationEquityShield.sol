@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AnimationEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AnimationEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AnimationSeal(string factor, string status);
 
     function logAnimation(string memory factor, string memory status) external {

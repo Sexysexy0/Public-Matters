@@ -1,7 +1,12 @@
 // TruthVerificationProtocol.sol
 pragma solidity ^0.8.0;
 
-contract TruthVerificationProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TruthVerificationProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ContentAudit {
         bytes32 contentHash;
         address creator;

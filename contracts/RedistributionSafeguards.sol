@@ -1,7 +1,12 @@
 // RedistributionSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract RedistributionSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RedistributionSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Discounted Asset Sale Charter"

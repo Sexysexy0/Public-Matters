@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PublicFundUtilityAudit {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PublicFundUtilityAudit is Ownable {
     uint256 public projectBudget;
     uint256 public crimeReductionTarget;
     address public treasuryAddress;

@@ -1,7 +1,12 @@
 // PrivacyProtocol.sol
 pragma solidity ^0.8.0;
 
-contract PrivacyProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PrivacyProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string domain;       // e.g. "User Data"

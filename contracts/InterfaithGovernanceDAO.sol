@@ -1,7 +1,12 @@
 // InterfaithGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract InterfaithGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InterfaithGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance belief with political power in interfaith governance"

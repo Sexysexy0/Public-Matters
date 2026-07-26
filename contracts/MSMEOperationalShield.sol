@@ -2,7 +2,12 @@
 // Logic: Accessing the P4-B DTI Crisis Fund
 pragma solidity ^0.8.0;
 
-contract MSMEOperationalShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MSMEOperationalShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant MAX_NO_COLLATERAL = 5000000; // PHP 5M Limit
 
     function applyForCrisisLoan(uint256 _requestedAmount) public pure returns (string memory) {

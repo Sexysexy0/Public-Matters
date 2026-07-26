@@ -1,7 +1,12 @@
 // CreativeOwnershipAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract CreativeOwnershipAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CreativeOwnershipAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Creative Ownership"

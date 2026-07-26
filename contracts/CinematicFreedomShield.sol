@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CinematicFreedomShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CinematicFreedomShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Project {
         address actor;
         string title;

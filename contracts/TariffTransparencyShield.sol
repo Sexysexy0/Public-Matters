@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TariffTransparencyShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TariffTransparencyShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TransparencySeal(string company, string refundStatus);
 
     function logTariffRefund(string memory company, string memory refundStatus) external {

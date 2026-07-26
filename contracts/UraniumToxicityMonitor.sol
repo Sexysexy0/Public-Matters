@@ -1,7 +1,12 @@
 // UraniumToxicityMonitor.sol
 pragma solidity ^0.8.0;
 
-contract UraniumToxicityMonitor {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UraniumToxicityMonitor is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public uraniumThreshold; // Safe parts per billion (ppb)
     
     // Kinukuha ang data mula sa field sensors [1:12]

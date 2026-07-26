@@ -1,7 +1,12 @@
 // ImmutableDisclosureLedger.sol
 pragma solidity ^0.8.0;
 
-contract ImmutableDisclosureLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ImmutableDisclosureLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Disclosure {
         bytes32 vulnerabilityHash;
         uint256 timestamp;

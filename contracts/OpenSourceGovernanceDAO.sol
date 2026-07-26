@@ -1,7 +1,12 @@
 // OpenSourceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract OpenSourceGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OpenSourceGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Adopt open-source standards for government tech projects"

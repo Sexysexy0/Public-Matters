@@ -1,7 +1,12 @@
 // NationalEnergyEmergencyGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract NationalEnergyEmergencyGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NationalEnergyEmergencyGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Allocate $500M buffer fund for diesel procurement"

@@ -1,7 +1,12 @@
 // HealthGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract HealthGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HealthGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement community-driven oversight of healthcare systems"

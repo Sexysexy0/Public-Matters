@@ -1,7 +1,12 @@
 // ConflictSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ConflictSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ConflictSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Science Ethics Charter"

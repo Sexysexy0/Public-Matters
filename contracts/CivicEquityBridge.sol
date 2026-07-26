@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CivicEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CivicEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CivicRecord(string element, string detail);
 
     function logCivic(string memory element, string memory detail) external {

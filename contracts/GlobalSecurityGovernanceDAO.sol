@@ -1,7 +1,12 @@
 // GlobalSecurityGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract GlobalSecurityGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalSecurityGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Establish UN-backed global crisis coordination mechanism"

@@ -1,7 +1,12 @@
 // IPWealthDistribution.sol
 pragma solidity ^0.8.0;
 
-contract IPWealthDistribution {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IPWealthDistribution is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public royaltyPercentage = 10; // 10% Share for IPs
 
     function distributeRoyalty(uint256 _projectRevenue, address _communityWallet) public payable {

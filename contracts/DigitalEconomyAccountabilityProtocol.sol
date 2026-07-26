@@ -1,7 +1,12 @@
 // DigitalEconomyAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract DigitalEconomyAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DigitalEconomyAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Digital Economy"

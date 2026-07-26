@@ -1,7 +1,12 @@
 // WageIndexSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract WageIndexSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WageIndexSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct WageStandard {
         uint256 baseWage;
         uint256 inflationMarkup; // Basis points (100 = 1%)

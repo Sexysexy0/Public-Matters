@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RapidIterationPatch {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RapidIterationPatch is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Speed over Stagnation]
     function applyHotFix(bytes32 _patchID, bytes memory _logic) external {
         // Logic: Overwrite a specific function's logic immediately.

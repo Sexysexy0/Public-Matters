@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RediscoveryLoreBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RediscoveryLoreBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RediscoveryLoreRecord(string element, string detail);
 
     function logRediscoveryLore(string memory element, string memory detail) external {

@@ -1,7 +1,12 @@
 // TaxSunsetSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract TaxSunsetSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TaxSunsetSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant TARGET_BUDGET = 1000000 ether; // Example target
     uint256 public automationRevenue;
     uint256 public currentIncomeTaxRate = 30; // Starts at 30%

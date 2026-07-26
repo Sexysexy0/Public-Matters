@@ -1,7 +1,12 @@
 // CleanTechGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CleanTechGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CleanTechGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance profit with planetary survival in clean-tech governance"

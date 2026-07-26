@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BonfireReturnBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BonfireReturnBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BonfireRecord(string community, string ritual);
 
     function logBonfire(string memory community, string memory ritual) external {

@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract TransportFairnessShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransportFairnessShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FairnessAlert(string group, string issue);
 
     function checkRisk(string memory group, bool shutdownRisk) public {

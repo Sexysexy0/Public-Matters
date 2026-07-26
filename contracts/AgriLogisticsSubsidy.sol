@@ -1,7 +1,12 @@
 // AgriLogisticsSubsidy.sol
 pragma solidity ^0.8.0;
 
-contract AgriLogisticsSubsidy {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AgriLogisticsSubsidy is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => bool) public isFoodProducer;
 
     function applySubsidizedRate() public view returns (uint256) {

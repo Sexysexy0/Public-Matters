@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FolkloreOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FolkloreOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MythicSeal(string creature, string status);
 
     function logMythic(string memory creature, string memory status) external {

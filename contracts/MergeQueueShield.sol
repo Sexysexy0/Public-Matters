@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MergeQueueShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MergeQueueShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event QueueSeal(string factor, string status);
 
     function logQueue(string memory factor, string memory status) external {

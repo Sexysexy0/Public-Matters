@@ -1,7 +1,12 @@
 // PublicRecallDAO.sol
 pragma solidity ^0.8.0;
 
-contract PublicRecallDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PublicRecallDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct RecallPetition {
         address official;
         string reason;

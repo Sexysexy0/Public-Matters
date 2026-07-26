@@ -1,7 +1,12 @@
 // SmartBiddingGovernance.sol
 pragma solidity ^0.8.0;
 
-contract SmartBiddingGovernance {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SmartBiddingGovernance is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Bid {
         address contractor;
         uint256 amount;

@@ -1,7 +1,12 @@
 // TrustProtocol.sol
 pragma solidity ^0.8.0;
 
-contract TrustProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TrustProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string clause;       // e.g. "No unverifiable narratives"

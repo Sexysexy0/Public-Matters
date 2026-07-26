@@ -1,7 +1,12 @@
 // DemocracyIntegrityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract DemocracyIntegrityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DemocracyIntegrityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Democracy"

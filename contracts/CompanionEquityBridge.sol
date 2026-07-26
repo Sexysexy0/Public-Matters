@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CompanionEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CompanionEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CompanionRecruit(address player, string npcName, string role);
     event CompanionResist(address player, string npcName);
 

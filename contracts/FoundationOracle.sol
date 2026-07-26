@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FoundationOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FoundationOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FoundationRecord(string area, string status);
 
     function logFoundationEquity(string memory area, string memory status) external {

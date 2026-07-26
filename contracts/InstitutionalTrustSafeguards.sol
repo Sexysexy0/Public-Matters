@@ -1,7 +1,12 @@
 // InstitutionalTrustSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract InstitutionalTrustSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InstitutionalTrustSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string institution; // e.g. "Congress"

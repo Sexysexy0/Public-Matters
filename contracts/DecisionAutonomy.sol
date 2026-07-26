@@ -2,7 +2,12 @@
 // Logic: Stopping the "Passing Up" Cycle
 pragma solidity ^0.8.0;
 
-contract DecisionAutonomy {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DecisionAutonomy is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct AuthorityLevel {
         uint256 budgetLimit;
         bool canSignOff;

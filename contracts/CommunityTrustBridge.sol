@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommunityTrustBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityTrustBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TrustRecord(string community, string measure);
 
     function logTrust(string memory community, string memory measure) external {

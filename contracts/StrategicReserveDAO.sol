@@ -1,7 +1,12 @@
 // StrategicReserveDAO.sol
 pragma solidity ^0.8.0;
 
-contract StrategicReserveDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StrategicReserveDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public reserveVolume;
     uint256 public buyThreshold = 85; // Bibili lang kapag < $85
 

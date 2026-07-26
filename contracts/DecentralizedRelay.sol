@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DecentralizedRelay {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DecentralizedRelay is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Bypass Blocklisted Endpoints]
     function findOptimalNode(string memory _region) public returns (string memory) {
         // Logic: Switch from Moscow IP to Neutral/Sanctioned IP addresses.

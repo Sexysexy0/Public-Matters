@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ClimbingPhysics {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ClimbingPhysics is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Universal Vertical Access]
     function calculateGrip(string memory _surfaceMaterial, uint256 _slope) external pure returns (uint256) {
         // Logic: Real-time physics calculation for grip integrity.

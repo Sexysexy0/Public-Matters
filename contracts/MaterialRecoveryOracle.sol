@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MaterialRecoveryOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MaterialRecoveryOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Extraction {
         address player;
         string item;

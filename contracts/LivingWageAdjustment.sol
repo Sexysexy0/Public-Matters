@@ -1,7 +1,12 @@
 // LivingWageAdjustment.sol
 pragma solidity ^0.8.0;
 
-contract LivingWageAdjustment {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LivingWageAdjustment is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public basicBasketPrice; // Presyo ng pangunahing pangangailangan
 
     function updateSalary(uint256 _newCPI) public {

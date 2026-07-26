@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EquityExpansionVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EquityExpansionVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Expansion {
         address overseer;
         string title;

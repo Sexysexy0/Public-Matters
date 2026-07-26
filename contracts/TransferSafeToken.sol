@@ -2,7 +2,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TransferSafeToken {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransferSafeToken is Ownable {
     string public name = "Transfer Safe Token";
     string public symbol = "TSAFE";
     uint8 public decimals = 18;

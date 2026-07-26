@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DynamicPowertrainManager {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DynamicPowertrainManager is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     enum MotorState { Single, Dual, Triple }
 
     // [9:57-10:44] Optimizing motor usage based on torque and speed requirements

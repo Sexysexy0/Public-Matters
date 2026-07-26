@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CorruptionEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CorruptionEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CorruptionRecord(string element, string detail);
 
     function logCorruption(string memory element, string memory detail) external {

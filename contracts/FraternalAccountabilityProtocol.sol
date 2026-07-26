@@ -1,7 +1,12 @@
 // FraternalAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract FraternalAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FraternalAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in fraternal governance"

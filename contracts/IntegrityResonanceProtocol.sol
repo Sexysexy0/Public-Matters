@@ -1,7 +1,12 @@
 // IntegrityResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract IntegrityResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IntegrityResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Check {
         uint256 id;
         string domain;    // e.g. "Transaction Ledger"

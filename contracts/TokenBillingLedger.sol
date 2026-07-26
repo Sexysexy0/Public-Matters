@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TokenBillingLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TokenBillingLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BillingSeal(string model, string billingType);
 
     function logBilling(string memory _model, string memory _billingType) external {

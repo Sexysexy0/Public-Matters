@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FairnessEquityArc {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FairnessEquityArc is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EquitySafeguard(string context, string safeguard, uint256 timestamp);
     event BiasResistance(string context, string safeguard, uint256 timestamp);
     event ConsumerTrust(string context, string safeguard, uint256 timestamp);

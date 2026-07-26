@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract ImmediateClaimProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ImmediateClaimProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ClaimRelease(string claimant, uint256 amount, string status);
 
     function releaseClaim(string memory claimant, uint256 amount, bool hasProof) public {

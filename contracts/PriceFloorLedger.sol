@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PriceFloorLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PriceFloorLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FloorSeal(string tier, uint256 price);
 
     function setPriceFloor(string memory _tier, uint256 _price) external {

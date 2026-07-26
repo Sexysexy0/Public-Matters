@@ -1,7 +1,12 @@
 // EvidenceIntegrityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract EvidenceIntegrityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EvidenceIntegrityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Evidence {
         bytes32 dataHash;
         address identifyingOfficer;

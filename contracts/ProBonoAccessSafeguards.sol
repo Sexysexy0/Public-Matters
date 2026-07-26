@@ -1,7 +1,12 @@
 // ProBonoAccessSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ProBonoAccessSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProBonoAccessSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct LegalFirm {
         uint256 proBonoHours;
         uint256 justiceCredits;

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract VetoTransparencyLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VetoTransparencyLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct BlockRecord {
         address official;
         string actionTaken;

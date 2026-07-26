@@ -2,7 +2,12 @@
 // Logic: Performance over Loyalty
 pragma solidity ^0.8.0;
 
-contract ResultOwnershipRegistry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResultOwnershipRegistry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Result {
         string kpi;
         bool achieved;

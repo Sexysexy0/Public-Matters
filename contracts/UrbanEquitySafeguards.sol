@@ -1,7 +1,12 @@
 // UrbanEquitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract UrbanEquitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UrbanEquitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Sustainable Cities"

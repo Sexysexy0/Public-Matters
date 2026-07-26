@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PublicFundOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PublicFundOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CampaignDonation {
         address politician;
         address donor;

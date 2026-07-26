@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract FuelAllowanceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FuelAllowanceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AllowanceActivation(string driverType, uint256 allowance);
 
     function checkExpenses(string memory driverType, uint256 expenses) public {

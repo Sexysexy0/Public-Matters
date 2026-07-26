@@ -1,7 +1,12 @@
 // VolatilityCharterProtocol.sol
 pragma solidity ^0.8.0;
 
-contract VolatilityCharterProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VolatilityCharterProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Strategy {
         uint256 id;
         string approach;   // e.g. "Diversify across asset classes"

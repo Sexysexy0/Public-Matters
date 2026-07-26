@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PhenomenaBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PhenomenaBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PhenomenaRecord(string behavior, string status);
 
     function logBehavior(string memory _behavior, string memory _status) external {

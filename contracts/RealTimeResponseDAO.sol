@@ -1,7 +1,12 @@
 // RealTimeResponseDAO.sol
 pragma solidity ^0.8.0;
 
-contract RealTimeResponseDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RealTimeResponseDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ResponseNode {
         address officer;
         uint256 totalResolved;

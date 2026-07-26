@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EmergencyBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EmergencyBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EmergencyRecord(string area, string action);
 
     function logEmergency(string memory area, string memory action) external {

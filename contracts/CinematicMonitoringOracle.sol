@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CinematicMonitoringOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CinematicMonitoringOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CinematicEvent(string context, string intensity);
 
     function monitorCinematic(string memory context, string memory intensity) external {

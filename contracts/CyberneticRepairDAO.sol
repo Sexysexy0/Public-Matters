@@ -1,7 +1,12 @@
 // CyberneticRepairDAO.sol
 pragma solidity ^0.8.0;
 
-contract CyberneticRepairDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CyberneticRepairDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct DevicePatch {
         string deviceModel;
         string firmwareUpdate;

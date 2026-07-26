@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract PlayerEmpowermentDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PlayerEmpowermentDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public votes;
 
     event OptimizationDemand(string game, uint256 totalVotes);

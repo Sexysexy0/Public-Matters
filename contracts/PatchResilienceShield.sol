@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PatchResilienceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PatchResilienceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PatchApplied(string feature, string effect);
 
     function applyPatch(string memory feature, string memory effect) external {

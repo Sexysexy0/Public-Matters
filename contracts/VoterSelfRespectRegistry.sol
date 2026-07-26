@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract VoterSelfRespectRegistry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VoterSelfRespectRegistry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CandidateCommitment {
         string plan;
         uint256 budgetAllocation;

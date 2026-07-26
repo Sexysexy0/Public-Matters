@@ -1,7 +1,12 @@
 // TradeEquityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract TradeEquityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TradeEquityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Trade Equity"

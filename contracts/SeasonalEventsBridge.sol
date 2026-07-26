@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SeasonalEventsBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SeasonalEventsBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Event {
         address participant;
         string season;

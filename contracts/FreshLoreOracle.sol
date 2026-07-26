@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FreshLoreOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FreshLoreOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event NewLoreCreated(string title, string creator, string theme);
     event RemakeRejected(string franchise, string reason);
 

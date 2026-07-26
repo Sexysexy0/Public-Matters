@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BondLegacyShieldExtended {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BondLegacyShieldExtended is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LegacySeal(string trait, string status);
     event FiscalAnchor(string factor, string status);
 

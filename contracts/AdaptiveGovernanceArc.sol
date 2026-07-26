@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AdaptiveGovernanceArc {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AdaptiveGovernanceArc is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event VoteCast(address indexed voter, uint256 weight, string proposal);
     event ReputationEarned(address indexed member, uint256 points, string context);
 

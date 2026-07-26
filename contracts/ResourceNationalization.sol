@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ResourceNationalization {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourceNationalization is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [GOAL: Use natural resources for electronics/batteries]
     function validateExport(string memory _resource, bool _isProcessedLocally) public pure returns (string memory) {
         if (_resource == "Nickel" || _resource == "Copper") {

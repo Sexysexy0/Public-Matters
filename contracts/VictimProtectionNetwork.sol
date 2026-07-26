@@ -2,7 +2,12 @@
 // Logic: Real-time Threat Neutralization
 pragma solidity ^0.8.0;
 
-contract VictimProtectionNetwork {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VictimProtectionNetwork is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => bool) public activePanicAlarms;
 
     function triggerEmergency(address _businessLoc) public {

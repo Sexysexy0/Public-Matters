@@ -1,7 +1,12 @@
 // DataCenterRelocationProtocol.sol
 pragma solidity ^0.8.0;
 
-contract DataCenterRelocationProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DataCenterRelocationProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Facility {
         uint256 id;
         string location;   // e.g. "Desert Zone Alpha"

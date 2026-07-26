@@ -1,7 +1,12 @@
 // OilAffordabilityGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract OilAffordabilityGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OilAffordabilityGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement tax-free and profit-free oil pricing with minimal expense markup"

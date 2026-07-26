@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CulturalAuthenticityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CulturalAuthenticityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AuthenticityRecord(string culture, string integration);
 
     function logAuthenticity(string memory culture, string integration) external {

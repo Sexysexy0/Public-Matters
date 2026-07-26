@@ -1,7 +1,12 @@
 // EventAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract EventAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EventAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in cultural event cybersecurity"

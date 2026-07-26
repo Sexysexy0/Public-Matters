@@ -1,7 +1,12 @@
 // ResetProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ResetProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResetProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Reset {
         uint256 id;
         string clause;       // e.g. "Remove self-referencing preaching"

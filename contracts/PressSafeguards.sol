@@ -1,7 +1,12 @@
 // PressSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract PressSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PressSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string right;      // e.g. "Freedom of the Press"

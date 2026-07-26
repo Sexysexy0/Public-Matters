@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ShowcaseEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ShowcaseEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MovieShowcased(string title, string date);
     event AnnouncementMade(string studio, string message);
 

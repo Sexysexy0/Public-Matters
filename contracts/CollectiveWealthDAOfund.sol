@@ -1,7 +1,12 @@
 // CollectiveWealthDAOfund.sol
 pragma solidity ^0.8.0;
 
-contract CollectiveWealthDAOfund {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CollectiveWealthDAOfund is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public collectiveBalance;
 
     struct ExpenseProposal {

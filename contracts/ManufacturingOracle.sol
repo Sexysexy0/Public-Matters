@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ManufacturingOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ManufacturingOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ProductionSeal(string factor, string status);
 
     function logProduction(string memory factor, string memory status) external {

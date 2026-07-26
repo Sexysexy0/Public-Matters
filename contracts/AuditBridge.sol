@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AuditBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AuditBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AuditRecord(string auditor, string result);
 
     function logAudit(string memory auditor, string memory result) external {

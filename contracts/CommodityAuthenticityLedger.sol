@@ -1,7 +1,12 @@
 // CommodityAuthenticityLedger.sol
 pragma solidity ^0.8.0;
 
-contract CommodityAuthenticityLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommodityAuthenticityLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Batch {
         string origin;
         uint256 timestamp;

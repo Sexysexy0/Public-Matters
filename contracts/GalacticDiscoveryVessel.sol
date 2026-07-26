@@ -1,7 +1,12 @@
 // GalacticDiscoveryVessel.sol
 pragma solidity ^0.8.0;
 
-contract GalacticDiscoveryVessel {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GalacticDiscoveryVessel is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     string public missionType = "Universal Knowledge Acquisition";
     bool public isCommercial = false;
 

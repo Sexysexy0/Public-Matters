@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LaborResilienceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LaborResilienceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WagePetition(string region, uint256 petitions);
 
     function logPetition(string memory region, uint256 petitions) external {

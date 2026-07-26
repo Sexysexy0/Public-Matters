@@ -2,7 +2,12 @@
 // Logic: Initiative Scoring
 pragma solidity ^0.8.0;
 
-contract ProactiveAgentLogic {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProactiveAgentLogic is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public initiativePoints;
 
     function recordProactiveAction(address _leader, string memory _actionType) public {

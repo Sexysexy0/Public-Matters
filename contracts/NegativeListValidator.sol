@@ -1,7 +1,12 @@
 // NegativeListValidator.sol
 pragma solidity ^0.8.0;
 
-contract NegativeListValidator {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NegativeListValidator is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(string => uint256) public equityLimit; // 0 to 100%
 
     // Updated April 17, 2026: Setting rules for global capital

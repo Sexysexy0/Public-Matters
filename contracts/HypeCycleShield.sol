@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HypeCycleShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HypeCycleShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event HypeSeal(string project, string safeguard);
 
     function logHype(string memory project, string memory safeguard) external {

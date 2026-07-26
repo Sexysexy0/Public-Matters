@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MarketAdaptationShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MarketAdaptationShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AdaptationSeal(string factor, string status);
 
     function logAdaptation(string memory factor, string memory status) external {

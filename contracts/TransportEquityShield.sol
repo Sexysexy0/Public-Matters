@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TransportEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransportEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event HighwayUpdate(string highway, string status);
     event CommuterInclusion(string project, string measure);
 

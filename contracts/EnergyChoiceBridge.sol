@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EnergyChoiceBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EnergyChoiceBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ChoiceRecord(string provider, string status);
 
     function logChoice(string memory provider, string memory status) external {

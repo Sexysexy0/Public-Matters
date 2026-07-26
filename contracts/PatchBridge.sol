@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PatchBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PatchBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PatchRecord(string patch, string detail);
 
     function logPatch(string memory patch, string memory detail) external {

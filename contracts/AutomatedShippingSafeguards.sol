@@ -1,7 +1,12 @@
 // AutomatedShippingSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract AutomatedShippingSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AutomatedShippingSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Vessel {
         uint256 vesselId;
         bool isAutonomous;

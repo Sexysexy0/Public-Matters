@@ -1,7 +1,12 @@
 // WaterGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract WaterGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WaterGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement community-driven oversight of water utilities and equitable pricing"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RelationshipOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RelationshipOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RelationshipEvent(string pirate, string dynamic);
 
     function monitorRelationship(string memory pirate, string memory dynamic) external {

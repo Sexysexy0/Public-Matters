@@ -1,7 +1,12 @@
 // FaithDefenseSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract FaithDefenseSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FaithDefenseSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Shield {
         uint256 id;
         string belief;     // e.g. "Catholic Faith"

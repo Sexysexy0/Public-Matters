@@ -1,7 +1,12 @@
 // CommunityDisputeDAO.sol
 pragma solidity ^0.8.0;
 
-contract CommunityDisputeDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityDisputeDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Case {
         uint256 id;
         address partyA;

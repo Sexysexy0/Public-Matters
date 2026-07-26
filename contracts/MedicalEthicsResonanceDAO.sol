@@ -1,7 +1,12 @@
 // MedicalEthicsResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract MedicalEthicsResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MedicalEthicsResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Ethics Training for Doctors"

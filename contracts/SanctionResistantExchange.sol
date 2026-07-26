@@ -1,7 +1,12 @@
 // SanctionResistantExchange.sol
 pragma solidity ^0.8.0;
 
-contract SanctionResistantExchange {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SanctionResistantExchange is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Trade {
         string resourceOffered;
         string goodsRequested;

@@ -1,7 +1,12 @@
 // OrganizationalFocusSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract OrganizationalFocusSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OrganizationalFocusSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Ensure Meeting Efficiency"

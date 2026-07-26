@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WalletEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WalletEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WalletSeal(string wallet, string status);
 
     function logWallet(string memory wallet, bool active) external {

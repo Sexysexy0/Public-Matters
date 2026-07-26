@@ -1,7 +1,12 @@
 // LaborSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract LaborSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LaborSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Worker Rights and Fair Wages"

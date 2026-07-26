@@ -1,7 +1,12 @@
 // DriverEquityVault.sol
 pragma solidity ^0.8.0;
 
-contract DriverEquityVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DriverEquityVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public driverShares;
 
     function allocationEquity(address _driver) public {

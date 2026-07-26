@@ -1,7 +1,12 @@
 // ChokepointTariffOracle.sol
 pragma solidity ^0.8.0;
 
-contract ChokepointTariffOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ChokepointTariffOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct VesselPassage {
         string vesselName;
         bool irgcApproved;

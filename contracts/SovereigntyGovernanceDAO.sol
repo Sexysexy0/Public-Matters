@@ -1,7 +1,12 @@
 // SovereigntyGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract SovereigntyGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereigntyGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Assert PH EEZ rights vs Nine-Dash Line"

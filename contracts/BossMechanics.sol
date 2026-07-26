@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BossMechanics {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BossMechanics is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: High-Stakes Skill Testing]
     function triggerBossPhase(uint256 _health) external pure returns (string memory) {
         if (_health < 50) {

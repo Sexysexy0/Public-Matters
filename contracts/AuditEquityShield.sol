@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AuditEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AuditEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AuditSeal(string city, string status);
 
     function logAudit(string memory city, string memory status) external {

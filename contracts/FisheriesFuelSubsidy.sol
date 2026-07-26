@@ -2,7 +2,12 @@
 // Logic: Shielding the Fleet from Oil Price Volatility
 pragma solidity ^0.8.0;
 
-contract FisheriesFuelSubsidy {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FisheriesFuelSubsidy is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant OIL_CRISIS_PRICE = 90; // Price per liter threshold
 
     function calculateSubsidy(uint256 _currentPrice) public pure returns (uint256) {

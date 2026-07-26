@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CustomizationOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CustomizationOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CustomizationSeal(string player, string feature);
 
     function logCustomization(string memory player, string memory feature) external {

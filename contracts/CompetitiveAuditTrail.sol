@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CompetitiveAuditTrail {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CompetitiveAuditTrail is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public conflictAlerts;
 
     // Triggers when a requirement limits the number of bidders to < 3

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommunityPartnerShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityPartnerShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PartnerSeal(string partner, string status);
 
     function logPartnership(string memory partner, bool active) external {

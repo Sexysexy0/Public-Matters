@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ScarcityEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ScarcityEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ScarcityEquity {
         address steward;
         string context;

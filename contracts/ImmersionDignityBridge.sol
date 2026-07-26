@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ImmersionDignityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ImmersionDignityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ImmersionRecord(string element, string detail);
 
     function logImmersion(string memory element, string memory detail) external {

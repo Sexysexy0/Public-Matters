@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommunityOptimizationShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityOptimizationShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event OptimizationSeal(string contributor, string fix);
 
     function logOptimization(string memory _contributor, string memory _fix) external {

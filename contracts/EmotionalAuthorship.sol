@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EmotionalAuthorship {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EmotionalAuthorship is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [28:45] Examining "proto-feelings" with the rational faculty
     function processEmotion(string memory _feeling, bool _isGroundedInTruth) public pure returns (string memory) {
         if (_isGroundedInTruth) {

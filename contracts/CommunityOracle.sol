@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommunityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CommunityRecord(string factor, string status);
 
     function logCommunityRecord(string memory factor, string memory status) external {

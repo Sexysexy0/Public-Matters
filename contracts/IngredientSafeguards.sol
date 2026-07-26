@@ -1,7 +1,12 @@
 // IngredientSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract IngredientSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IngredientSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Ban Petroleum-Based Dyes"

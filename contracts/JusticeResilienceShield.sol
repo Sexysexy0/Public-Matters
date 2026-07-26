@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract JusticeResilienceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract JusticeResilienceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event JusticeSeal(string factor, string status);
 
     function logJustice(string memory factor, string memory status) external {

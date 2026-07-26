@@ -1,7 +1,12 @@
 // LaborSafetyNetProtocol.sol
 pragma solidity ^0.8.0;
 
-contract LaborSafetyNetProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LaborSafetyNetProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public totalSafetyNetFund;
     
     event UBIDistributed(address worker, uint256 amount);

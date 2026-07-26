@@ -1,7 +1,12 @@
 // RuleOfLawGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract RuleOfLawGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RuleOfLawGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure judicial and legislative independence in upholding constitutional order"

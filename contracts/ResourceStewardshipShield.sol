@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ResourceStewardshipShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourceStewardshipShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event StewardshipSeal(string resource, string safeguard);
 
     function logStewardship(string memory resource, string memory safeguard) external {

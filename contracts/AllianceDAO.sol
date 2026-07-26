@@ -1,7 +1,12 @@
 // AllianceDAO.sol
 pragma solidity ^0.8.0;
 
-contract AllianceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AllianceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Pact {
         uint256 id;
         string partner;   // e.g. "Regional Bloc"

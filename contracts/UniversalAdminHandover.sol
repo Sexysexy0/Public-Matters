@@ -1,7 +1,12 @@
 // UniversalAdminHandover.sol
 pragma solidity ^0.8.0;
 
-contract UniversalAdminHandover {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UniversalAdminHandover is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public isDecentralizedFinal;
 
     function finalizeGovernance() public {

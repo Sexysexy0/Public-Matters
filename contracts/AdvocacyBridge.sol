@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AdvocacyBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AdvocacyBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AdvocacyRecord(string advocate, string cause);
 
     function logAdvocacy(string memory advocate, string memory cause) external {

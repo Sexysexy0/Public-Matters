@@ -1,7 +1,12 @@
 // EducationGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract EducationGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EducationGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of education governance and learning safeguards"

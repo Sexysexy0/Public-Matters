@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TurnaroundShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TurnaroundShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TurnaroundSeal(string leader, string safeguard);
 
     function logTurnaround(string memory leader, string memory safeguard) external {

@@ -1,7 +1,12 @@
 // ScreeningSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ScreeningSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ScreeningSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Pre-Election Background Check"

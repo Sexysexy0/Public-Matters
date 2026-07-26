@@ -2,6 +2,8 @@
 // Logic: Converting Cannery Waste & Hemp to Energy
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 contract BiofuelTransitionLogic {
     function allocateEnergyGrant(string memory _technology) public pure {
         // Goal: Energy Autonomy.

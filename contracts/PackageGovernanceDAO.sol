@@ -1,7 +1,12 @@
 // PackageGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract PackageGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PackageGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance speed with security in package governance"

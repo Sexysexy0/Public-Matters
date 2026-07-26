@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract UnityEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UnityEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event UnityLogged(string regionA, string regionB, string initiative);
     event CooperativeSafeguard(string initiative, bool safeguarded);
 

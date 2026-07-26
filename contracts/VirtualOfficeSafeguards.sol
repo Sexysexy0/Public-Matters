@@ -1,7 +1,12 @@
 // VirtualOfficeSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract VirtualOfficeSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VirtualOfficeSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct OfficerNode {
         address officer;
         bool isOnline;

@@ -1,7 +1,12 @@
 // HeritageSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract HeritageSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HeritageSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Protect Monuments and Traditions"

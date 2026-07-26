@@ -1,7 +1,12 @@
 // WisdomProofCredential.sol
 pragma solidity ^0.8.0;
 
-contract WisdomProofCredential {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WisdomProofCredential is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Competency {
         string skill;
         uint256 masteryLevel; // Validated by decentralized testers

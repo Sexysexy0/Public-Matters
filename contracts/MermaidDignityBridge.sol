@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MermaidDignityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MermaidDignityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MermaidEvent(string action, string detail);
 
     function logMermaid(string memory action, string memory detail) external {

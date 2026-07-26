@@ -1,7 +1,12 @@
 // KnowledgeDAO.sol
 pragma solidity ^0.8.0;
 
-contract KnowledgeDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract KnowledgeDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Resource {
         uint256 id;
         string topic;   // e.g. "Blockchain Basics"

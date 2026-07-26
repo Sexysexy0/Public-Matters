@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GuardianStewardship {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GuardianStewardship is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct StewardAction {
         address guardian;
         string covenant;

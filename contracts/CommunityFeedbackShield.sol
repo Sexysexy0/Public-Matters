@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommunityFeedbackShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityFeedbackShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WishlistLogged(string player, string request);
 
     function logWishlist(string memory player, string memory request) external {

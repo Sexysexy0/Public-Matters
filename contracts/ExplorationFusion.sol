@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ExplorationFusion {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ExplorationFusion is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FusionSeal(string activity, string combatStyle);
 
     function logFusion(string memory activity, string memory combatStyle) external {

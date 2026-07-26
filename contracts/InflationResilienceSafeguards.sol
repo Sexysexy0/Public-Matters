@@ -1,7 +1,12 @@
 // InflationResilienceSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract InflationResilienceSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InflationResilienceSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct EconomicMarker {
         string sector;        // e.g. "Fuel and Transport"
         uint256 rate;         // e.g. 410 (representing 4.1%)

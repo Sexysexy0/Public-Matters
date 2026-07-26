@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CamSwitchBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CamSwitchBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SwitchRecord(string fromCam, string toCam);
 
     function logSwitch(string memory _fromCam, string memory _toCam) external {

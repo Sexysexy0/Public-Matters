@@ -1,7 +1,12 @@
 // OpenSourceMedLedger.sol
 pragma solidity ^0.8.0;
 
-contract OpenSourceMedLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OpenSourceMedLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Formula {
         string drugName;
         string manufacturingSteps;

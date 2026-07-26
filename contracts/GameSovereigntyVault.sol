@@ -1,7 +1,12 @@
 // GameSovereigntyVault.sol
 pragma solidity ^0.8.0;
 
-contract GameSovereigntyVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GameSovereigntyVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct GameLicense {
         string gameTitle;
         bool isOfflineCapable;

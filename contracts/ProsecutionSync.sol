@@ -2,7 +2,12 @@
 // Logic: Digital Indictment System
 pragma solidity ^0.8.0;
 
-contract ProsecutionSync {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProsecutionSync is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CaseFile {
         string officialName;
         string offense;

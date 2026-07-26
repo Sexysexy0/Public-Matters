@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract UnilateralSanctionBlocker {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UnilateralSanctionBlocker is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct GlobalAction {
         string initiator;
         string target;

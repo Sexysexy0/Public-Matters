@@ -1,7 +1,12 @@
 // RegenerativeFarmRegistry.sol
 pragma solidity ^0.8.0;
 
-contract RegenerativeFarmRegistry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RegenerativeFarmRegistry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Farm {
         address owner;
         uint256 soilOrganicMatter; // Primary health metric

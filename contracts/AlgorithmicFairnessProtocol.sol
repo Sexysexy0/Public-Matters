@@ -1,7 +1,12 @@
 // AlgorithmicFairnessProtocol.sol
 pragma solidity ^0.8.0;
 
-contract AlgorithmicFairnessProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AlgorithmicFairnessProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct AuditReport {
         uint256 reportId;
         string platformName;

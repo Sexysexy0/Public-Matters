@@ -1,7 +1,12 @@
 // SovereigntyResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract SovereigntyResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereigntyResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Border Security Modernization Program"

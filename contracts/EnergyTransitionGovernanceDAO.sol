@@ -1,7 +1,12 @@
 // EnergyTransitionGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract EnergyTransitionGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EnergyTransitionGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Allocate national budget for renewable energy infrastructure"

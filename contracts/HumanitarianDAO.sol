@@ -1,7 +1,12 @@
 // HumanitarianDAO.sol
 pragma solidity ^0.8.0;
 
-contract HumanitarianDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumanitarianDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string focus;   // e.g. "Civilian Protection"

@@ -1,7 +1,12 @@
 // CitizenParticipationResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CitizenParticipationResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CitizenParticipationResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;   // e.g. "Participatory Budgeting"

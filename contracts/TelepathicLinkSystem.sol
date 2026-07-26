@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TelepathicLinkSystem {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TelepathicLinkSystem is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public sharedBondLevel;
 
     // Navigator sends energy to the Diver in distress [47:48]

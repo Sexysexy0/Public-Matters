@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommunalBalanceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunalBalanceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BalanceSeal(string community, string safeguard);
 
     function logBalance(string memory community, string memory safeguard) external {

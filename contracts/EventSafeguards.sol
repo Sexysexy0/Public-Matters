@@ -1,7 +1,12 @@
 // EventSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract EventSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EventSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Oscar Hype Security Charter"

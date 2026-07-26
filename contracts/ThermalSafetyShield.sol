@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ThermalSafetyShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ThermalSafetyShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ThermalAlert(string component, string status);
 
     function monitorComponent(string memory _component, string memory _status) external {

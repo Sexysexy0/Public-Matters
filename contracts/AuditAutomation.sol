@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AuditAutomation {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AuditAutomation is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: 24/7 Digital Surveillance of Assets]
     function runSecurityAudit(address _contractAddr) external pure returns (string memory) {
         // Logic: Scan for reentrancy or ownership vulnerabilities.

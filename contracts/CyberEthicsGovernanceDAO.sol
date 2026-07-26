@@ -1,7 +1,12 @@
 // CyberEthicsGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CyberEthicsGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CyberEthicsGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement community-driven moderation standards"

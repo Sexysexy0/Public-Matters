@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WeaponDurabilityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WeaponDurabilityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DurabilityUpdate(string weapon, uint256 durability);
 
     function logDurability(string memory weapon, uint256 durability) external {

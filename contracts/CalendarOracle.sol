@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CalendarOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CalendarOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CalendarRecord(string period, string status);
 
     function logCalendarEquity(string memory period, string memory status) external {

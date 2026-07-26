@@ -1,7 +1,12 @@
 // DynamicLaborOracle.sol
 pragma solidity ^0.8.0;
 
-contract DynamicLaborOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DynamicLaborOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public costOfLivingIndex; 
 
     function getMinimumFairRate() public view returns (uint256) {

@@ -1,7 +1,12 @@
 // PeaceResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract PeaceResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PeaceResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Global Peace Accord"

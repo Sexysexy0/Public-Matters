@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HumanitarianBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumanitarianBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AidRecord(string aidType, string location, string status);
 
     function logAid(string memory aidType, string memory location, string memory status) external {

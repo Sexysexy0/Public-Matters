@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GenderDynamicsOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GenderDynamicsOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Discourse {
         address participant;
         string theme;

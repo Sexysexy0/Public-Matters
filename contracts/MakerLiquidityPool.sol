@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MakerLiquidityPool {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MakerLiquidityPool is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Direct capital injection for raw materials and industrial scale-up]
     mapping(address => uint256) public activeCreditLine;
 

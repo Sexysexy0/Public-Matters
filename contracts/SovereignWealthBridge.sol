@@ -1,7 +1,12 @@
 // SovereignWealthBridge.sol
 pragma solidity ^0.8.0;
 
-contract SovereignWealthBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereignWealthBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Entity {
         bool earlyAdopter;
         uint256 transitionBonus;

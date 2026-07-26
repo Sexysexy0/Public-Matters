@@ -1,7 +1,12 @@
 // DevOpsSandboxAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract DevOpsSandboxAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DevOpsSandboxAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in DevOps Sandbox"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract OnboardingBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OnboardingBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event OnboardingRecord(string developer, string stage);
 
     function logOnboarding(string memory developer, string memory stage) external {

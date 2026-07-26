@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FeedbackResonanceBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FeedbackResonanceBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FeedbackLogged(string player, string studio, string sentiment);
     event StudioResponse(string studio, string action);
 

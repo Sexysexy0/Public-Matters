@@ -1,7 +1,12 @@
 // SecurityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract SecurityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SecurityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Threat {
         uint256 id;
         string vector;       // e.g. "iOS Exploit"

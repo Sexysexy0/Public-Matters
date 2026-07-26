@@ -1,7 +1,12 @@
 // RobotLaborDividends.sol
 pragma solidity ^0.8.0;
 
-contract RobotLaborDividends {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RobotLaborDividends is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct AutomatedSystem {
         address ownerCorp;
         uint256 computingPower;

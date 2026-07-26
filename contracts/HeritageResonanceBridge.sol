@@ -4,7 +4,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HeritageResonanceBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HeritageResonanceBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Heritage {
         address curator;
         string culture;

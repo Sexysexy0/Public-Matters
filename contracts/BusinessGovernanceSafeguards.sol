@@ -1,7 +1,12 @@
 // BusinessGovernanceSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract BusinessGovernanceSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BusinessGovernanceSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect Enterprise Stewardship"

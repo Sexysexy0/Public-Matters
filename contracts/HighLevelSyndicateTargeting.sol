@@ -2,6 +2,8 @@
 // Logic: Protecting Local Traditional Knowledge
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 contract BusinessSovereigntyShield {
     mapping(address => bool) public registeredHealers;
 

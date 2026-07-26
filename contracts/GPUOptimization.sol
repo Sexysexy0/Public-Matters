@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GPUOptimization {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GPUOptimization is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: High Performance on Older Hardware]
     function shiftLoad(uint256 _taskComplexity) external pure {
         // Logic: Bypass CPU bottlenecks for massive open-world rendering.

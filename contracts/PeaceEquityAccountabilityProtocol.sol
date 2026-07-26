@@ -1,7 +1,12 @@
 // PeaceEquityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract PeaceEquityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PeaceEquityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Peace Equity"

@@ -1,7 +1,12 @@
 // PUVFuelSubsidyAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract PUVFuelSubsidyAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PUVFuelSubsidyAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in PUV Fuel Subsidy Governance"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HeadsetPortLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HeadsetPortLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PortSeal(string device, string status);
 
     function addHeadsetPort(string memory _device, string memory _status) external {

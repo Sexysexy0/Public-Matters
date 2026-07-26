@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DefenseOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DefenseOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DefenseRecord(string fortress, string status);
 
     function logDefense(string memory fortress, string memory status) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PerceptionBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PerceptionBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PerceptionRecord(string group, string narrative);
 
     function logNarrative(string memory group, string memory narrative) external {

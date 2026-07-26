@@ -1,7 +1,12 @@
 // WorkerRightsProtocol.sol
 pragma solidity ^0.8.0;
 
-contract WorkerRightsProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WorkerRightsProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // --- Breaktime Autonomy ---
     mapping(address => uint256) public totalBreaktime;
     mapping(address => uint256[]) public breakSegments;

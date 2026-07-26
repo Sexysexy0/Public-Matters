@@ -1,7 +1,12 @@
 // NeutralProtocol.sol
 pragma solidity ^0.8.0;
 
-contract NeutralProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NeutralProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Principle {
         uint256 id;
         string clause;       // e.g. "No religious framing in war"

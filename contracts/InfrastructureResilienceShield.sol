@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract InfrastructureResilienceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InfrastructureResilienceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event StabilityLogged(string system, string status);
 
     function logStability(string memory system, string memory status) external {

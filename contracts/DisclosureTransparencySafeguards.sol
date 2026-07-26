@@ -1,7 +1,12 @@
 // DisclosureTransparencySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract DisclosureTransparencySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DisclosureTransparencySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct SecretData {
         bytes32 dataHash;
         uint256 declassificationDate;

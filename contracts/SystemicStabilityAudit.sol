@@ -1,7 +1,12 @@
 // SystemicStabilityAudit.sol
 pragma solidity ^0.8.0;
 
-contract SystemicStabilityAudit {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SystemicStabilityAudit is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public isEconomicEmergency;
     uint256 public sentimentThreshold = 20; // Lower means more unrest
 

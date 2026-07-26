@@ -1,7 +1,12 @@
 // CommunityTrustProtocol.sol
 pragma solidity ^0.8.0;
 
-contract CommunityTrustProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityTrustProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public reputation; // Based on actual community help
 
     function logGoodDeed(address _neighbor) public {

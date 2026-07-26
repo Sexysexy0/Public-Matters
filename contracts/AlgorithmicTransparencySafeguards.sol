@@ -1,7 +1,12 @@
 // AlgorithmicTransparencySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract AlgorithmicTransparencySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AlgorithmicTransparencySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct AIModel {
         bytes32 modelHash;
         string purpose; // e.g., "Credit Scoring"

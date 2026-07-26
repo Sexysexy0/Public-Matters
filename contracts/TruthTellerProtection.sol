@@ -1,7 +1,12 @@
 // TruthTellerProtection.sol
 pragma solidity ^0.8.0;
 
-contract TruthTellerProtection {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TruthTellerProtection is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(string => bytes32) public truthLedger;
 
     // Protecting the "luxurious" freedom to debate opposing views [11:30]

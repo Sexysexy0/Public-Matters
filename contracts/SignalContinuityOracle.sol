@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SignalContinuityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SignalContinuityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Signal {
         address sender;
         string phrase;

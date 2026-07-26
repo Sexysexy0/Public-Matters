@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PetSkillTreeVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PetSkillTreeVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct PetSkill {
         address owner;
         string petType;

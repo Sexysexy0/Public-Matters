@@ -1,7 +1,12 @@
 // VatVoteTransparency.sol
 pragma solidity ^0.8.0;
 
-contract VatVoteTransparency {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VatVoteTransparency is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct VoteStatus {
         bool isBlocking;
         string justification;

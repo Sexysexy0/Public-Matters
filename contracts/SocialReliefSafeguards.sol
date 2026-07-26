@@ -1,7 +1,12 @@
 // SocialReliefSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract SocialReliefSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SocialReliefSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect Equitable Aid Distribution"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract VoterDemandRegistry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VoterDemandRegistry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct BillStatus {
         string title;
         uint256 supportCount;

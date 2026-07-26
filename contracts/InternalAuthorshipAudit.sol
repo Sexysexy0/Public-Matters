@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract InternalAuthorshipAudit {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InternalAuthorshipAudit is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [0:55] Measuring if you act with responsibility or as a reaction
     function verifySourceOfAction(string memory _action) public pure returns (string memory) {
         // Logic: Checks if the decision is "Self-Authored" or "Algorithm-Driven"

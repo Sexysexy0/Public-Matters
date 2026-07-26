@@ -1,7 +1,12 @@
 // HarmonyDAO.sol
 pragma solidity ^0.8.0;
 
-contract HarmonyDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HarmonyDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Directive {
         uint256 id;
         string policy;   // e.g. "No dominance agents"

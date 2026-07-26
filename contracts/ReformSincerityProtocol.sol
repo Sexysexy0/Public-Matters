@@ -1,7 +1,12 @@
 // ReformSincerityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ReformSincerityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ReformSincerityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Reform {
         uint256 id;
         string measure;   // e.g. "Anti-Political Dynasty Bill"

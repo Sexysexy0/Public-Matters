@@ -1,7 +1,12 @@
 // HollywoodAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract HollywoodAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HollywoodAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in Hollywood governance"

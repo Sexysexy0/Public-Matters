@@ -1,7 +1,12 @@
 // EscalationSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract EscalationSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EscalationSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string scenario;   // e.g. "Resource Scarcity Conflict"

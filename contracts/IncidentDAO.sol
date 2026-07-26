@@ -1,7 +1,12 @@
 // IncidentDAO.sol
 pragma solidity ^0.8.0;
 
-contract IncidentDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IncidentDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Incident {
         uint256 id;
         string module;   // e.g. "API Gateway"

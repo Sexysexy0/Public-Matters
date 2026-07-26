@@ -1,7 +1,12 @@
 // ProductivityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ProductivityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProductivityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct AutomationUnit {
         address corporation;
         uint256 outputLevel;

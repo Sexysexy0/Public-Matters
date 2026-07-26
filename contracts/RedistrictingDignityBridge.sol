@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RedistrictingDignityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RedistrictingDignityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RedistrictingRecord(string element, string detail);
 
     function logRedistricting(string memory element, string memory detail) external {

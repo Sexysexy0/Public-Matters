@@ -1,7 +1,12 @@
 // NonPoliticalExpertDAO.sol
 pragma solidity ^0.8.0;
 
-contract NonPoliticalExpertDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NonPoliticalExpertDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Expert {
         uint256 reputationScore;
         bool isVerified;

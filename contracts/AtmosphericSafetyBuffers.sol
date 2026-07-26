@@ -1,7 +1,12 @@
 // AtmosphericSafetyBuffers.sol
 pragma solidity ^0.8.0;
 
-contract AtmosphericSafetyBuffers {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AtmosphericSafetyBuffers is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant MAX_PRECIPITATION = 50; // mm/hour
     uint256 public constant MAX_WIND_SPEED = 60; // kph
 

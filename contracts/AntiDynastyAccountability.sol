@@ -1,7 +1,12 @@
 // AntiDynastyAccountability.sol
 pragma solidity ^0.8.0;
 
-contract AntiDynastyAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiDynastyAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Candidate {
         string familyRoot;
         uint256 activeFamilyMembers;

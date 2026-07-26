@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FiscalOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FiscalOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FiscalRecord(string factor, string status);
 
     function logFiscalRecord(string memory factor, string memory status) external {

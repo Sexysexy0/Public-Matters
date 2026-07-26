@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GlobalEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event GlobalEquitySeal(string country, string standard);
 
     function logGlobalLabor(string memory country, string memory standard) external {

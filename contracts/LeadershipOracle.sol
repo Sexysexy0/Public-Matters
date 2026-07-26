@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LeadershipOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LeadershipOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LeadershipRecord(string factor, string status);
 
     function logLeadershipRecord(string memory factor, string memory status) external {

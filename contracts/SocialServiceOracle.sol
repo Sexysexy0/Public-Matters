@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SocialServiceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SocialServiceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SocialRecord(string service, string impact);
 
     function logSocialService(string memory service, string memory impact) external {

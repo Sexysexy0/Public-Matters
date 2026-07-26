@@ -1,7 +1,12 @@
 // CommunityGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CommunityGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of barangay enforcement and citizen dignity rights"

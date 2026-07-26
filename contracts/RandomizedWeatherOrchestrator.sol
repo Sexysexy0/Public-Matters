@@ -1,7 +1,12 @@
 // RandomizedWeatherOrchestrator.sol
 pragma solidity ^0.8.0;
 
-contract RandomizedWeatherOrchestrator {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RandomizedWeatherOrchestrator is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     enum WeatherType { Sunny, LightRain, Overcast, Breezy }
     
     function requestWeatherChange() public {

@@ -1,7 +1,12 @@
 // WorkloadBalanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract WorkloadBalanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WorkloadBalanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public dailyWorkload;
     mapping(address => uint256) public weeklyAttendance;
     mapping(address => bool) public overloadFlag;

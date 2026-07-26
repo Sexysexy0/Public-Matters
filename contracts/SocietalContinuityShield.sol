@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SocietalContinuityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SocietalContinuityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Covenant {
         address participant;
         string factor;

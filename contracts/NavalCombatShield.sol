@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract NavalCombatShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NavalCombatShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event NavalSeal(string ship, string mechanic);
 
     function logNaval(string memory ship, string memory mechanic) external {

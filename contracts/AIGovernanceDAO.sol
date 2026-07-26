@@ -1,7 +1,12 @@
 // AIGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract AIGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AIGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct AIPolicy {
         string feature; // e.g., "Facial Recognition"
         bool isEnabled;

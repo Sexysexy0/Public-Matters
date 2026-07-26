@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DialogueOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DialogueOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DialogueRecord(string factor, string status);
 
     function logDialogueRecord(string memory factor, string memory status) external {

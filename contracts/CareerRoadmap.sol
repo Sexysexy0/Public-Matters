@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CareerRoadmap {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CareerRoadmap is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     enum Rank { Amateur, Pro, Champion, Legend }
     Rank public currentRank;
 

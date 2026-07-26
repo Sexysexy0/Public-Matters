@@ -1,7 +1,12 @@
 // ComplianceDAO.sol
 pragma solidity ^0.8.0;
 
-contract ComplianceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ComplianceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Obligation {
         uint256 id;
         string requirement;   // e.g. "Stop oppression"

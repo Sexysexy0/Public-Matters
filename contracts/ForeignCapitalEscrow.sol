@@ -1,7 +1,12 @@
 // ForeignCapitalEscrow.sol
 pragma solidity ^0.8.0;
 
-contract ForeignCapitalEscrow {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ForeignCapitalEscrow is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function releaseIncentives(address _investor, uint256 _localHiringRate) public {
         // Condition: Minimum 70% Filipino workforce requirement
         if (_localHiringRate >= 70) {

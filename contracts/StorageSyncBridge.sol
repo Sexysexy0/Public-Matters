@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract StorageSyncBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StorageSyncBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SyncRecord(string medium, string status);
 
     function logSync(string memory _medium, string memory _status) external {

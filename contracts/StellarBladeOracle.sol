@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract StellarBladeOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StellarBladeOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rumor {
         address source;
         string title;

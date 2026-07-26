@@ -1,7 +1,12 @@
 // CitizenEquityStream.sol
 pragma solidity ^0.8.0;
 
-contract CitizenEquityStream {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CitizenEquityStream is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public microOwnership;
 
     function streamEquity(address _citizen, uint256 _projectID) public {

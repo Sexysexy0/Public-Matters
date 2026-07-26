@@ -1,7 +1,12 @@
 // PipelineResilienceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract PipelineResilienceGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PipelineResilienceGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure pipeline governance balances automation with trust and resilience"

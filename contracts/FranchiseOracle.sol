@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FranchiseOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FranchiseOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FranchiseRecord(string factor, string status);
 
     function logFranchiseRecord(string memory factor, string memory status) external {

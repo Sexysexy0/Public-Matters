@@ -1,7 +1,12 @@
 // HarvestIncentiveProtocol.sol
 pragma solidity ^0.8.0;
 
-contract HarvestIncentiveProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HarvestIncentiveProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public incentives;
 
     event IncentiveHarvest(address indexed worker, uint256 amount);

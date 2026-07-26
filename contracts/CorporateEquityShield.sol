@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CorporateEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CorporateEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CorporateAction {
         address stakeholder;
         string company;

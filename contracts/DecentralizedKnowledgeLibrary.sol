@@ -1,7 +1,12 @@
 // DecentralizedKnowledgeLibrary.sol
 pragma solidity ^0.8.0;
 
-contract DecentralizedKnowledgeLibrary {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DecentralizedKnowledgeLibrary is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct KnowledgeBase {
         bytes32 fileHash; // IPFS hash ng aklat o journal
         string category;

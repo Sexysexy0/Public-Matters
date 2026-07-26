@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ReviewIntegrityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ReviewIntegrityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ReviewRecord(string product, string feedback);
 
     function logReview(string memory product, string memory feedback) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ProfitOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProfitOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ProfitRecord(string modder, uint256 amount, string status);
 
     function logCompensation(string memory modder, uint256 amount, string memory status) external {

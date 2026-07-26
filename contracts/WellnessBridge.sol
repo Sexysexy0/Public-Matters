@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WellnessBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WellnessBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WellnessRecord(string program, string outcome);
 
     function logWellness(string memory program, string memory outcome) external {

@@ -1,7 +1,12 @@
 // WorkFlowTransparencyProtocol.sol
 pragma solidity ^0.8.0;
 
-contract WorkFlowTransparencyProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WorkFlowTransparencyProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Milestone {
         string taskName;
         string outputHash; // Hash of the document/action

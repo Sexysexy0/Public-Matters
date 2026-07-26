@@ -1,7 +1,12 @@
 // DiplomacyProtocol.sol
 pragma solidity ^0.8.0;
 
-contract DiplomacyProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DiplomacyProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Dialogue {
         uint256 id;
         string country;      // e.g. "South Korea"

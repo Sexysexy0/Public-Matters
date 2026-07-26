@@ -1,7 +1,12 @@
 // OrbitalTrafficRegistry.sol
 pragma solidity ^0.8.0;
 
-contract OrbitalTrafficRegistry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OrbitalTrafficRegistry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Satellite {
         string owner;
         uint256 launchDate;

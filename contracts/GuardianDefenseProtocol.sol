@@ -1,7 +1,12 @@
 // GuardianDefenseProtocol.sol
 pragma solidity ^0.8.0;
 
-contract GuardianDefenseProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GuardianDefenseProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Defense {
         uint256 id;
         string guardian;   // e.g. "Michael Archetype"

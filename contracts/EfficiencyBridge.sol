@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EfficiencyBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EfficiencyBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EfficiencyCase(string project, string duration);
 
     function logEfficiency(string memory project, string memory duration) external {

@@ -1,7 +1,12 @@
 // HeritageGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract HeritageGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HeritageGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance modernization with identity in heritage governance"

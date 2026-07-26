@@ -1,7 +1,12 @@
 // StrategicStockpileSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract StrategicStockpileSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StrategicStockpileSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant MINIMUM_BUFFER_DAYS = 90;
     uint256 public currentInventory;
 

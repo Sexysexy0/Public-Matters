@@ -1,7 +1,12 @@
 // AdminGovernanceKillswitch.sol
 pragma solidity ^0.8.0;
 
-contract AdminGovernanceKillswitch {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AdminGovernanceKillswitch is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public systemPaused = false;
 
     function triggerEmergencyPause() public {

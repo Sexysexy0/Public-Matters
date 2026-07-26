@@ -1,7 +1,12 @@
 // EcclesialHierarchyGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract EcclesialHierarchyGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EcclesialHierarchyGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure ecclesial governance balances authority with pastoral service"

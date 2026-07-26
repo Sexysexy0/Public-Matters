@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GlobalHormuzSentry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalHormuzSentry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public isStraitClosed;
     uint256 public ceasefireExpiry = 1713744000; // April 22, 2026
 

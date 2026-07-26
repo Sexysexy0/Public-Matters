@@ -1,7 +1,12 @@
 // JusticeProtocol.sol
 pragma solidity ^0.8.0;
 
-contract JusticeProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract JusticeProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Case {
         uint256 id;
         string domain;       // e.g. "Human Rights"

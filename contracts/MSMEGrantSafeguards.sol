@@ -1,7 +1,12 @@
 // MSMEGrantSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract MSMEGrantSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MSMEGrantSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct GrantCondition {
         uint256 businessId;
         bool usesLocalMaterials;

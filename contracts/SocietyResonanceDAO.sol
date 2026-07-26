@@ -1,7 +1,12 @@
 // SocietyResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract SocietyResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SocietyResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Public Good Program"

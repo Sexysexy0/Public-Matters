@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EquityPreservationBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EquityPreservationBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Preservation {
         address steward;
         string archive;

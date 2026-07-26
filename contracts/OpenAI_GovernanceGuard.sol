@@ -1,7 +1,12 @@
 // OpenAI_GovernanceGuard.sol
 pragma solidity ^0.8.0;
 
-contract OpenAI_GovernanceGuard {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OpenAI_GovernanceGuard is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public isWeaponized;
     uint256 public ethicsScore;
 

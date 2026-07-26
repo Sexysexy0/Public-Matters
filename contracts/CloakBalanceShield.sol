@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CloakBalanceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CloakBalanceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CloakUpdate(string cloakType, uint256 duration);
 
     function logCloak(string memory cloakType, uint256 duration) external {

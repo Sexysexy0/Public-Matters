@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PeripheralIntegrationShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PeripheralIntegrationShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event IntegrationSeal(string device, string status);
 
     function logPeripheral(string memory _device, string memory _status) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract IslandProgression {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IslandProgression is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public renown;
 
     // [Goal: Goal-Oriented Growth]

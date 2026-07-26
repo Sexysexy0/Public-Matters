@@ -1,7 +1,12 @@
 // HealthcareEquityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract HealthcareEquityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HealthcareEquityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Healthcare Equity"

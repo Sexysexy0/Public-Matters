@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract IncentivizedHousing {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IncentivizedHousing is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Solvable Housing through Incentives]
     function buildSocializedUnit(uint256 _cost) external pure returns (uint256) {
         // Logic: Offset low income with system-level subsidies.

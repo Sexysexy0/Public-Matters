@@ -1,7 +1,12 @@
 // MoneyGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract MoneyGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MoneyGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance innovation with civil liberty in programmable money governance"

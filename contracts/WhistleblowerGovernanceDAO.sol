@@ -1,7 +1,12 @@
 // WhistleblowerGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract WhistleblowerGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WhistleblowerGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of whistleblower governance and transparency in institutions"

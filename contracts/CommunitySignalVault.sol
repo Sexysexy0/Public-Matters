@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommunitySignalVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunitySignalVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CommunitySignal {
         address sender;
         string signal;

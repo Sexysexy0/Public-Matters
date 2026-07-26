@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SkillSynergyBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SkillSynergyBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SynergyRecord(string element, string detail);
 
     function logSynergy(string memory element, string memory detail) external {

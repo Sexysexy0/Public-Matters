@@ -2,7 +2,12 @@
 // Logic: Market Dominance via Logistics Subsidies
 pragma solidity ^0.8.0;
 
-contract PetroExportIncentive {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PetroExportIncentive is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct PartnerCountry {
         string name;
         bool isStrategicAlly;

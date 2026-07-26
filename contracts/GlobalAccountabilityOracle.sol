@@ -1,7 +1,12 @@
 // GlobalAccountabilityOracle.sol
 pragma solidity ^0.8.0;
 
-contract GlobalAccountabilityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalAccountabilityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CaseStatus {
         string caseID;
         bool isOngoing;

@@ -1,7 +1,12 @@
 // AutomationGatekeeper.sol
 pragma solidity ^0.8.0;
 
-contract AutomationGatekeeper {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AutomationGatekeeper is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public isRequirementLessDumb;
     bool public isPartDeleted;
 

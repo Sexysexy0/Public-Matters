@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RepairabilityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RepairabilityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RepairSeal(string device, string module);
 
     function logRepair(string memory device, string memory module) external {

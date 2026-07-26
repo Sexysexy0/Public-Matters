@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GrievanceLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GrievanceLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event GrievanceSeal(string barangay, string complaint);
 
     function logGrievance(string memory _barangay, string memory _complaint) external {

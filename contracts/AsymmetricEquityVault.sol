@@ -1,7 +1,12 @@
 // AsymmetricEquityVault.sol
 pragma solidity ^0.8.0;
 
-contract AsymmetricEquityVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AsymmetricEquityVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     address public leadPartner; // The 51% holder
     address public juniorPartner; // The 49% holder
 

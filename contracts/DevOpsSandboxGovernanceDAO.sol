@@ -1,7 +1,12 @@
 // DevOpsSandboxGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract DevOpsSandboxGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DevOpsSandboxGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure pipeline governance balances speed with reliability using sandbox validation"

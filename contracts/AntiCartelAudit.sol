@@ -1,7 +1,12 @@
 // AntiCartelAudit.sol
 pragma solidity ^0.8.0;
 
-contract AntiCartelAudit {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiCartelAudit is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Warehouse {
         uint256 stockAmount;
         uint256 lastMovement;

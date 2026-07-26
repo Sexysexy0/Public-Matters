@@ -1,7 +1,12 @@
 // AIMusicGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract AIMusicGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AIMusicGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure cultural governance balances AI innovation with heritage preservation"

@@ -1,7 +1,12 @@
 // SovereignID.sol
 pragma solidity ^0.8.0;
 
-contract SovereignID {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereignID is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Identity {
         string username;
         bytes32 identityRoot; // Link to decentralized bio/data

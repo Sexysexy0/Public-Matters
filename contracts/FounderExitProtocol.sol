@@ -1,7 +1,12 @@
 // FounderExitProtocol.sol
 pragma solidity ^0.8.0;
 
-contract FounderExitProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FounderExitProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public systemIsStrong;
     address public successor;
 

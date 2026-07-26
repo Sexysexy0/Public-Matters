@@ -1,7 +1,12 @@
 // ResourceRoyaltySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ResourceRoyaltySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourceRoyaltySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ExtractionLog {
         string resourceType; // e.g., "Natural Gas", "Gold"
         uint256 volume;

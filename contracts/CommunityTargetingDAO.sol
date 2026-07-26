@@ -1,7 +1,12 @@
 // CommunityTargetingDAO.sol
 pragma solidity ^0.8.0;
 
-contract CommunityTargetingDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityTargetingDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Applicant {
         string name;
         uint256 validationPoints;

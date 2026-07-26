@@ -1,7 +1,12 @@
 // DecentralizedScienceDAO.sol
 pragma solidity ^0.8.0;
 
-contract DecentralizedScienceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DecentralizedScienceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ResearchProject {
         string title;
         uint256 fundingPool;

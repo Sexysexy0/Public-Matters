@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract InnovationCycleShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InnovationCycleShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event InnovationSeal(string project, string status);
 
     function logInnovation(string memory project, string memory status) external {

@@ -2,11 +2,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 /**
  * @title StoryLedger
  * @notice Log narratives, reflections, and communal myths; publicly viewable ledger.
  */
-contract StoryLedger {
+contract StoryLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Story {
         string title;
         string content;

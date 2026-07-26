@@ -1,7 +1,12 @@
 // AfricaGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract AfricaGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AfricaGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of state response to persecution and proxy militia influence"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EnergyIndependenceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EnergyIndependenceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event IndependenceSeal(string factor, string status);
 
     function logIndependence(string memory factor, string memory status) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DigitalWillEncryption {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DigitalWillEncryption is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     address public heir;
     uint256 public inactivityLimit;
 

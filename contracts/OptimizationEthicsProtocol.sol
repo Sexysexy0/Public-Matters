@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract OptimizationEthicsProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OptimizationEthicsProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EthicsAlert(string game, string issue);
 
     function checkGame(string memory game, uint256 fps, uint256 crashRate) public {

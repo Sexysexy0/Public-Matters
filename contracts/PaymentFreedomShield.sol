@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PaymentFreedomShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PaymentFreedomShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FreedomSeal(string platform, string status);
 
     function logPaymentDecision(string memory platform, bool allowed) external {

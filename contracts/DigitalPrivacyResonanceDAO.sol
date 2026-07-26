@@ -1,7 +1,12 @@
 // DigitalPrivacyResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract DigitalPrivacyResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DigitalPrivacyResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Data Protection Policy"

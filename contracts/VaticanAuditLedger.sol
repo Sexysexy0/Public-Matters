@@ -1,7 +1,12 @@
 // VaticanAuditLedger.sol
 pragma solidity ^0.8.0;
 
-contract VaticanAuditLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VaticanAuditLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Transaction {
         address recipient;
         uint256 amount;

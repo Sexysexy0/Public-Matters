@@ -1,7 +1,12 @@
 // WisdomResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract WisdomResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WisdomResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Insight {
         uint256 id;
         string domain;    // e.g. "Community Leadership"

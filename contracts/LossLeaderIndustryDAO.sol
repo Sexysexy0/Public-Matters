@@ -1,7 +1,12 @@
 // LossLeaderIndustryDAO.sol
 pragma solidity ^0.8.0;
 
-contract LossLeaderIndustryDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LossLeaderIndustryDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct StrategicIndustry {
         string name; // e.g., "Steel Manufacturing"
         uint256 subsidyLevel;

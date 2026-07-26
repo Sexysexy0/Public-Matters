@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CritiqueResonanceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CritiqueResonanceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Critique {
         address overseer;
         string arc;

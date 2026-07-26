@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ResourceAbundance {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourceAbundance is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Eliminate Frustrating Bottlenecks]
     function calculateYield(uint256 _effort) external pure returns (uint256) {
         // Logic: Linear effort yields exponential resource gain.

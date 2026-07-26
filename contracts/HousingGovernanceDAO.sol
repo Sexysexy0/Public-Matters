@@ -1,7 +1,12 @@
 // HousingGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract HousingGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HousingGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of urban housing governance and land use"

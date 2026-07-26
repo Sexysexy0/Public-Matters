@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract FuelReliefMechanism {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FuelReliefMechanism is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ReliefActivation(string driver, uint256 subsidy);
 
     function checkFuel(string memory driver, uint256 price) public {

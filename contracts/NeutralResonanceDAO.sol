@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract NeutralResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NeutralResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // "Peace-First Aid Program"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PortabilityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PortabilityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PortabilitySeal(string studio, string title);
 
     function logPort(string memory studio, string memory title) external {

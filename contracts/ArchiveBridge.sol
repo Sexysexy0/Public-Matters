@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ArchiveBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ArchiveBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ArchiveRecord(string element, string detail);
 
     function logArchive(string memory element, string memory detail) external {

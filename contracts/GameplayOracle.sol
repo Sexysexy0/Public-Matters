@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GameplayOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GameplayOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event GameplayRecord(string factor, string status);
 
     function logGameplayRecord(string memory factor, string memory status) external {

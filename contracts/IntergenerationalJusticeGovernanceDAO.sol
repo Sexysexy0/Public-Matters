@@ -1,7 +1,12 @@
 // IntergenerationalJusticeGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract IntergenerationalJusticeGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IntergenerationalJusticeGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure present policies safeguard the rights of future generations"

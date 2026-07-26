@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RegulationBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RegulationBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RegulationRecord(string policy, string detail);
 
     function logRegulation(string memory policy, string memory detail) external {

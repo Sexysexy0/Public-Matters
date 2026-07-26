@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ArchitectureTruth {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ArchitectureTruth is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Performance through Efficiency, Not AI]
     function auditEfficiency(uint256 _complexity) public pure returns (string memory) {
         if (_complexity < 100) {

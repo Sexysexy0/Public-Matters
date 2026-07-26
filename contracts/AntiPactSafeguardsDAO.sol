@@ -1,7 +1,12 @@
 // AntiPactSafeguardsDAO.sol
 pragma solidity ^0.8.0;
 
-contract AntiPactSafeguardsDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiPactSafeguardsDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Pact {
         uint256 id;
         string seeker;     // e.g. "Occult Practitioner"

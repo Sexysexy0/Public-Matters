@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CustomEngineCore {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CustomEngineCore is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Technical Innovation over Investor Presentations]
     function optimizeEnvironment(uint256 _entityCount) external pure {
         // Logic: Delete hidden geometry to save performance.

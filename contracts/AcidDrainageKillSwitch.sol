@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AcidDrainageKillSwitch {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AcidDrainageKillSwitch is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public acidThreshold = 4; // pH Level limit
 
     // [The Self-Executing Penalty]

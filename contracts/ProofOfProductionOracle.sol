@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ProofOfProductionOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProofOfProductionOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Verify localized production metrics via IoT/Data hashing]
     enum Status { Pending, VerifiedMaker, ResellerOnly }
 

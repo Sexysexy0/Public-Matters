@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CredibilityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CredibilityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CredibilityRecord(string element, string detail);
 
     function logCredibility(string memory element, string memory detail) external {

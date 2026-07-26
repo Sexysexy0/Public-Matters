@@ -1,7 +1,12 @@
 // AtmosphericThermostat.sol
 pragma solidity ^0.8.0;
 
-contract AtmosphericThermostat {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AtmosphericThermostat is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant CRITICAL_HEAT = 39;
     uint256 public constant TARGET_COMFORT = 31; // Range: 30-32
 

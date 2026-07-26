@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract InnovationOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InnovationOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event InnovationEvent(string mod, string effect);
 
     function monitorInnovation(string memory mod, string memory effect) external {

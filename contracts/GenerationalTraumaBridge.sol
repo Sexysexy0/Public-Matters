@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GenerationalTraumaBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GenerationalTraumaBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Trauma {
         address participant;
         string origin;

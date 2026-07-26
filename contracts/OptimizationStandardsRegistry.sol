@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract OptimizationStandardsRegistry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OptimizationStandardsRegistry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event OptimizationAlert(string game, string issue);
 
     function checkPerformance(string memory game, uint256 fps, uint256 memoryUsage) public {

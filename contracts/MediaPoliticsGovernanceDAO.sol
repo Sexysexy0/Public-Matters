@@ -1,7 +1,12 @@
 // MediaPoliticsGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract MediaPoliticsGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MediaPoliticsGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of candidacy vs. media influence"

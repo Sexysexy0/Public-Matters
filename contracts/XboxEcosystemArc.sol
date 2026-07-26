@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract XboxEcosystemArc {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract XboxEcosystemArc is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PerformanceSafeguard(string feature, string safeguard, uint256 timestamp);
     event BrandIdentity(string context, string safeguard, uint256 timestamp);
     event ControllerInnovation(string feature, string safeguard, uint256 timestamp);

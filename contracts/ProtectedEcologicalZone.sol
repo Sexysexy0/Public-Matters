@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ProtectedEcologicalZone {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProtectedEcologicalZone is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Zone {
         string name;
         bool isPristine;

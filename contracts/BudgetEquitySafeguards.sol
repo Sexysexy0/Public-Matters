@@ -1,7 +1,12 @@
 // BudgetEquitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract BudgetEquitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BudgetEquitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Fiscal Discipline in Appropriations"

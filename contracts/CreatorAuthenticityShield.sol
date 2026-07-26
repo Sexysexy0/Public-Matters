@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract CreatorAuthenticityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CreatorAuthenticityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AuthenticityAlert(string channel, string issue);
 
     function checkCreatorPresence(bool creatorActive) public {

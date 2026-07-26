@@ -1,7 +1,12 @@
 // SandboxModeEnabler.sol
 pragma solidity ^0.8.0;
 
-contract SandboxModeEnabler {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SandboxModeEnabler is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public isQuestLockActive;
 
     // Bubuksan ang buong mundo para sa "Free Roam"

@@ -1,7 +1,12 @@
 // CompassionateWorkProtocol.sol
 pragma solidity ^0.8.0;
 
-contract CompassionateWorkProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CompassionateWorkProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public workloadLevel;
     mapping(address => uint256) public weeklyAttendance;
     mapping(address => bool) public overloadFlag;

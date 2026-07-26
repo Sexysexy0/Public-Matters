@@ -1,7 +1,12 @@
 // FuelGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract FuelGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FuelGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Domestic priority pricing at 40-60 pesos per liter"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ProtoFeelingAuditor {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProtoFeelingAuditor is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [28:45] Examining feelings with the rational faculty
     function analyzeEmotion(string memory _initialReaction, bool _isBasedOnFact) public pure returns (string memory) {
         if (_isBasedOnFact) {

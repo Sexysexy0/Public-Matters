@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ProsperityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProsperityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ProsperityRecord(string actor, string measure);
 
     function logProsperity(string memory actor, string memory measure) external {

@@ -1,7 +1,12 @@
 // TransparencyReliefGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract TransparencyReliefGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransparencyReliefGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of relief governance and transparency in aid"

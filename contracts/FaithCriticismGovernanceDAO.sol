@@ -1,7 +1,12 @@
 // FaithCriticismGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract FaithCriticismGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FaithCriticismGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure faith communities integrate historical scholarship with theological integrity"

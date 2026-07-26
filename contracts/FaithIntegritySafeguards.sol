@@ -1,7 +1,12 @@
 // FaithIntegritySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract FaithIntegritySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FaithIntegritySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect Religious Integrity"

@@ -1,7 +1,12 @@
 // SharedResponsibilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract SharedResponsibilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SharedResponsibilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string challenge;  // e.g. "Climate Change"

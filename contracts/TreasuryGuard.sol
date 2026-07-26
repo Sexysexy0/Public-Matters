@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TreasuryGuard {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TreasuryGuard is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Extreme Asset Protection]
     function validateWithdrawal(uint256 _amount, uint256 _timePassed) external pure returns (bool) {
         // Logic: No large withdrawals without 48-hour time-lock.

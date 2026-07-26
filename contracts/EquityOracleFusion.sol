@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EquityOracleFusion {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EquityOracleFusion is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EquityRecord(string sector, string measure);
 
     function logEquity(string memory sector, string memory measure) external {

@@ -1,7 +1,12 @@
 // ResponsibilitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ResponsibilitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResponsibilitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "CSR Obligations"

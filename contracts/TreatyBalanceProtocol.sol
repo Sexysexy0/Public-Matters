@@ -1,7 +1,12 @@
 // TreatyBalanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract TreatyBalanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TreatyBalanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Demand {
         uint256 id;
         string clause;       // e.g. "Lift sanctions"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EquitySafeguard {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EquitySafeguard is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EquitySeal(string community, string benefit);
 
     function allocateBenefit(string memory _community, string memory _benefit) external {

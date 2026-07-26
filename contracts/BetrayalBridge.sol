@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BetrayalBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BetrayalBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BetrayalRecord(string traitor, string weakness);
 
     function logBetrayal(string memory traitor, string memory weakness) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract InnovationResilienceBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InnovationResilienceBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event InnovationRecord(string element, string detail);
 
     function logInnovation(string memory element, string memory detail) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LegacySupportProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LegacySupportProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LegacySeal(string title, string action);
 
     function logLegacy(string memory title, string memory action) external {

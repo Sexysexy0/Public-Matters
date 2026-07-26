@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ChargeReductionShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ChargeReductionShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ReductionSeal(string chargeType, uint256 oldRate, uint256 newRate);
 
     function applyReduction(string memory chargeType, uint256 oldRate) external {

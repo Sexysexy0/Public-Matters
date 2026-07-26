@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract NuclearEnergyProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NuclearEnergyProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event NuclearAdoptionAlert(string country, string issue);
 
     function adoptNuclear(string memory country, bool crisis) public {

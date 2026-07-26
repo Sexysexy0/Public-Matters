@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AthleticRootsBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AthleticRootsBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Transition {
         address athlete;
         string origin;

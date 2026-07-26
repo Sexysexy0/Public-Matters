@@ -1,7 +1,12 @@
 // LandReformSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract LandReformSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LandReformSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Reform {
         uint256 id;
         string measure;    // e.g. "Equitable Land Distribution"

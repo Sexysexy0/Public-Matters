@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FinalSovereignSeal {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FinalSovereignSeal is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public isComplete = false;
 
     // [Goal: The End of the Beginning]

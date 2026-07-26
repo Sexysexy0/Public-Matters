@@ -1,7 +1,12 @@
 // ElectoralIntegritySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ElectoralIntegritySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ElectoralIntegritySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Ballot {
         bytes32 voteHash;
         uint256 timestamp;

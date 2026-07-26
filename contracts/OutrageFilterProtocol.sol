@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract OutrageFilterProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OutrageFilterProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // Detects high-emotional/low-fact content to prevent "Mirror of Radicalisation" [3:36]
     function deEscalateDiscourse(uint256 _outrageLevel) public pure returns (bool) {
         if (_outrageLevel > 90) {

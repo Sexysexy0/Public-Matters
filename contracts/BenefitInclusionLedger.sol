@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract BenefitInclusionLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BenefitInclusionLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BenefitAlert(string employer, string issue);
 
     function checkBenefits(string memory employer, bool complete) public {

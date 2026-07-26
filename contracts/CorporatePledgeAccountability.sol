@@ -1,7 +1,12 @@
 // CorporatePledgeAccountability.sol
 pragma solidity ^0.8.0;
 
-contract CorporatePledgeAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CorporatePledgeAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Pledge {
         address corporation;
         string goal; // e.g., "Plant 1M Trees"

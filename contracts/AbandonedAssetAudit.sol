@@ -2,7 +2,12 @@
 // Logic: Detecting "White Elephants" in Real-time
 pragma solidity ^0.8.0;
 
-contract AbandonedAssetAudit {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AbandonedAssetAudit is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Project {
         string name;
         uint256 cost;

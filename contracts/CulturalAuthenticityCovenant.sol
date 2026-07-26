@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CulturalAuthenticityCovenant {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CulturalAuthenticityCovenant is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Likeness {
         address claimant;
         string entity;

@@ -1,7 +1,12 @@
 // FairTradeSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract FairTradeSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FairTradeSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect Fair Trade"

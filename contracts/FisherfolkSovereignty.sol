@@ -2,7 +2,12 @@
 // Logic: Prioritizing Local Catch over Imports
 pragma solidity ^0.8.0;
 
-contract FisherfolkSovereignty {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FisherfolkSovereignty is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public localInventory; // Measured in Metric Tons
     uint256 public constant IMPORT_RESTRICTION_THRESHOLD = 100; // Halimbawa: 100 tons local supply
 

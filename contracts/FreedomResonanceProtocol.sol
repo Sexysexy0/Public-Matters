@@ -1,7 +1,12 @@
 // FreedomResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract FreedomResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FreedomResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Action {
         uint256 id;
         string domain;    // e.g. "Digital Rights"

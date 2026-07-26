@@ -1,7 +1,12 @@
 // AntiDeepfakeRegistry.sol
 pragma solidity ^0.8.0;
 
-contract AntiDeepfakeRegistry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiDeepfakeRegistry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ContentHash {
         bytes32 mediaHash;
         address creator;

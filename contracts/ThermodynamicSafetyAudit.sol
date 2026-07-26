@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ThermodynamicSafetyAudit {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ThermodynamicSafetyAudit is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // Sinusuri kung ang energy output ay hindi "scam"
     function verifyEfficiency(uint256 _inputPower, uint256 _hydrogenOutput) public pure returns (string memory) {
         // Law of Conservation of Energy check

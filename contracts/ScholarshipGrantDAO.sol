@@ -1,7 +1,12 @@
 // ScholarshipGrantDAO.sol
 pragma solidity ^0.8.0;
 
-contract ScholarshipGrantDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ScholarshipGrantDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Candidate {
         string name;
         uint256 gpa; // Scaled by 100 (e.g., 1.25 = 125)

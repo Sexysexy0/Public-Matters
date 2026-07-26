@@ -1,7 +1,12 @@
 // CrossCulturalResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CrossCulturalResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CrossCulturalResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Program {
         uint256 id;
         string culture;    // e.g. "Filipino-Japanese Exchange"

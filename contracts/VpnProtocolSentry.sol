@@ -1,7 +1,12 @@
 // VpnProtocolSentry.sol
 pragma solidity ^0.8.0;
 
-contract VpnProtocolSentry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VpnProtocolSentry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     string public activeProtocol = "Dausos"; // April 2026 Standard
 
     function switchProtocol(string memory _newProtocol) public {

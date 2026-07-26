@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AllureBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AllureBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AllureRecord(string element, string detail);
 
     function logAllure(string memory element, string memory detail) external {

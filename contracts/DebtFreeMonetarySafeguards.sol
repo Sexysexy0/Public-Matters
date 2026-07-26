@@ -1,7 +1,12 @@
 // DebtFreeMonetarySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract DebtFreeMonetarySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DebtFreeMonetarySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CurrencySupply {
         uint256 totalCirculation;
         uint256 reserveRatio; // Fixed at 100% for transparency

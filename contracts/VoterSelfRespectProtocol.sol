@@ -1,7 +1,12 @@
 // VoterSelfRespectProtocol.sol
 pragma solidity ^0.8.0;
 
-contract VoterSelfRespectProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VoterSelfRespectProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CandidateData {
         string trackRecord;
         string budgetPlan; // [1:37] Edu's requirement for concrete plans

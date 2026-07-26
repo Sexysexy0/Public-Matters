@@ -1,7 +1,12 @@
 // ResourceAffordabilitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ResourceAffordabilitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourceAffordabilitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Affordable Basic Needs"

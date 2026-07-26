@@ -1,7 +1,12 @@
 // RightToRepairEquityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract RightToRepairEquityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RightToRepairEquityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Repair Governance"

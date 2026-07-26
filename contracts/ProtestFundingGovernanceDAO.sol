@@ -1,7 +1,12 @@
 // ProtestFundingGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract ProtestFundingGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProtestFundingGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure civic governance balances activism with legitimacy through transparent funding"

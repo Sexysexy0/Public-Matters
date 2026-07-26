@@ -1,7 +1,12 @@
 // AgileLaborIncentive.sol
 pragma solidity ^0.8.0;
 
-contract AgileLaborIncentive {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AgileLaborIncentive is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rider { uint256 deliveries; bool isInsured; }
     mapping(address => Rider) public fleet;
 

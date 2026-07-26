@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FreedomOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FreedomOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FreedomEvent(string actor, string action);
 
     function monitorFreedom(string memory actor, string memory action) external {

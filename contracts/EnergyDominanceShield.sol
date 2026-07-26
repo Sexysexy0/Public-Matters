@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EnergyDominanceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EnergyDominanceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EnergyAllocation(string source, uint256 megawatts);
 
     function allocateEnergy(string memory source, uint256 megawatts) external {

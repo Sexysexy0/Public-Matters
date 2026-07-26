@@ -1,7 +1,12 @@
 // DataSovereigntyVault.sol
 pragma solidity ^0.8.0;
 
-contract DataSovereigntyVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DataSovereigntyVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct DataAccess {
         address requester;
         uint256 accessExpiry;

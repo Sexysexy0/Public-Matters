@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RegionalEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RegionalEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EquityRecord(string region, string measure);
 
     function logEquity(string memory region, string memory measure) external {

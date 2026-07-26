@@ -1,7 +1,12 @@
 // AutomaticAssetTransfer.sol
 pragma solidity ^0.8.0;
 
-contract AutomaticAssetTransfer {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AutomaticAssetTransfer is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     address public owner;
     bool public isOwnerDeceased;
 

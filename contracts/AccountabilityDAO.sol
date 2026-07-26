@@ -1,7 +1,12 @@
 // AccountabilityDAO.sol
 pragma solidity ^0.8.0;
 
-contract AccountabilityDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AccountabilityDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Agreement {
         uint256 id;
         string clause;   // e.g. "Stop oppression"

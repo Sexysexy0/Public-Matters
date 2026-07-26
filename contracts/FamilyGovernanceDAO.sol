@@ -1,7 +1,12 @@
 // FamilyGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract FamilyGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FamilyGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of family governance and fatherhood safeguards"

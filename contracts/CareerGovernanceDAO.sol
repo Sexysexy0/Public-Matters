@@ -1,7 +1,12 @@
 // CareerGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CareerGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CareerGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance mastery with adaptability in developer careers"

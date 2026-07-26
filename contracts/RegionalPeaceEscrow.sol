@@ -1,7 +1,12 @@
 // RegionalPeaceEscrow.sol
 pragma solidity ^0.8.0;
 
-contract RegionalPeaceEscrow {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RegionalPeaceEscrow is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public ceasefireStart;
     bool public isViolationDetected;
 

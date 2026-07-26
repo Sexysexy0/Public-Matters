@@ -1,7 +1,12 @@
 // InnovationResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract InnovationResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InnovationResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Creative Growth Program"

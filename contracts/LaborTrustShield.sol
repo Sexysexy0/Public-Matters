@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LaborTrustShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LaborTrustShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TrustSeal(string factor, string status);
 
     function logTrust(string memory factor, string memory status) external {

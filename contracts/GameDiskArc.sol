@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GameDiskArc {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GameDiskArc is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DiskInserted(address indexed player, string gameId, string artHash, uint256 timestamp);
     event ArtRegistered(string gameId, string artHash, string contributor);
     event ReputationEarned(address indexed contributor, uint256 points);

@@ -1,7 +1,12 @@
 // ResourceCommonsSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ResourceCommonsSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourceCommonsSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CommonsAsset {
         string name; // e.g., "Deep Sea Minerals"
         uint256 totalReserve;

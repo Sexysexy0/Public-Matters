@@ -1,7 +1,12 @@
 // SovereignIndustrialMandate.sol
 pragma solidity ^0.8.0;
 
-contract SovereignIndustrialMandate {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereignIndustrialMandate is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct LocalFactory {
         string productType; // e.g., "Engine Parts", "Medical Supplies"
         bool isStrategicAsset;

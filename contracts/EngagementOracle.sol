@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EngagementOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EngagementOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EngagementEvent(address player, string action);
 
     function monitorEngagement(address player, string memory action) external {

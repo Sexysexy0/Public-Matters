@@ -1,7 +1,12 @@
 // AutomationTaxDistributor.sol
 pragma solidity ^0.8.0;
 
-contract AutomationTaxDistributor {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AutomationTaxDistributor is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public feePerMile = 10; // 10 units per autonomous mile
 
     function collectAndDistribute() public {

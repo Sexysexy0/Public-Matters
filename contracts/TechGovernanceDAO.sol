@@ -1,7 +1,12 @@
 // TechGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract TechGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TechGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of tech governance and innovation safeguards"

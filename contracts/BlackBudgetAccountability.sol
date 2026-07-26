@@ -1,7 +1,12 @@
 // BlackBudgetAccountability.sol
 pragma solidity ^0.8.0;
 
-contract BlackBudgetAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BlackBudgetAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct BudgetAudit {
         string agency;
         uint256 allocatedAmount;

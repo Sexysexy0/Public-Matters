@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LoyaltyOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LoyaltyOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LoyaltyEvent(string npcName, string status);
 
     function monitorLoyalty(string memory npcName, string memory status) external {

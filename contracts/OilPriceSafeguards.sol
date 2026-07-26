@@ -1,7 +1,12 @@
 // OilPriceSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract OilPriceSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OilPriceSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect Consumers from Oil Price Spikes"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EmergencyExtraction {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EmergencyExtraction is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Escape Before the Freeze]
     function triggerEmergencyExit(address _vault) external {
         // Logic: Monitor systemic risk levels.

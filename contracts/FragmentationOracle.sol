@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FragmentationOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FragmentationOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FragmentationRecord(string ecosystem, string status);
 
     function logFragmentation(string memory ecosystem, string memory status) external {

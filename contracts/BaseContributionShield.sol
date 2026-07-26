@@ -1,7 +1,12 @@
  // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BaseContributionShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BaseContributionShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ContributionAssigned(string npcName, string task);
 
     function assignContribution(string memory npcName, string memory task) external {

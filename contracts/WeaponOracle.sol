@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WeaponOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WeaponOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WeaponEvent(string weapon, string change);
 
     function monitorWeapon(string memory weapon, string memory change) external {

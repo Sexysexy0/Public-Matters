@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TailoringBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TailoringBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TailoringRecord(string outfit, string detail);
 
     function logTailoring(string memory outfit, string memory detail) external {

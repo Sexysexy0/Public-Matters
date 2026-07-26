@@ -1,7 +1,12 @@
 // DemocraticCalendarGuard.sol
 pragma solidity ^0.8.0;
 
-contract DemocraticCalendarGuard {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DemocraticCalendarGuard is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public electionDate;
     bool public isFundReleased;
 

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BundleLogic {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BundleLogic is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Encourage Multi-game Ownership]
     function calculateTotal(uint256 _gameCount, uint256 _basePrice) public pure returns (uint256) {
         if (_gameCount >= 2) {

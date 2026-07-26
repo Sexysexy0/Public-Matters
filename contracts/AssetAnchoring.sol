@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AssetAnchoring {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AssetAnchoring is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Real-World Resilience]
     function triggerAnchor(uint256 _profit) external {
         if (_profit >= 1000) {

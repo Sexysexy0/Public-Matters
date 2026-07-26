@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ScopeMultiplier {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ScopeMultiplier is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SupportModuleDeployed(string module);
 
     function deploySupport(string memory _module) external {

@@ -4,7 +4,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GlobalContinuityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalContinuityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ContinuityArc {
         address curator;
         string region;

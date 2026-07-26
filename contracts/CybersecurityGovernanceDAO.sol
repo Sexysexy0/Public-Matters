@@ -1,7 +1,12 @@
 // CybersecurityGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CybersecurityGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CybersecurityGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of cybersecurity governance and developer trust safeguards"

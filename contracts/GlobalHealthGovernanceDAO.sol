@@ -1,7 +1,12 @@
 // GlobalHealthGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract GlobalHealthGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalHealthGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Expand global cooperation for pandemic preparedness and equitable resource sharing"

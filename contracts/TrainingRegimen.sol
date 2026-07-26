@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TrainingRegimen {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TrainingRegimen is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public speedStat;
 
     // [Goal: Tangible Progression]

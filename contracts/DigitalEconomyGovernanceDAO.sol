@@ -1,7 +1,12 @@
 // DigitalEconomyGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract DigitalEconomyGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DigitalEconomyGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Require transparency in digital pricing models"

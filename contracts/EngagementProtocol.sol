@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract EngagementProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EngagementProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Dialogue {
         uint256 id;
         string partner;

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TransparencyOracleFusion {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransparencyOracleFusion is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TransparencyFusionRecord(string source, string status);
 
     function logTransparency(string memory source, string memory status) external {

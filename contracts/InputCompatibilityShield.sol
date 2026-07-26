@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract InputCompatibilityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InputCompatibilityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CompatibilitySeal(string device, string inputType);
 
     function logInputUpdate(string memory device, string memory inputType) external {

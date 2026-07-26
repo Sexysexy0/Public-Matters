@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WishlistIntegrationBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WishlistIntegrationBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WishlistIntegrated(string request, string status);
 
     function integrateWishlist(string memory request, string memory status) external {

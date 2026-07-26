@@ -1,7 +1,12 @@
 // EndOfLifeEscrow.sol
 pragma solidity ^0.8.0;
 
-contract EndOfLifeEscrow {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EndOfLifeEscrow is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => bytes32) private serverSourceCodeHash;
     bool public isSupportEnded;
 

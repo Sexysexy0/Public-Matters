@@ -1,7 +1,12 @@
 // RuleOfLawAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract RuleOfLawAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RuleOfLawAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Rule of Law"

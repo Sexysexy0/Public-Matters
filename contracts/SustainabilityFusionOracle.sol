@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SustainabilityFusionOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SustainabilityFusionOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FusionRecord(string resource, string measure);
 
     function logFusion(string memory resource, string memory measure) external {

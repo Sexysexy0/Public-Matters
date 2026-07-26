@@ -1,7 +1,12 @@
 // MoralVigilanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract MoralVigilanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MoralVigilanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Guardrail {
         uint256 id;
         string practice;   // e.g. "Daily Examination of Conscience"

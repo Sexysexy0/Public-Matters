@@ -1,7 +1,12 @@
 // HousingAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract HousingAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HousingAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in housing policy"

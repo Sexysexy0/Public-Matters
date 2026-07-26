@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PlayerRightsOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PlayerRightsOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RightsAlert(string company, string violation);
 
     function detectViolation(string memory _company, string memory _violation) external {

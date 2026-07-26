@@ -1,7 +1,12 @@
 // RollbackFuelGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract RollbackFuelGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RollbackFuelGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of rollback governance and fuel pricing safeguards"

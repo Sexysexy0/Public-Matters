@@ -1,7 +1,12 @@
 // AntiGentrificationAudit.sol
 pragma solidity ^0.8.0;
 
-contract AntiGentrificationAudit {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiGentrificationAudit is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct PropertyOwner {
         address ownerAddress;
         bool isCorporateBody;

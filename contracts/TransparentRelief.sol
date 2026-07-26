@@ -1,7 +1,12 @@
 // TransparentRelief.sol (v2.0 - The Anti-Greed Update)
 pragma solidity ^0.8.0;
 
-contract TransparentRelief {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransparentRelief is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public currentGasPrice; // I-update ito via Oracle (e.g., Chainlink)
     uint256 public constant GAS_THRESHOLD = 80; // Halimbawa: 80 Pesos/Liter
 

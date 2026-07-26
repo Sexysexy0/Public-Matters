@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RematchOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RematchOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RematchRecord(string boss, string status);
 
     function logRematchRecord(string memory boss, string memory status) external {

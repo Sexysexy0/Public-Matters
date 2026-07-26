@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FunFirstBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FunFirstBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FunRecord(string player, string mechanic);
 
     function logFun(string memory player, string memory mechanic) external {

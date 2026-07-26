@@ -1,7 +1,12 @@
 // CommunityPrayerResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CommunityPrayerResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityPrayerResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Prayer {
         uint256 id;
         string community;  // e.g. "San Fernando Parish"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BalanceResilienceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BalanceResilienceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BalanceUpdate(string feature, string status);
 
     function logBalance(string memory feature, string memory status) external {

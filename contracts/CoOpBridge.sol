@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CoOpBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CoOpBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CoOpRecord(string element, string detail);
 
     function logCoOp(string memory element, string memory detail) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TransmogIdentityVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransmogIdentityVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Identity {
         address player;
         string gearPiece;

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AuthenticCustomization {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AuthenticCustomization is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Alignment over Achievement]
     function applyGear(string memory _gearType, string memory _boxerNature) external pure returns (bool) {
         // Logic: Check if gear matches the internal nature.

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ChosenOneShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ChosenOneShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BalanceSeal(string domain, string measure);
 
     function logBalance(string memory domain, string memory measure) external {

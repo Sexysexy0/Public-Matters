@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MallEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MallEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MallStrengthened(string mall, string initiative, string sentiment);
     event CinemaSupport(string title, string mall, bool safeguarded);
 

@@ -1,7 +1,12 @@
 // CurriculumResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract CurriculumResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CurriculumResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string reform;     // e.g. "STEM Integration"

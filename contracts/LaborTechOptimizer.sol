@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LaborTechOptimizer {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LaborTechOptimizer is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [7:05-7:30] Technological advancement must benefit the working class
     function calculateWeeklySchedule(uint256 _productivityGain) public pure returns (string memory) {
         if (_productivityGain > 20) {

@@ -1,7 +1,12 @@
 // WaterEquityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract WaterEquityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WaterEquityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Water Equity"

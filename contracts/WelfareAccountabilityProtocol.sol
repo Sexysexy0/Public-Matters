@@ -1,7 +1,12 @@
 // WelfareAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract WelfareAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WelfareAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in welfare distribution"

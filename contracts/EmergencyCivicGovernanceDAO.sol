@@ -1,7 +1,12 @@
 // EmergencyCivicGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract EmergencyCivicGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EmergencyCivicGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure civic governance balances authority with knowledge during emergencies"

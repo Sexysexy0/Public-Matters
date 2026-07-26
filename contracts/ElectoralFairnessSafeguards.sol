@@ -1,7 +1,12 @@
 // ElectoralFairnessSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ElectoralFairnessSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ElectoralFairnessSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect Clean Elections"

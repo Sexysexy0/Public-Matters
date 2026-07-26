@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HumanWorkforceProtection {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumanWorkforceProtection is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public automationTaxRate = 25; // 25% tax on AI productivity gains
 
     // [5:23-6:05] Funding social safety nets for displaced workers

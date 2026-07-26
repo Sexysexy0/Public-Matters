@@ -1,7 +1,12 @@
 // LogisticsEfficiencyProtocol.sol
 pragma solidity ^0.8.0;
 
-contract LogisticsEfficiencyProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LogisticsEfficiencyProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Shipment {
         uint256 id;
         uint256 startTime;

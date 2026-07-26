@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AtmosphereProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AtmosphereProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AtmosphereRecord(string environment, string effect);
 
     function logAtmosphere(string memory environment, string memory effect) external {

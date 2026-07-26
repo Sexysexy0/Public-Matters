@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RespectEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RespectEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event StudioAction(string studio, string action, string outcome);
     event FanRespectLogged(string studio, bool respected);
 

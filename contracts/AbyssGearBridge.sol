@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AbyssGearBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AbyssGearBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SwapSeal(address player, string gear);
 
     function applySwap(address _player, string memory _gear) external {

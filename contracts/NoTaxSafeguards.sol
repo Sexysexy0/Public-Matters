@@ -1,7 +1,12 @@
 // NoTaxSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract NoTaxSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NoTaxSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "No Tax on Oil and Basic Needs"

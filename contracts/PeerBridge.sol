@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PeerBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PeerBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PeerRecord(string sender, string receiver, uint256 amount);
 
     function logPeerTransaction(string memory sender, string memory receiver, uint256 amount) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HardwareInsightShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HardwareInsightShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event InsightSeal(string device, string metric);
 
     function logHardwareInsight(string memory device, string memory metric) external {

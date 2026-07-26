@@ -1,7 +1,12 @@
 // GlobalBusinessGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract GlobalBusinessGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalBusinessGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Equity distribution per family with certificates"

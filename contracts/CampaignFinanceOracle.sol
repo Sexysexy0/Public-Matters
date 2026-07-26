@@ -1,7 +1,12 @@
 // CampaignFinanceOracle.sol
 pragma solidity ^0.8.0;
 
-contract CampaignFinanceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CampaignFinanceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant SPENDING_LIMIT = 100_000_000; // e.g., 100M PHP
 
     struct CandidateFinance {

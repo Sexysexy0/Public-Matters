@@ -1,7 +1,12 @@
 // AutomatedImpactAccountability.sol
 pragma solidity ^0.8.0;
 
-contract AutomatedImpactAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AutomatedImpactAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ImpactClaim {
         address affectedUser;
         string reason;

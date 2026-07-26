@@ -1,7 +1,12 @@
 // SkillValidationLedger.sol
 pragma solidity ^0.8.0;
 
-contract SkillValidationLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SkillValidationLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ProfessionalProfile {
         string skillName;
         uint256 proficiencyLevel; // 1-100

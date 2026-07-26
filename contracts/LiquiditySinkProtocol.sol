@@ -1,7 +1,12 @@
 // LiquiditySinkProtocol.sol
 pragma solidity ^0.8.0;
 
-contract LiquiditySinkProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LiquiditySinkProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public liquidity;
 
     event LiquidityAdded(address indexed user, uint256 amount);

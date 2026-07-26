@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ProneMovementModule {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ProneMovementModule is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     enum Stance { Standing, Crouching, Prone }
 
     // [REQUEST: "Yo they better put the prone mechanic in there"]

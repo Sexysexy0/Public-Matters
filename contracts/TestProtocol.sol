@@ -1,7 +1,12 @@
 // TestProtocol.sol
 pragma solidity ^0.8.0;
 
-contract TestProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TestProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Case {
         uint256 id;
         string domain;       // e.g. "Authentication"

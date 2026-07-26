@@ -1,7 +1,12 @@
 // AlgorithmicNeutralityAudit.sol
 pragma solidity ^0.8.0;
 
-contract AlgorithmicNeutralityAudit {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AlgorithmicNeutralityAudit is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public biasThreshold = 30; // 30% deviance limit
     
     event BiasAlert(string platform, uint256 score);

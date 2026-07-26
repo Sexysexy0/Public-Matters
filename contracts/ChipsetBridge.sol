@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ChipsetBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ChipsetBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ChipsetRecord(string chipset, string status);
 
     function logChipsetSupport(string memory chipset, string memory status) external {

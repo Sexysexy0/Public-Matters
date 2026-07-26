@@ -1,7 +1,12 @@
 // DigitalAssetResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract DigitalAssetResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DigitalAssetResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Stablecoin Yield Program"

@@ -1,7 +1,12 @@
 // CommunityHealthDAO.sol
 pragma solidity ^0.8.0;
 
-contract CommunityHealthDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityHealthDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Claim {
         address patient;
         uint256 amountNeeded;

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract UtilityResponsibilityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UtilityResponsibilityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ResponsibilityLogged(string utility, string charge);
 
     function logResponsibility(string memory utility, string memory charge) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LeakDefenseOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LeakDefenseOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LeakRecord(string project, string status);
 
     function logLeakDefense(string memory project, string memory status) external {

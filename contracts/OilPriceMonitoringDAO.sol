@@ -1,7 +1,12 @@
 // OilPriceMonitoringDAO.sol
 pragma solidity ^0.8.0;
 
-contract OilPriceMonitoringDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OilPriceMonitoringDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct PriceReport {
         uint256 price;
         uint256 timestamp;

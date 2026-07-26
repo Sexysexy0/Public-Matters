@@ -1,7 +1,12 @@
 // ConsumerDigitalGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract ConsumerDigitalGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ConsumerDigitalGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Transition streaming services to one-time payment ownership"

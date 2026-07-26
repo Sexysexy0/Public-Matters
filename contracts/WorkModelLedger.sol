@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WorkModelLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WorkModelLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WorkSeal(string company, string model);
 
     function logModel(string memory _company, string memory _model) external {

@@ -1,7 +1,12 @@
 // PharmaPatentOracle.sol
 pragma solidity ^0.8.0;
 
-contract PharmaPatentOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PharmaPatentOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct DrugPatent {
         string drugName;
         address developer;

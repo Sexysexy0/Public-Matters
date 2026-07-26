@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RecoveryKeyLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RecoveryKeyLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RecoverySeal(address user, string keyStatus);
 
     function validateKey(address _user, string memory _keyStatus) external {

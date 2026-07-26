@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EcosystemOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EcosystemOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EcosystemRecord(string platform, string status);
 
     function logEcosystem(string memory platform, string memory status) external {

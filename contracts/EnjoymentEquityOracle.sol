@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EnjoymentEquityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EnjoymentEquityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EnjoymentRecord(string actor, string activity);
 
     function logEnjoyment(string memory actor, string memory activity) external {

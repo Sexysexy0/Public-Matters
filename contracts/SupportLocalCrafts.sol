@@ -2,7 +2,12 @@
 // Logic: Boosting Local Micro-Economies
 pragma solidity ^0.8.0;
 
-contract SupportLocalCrafts {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SupportLocalCrafts is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Artisan {
         string name;
         string location; // e.g., Marikina

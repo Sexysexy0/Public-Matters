@@ -1,7 +1,12 @@
 // FuelSubsidyGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract FuelSubsidyGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FuelSubsidyGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of fuel subsidy governance and oil company partnerships"

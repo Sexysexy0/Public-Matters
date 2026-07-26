@@ -1,7 +1,12 @@
 // ConsumerOwnershipMandate.sol
 pragma solidity ^0.8.0;
 
-contract ConsumerOwnershipMandate {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ConsumerOwnershipMandate is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => bool) public isHumanOwner;
 
     function registerVehicle(address _owner) public {

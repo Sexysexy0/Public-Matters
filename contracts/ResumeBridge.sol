@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ResumeBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResumeBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ResumeRecord(string game, string status);
 
     function logResumeControl(string memory game, string memory status) external {

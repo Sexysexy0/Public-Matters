@@ -1,7 +1,12 @@
 // PublicOfficialAudit.sol
 pragma solidity ^0.8.0;
 
-contract PublicOfficialAudit {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PublicOfficialAudit is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Official {
         uint256 reportedIncome;
         uint256 totalAssetValue;

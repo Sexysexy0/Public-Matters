@@ -1,7 +1,12 @@
 // ResourceDistributionDAO.sol
 pragma solidity ^0.8.0;
 
-contract ResourceDistributionDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourceDistributionDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct DividendPool {
         uint256 totalPool;
         uint256 distributionDate;

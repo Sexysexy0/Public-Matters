@@ -1,7 +1,12 @@
 // HumanIQ_Incentive.sol
 pragma solidity ^0.8.0;
 
-contract HumanIQ_Incentive {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumanIQ_Incentive is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Enterprise {
         uint256 humanLaborCount;
         uint256 aiAgentCount;

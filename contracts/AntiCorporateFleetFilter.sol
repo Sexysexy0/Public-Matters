@@ -1,7 +1,12 @@
 // AntiCorporateFleetFilter.sol
 pragma solidity ^0.8.0;
 
-contract AntiCorporateFleetFilter {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiCorporateFleetFilter is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant MAX_UNITS_PER_PERSON = 2;
     mapping(address => uint256) public unitsOwned;
 

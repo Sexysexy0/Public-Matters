@@ -2,7 +2,12 @@
 // Logic: Aligning Hardware with Domestic Resources
 pragma solidity ^0.8.0;
 
-contract RefineryHardwareOptimizer {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RefineryHardwareOptimizer is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Refinery {
         string techType; // e.g., "Heavy-Sour" or "Light-Sweet"
         uint256 efficiencyRate;

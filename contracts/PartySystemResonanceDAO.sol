@@ -1,7 +1,12 @@
 // PartySystemResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract PartySystemResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PartySystemResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string reform;     // e.g. "Closed Party System"

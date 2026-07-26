@@ -1,7 +1,12 @@
 // DissentManagementDAO.sol
 pragma solidity ^0.8.0;
 
-contract DissentManagementDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DissentManagementDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Case {
         uint256 id;
         string member;     // e.g. "Rep. Erice"

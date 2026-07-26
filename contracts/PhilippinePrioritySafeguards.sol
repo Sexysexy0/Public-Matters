@@ -1,7 +1,12 @@
 // PhilippinePrioritySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract PhilippinePrioritySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PhilippinePrioritySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Philippine Priority in Governance and Delivery"

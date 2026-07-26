@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract CommunityEquityLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityEquityLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EquityAlert(string recipient, string issue);
 
     function checkDistribution(string memory recipient, bool received) public {

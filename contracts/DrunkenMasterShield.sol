@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DrunkenMasterShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DrunkenMasterShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DrunkenBuff(string fighter, string status);
 
     function logDrunkenCombat(string memory fighter, string memory status) external {

@@ -1,7 +1,12 @@
 // InfluenceAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract InfluenceAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InfluenceAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Counter propaganda and foreign interference"

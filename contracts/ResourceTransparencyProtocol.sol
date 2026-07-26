@@ -1,7 +1,12 @@
 // ResourceTransparencyProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ResourceTransparencyProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourceTransparencyProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Disclosure {
         bytes32 techHash;
         string category; // e.g. "Energy", "Financial Logic"

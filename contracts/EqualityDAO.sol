@@ -1,7 +1,12 @@
 // EqualityDAO.sol
 pragma solidity ^0.8.0;
 
-contract EqualityDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EqualityDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Policy {
         uint256 id;
         string sector;   // e.g. "Workplace"

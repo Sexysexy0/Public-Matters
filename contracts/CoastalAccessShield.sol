@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CoastalAccessShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CoastalAccessShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AccessSeal(string location, string safeguard);
 
     function logAccess(string memory location, string memory safeguard) external {

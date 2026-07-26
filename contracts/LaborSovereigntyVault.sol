@@ -1,7 +1,12 @@
 // LaborSovereigntyVault.sol
 pragma solidity ^0.8.0;
 
-contract LaborSovereigntyVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LaborSovereigntyVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public workerBalance;
 
     function secureWages(address _worker) public payable {

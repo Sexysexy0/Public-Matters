@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract IdentityIntegrity {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IdentityIntegrity is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     string public constant MISSION = "Sovereign Architecture";
 
     // [Goal: Resistance to External Narrative Attacks]

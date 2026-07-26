@@ -2,7 +2,12 @@
 // Logic: Activating Local Exchange when Global Rails Fail
 pragma solidity ^0.8.0;
 
-contract LifeboatTransition {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LifeboatTransition is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function activateLocalRails(bool _globalSystemFailure) public pure returns (string memory) {
         if (_globalSystemFailure) {
             // Shift all local transactions to P2P Malolos Credits.

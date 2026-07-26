@@ -1,7 +1,12 @@
 // NeutralityResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract NeutralityResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NeutralityResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string domain;    // e.g. "Governance Communication"

@@ -1,7 +1,12 @@
 // EquityGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract EquityGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EquityGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Activate OPC registration with validator-grade governance"

@@ -1,7 +1,12 @@
 // InternationalAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract InternationalAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InternationalAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Agreement {
         uint256 id;
         string treaty;     // e.g. "Universal Declaration of Human Rights"

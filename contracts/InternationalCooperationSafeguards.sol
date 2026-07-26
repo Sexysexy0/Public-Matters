@@ -1,7 +1,12 @@
 // InternationalCooperationSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract InternationalCooperationSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InternationalCooperationSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Alliance {
         uint256 id;
         string partner;    // e.g. "ASEAN"

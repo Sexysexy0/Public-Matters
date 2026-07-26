@@ -1,7 +1,12 @@
 // EquityCompassionGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract EquityCompassionGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EquityCompassionGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure welfare programs balance fairness with compassion"

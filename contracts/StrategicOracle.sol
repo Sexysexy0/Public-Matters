@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract StrategicOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StrategicOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event StrategicRecord(string factor, string status);
 
     function logStrategicRecord(string memory factor, string memory status) external {

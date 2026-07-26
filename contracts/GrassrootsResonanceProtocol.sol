@@ -1,7 +1,12 @@
 // GrassrootsResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract GrassrootsResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GrassrootsResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string reform;    // e.g. "Education Reform"

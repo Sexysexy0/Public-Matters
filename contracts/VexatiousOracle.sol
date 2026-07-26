@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract VexatiousOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VexatiousOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event VexatiousRecord(string plaintiff, string status);
 
     function logVexatious(string memory plaintiff, string memory status) external {

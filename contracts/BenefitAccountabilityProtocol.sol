@@ -1,7 +1,12 @@
 // BenefitAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract BenefitAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BenefitAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ComplianceRecord {
         uint256 employeeId;
         uint256 remittanceDate;

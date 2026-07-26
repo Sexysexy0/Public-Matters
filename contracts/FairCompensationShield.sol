@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FairCompensationShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FairCompensationShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CompensationSeal(address worker, string status);
 
     function logCompensation(address worker, string memory status) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CleanReminderShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CleanReminderShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ReminderSeal(string location, string message);
 
     function logReminder(string memory location, string memory message) external {

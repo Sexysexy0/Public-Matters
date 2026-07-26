@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SovereignVault {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereignVault is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Ultimate Privacy & Security]
     mapping(address => bytes32) private secretHoldings;
 

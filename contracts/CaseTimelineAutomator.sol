@@ -1,7 +1,12 @@
 // CaseTimelineAutomator.sol
 pragma solidity ^0.8.0;
 
-contract CaseTimelineAutomator {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CaseTimelineAutomator is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct LegalCase {
         uint256 caseId;
         uint256 dateFiled;

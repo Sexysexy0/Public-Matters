@@ -1,7 +1,12 @@
 // LocalProductionDAO.sol
 pragma solidity ^0.8.0;
 
-contract LocalProductionDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LocalProductionDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ProductionBatch {
         string commodity;
         uint256 targetQuantity;

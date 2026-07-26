@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PrivacyOptOutShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PrivacyOptOutShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PrivacySeal(address user, string status);
 
     function logOptOut(address user, bool optedOut) external {

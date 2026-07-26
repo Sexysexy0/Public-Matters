@@ -1,7 +1,12 @@
 // WageConversionGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract WageConversionGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WageConversionGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of aid-to-wage conversion policy"

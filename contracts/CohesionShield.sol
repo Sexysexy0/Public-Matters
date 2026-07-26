@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CohesionShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CohesionShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CohesionRecord(string arc, string integrity);
 
     function logCohesion(string memory arc, string memory integrity) external {

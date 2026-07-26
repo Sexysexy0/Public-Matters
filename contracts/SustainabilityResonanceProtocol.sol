@@ -1,7 +1,12 @@
 // SustainabilityResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract SustainabilityResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SustainabilityResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string domain;    // e.g. "Energy Efficiency"

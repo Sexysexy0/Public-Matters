@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FuelQualityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FuelQualityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct FuelBatch {
         uint256 octaneLevel;
         uint256 impurityScore; // Dapat mababa ito para hindi masira ang makina

@@ -1,7 +1,12 @@
 // GlobalGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract GlobalGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement community-driven oversight of global cooperation and equitable governance policies"

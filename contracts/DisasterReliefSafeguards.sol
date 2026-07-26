@@ -1,7 +1,12 @@
 // DisasterReliefSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract DisasterReliefSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DisasterReliefSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ReliefPool {
         string region;
         uint256 windSpeedThreshold; // in km/h

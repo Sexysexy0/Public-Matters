@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract UserDataShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UserDataShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DataBreachAlert(string userId, string issue);
 
     function protectUser(string memory userId, bool unauthorizedAccess) public {

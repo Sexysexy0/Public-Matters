@@ -1,7 +1,12 @@
 // CuriaReformDAO.sol
 pragma solidity ^0.8.0;
 
-contract CuriaReformDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CuriaReformDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ReformProposal {
         string title;
         uint256 supportVotes;

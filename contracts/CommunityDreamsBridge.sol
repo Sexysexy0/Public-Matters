@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommunityDreamsBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityDreamsBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DreamRecord(string element, string detail);
 
     function logDream(string memory element, string memory detail) external {

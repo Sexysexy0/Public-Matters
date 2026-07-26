@@ -1,7 +1,12 @@
 // ImpactResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract ImpactResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ImpactResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Assessment {
         uint256 id;
         string impact;     // e.g. "Direct", "Indirect"

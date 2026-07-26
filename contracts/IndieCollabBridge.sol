@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract IndieCollabBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IndieCollabBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CollabRecord(string indieStudio, string project);
 
     function logIndieCollaboration(string memory indieStudio, string memory project) external {

@@ -1,7 +1,12 @@
 // OrganizationalGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract OrganizationalGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OrganizationalGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance inclusivity with productivity in organizational governance"

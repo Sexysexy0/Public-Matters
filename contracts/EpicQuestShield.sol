@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EpicQuestShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EpicQuestShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event QuestSeal(string quest, string branch);
 
     function logQuest(string memory quest, string memory branch) external {

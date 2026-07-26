@@ -1,7 +1,12 @@
 // EducationProtocol.sol
 pragma solidity ^0.8.0;
 
-contract EducationProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EducationProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Program {
         uint256 id;
         string domain;       // e.g. "STEM"

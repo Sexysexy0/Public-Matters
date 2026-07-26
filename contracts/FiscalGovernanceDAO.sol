@@ -1,7 +1,12 @@
 // FiscalGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract FiscalGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FiscalGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of fiscal governance and taxation rollback"

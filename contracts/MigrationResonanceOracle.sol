@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MigrationResonanceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MigrationResonanceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MigrationLogged(string developer, string project, string destination);
     event AlternativeSafeguard(string platform, bool safeguarded);
     event InfraMonitoring(string platform, string sentiment);

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HarmonyResonanceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HarmonyResonanceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event HarmonyLogged(string collective, string initiative, string sentiment);
     event CollectiveFairness(string collective, bool safeguarded);
 

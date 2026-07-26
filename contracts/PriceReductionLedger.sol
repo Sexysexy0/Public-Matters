@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PriceReductionLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PriceReductionLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ReductionSeal(string product, uint256 oldPrice, uint256 newPrice);
 
     function applyReduction(string memory _product, uint256 _oldPrice) external {

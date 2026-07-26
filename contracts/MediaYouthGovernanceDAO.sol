@@ -1,7 +1,12 @@
 // MediaYouthGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract MediaYouthGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MediaYouthGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement community-driven oversight of youth media programs and equitable information access"

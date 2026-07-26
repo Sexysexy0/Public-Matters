@@ -1,7 +1,12 @@
 // WealthRedistributionEngine.sol
 pragma solidity ^0.8.0;
 
-contract WealthRedistributionEngine {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WealthRedistributionEngine is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant MAX_WEALTH_RATIO = 100; // CEO cannot earn >100x average worker
     
     struct CorporateTaxProfile {

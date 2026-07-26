@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PerformanceLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PerformanceLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PerformanceRecord(string device, string setup, string result);
 
     function logPerformance(string memory _device, string memory _setup, string memory _result) external {

@@ -1,7 +1,12 @@
 // HumanOversightResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract HumanOversightResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumanOversightResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Oversight {
         uint256 id;
         string mechanism;  // e.g. "Human-in-the-loop review"

@@ -1,7 +1,12 @@
 // EnergyPriceStability.sol
 pragma solidity ^0.8.0;
 
-contract EnergyPriceStability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EnergyPriceStability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public globalBrentPrice;
     bool public isStraitOfHormuzOpen;
     uint256 public localMarkupCap = 5; // 5% max markup limit para sa mga negosyante

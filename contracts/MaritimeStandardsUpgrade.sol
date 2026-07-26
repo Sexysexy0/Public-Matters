@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract MaritimeStandardsUpgrade {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MaritimeStandardsUpgrade is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public grants;
 
     function releaseGrant(address academy, uint256 complianceScore) public {

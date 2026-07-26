@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract VRAMManager {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VRAMManager is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Efficiency and Accessibility]
     function allocateMemory(uint256 _textureQuality) external pure returns (uint256) {
         // Logic: Scale textures to fit hardware limits without losing visual weight.

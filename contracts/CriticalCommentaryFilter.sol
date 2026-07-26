@@ -1,7 +1,12 @@
 // CriticalCommentaryFilter.sol
 pragma solidity ^0.8.0;
 
-contract CriticalCommentaryFilter {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CriticalCommentaryFilter is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Claim {
         uint256 id;
         string source;     // e.g. "Financial Times"

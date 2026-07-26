@@ -1,7 +1,12 @@
 // GuidanceStabilityBuffer.sol
 pragma solidity ^0.8.0;
 
-contract GuidanceStabilityBuffer {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GuidanceStabilityBuffer is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public q1Profit;
     uint256 public yearGuidance;
 

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PricingDecisionBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PricingDecisionBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DecisionRecord(string publisher, string game, string decision);
 
     function logDecision(string memory publisher, string memory game, string memory decision) external {

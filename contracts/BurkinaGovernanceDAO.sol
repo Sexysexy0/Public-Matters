@@ -1,7 +1,12 @@
 // BurkinaGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract BurkinaGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BurkinaGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of military governance and civilian rights"

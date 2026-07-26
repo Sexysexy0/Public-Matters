@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AIContributionFilter {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AIContributionFilter is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Contribution {
         address contributor;
         string description;

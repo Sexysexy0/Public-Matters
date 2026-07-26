@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CombatDepthBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CombatDepthBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CombatRecord(string element, string detail);
 
     function logCombat(string memory element, string memory detail) external {

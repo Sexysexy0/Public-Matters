@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract DirectFuelSupport {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DirectFuelSupport is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FuelSupportActivation(string driver, uint256 subsidy);
 
     function checkFuel(string memory driver, uint256 price) public {

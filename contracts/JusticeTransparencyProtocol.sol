@@ -1,7 +1,12 @@
 // JusticeTransparencyProtocol.sol
 pragma solidity ^0.8.0;
 
-contract JusticeTransparencyProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract JusticeTransparencyProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CaseStatus {
         bytes32 caseHash;
         uint256 lastActivity;

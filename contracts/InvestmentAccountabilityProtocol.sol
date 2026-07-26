@@ -1,7 +1,12 @@
 // InvestmentAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract InvestmentAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InvestmentAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Investment Reform"

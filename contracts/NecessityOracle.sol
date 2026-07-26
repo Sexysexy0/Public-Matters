@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract NecessityOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NecessityOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event NecessityRecord(string sector, string priority);
 
     function logNecessity(string memory sector, string memory priority) external {

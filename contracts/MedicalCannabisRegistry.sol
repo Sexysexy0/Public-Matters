@@ -1,7 +1,12 @@
 // MedicalCannabisRegistry.sol
 pragma solidity ^0.8.0;
 
-contract MedicalCannabisRegistry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MedicalCannabisRegistry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Patient { bool isCertified; uint256 dosageLimit; }
     mapping(address => Patient) public certifiedPatients;
 

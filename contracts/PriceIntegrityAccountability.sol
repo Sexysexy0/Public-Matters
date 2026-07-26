@@ -1,7 +1,12 @@
 // PriceIntegrityAccountability.sol
 pragma solidity ^0.8.0;
 
-contract PriceIntegrityAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PriceIntegrityAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct PriceAudit {
         string item;
         uint256 farmGatePrice;

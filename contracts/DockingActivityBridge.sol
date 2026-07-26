@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DockingActivityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DockingActivityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DockActivity(string npc, string action);
 
     function logDockActivity(string memory npc, string memory action) external {

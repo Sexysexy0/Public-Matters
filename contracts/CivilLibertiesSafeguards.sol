@@ -1,7 +1,12 @@
 // CivilLibertiesSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract CivilLibertiesSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CivilLibertiesSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string liberty;    // e.g. "Freedom of Speech"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GameStopPhysicalSaleArc {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GameStopPhysicalSaleArc is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DiscountSafeguard(string title, uint256 price, string safeguard, uint256 timestamp);
     event ConsumerEquity(address indexed buyer, string title, string safeguard);
     event PreservationRitual(string title, string safeguard, uint256 timestamp);

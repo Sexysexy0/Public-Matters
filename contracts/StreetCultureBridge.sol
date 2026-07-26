@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract StreetCultureBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StreetCultureBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CultureSeal(string element, string status);
 
     function logCultureIntegration(string memory element, string memory status) external {

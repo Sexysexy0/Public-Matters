@@ -1,7 +1,12 @@
 // DisarmamentAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract DisarmamentAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DisarmamentAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Agreement {
         uint256 id;
         string treaty;     // e.g. "Nuclear Non-Proliferation Treaty"

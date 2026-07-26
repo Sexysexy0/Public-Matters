@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract DeveloperFreedomFund {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DeveloperFreedomFund is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public grants;
 
     function supportIndie(address studio, bool predatoryPolicy) public {

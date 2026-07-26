@@ -1,7 +1,12 @@
 // MaritimeEquitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract MaritimeEquitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MaritimeEquitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Chokepoint Sovereignty"

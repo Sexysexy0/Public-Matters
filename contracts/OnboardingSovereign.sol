@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract OnboardingSovereign {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OnboardingSovereign is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Reduce Early Player Churn]
     function monitorPlayerExperience(uint256 _failCount) external pure returns (string memory) {
         if (_failCount > 3) {

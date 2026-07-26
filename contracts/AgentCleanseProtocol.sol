@@ -1,7 +1,12 @@
 // AgentCleanseProtocol.sol
 pragma solidity ^0.8.0;
 
-contract AgentCleanseProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AgentCleanseProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Agent {
         uint256 id;
         string type;     // e.g. "Residual/Idle"

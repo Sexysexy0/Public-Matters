@@ -1,7 +1,12 @@
 // InclusiveWelfareGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract InclusiveWelfareGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InclusiveWelfareGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Expand welfare programs to guarantee universal access and resilience"

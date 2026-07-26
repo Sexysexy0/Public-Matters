@@ -1,7 +1,12 @@
 // CollaborationDAO.sol
 pragma solidity ^0.8.0;
 
-contract CollaborationDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CollaborationDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Project {
         uint256 id;
         string partner;   // e.g. "Tech Startup"

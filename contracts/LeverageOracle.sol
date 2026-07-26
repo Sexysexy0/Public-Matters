@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LeverageOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LeverageOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LeverageRecord(string layer, string status);
 
     function logLeverage(string memory layer, string memory status) external {

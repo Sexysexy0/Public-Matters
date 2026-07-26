@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ResourceBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourceBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ResourceRecord(string resource, string status);
 
     function logResource(string memory resource, string memory status) external {

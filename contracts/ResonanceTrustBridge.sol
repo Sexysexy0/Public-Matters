@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ResonanceTrustBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResonanceTrustBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct TrustRecord {
         address member;
         string context;

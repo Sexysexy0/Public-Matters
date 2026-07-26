@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TransformationOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransformationOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TransformationRecord(string factor, string status);
 
     function logTransformationRecord(string memory factor, string memory status) external {

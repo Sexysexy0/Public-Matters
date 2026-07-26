@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CombatHistoryLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CombatHistoryLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CombatRecord(string title, uint256 year);
 
     function logCombatEvolution(string memory _title, uint256 _year) external {

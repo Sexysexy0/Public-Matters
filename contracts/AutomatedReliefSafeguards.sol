@@ -1,7 +1,12 @@
 // AutomatedReliefSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract AutomatedReliefSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AutomatedReliefSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Household {
         uint256 baseSubsidy;
         uint256 lastDisbursement;

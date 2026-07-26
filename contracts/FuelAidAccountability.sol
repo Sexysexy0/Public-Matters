@@ -1,7 +1,12 @@
 // FuelAidAccountability.sol
 pragma solidity ^0.8.0;
 
-contract FuelAidAccountability {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FuelAidAccountability is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct AuditTrail {
         bytes32 batchHash;      // Hash of distribution list
         string fuelProvider;    // Name of gas station/provider

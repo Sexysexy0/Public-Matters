@@ -1,7 +1,12 @@
 // BreaktimeAutonomyProtocol.sol
 pragma solidity ^0.8.0;
 
-contract BreaktimeAutonomyProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BreaktimeAutonomyProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // Track breaktime allocations per worker
     mapping(address => uint256) public totalBreaktime;
     mapping(address => uint256[]) public breakSegments;

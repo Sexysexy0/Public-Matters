@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AdaptationFiscalBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AdaptationFiscalBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AdaptationFiscalRecord(string element, string detail);
 
     function logAdaptationFiscal(string memory element, string memory detail) external {

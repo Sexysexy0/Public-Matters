@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MonetaryOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MonetaryOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MonetaryRecord(string factor, string status);
 
     function logMonetaryRecord(string memory factor, string memory status) external {

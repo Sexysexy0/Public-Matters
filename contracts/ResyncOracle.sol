@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ResyncOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResyncOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ResyncRecord(string mechanic, string status);
 
     function resyncMechanic(string memory _mechanic, string memory _status) external {

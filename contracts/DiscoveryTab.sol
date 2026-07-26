@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DiscoveryTab {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DiscoveryTab is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(bytes32 => bool) public unlockedRecipes;
 
     // [Goal: Meaningful Progression Tiers]

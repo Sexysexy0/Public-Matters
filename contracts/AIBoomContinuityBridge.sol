@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AIBoomContinuityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AIBoomContinuityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct AIBoomContinuity {
         address steward;
         string context;

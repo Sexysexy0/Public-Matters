@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract MarinerWelfareShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MarinerWelfareShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function computeAllowance(uint256 daysAtSea) public pure returns (uint256) {
         if (daysAtSea > 180) {
             return 1000; // Long voyage welfare credit

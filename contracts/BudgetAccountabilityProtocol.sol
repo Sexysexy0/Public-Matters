@@ -1,7 +1,12 @@
 // BudgetAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract BudgetAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BudgetAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Transparency in Unprogrammed Appropriations"

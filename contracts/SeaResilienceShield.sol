@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SeaResilienceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SeaResilienceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SeaSeal(string factor, string status);
 
     function logSea(string memory factor, string memory status) external {

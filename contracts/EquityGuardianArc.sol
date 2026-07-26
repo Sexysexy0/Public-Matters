@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EquityGuardianArc {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EquityGuardianArc is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Covenant {
         address guardian;
         string safeguard;

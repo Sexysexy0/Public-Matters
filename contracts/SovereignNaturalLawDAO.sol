@@ -1,7 +1,12 @@
 // SovereignNaturalLawDAO.sol
 pragma solidity ^0.8.0;
 
-contract SovereignNaturalLawDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereignNaturalLawDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => bool) public isSovereign;
 
     function declareSovereignty() public {

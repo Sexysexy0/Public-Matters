@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DominionOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DominionOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DominionRecord(string territory, string status);
 
     function logDominion(string memory territory, string memory status) external {

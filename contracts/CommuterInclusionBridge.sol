@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommuterInclusionBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommuterInclusionBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event InclusionLogged(string commuterGroup, string benefit);
 
     function logInclusion(string memory commuterGroup, string memory benefit) external {

@@ -1,7 +1,12 @@
 // AIMusicSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract AIMusicSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AIMusicSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect Artistic Integrity"

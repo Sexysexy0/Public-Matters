@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract InfoVerificationBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InfoVerificationBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event VerificationRecord(string claim, string verifiedStatus);
 
     function logVerification(string memory claim, string memory verifiedStatus) external {

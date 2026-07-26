@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SensoryOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SensoryOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SensoryRecord(string factor, string status);
 
     function logSensoryRecord(string memory factor, string memory status) external {

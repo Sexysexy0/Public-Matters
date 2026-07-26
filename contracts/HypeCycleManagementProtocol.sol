@@ -1,7 +1,12 @@
 // HypeCycleManagementProtocol.sol
 pragma solidity ^0.8.0;
 
-contract HypeCycleManagementProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HypeCycleManagementProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Strategy {
         uint256 id;
         string approach;   // e.g. "Monitor hype vs. delivery"

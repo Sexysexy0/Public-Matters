@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract IdentityShieldGlobal {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IdentityShieldGlobal is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event IdentitySeal(string culture, string safeguard);
 
     function logIdentity(string memory culture, string memory safeguard) external {

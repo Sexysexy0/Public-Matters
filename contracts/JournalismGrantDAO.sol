@@ -1,7 +1,12 @@
 // JournalismGrantDAO.sol
 pragma solidity ^0.8.0;
 
-contract JournalismGrantDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract JournalismGrantDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ReportProposal {
         address journalist;
         string topic;

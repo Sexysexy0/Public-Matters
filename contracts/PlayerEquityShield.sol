@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PlayerEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PlayerEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PlayerFeedback(string studio, string response);
     event AmbitionLogged(string target, string outcome);
 

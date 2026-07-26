@@ -1,7 +1,12 @@
 // IntegrityGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract IntegrityGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IntegrityGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure ethical leadership and strengthen public trust in governance"

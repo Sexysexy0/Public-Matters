@@ -1,7 +1,12 @@
 // CompassionResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract CompassionResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CompassionResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Support {
         uint256 id;
         string community; // e.g. "Displaced Families"

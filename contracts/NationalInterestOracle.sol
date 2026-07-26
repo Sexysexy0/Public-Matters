@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract NationalInterestOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NationalInterestOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [5:50 - 6:35] Prioritizing National Interest over Foreign Trust
     function validateLoyaltyMetric(bool _trustsForeignAdversary) public pure returns (string memory) {
         if (_trustsForeignAdversary) {

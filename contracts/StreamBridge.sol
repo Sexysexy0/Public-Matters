@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract StreamBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StreamBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event StreamRecord(string streamer, string topic);
 
     function logStreamLecture(string memory streamer, string memory topic) external {

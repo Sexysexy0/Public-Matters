@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PostQuantumShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PostQuantumShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event QuantumSeal(string algorithm, string status);
 
     function migrateEncryption(string memory _algorithm, string memory _status) external {

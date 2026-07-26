@@ -1,7 +1,12 @@
 // InnovationAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract InnovationAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InnovationAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Check {
         uint256 id;
         string technology; // e.g. "Blockchain"

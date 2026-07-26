@@ -1,7 +1,12 @@
 // CommunityEmpowermentProtocol.sol
 pragma solidity ^0.8.0;
 
-contract CommunityEmpowermentProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityEmpowermentProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Project {
         uint256 id;
         string initiative; // e.g. "Barangay Livelihood Program"

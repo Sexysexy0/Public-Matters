@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SovereignTradeRails {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereignTradeRails is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Dynamic Inter-Town Economy]
     function checkTownDemand(string memory _town, string memory _resource) external pure returns (uint256) {
         // Logic: Calculate scarcity and demand.

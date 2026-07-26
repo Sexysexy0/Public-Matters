@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract TransitApprovalOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransitApprovalOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ShipClearance {
         string vesselID;
         bool irgcVerified; // Approval from IRGC Navy [3:20]

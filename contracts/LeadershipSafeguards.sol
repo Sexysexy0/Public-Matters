@@ -1,7 +1,12 @@
 // LeadershipSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract LeadershipSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LeadershipSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Rooted Cosmopolitanism Charter"

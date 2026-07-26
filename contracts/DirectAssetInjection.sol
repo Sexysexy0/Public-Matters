@@ -1,7 +1,12 @@
 // DirectAssetInjection.sol
 pragma solidity ^0.8.0;
 
-contract DirectAssetInjection {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DirectAssetInjection is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public injectionAmount = 1000; // Example: 1000 UBA tokens
 
     function triggerGlobalInjection(address[] memory _citizens) public {

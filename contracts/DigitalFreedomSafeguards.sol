@@ -1,7 +1,12 @@
 // DigitalFreedomSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract DigitalFreedomSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DigitalFreedomSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect User Rights in App Regulation"

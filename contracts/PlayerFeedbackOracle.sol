@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PlayerFeedbackOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PlayerFeedbackOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FeedbackLogged(string player, string request, string sentiment);
 
     function logFeedback(string memory player, string memory request, string memory sentiment) external {

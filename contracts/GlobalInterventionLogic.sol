@@ -2,7 +2,12 @@
 // Logic: Tracking Extremist Financials
 pragma solidity ^0.8.0;
 
-contract GlobalInterventionLogic {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalInterventionLogic is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function classifyThreat(string memory _group, string memory _targetType) public pure returns (string memory) {
         // Logic: Identifying Persecutors.
         // If targeting 'Christians' or 'Innocent Civilians' for faith, status = GLOBAL_THREAT.

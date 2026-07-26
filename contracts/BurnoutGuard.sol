@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BurnoutGuard {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BurnoutGuard is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Protect Mental Bandwidth]
     function enforceRecovery(uint256 _stressLevel) external pure returns (string memory) {
         if (_stressLevel > 85) {

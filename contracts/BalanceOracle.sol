@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BalanceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BalanceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BalanceEvent(string mechanic, string effect);
 
     function monitorBalance(string memory mechanic, string memory effect) external {

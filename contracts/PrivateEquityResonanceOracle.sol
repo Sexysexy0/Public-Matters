@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PrivateEquityResonanceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PrivateEquityResonanceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct EquityResonance {
         address overseer;
         string entity;

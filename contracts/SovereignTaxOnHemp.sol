@@ -2,7 +2,12 @@
 // Logic: Wealth Redistribution to Farmers
 pragma solidity ^0.8.0;
 
-contract SovereignTaxOnHemp {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereignTaxOnHemp is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function calculateTax(uint256 _marketPrice) public pure returns (uint256) {
         // Goal: Sustainable Revenue.
         // 10% Sovereign Tax to be reinvested in local irrigation and tech.

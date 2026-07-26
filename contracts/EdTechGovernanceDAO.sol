@@ -1,7 +1,12 @@
 // EdTechGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract EdTechGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EdTechGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance innovation with student dignity in edtech governance"

@@ -1,7 +1,12 @@
 // CybersecurityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract CybersecurityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CybersecurityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Cybersecurity Governance"

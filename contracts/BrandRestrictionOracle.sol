@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BrandRestrictionOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BrandRestrictionOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RestrictionEvent(string brand, string restriction);
 
     function monitorRestriction(string memory brand, string memory restriction) external {

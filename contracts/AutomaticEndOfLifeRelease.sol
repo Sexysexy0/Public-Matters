@@ -1,7 +1,12 @@
 // AutomaticEndOfLifeRelease.sol
 pragma solidity ^0.8.0;
 
-contract AutomaticEndOfLifeRelease {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AutomaticEndOfLifeRelease is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant INACTIVITY_THRESHOLD = 180 days;
     
     function triggerOpenSourceRelease(string memory _gameId) public {

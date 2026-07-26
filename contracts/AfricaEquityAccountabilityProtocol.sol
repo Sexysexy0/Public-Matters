@@ -1,7 +1,12 @@
 // AfricaEquityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract AfricaEquityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AfricaEquityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Persecution Response"

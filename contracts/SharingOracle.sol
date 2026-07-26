@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SharingOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SharingOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SharingEvent(string actor, string action);
 
     function monitorSharing(string memory actor, string memory action) external {

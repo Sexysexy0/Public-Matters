@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ArchitectVoteWeight {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ArchitectVoteWeight is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public architectureRank;
 
     // [Goal: Expert-Led Governance]

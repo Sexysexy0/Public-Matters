@@ -1,7 +1,12 @@
 // InstitutionalHarmonySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract InstitutionalHarmonySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InstitutionalHarmonySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Ensure Institutional Harmony"

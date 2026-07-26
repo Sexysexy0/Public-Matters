@@ -1,7 +1,12 @@
 // LegacyDebtLiquidationDAO.sol
 pragma solidity ^0.8.0;
 
-contract LegacyDebtLiquidationDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LegacyDebtLiquidationDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public nationalDebt;
     
     function payDownDebt(uint256 _payment) public {

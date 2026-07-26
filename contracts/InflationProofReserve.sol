@@ -1,7 +1,12 @@
 // InflationProofReserve.sol
 pragma solidity ^0.8.0;
 
-contract InflationProofReserve {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InflationProofReserve is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public assetBackingRatio;
 
     function mintStableValue() public payable {

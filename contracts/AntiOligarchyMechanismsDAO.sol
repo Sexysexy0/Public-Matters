@@ -1,7 +1,12 @@
 // AntiOligarchyMechanismsDAO.sol
 pragma solidity ^0.8.0;
 
-contract AntiOligarchyMechanismsDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiOligarchyMechanismsDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Mechanism {
         uint256 id;
         string target;     // e.g. "Political Dynasties"

@@ -1,7 +1,12 @@
 // RangeAnxietyBridge.sol
 pragma solidity ^0.8.0;
 
-contract RangeAnxietyBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RangeAnxietyBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     enum DriveType { ICE, HEV, PHEV, BEV }
 
     function recommendDrive(uint256 _dailyKm, bool _hasHomeCharging) public pure returns (DriveType) {

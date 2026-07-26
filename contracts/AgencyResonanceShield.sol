@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AgencyResonanceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AgencyResonanceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct AgencyResonance {
         address overseer;
         string arc;

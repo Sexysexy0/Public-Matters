@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DelayTransparencyArc {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DelayTransparencyArc is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DelayLogged(string project, uint256 monthsDelayed, string reason, uint256 timestamp);
     event QualityAssurance(string project, string safeguard, uint256 timestamp);
     event ResourceAllocation(string project, string safeguard, uint256 timestamp);

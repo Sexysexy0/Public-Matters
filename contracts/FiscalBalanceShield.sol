@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FiscalBalanceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FiscalBalanceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FiscalSeal(string factor, string status);
 
     function logFiscal(string memory factor, string memory status) external {

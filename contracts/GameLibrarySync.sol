@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GameLibrarySync {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GameLibrarySync is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SyncSeal(string game, string medium, string status);
 
     function logSync(string memory _game, string memory _medium, string memory _status) external {

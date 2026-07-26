@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PipelineOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PipelineOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PipelineRecord(string project, string outcome);
 
     function logPipelineOutcome(string memory project, string memory outcome) external {

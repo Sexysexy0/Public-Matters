@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FederalLegalizationBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FederalLegalizationBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LegalizationRecord(string element, string detail);
 
     function logLegalization(string memory element, string memory detail) external {

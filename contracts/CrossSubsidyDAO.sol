@@ -1,7 +1,12 @@
 // CrossSubsidyDAO.sol
 pragma solidity ^0.8.0;
 
-contract CrossSubsidyDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CrossSubsidyDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct StoreBranch {
         string location;
         bool isRemote;

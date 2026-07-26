@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PricingTransparencyBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PricingTransparencyBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PricingRecord(string product, string transparency);
 
     function logPricing(string memory product, string transparency) external {

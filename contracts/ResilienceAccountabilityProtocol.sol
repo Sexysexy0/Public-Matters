@@ -1,7 +1,12 @@
 // ResilienceAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ResilienceAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResilienceAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Resilience Governance"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PublisherAccountabilityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PublisherAccountabilityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AccountabilitySeal(string publisher, string game, string status);
 
     function logPricingDecision(string memory publisher, string memory game, bool fair) external {

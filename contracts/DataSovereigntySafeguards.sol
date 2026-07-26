@@ -1,7 +1,12 @@
 // DataSovereigntySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract DataSovereigntySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DataSovereigntySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct DataVault {
         address owner;
         bytes32 dataRoot; // Merkle root of encrypted data

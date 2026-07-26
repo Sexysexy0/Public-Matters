@@ -1,7 +1,12 @@
 // TransportFiscalEquityAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract TransportFiscalEquityAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TransportFiscalEquityAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Transport-Fiscal Governance"

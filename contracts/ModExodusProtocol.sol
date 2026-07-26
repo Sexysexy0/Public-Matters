@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract ModExodusProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ModExodusProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CommunityAlert(string issue, string detail);
 
     function detectExodus(bool modsLeft) public {

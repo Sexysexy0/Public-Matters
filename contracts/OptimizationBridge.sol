@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract OptimizationBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OptimizationBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event OptimizationRecord(string process, string outcome);
 
     function logOptimization(string memory process, string memory outcome) external {

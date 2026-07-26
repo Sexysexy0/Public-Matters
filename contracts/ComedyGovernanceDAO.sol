@@ -1,7 +1,12 @@
 // ComedyGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract ComedyGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ComedyGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance authenticity with production polish in comedy recordings"

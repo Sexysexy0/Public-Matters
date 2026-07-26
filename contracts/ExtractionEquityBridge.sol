@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ExtractionEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ExtractionEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ExtractionPoint(string location, string balance);
 
     function logExtraction(string memory location, string memory balance) external {

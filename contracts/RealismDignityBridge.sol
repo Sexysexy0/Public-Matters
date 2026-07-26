@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RealismDignityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RealismDignityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RealismRecord(string element, string detail);
 
     function logRealism(string memory element, string memory detail) external {

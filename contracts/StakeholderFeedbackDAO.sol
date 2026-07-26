@@ -1,7 +1,12 @@
 // StakeholderFeedbackDAO.sol
 pragma solidity ^0.8.0;
 
-contract StakeholderFeedbackDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StakeholderFeedbackDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Inquiry {
         address stakeholder;
         string issue;

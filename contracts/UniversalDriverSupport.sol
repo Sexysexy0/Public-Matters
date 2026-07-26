@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract UniversalDriverSupport {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract UniversalDriverSupport is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SupportActivation(string driverType, uint256 subsidy);
 
     function qualifyDriver(string memory driverType, bool usesFuel, uint256 fuelPrice) public {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract EmotionalEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EmotionalEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EmotionRecord(string element, string detail);
 
     function logEmotion(string memory element, string memory detail) external {

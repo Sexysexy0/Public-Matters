@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GlobalResonanceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GlobalResonanceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event GlobalTrend(string region, string trend, string sentiment);
     event CrossCulturalEquity(string regionA, string regionB, bool safeguarded);
 

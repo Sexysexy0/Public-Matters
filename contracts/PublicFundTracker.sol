@@ -1,7 +1,12 @@
 // PublicFundTracker.sol
 pragma solidity ^0.8.0;
 
-contract PublicFundTracker {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PublicFundTracker is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ProjectFund {
         string projectName;
         uint256 totalBudget;

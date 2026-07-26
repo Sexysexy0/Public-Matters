@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CrisisTariffSentry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CrisisTariffSentry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public globalTransitFee;
 
     // Kapag ginamit ang Strait as leverage (2:48)

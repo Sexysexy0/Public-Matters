@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HumanBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumanBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event HumanRecord(string element, string detail);
 
     function logHuman(string memory element, string memory detail) external {

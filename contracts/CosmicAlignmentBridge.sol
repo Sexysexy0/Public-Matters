@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CosmicAlignmentBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CosmicAlignmentBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Alignment {
         address participant;
         string celestialEvent;

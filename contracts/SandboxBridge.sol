@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SandboxBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SandboxBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SandboxRecord(string feature, string outcome);
 
     function logSandboxFusion(string memory feature, string memory outcome) external {

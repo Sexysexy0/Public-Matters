@@ -1,7 +1,12 @@
 // BarangayMicroGridSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract BarangayMicroGridSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BarangayMicroGridSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct PowerNode {
         uint256 capacity;
         uint256 localDemand;

@@ -1,7 +1,12 @@
 // ContinuityResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ContinuityResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ContinuityResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Plan {
         uint256 id;
         string domain;    // e.g. "Business Operations"

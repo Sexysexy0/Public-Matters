@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract PublicTransportRelief {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PublicTransportRelief is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function fareCredit(uint256 fuelPrice) public pure returns (uint256) {
         if (fuelPrice > 70) {
             return 1000; // Daily credit for PUV operators

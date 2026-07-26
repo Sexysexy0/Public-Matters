@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DynamicTradeRoutes {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DynamicTradeRoutes is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct ShipRoute { string origin; string destination; uint256 lootValue; }
 
     // Logic: Generates actual trade traffic in the sea.

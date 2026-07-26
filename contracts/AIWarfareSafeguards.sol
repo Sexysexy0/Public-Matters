@@ -1,7 +1,12 @@
 // AIWarfareSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract AIWarfareSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AIWarfareSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Human Oversight"

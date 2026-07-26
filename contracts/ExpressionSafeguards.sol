@@ -1,7 +1,12 @@
 // ExpressionSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract ExpressionSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ExpressionSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Protect Public Religious Expression"

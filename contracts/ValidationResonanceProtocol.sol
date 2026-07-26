@@ -1,7 +1,12 @@
 // ValidationResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ValidationResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ValidationResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Check {
         uint256 id;
         string domain;    // e.g. "API Calls"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract VotingAccessShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VotingAccessShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AccessSeal(address voter, string status);
 
     function validateVoter(address voter, bool hasID, bool isCitizen) external {

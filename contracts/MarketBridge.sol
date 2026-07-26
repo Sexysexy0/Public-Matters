@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MarketBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MarketBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MarketRecord(string product, string priceStatus);
 
     function logMarketEquity(string memory product, string memory priceStatus) external {

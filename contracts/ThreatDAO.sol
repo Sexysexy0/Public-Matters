@@ -1,7 +1,12 @@
 // ThreatDAO.sol
 pragma solidity ^0.8.0;
 
-contract ThreatDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ThreatDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Threat {
         uint256 id;
         string module;   // e.g. "API Gateway"

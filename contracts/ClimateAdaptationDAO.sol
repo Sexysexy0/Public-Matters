@@ -1,7 +1,12 @@
 // ClimateAdaptationDAO.sol
 pragma solidity ^0.8.0;
 
-contract ClimateAdaptationDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ClimateAdaptationDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Project {
         uint256 id;
         string description;

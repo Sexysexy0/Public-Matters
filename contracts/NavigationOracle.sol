@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract NavigationOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NavigationOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event NavigationEvent(string region, string effect);
 
     function monitorNavigation(string memory region, string memory effect) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HandcraftedInteractions {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HandcraftedInteractions is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Soulful World-Building]
     function interactWithObject(string memory _objectType) external pure returns (string memory) {
         // Logic: Handcrafted response for every environmental asset.

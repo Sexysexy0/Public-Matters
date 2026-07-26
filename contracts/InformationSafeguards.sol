@@ -1,7 +1,12 @@
 // InformationSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract InformationSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InformationSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Truth in Media Charter"

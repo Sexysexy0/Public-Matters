@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ReplayOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ReplayOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ReplayRecord(string playthrough, string uniqueOutcome);
 
     function logReplay(string memory playthrough, string memory uniqueOutcome) external {

@@ -1,7 +1,12 @@
 // PublicHealthGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract PublicHealthGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PublicHealthGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Expand community wellness programs and preventive health initiatives"

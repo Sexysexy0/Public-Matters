@@ -2,7 +2,12 @@
 // Logic: Distinguishing Natural Flora from Synthetic Poison
 pragma solidity ^0.8.0;
 
-contract MedicinalPlantGrace {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MedicinalPlantGrace is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function evaluateCultivation(uint256 _marketValue, bool _isSynthetic) public pure returns (string memory) {
         // Logic: 13k worth of plants vs Millions worth of Shabu.
         // If the plant is natural and value is low, prioritize "Regulation" over "Incarceration".

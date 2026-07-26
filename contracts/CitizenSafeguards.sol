@@ -1,7 +1,12 @@
 // CitizenSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract CitizenSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CitizenSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Community Audit Registry"

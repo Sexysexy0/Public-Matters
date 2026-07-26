@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract IndieEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IndieEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event EquitySeal(string game, string achievement);
 
     function logIndieSuccess(string memory game, string memory achievement) external {

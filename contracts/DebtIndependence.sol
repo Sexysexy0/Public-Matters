@@ -2,7 +2,12 @@
 // Logic: Shifting from Fiat Dependency to Hard Assets
 pragma solidity ^0.8.0;
 
-contract DebtIndependence {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DebtIndependence is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function hedgeAgainstCollapse(uint256 _fiatAmount) public pure returns (string memory) {
         // Goal: Avoid the "National Debt Sinkhole."
         // Re-route 40% of local reserves to Sovereign Energy and Agriculture.

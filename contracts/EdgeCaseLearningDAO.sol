@@ -1,7 +1,12 @@
 // EdgeCaseLearningDAO.sol
 pragma solidity ^0.8.0;
 
-contract EdgeCaseLearningDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EdgeCaseLearningDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct EdgeCase {
         string scenario; // e.g., "Off-road grass recovery"
         string successfulAction;

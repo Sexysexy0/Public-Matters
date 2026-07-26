@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FanAuthenticityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FanAuthenticityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AuthenticityRecord(string community, string demand);
 
     function logAuthenticity(string memory community, string memory demand) external {

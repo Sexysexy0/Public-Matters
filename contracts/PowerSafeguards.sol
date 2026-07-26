@@ -1,7 +1,12 @@
 // PowerSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract PowerSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PowerSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Elite Transparency Charter"

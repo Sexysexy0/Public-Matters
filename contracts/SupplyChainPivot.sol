@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SupplyChainPivot {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SupplyChainPivot is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     enum StraitStatus { Open, Closed, Hostile }
 
     // [1:15-2:03] Response to IRGC defying political leadership

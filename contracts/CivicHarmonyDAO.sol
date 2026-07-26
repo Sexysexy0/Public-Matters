@@ -1,7 +1,12 @@
 // CivicHarmonyDAO.sol
 pragma solidity ^0.8.0;
 
-contract CivicHarmonyDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CivicHarmonyDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Policy {
         uint256 id;
         string directive;   // e.g. "No self-referencing preaching"

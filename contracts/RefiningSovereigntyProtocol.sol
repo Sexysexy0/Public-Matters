@@ -1,7 +1,12 @@
 // RefiningSovereigntyProtocol.sol
 pragma solidity ^0.8.0;
 
-contract RefiningSovereigntyProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RefiningSovereigntyProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     bool public isRefineryOperational;
 
     function buildSovereignRefinery() public {

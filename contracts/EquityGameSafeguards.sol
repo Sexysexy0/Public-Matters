@@ -1,7 +1,12 @@
 // EquityGameSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract EquityGameSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EquityGameSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Fair Play"

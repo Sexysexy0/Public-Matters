@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract IPBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IPBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event IPRecord(string ipName, string detail);
 
     function logIP(string memory ipName, string memory detail) external {

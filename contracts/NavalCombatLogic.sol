@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract NavalCombatLogic {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NavalCombatLogic is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Precision over Spray-and-Pray]
     function fireBroadside(uint256 _targetHullIntegrity) external pure {
         require(_targetHullIntegrity < 50, "Target too strong. Adjust aim for critical hit.");

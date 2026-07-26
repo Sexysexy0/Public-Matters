@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GuildOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GuildOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event GuildRecord(string factor, string status);
 
     function logGuildRecord(string memory factor, string memory status) external {

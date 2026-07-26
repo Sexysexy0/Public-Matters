@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RemakeOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RemakeOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event NostalgiaRecord(string fanbase, string measure);
 
     function logNostalgia(string memory fanbase, string memory measure) external {

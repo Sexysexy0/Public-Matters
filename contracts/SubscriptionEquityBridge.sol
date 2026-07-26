@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SubscriptionEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SubscriptionEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SubscriptionRecord(string platform, string detail);
 
     function logSubscription(string memory platform, string memory detail) external {

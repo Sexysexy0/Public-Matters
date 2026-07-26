@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ReshapeBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ReshapeBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ReshapeRecord(string initiative, string outcome);
 
     function logReshape(string memory initiative, string memory outcome) external {

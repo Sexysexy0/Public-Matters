@@ -1,7 +1,12 @@
 // TaxAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract TaxAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TaxAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in fiscal policy"

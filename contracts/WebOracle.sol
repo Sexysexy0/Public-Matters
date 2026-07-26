@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WebOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WebOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WebRecord(string factor, string status);
 
     function logWebRecord(string memory factor, string memory status) external {

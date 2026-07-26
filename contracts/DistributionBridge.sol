@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract DistributionBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DistributionBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event DistributionRecord(string community, string resource);
 
     function logDistribution(string memory community, string resource) external {

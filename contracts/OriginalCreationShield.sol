@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract OriginalCreationShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OriginalCreationShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event NewWorldCreated(string title, string creator);
     event RemakeBlocked(string franchise, string reason);
 

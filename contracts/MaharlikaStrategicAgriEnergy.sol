@@ -1,7 +1,12 @@
 // MaharlikaStrategicAgriEnergy.sol
 pragma solidity ^0.8.0;
 
-contract MaharlikaStrategicAgriEnergy {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MaharlikaStrategicAgriEnergy is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public constant TOTAL_CAPITAL = 725_000_000_000 ether; // 725B PHP
     
     function allocateToResilience(uint256 _amount, string memory _sector) public {

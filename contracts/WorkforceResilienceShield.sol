@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract WorkforceResilienceShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WorkforceResilienceShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WorkforceSeal(string factor, string status);
 
     function logWorkforce(string memory factor, string memory status) external {

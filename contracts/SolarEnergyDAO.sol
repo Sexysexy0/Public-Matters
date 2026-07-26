@@ -1,7 +1,12 @@
 // SolarEnergyDAO.sol
 pragma solidity ^0.8.0;
 
-contract SolarEnergyDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SolarEnergyDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Plant {
         uint256 id;
         string zone;     // e.g. "Desert Solar Farm Beta"

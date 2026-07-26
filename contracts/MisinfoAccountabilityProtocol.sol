@@ -1,7 +1,12 @@
 // MisinfoAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract MisinfoAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MisinfoAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Entity {
         uint256 integrityStake;
         uint256 strikeCount;

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CurrencyStabilityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CurrencyStabilityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CurrencySeal(string factor, string status);
 
     function logCurrency(string memory factor, string memory status) external {

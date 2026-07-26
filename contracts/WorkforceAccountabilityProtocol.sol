@@ -1,7 +1,12 @@
 // WorkforceAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract WorkforceAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WorkforceAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in AI-driven workforce changes"

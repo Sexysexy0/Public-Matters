@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PirateExpansionBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PirateExpansionBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PirateRecord(string feature, string detail);
 
     function logPirate(string memory feature, string memory detail) external {

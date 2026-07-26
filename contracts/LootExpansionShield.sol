@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LootExpansionShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LootExpansionShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event LootZoneAdded(string zone, string type);
 
     function addLootZone(string memory zone, string memory type) external {

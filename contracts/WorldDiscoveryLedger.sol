@@ -1,7 +1,12 @@
 // WorldDiscoveryLedger.sol
 pragma solidity ^0.8.0;
 
-contract WorldDiscoveryLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WorldDiscoveryLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Discovery {
         string locationName;
         uint256 discoveryDate;

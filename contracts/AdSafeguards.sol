@@ -1,7 +1,12 @@
 // AdSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract AdSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AdSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Fair Ad Charter"

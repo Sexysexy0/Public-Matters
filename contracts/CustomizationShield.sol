@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CustomizationShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CustomizationShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CustomizationSeal(string feature, string status);
 
     function logCustomization(string memory feature, string memory status) external {

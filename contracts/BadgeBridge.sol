@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BadgeBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BadgeBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event BadgeRecord(string player, string badge);
 
     function logBadge(string memory player, string memory badge) external {

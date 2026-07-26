@@ -1,7 +1,12 @@
 // AutomatedPortWarden.sol
 pragma solidity ^0.8.0;
 
-contract AutomatedPortWarden {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AutomatedPortWarden is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function auditCargo(uint256 _declaredVol, uint256 _actualVol) public pure returns (bool) {
         // Goal: Anti-Smuggling Firewall.
         // Ensuring every drop is taxed and accounted for.

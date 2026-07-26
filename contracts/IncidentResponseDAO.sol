@@ -1,7 +1,12 @@
 // IncidentResponseDAO.sol
 pragma solidity ^0.8.0;
 
-contract IncidentResponseDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract IncidentResponseDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Balance productivity with vigilance in incident response"

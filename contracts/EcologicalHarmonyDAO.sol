@@ -1,7 +1,12 @@
 // EcologicalHarmonyDAO.sol
 pragma solidity ^0.8.0;
 
-contract EcologicalHarmonyDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EcologicalHarmonyDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct SoilHealth {
         uint256 moistureLevel;
         bool needsHydration;

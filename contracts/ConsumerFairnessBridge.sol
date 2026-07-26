@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ConsumerFairnessBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ConsumerFairnessBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ConsumerLogged(string user, string action);
 
     function logConsumer(string memory user, string memory action) external {

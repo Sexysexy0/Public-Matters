@@ -2,6 +2,8 @@
 // Logic: Aligning AGI with Human Safety
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 contract EthicalIncentiveAudit {
     function auditAgentIncentive(string memory _modelID) public pure returns (bool) {
         // Goal: Ensure AGI is "Pro-Steering".

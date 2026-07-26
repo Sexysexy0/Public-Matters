@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MisinformationShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MisinformationShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MisinformationSeal(string actor, string narrative);
 
     function logMisinformation(string memory actor, string memory narrative) external {

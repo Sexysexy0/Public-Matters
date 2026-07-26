@@ -1,7 +1,12 @@
 // WorkerWelfareGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract WorkerWelfareGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract WorkerWelfareGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Implement mandatory hazard pay for frontline workers"

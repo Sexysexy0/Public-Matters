@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RevengeRematchShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RevengeRematchShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RevengeRematchSeal(string boss, uint256 stage);
 
     function logRevengeRematch(string memory boss, uint256 stage) external {

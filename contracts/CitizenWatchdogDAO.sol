@@ -1,7 +1,12 @@
 // CitizenWatchdogDAO.sol
 pragma solidity ^0.8.0;
 
-contract CitizenWatchdogDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CitizenWatchdogDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Decree {
         string title;
         bool violatesConstitutionalRights;

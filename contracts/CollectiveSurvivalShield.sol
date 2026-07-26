@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CollectiveSurvivalShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CollectiveSurvivalShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SurvivalSeal(string decision, string outcome);
 
     function logDecision(string memory decision, uint256 votes, uint256 total) external {

@@ -1,7 +1,12 @@
 // KnowledgeSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract KnowledgeSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract KnowledgeSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string mechanism;  // e.g. "Protect Intellectual Capital"

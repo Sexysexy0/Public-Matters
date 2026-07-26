@@ -1,7 +1,12 @@
 // GeopoliticalEquitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract GeopoliticalEquitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GeopoliticalEquitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Democratic Resilience"

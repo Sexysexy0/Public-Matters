@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CulturalStewardshipArc {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CulturalStewardshipArc is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event StewardshipShift(string region, string safeguard, uint256 timestamp);
     event FranchiseNeglect(string franchise, string safeguard, uint256 timestamp);
     event AuthenticityEquity(string context, string safeguard, uint256 timestamp);

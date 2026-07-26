@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommunalResonanceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunalResonanceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CommunityResonance(string community, string initiative, string sentiment);
     event PublicFairnessSafeguard(string studio, bool safeguarded);
 

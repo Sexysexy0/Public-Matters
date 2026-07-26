@@ -1,7 +1,12 @@
 // DynamicExciseSwitch.sol
 pragma solidity ^0.8.0;
 
-contract DynamicExciseSwitch {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DynamicExciseSwitch is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public oilPriceThreshold = 80;
 
     function autoAdjustTax(uint256 _currentPrice) public {

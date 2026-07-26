@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SubsistenceCodex {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SubsistenceCodex is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Guarantee {
         uint256 id;
         string category; // e.g. "Food", "Shelter", "Livelihood"

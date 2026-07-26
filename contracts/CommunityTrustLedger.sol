@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CommunityTrustLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityTrustLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Entry {
         address contributor;
         string project;

@@ -1,7 +1,12 @@
 // EliteInfluenceMonitor.sol
 pragma solidity ^0.8.0;
 
-contract EliteInfluenceMonitor {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EliteInfluenceMonitor is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct InfluenceAlert {
         string topic;          // e.g., "Arctic Security"
         uint256 volatilityIndex; 

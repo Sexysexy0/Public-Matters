@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract QuestEquityBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract QuestEquityBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event QuestRecord(string element, string detail);
 
     function logQuest(string memory element, string memory detail) external {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AntiScalperOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiScalperOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Slot {
         bytes32 riderBiometricHash;
         string plateNumber;

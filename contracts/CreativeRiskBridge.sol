@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CreativeRiskBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CreativeRiskBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RiskRecord(string initiative, string outcome);
 
     function logRisk(string memory initiative, string memory outcome) external {

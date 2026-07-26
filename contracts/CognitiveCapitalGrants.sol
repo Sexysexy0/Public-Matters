@@ -1,7 +1,12 @@
 // CognitiveCapitalGrants.sol
 pragma solidity ^0.8.0;
 
-contract CognitiveCapitalGrants {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CognitiveCapitalGrants is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public educationCredits;
 
     function issueGrant(address _citizen, uint256 _amount) public {

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AccessBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AccessBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AccessRecord(string provider, string subsidyType);
 
     function logHealthcareSubsidy(string memory provider, string memory subsidyType) external {

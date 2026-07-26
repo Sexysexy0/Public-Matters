@@ -1,7 +1,12 @@
 // MonitoringDAO.sol
 pragma solidity ^0.8.0;
 
-contract MonitoringDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MonitoringDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Alert {
         uint256 id;
         string module;   // e.g. "API Gateway"

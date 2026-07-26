@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FanTrustBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FanTrustBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FanTrustRecord(string element, string detail);
 
     function logFanTrust(string memory element, string memory detail) external {

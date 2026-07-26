@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract OwnershipBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract OwnershipBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event OwnershipRecord(string element, string detail);
 
     function logOwnership(string memory element, string memory detail) external {

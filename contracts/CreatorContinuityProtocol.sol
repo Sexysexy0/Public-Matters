@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract CreatorContinuityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CreatorContinuityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ContinuityAlert(string channel, string issue);
 
     function checkPresence(string memory channel, bool creatorActive) public {

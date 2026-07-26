@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MaterialHarvester {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MaterialHarvester is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Convert Raw Resources into Crafting Assets]
     function checkIngredients(uint256 _silk, uint256 _leather) external pure returns (bool) {
         // Logic: Require specific quantities for high-tier suits.

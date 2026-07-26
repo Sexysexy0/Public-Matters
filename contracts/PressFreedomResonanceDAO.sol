@@ -1,7 +1,12 @@
 // PressFreedomResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract PressFreedomResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PressFreedomResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Independent Media Fund"

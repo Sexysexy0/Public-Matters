@@ -1,7 +1,12 @@
 // PeaceGrantProtocol.sol
 pragma solidity ^0.8.0;
 
-contract PeaceGrantProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PeaceGrantProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Condition {
         uint256 id;
         string demand;       // e.g. "Lift sanctions"

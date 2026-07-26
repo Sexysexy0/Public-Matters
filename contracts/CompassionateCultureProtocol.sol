@@ -1,7 +1,12 @@
 // CompassionateCultureProtocol.sol
 pragma solidity ^0.8.0;
 
-contract CompassionateCultureProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CompassionateCultureProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CultureTrait {
         string trait;
         string description;

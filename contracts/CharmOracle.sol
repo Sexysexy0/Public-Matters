@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CharmOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CharmOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event CharmRecord(string factor, string status);
 
     function logCharmRecord(string memory factor, string memory status) external {

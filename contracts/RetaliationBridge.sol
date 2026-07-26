@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RetaliationBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RetaliationBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RetaliationRecord(string boss, string escalation);
 
     function logRetaliation(string memory boss, string memory escalation) external {

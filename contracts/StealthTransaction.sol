@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract StealthTransaction {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StealthTransaction is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Financial Anonymity & Stealth Operations]
     function executePrivateTrade(bytes32 _proof, uint256 _amount) external {
         // Logic: Verify transaction without revealing identity or balance.

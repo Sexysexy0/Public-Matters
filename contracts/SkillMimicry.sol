@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 contract SkillObservation {
     // [Goal: Rewarding Curiosity and Observation]
     function unlockSkill(address _targetNPC, uint256 _timeObserved) external pure returns (bool) {

@@ -1,7 +1,12 @@
 // PoliticalAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract PoliticalAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PoliticalAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure politicians face prosecution for crimes"

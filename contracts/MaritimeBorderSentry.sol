@@ -1,7 +1,12 @@
 // MaritimeBorderSentry.sol
 pragma solidity ^0.8.0;
 
-contract MaritimeBorderSentry {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MaritimeBorderSentry is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Vessel {
         string name;
         string nationality;

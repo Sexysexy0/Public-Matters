@@ -1,7 +1,12 @@
 // DeFiGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract DeFiGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DeFiGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Oversight of liquidity governance and DeFi innovation"

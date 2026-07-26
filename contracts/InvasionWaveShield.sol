@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract InvasionWaveShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InvasionWaveShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event WaveSeal(uint256 level, string detail);
 
     function logWave(uint256 level, string memory detail) external {

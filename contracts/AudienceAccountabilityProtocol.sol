@@ -1,7 +1,12 @@
 // AudienceAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract AudienceAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AudienceAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Ensure Accountability in Audience Energy Preservation"

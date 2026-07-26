@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ArtisticLegacy {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ArtisticLegacy is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Turn Experiences into Permanent Assets]
     function mintArtwork(string memory _scene, address _artist) external pure returns (string memory) {
         // Logic: Capture the beauty of the journey into a digital canvas.

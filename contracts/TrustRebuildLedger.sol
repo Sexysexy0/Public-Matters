@@ -1,6 +1,11 @@
 pragma solidity ^0.8.0;
 
-contract TrustRebuildLedger {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TrustRebuildLedger is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TrustAlert(string partners, string issue);
 
     function checkTrust(string memory partners, bool trustBuilt) public {

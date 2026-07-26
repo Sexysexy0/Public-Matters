@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AccessOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AccessOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AccessRecord(string factor, string status);
 
     function logAccessRecord(string memory factor, string memory status) external {

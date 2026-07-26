@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract FundingBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FundingBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event FundingRecord(string project, string detail);
 
     function logFunding(string memory project, string memory detail) external {

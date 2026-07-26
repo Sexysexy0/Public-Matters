@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract HighStakesBetting {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HighStakesBetting is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [Goal: Wealth Redistribution through Skill]
     function placeArenaBet(uint256 _amount, address _champion) external {
         // Logic: Lock tokens in escrow until match resolution.

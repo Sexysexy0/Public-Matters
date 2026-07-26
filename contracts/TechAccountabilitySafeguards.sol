@@ -1,7 +1,12 @@
 // TechAccountabilitySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract TechAccountabilitySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TechAccountabilitySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect Users from Harmful Design"

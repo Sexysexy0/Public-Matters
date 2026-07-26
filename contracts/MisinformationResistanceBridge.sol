@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract MisinformationResistanceBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MisinformationResistanceBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ResistanceRecord(string element, string detail);
 
     function logResistance(string memory element, string memory detail) external {

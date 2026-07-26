@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GTA6MarketingShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GTA6MarketingShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event MarketingLogged(string phase, string date);
     event PricingSafeguard(string edition, uint256 price);
     event HardwareRestraint(string console, string sentiment);

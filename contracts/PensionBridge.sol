@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PensionBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PensionBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event PensionRecord(string project, string detail);
 
     function logPension(string memory project, string memory detail) external {

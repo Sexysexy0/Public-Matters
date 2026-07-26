@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract SurveillanceOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SurveillanceOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event SurveillanceRecord(string factor, string status);
 
     function logSurveillanceRecord(string memory factor, string memory status) external {

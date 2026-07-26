@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract LayoffTransparency {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LayoffTransparency is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TransparencyAlert(uint256 count, string reason);
     event SeveranceReleased(address employee, uint256 amount);
 

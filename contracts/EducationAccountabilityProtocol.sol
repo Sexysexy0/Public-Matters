@@ -1,7 +1,12 @@
 // EducationAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract EducationAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract EducationAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;   // e.g. "Accountability in Education Governance"

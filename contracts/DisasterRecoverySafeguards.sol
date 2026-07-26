@@ -1,7 +1,12 @@
 // DisasterRecoverySafeguards.sol
 pragma solidity ^0.8.0;
 
-contract DisasterRecoverySafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DisasterRecoverySafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Protect Post-Disaster Rebuilding"

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract VirtueOverGrind {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VirtueOverGrind is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     // [21:01] Stoicism focuses on communal character
     function checkStoicAlignment(uint256 _materialWealth, uint256 _virtueScore) public pure returns (string memory) {
         if (_virtueScore == 0) {

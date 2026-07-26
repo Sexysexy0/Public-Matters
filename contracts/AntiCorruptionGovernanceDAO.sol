@@ -1,7 +1,12 @@
 // AntiCorruptionGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract AntiCorruptionGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract AntiCorruptionGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure transparency in NGO fund management and prevent misuse of public resources"

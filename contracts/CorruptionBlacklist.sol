@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract CorruptionBlacklist {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CorruptionBlacklist is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => bool) public isBlacklisted;
 
     // [Permanent Ban for Corrupt Entities]

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract NativeARMShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NativeARMShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ARMSeal(string game, string status);
 
     function logCompatibility(string memory game, bool compatible) external {

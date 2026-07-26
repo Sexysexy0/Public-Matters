@@ -1,7 +1,12 @@
 // NeutralResetProtocol.sol
 pragma solidity ^0.8.0;
 
-contract NeutralResetProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract NeutralResetProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Reset {
         uint256 id;
         string clause;       // e.g. "Remove religious framing"

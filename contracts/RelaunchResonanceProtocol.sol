@@ -1,7 +1,12 @@
 // RelaunchResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract RelaunchResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RelaunchResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Relaunch {
         uint256 id;
         string domain;    // e.g. "Manufacturing Plant"

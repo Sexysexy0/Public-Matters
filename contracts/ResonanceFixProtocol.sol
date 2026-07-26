@@ -1,7 +1,12 @@
 // ResonanceFixProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ResonanceFixProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResonanceFixProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Insight {
         uint256 id;
         string domain;    // e.g. "API Calls"

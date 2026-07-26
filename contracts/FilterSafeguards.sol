@@ -1,7 +1,12 @@
 // FilterSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract FilterSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FilterSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct NewsItem {
         uint256 id;
         string category;   // e.g. "Macro", "Industry", "Sentiment"

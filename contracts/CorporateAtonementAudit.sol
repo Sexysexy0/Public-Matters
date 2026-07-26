@@ -1,7 +1,12 @@
 // CorporateAtonementAudit.sol
 pragma solidity ^0.8.0;
 
-contract CorporateAtonementAudit {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CorporateAtonementAudit is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct CompanyStatus {
         string companyName;
         uint256 unresolvedDisputes;

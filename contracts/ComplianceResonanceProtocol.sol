@@ -1,7 +1,12 @@
 // ComplianceResonanceProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ComplianceResonanceProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ComplianceResonanceProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Audit {
         uint256 id;
         string domain;    // e.g. "Financial Transactions"

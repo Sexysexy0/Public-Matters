@@ -2,7 +2,12 @@
 // Logic: Real-Time Physical Asset Inventory
 pragma solidity ^0.8.0;
 
-contract SovereignResourceAudit {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SovereignResourceAudit is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     function auditReserves(string memory _commodity) public pure returns (uint256) {
         // Goal: Focus on tangible security vs. paper wealth.
         // Return 100% verification score of physical silos.

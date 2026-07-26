@@ -1,7 +1,12 @@
 // ImmigrationAccountabilityProtocol.sol
 pragma solidity ^0.8.0;
 
-contract ImmigrationAccountabilityProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ImmigrationAccountabilityProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Rule {
         uint256 id;
         string safeguard;  // e.g. "Ensure transparency in immigration enforcement"

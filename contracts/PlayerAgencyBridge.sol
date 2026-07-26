@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract PlayerAgencyBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PlayerAgencyBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event AgencyLogged(string playerAction, string outcome);
 
     function logAgency(string memory playerAction, string memory outcome) external {

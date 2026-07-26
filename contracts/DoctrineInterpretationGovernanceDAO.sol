@@ -1,7 +1,12 @@
 // DoctrineInterpretationGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract DoctrineInterpretationGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DoctrineInterpretationGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure doctrinal development integrates both literal and allegorical interpretations"

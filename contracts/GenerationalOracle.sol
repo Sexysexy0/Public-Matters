@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract GenerationalOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GenerationalOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event GenerationalRecord(string factor, string status);
 
     function logGenerationalRecord(string memory factor, string memory status) external {

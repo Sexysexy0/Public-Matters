@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract RecoveryEquityShield {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract RecoveryEquityShield is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event RecoveryLogged(string device, string status);
 
     function logRecovery(string memory device, string memory status) external {

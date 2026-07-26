@@ -1,7 +1,12 @@
 // CommunityGridDAO.sol
 pragma solidity ^0.8.0;
 
-contract CommunityGridDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CommunityGridDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct EnergyOffer {
         uint256 kilowattHours;
         uint256 pricePerKwh;

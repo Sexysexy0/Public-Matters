@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract ModdingBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ModdingBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event ModdingRecord(string modName, string status);
 
     function logModding(string memory modName, string memory status) external {

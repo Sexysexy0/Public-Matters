@@ -1,7 +1,12 @@
 // TechAccountabilityGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract TechAccountabilityGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TechAccountabilityGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Require independent audits of social media design for addictive features"

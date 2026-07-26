@@ -1,7 +1,12 @@
 // FlowResonanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract FlowResonanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FlowResonanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Initiative {
         uint256 id;
         string program;    // e.g. "Integrated Water Flow Program"

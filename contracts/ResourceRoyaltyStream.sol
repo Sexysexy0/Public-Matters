@@ -1,7 +1,12 @@
 // ResourceRoyaltyStream.sol
 pragma solidity ^0.8.0;
 
-contract ResourceRoyaltyStream {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ResourceRoyaltyStream is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     uint256 public citizenSharePercent = 40;
 
     function processSale(uint256 _totalAmount) public payable {

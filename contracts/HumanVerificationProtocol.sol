@@ -1,7 +1,12 @@
 // HumanVerificationProtocol.sol
 pragma solidity ^0.8.0;
 
-contract HumanVerificationProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumanVerificationProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => bool) public isVerifiedHuman;
 
     function verifyHuman(bytes32 _zkProof) public {

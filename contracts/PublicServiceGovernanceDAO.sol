@@ -1,7 +1,12 @@
 // PublicServiceGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract PublicServiceGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract PublicServiceGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Guarantee hazard pay for TSA workers during shutdowns"

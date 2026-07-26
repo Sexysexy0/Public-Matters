@@ -1,7 +1,12 @@
 // CyberSovereigntyFirewall.sol
 pragma solidity ^0.8.0;
 
-contract CyberSovereigntyFirewall {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CyberSovereigntyFirewall is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => bool) public isAuthorizedNode;
 
     function interceptIncursion(address _externalIP) public {

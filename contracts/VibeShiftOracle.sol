@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract VibeShiftOracle {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract VibeShiftOracle is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event TrendLogged(string studio, string trend, string sentiment);
     event CulturalResonance(string region, string outcome);
 

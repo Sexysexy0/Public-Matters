@@ -1,7 +1,12 @@
 // DeFiPrimitivesProtocol.sol
 pragma solidity ^0.8.0;
 
-contract DeFiPrimitivesProtocol {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract DeFiPrimitivesProtocol is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     mapping(address => uint256) public stablecoinCollateral;
 
     event MintStablecoin(address indexed user, uint256 amount);

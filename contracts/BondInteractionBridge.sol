@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract BondInteractionBridge {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BondInteractionBridge is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     event InteractionRecord(string action, string detail);
 
     function initiateDialogue(string memory action, string memory detail) external {

@@ -1,7 +1,12 @@
 // CulturalHeritageSafeguards.sol
 pragma solidity ^0.8.0;
 
-contract CulturalHeritageSafeguards {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract CulturalHeritageSafeguards is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Safeguard {
         uint256 id;
         string principle;   // e.g. "Preserve Cultural Traditions"

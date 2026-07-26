@@ -1,7 +1,12 @@
 // BiomedicalEthicsGovernanceDAO.sol
 pragma solidity ^0.8.0;
 
-contract BiomedicalEthicsGovernanceDAO {
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract BiomedicalEthicsGovernanceDAO is Ownable {
+
+    constructor() Ownable(msg.sender) {}
+
     struct Proposal {
         uint256 id;
         string topic;       // e.g. "Ensure biomedical innovation aligns with patient rights and ethical governance"
