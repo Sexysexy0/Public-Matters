@@ -34,8 +34,8 @@ jobs:
       - name: Format
         run: forge fmt --check
 
-      - name: Run tests
-        run: forge test -vv
+      - name: Run tests with gas report
+        run: forge test --gas-report -vv
 
       - name: Upload test results
         if: always()
@@ -43,3 +43,32 @@ jobs:
         with:
           name: forge-test-logs
           path: ./out || .
+
+      - name: Upload gas report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forge-gas-report
+          path: ./gas-report.txt
+
+  slither:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Slither
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install slither-analyzer
+
+      - name: Run Slither analysis
+        run: slither ./contracts --ignore-compile --exclude solc-version
+
+      - name: Upload Slither report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: slither-report
+          path: ./slither-report.json
