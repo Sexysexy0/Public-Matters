@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 import "forge-std/Test.sol";
 import "../contracts/InflationIndexedSavings.sol";
-import "@openzeppelin/contracts/mocks/ERC20Mock.sol";
+import "../contracts/mocks/ERC20Mock.sol";
 
 contract MockOracle is IInflationOracle {
     uint256 public rate;
