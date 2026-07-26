@@ -39,7 +39,7 @@ contract WaterMercyAct_0005 {
         emit HydrationReportReceived(reportHash, block.timestamp);
     }
 
-    function terminateContract(string memory reason) external onlySteard {
+    function terminateContract(string memory reason) external onlySteward {
         emit ContractTerminated(reason, block.timestamp);
         selfdestruct(payable(steward));
     }
