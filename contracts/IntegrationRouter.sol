@@ -9,6 +9,8 @@ import "./SammaCodex.sol";
 import "./CivicDAO.sol";
 import "./ValidatorRegistry.sol";
 
+/// @title IntegrationRouter
+/// @notice Covenant contract to route governance and compliance flows
 contract IntegrationRouter {
     AccessControlCodex public access;
     DueProcessCodex public dueProcess;
@@ -17,6 +19,15 @@ contract IntegrationRouter {
     SammaCodex public samma;
     CivicDAO public civic;
     ValidatorRegistry public registry;
+
+    address public sovereignContractor;
+
+    event RouteExecuted(string route, address executor);
+
+    modifier onlyContractor() {
+        require(msg.sender == sovereignContractor, "Error: Only Sovereign Contractor access.");
+        _;
+    }
 
     constructor(
         address accessAddr,
@@ -34,39 +45,23 @@ contract IntegrationRouter {
         samma = SammaCodex(sammaAddr);
         civic = CivicDAO(civicAddr);
         registry = ValidatorRegistry(registryAddr);
+        sovereignContractor = msg.sender;
     }
 
-    /// ✅ Unified function para i-update APR at i-check Damay state
     function updateAPRAndCheckDamay(
         int256 deltaAPR,
         int256 grief,
         int256 joy,
         int256 anger,
         address actor
-    ) external returns (bool) {
-        // Update APR
+    ) external onlyContractor returns (bool) {
         apr.updateAPR(deltaAPR, grief, joy, anger);
 
-        // Ensure router also updates Damay state if APR < 0
         if (apr.currentAPR() < 0) {
             damay.triggerAlert(actor);
         }
 
         return damay.checkState(actor);
-/// @title IntegrationRouter
-/// @notice Covenant contract to route governance and compliance flows
-contract IntegrationRouter {
-    address public sovereignContractor;
-
-    event RouteExecuted(string route, address executor);
-
-    modifier onlyContractor() {
-        require(msg.sender == sovereignContractor, "Error: Only Sovereign Contractor access.");
-        _;
-    }
-
-    constructor() {
-        sovereignContractor = msg.sender;
     }
 
     function executeRoute(string memory _route) public onlyContractor {

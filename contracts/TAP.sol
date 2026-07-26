@@ -6,7 +6,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @title TAP Governance Token
 contract TAPToken is ERC20, Ownable {
-    constructor() ERC20("Transparency Accountability Protocol Token", "TAPT") {}
+    constructor(address initialOwner) ERC20("Transparency Accountability Protocol Token", "TAPT") Ownable(initialOwner) {
+        _mint(initialOwner, 1_000_000 * 10 ** decimals());
+    }
 
     function mint(address to, uint256 amount) external onlyOwner {
         _mint(to, amount);
@@ -43,7 +45,6 @@ contract TAP is Ownable {
 
     uint256 public proposalCount;
 
-    // --- Events ---
     event DisclosureLogged(address indexed submitter, string content, uint256 timestamp);
     event ProposalCreated(uint256 id, address proposer, string description, uint256 deadline);
     event Voted(uint256 id, address voter, bool support);
@@ -51,17 +52,15 @@ contract TAP is Ownable {
     event PenaltyApplied(address indexed offender, uint256 amount);
     event RewardIssued(address indexed contributor, uint256 amount);
 
-    constructor(address _token) {
+    constructor(address _token, address initialOwner) Ownable(initialOwner) {
         token = TAPToken(_token);
     }
 
-    // --- Core Functions ---
     function logDisclosure(string calldata _content) external {
         disclosures.push(Disclosure(msg.sender, _content, block.timestamp));
         emit DisclosureLogged(msg.sender, _content, block.timestamp);
     }
 
-    // --- Governance Voting ---
     function createProposal(string calldata _description, uint256 _duration) external {
         proposalCount++;
         proposals.push(Proposal({
@@ -103,7 +102,6 @@ contract TAP is Ownable {
         emit ProposalExecuted(_id, passed);
     }
 
-    // --- Penalty & Reward ---
     function applyPenalty(address _offender, uint256 _amount) external onlyOwner {
         token.burn(_offender, _amount);
         emit PenaltyApplied(_offender, _amount);
@@ -114,7 +112,6 @@ contract TAP is Ownable {
         emit RewardIssued(_contributor, _amount);
     }
 
-    // --- View Helpers ---
     function getDisclosures() external view returns (Disclosure[] memory) {
         return disclosures;
     }

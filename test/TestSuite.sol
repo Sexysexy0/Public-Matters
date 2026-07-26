@@ -34,7 +34,7 @@ contract TestSuite is Test {
     function testAPRTriggersDamay() public {
         apr.updateAPR(-100, 0, 0, 0); // CPI shock lowers APR
         (DamayStateMachine.DamayPhase phase, uint256 value) = damay.exchanges(address(this));
-        assertEq(uint(phase), uint(DamayStateMachine.DamayPhase.Alert));
+        assertEq(uint256(phase), uint256(DamayStateMachine.DamayPhase.Alert));
     }
 
     function testPrincipleDeclaration() public {

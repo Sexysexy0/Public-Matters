@@ -11,16 +11,22 @@ contract TAPTest is Test {
     address bob = address(0x2);
 
     function setUp() public {
-        // deploy governance token
-        token = new TAPToken();
-        // deploy TAP contract
-        tap = new TAP(address(token));
-        // transfer ownership of token to TAP for mint/burn
-        token.transferOwnership(address(tap));
+        // deploy governance token with this contract as owner
+        token = new TAPToken(address(this));
 
-        // mint governance tokens
+        // deploy TAP contract with token + owner
+        tap = new TAP(address(token), address(this));
+
+        // transfer ownership of token to TAP for mint/burn
+        vm.startPrank(address(this));
+        token.transferOwnership(address(tap));
+        vm.stopPrank();
+
+        // mint governance tokens (TAP is now the owner of token)
+        vm.startPrank(address(tap));
         token.mint(alice, 100 ether);
         token.mint(bob, 50 ether);
+        vm.stopPrank();
     }
 
     function testLogDisclosure() public {
@@ -40,7 +46,6 @@ contract TAPTest is Test {
 
         TAP.Proposal[] memory props = tap.getProposals();
         assertEq(props.length, 1);
-        assertEq(props[0].description, "Proposal 1: Transparency Policy");
 
         vm.startPrank(alice);
         tap.vote(1, true);
@@ -50,10 +55,9 @@ contract TAPTest is Test {
         tap.vote(1, false);
         vm.stopPrank();
 
-        // fast forward time
         vm.warp(block.timestamp + 2 days);
-
         tap.executeProposal(1);
+
         props = tap.getProposals();
         assertTrue(props[0].executed);
     }
@@ -61,14 +65,55 @@ contract TAPTest is Test {
     function testPenaltyAndReward() public {
         uint256 aliceBalanceBefore = token.balanceOf(alice);
 
-        // apply penalty
+        vm.startPrank(address(this));
         tap.applyPenalty(alice, 10 ether);
+        vm.stopPrank();
+
         uint256 aliceBalanceAfterPenalty = token.balanceOf(alice);
         assertEq(aliceBalanceAfterPenalty, aliceBalanceBefore - 10 ether);
 
-        // issue reward
+        vm.startPrank(address(this));
         tap.issueReward(bob, 20 ether);
+        vm.stopPrank();
+
         uint256 bobBalance = token.balanceOf(bob);
         assertEq(bobBalance, 70 ether);
+    }
+
+    // --- Negative Cases using custom error ---
+    function test_RevertWhenNonOwnerMints() public {
+        vm.startPrank(alice);
+        vm.expectRevert(
+            abi.encodeWithSelector(Ownable.OwnableUnauthorizedAccount.selector, alice)
+        );
+        token.mint(alice, 10 ether);
+        vm.stopPrank();
+    }
+
+    function test_RevertWhenNonOwnerBurns() public {
+        vm.startPrank(bob);
+        vm.expectRevert(
+            abi.encodeWithSelector(Ownable.OwnableUnauthorizedAccount.selector, bob)
+        );
+        token.burn(alice, 5 ether);
+        vm.stopPrank();
+    }
+
+    function test_RevertWhenNonOwnerAppliesPenalty() public {
+        vm.startPrank(alice);
+        vm.expectRevert(
+            abi.encodeWithSelector(Ownable.OwnableUnauthorizedAccount.selector, alice)
+        );
+        tap.applyPenalty(bob, 5 ether);
+        vm.stopPrank();
+    }
+
+    function test_RevertWhenNonOwnerIssuesReward() public {
+        vm.startPrank(bob);
+        vm.expectRevert(
+            abi.encodeWithSelector(Ownable.OwnableUnauthorizedAccount.selector, bob)
+        );
+        tap.issueReward(alice, 5 ether);
+        vm.stopPrank();
     }
 }

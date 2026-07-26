@@ -54,7 +54,7 @@ contract IntegrationTests is Test {
     function testAPRTriggersDamayViaRouter() public {
         bool stateOk = router.updateAPRAndCheckDamay(-100, 0, 0, 0, address(this));
         assertTrue(stateOk);
-        (DamayStateMachine.DamayPhase phase, ) = damay.exchanges(address(this));
-        assertEq(uint(phase), uint(DamayStateMachine.DamayPhase.Alert));
+        (DamayStateMachine.DamayPhase phase,) = damay.exchanges(address(this));
+        assertEq(uint256(phase), uint256(DamayStateMachine.DamayPhase.Alert));
     }
 }

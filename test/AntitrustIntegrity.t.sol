@@ -7,7 +7,7 @@ contract AntitrustIntegrity {
 
     struct Case {
         uint256 id;
-        bytes32[] evidenceHashes;   // audit trail of all evidences
+        bytes32[] evidenceHashes; // audit trail of all evidences
         bool paid;
         uint256 votes;
         bool accepted;
