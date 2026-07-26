@@ -1,0 +1,36 @@
+name: Matrix Tests
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [16, 18, 20]
+        foundry: [latest, nightly]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: npm install --force
+
+      - name: Setup Foundry
+        uses: ethereum/setup-foundry@v1
+        with:
+          version: ${{ matrix.foundry }}
+
+      - name: Run tests
+        run: forge test -vv

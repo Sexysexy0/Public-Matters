@@ -1,0 +1,48 @@
+name: Publish Artifacts
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Foundry
+        uses: ethereum/setup-foundry@v1
+        with:
+          version: latest
+
+      - name: Install dependencies
+        run: |
+          forge install || true
+          forge update || true
+
+      - name: Run tests
+        run: forge test -vv
+
+      - name: Upload build outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: ./out
+
+      - name: Upload test logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs
+          path: ./out/test-logs || .
+
+      - name: Upload gas report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gas-report
+          path: ./gas-report.txt

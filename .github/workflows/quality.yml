@@ -1,0 +1,42 @@
+name: Code Quality
+
+on:
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install --force
+
+      - name: Run ESLint
+        run: npx eslint . --ext .js,.ts --max-warnings=0
+
+      - name: Run Prettier check
+        run: npx prettier --check .
+
+      - name: Install Slither
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install slither-analyzer
+
+      - name: Run Slither static analysis
+        run: slither ./contracts --ignore-compile --exclude solc-version
+
+      - name: Upload Slither report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: slither-quality-report
+          path: ./slither-report.json

@@ -1,0 +1,16 @@
+name: Cleanup Artifacts
+
+on:
+  schedule:
+    - cron: "0 2 * * 0" # run weekly, Sunday 2 AM UTC
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup old artifacts
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          age: 7 # delete artifacts older than 7 days
+          skip-recent: 3 # keep last 3 artifacts

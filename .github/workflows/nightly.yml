@@ -1,0 +1,42 @@
+name: Nightly Build
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # run daily at midnight UTC
+  workflow_dispatch:
+
+jobs:
+  nightly:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install --force
+
+      - name: Setup Foundry
+        uses: ethereum/setup-foundry@v1
+        with:
+          version: latest
+
+      - name: Run full test suite
+        run: forge test -vv
+
+      - name: Run coverage
+        run: forge coverage --report lcov
+
+      - name: Run Slither analysis
+        run: slither ./contracts --ignore-compile --exclude solc-version
+
+      - name: Upload nightly artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-report
+          path: ./out

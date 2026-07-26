@@ -1,0 +1,28 @@
+name: Notifications
+
+on:
+  workflow_run:
+    workflows: [ "CI", "Release", "Docker Build" ]
+    types:
+      - completed
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack notification
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          payload: |
+            {
+              "text": "Workflow *${{ github.workflow }}* finished with status *${{ github.event.workflow_run.conclusion }}* on repo *${{ github.repository }}*."
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send Discord notification
+        uses: Ilshidur/action-discord@v2
+        with:
+          args: "Workflow **${{ github.workflow }}** finished with status **${{ github.event.workflow_run.conclusion }}** on repo **${{ github.repository }}**."
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}

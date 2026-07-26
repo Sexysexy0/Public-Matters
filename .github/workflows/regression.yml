@@ -1,0 +1,29 @@
+name: Regression Guard
+
+on:
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Foundry
+        uses: ethereum/setup-foundry@v1
+        with:
+          version: latest
+
+      - name: Install dependencies
+        run: |
+          forge install || true
+          forge update || true
+
+      - name: Run gas snapshot
+        run: forge snapshot --snap gas-snapshot.txt
+
+      - name: Compare with baseline
+        run: |
+          forge snapshot --diff gas-snapshot.txt --snap gas-snapshot-baseline.txt --threshold 5

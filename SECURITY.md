@@ -1,21 +1,39 @@
-# Security Policy
+# 🔐 Security Policy
 
 ## Supported Versions
+We actively maintain and patch the following versions of Public Matters:
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Version | Supported |
+|---------|-----------|
+| main    | ✅ |
+| dev     | ✅ |
+| old     | ❌ |
 
 ## Reporting a Vulnerability
+We take security issues seriously. If you discover a vulnerability:
 
-Use this section to tell people how to report a vulnerability.
+- **Do not open a public issue.**
+- **Do not disclose publicly until it is patched.**
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+### Steps
+1. Email the core team at **security@publicmatters.org**
+2. Include:
+   - Description of the vulnerability
+   - Steps to reproduce
+   - Potential impact
+   - Suggested fix (if any)
+
+### Response
+- We will acknowledge receipt within 48 hours.
+- We will provide a status update within 7 days.
+- Once resolved, we will publish a security advisory.
+
+## Best Practices
+- Always run `slither ./contracts` before submitting PRs.
+- Ensure reentrancy guards and access control modifiers are applied.
+- Document upgrade steps for proxy contracts.
+- Emit events for all critical state changes.
+- Validate all inputs to prevent out‑of‑range errors.
+- Functions should revert on invalid states rather than silently succeed.
+- Optimize loops and mappings to keep governance flows affordable.
+- Include negative tests for unauthorized access, invalid inputs, and double execution attempts.

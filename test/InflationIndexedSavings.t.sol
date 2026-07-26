@@ -20,28 +20,35 @@ contract InflationIndexedSavingsTest is Test {
     MockOracle oracle;
     ERC20Mock stable;
 
+    address owner = address(this);
     address user = address(0x123);
 
     function setUp() public {
-        // deploy mock stablecoin
         stable = new ERC20Mock("MockUSD", "MUSD", user, 1_000_000 ether);
         oracle = new MockOracle();
         savings = new InflationIndexedSavings(address(stable), address(oracle));
 
-        // approve contract
         vm.startPrank(user);
         stable.approve(address(savings), type(uint256).max);
         vm.stopPrank();
+
+        stable.mint(owner, 1_000_000 ether);
+        stable.approve(address(savings), type(uint256).max);
+        savings.fundReserve(1_000_000 ether);
     }
 
     function testDepositAndWithdrawWithInflation() public {
+        uint256 initialBalance = stable.balanceOf(user); // 1,000,000 ether
+
         vm.startPrank(user);
         savings.deposit(100 ether);
-        oracle.setRate(300); // 3% inflation
+        oracle.setRate(300); // 300 basis points = 3%
         savings.withdraw();
         vm.stopPrank();
 
         uint256 balance = stable.balanceOf(user);
-        assertEq(balance, 100 ether + 3 ether, "Adjusted payout should include inflation");
+        // User deposited 100, got back 103 (3% inflation adjustment)
+        // Net gain = 3 ether
+        assertEq(balance, initialBalance + 3 ether, "Adjusted payout should include inflation");
     }
 }

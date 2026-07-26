@@ -1,0 +1,34 @@
+name: Integration Tests
+
+on:
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install --force
+
+      - name: Setup Foundry
+        uses: ethereum/setup-foundry@v1
+        with:
+          version: latest
+
+      - name: Run integration tests
+        run: npm run test:integration
+
+      - name: Upload integration report
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-report
+          path: ./integration-report.txt

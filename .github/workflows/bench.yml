@@ -1,0 +1,31 @@
+name: Benchmarks
+
+on:
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Foundry
+        uses: ethereum/setup-foundry@v1
+        with:
+          version: latest
+
+      - name: Install dependencies
+        run: |
+          forge install || true
+          forge update || true
+
+      - name: Run benchmarks
+        run: forge test --gas-report -vv
+
+      - name: Upload benchmark report
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-report
+          path: ./gas-report.txt
