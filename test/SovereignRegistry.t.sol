@@ -9,6 +9,7 @@ contract SovereignRegistryTest is Test {
     address registrar = address(1);
     address contract1 = address(2);
     address contract2 = address(3);
+    address contract3 = address(4);
     
     function setUp() public {
         vm.prank(registrar);
@@ -40,5 +41,49 @@ contract SovereignRegistryTest is Test {
     function test_RevertWhenNonRegistrarRegisters() public {
         vm.expectRevert("Not registrar");
         registry.register(contract1, "Test", "test", "1.0");
+    }
+    
+    function test_RegisterBatch() public {
+        address[] memory addrs = new address[](2);
+        addrs[0] = contract1;
+        addrs[1] = contract2;
+        
+        string[] memory names = new string[](2);
+        names[0] = "BankFusionDAO";
+        names[1] = "FeeBlessingRouter";
+        
+        string[] memory cats = new string[](2);
+        cats[0] = "finance";
+        cats[1] = "finance";
+        
+        string[] memory vers = new string[](2);
+        vers[0] = "1.0";
+        vers[1] = "2.0";
+        
+        vm.prank(registrar);
+        registry.registerBatch(addrs, names, cats, vers);
+        
+        assertEq(registry.count(), 2);
+    }
+    
+    function test_RevertDuplicateName() public {
+        vm.startPrank(registrar);
+        registry.register(contract1, "BankFusionDAO", "finance", "1.0");
+        
+        vm.expectRevert("Name taken");
+        registry.register(contract2, "BankFusionDAO", "water", "1.0");
+        vm.stopPrank();
+    }
+    
+    function test_TransferRegistrar() public {
+        address newRegistrar = address(5);
+        
+        vm.prank(registrar);
+        registry.transferRegistrar(newRegistrar);
+        
+        vm.prank(newRegistrar);
+        registry.register(contract1, "Test", "test", "1.0");
+        
+        assertEq(registry.count(), 1);
     }
 }

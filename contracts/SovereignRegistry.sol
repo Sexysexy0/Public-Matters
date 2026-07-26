@@ -10,7 +10,7 @@ contract SovereignRegistry {
     
     struct ContractMeta {
         string name;
-        string category;      // e.g., "finance", "water", "safeguards"
+        string category;
         string version;
         address contractAddress;
         bool active;
@@ -19,10 +19,12 @@ contract SovereignRegistry {
     
     mapping(address => ContractMeta) public registry;
     mapping(string => address[]) public categoryIndex;
+    mapping(bytes32 => bool) public nameExists;
     address[] public allContracts;
     
     event ContractRegistered(address indexed contractAddress, string name, string category);
     event ContractUpdated(address indexed contractAddress, bool active);
+    event RegistrarTransferred(address indexed oldRegistrar, address indexed newRegistrar);
     
     modifier onlyRegistrar() {
         require(msg.sender == registrar, "Not registrar");
@@ -39,7 +41,10 @@ contract SovereignRegistry {
         string memory _category,
         string memory _version
     ) external onlyRegistrar {
+        require(_contract != address(0), "Invalid address");
+        require(bytes(_name).length > 0, "Empty name");
         require(registry[_contract].contractAddress == address(0), "Already registered");
+        require(!nameExists[keccak256(bytes(_name))], "Name taken");
         
         ContractMeta memory meta = ContractMeta({
             name: _name,
@@ -51,10 +56,54 @@ contract SovereignRegistry {
         });
         
         registry[_contract] = meta;
+        nameExists[keccak256(bytes(_name))] = true;
         categoryIndex[_category].push(_contract);
         allContracts.push(_contract);
         
         emit ContractRegistered(_contract, _name, _category);
+    }
+    
+    function registerBatch(
+        address[] calldata _contracts,
+        string[] calldata _names,
+        string[] calldata _categories,
+        string[] calldata _versions
+    ) external onlyRegistrar {
+        uint256 len = _contracts.length;
+        require(
+            len == _names.length &&
+            len == _categories.length &&
+            len == _versions.length,
+            "Array length mismatch"
+        );
+        require(len <= 100, "Batch too large");
+        
+        for (uint256 i = 0; i < len; i++) {
+            address addr = _contracts[i];
+            string memory name = _names[i];
+            
+            if (addr != address(0) && 
+                bytes(name).length > 0 &&
+                registry[addr].contractAddress == address(0) &&
+                !nameExists[keccak256(bytes(name))]) {
+                
+                ContractMeta memory meta = ContractMeta({
+                    name: name,
+                    category: _categories[i],
+                    version: _versions[i],
+                    contractAddress: addr,
+                    active: true,
+                    registeredAt: block.timestamp
+                });
+                
+                registry[addr] = meta;
+                nameExists[keccak256(bytes(name))] = true;
+                categoryIndex[_categories[i]].push(addr);
+                allContracts.push(addr);
+                
+                emit ContractRegistered(addr, name, _categories[i]);
+            }
+        }
     }
     
     function setActive(address _contract, bool _active) external onlyRegistrar {
@@ -81,6 +130,8 @@ contract SovereignRegistry {
     
     function transferRegistrar(address _newRegistrar) external onlyRegistrar {
         require(_newRegistrar != address(0), "Invalid address");
+        address old = registrar;
         registrar = _newRegistrar;
+        emit RegistrarTransferred(old, _newRegistrar);
     }
 }
