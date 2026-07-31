@@ -10,7 +10,7 @@ contract GovernanceSimulation is Test {
     SammaCodex public samma;
 
     function setUp() public {
-        samma = new SammaCodex();
+        samma = new SammaCodex(address(this));
         civic = new CivicDAO(address(samma));
     }
 

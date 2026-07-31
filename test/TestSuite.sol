@@ -11,7 +11,7 @@ contract TestSuite is Test {
 
     function setUp() public {
         dueProcess = new DueProcessCodex();
-        samma = new SammaCodex();
+        samma = new SammaCodex(address(this));
     }
 
     function testRejectPhantomAccusation() public {

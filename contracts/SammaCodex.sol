@@ -25,9 +25,9 @@ contract SammaCodex {
 
     address public owner;
 
-    constructor() {
-        owner = msg.sender;
-        roles[msg.sender][OVERSEER_ROLE] = true;
+    constructor(address admin) {
+        owner = admin != address(0) ? admin : msg.sender;
+        roles[owner][OVERSEER_ROLE] = true;
     }
 
     function declarePrinciple(string calldata title, string calldata description) external {
