@@ -43,3 +43,10 @@ client.crt
 client.key
 .env
 repo-mirror.git/
+
+# Control Tower & Foundry Ignores
+.env
+node_modules/
+broadcast/
+cache/
+out/
