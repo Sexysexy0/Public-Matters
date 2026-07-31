@@ -26,10 +26,10 @@
     "@nomicfoundation/hardhat-toolbox": "^6.1.2",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.1.2",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "autoprefixer": "^10.5.4",
-    "chai": "^6.2.2",
+    "chai": "^4.5.0",
     "ethers": "^6.17.0",
     "hardhat": "^3.11.1",
     "postcss": "^8.5.25",
@@ -39,12 +39,20 @@
   },
   "type": "module",
   "overrides": {
-    "postcss": "$postcss",
+    "postcss": "^8.5.25",
     "sharp": "^0.33.5",
     "lodash": "^4.17.23",
     "brace-expansion": "^5.0.8",
     "elliptic": "^6.6.1",
-    "undici": "^6.21.0",
-    "serialize-javascript": "^6.0.2"
+    "undici": "^6.21.1",
+    "serialize-javascript": "^6.0.2",
+    "ws": "^8.17.1",
+    "cookie": "^0.7.0",
+    "semver": "^7.5.3",
+    "body-parser": "^1.20.3",
+    "express": "^4.20.0",
+    "micromatch": "^4.0.8",
+    "send": "^0.19.0",
+    "serve-static": "^1.16.0"
   }
 }
