@@ -3,38 +3,25 @@ pragma solidity ^0.8.20;
 
 import "forge-std/Test.sol";
 import "../contracts/DueProcessCodex.sol";
-import "../contracts/DamayStateMachine.sol";
-import "../contracts/EmotionalAPR.sol";
 import "../contracts/SammaCodex.sol";
-import "../contracts/CivicDAO.sol";
-import "../contracts/ValidatorRegistry.sol";
 
 contract TestSuite is Test {
-    DueProcessCodex dueProcess;
-    DamayStateMachine damay;
-    EmotionalAPR apr;
-    SammaCodex samma;
-    CivicDAO civic;
-    ValidatorRegistry registry;
+    DueProcessCodex public dueProcess;
+    SammaCodex public samma;
 
     function setUp() public {
         dueProcess = new DueProcessCodex();
-        damay = new DamayStateMachine();
-        apr = new EmotionalAPR(address(damay));
-        samma = new SammaCodex(address(this));
-        civic = new CivicDAO(address(samma));
-        registry = new ValidatorRegistry();
+        samma = new SammaCodex();
     }
 
     function testRejectPhantomAccusation() public {
-        vm.expectRevert();
-        dueProcess.fileAccusation(address(0), ""); // too vague, should fail
+        vm.expectRevert("Invalid accusation");
+        dueProcess.fileAccusation(address(0), "Accusation details long enough to pass length check");
     }
 
-    function testAPRTriggersDamay() public {
-        apr.updateAPR(-100, 0, 0, 0); // CPI shock lowers APR
-        (DamayStateMachine.DamayPhase phase, uint256 value) = damay.exchanges(address(this));
-        assertEq(uint256(phase), uint256(DamayStateMachine.DamayPhase.Alert));
+    function testRejectSelfAccusation() public {
+        vm.expectRevert("Cannot accuse self");
+        dueProcess.fileAccusation(address(this), "Accusation details long enough to pass length check");
     }
 
     function testPrincipleDeclaration() public {

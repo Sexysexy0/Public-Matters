@@ -5,11 +5,12 @@ import "./SammaCodex.sol";
 
 contract CivicDAO {
     SammaCodex public codex;
+    address public owner;
 
     struct Proposal {
         uint256 id;
-        string description;
         uint256 principleId;
+        string description;
         uint256 votesFor;
         uint256 votesAgainst;
         bool executed;
@@ -19,12 +20,18 @@ contract CivicDAO {
     mapping(uint256 => Proposal) public proposals;
     mapping(address => mapping(uint256 => bool)) public hasVoted;
 
-    event ProposalCreated(uint256 id, string description, uint256 principleId);
-    event Voted(uint256 proposalId, address voter, bool support);
-    event ProposalExecuted(uint256 id, bool passed);
+    event ProposalCreated(uint256 indexed id, string description, uint256 principleId);
+    event Voted(uint256 indexed proposalId, address indexed voter, bool support);
+    event ProposalExecuted(uint256 indexed id);
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not authorized");
+        _;
+    }
 
     constructor(address codexAddress) {
         codex = SammaCodex(codexAddress);
+        owner = msg.sender;
     }
 
     function createProposal(string calldata description, uint256 principleId) external {
@@ -32,8 +39,8 @@ contract CivicDAO {
         proposalCount++;
         proposals[proposalCount] = Proposal({
             id: proposalCount,
-            description: description,
             principleId: principleId,
+            description: description,
             votesFor: 0,
             votesAgainst: 0,
             executed: false
@@ -42,21 +49,27 @@ contract CivicDAO {
     }
 
     function vote(uint256 proposalId, bool support) external {
+        require(proposalId > 0 && proposalId <= proposalCount, "Proposal does not exist");
+        Proposal storage p = proposals[proposalId];
+        require(codex.isActive(p.principleId), "Principle not active");
+        require(!p.executed, "Proposal already executed");
         require(!hasVoted[msg.sender][proposalId], "Already voted");
+
         hasVoted[msg.sender][proposalId] = true;
         if (support) {
-            proposals[proposalId].votesFor++;
+            p.votesFor++;
         } else {
-            proposals[proposalId].votesAgainst++;
+            p.votesAgainst++;
         }
         emit Voted(proposalId, msg.sender, support);
     }
 
-    function executeProposal(uint256 proposalId) external {
+    function executeProposal(uint256 proposalId) external onlyOwner {
+        require(proposalId > 0 && proposalId <= proposalCount, "Proposal does not exist");
         Proposal storage p = proposals[proposalId];
         require(!p.executed, "Already executed");
+        
         p.executed = true;
-        bool passed = p.votesFor > p.votesAgainst;
-        emit ProposalExecuted(proposalId, passed);
+        emit ProposalExecuted(proposalId);
     }
 }
