@@ -29,7 +29,7 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "autoprefixer": "^10.5.4",
-    "chai": "^4.5.0",
+    "chai": "^6.2.2",
     "ethers": "^6.17.0",
     "hardhat": "^3.11.1",
     "postcss": "^8.5.25",
@@ -40,6 +40,11 @@
   "type": "module",
   "overrides": {
     "postcss": "$postcss",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "lodash": "^4.17.23",
+    "brace-expansion": "^5.0.8",
+    "elliptic": "^6.6.1",
+    "undici": "^6.21.0",
+    "serialize-javascript": "^6.0.2"
   }
 }
