@@ -8,7 +8,7 @@ contract AgriculturalCommodityStabilizerTest is Test {
     AgriculturalCommodityStabilizer public acs;
 
     address public admin = address(this);
-    address public farmer = address(0x11);
+    address public farmer = makeAddr("farmer");
 
     uint256 public floorPrice = 25; // 25 wei per kg floor benchmark
 
