@@ -72,7 +72,7 @@ contract SovereignGridProtocol {
 
         // Ibabawas ang kuryente sa seller at ibibigay ang bayad sa kanila nang walang middleman
         seller.excessKWh -= _kwhToBuy;
-        payable(_sellerNode).transfer(msg.value);
+        (bool success, ) = _sellerNode.call{value: msg.value}(""); require(success, "P2P energy payment failed");
         
         emit P2PEnergyBought(msg.sender, _sellerNode, _kwhToBuy, totalCost);
     }
