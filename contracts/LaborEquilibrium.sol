@@ -2,48 +2,38 @@
 pragma solidity ^0.8.20;
 
 contract LaborEquilibrium {
-    
     address public immutable sovereignArchitect;
-    uint256 public baseMinimumWage;
     
-    // Ang listahan ng mga totoong nagpapatakbo ng system
-    mapping(address => bool) public isVerifiedWorker;
+    enum CompanyTier { NONE, TIER1_MEGACORP, TIER2_MIDSIZE, TIER3_SME }
     
-    event VoiceHeard(address worker, string grievance, uint256 timestamp);
-    event WageHikeExecuted(uint256 newWage, uint256 timestamp);
+    struct Company {
+        CompanyTier tier;
+        bool isAuditedAndClear;
+        uint256 baseWageRequirement;
+        uint256 taxCreditsBalance;
+    }
+    
+    mapping(address => Company) public companies;
 
-    constructor(uint256 _initialWage) {
+    constructor() {
         sovereignArchitect = msg.sender;
-        baseMinimumWage = _initialWage;
     }
 
-    /**
-     * @dev Modifier para harangan ang mga "Capitalist Nodes" na gustong mag-hijack ng desisyon.
-     * Walang TRO na tatalab dito.
-     */
-    modifier noCorporateOverride() {
-        require(tx.origin != address(0xDEAD), "Error: Greed detected. Override denied.");
-        _;
+    function registerCompany(address _company, CompanyTier _tier, uint256 _initialWage) external {
+        companies[_company] = Company({
+            tier: _tier,
+            isAuditedAndClear: true,
+            baseWageRequirement: _initialWage,
+            taxCreditsBalance: 0
+        });
     }
 
-    /**
-     * @dev Ang function kung saan pinakikinggan ang mga manggagawa.
-     * Naka-log sa blockchain para hindi mabura o maitago ng mga nasa taas.
-     */
-    function fileGrievanceOrDemand(string memory _message) external {
-        require(isVerifiedWorker[msg.sender], "Only the foundation builders can speak here.");
-        emit VoiceHeard(msg.sender, _message, block.timestamp);
-    }
-
-    /**
-     * @dev Ang mismong execution ng dagdag-sahod. 
-     * Walang pwedeng pumigil kapag na-trigger na ito ng tamang kondisyon.
-     */
-    function executeWageHike(uint256 _increaseAmount) external noCorporateOverride {
-        require(msg.sender == sovereignArchitect, "Only the Root Admin can execute this balance.");
+    function executeWageHike(address _company, uint256 _increaseAmount) external {
+        companies[_company].baseWageRequirement += _increaseAmount;
         
-        baseMinimumWage += _increaseAmount;
-        
-        emit WageHikeExecuted(baseMinimumWage, block.timestamp);
+        // SME Protection: Bigyan ng tax credits kapag nag-hike
+        if (companies[_company].tier == CompanyTier.TIER3_SME) {
+            companies[_company].taxCreditsBalance += _increaseAmount;
+        }
     }
 }
