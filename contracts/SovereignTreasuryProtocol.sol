@@ -81,7 +81,7 @@ contract SovereignTreasuryProtocol {
         p.milestonesCompleted++;
 
         // I-release ang pera diretso sa contractor, walang dadaanang pulitiko.
-        payable(p.awardedContractor).transfer(payoutAmount);
+        (bool success, ) = p.awardedContractor.call{value: payoutAmount}(""); require(success, "ETH transfer failed");
         emit MilestonePaid(_projectId, p.milestonesCompleted, payoutAmount);
 
         // Kung tapos na lahat ng milestones, mark as COMPLETED
