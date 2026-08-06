@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "forge-std/Test.sol";
-import "../contracts/TokenizedTreatyBase.sol";
+import "../src/TokenizedTreatyBase.sol";
 
 contract MockTreaty is TokenizedTreatyBase {
     function createTreaty(string memory _name, string memory _signatories, bytes32 _treatyHash, uint256 _deadline) public override returns (uint256) {

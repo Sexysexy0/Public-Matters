@@ -2,12 +2,12 @@
 pragma solidity ^0.8.20;
 
 import "forge-std/Test.sol";
-import "../contracts/FamilyOfficeRegistry.sol";
-import "../contracts/MultiSigEscrowVault.sol";
-import "../contracts/TokenizedTreatyBase.sol";
-import "../contracts/ProjectMilestoneEscrow.sol";
-import "../contracts/DisputeResolutionArbitration.sol";
-import "../contracts/AnchorGovernanceVault.sol";
+import "../src/FamilyOfficeRegistry.sol";
+import "../src/MultiSigEscrowVault.sol";
+import "../src/TokenizedTreatyBase.sol";
+import "../src/ProjectMilestoneEscrow.sol";
+import "../src/DisputeResolutionArbitration.sol";
+import "../src/AnchorGovernanceVault.sol";
 
 // Mock contract to deploy the abstract Treaty Base
 contract MockTreaty is TokenizedTreatyBase {}

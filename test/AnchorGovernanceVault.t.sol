@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "forge-std/Test.sol";
-import "../contracts/AnchorGovernanceVault.sol";
+import "../src/AnchorGovernanceVault.sol";
 
 contract AnchorGovernanceVaultTest is Test {
     AnchorGovernanceVault public anchor;
