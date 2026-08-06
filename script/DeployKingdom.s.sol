@@ -2,12 +2,12 @@
 pragma solidity ^0.8.20;
 
 import "forge-std/Script.sol";
-import "../contracts/FamilyOfficeRegistry.sol";
-import "../contracts/MultiSigEscrowVault.sol";
-import "../contracts/TokenizedTreatyBase.sol";
-import "../contracts/ProjectMilestoneEscrow.sol";
-import "../contracts/DisputeResolutionArbitration.sol";
-import "../contracts/AnchorGovernanceVault.sol";
+import "../src/FamilyOfficeRegistry.sol";
+import "../src/MultiSigEscrowVault.sol";
+import "../src/TokenizedTreatyBase.sol";
+import "../src/ProjectMilestoneEscrow.sol";
+import "../src/DisputeResolutionArbitration.sol";
+import "../src/AnchorGovernanceVault.sol";
 
 contract DeployKingdom is Script {
     function run() external {
@@ -22,7 +22,7 @@ contract DeployKingdom is Script {
         // 2. Deploy MultiSig Vault (set your initial signers here)
         address[] memory signers = new address[](2);
         signers[0] = deployer; // You
-        signers[1] = 0x...;    // <--- Replace this with your trusted partner's address before deploying!
+        signers[1] = deployer; // Temporarily using same address    // <--- Replace this with your trusted partner's address before deploying!
         MultiSigEscrowVault vault = new MultiSigEscrowVault(signers, 2);
         
         // 3. Deploy Treaty Base
