@@ -1,10 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/**
- * @title MultiSigEscrowVault
- * @dev Multi-Signature Institutional Vault with Time-Lock for PPPs and Treaties
- */
 contract MultiSigEscrowVault {
     address public immutable owner;
     uint256 public constant EXECUTION_DELAY = 1 days; // 24-hour revoke window
@@ -26,6 +22,7 @@ contract MultiSigEscrowVault {
     address[] public signers;
 
     event SignerAdded(address indexed signer);
+    event SignerRemoved(address indexed signer);
     event TransactionSubmitted(uint256 indexed txId, address to, uint256 value);
     event TransactionConfirmed(uint256 indexed txId, address indexed signer);
     event TransactionRevoked(uint256 indexed txId, address indexed signer);
@@ -58,9 +55,22 @@ contract MultiSigEscrowVault {
         }
     }
 
+    function addSigner(address _newSigner) external onlyOwner {
+        require(!isSigner[_newSigner], "MultiSigVault: Already a signer");
+        isSigner[_newSigner] = true;
+        signers.push(_newSigner);
+        emit SignerAdded(_newSigner);
+    }
+
+    function removeSigner(address _signer) external onlyOwner {
+        require(isSigner[_signer], "MultiSigVault: Not a signer");
+        require(signers.length > requiredConfirmations, "MultiSigVault: Cannot remove below required threshold");
+        isSigner[_signer] = false;
+        emit SignerRemoved(_signer);
+    }
+
     receive() external payable {}
 
-    // Submit a payout request to the vault
     function submitTransaction(address payable _to, uint256 _value, bytes calldata _data) external onlySigner returns (uint256) {
         uint256 txId = transactionCount;
         transactions[txId].to = _to;
@@ -71,10 +81,9 @@ contract MultiSigEscrowVault {
         transactions[txId].creationTime = block.timestamp;
         transactionCount++;
         emit TransactionSubmitted(txId, _to, _value);
-    return txId;
+        return txId;
     }
 
-    // Approve a transaction
     function confirmTransaction(uint256 _txId) external onlySigner txExists(_txId) {
         Transaction storage transaction = transactions[_txId];
         require(!transaction.isConfirmed[msg.sender], "MultiSigVault: Already confirmed");
@@ -85,7 +94,6 @@ contract MultiSigEscrowVault {
         emit TransactionConfirmed(_txId, msg.sender);
     }
 
-    // Revoke your signature (before the 24 hours expire)
     function revokeConfirmation(uint256 _txId) external onlySigner txExists(_txId) {
         Transaction storage transaction = transactions[_txId];
         require(transaction.isConfirmed[msg.sender], "MultiSigVault: Not confirmed");
@@ -96,7 +104,6 @@ contract MultiSigEscrowVault {
         emit TransactionRevoked(_txId, msg.sender);
     }
 
-    // Execute the payout if thresholds are met and timelock passed
     function executeTransaction(uint256 _txId) external onlySigner txExists(_txId) {
         Transaction storage transaction = transactions[_txId];
         require(!transaction.executed, "MultiSigVault: Already executed");
@@ -111,7 +118,6 @@ contract MultiSigEscrowVault {
         emit TransactionExecuted(_txId);
     }
 
-    // Top up the vault
     function deposit() external payable {
         require(msg.value > 0, "Must deposit something");
     }
