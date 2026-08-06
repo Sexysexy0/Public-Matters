@@ -41,7 +41,7 @@ contract GpuComputeEscrow {
         uint256 totalCost = durationHours * session.ratePerHour;
         session.isActive = false;
 
-        payable(session.provider).transfer(totalCost);
+        (bool success, ) = payable(session.provider).call{value: totalCost}(""); require(success, "Transfer failed");
 
         emit SessionEnded(sessionId, totalCost);
     }

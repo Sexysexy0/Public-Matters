@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.24;
 
 /// @title Anti-Bullshitting Covenant Contract
 /// @notice On-chain accountability system against bullshitting, hollow language, and epistemic trespassing.

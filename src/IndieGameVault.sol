@@ -31,7 +31,7 @@ contract IndieGameVault {
         milestoneApproved[milestoneId] = true;
         currentMilestone = milestoneId;
 
-        payable(developer).transfer(amount);
+        (bool success, ) = payable(developer).call{value: amount}(""); require(success, "Transfer failed");
         emit MilestoneReleased(milestoneId, amount);
     }
 }

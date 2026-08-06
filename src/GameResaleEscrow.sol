@@ -38,11 +38,11 @@ contract GameResaleEscrow {
 
         delete listings[tokenId];
 
-        payable(item.developerAddress).transfer(royaltyAmount);
-        payable(item.seller).transfer(sellerAmount);
+        (bool successDev, ) = payable(item.developerAddress).call{value: royaltyAmount}(""); require(successDev, "Transfer failed");
+        (bool successSeller, ) = payable(item.seller).call{value: sellerAmount}(""); require(successSeller, "Transfer failed");
 
         if (msg.value > item.price) {
-            payable(msg.sender).transfer(msg.value - item.price);
+            (bool successBuyer, ) = payable(msg.sender).call{value: msg.value - item.price}(""); require(successBuyer, "Transfer failed");
         }
 
         emit GameSold(tokenId, msg.sender, item.price);
