@@ -13,7 +13,7 @@ contract AnchorGovernanceVault {
     address public vault;
     address public treatyBase;
     address public escrow;
-    address public arbitration;
+    address public arbitration; address public whistleblowerVault; address public sovereignCovenant; address public cyberResilience;
 
     bool public isPaused;
 
