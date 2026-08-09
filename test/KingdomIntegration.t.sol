@@ -96,12 +96,12 @@ contract KingdomIntegrationTest is Test {
 
         // --- Step 6: Emergency Pause via Anchor ---
         anchor.pause();
-        ( , , , , , bool isPaused) = anchor.getSystemStatus();
+        ( , , , , , , , , bool isPaused) = anchor.getSystemStatus();
         assertTrue(isPaused);
 
         // --- Step 7: Unpause ---
         anchor.unpause();
-        ( , , , , , isPaused) = anchor.getSystemStatus();
+        ( , , , , , , , , isPaused) = anchor.getSystemStatus();
         assertFalse(isPaused);
     }
 }
