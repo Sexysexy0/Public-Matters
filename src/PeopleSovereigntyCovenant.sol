@@ -1,40 +1,49 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+interface IEndowmentGovernor {
+    function disburse(address _to, uint256 _amount) external;
+}
+
 /**
  * @title PeopleSovereigntyCovenant
  * @dev On-chain implementation of Kara David's lyrics, ensuring basic human rights are actionable.
  */
 contract PeopleSovereigntyCovenant {
     address public immutable owner;
+    IEndowmentGovernor public endowment;
 
-    // Ang mga pangalang galing sa kanta. Sila ang mga state variable ng ating "Social Contract"
-    bool public elsaAtLandoIsPeaceful;      // Kapayapaan
-    bool public magdaIsFree;                // Kalayaan
-    bool public sirenaIsAccepted;           // Pagtanggap (LGBTQ+, marginalized)
-    bool public walangNatiraHasHome;        // Pabahay
-    bool public simplengTaoHasFairLife;     // Pantay na oportunidad
-    bool public upuanHasReturned;           // Pag-uwi / Repatriation
+    bool public elsaAtLandoIsPeaceful;
+    bool public magdaIsFree;
+    bool public sirenaIsAccepted;
+    bool public walangNatiraHasHome;
+    bool public simplengTaoHasFairLife;
+    bool public upuanHasReturned;
 
-    // Mga function na magti-trigger ng pagpapalit ng estado, na magpo-prompt sa Disbursement Engine
     event SocialGoalUpdated(string goalName, bool status, uint256 timestamp);
-    event GrantReleased(string goalName, uint256 amount);
+    event GrantReleased(string goalName, address indexed recipient, uint256 amount);
+    event EndowmentUpdated(address newEndowment);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Only the Architect");
         _;
     }
 
-    constructor() {
+    constructor(address _endowment) {
         owner = msg.sender;
+        endowment = IEndowmentGovernor(_endowment);
     }
 
-    // Mga function para i-activate ang misyon ng gobyerno para sa mga tao
-    function grantPeace() external onlyOwner {
+    function setEndowment(address _endowment) external onlyOwner {
+        endowment = IEndowmentGovernor(_endowment);
+        emit EndowmentUpdated(_endowment);
+    }
+
+    function grantPeace(address _recipient, uint256 _amount) external onlyOwner {
         elsaAtLandoIsPeaceful = true;
         emit SocialGoalUpdated("Elsa at Lando (Peace)", true, block.timestamp);
-        // Pwede itong mag-trigger ng automatic fund release para sa conflict zones
-        emit GrantReleased("Peace & Stability Fund", 10000 ether);
+        endowment.disburse(_recipient, _amount);
+        emit GrantReleased("Peace & Stability Fund", _recipient, _amount);
     }
 
     function grantFreedom() external onlyOwner {
@@ -47,10 +56,11 @@ contract PeopleSovereigntyCovenant {
         emit SocialGoalUpdated("Sirena (Acceptance)", true, block.timestamp);
     }
 
-    function grantHousing() external onlyOwner {
+    function grantHousing(address _recipient, uint256 _amount) external onlyOwner {
         walangNatiraHasHome = true;
         emit SocialGoalUpdated("Walang Natira (Housing)", true, block.timestamp);
-        emit GrantReleased("Housing Construction Fund", 50000 ether);
+        endowment.disburse(_recipient, _amount);
+        emit GrantReleased("Housing Construction Fund", _recipient, _amount);
     }
 
     function grantFairLife() external onlyOwner {

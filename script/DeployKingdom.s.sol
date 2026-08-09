@@ -58,11 +58,12 @@ contract DeployKingdom is Script {
         // --- 2. SOVEREIGN BRICKS ---
         AntiCorruptionWhistleblowerVault whistleblower = new AntiCorruptionWhistleblowerVault();
         whistleblower.addAuditor(deployer);
-        PeopleSovereigntyCovenant covenant = new PeopleSovereigntyCovenant();
-        CyberOperationalResilience cyber = new CyberOperationalResilience();
         // --- 3. SOCIAL BRICKS ---
         EndowmentGovernor endowment = new EndowmentGovernor(address(anchor));
         endowment.registerCompany(deployer);
+        PeopleSovereigntyCovenant covenant = new PeopleSovereigntyCovenant(address(endowment));
+        endowment.setAuthorizedTrigger(address(covenant));
+        CyberOperationalResilience cyber = new CyberOperationalResilience();
         HospitalClaimEscrow hospital = new HospitalClaimEscrow(address(0)); // placeholder, will be updated
         LandTitleNFT land = new LandTitleNFT();
         // --- 4. CONTENT & SURVEILLANCE ---
