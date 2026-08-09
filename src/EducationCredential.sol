@@ -3,32 +3,37 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./ITrustIntegrator.sol";
 
 /**
  * @title EducationCredential
  * @dev Unforgeable digital diplomas issued by accredited training centers.
+ *      Automatically updates the Trust Index when a new credential is issued.
  */
 contract EducationCredential is ERC721, Ownable {
     uint256 public nextTokenId;
+    ITrustIntegrator public trustIntegrator;
 
     struct Credential {
         address student;
         uint256 graduationDate;
         string courseName;
         string institution;
-        bytes32 transcriptHash; // Hash ng grades / curriculum
+        bytes32 transcriptHash;
         bool isValid;
     }
 
     mapping(uint256 => Credential) public credentials;
-    mapping(address => uint256[]) public studentCredentials; // Para mahanap ng student ang kanilang mga diploma
+    mapping(address => uint256[]) public studentCredentials;
 
     event CredentialIssued(uint256 indexed id, address student, string course, string institution);
     event CredentialRevoked(uint256 indexed id);
+    event TrustIntegratorUpdated(address newIntegrator);
 
-    constructor() ERC721("Education Credential", "EDU") Ownable(msg.sender) {}
+    constructor(address _trustIntegrator) ERC721("Education Credential", "EDU") Ownable(msg.sender) {
+        trustIntegrator = ITrustIntegrator(_trustIntegrator);
+    }
 
-    // Issue a diploma (only owner can call)
     function issueCredential(
         address _student,
         string memory _courseName,
@@ -51,18 +56,20 @@ contract EducationCredential is ERC721, Ownable {
         });
 
         studentCredentials[_student].push(tokenId);
+
+        // Boost the Trust Index when a new diploma is issued
+        trustIntegrator.logPositiveAction(10);
+
         emit CredentialIssued(tokenId, _student, _courseName, _institution);
         return tokenId;
     }
 
-    // Revoke a credential (for academic dishonesty or error)
     function revokeCredential(uint256 _tokenId) external onlyOwner {
         require(credentials[_tokenId].isValid, "Already revoked");
         credentials[_tokenId].isValid = false;
         emit CredentialRevoked(_tokenId);
     }
 
-    // Get credential details (for employer verification)
     function getCredential(uint256 _tokenId) external view returns (
         address student,
         uint256 graduationDate,
@@ -75,8 +82,12 @@ contract EducationCredential is ERC721, Ownable {
         return (c.student, c.graduationDate, c.courseName, c.institution, c.transcriptHash, c.isValid);
     }
 
-    // Get all credential IDs for a student
     function getStudentCredentials(address _student) external view returns (uint256[] memory) {
         return studentCredentials[_student];
+    }
+
+    function setTrustIntegrator(address _newIntegrator) external onlyOwner {
+        trustIntegrator = ITrustIntegrator(_newIntegrator);
+        emit TrustIntegratorUpdated(_newIntegrator);
     }
 }
