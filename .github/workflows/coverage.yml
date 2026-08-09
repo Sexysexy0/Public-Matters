@@ -34,10 +34,3 @@ jobs:
         with:
           name: coverage-report
           path: ./lcov.info
-
-      - name: Report to Codecov
-        uses: codecov/codecov-action@v7
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./lcov.info
-          fail_ci_if_error: true
