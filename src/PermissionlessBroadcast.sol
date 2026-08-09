@@ -1,0 +1,82 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+/**
+ * @title PermissionlessBroadcast
+ * @dev A community archive of hope. Anyone can submit; the Emperor curates.
+ */
+contract PermissionlessBroadcast {
+    address public immutable emperor;
+
+    struct Submission {
+        address author;
+        string message;
+        uint256 timestamp;
+        bool approved;
+    }
+
+    Submission[] public submissions;
+    uint256 public approvedCount;
+
+    event SubmissionReceived(address indexed author, string message, uint256 timestamp);
+    event SubmissionApproved(uint256 indexed id, address indexed author, string message);
+
+    modifier onlyEmperor() {
+        require(msg.sender == emperor, "Only the Emperor");
+        _;
+    }
+
+    constructor() {
+        emperor = msg.sender;
+    }
+
+    // Anyone can submit a message of hope or gratitude
+    function submitMessage(string memory _message) external {
+        require(bytes(_message).length > 0, "Message cannot be empty");
+        submissions.push(Submission({
+            author: msg.sender,
+            message: _message,
+            timestamp: block.timestamp,
+            approved: false
+        }));
+        emit SubmissionReceived(msg.sender, _message, block.timestamp);
+    }
+
+    // Emperor approves a submission to be permanently stored
+    function approveSubmission(uint256 _index) external onlyEmperor {
+        require(_index < submissions.length, "Submission does not exist");
+        require(!submissions[_index].approved, "Already approved");
+
+        submissions[_index].approved = true;
+        approvedCount++;
+        emit SubmissionApproved(_index, submissions[_index].author, submissions[_index].message);
+    }
+
+    // Get all submissions (approved and pending)
+    function getAllSubmissions() external view returns (Submission[] memory) {
+        return submissions;
+    }
+
+    // Get only approved messages (the public archive)
+    function getApprovedMessages() external view returns (Submission[] memory) {
+        uint256 count = 0;
+        for (uint256 i = 0; i < submissions.length; i++) {
+            if (submissions[i].approved) count++;
+        }
+
+        Submission[] memory approved = new Submission[](count);
+        uint256 index = 0;
+        for (uint256 i = 0; i < submissions.length; i++) {
+            if (submissions[i].approved) {
+                approved[index] = submissions[i];
+                index++;
+            }
+        }
+        return approved;
+    }
+
+    // Get total number of submissions
+    function getSubmissionCount() external view returns (uint256) {
+        return submissions.length;
+    }
+}
