@@ -24,6 +24,8 @@ import "../src/CCTVTransparencyRegistry.sol";
 // Education & Scholarships
 import "../src/EducationCredential.sol";
 import "../src/ScholarshipEscrow.sol";
+// Job Market
+import "../src/JobMatchingDAO.sol";
 // Genesis
 import "../src/GenesisManifesto.sol";
 
@@ -70,10 +72,13 @@ contract DeployKingdom is Script {
         EducationCredential edu = new EducationCredential();
         ScholarshipEscrow scholarship = new ScholarshipEscrow();
 
-        // --- 6. GENESIS MANIFESTO ---
+        // --- 6. JOB MARKET ---
+        JobMatchingDAO job = new JobMatchingDAO(address(edu));
+
+        // --- 7. GENESIS MANIFESTO ---
         GenesisManifesto manifesto = new GenesisManifesto("2008: digital money without a middleman. A compounding graph. The seed of a sovereign system.");
 
-        // --- 7. WIRE THE ANCHOR (8 parameters) ---
+        // --- 8. WIRE THE ANCHOR (8 parameters) ---
         anchor.setCoreContracts(
             address(registry),
             address(vault),
@@ -87,7 +92,7 @@ contract DeployKingdom is Script {
 
         vm.stopBroadcast();
 
-        console.log("=== 18-BRICK KINGDOM DEPLOYED SUCCESSFULLY ===");
+        console.log("=== 19-BRICK KINGDOM DEPLOYED SUCCESSFULLY ===");
         console.log("Registry:      ", address(registry));
         console.log("Vault:         ", address(vault));
         console.log("Treaty:        ", address(treatyBase));
@@ -109,6 +114,8 @@ contract DeployKingdom is Script {
         console.log("--- EDUCATION & SCHOLARSHIPS ---");
         console.log("Education:     ", address(edu));
         console.log("Scholarship:   ", address(scholarship));
+        console.log("--- JOB MARKET ---");
+        console.log("JobMatching:   ", address(job));
         console.log("--- GENESIS ---");
         console.log("Manifesto:     ", address(manifesto));
     }
