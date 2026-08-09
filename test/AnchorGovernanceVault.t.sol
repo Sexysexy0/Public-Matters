@@ -21,9 +21,19 @@ contract AnchorGovernanceVaultTest is Test {
         address e = makeAddr("escrow");
         address a = makeAddr("arbitration");
 
-        anchor.setCoreContracts(r, v, t, e, a);
+        anchor.setCoreContracts(r, v, t, e, address(0), address(0), address(0), a);
 
-        (address _registry, address _vault, address _treaty, address _escrow, address _arbitration, bool _paused) = anchor.getSystemStatus();
+        (
+            address _registry,
+            address _vault,
+            address _treaty,
+            address _escrow,
+            ,
+            ,
+            ,
+            address _arbitration,
+            bool _paused
+        ) = anchor.getSystemStatus();
 
         assertEq(_registry, r);
         assertEq(_vault, v);
@@ -33,7 +43,7 @@ contract AnchorGovernanceVaultTest is Test {
         assertFalse(_paused);
 
         anchor.pause();
-        (, , , , , _paused) = anchor.getSystemStatus();
+        (,,,,,,,, _paused) = anchor.getSystemStatus();
         assertTrue(_paused);
     }
 

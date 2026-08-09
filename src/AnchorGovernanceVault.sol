@@ -13,7 +13,10 @@ contract AnchorGovernanceVault {
     address public vault;
     address public treatyBase;
     address public escrow;
-    address public arbitration; address public whistleblowerVault; address public sovereignCovenant; address public cyberResilience;
+    address public whistleblowerVault;
+    address public sovereignCovenant;
+    address public cyberResilience;
+    address public arbitration;
 
     bool public isPaused;
 
@@ -36,24 +39,33 @@ contract AnchorGovernanceVault {
         isPaused = false;
     }
 
-    // Set the addresses of all core contracts
+    // Set the addresses of all core contracts (Updated to include 3 new sovereign bricks)
     function setCoreContracts(
         address _registry,
         address _vault,
         address _treatyBase,
         address _escrow,
+        address _whistleblower,
+        address _covenant,
+        address _cyber,
         address _arbitration
     ) external onlyOwner {
         registry = _registry;
         vault = _vault;
         treatyBase = _treatyBase;
         escrow = _escrow;
+        whistleblowerVault = _whistleblower;
+        sovereignCovenant = _covenant;
+        cyberResilience = _cyber;
         arbitration = _arbitration;
 
         emit ContractUpdated("Registry", _registry);
         emit ContractUpdated("Vault", _vault);
         emit ContractUpdated("TreatyBase", _treatyBase);
         emit ContractUpdated("Escrow", _escrow);
+        emit ContractUpdated("Whistleblower", _whistleblower);
+        emit ContractUpdated("Covenant", _covenant);
+        emit ContractUpdated("CyberResilience", _cyber);
         emit ContractUpdated("Arbitration", _arbitration);
     }
 
@@ -68,15 +80,28 @@ contract AnchorGovernanceVault {
         emit SystemUnpaused(msg.sender);
     }
 
-    // Example: get the full ecosystem status in one call
+    // Get the full ecosystem status
     function getSystemStatus() external view returns (
         address _registry,
         address _vault,
         address _treatyBase,
         address _escrow,
+        address _whistleblower,
+        address _covenant,
+        address _cyber,
         address _arbitration,
         bool _paused
     ) {
-        return (registry, vault, treatyBase, escrow, arbitration, isPaused);
+        return (
+            registry,
+            vault,
+            treatyBase,
+            escrow,
+            whistleblowerVault,
+            sovereignCovenant,
+            cyberResilience,
+            arbitration,
+            isPaused
+        );
     }
 }

@@ -1,0 +1,14 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+solc = "0.8.35"
+via-ir = true
+
+[rpc_endpoints]
+sepolia = "https://eth-sepolia.g.alchemy.com/v2/3ju8iuKMO0HV-z4qXYisk"
+mainnet = "https://eth-mainnet.g.alchemy.com/v2/3ju8iuKMO0HV-z4qXYisk"
+
+[etherscan]
+sepolia = { key = "${ETHERSCAN_API_KEY}" }
+mainnet = { key = "${ETHERSCAN_API_KEY}" }

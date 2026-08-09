@@ -55,7 +55,7 @@ contract DeployKingdom is Script {
         // Pre-register deployer as a borrower with a score of 50 for testing
         lending.registerBorrower(deployer, 50);
 
-        HospitalClaimEscrow hospital = new HospitalClaimEscrow(address(endowment));
+        HospitalClaimEscrow hospital = new HospitalClaimEscrow();
         LandTitleNFT land = new LandTitleNFT();
 
         // --- 4. WIRING THE ANCHOR (8 parameters) ---
