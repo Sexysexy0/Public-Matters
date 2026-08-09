@@ -16,16 +16,9 @@ jobs:
         uses: actions/checkout@v7
         with:
           submodules: recursive
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm install --force
 
       - name: Setup Foundry
-        uses: ethereum/setup-foundry@v1
+        uses: foundry-rs/foundry-toolchain@v1
         with:
           version: latest
 
@@ -36,12 +29,13 @@ jobs:
         run: forge coverage --report lcov
 
       - name: Run lint
-        run: |
-          forge fmt --check
-          npx eslint . --ext .js,.ts --max-warnings=0
+        run: forge fmt --check
+
+      - name: Install Slither
+        run: pip install slither-analyzer
 
       - name: Run Slither analysis
-        run: slither ./contracts --ignore-compile --exclude solc-version
+        run: slither ./src --ignore-compile --exclude solc-version
 
       - name: Upload verification artifacts
         if: always()

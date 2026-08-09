@@ -1,5 +1,6 @@
 permissions:
   contents: read
+
 name: Lint
 
 on:
@@ -14,22 +15,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
         with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm install --force
+          submodules: recursive
 
       - name: Setup Foundry
-        uses: ethereum/setup-foundry@v1
+        uses: foundry-rs/foundry-toolchain@v1
         with:
           version: latest
 
       - name: Run Forge formatter
         run: forge fmt --check
-
-      - name: Run ESLint
-        run: npx eslint . --ext .js,.ts --max-warnings=0
