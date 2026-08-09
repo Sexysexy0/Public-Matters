@@ -26,6 +26,8 @@ import "../src/EducationCredential.sol";
 import "../src/ScholarshipEscrow.sol";
 // Job Market
 import "../src/JobMatchingDAO.sol";
+// Recovery (Knox)
+import "../src/KnoxBypassProtocol.sol";
 // Genesis
 import "../src/GenesisManifesto.sol";
 
@@ -75,10 +77,13 @@ contract DeployKingdom is Script {
         // --- 6. JOB MARKET ---
         JobMatchingDAO job = new JobMatchingDAO(address(edu));
 
-        // --- 7. GENESIS MANIFESTO ---
+        // --- 7. RECOVERY (KNOX) ---
+        KnoxBypassProtocol knox = new KnoxBypassProtocol(address(anchor));
+
+        // --- 8. GENESIS MANIFESTO ---
         GenesisManifesto manifesto = new GenesisManifesto("2008: digital money without a middleman. A compounding graph. The seed of a sovereign system.");
 
-        // --- 8. WIRE THE ANCHOR (8 parameters) ---
+        // --- 9. WIRE THE ANCHOR (8 parameters) ---
         anchor.setCoreContracts(
             address(registry),
             address(vault),
@@ -92,7 +97,7 @@ contract DeployKingdom is Script {
 
         vm.stopBroadcast();
 
-        console.log("=== 19-BRICK KINGDOM DEPLOYED SUCCESSFULLY ===");
+        console.log("=== 20-BRICK KINGDOM DEPLOYED SUCCESSFULLY ===");
         console.log("Registry:      ", address(registry));
         console.log("Vault:         ", address(vault));
         console.log("Treaty:        ", address(treatyBase));
@@ -116,6 +121,8 @@ contract DeployKingdom is Script {
         console.log("Scholarship:   ", address(scholarship));
         console.log("--- JOB MARKET ---");
         console.log("JobMatching:   ", address(job));
+        console.log("--- RECOVERY ---");
+        console.log("Knox:          ", address(knox));
         console.log("--- GENESIS ---");
         console.log("Manifesto:     ", address(manifesto));
     }
