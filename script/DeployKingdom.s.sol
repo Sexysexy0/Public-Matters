@@ -18,6 +18,12 @@ import "../src/EndowmentGovernor.sol";
 import "../src/MicroLendingEscrow.sol";
 import "../src/HospitalClaimEscrow.sol";
 import "../src/LandTitleNFT.sol";
+// Content Ownership
+import "../src/ContentOwnershipRegistry.sol";
+// CCTV Transparency
+import "../src/CCTVTransparencyRegistry.sol";
+// Education Credential
+import "../src/EducationCredential.sol";
 
 contract DeployKingdom is Script {
     function run() external {
@@ -48,17 +54,22 @@ contract DeployKingdom is Script {
 
         // --- 3. SOCIAL BRICKS ---
         EndowmentGovernor endowment = new EndowmentGovernor(address(anchor));
-        // Register the deployer as a test contributor for the Endowment
         endowment.registerCompany(deployer);
-
-        MicroLendingEscrow lending = new MicroLendingEscrow(500); // 5% interest rate
-        // Pre-register deployer as a borrower with a score of 50 for testing
+        MicroLendingEscrow lending = new MicroLendingEscrow(500);
         lending.registerBorrower(deployer, 50);
-
         HospitalClaimEscrow hospital = new HospitalClaimEscrow();
         LandTitleNFT land = new LandTitleNFT();
 
-        // --- 4. WIRING THE ANCHOR (8 parameters) ---
+        // --- 4. CONTENT OWNERSHIP ---
+        ContentOwnershipRegistry content = new ContentOwnershipRegistry();
+
+        // --- 5. CCTV TRANSPARENCY ---
+        CCTVTransparencyRegistry cctv = new CCTVTransparencyRegistry();
+
+        // --- 6. EDUCATION CREDENTIAL ---
+        EducationCredential edu = new EducationCredential();
+
+        // --- 7. WIRE THE ANCHOR (8 parameters) ---
         anchor.setCoreContracts(
             address(registry),
             address(vault),
@@ -72,21 +83,25 @@ contract DeployKingdom is Script {
 
         vm.stopBroadcast();
 
-        console.log("=== 13-BRICK KINGDOM DEPLOYED SUCCESSFULLY ===");
+        console.log("=== 15-BRICK KINGDOM DEPLOYED SUCCESSFULLY ===");
         console.log("Registry:      ", address(registry));
         console.log("Vault:         ", address(vault));
         console.log("Treaty:        ", address(treatyBase));
         console.log("Escrow:        ", address(escrow));
         console.log("Arbitration:   ", address(arbitration));
         console.log("Anchor:        ", address(anchor));
-        console.log("--- SOVEREIGN BRICKS ---");
+        console.log("--- SOVEREIGN ---");
         console.log("Whistleblower: ", address(whistleblower));
         console.log("Covenant:      ", address(covenant));
         console.log("CyberRes:      ", address(cyber));
-        console.log("--- SOCIAL BRICKS ---");
+        console.log("--- SOCIAL ---");
         console.log("Endowment:     ", address(endowment));
         console.log("Lending:       ", address(lending));
         console.log("Hospital:      ", address(hospital));
         console.log("LandTitle:     ", address(land));
+        console.log("--- NEW BRICKS ---");
+        console.log("Content:       ", address(content));
+        console.log("CCTV:          ", address(cctv));
+        console.log("Education:     ", address(edu));
     }
 }
