@@ -1,13 +1,8 @@
+import "./ITrustIntegrator.sol";
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "./ITrustIntegrator.sol";
 
-/**
- * @title MicroLendingEscrow
- * @dev Community lending pool against predatory loan sharks.
- *      Automatically updates the Trust Index when a loan is repaid.
- */
 contract MicroLendingEscrow {
     address public immutable steward;
     ITrustIntegrator public trustIntegrator;
@@ -91,7 +86,6 @@ contract MicroLendingEscrow {
 
         creditScore[msg.sender] += 5;
 
-        // Boost the Trust Index when a loan is repaid
         trustIntegrator.logPositiveAction(15);
 
         emit LoanRepaid(msg.sender, loan.dueAmount);

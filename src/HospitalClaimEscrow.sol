@@ -1,7 +1,7 @@
+import "./ITrustIntegrator.sol";
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "./ITrustIntegrator.sol";
 
 contract HospitalClaimEscrow {
     address public immutable steward;
@@ -70,7 +70,7 @@ contract HospitalClaimEscrow {
 
         claim.paid = true;
         payable(claim.hospital).transfer(claim.amount);
-        trustIntegrator.logPositiveAction(20); // Boost Trust Index
+        trustIntegrator.logPositiveAction(20);
 
         emit ClaimPaid(_id);
     }
