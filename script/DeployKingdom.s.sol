@@ -18,12 +18,14 @@ import "../src/EndowmentGovernor.sol";
 import "../src/MicroLendingEscrow.sol";
 import "../src/HospitalClaimEscrow.sol";
 import "../src/LandTitleNFT.sol";
-// Content Ownership
+// Content & Surveillance
 import "../src/ContentOwnershipRegistry.sol";
-// CCTV Transparency
 import "../src/CCTVTransparencyRegistry.sol";
-// Education Credential
+// Education & Scholarships
 import "../src/EducationCredential.sol";
+import "../src/ScholarshipEscrow.sol";
+// Genesis
+import "../src/GenesisManifesto.sol";
 
 contract DeployKingdom is Script {
     function run() external {
@@ -60,14 +62,16 @@ contract DeployKingdom is Script {
         HospitalClaimEscrow hospital = new HospitalClaimEscrow();
         LandTitleNFT land = new LandTitleNFT();
 
-        // --- 4. CONTENT OWNERSHIP ---
+        // --- 4. CONTENT & SURVEILLANCE ---
         ContentOwnershipRegistry content = new ContentOwnershipRegistry();
-
-        // --- 5. CCTV TRANSPARENCY ---
         CCTVTransparencyRegistry cctv = new CCTVTransparencyRegistry();
 
-        // --- 6. EDUCATION CREDENTIAL ---
+        // --- 5. EDUCATION & SCHOLARSHIPS ---
         EducationCredential edu = new EducationCredential();
+        ScholarshipEscrow scholarship = new ScholarshipEscrow();
+
+        // --- 6. GENESIS MANIFESTO ---
+        GenesisManifesto manifesto = new GenesisManifesto("2008: digital money without a middleman. A compounding graph. The seed of a sovereign system.");
 
         // --- 7. WIRE THE ANCHOR (8 parameters) ---
         anchor.setCoreContracts(
@@ -83,7 +87,7 @@ contract DeployKingdom is Script {
 
         vm.stopBroadcast();
 
-        console.log("=== 15-BRICK KINGDOM DEPLOYED SUCCESSFULLY ===");
+        console.log("=== 18-BRICK KINGDOM DEPLOYED SUCCESSFULLY ===");
         console.log("Registry:      ", address(registry));
         console.log("Vault:         ", address(vault));
         console.log("Treaty:        ", address(treatyBase));
@@ -99,9 +103,13 @@ contract DeployKingdom is Script {
         console.log("Lending:       ", address(lending));
         console.log("Hospital:      ", address(hospital));
         console.log("LandTitle:     ", address(land));
-        console.log("--- NEW BRICKS ---");
+        console.log("--- CONTENT & SURVEILLANCE ---");
         console.log("Content:       ", address(content));
         console.log("CCTV:          ", address(cctv));
+        console.log("--- EDUCATION & SCHOLARSHIPS ---");
         console.log("Education:     ", address(edu));
+        console.log("Scholarship:   ", address(scholarship));
+        console.log("--- GENESIS ---");
+        console.log("Manifesto:     ", address(manifesto));
     }
 }
