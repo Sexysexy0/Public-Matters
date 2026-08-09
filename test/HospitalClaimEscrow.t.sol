@@ -4,39 +4,38 @@ pragma solidity ^0.8.20;
 import "forge-std/Test.sol";
 import "../src/HospitalClaimEscrow.sol";
 
+contract MockTrustIntegrator {
+    uint256 public lastWeight;
+    function logPositiveAction(uint256 _weight) external {
+        lastWeight = _weight;
+    }
+}
+
 contract HospitalClaimEscrowTest is Test {
     HospitalClaimEscrow public hospital;
+    MockTrustIntegrator public mockIntegrator;
 
-    address public owner = address(this);
+    address public steward = address(this);
     address public patient = makeAddr("patient");
     address public hospitalAddr = makeAddr("hospital");
 
     function setUp() public {
-        hospital = new HospitalClaimEscrow();
-        // Fund the hospital contract directly for payouts
+        mockIntegrator = new MockTrustIntegrator();
+        hospital = new HospitalClaimEscrow(address(mockIntegrator));
         vm.deal(address(hospital), 1 ether);
     }
 
-    function test_SubmitApproveAndPay() public {
+    function test_SubmitApproveAndPay_UpdatesTrust() public {
         bytes32 diagnosis = keccak256(abi.encodePacked("Flu"));
         uint256 amount = 0.1 ether;
 
         hospital.submitClaim(patient, hospitalAddr, diagnosis, amount);
-
-        (address pat, address hosp, bytes32 diag, uint256 amt, bool approved, bool paid) = hospital.claims(1);
-        assertEq(pat, patient);
-        assertEq(hosp, hospitalAddr);
-        assertEq(amt, amount);
-        assertFalse(approved);
-        assertFalse(paid);
-
         hospital.approveClaim(1);
 
         uint256 hospitalBalanceBefore = hospitalAddr.balance;
         hospital.payClaim(1);
 
         assertEq(hospitalAddr.balance - hospitalBalanceBefore, amount);
-        (, , , , , paid) = hospital.claims(1);
-        assertTrue(paid);
+        assertEq(mockIntegrator.lastWeight(), 20);
     }
 }

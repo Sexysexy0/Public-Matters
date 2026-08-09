@@ -1,8 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "./ITrustIntegrator.sol";
+
 contract HospitalClaimEscrow {
-    address public immutable owner;
+    address public immutable steward;
+    ITrustIntegrator public trustIntegrator;
 
     struct Claim {
         address patient;
@@ -19,14 +22,16 @@ contract HospitalClaimEscrow {
     event ClaimSubmitted(uint256 id, address patient, address hospital, uint256 amount);
     event ClaimApproved(uint256 id);
     event ClaimPaid(uint256 id);
+    event TrustIntegratorUpdated(address newIntegrator);
 
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Only the architect");
+    modifier onlySteward() {
+        require(msg.sender == steward, "Only the steward");
         _;
     }
 
-    constructor() {
-        owner = msg.sender;
+    constructor(address _trustIntegrator) {
+        steward = msg.sender;
+        trustIntegrator = ITrustIntegrator(_trustIntegrator);
     }
 
     function submitClaim(address _patient, address _hospital, bytes32 _diagnosisHash, uint256 _amount) external {
@@ -48,7 +53,7 @@ contract HospitalClaimEscrow {
         emit ClaimSubmitted(claimCounter, _patient, _hospital, _amount);
     }
 
-    function approveClaim(uint256 _id) external onlyOwner {
+    function approveClaim(uint256 _id) external onlySteward {
         Claim storage claim = claims[_id];
         require(!claim.approved, "Already approved");
         require(claim.amount > 0, "Claim does not exist");
@@ -57,15 +62,22 @@ contract HospitalClaimEscrow {
         emit ClaimApproved(_id);
     }
 
-    // Pay the claim from this contract's balance (must be funded by owner)
-    function payClaim(uint256 _id) external onlyOwner {
+    function payClaim(uint256 _id) external onlySteward {
         Claim storage claim = claims[_id];
         require(claim.approved, "Not approved");
         require(!claim.paid, "Already paid");
+        require(address(this).balance >= claim.amount, "Insufficient balance");
 
         claim.paid = true;
         payable(claim.hospital).transfer(claim.amount);
+        trustIntegrator.logPositiveAction(20); // Boost Trust Index
+
         emit ClaimPaid(_id);
+    }
+
+    function setTrustIntegrator(address _newIntegrator) external onlySteward {
+        trustIntegrator = ITrustIntegrator(_newIntegrator);
+        emit TrustIntegratorUpdated(_newIntegrator);
     }
 
     receive() external payable {}
