@@ -34,7 +34,7 @@ contract TrustIndexTest is Test {
         vm.prank(user);
         vm.expectRevert("Only the steward");
         trust.setBaseWeight(50);
-        
+
         trust.setBaseWeight(50);
         assertEq(trust.baseActionWeight(), 50);
     }

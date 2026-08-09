@@ -6,6 +6,7 @@ import "../src/MicroLendingEscrow.sol";
 
 contract MockTrustIntegrator {
     uint256 public lastWeight;
+
     function logPositiveAction(uint256 _weight) external {
         lastWeight = _weight;
     }
@@ -31,7 +32,8 @@ contract MicroLendingEscrowTest is Test {
         vm.prank(borrower1);
         escrow.requestLoan(0.05 ether, 30);
 
-        (address borrower, uint256 principal, uint256 dueAmount, uint256 dueDate, bool isActive, bool isPaid) = escrow.activeLoans(borrower1);
+        (address borrower, uint256 principal, uint256 dueAmount, uint256 dueDate, bool isActive, bool isPaid) =
+            escrow.activeLoans(borrower1);
         assertTrue(isActive);
         assertFalse(isPaid);
 
@@ -40,7 +42,7 @@ contract MicroLendingEscrowTest is Test {
         vm.prank(borrower1);
         escrow.repayLoan{value: dueAmount}();
 
-        (, , , , isActive, isPaid) = escrow.activeLoans(borrower1);
+        (,,,, isActive, isPaid) = escrow.activeLoans(borrower1);
         assertFalse(isActive);
         assertTrue(isPaid);
 

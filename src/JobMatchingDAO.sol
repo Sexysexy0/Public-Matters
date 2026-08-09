@@ -46,7 +46,11 @@ contract JobMatchingDAO {
     }
 
     // Post a new job (only the architect can post on behalf of employers for now)
-    function postJob(address _employer, string memory _role, string memory _description, uint256 _salary) external onlyOwner returns (uint256) {
+    function postJob(address _employer, string memory _role, string memory _description, uint256 _salary)
+        external
+        onlyOwner
+        returns (uint256)
+    {
         require(_employer != address(0), "Invalid employer");
         require(bytes(_role).length > 0, "Role required");
         require(_salary > 0, "Salary must be > 0");
@@ -70,13 +74,14 @@ contract JobMatchingDAO {
         Job storage job = jobs[_jobId];
         require(job.employer != address(0), "Job does not exist");
         require(!job.isFilled, "Job is already filled");
-        require(IERC721(educationCredentialContract).ownerOf(_educationTokenId) == msg.sender, "You do not own this credential");
+        require(
+            IERC721(educationCredentialContract).ownerOf(_educationTokenId) == msg.sender,
+            "You do not own this credential"
+        );
 
-        applications[_jobId].push(Application({
-            applicant: msg.sender,
-            educationTokenId: _educationTokenId,
-            isHired: false
-        }));
+        applications[_jobId].push(
+            Application({applicant: msg.sender, educationTokenId: _educationTokenId, isHired: false})
+        );
         emit ApplicationSubmitted(_jobId, msg.sender, _educationTokenId);
     }
 

@@ -23,17 +23,8 @@ contract AnchorGovernanceVaultTest is Test {
 
         anchor.setCoreContracts(r, v, t, e, address(0), address(0), address(0), a);
 
-        (
-            address _registry,
-            address _vault,
-            address _treaty,
-            address _escrow,
-            ,
-            ,
-            ,
-            address _arbitration,
-            bool _paused
-        ) = anchor.getSystemStatus();
+        (address _registry, address _vault, address _treaty, address _escrow,,,, address _arbitration, bool _paused) =
+            anchor.getSystemStatus();
 
         assertEq(_registry, r);
         assertEq(_vault, v);

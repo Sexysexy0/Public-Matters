@@ -6,6 +6,7 @@ import "../src/EducationCredential.sol";
 
 contract MockTrustIntegrator {
     uint256 public lastWeight;
+
     function logPositiveAction(uint256 _weight) external {
         lastWeight = _weight;
     }
@@ -27,7 +28,14 @@ contract EducationCredentialTest is Test {
         bytes32 hash = keccak256(abi.encodePacked("Grades: A+"));
         uint256 tokenId = edu.issueCredential(student, "Solidity Engineering", "Tinkerer University", hash);
 
-        (address studentAddr, uint256 gradDate, string memory course, string memory inst, bytes32 transcriptHash, bool isValid) = edu.getCredential(tokenId);
+        (
+            address studentAddr,
+            uint256 gradDate,
+            string memory course,
+            string memory inst,
+            bytes32 transcriptHash,
+            bool isValid
+        ) = edu.getCredential(tokenId);
         assertEq(studentAddr, student);
         assertEq(course, "Solidity Engineering");
         assertEq(inst, "Tinkerer University");
@@ -43,7 +51,7 @@ contract EducationCredentialTest is Test {
         uint256 tokenId = edu.issueCredential(student, "Blockchain 101", "Tinkerer University", bytes32(0));
         edu.revokeCredential(tokenId);
 
-        (, , , , , bool isValid) = edu.getCredential(tokenId);
+        (,,,,, bool isValid) = edu.getCredential(tokenId);
         assertFalse(isValid);
     }
 }

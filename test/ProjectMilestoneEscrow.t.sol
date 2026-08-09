@@ -8,6 +8,7 @@ import "../src/ProjectMilestoneEscrow.sol";
 contract MockVault {
     address public lastRecipient;
     uint256 public lastAmount;
+
     function submitTransaction(address payable _to, uint256 _value, bytes calldata) external returns (uint256) {
         lastRecipient = _to;
         lastAmount = _value;

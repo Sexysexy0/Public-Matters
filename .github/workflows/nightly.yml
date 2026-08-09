@@ -25,7 +25,7 @@ jobs:
         run: forge test -vv
 
       - name: Run coverage
-        run: forge coverage --report lcov
+        run: forge coverage --ir-minimum --report lcov
 
       - name: Install Slither
         run: pip install slither-analyzer

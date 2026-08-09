@@ -10,9 +10,9 @@ contract ContentOwnershipRegistry is ERC721, Ownable {
     struct Content {
         string title;
         string creator;
-        string mediaHash;       // IPFS or Arweave hash of the actual file
-        uint256 price;          // Original purchase price (wei)
-        uint256 royaltyBps;     // Royalty in basis points (e.g., 500 = 5%)
+        string mediaHash; // IPFS or Arweave hash of the actual file
+        uint256 price; // Original purchase price (wei)
+        uint256 royaltyBps; // Royalty in basis points (e.g., 500 = 5%)
         address payable creatorAddress;
         uint256 totalSales;
     }
@@ -86,15 +86,19 @@ contract ContentOwnershipRegistry is ERC721, Ownable {
     }
 
     // Get content info
-    function getContent(uint256 _tokenId) external view returns (
-        string memory title,
-        string memory creator,
-        string memory mediaHash,
-        uint256 price,
-        uint256 royaltyBps,
-        address creatorAddress,
-        uint256 totalSales
-    ) {
+    function getContent(uint256 _tokenId)
+        external
+        view
+        returns (
+            string memory title,
+            string memory creator,
+            string memory mediaHash,
+            uint256 price,
+            uint256 royaltyBps,
+            address creatorAddress,
+            uint256 totalSales
+        )
+    {
         Content memory c = contents[_tokenId];
         return (c.title, c.creator, c.mediaHash, c.price, c.royaltyBps, c.creatorAddress, c.totalSales);
     }

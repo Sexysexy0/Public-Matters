@@ -15,7 +15,7 @@ contract FamilyOfficeRegistryTest is Test {
 
     function test_RegisterOfficeAndGetDetails() public {
         bytes32 testHash = keccak256(abi.encodePacked("PwC_Confidential_Asset_2026"));
-        
+
         // Mag-register ng isang PwC Family Office (APAC)
         registry.registerOffice("PwC Hong Kong Family Office", FamilyOfficeRegistry.Jurisdiction.APAC, testHash);
 
@@ -37,8 +37,9 @@ contract FamilyOfficeRegistryTest is Test {
     function test_DeactivateOffice() public {
         registry.registerOffice("EU Treaty Partner", FamilyOfficeRegistry.Jurisdiction.EU, bytes32("test"));
         registry.deactivateOffice(1);
-        
-        FamilyOfficeRegistry.Office memory office = registry.getOffice(1); bool isActive = office.isActive;
+
+        FamilyOfficeRegistry.Office memory office = registry.getOffice(1);
+        bool isActive = office.isActive;
         assertFalse(isActive);
     }
 }

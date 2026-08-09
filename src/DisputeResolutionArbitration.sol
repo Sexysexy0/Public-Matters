@@ -8,15 +8,19 @@ pragma solidity ^0.8.20;
 contract DisputeResolutionArbitration {
     address public immutable owner;
 
-    enum DisputeStatus { NONE, DISPUTED, RESOLVED }
+    enum DisputeStatus {
+        NONE,
+        DISPUTED,
+        RESOLVED
+    }
 
     struct Dispute {
-        uint256 treatyId;       // Reference to TokenizedTreatyBase ID
-        address disputant;      // Who raised the issue
-        address respondent;     // Who is being disputed against
-        bytes32 evidenceHash;   // Hash of the off-chain evidence document
-        DisputeStatus status;   // Current state of the dispute
-        uint256 timestamp;      // When it was raised
+        uint256 treatyId; // Reference to TokenizedTreatyBase ID
+        address disputant; // Who raised the issue
+        address respondent; // Who is being disputed against
+        bytes32 evidenceHash; // Hash of the off-chain evidence document
+        DisputeStatus status; // Current state of the dispute
+        uint256 timestamp; // When it was raised
     }
 
     uint256 public disputeCount;
@@ -35,11 +39,11 @@ contract DisputeResolutionArbitration {
     }
 
     // Submit a new dispute
-    function raiseDispute(
-        uint256 _treatyId,
-        address _respondent,
-        bytes32 _evidenceHash
-    ) external onlyOwner returns (uint256) {
+    function raiseDispute(uint256 _treatyId, address _respondent, bytes32 _evidenceHash)
+        external
+        onlyOwner
+        returns (uint256)
+    {
         require(_respondent != address(0), "Invalid respondent");
         require(_evidenceHash != bytes32(0), "Evidence hash required");
 

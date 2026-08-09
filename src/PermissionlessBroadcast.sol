@@ -2,7 +2,6 @@ import "./ITrustIntegrator.sol";
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-
 /**
  * @title PermissionlessBroadcast
  * @dev A community archive of hope. Anyone can submit; the steward curates.
@@ -39,12 +38,9 @@ contract PermissionlessBroadcast {
     // Anyone can submit a message of hope or gratitude
     function submitMessage(string memory _message) external {
         require(bytes(_message).length > 0, "Message cannot be empty");
-        submissions.push(Submission({
-            author: msg.sender,
-            message: _message,
-            timestamp: block.timestamp,
-            approved: false
-        }));
+        submissions.push(
+            Submission({author: msg.sender, message: _message, timestamp: block.timestamp, approved: false})
+        );
         emit SubmissionReceived(msg.sender, _message, block.timestamp);
     }
 

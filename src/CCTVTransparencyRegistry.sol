@@ -3,32 +3,32 @@ pragma solidity ^0.8.20;
 
 /**
  * @title CCTVTransparencyRegistry
- * @dev Decentralized registry for public CCTV cameras. 
+ * @dev Decentralized registry for public CCTV cameras.
  * Forces transparency and accountability on mass surveillance.
  */
 contract CCTVTransparencyRegistry {
     address public immutable owner;
 
     struct Camera {
-        address owner;          // Govt agency or private entity managing the camera
-        string location;        // Barangay / Street / Area
-        bytes32 publicKeyHash;  // Hash ng public key para sa footage verification
+        address owner; // Govt agency or private entity managing the camera
+        string location; // Barangay / Street / Area
+        bytes32 publicKeyHash; // Hash ng public key para sa footage verification
         bool isActive;
         uint256 dateRegistered;
     }
 
     struct FootageLog {
         uint256 cameraId;
-        bytes32 footageHash;    // SHA-256 hash ng daily footage summary
+        bytes32 footageHash; // SHA-256 hash ng daily footage summary
         uint256 timestamp;
-        uint256 dayIndex;       // 0 = Day 1, 1 = Day 2, etc.
+        uint256 dayIndex; // 0 = Day 1, 1 = Day 2, etc.
     }
 
     struct AccessRequest {
-        address requester;      // Pulis, investigator, or citizen
+        address requester; // Pulis, investigator, or citizen
         uint256 cameraId;
-        uint256 dayIndex;       // Which day's footage they want
-        string purpose;         // Reason for access
+        uint256 dayIndex; // Which day's footage they want
+        string purpose; // Reason for access
         uint256 requestTime;
         bool approved;
         bool footageReleased;
@@ -76,12 +76,9 @@ contract CCTVTransparencyRegistry {
         // For now, let's keep it open so citizens can submit hashes too (making it decentralized)
         // But we'll add an optional "reporter" field. Let's keep it simple and allow anyone to log it.
         uint256 dayIndex = footageLogs[_cameraId].length;
-        footageLogs[_cameraId].push(FootageLog({
-            cameraId: _cameraId,
-            footageHash: _footageHash,
-            timestamp: block.timestamp,
-            dayIndex: dayIndex
-        }));
+        footageLogs[_cameraId].push(
+            FootageLog({cameraId: _cameraId, footageHash: _footageHash, timestamp: block.timestamp, dayIndex: dayIndex})
+        );
         emit FootageLogged(_cameraId, dayIndex, _footageHash);
     }
 
@@ -89,7 +86,7 @@ contract CCTVTransparencyRegistry {
     function requestFootageAccess(uint256 _cameraId, uint256 _dayIndex, string memory _purpose) external {
         require(cameras[_cameraId].isActive, "Camera inactive");
         require(_dayIndex < footageLogs[_cameraId].length, "Day index out of range");
-        
+
         AccessRequest memory newRequest = AccessRequest({
             requester: msg.sender,
             cameraId: _cameraId,

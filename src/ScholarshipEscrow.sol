@@ -55,12 +55,9 @@ contract ScholarshipEscrow {
         require(_student != address(0), "Invalid student");
         require(_amount > 0, "Amount must be > 0");
 
-        scholarships[_student].push(Scholarship({
-            student: _student,
-            amount: _amount,
-            semester: _semester,
-            claimed: false
-        }));
+        scholarships[_student].push(
+            Scholarship({student: _student, amount: _amount, semester: _semester, claimed: false})
+        );
 
         emit ScholarshipGranted(_student, _amount, _semester);
     }

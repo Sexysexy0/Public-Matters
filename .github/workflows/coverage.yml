@@ -27,7 +27,7 @@ jobs:
           forge update || true
 
       - name: Run coverage
-        run: forge coverage --report lcov
+        run: forge coverage --ir-minimum --report lcov
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v7

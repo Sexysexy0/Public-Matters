@@ -71,7 +71,11 @@ contract MultiSigEscrowVault {
 
     receive() external payable {}
 
-    function submitTransaction(address payable _to, uint256 _value, bytes calldata _data) external onlySigner returns (uint256) {
+    function submitTransaction(address payable _to, uint256 _value, bytes calldata _data)
+        external
+        onlySigner
+        returns (uint256)
+    {
         uint256 txId = transactionCount;
         transactions[txId].to = _to;
         transactions[txId].value = _value;
@@ -112,7 +116,7 @@ contract MultiSigEscrowVault {
 
         transaction.executed = true;
 
-        (bool success, ) = transaction.to.call{value: transaction.value}(transaction.data);
+        (bool success,) = transaction.to.call{value: transaction.value}(transaction.data);
         require(success, "MultiSigVault: Execution failed");
 
         emit TransactionExecuted(_txId);

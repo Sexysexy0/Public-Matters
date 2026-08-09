@@ -15,11 +15,11 @@ contract DailyResilienceTest is Test {
     }
 
     function test_ReadAndUpdateMessage() public {
-        (string memory msg, ) = daily.getTodaysMessage();
+        (string memory msg,) = daily.getTodaysMessage();
         assertEq(msg, "Keep going. You are not alone.");
 
         daily.setMessage("You have survived 100% of your worst days.");
-        (msg, ) = daily.getTodaysMessage();
+        (msg,) = daily.getTodaysMessage();
         assertEq(msg, "You have survived 100% of your worst days.");
     }
 

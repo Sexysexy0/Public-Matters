@@ -57,7 +57,9 @@ contract KingdomIntegrationTest is Test {
         registry.registerOffice("PwC Manila Family Office", FamilyOfficeRegistry.Jurisdiction.APAC, hash);
 
         bytes32 treatyHash = keccak256(abi.encodePacked("PH-USA-Web3-Treaty"));
-        uint256 treatyId = treatyBase.createTreaty("PH-USA Blockchain Accord", "Philippines, USA", treatyHash, block.timestamp + 365 days);
+        uint256 treatyId = treatyBase.createTreaty(
+            "PH-USA Blockchain Accord", "Philippines, USA", treatyHash, block.timestamp + 365 days
+        );
 
         string[] memory descs = new string[](2);
         descs[0] = "Phase 1 - Infrastructure";
@@ -79,11 +81,11 @@ contract KingdomIntegrationTest is Test {
         assertEq(uint8(dispute.status), uint8(DisputeResolutionArbitration.DisputeStatus.RESOLVED));
 
         anchor.pause();
-        (, , , , , , , , bool isPaused) = anchor.getSystemStatus();
+        (,,,,,,,, bool isPaused) = anchor.getSystemStatus();
         assertTrue(isPaused);
 
         anchor.unpause();
-        (, , , , , , , , isPaused) = anchor.getSystemStatus();
+        (,,,,,,,, isPaused) = anchor.getSystemStatus();
         assertFalse(isPaused);
     }
 }

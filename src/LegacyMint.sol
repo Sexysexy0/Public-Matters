@@ -9,10 +9,7 @@ contract LegacyMint is ERC721, Ownable {
     bytes32 public immutable manifestoHash;
     string public baseMessage;
 
-    constructor(
-        bytes32 _manifestoHash,
-        string memory _baseMessage
-    ) ERC721("The Bridge", "BRIDGE") Ownable(msg.sender) {
+    constructor(bytes32 _manifestoHash, string memory _baseMessage) ERC721("The Bridge", "BRIDGE") Ownable(msg.sender) {
         manifestoHash = _manifestoHash;
         baseMessage = _baseMessage;
     }

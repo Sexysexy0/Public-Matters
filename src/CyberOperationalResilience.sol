@@ -12,7 +12,7 @@ contract CyberOperationalResilience {
     struct CyberUnit {
         address unitCommander;
         string codename;
-        uint8 meritScore;   // 1 to 100 (Talent Management / Merit-based)
+        uint8 meritScore; // 1 to 100 (Talent Management / Merit-based)
         uint8 adaptabilityIndex; // 1 to 100 (Ability to adapt to new threats)
         bool isActive;
     }

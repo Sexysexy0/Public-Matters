@@ -7,7 +7,8 @@ import "../src/GenesisManifesto.sol";
 contract GenesisManifestoTest is Test {
     GenesisManifesto public manifesto;
 
-    string constant ORIGIN = "2008: digital money without a middleman. A compounding graph. The seed of a sovereign system.";
+    string constant ORIGIN =
+        "2008: digital money without a middleman. A compounding graph. The seed of a sovereign system.";
 
     function setUp() public {
         manifesto = new GenesisManifesto(ORIGIN);

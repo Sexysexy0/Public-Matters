@@ -18,7 +18,7 @@ contract CCTVTransparencyRegistryTest is Test {
         // 1. Register a camera
         bytes32 pubKeyHash = keccak256(abi.encodePacked("PublicKeyXYZ"));
         uint256 camId = registry.registerCamera("Barangay San Juan - Intersection", pubKeyHash);
-        
+
         // FIX: Kunin ang struct at i-access ang fields
         CCTVTransparencyRegistry.Camera memory cam = registry.getCameraInfo(camId);
         assertEq(cam.owner, ghostArchitect);

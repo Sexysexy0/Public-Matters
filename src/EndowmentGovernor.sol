@@ -58,7 +58,7 @@ contract EndowmentGovernor {
     function disburse(address _to, uint256 _amount) external onlyOwnerOrTrigger {
         require(_amount <= totalPool, "Insufficient pool balance");
         totalPool -= _amount;
-        (bool success, ) = _to.call{value: _amount}("");
+        (bool success,) = _to.call{value: _amount}("");
         require(success, "Transfer failed");
         emit FundsDisbursed(_to, _amount);
     }

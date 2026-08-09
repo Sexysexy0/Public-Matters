@@ -39,6 +39,7 @@ import "../src/BroadcasterRegistry.sol";
 import "../src/TrustIndex.sol";
 import "../src/TrustIntegrator.sol";
 import "../src/DependencyMonitor.sol";
+
 contract DeployKingdom is Script {
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
@@ -77,7 +78,9 @@ contract DeployKingdom is Script {
         // --- 7. RECOVERY (KNOX) ---
         KnoxBypassProtocol knox = new KnoxBypassProtocol(address(anchor));
         // --- 8. GENESIS MANIFESTO ---
-        GenesisManifesto manifesto = new GenesisManifesto("2008: digital money without a middleman. A compounding graph. The seed of a sovereign system.");
+        GenesisManifesto manifesto = new GenesisManifesto(
+            "2008: digital money without a middleman. A compounding graph. The seed of a sovereign system."
+        );
         // --- 9. SOUL BRICKS ---
         DailyResilience daily = new DailyResilience("You have survived 100% of your worst days.");
         LegacyMint legacy = new LegacyMint(keccak256(abi.encodePacked("Genesis Manifesto")), "The Bridge is open.");

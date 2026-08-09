@@ -20,7 +20,7 @@ contract PeopleSovereigntyCovenantTest is Test {
 
         // Fund the governor's pool directly
         vm.deal(address(this), 100 ether);
-        (bool success, ) = address(governor).call{value: 100 ether}("");
+        (bool success,) = address(governor).call{value: 100 ether}("");
         require(success, "funding failed");
     }
 

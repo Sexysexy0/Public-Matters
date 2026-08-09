@@ -16,15 +16,16 @@ contract CyberOperationalResilienceTest is Test {
 
     function test_RegisterAndUpdateMerit() public {
         cyber.registerCyberUnit(commander1, "Alpha Unit", 75);
-        (address unitCommander, string memory codename, uint8 meritScore, , bool isActive) = cyber.cyberForces(commander1);
-        
+        (address unitCommander, string memory codename, uint8 meritScore,, bool isActive) =
+            cyber.cyberForces(commander1);
+
         assertEq(unitCommander, commander1);
         assertEq(codename, "Alpha Unit");
         assertEq(meritScore, 75);
         assertTrue(isActive);
 
         cyber.updateMeritScore(commander1, 92);
-        (, , meritScore, , ) = cyber.cyberForces(commander1);
+        (,, meritScore,,) = cyber.cyberForces(commander1);
         assertEq(meritScore, 92);
     }
 
@@ -34,7 +35,7 @@ contract CyberOperationalResilienceTest is Test {
 
         cyber.setAlert(true);
         assertTrue(cyber.systemAlert());
-        
+
         cyber.setAlert(false);
         assertFalse(cyber.systemAlert());
     }

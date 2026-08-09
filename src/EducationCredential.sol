@@ -70,14 +70,18 @@ contract EducationCredential is ERC721, Ownable {
         emit CredentialRevoked(_tokenId);
     }
 
-    function getCredential(uint256 _tokenId) external view returns (
-        address student,
-        uint256 graduationDate,
-        string memory courseName,
-        string memory institution,
-        bytes32 transcriptHash,
-        bool isValid
-    ) {
+    function getCredential(uint256 _tokenId)
+        external
+        view
+        returns (
+            address student,
+            uint256 graduationDate,
+            string memory courseName,
+            string memory institution,
+            bytes32 transcriptHash,
+            bool isValid
+        )
+    {
         Credential memory c = credentials[_tokenId];
         return (c.student, c.graduationDate, c.courseName, c.institution, c.transcriptHash, c.isValid);
     }

@@ -17,14 +17,8 @@ contract ContentOwnershipRegistryTest is Test {
     }
 
     function test_RegisterAndBuyWithRoyalty() public {
-        uint256 tokenId = registry.registerContent(
-            "Lord of the Rings",
-            "Tolkien",
-            "ipfs://QmHash",
-            1 ether,
-            500,
-            payable(creator)
-        );
+        uint256 tokenId =
+            registry.registerContent("Lord of the Rings", "Tolkien", "ipfs://QmHash", 1 ether, 500, payable(creator));
 
         // --- First purchase ---
         vm.deal(buyer1, 2 ether);

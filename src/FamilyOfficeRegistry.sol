@@ -6,19 +6,24 @@ pragma solidity ^0.8.20;
  * @dev Master census of PwC entities, family offices, and treaty partners
  */
 contract FamilyOfficeRegistry {
-    
-    enum Jurisdiction { APAC, EU, US, AFRICA, OTHER }
+    enum Jurisdiction {
+        APAC,
+        EU,
+        US,
+        AFRICA,
+        OTHER
+    }
 
     struct Office {
-        string name;              // Pangalan ng entity
-        Jurisdiction location;    // Rehiyon (APAC, EU, etc.)
-        bytes32 contactHash;      // Hash ng confidential PwC document
-        bool isActive;            // Status ng partnership
-        uint256 registeredAt;     // Unix timestamp ng registration
+        string name; // Pangalan ng entity
+        Jurisdiction location; // Rehiyon (APAC, EU, etc.)
+        bytes32 contactHash; // Hash ng confidential PwC document
+        bool isActive; // Status ng partnership
+        uint256 registeredAt; // Unix timestamp ng registration
     }
 
     address public immutable owner; // Ikaw, ang One Man Army
-    uint256 public officeCount;     // Total bilang ng na-rehistro
+    uint256 public officeCount; // Total bilang ng na-rehistro
 
     mapping(uint256 => Office) public offices;
 
@@ -36,18 +41,10 @@ contract FamilyOfficeRegistry {
     }
 
     // Magdagdag ng bagong Family Office / PwC Entity
-    function registerOffice(
-        string memory _name,
-        Jurisdiction _location,
-        bytes32 _contactHash
-    ) external onlyOwner {
+    function registerOffice(string memory _name, Jurisdiction _location, bytes32 _contactHash) external onlyOwner {
         officeCount++;
         offices[officeCount] = Office({
-            name: _name,
-            location: _location,
-            contactHash: _contactHash,
-            isActive: true,
-            registeredAt: block.timestamp
+            name: _name, location: _location, contactHash: _contactHash, isActive: true, registeredAt: block.timestamp
         });
         emit OfficeRegistered(officeCount, _name, _location, block.timestamp);
     }

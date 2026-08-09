@@ -20,7 +20,7 @@ contract LandTitleNFTTest is Test {
         // Issue title to citizen1
         uint256 tokenId = land.issueTitle(citizen1, "Barangay San Juan", "Lot-42A", hash);
 
-        (string memory location, string memory lot, bytes32 docHash, address currentOwner, ) = land.getTitle(tokenId);
+        (string memory location, string memory lot, bytes32 docHash, address currentOwner,) = land.getTitle(tokenId);
 
         assertEq(location, "Barangay San Juan");
         assertEq(lot, "Lot-42A");
@@ -31,7 +31,7 @@ contract LandTitleNFTTest is Test {
         vm.prank(citizen1);
         land.transferTitle(owner, tokenId);
 
-        (, , , currentOwner, ) = land.getTitle(tokenId);
+        (,,, currentOwner,) = land.getTitle(tokenId);
         assertEq(currentOwner, owner);
     }
 }

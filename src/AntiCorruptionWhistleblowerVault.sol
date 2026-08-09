@@ -11,8 +11,8 @@ contract AntiCorruptionWhistleblowerVault {
     uint256 public constant REQUIRED_VERIFICATIONS = 3; // Kailangan ng 3 na "Citizen Auditors" para ma-validate
 
     struct Report {
-        bytes32 evidenceHash;      // Hash ng ebidensya (PDF, photo, video na naka-store sa IPFS)
-        bytes32 secretCommitment;  // Ginagamit ng reporter para i-claim ang bounty gamit ang secret key
+        bytes32 evidenceHash; // Hash ng ebidensya (PDF, photo, video na naka-store sa IPFS)
+        bytes32 secretCommitment; // Ginagamit ng reporter para i-claim ang bounty gamit ang secret key
         uint256 bountyAmount;
         uint256 approvalCount;
         bool isVerified;
@@ -48,7 +48,10 @@ contract AntiCorruptionWhistleblowerVault {
     }
 
     // Mag-submit ng anonymous report (walang sender address na naka-link sa report)
-    function submitReport(bytes32 _evidenceHash, bytes32 _secretCommitment, uint256 _requestedBounty) external returns (uint256) {
+    function submitReport(bytes32 _evidenceHash, bytes32 _secretCommitment, uint256 _requestedBounty)
+        external
+        returns (uint256)
+    {
         reportCount++;
         reports[reportCount] = Report({
             evidenceHash: _evidenceHash,

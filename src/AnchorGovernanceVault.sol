@@ -81,17 +81,21 @@ contract AnchorGovernanceVault {
     }
 
     // Get the full ecosystem status
-    function getSystemStatus() external view returns (
-        address _registry,
-        address _vault,
-        address _treatyBase,
-        address _escrow,
-        address _whistleblower,
-        address _covenant,
-        address _cyber,
-        address _arbitration,
-        bool _paused
-    ) {
+    function getSystemStatus()
+        external
+        view
+        returns (
+            address _registry,
+            address _vault,
+            address _treatyBase,
+            address _escrow,
+            address _whistleblower,
+            address _covenant,
+            address _cyber,
+            address _arbitration,
+            bool _paused
+        )
+    {
         return (
             registry,
             vault,

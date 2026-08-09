@@ -6,6 +6,7 @@ import "../src/PermissionlessBroadcast.sol";
 
 contract MockTrustIntegrator {
     uint256 public lastWeight;
+
     function logPositiveAction(uint256 _weight) external {
         lastWeight = _weight;
     }

@@ -2,7 +2,6 @@ import "./ITrustIntegrator.sol";
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-
 contract HospitalClaimEscrow {
     address public immutable steward;
     ITrustIntegrator public trustIntegrator;

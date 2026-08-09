@@ -63,7 +63,7 @@ contract EndowmentGovernorTest is Test {
     }
 
     function test_ReceiveFallbackAddsToPool() public {
-        (bool success, ) = address(governor).call{value: 1 ether}("");
+        (bool success,) = address(governor).call{value: 1 ether}("");
         assertTrue(success);
         assertEq(governor.totalPool(), 1 ether);
     }

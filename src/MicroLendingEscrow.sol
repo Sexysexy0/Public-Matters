@@ -2,13 +2,12 @@ import "./ITrustIntegrator.sol";
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-
 contract MicroLendingEscrow {
     address public immutable steward;
     ITrustIntegrator public trustIntegrator;
     uint256 public baseInterestRate;
     uint256 public totalLiquidity;
-    
+
     struct Loan {
         address borrower;
         uint256 principal;

@@ -6,16 +6,21 @@ pragma solidity ^0.8.20;
  * @dev Abstract blueprint for on-chain treaty tokenization and governance linking
  */
 contract TokenizedTreatyBase {
-    
-    enum TreatyStatus { DRAFT, SIGNED, ACTIVE, DISPUTE, TERMINATED }
+    enum TreatyStatus {
+        DRAFT,
+        SIGNED,
+        ACTIVE,
+        DISPUTE,
+        TERMINATED
+    }
 
     struct TreatyData {
-        string name;                // Official name of the treaty
-        string signatories;         // Comma-separated list of involved countries/parties
-        uint256 signedAt;           // Timestamp of signing
-        TreatyStatus status;        // Current lifecycle status
+        string name; // Official name of the treaty
+        string signatories; // Comma-separated list of involved countries/parties
+        uint256 signedAt; // Timestamp of signing
+        TreatyStatus status; // Current lifecycle status
         uint256 implementationDeadline; // Milestone target date
-        bytes32 treatyHash;         // Hash of the physical/digital treaty document
+        bytes32 treatyHash; // Hash of the physical/digital treaty document
     }
 
     mapping(uint256 => TreatyData) public treaties;

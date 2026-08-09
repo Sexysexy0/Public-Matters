@@ -26,7 +26,7 @@ contract AntiCorruptionWhistleblowerVaultTest is Test {
     function test_ReportAndClaimFlow() public {
         bytes32 evidence = keccak256(abi.encodePacked("CorruptionEvidence.pdf"));
         bytes32 secretKey = keccak256(abi.encodePacked("WhistleblowerSecret123"));
-        
+
         // Whistleblower computes the commitment off-chain
         bytes32 commitment = keccak256(abi.encodePacked(secretKey, whistleblower));
 
@@ -35,9 +35,12 @@ contract AntiCorruptionWhistleblowerVaultTest is Test {
         uint256 reportId = vault.submitReport(evidence, commitment, 1 ether);
 
         // 2. Auditors verify the report
-        vm.prank(auditor1); vault.verifyReport(reportId);
-        vm.prank(auditor2); vault.verifyReport(reportId);
-        vm.prank(auditor3); vault.verifyReport(reportId);
+        vm.prank(auditor1);
+        vault.verifyReport(reportId);
+        vm.prank(auditor2);
+        vault.verifyReport(reportId);
+        vm.prank(auditor3);
+        vault.verifyReport(reportId);
 
         // 3. Claim bounty using the secret key
         uint256 balanceBefore = whistleblower.balance;

@@ -12,10 +12,10 @@ interface IMultiSigVault {
  */
 contract ProjectMilestoneEscrow {
     address public immutable owner;
-    
+
     // Reference to the MultiSig Vault (Brick 2)
     IMultiSigVault public vault;
-    
+
     struct Milestone {
         string description;
         uint256 amount;
@@ -24,7 +24,7 @@ contract ProjectMilestoneEscrow {
     }
 
     struct Project {
-        uint256 treatyId;         // Reference to TokenizedTreatyBase ID
+        uint256 treatyId; // Reference to TokenizedTreatyBase ID
         address payable recipient; // Who gets paid upon completion
         uint256 totalFunds;
         uint256 fundsDisbursed;
@@ -72,12 +72,15 @@ contract ProjectMilestoneEscrow {
         uint256 total = 0;
         for (uint256 i = 0; i < _milestoneAmounts.length; i++) {
             require(_milestoneAmounts[i] > 0, "Milestone amount must be > 0");
-            project.milestones.push(Milestone({
-                description: _milestoneDescriptions[i],
-                amount: _milestoneAmounts[i],
-                isCompleted: false,
-                completedAt: 0
-            }));
+            project.milestones
+                .push(
+                    Milestone({
+                        description: _milestoneDescriptions[i],
+                        amount: _milestoneAmounts[i],
+                        isCompleted: false,
+                        completedAt: 0
+                    })
+                );
             total += _milestoneAmounts[i];
         }
 
@@ -86,7 +89,11 @@ contract ProjectMilestoneEscrow {
         return projectCount;
     }
 
-    function completeMilestone(uint256 _projectId, uint256 _milestoneIndex) external onlyOwner projectExists(_projectId) {
+    function completeMilestone(uint256 _projectId, uint256 _milestoneIndex)
+        external
+        onlyOwner
+        projectExists(_projectId)
+    {
         Project storage project = projects[_projectId];
         require(_milestoneIndex < project.milestones.length, "Invalid milestone index");
         require(project.isActive, "Project is closed");
