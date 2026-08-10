@@ -112,6 +112,7 @@ contract MultiSigEscrowVault {
         Transaction storage transaction = transactions[_txId];
         require(!transaction.executed, "MultiSigVault: Already executed");
         require(transaction.confirmations >= requiredConfirmations, "MultiSigVault: Not enough approvals");
+        // forge-lint: disable-next-line(block-timestamp)
         require(block.timestamp >= transaction.creationTime + EXECUTION_DELAY, "MultiSigVault: Timelock active");
 
         transaction.executed = true;

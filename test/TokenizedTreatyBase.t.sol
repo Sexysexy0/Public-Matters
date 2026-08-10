@@ -38,6 +38,7 @@ contract TokenizedTreatyBaseTest is Test {
 
     function test_UpdateStatus() public {
         uint256 id =
+            // forge-lint: disable-next-line(unsafe-typecast)
             treaty.createTreaty("ASEAN-India Agreement", "ASEAN, India", bytes32("hash"), block.timestamp + 730 days);
 
         treaty.updateStatus(id, TokenizedTreatyBase.TreatyStatus.ACTIVE);

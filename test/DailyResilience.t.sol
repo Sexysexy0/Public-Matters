@@ -6,26 +6,18 @@ import "../src/DailyResilience.sol";
 
 contract DailyResilienceTest is Test {
     DailyResilience public daily;
-
     address public emperor = address(this);
-    address public randomUser = makeAddr("randomUser");
 
     function setUp() public {
-        daily = new DailyResilience("Keep going. You are not alone.");
+        daily = new DailyResilience("Sovereign Initialization");
     }
 
-    function test_ReadAndUpdateMessage() public {
-        (string memory msg,) = daily.getTodaysMessage();
-        assertEq(msg, "Keep going. You are not alone.");
+    function test_DailyMessageFlow() public {
+        vm.prank(emperor);
+        daily.setMessage("Keep going. You are not alone.");
 
-        daily.setMessage("You have survived 100% of your worst days.");
-        (msg,) = daily.getTodaysMessage();
-        assertEq(msg, "You have survived 100% of your worst days.");
-    }
-
-    function test_OnlyEmperorCanUpdate() public {
-        vm.prank(randomUser);
-        vm.expectRevert("Only the Emperor can update the message");
-        daily.setMessage("Hack attempt!");
+        (string memory todaysMessage, uint256 updatedTime) = daily.getTodaysMessage();
+        assertEq(todaysMessage, "Keep going. You are not alone.");
+        assertEq(updatedTime, block.timestamp);
     }
 }

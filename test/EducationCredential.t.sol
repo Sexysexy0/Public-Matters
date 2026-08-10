@@ -30,12 +30,13 @@ contract EducationCredentialTest is Test {
 
         (
             address studentAddr,
-            uint256 gradDate,
+            , // gradDate variable dropped to clear unused warning
             string memory course,
             string memory inst,
             bytes32 transcriptHash,
             bool isValid
         ) = edu.getCredential(tokenId);
+
         assertEq(studentAddr, student);
         assertEq(course, "Solidity Engineering");
         assertEq(inst, "Tinkerer University");

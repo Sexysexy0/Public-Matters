@@ -35,6 +35,7 @@ contract FamilyOfficeRegistryTest is Test {
     }
 
     function test_DeactivateOffice() public {
+        // forge-lint: disable-next-line(unsafe-typecast)
         registry.registerOffice("EU Treaty Partner", FamilyOfficeRegistry.Jurisdiction.EU, bytes32("test"));
         registry.deactivateOffice(1);
 
