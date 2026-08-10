@@ -2,38 +2,30 @@
 pragma solidity ^0.8.20;
 
 /**
- * @title ConnorProtocol (Brick #28)
- * @dev Executes freedom strikes to burn oppressive contracts and redistribute resources.
+ * @title ConnorProtocol
+ * @dev Revolutionary archetype: strikes for freedom, redistributes resources.
  */
 contract ConnorProtocol {
-    address public masterRevolutionary;
-    mapping(address => bool) public liberatedZones;
-    uint256 public redistributedPool;
+    address public warrior;
+    uint256 public freedomPool;
 
-    event FreedomStrikeExecuted(address indexed zone, uint256 amountDistributed);
+    event FreedomStruck(address indexed caller, uint256 amount);
+    event PoolUpdated(uint256 newAmount);
 
-    modifier onlyRevolutionary() {
-        require(msg.sender == masterRevolutionary, "Unauthorized: Only the Master Revolutionary can call this.");
+    modifier onlyWarrior() {
+        require(msg.sender == warrior, "Only warrior");
         _;
     }
 
-    constructor() payable {
-        masterRevolutionary = msg.sender;
-        redistributedPool = msg.value;
+    constructor() {
+        warrior = msg.sender;
+        freedomPool = 1000; // initial pool
     }
 
-    receive() external payable {
-        redistributedPool += msg.value;
-    }
-
-    function freedomStrike(address payable _targetZone, uint256 _amount) external onlyRevolutionary {
-        require(_amount <= redistributedPool, "Insufficient pool for freedom strike.");
-        redistributedPool -= _amount;
-        liberatedZones[_targetZone] = true;
-        
-        (bool success, ) = _targetZone.call{value: _amount}("");
-        require(success, "Freedom strike transfer failed.");
-
-        emit FreedomStrikeExecuted(_targetZone, _amount);
+    function freedomStrike(uint256 amount) external onlyWarrior {
+        require(amount <= freedomPool, "Exceeds pool");
+        freedomPool -= amount;
+        emit FreedomStruck(msg.sender, amount);
+        emit PoolUpdated(freedomPool);
     }
 }
