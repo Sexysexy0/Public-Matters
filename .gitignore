@@ -5,3 +5,5 @@ broadcast/
 lib/
 .env.local
 node_modules/
+.env
+.env.local
