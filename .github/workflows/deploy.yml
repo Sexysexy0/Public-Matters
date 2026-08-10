@@ -56,4 +56,4 @@ jobs:
           forge script script/DeployKingdom.s.sol:DeployKingdom \
             --rpc-url $RPC_URL \
             --private-key $PRIVATE_KEY \
-            --broadcast
+            --broadcast --slow
