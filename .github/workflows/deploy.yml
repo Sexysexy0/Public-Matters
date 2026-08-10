@@ -21,6 +21,9 @@ jobs:
         with:
           version: nightly
 
+      - name: Clean build artifacts
+        run: forge clean
+
       - name: Run tests
         run: forge test --gas-report
 
@@ -42,6 +45,9 @@ jobs:
           name: gas-snapshot
           path: gas-snapshot.txt
 
+      - name: Clean before deploy
+        run: forge clean
+
       - name: Run deployment script (Sepolia)
         env:
           RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
@@ -50,4 +56,4 @@ jobs:
           forge script script/DeployKingdom.s.sol:DeployKingdom \
             --rpc-url $RPC_URL \
             --private-key $PRIVATE_KEY \
-            --broadcast --slow
+            --broadcast
