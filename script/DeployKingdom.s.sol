@@ -78,9 +78,7 @@ contract DeployKingdom is Script {
         // --- 7. RECOVERY (KNOX) ---
         KnoxBypassProtocol knox = new KnoxBypassProtocol(address(anchor));
         // --- 8. GENESIS MANIFESTO ---
-        GenesisManifesto manifesto = new GenesisManifesto(
-            "2008: digital money without a middleman. A compounding graph. The seed of a sovereign system."
-        );
+        GenesisManifesto manifesto = new GenesisManifesto("Genesis Manifesto", "Origin story and principles");
         // --- 9. SOUL BRICKS ---
         DailyResilience daily = new DailyResilience("You have survived 100% of your worst days.");
         LegacyMint legacy = new LegacyMint(keccak256(abi.encodePacked("Genesis Manifesto")), "The Bridge is open.");
