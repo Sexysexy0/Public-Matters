@@ -22,29 +22,36 @@ jobs:
           - language: javascript-typescript
             build-mode: none
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v7
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v4
-      with:
-        languages: ${{ matrix.language }}
-        build-mode: ${{ matrix.build-mode }}
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v4
-      with:
-        category: "/language:${{matrix.language}}"
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@b7ada1379304ef090a803f6c304c50810db60f8d # v3.28.10
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@b7ada1379304ef090a803f6c304c50810db60f8d # v3.28.10
+        with:
+          category: "/language:${{matrix.language}}"
 
   slither:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v7
-    - name: Setup Python
-      uses: actions/setup-python@v7
-      with:
-        python-version: '3.x'
-    - name: Install Slither
-      run: |
-        pip install slither-analyzer
-    - name: Run Slither Analysis
-      run: slither ./contracts --solc-remaps "forge-std/=lib/forge-std/src/" --fail-high
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
+        with:
+          python-version: '3.x'
+
+      - name: Install Slither
+        run: |
+          pip install slither-analyzer
+
+      - name: Run Slither Analysis
+        run: slither ./contracts --solc-remaps "forge-std/=lib/forge-std/src/" --fail-high

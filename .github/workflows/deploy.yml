@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v7
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v7
         with:
           submodules: recursive
 
       - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@v1
+        uses: foundry-rs/foundry-toolchain@c30f40d6e679b375b066d92976b9f2d184fc3a0b # v1
         with:
           version: nightly
 
@@ -34,13 +34,13 @@ jobs:
         run: forge snapshot --snap gas-snapshot.txt
 
       - name: Upload coverage report
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@ea73c09b6fa754f92330a905a96860840b2b8004 # v7
         with:
           name: coverage-report
           path: lcov.info
 
       - name: Upload gas snapshot
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@ea73c09b6fa754f92330a905a96860840b2b8004 # v7
         with:
           name: gas-snapshot
           path: gas-snapshot.txt
