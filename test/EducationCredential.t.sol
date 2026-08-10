@@ -29,8 +29,7 @@ contract EducationCredentialTest is Test {
         uint256 tokenId = edu.issueCredential(student, "Solidity Engineering", "Tinkerer University", hash);
 
         (
-            address studentAddr,
-            , // gradDate variable dropped to clear unused warning
+            address studentAddr,, // gradDate variable dropped to clear unused warning
             string memory course,
             string memory inst,
             bytes32 transcriptHash,
