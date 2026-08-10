@@ -4,3 +4,4 @@ broadcast/
 .env
 lib/
 .env.local
+node_modules/
