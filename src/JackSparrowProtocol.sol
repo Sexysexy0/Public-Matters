@@ -16,7 +16,6 @@ contract JackSparrowProtocol {
     }
 
     function chaosPlay() external returns (uint256) {
-        // Pseudo-random roll between 0 and 99
         uint256 chaosRoll = uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, msg.sender))) % 100;
         
         string memory resultMsg;
