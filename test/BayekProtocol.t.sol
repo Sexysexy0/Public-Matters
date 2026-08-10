@@ -8,18 +8,17 @@ contract BayekProtocolTest is Test {
     BayekProtocol bayek;
 
     function setUp() public {
-        bayek = new BayekProtocol("Nothing is true, everything is permitted.");
+        bayek = new BayekProtocol();
     }
 
     function test_FoundCreed() public {
-        bayek.foundCreed("We work in the dark to serve the light.");
-        assertEq(bayek.creedCore(), "We work in the dark to serve the light.");
+        bayek.foundCreed();
         assertTrue(bayek.creedLocked());
     }
 
     function test_RevertWhenAlreadyLocked() public {
-        bayek.foundCreed("First founding.");
-        vm.expectRevert("Creed is already locked permanently.");
-        bayek.foundCreed("Second founding.");
+        bayek.foundCreed();
+        vm.expectRevert("Already locked");
+        bayek.foundCreed();
     }
 }

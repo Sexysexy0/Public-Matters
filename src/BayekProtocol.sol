@@ -2,33 +2,30 @@
 pragma solidity ^0.8.20;
 
 /**
- * @title BayekProtocol (Brick #30)
- * @dev Establishes and locks immutable Creed values on-chain as the foundation.
+ * @title BayekProtocol
+ * @dev Creed archetype: seals the immutable creed, locks the brotherhood.
  */
 contract BayekProtocol {
-    address public masterFounder;
-    string public creedCore;
+    address public founder;
     bool public creedLocked;
 
-    event CreedFounded(string creed, uint256 timestamp);
-    event CreedLocked();
+    event CreedFound(address indexed caller);
+    event CreedLocked(address indexed caller);
 
     modifier onlyFounder() {
-        require(msg.sender == masterFounder, "Unauthorized: Only the Master Founder can set the Creed.");
+        require(msg.sender == founder, "Only founder");
         _;
     }
 
-    constructor(string memory _initialCreed) {
-        masterFounder = msg.sender;
-        creedCore = _initialCreed;
+    constructor() {
+        founder = msg.sender;
         creedLocked = false;
     }
 
-    function foundCreed(string calldata _newCreed) external onlyFounder {
-        require(!creedLocked, "Creed is already locked permanently.");
-        creedCore = _newCreed;
+    function foundCreed() external onlyFounder {
+        require(!creedLocked, "Already locked");
+        emit CreedFound(msg.sender);
         creedLocked = true;
-        emit CreedFounded(_newCreed, block.timestamp);
-        emit CreedLocked();
+        emit CreedLocked(msg.sender);
     }
 }
