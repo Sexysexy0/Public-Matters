@@ -6,21 +6,20 @@ import "../src/EzioProtocol.sol";
 
 contract EzioProtocolTest is Test {
     EzioProtocol ezio;
-    address student = address(0x2026);
+    address apprentice = address(0x1234);
 
     function setUp() public {
         ezio = new EzioProtocol();
     }
 
     function test_MentorApprentice() public {
-        ezio.mentor(student);
-        assertTrue(ezio.apprentices(student));
-        assertEq(ezio.wisdomTokens(student), 50);
+        ezio.mentorApprentice(apprentice);
+        assertTrue(ezio.apprentices(apprentice));
     }
 
     function test_RevertWhenNonMentorCalls() public {
-        vm.prank(student);
-        vm.expectRevert("Unauthorized: Only the Master Mentor can call this.");
-        ezio.mentor(student);
+        vm.prank(apprentice);
+        vm.expectRevert("Only mentor");
+        ezio.mentorApprentice(apprentice);
     }
 }

@@ -2,29 +2,32 @@
 pragma solidity ^0.8.20;
 
 /**
- * @title EzioProtocol (Brick #27)
- * @dev Manages mentorship, wisdom token granting, and apprentice registration.
+ * @title EzioProtocol
+ * @dev Mentor archetype: trains apprentices, grants wisdom tokens.
  */
 contract EzioProtocol {
-    address public masterMentor;
+    address public mentor;
     mapping(address => bool) public apprentices;
-    mapping(address => uint256) public wisdomTokens;
 
-    event ApprenticeMentored(address indexed student, uint256 tokensGranted);
+    event ApprenticeMentored(address indexed apprentice);
+    event WisdomGranted(address indexed apprentice);
 
     modifier onlyMentor() {
-        require(msg.sender == masterMentor, "Unauthorized: Only the Master Mentor can call this.");
+        require(msg.sender == mentor, "Only mentor");
         _;
     }
 
     constructor() {
-        masterMentor = msg.sender;
+        mentor = msg.sender;
     }
 
-    function mentor(address _student) external onlyMentor {
-        require(_student != address(0), "Invalid student address");
-        apprentices[_student] = true;
-        wisdomTokens[_student] += 50;
-        emit ApprenticeMentored(_student, wisdomTokens[_student]);
+    function mentorApprentice(address _apprentice) external onlyMentor {
+        apprentices[_apprentice] = true;
+        emit ApprenticeMentored(_apprentice);
+    }
+
+    function grantWisdom(address _apprentice) external onlyMentor {
+        require(apprentices[_apprentice], "Not an apprentice");
+        emit WisdomGranted(_apprentice);
     }
 }
