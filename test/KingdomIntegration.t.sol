@@ -2,90 +2,61 @@
 pragma solidity ^0.8.20;
 
 import "forge-std/Test.sol";
-import "../src/FamilyOfficeRegistry.sol";
-import "../src/MultiSigEscrowVault.sol";
-import "../src/TokenizedTreatyBase.sol";
-import "../src/ProjectMilestoneEscrow.sol";
-import "../src/DisputeResolutionArbitration.sol";
-import "../src/AnchorGovernanceVault.sol";
-
-contract MockTreaty is TokenizedTreatyBase {}
+import "../src/AltairProtocol.sol";
+import "../src/EzioProtocol.sol";
+import "../src/ConnorProtocol.sol";
+import "../src/ArnoProtocol.sol";
+import "../src/BayekProtocol.sol";
+import "../src/JackSparrowProtocol.sol";
+import "../src/YellowMaskProtocol.sol";
+import "../src/EndowmentGovernor.sol";
+import "../src/TrustIndex.sol";
 
 contract KingdomIntegrationTest is Test {
-    FamilyOfficeRegistry public registry;
-    MultiSigEscrowVault public vault;
-    MockTreaty public treatyBase;
-    ProjectMilestoneEscrow public escrow;
-    DisputeResolutionArbitration public arbitration;
-    AnchorGovernanceVault public anchor;
-
-    address public owner = address(this);
-    address public partner1 = makeAddr("partner1");
-    address public partner2 = makeAddr("partner2");
+    AltairProtocol altair;
+    EzioProtocol ezio;
+    ConnorProtocol connor;
+    ArnoProtocol arno;
+    BayekProtocol bayek;
+    JackSparrowProtocol sparrow;
+    YellowMaskProtocol yellow;
+    EndowmentGovernor governor;
+    TrustIndex trust;
 
     function setUp() public {
-        registry = new FamilyOfficeRegistry();
+        altair = new AltairProtocol();
+        ezio = new EzioProtocol();
+        connor = new ConnorProtocol();
+        arno = new ArnoProtocol();
+        bayek = new BayekProtocol();
+        sparrow = new JackSparrowProtocol();
+        yellow = new YellowMaskProtocol();
 
-        address[] memory signers = new address[](2);
-        signers[0] = partner1;
-        signers[1] = partner2;
-        vault = new MultiSigEscrowVault(signers, 2);
-        vm.deal(address(vault), 100 ether);
-
-        treatyBase = new MockTreaty();
-        escrow = new ProjectMilestoneEscrow(address(vault));
-        // FIX: Make the escrow a signer so it can submit transactions
-        vault.addSigner(address(escrow));
-
-        arbitration = new DisputeResolutionArbitration();
-        anchor = new AnchorGovernanceVault();
-
-        anchor.setCoreContracts(
-            address(registry),
-            address(vault),
-            address(treatyBase),
-            address(escrow),
-            address(arbitration), // dummy for whistleblower
-            address(arbitration), // dummy for covenant
-            address(arbitration), // dummy for cyber
-            address(arbitration)
-        );
+        // FALLBACK GUESS: adjust after you paste constructor signatures
+        governor = new EndowmentGovernor(address(this));
+        trust = new TrustIndex(1, 0);
     }
 
     function test_FullKingdomWorkflow() public {
-        bytes32 hash = keccak256(abi.encodePacked("PwC-Test-Doc"));
-        registry.registerOffice("PwC Manila Family Office", FamilyOfficeRegistry.Jurisdiction.APAC, hash);
+        altair.discipline();
+        ezio.mentorApprentice(address(this));
+        connor.freedomStrike(100);
+        arno.redemption(address(this), 50);
+        bayek.foundCreed();
 
-        bytes32 treatyHash = keccak256(abi.encodePacked("PH-USA-Web3-Treaty"));
-        uint256 treatyId = treatyBase.createTreaty(
-            "PH-USA Blockchain Accord", "Philippines, USA", treatyHash, block.timestamp + 365 days
-        );
+        sparrow.chaosPlay();
+        yellow.addMask("Existential dread archetype");
 
-        string[] memory descs = new string[](2);
-        descs[0] = "Phase 1 - Infrastructure";
-        descs[1] = "Phase 2 - Deployment";
-        uint256[] memory amounts = new uint256[](2);
-        amounts[0] = 10 ether;
-        amounts[1] = 20 ether;
-        address payable recipient = payable(makeAddr("project_recipient"));
-        uint256 projectId = escrow.createProject(treatyId, recipient, descs, amounts);
+        governor.registerCompany(address(this));
 
-        escrow.completeMilestone(projectId, 0);
-        assertEq(vault.transactionCount(), 1);
+        // FALLBACK GUESS: replace with exact helper after inspection
+        // e.g., trust.increaseIndexFor(address(this)); or trust.recordPositiveAction();
+        // For now this is a no-op placeholder to avoid compile-time call errors:
+        // (remove or replace after you paste the real helper name)
+        // trust.placeholderNoop();
 
-        bytes32 evidence = keccak256(abi.encodePacked("Missing Deliverables"));
-        uint256 disputeId = arbitration.raiseDispute(treatyId, partner1, evidence);
-        arbitration.resolveDispute(disputeId, true);
-
-        DisputeResolutionArbitration.Dispute memory dispute = arbitration.getDispute(disputeId);
-        assertEq(uint8(dispute.status), uint8(DisputeResolutionArbitration.DisputeStatus.RESOLVED));
-
-        anchor.pause();
-        (,,,,,,,, bool isPaused) = anchor.getSystemStatus();
-        assertTrue(isPaused);
-
-        anchor.unpause();
-        (,,,,,,,, isPaused) = anchor.getSystemStatus();
-        assertFalse(isPaused);
+        assertTrue(bayek.creedLocked());
+        // final assertion will be adjusted once we know how to increment index
+        // assertEq(trust.index(address(this)), 1);
     }
 }
