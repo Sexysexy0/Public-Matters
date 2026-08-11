@@ -20,7 +20,7 @@ jobs:
     - name: Install Foundry
       uses: foundry-rs/foundry-toolchain@c30f40d6e679b375b066d92976b9f2d184fc3a0b # v1
       with:
-        version: nightly
+        version: latest
     - name: Build contracts
       run: forge build
     - name: Run tests
