@@ -31,21 +31,21 @@ jobs:
 
       - name: Upload build outputs
         if: always()
-        uses: actions/upload-artifact@ea73c09b6fa754f92330a905a96860840b2b8004 # v7
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
           path: ./out
 
       - name: Upload test logs
         if: always()
-        uses: actions/upload-artifact@ea73c09b6fa754f92330a905a96860840b2b8004 # v7
+        uses: actions/upload-artifact@v4
         with:
           name: test-logs
           path: ./out/test-logs || .
 
       - name: Upload gas report
         if: always()
-        uses: actions/upload-artifact@ea73c09b6fa754f92330a905a96860840b2b8004 # v7
+        uses: actions/upload-artifact@v4
         with:
           name: gas-report
           path: ./gas-report.txt

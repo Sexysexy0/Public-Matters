@@ -35,7 +35,7 @@ jobs:
 
       - name: Upload nightly artifacts
         if: always()
-        uses: actions/upload-artifact@ea73c09b6fa754f92330a905a96860840b2b8004 # v7
+        uses: actions/upload-artifact@v4
         with:
           name: nightly-report
           path: ./out
