@@ -3,13 +3,12 @@ pragma solidity 0.8.35;
 
 /**
  * @title OilPriceBufferTracker
- * @notice Sinusubaybayan ang paggalaw ng presyo ng petrolyo (Rollback/Hike) 
+ * @notice Sinusubaybayan ang paggalaw ng presyo ng petrolyo (Rollback/Hike)
  * at nagbibigay ng awtomatikong adjustment sa transport/logistics subsidy budget.
  */
 contract OilPriceBufferTracker {
-
     address public immutable steward;
-    
+
     struct PriceLog {
         uint256 timestamp;
         int256 gasolineChange; // Pwede maging negative (rollback) o positive (hike) sa sentimos (centavo scale)
@@ -36,12 +35,11 @@ contract OilPriceBufferTracker {
      * @notice I-log ang pinakabagong oil price adjustment (hal. Rollback ngayong linggo)
      */
     function logPriceAdjustment(int256 _gasChange, int256 _dieselChange, string memory _reason) external onlySteward {
-        priceHistory.push(PriceLog({
-            timestamp: block.timestamp,
-            gasolineChange: _gasChange,
-            dieselChange: _dieselChange,
-            reason: _reason
-        }));
+        priceHistory.push(
+            PriceLog({
+                timestamp: block.timestamp, gasolineChange: _gasChange, dieselChange: _dieselChange, reason: _reason
+            })
+        );
 
         emit OilPriceUpdated(_gasChange, _dieselChange, _reason);
     }

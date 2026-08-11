@@ -7,7 +7,6 @@ pragma solidity 0.8.35;
  * protektahan ang modding community, at itaas ang pamantayan ng mga epic RPGs.
  */
 contract BethesdaQualityProtocol {
-    
     address public immutable executiveDirector;
     uint256 public bugFixThresholdDays; // Minimum extra months/days in QA bago i-release
     uint256 public creativeFreedomIndex;

@@ -13,7 +13,7 @@ contract FairGovernanceFramework {
 
     mapping(bytes32 => Policy) public policies;
     mapping(bytes32 => mapping(address => bool)) public hasVoted;
-    
+
     address public immutable administrator;
     uint256 public constant QUORUM = 50; // Minimum votes required for fairness check
 
@@ -35,12 +35,7 @@ contract FairGovernanceFramework {
         require(!policies[policyId].exists, "Policy already exists");
 
         policies[policyId] = Policy({
-            title: _title,
-            description: _description,
-            votesFor: 0,
-            votesAgainst: 0,
-            executed: false,
-            exists: true
+            title: _title, description: _description, votesFor: 0, votesAgainst: 0, executed: false, exists: true
         });
 
         emit PolicyProposed(policyId, _title);
@@ -68,7 +63,7 @@ contract FairGovernanceFramework {
         Policy storage policy = policies[_policyId];
         require(policy.exists, "Policy does not exist");
         require(!policy.executed, "Policy already executed");
-        
+
         uint256 totalVotes = policy.votesFor + policy.votesAgainst;
         require(totalVotes >= QUORUM, "Quorum not reached for fairness check");
 

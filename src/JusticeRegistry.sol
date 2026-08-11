@@ -27,11 +27,10 @@ contract JusticeRegistry {
         supremeAuditor = msg.sender;
     }
 
-    function logCommitment(
-        bytes32 _recordId,
-        string memory _institutionOrLeader,
-        string memory _commitment
-    ) external onlyAuditor {
+    function logCommitment(bytes32 _recordId, string memory _institutionOrLeader, string memory _commitment)
+        external
+        onlyAuditor
+    {
         require(records[_recordId].filingTimestamp == 0, "Record already exists");
 
         records[_recordId] = AccountabilityRecord({
@@ -65,7 +64,11 @@ contract JusticeRegistry {
         emit FulfillmentVerified(_recordId, _status);
     }
 
-    function getRecord(bytes32 _recordId) external view returns (string memory, string memory, uint256, bool, bool, address) {
+    function getRecord(bytes32 _recordId)
+        external
+        view
+        returns (string memory, string memory, uint256, bool, bool, address)
+    {
         AccountabilityRecord memory r = records[_recordId];
         return (r.institutionOrLeader, r.commitment, r.filingTimestamp, r.fulfilled, r.challenged, r.challenger);
     }

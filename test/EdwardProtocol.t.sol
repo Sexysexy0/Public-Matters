@@ -21,7 +21,7 @@ contract EdwardProtocolTest is Test {
     function test_DistributePlunder() public {
         uint256 balanceBefore = crewMember.balance;
         edward.distributePlunder(crewMember, 0.5 ether);
-        
+
         assertEq(crewMember.balance, balanceBefore + 0.5 ether);
         assertEq(edward.jackdawTreasury(crewMember), 0.5 ether);
     }

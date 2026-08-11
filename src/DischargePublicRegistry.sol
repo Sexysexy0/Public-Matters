@@ -26,14 +26,13 @@ contract DischargePublicRegistry {
         coreRegistryOwner = msg.sender;
     }
 
-    function publishRecord(
-        string memory facilityId,
-        string memory chemicalCompound,
-        uint256 volumePPM,
-        bool compliant
-    ) external onlyOwner returns (bytes32) {
+    function publishRecord(string memory facilityId, string memory chemicalCompound, uint256 volumePPM, bool compliant)
+        external
+        onlyOwner
+        returns (bytes32)
+    {
         bytes32 recordId = keccak256(abi.encodePacked(facilityId, chemicalCompound, block.timestamp));
-        
+
         publicRecords[recordId] = PublicDischargeRecord({
             facilityId: facilityId,
             chemicalCompound: chemicalCompound,

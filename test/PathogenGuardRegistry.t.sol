@@ -19,7 +19,7 @@ contract PathogenGuardRegistryTest is Test {
         guard.submitGenome(MOCK_GENOME, 3);
 
         guard.reviewAndApprove(MOCK_GENOME);
-        (, , bool isApproved, , ) = guard.registry(MOCK_GENOME);
+        (,, bool isApproved,,) = guard.registry(MOCK_GENOME);
         assertTrue(isApproved);
     }
 

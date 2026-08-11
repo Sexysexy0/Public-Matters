@@ -17,16 +17,16 @@ contract CommunityMatchmaking {
 
     function voteForMode(string memory modeName) external {
         require(!hasVoted[msg.sender], "Already voted");
-        
+
         // I-check kung bago pa lang itong mode na ito
         if (bytes(modes[modeName].modeName).length == 0 && modes[modeName].voteCount == 0) {
             allModes.push(modeName);
             modes[modeName].modeName = modeName;
         }
-        
+
         modes[modeName].voteCount += 1;
         hasVoted[msg.sender] = true;
-        
+
         emit ModeVoted(modeName, modes[modeName].voteCount);
     }
 

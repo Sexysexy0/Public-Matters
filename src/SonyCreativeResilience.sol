@@ -3,11 +3,10 @@ pragma solidity 0.8.35;
 
 /**
  * @title SonyCreativeResilience
- * @notice Isang on-chain framework para ibalik ang balanse sa pagitan ng PlayStation Studios 
+ * @notice Isang on-chain framework para ibalik ang balanse sa pagitan ng PlayStation Studios
  * at corporate leadership, protektahan ang single-player IPs, at i-audit ang live-service expansion.
  */
 contract SonyCreativeResilience {
-    
     address public immutable boardExecutive;
     uint256 public liveServiceBudgetCap; // Limit para maiwasan ang pagsasayang ng pondo sa dead-on-arrival games
     uint256 public qualityReviewThreshold;

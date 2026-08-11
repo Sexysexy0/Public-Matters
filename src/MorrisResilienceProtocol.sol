@@ -3,17 +3,16 @@ pragma solidity 0.8.35;
 
 /**
  * @title MorrisResilienceProtocol
- * @notice Isang on-chain na depensa para sa mga kritikal na imprastruktura upang 
+ * @notice Isang on-chain na depensa para sa mga kritikal na imprastruktura upang
  * awtomatikong magpatupad ng circuit breaker at i-isolate ang network kapag may detect na mabilis na pagkalat ng payload.
  */
 contract MorrisResilienceProtocol {
-
     address public immutable networkSteward;
     bool public systemLocked;
-    
+
     mapping(address => uint256) public nodeRequestCounts;
     mapping(address => bool) public blacklistedNodes;
-    
+
     uint256 public constant REPLICATION_THRESHOLD = 5; // Max allowed requests bago ma-flag bilang worm-like behavior
 
     event SystemEmergencyLocked(address indexed triggeringNode, string reason);

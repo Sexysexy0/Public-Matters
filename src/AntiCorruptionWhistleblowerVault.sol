@@ -27,7 +27,7 @@ contract AntiCorruptionWhistleblowerVault is Ownable {
     mapping(bytes32 => ProofBundle) public vault;
     mapping(uint256 => Report) public reports;
     mapping(address => bool) public auditors;
-    
+
     uint256 public reportCounter;
 
     event ProofSubmitted(bytes32 indexed bundleId, uint256 timestamp);
@@ -57,12 +57,8 @@ contract AntiCorruptionWhistleblowerVault is Ownable {
 
     function submitProof(bytes32 bundleId, bytes32 _merkleRoot) external {
         require(vault[bundleId].timestamp == 0, "Bundle ID already exists.");
-        
-        vault[bundleId] = ProofBundle({
-            merkleRoot: _merkleRoot,
-            timestamp: block.timestamp,
-            isLocked: false
-        });
+
+        vault[bundleId] = ProofBundle({merkleRoot: _merkleRoot, timestamp: block.timestamp, isLocked: false});
 
         emit ProofSubmitted(bundleId, block.timestamp);
     }
@@ -73,11 +69,15 @@ contract AntiCorruptionWhistleblowerVault is Ownable {
         emit ProofLocked(bundleId);
     }
 
-    function submitReport(bytes32 evidence, bytes32 commitment, uint256 fee) external payable returns (uint256 reportId) {
+    function submitReport(bytes32 evidence, bytes32 commitment, uint256 fee)
+        external
+        payable
+        returns (uint256 reportId)
+    {
         // Relax strict msg.value check to accommodate testing frameworks without explicit value transfers
         reportCounter++;
         reportId = reportCounter;
-        
+
         reports[reportId] = Report({
             submitter: msg.sender,
             evidence: evidence,
@@ -105,23 +105,22 @@ contract AntiCorruptionWhistleblowerVault is Ownable {
 
         if (report.commitment != bytes32(0)) {
             require(
-                report.commitment == secretKey || 
-                report.commitment == keccak256(abi.encodePacked(secretKey)) ||
-                report.commitment == keccak256(abi.encodePacked(secretKey, report.submitter)), 
+                report.commitment == secretKey || report.commitment == keccak256(abi.encodePacked(secretKey))
+                    || report.commitment == keccak256(abi.encodePacked(secretKey, report.submitter)),
                 "Invalid secret key"
             );
         }
 
         report.claimed = true;
-        
+
         // Transfer bounty reward if contract has enough balance
         if (address(this).balance >= report.fee) {
-            (bool success, ) = payable(msg.sender).call{value: report.fee}("");
+            (bool success,) = payable(msg.sender).call{value: report.fee}("");
             require(success, "Bounty transfer failed");
         }
 
         emit BountyClaimed(reportId, msg.sender);
     }
-    
+
     receive() external payable {}
 }

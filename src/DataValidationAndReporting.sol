@@ -2,8 +2,16 @@
 pragma solidity ^0.8.20;
 
 contract DataValidationAndReporting {
-    enum Role { Admin, Auditor, FieldOperator }
-    enum StakeholderType { Funder, Executive, Community }
+    enum Role {
+        Admin,
+        Auditor,
+        FieldOperator
+    }
+    enum StakeholderType {
+        Funder,
+        Executive,
+        Community
+    }
 
     struct Participant {
         bytes32 participantId;
@@ -42,7 +50,11 @@ contract DataValidationAndReporting {
         userRoles[account] = role;
     }
 
-    function registerParticipant(bytes32 _rawInput, string calldata _encryptedMetadataURI) external onlyRole(Role.FieldOperator) returns (bytes32) {
+    function registerParticipant(bytes32 _rawInput, string calldata _encryptedMetadataURI)
+        external
+        onlyRole(Role.FieldOperator)
+        returns (bytes32)
+    {
         bytes32 pId = keccak256(abi.encodePacked(_rawInput, block.timestamp, msg.sender));
         require(!participants[pId].isActive, "Participant already exists");
 
@@ -57,15 +69,15 @@ contract DataValidationAndReporting {
         return pId;
     }
 
-    function recordMetric(bytes32 _participantId, uint256 _categoryId, uint256 _value, bytes32 _proofHash) external onlyRole(Role.FieldOperator) {
+    function recordMetric(bytes32 _participantId, uint256 _categoryId, uint256 _value, bytes32 _proofHash)
+        external
+        onlyRole(Role.FieldOperator)
+    {
         require(participants[_participantId].isActive, "Participant not found");
 
-        participantMetrics[_participantId].push(OutcomeMetric({
-            categoryId: _categoryId,
-            value: _value,
-            timestamp: block.timestamp,
-            proofHash: _proofHash
-        }));
+        participantMetrics[_participantId].push(
+            OutcomeMetric({categoryId: _categoryId, value: _value, timestamp: block.timestamp, proofHash: _proofHash})
+        );
 
         emit MetricRecorded(_participantId, _categoryId, _value);
     }

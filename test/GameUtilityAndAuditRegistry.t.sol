@@ -19,13 +19,12 @@ contract GameUtilityAndAuditRegistryTest is Test {
         vm.prank(developer);
         bytes32 proof = keccak256("economy_simulation_v1_results");
         bytes32 recId = registry.logInternalUtility(
-            keccak256("sim_run_001"),
-            GameUtilityAndAuditRegistry.UtilityType.BalanceSimulation,
-            proof
+            keccak256("sim_run_001"), GameUtilityAndAuditRegistry.UtilityType.BalanceSimulation, proof
         );
 
-        (bytes32 id, GameUtilityAndAuditRegistry.UtilityType uType, bytes32 pHash, , address rep) = registry.utilityRecords(recId);
-        
+        (bytes32 id, GameUtilityAndAuditRegistry.UtilityType uType, bytes32 pHash,, address rep) =
+            registry.utilityRecords(recId);
+
         assertEq(id, recId);
         assertTrue(uType == GameUtilityAndAuditRegistry.UtilityType.BalanceSimulation);
         assertEq(pHash, proof);
@@ -39,7 +38,7 @@ contract GameUtilityAndAuditRegistryTest is Test {
         vm.prank(owner);
         registry.attestHumanCraft(assetId, "Character Art", sigHash);
 
-        (, string memory cat, bytes32 sig, bool isHuman, ) = registry.craftAttestations(assetId);
+        (, string memory cat, bytes32 sig, bool isHuman,) = registry.craftAttestations(assetId);
         assertEq(cat, "Character Art");
         assertEq(sig, sigHash);
         assertTrue(isHuman);
@@ -47,7 +46,7 @@ contract GameUtilityAndAuditRegistryTest is Test {
 
     function test_RevertWhen_NonOwnerAttestsCraft() public {
         bytes32 assetId = keccak256("soundtrack");
-        
+
         vm.prank(developer);
         vm.expectRevert("Unauthorized: Owner only");
         registry.attestHumanCraft(assetId, "Audio Score", keccak256("sig"));

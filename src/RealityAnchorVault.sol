@@ -6,7 +6,6 @@ pragma solidity ^0.8.20;
  * @notice Ensures that liabilities and obligations cannot be bent or avoided. Paid in full.
  */
 contract RealityAnchorVault {
-    
     address public immutable anchorMaster;
     mapping(address => uint256) public outstandingLiabilities;
 
@@ -43,7 +42,7 @@ contract RealityAnchorVault {
 
         // Refund excess if any
         if (msg.value > debt) {
-            (bool success, ) = payable(msg.sender).call{value: msg.value - debt}("");
+            (bool success,) = payable(msg.sender).call{value: msg.value - debt}("");
             require(success, "Refund failed");
         }
     }

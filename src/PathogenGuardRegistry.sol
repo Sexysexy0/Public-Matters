@@ -50,7 +50,7 @@ contract PathogenGuardRegistry {
         BioRecord storage record = registry[_genomeHash];
         if (record.riskLevel > MAX_SAFE_RISK) {
             // High-risk designs require special administrative clearance or remain locked
-            record.isApproved = true; 
+            record.isApproved = true;
         } else {
             record.isApproved = true;
         }

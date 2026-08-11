@@ -37,16 +37,16 @@ contract DeSciManuscriptEquity {
         trustIntegrator = ITrustIntegrator(_trustIntegrator);
     }
 
-    function registerManuscript(string calldata ipfsCid, address author, uint256 royaltyFee) external onlyOwner returns (uint256 manuscriptId) {
+    function registerManuscript(string calldata ipfsCid, address author, uint256 royaltyFee)
+        external
+        onlyOwner
+        returns (uint256 manuscriptId)
+    {
         require(author != address(0), "Invalid author address");
 
         manuscriptId = ++manuscriptCount;
-        manuscripts[manuscriptId] = Manuscript({
-            ipfsCid: ipfsCid,
-            author: author,
-            royaltyFee: royaltyFee,
-            totalRoyaltiesEarned: 0
-        });
+        manuscripts[manuscriptId] =
+            Manuscript({ipfsCid: ipfsCid, author: author, royaltyFee: royaltyFee, totalRoyaltiesEarned: 0});
 
         trustIntegrator.logPositiveAction(author, 4); // 4 = DeSci Scholarly Contribution
 
@@ -60,7 +60,7 @@ contract DeSciManuscriptEquity {
 
         ms.totalRoyaltiesEarned += msg.value;
 
-        (bool success, ) = payable(ms.author).call{value: msg.value}("");
+        (bool success,) = payable(ms.author).call{value: msg.value}("");
         require(success, "Royalty transfer failed");
 
         emit RoyaltyPaid(manuscriptId, msg.sender, msg.value);

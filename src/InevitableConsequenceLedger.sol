@@ -6,7 +6,6 @@ pragma solidity ^0.8.20;
  * @notice Enforces immutable accountability where every action multiplies its recorded weight.
  */
 contract InevitableConsequenceLedger {
-    
     struct Record {
         address actor;
         string actionHash;
@@ -26,13 +25,9 @@ contract InevitableConsequenceLedger {
      */
     function logAction(string memory _actionHash, uint256 _weight) external returns (bytes32) {
         bytes32 actionId = keccak256(abi.encodePacked(msg.sender, _actionHash, block.timestamp));
-        
+
         ledgers[actionId] = Record({
-            actor: msg.sender,
-            actionHash: _actionHash,
-            weight: _weight,
-            timestamp: block.timestamp,
-            settled: false
+            actor: msg.sender, actionHash: _actionHash, weight: _weight, timestamp: block.timestamp, settled: false
         });
 
         // Consequences multiply over time or usage

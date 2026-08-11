@@ -15,7 +15,7 @@ contract ScholarshipEscrowTest is Test {
 
     function setUp() public {
         vm.deal(admin, 10 ether);
-        
+
         vm.prank(admin);
         escrow = new ScholarshipEscrow{value: 5 ether}(verifier);
 
@@ -36,7 +36,7 @@ contract ScholarshipEscrowTest is Test {
 
         // 3. Disburse funds
         uint256 initialBalance = studentAddr.balance;
-        
+
         escrow.disburseMilestone(studentId, 0);
 
         assertEq(studentAddr.balance, initialBalance + 1 ether);

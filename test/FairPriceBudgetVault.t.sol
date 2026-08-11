@@ -22,7 +22,7 @@ contract FairPriceBudgetVaultTest is Test {
 
     function test_AutomatedSafetyBufferDeposit() public {
         vault.depositFunds{value: 1000}();
-        
+
         assertEq(vault.emergencyReserve(), 150);
         assertEq(vault.totalAllocatedFunds(), 850);
     }
@@ -30,7 +30,7 @@ contract FairPriceBudgetVaultTest is Test {
     function test_CategoryCapEnforcement() public {
         vault.setCategoryCap("Bilihin", 300);
         vault.logExpense("Bilihin", 200, "Unang bili");
-        
+
         vm.expectRevert("Expense exceeds defined category cap limit");
         vault.logExpense("Bilihin", 150, "Lalagpas sa cap");
     }

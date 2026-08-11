@@ -26,13 +26,9 @@ contract SkillRegistry {
         registrySteward = msg.sender;
     }
 
-    function registerSkill(
-        string memory _name,
-        string memory _skillCategory,
-        uint256 _proficiencyLevel
-    ) external {
+    function registerSkill(string memory _name, string memory _skillCategory, uint256 _proficiencyLevel) external {
         require(_proficiencyLevel >= 1 && _proficiencyLevel <= 10, "Proficiency must be between 1 and 10");
-        
+
         profiles[msg.sender] = SkillProfile({
             name: _name,
             skillCategory: _skillCategory,

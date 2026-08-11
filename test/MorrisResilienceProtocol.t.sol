@@ -19,7 +19,7 @@ contract MorrisResilienceProtocolTest is Test {
         for (uint256 i = 0; i < 5; i++) {
             protocol.monitorAndVerifyNode(normalNode);
         }
-        
+
         assertFalse(protocol.systemLocked());
         assertEq(protocol.nodeRequestCounts(normalNode), 5);
     }

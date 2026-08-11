@@ -3,15 +3,14 @@ pragma solidity 0.8.35;
 
 /**
  * @title FairPriceBudgetVault
- * @notice Isang pinatibay na kontrata para sa budget, 50% reduction targets, 
+ * @notice Isang pinatibay na kontrata para sa budget, 50% reduction targets,
  * automated safety buffer, at strict expense categorization caps.
  */
 contract FairPriceBudgetVault {
-
     address public immutable steward;
     uint256 public baselineBudget;
-    uint256 public targetReducedBudget; 
-    
+    uint256 public targetReducedBudget;
+
     // Safety Buffer percentage (Halimbawa: 15%)
     uint256 public constant BUFFER_PERCENTAGE = 15;
     uint256 public emergencyReserve;
@@ -45,7 +44,7 @@ contract FairPriceBudgetVault {
      */
     function depositFunds() external payable onlySteward {
         require(!budgetLocked, "Vault is locked");
-        
+
         uint256 bufferAmount = (msg.value * BUFFER_PERCENTAGE) / 100;
         uint256 usableAmount = msg.value - bufferAmount;
 
@@ -68,7 +67,7 @@ contract FairPriceBudgetVault {
      */
     function logExpense(string memory category, uint256 amount, string memory note) external onlySteward {
         require(!budgetLocked, "Budget is locked due to emergency");
-        
+
         uint256 currentCap = categoryCaps[category];
         if (currentCap > 0 && (categoryExpenses[category] + amount) > currentCap) {
             emit BudgetCapExceeded(category, categoryExpenses[category] + amount, currentCap);
@@ -85,8 +84,8 @@ contract FairPriceBudgetVault {
     function withdrawEmergencyReserve(uint256 amount) external onlySteward {
         require(amount <= emergencyReserve, "Insufficient emergency reserve");
         emergencyReserve -= amount;
-        
-        (bool success, ) = payable(steward).call{value: amount}("");
+
+        (bool success,) = payable(steward).call{value: amount}("");
         require(success, "Transfer failed");
 
         emit EmergencyBufferWithdrawn(amount, steward);

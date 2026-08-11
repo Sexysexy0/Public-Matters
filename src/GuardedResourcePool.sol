@@ -11,10 +11,10 @@ contract GuardedResourcePool is ContextEngineGuard {
 
     constructor(bytes32 _coreContext) ContextEngineGuard(_coreContext) {}
 
-    function allocate(bytes32 _context, uint256 _amount, address _recipient) 
-        external 
-        enforceContext(_context) 
-        maintainBaseline(_amount, MAX_LIMIT) 
+    function allocate(bytes32 _context, uint256 _amount, address _recipient)
+        external
+        enforceContext(_context)
+        maintainBaseline(_amount, MAX_LIMIT)
     {
         totalAllocated += _amount;
         emit ResourceAllocated(_recipient, _amount);

@@ -21,7 +21,12 @@ contract MoratoriumEnforcer {
         emit MoratoriumToggled(_active);
     }
 
-    function verifyAndExecute(bytes32 /* projectId */) external view {
+    function verifyAndExecute(
+        bytes32 /* projectId */
+    )
+        external
+        view
+    {
         require(!isMoratoriumActive, "Moratorium active: High-energy data center project blocked");
     }
 }

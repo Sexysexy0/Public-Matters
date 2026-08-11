@@ -14,7 +14,13 @@ contract InfrastructureProofRegistry {
     address public immutable owner;
     ITrustIntegrator public immutable trustIntegrator;
 
-    enum ProjectStatus { Proposed, Active, Completed, Audited, Failed }
+    enum ProjectStatus {
+        Proposed,
+        Active,
+        Completed,
+        Audited,
+        Failed
+    }
 
     struct Project {
         string name;
@@ -90,7 +96,7 @@ contract InfrastructureProofRegistry {
             trustIntegrator.logPositiveAction(proj.contractor, 1);
         }
 
-        (bool success, ) = payable(proj.contractor).call{value: payout}("");
+        (bool success,) = payable(proj.contractor).call{value: payout}("");
         require(success, "Payout transfer failed");
 
         emit MilestoneApproved(projectId, proj.completedMilestones, payout);

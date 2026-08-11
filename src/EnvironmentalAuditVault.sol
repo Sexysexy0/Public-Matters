@@ -28,13 +28,12 @@ contract EnvironmentalAuditVault {
         coreAuditor = msg.sender;
     }
 
-    function submitDischargeReport(
-        string memory facilityId,
-        string memory chemicalDetails,
-        uint256 volumeGallons
-    ) external returns (bytes32) {
+    function submitDischargeReport(string memory facilityId, string memory chemicalDetails, uint256 volumeGallons)
+        external
+        returns (bytes32)
+    {
         bytes32 reportId = keccak256(abi.encodePacked(msg.sender, facilityId, block.timestamp));
-        
+
         reports[reportId] = DischargeReport({
             whistleblower: msg.sender,
             facilityId: facilityId,

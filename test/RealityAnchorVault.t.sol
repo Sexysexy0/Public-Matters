@@ -21,7 +21,7 @@ contract RealityAnchorVaultTest is Test {
         vm.deal(debtor, 2 ether);
         vm.prank(debtor);
         vault.payInFull{value: 1 ether}();
-        
+
         // Liability should be zeroed out
         assertEq(vault.outstandingLiabilities(debtor), 0);
     }

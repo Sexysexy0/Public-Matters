@@ -30,16 +30,12 @@ contract TransparencyLedger {
         require(msg.value == _amount, "Amount mismatch");
         txCount++;
         transactions[txCount] = Transaction({
-            recipient: _recipient,
-            amount: _amount,
-            purpose: _purpose,
-            timestamp: block.timestamp,
-            audited: false
+            recipient: _recipient, amount: _amount, purpose: _purpose, timestamp: block.timestamp, audited: false
         });
 
-        (bool success, ) = payable(_recipient).call{value: _amount}("");
+        (bool success,) = payable(_recipient).call{value: _amount}("");
         require(success, "Transfer failed");
-        
+
         emit FundsDisbursed(txCount, _recipient, _amount, _purpose);
     }
 

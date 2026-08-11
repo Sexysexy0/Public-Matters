@@ -49,19 +49,14 @@ contract ZKWhistleblowerOversight {
         return computedHash == authorizedMerkleRoot;
     }
 
-    function submitAnonymousReport(
-        bytes32 evidenceHash,
-        bytes32 identityCommitment,
-        bytes32[] calldata proof
-    ) external returns (uint256 reportId) {
+    function submitAnonymousReport(bytes32 evidenceHash, bytes32 identityCommitment, bytes32[] calldata proof)
+        external
+        returns (uint256 reportId)
+    {
         require(verifyProof(identityCommitment, proof), "Invalid identity proof or clearance");
 
         reportId = ++reportCount;
-        reports[reportId] = IntelligenceReport({
-            evidenceHash: evidenceHash,
-            timestamp: block.timestamp,
-            verified: true
-        });
+        reports[reportId] = IntelligenceReport({evidenceHash: evidenceHash, timestamp: block.timestamp, verified: true});
 
         emit ReportSubmitted(reportId, evidenceHash, block.timestamp);
     }

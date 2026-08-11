@@ -13,7 +13,12 @@ contract CommunityFloodVault {
     address public immutable owner;
     ITrustIntegrator public immutable trustIntegrator;
 
-    enum InitiativeStatus { Proposed, Funded, InProgress, Completed }
+    enum InitiativeStatus {
+        Proposed,
+        Funded,
+        InProgress,
+        Completed
+    }
 
     struct FloodInitiative {
         string location;
@@ -27,7 +32,9 @@ contract CommunityFloodVault {
     mapping(uint256 => FloodInitiative) public initiatives;
     uint256 public initiativeCount;
 
-    event InitiativeCreated(uint256 indexed initiativeId, string location, address indexed leader, uint256 requiredBudget);
+    event InitiativeCreated(
+        uint256 indexed initiativeId, string location, address indexed leader, uint256 requiredBudget
+    );
     event DirectFunded(uint256 indexed initiativeId, address indexed funder, uint256 amount);
     event InitiativeCompleted(uint256 indexed initiativeId);
 
@@ -66,7 +73,9 @@ contract CommunityFloodVault {
 
     function directFundInitiative(uint256 initiativeId) external payable {
         FloodInitiative storage init = initiatives[initiativeId];
-        require(init.status == InitiativeStatus.Proposed || init.status == InitiativeStatus.Funded, "Initiative not active");
+        require(
+            init.status == InitiativeStatus.Proposed || init.status == InitiativeStatus.Funded, "Initiative not active"
+        );
         require(msg.value > 0, "Must send funds");
 
         init.fundedAmount += msg.value;
@@ -74,9 +83,9 @@ contract CommunityFloodVault {
 
         if (init.fundedAmount >= init.requiredBudget && init.status == InitiativeStatus.Proposed) {
             init.status = InitiativeStatus.Funded;
-            
+
             // Release funds directly to project lead
-            (bool success, ) = payable(init.contractorOrLeader).call{value: init.fundedAmount}("");
+            (bool success,) = payable(init.contractorOrLeader).call{value: init.fundedAmount}("");
             require(success, "Payout to lead failed");
 
             init.status = InitiativeStatus.InProgress;

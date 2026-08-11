@@ -16,7 +16,7 @@ contract JackSparrowProtocolTest is Test {
         vm.prank(pirate);
         vm.warp(1000);
         vm.prevrandao(bytes32(uint256(12345)));
-        
+
         uint256 roll = jack.chaosPlay();
         assertTrue(roll >= 0 && roll < 100);
     }

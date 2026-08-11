@@ -8,7 +8,6 @@ pragma solidity 0.8.35;
  * ang may kontrol sa pag-aaral at benepisyo ng kanilang mga sagradong likas-yaman.
  */
 contract IndigenousKnowledgeRegistry {
-    
     address public immutable protocolGuardian;
 
     struct IndigenousCommunity {
@@ -18,7 +17,7 @@ contract IndigenousKnowledgeRegistry {
     }
 
     struct KnowledgeRecord {
-        string knowledgeTitle;       // e.g., "Cevil/Bufotenine Sacred Botanical Use"
+        string knowledgeTitle; // e.g., "Cevil/Bufotenine Sacred Botanical Use"
         address communityRepresentative;
         uint256 timestamp;
         bool commercializationAllowed;
@@ -46,12 +45,12 @@ contract IndigenousKnowledgeRegistry {
     /**
      * @notice Irehistro ang isang katutubong komunidad para maging ganap na may-ari ng kanilang karapatan
      */
-    function registerCommunity(address _communityAddress, string memory _name, string memory _domain) external onlyGuardian {
-        communities[_communityAddress] = IndigenousCommunity({
-            communityName: _name,
-            ancestralDomain: _domain,
-            isRegistered: true
-        });
+    function registerCommunity(address _communityAddress, string memory _name, string memory _domain)
+        external
+        onlyGuardian
+    {
+        communities[_communityAddress] =
+            IndigenousCommunity({communityName: _name, ancestralDomain: _domain, isRegistered: true});
         emit CommunityRegistered(_communityAddress, _name);
     }
 
@@ -59,16 +58,18 @@ contract IndigenousKnowledgeRegistry {
      * @notice I-lock at protektahan ang Traditional Ecological Knowledge (TEK) laban sa maling pagbansa o pagnanakaw
      */
     function protectKnowledge(
-        string memory _title, 
-        address _communityAddress, 
-        bool _allowCommercial, 
+        string memory _title,
+        address _communityAddress,
+        bool _allowCommercial,
         string memory _proofHash
     ) external returns (bytes32) {
         require(communities[_communityAddress].isRegistered, "Community must be registered first");
-        require(msg.sender == _communityAddress || msg.sender == protocolGuardian, "Unauthorized registration of knowledge");
+        require(
+            msg.sender == _communityAddress || msg.sender == protocolGuardian, "Unauthorized registration of knowledge"
+        );
 
         bytes32 knowledgeId = keccak256(abi.encodePacked(_title, _communityAddress));
-        
+
         protectedKnowledge[knowledgeId] = KnowledgeRecord({
             knowledgeTitle: _title,
             communityRepresentative: _communityAddress,

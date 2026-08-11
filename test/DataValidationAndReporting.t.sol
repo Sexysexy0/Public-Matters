@@ -23,12 +23,12 @@ contract DataValidationAndReportingTest is Test {
 
     function test_RegisterParticipantAndRecordMetric() public {
         vm.startPrank(operator);
-        
+
         bytes32 pId = target.registerParticipant(keccak256("raw_data_sample"), "ipfs://bafybeicik...");
-        
+
         bytes32 proofHash = keccak256("verification_proof");
         target.recordMetric(pId, 1, 100, proofHash);
-        
+
         vm.stopPrank();
 
         DataValidationAndReporting.OutcomeMetric[] memory metrics = target.getParticipantMetrics(pId);

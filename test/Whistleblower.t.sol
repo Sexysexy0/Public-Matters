@@ -21,7 +21,7 @@ contract AntiCorruptionWhistleblowerVaultTest is Test {
         vault.submitProof(bundleId, merkleRoot);
 
         (bytes32 storedRoot, uint256 timestamp, bool isLocked) = vault.vault(bundleId);
-        
+
         assertEq(storedRoot, merkleRoot);
         assertGt(timestamp, 0);
         assertEq(isLocked, false);

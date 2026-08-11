@@ -38,10 +38,7 @@ contract InfrastructureProofRegistryTest is Test {
         uint256 milestones = 2;
 
         uint256 projectId = registry.registerProject{value: budget}(
-            "Flood Mitigation Dike - Calumpit",
-            contractor,
-            milestones,
-            LICENSE_CATEGORY
+            "Flood Mitigation Dike - Calumpit", contractor, milestones, LICENSE_CATEGORY
         );
 
         uint256 initialBalance = contractor.balance;
@@ -57,12 +54,8 @@ contract InfrastructureProofRegistryTest is Test {
 
     function test_ReportAuditFailure() public {
         uint256 budget = 1 ether;
-        uint256 projectId = registry.registerProject{value: budget}(
-            "Ghost Project Test",
-            contractor,
-            1,
-            LICENSE_CATEGORY
-        );
+        uint256 projectId =
+            registry.registerProject{value: budget}("Ghost Project Test", contractor, 1, LICENSE_CATEGORY);
 
         registry.reportAuditFailure(projectId);
     }

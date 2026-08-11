@@ -3,7 +3,7 @@ pragma solidity 0.8.35;
 
 /**
  * @title TransientSupplyPassport
- * @notice Leverages EIP-1153 transient storage (tstore/tload) for gas-efficient, 
+ * @notice Leverages EIP-1153 transient storage (tstore/tload) for gas-efficient,
  * single-transaction supply chain provenance and verification.
  */
 contract TransientSupplyPassport {

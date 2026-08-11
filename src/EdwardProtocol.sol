@@ -33,8 +33,8 @@ contract EdwardProtocol {
     function distributePlunder(address payable _crew, uint256 _share) external onlyCaptain {
         require(address(this).balance >= _share, "Insufficient treasury for plunder distribution");
         jackdawTreasury[_crew] += _share;
-        
-        (bool success, ) = _crew.call{value: _share}("");
+
+        (bool success,) = _crew.call{value: _share}("");
         require(success, "Plunder transfer failed");
 
         emit PlunderDistributed(_crew, _share);

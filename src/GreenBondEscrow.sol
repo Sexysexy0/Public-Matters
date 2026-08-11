@@ -28,12 +28,12 @@ contract GreenBondEscrow {
         require(!penalized[facilityId], "Facility already penalized");
         uint256 bondAmount = facilityBonds[facilityId];
         require(bondAmount > 0, "No active bond for facility");
-        
+
         penalized[facilityId] = true;
         facilityBonds[facilityId] = 0;
-        
+
         // I-transfer ang seized bond pabalik sa core auditor / remediation pool
-        (bool success, ) = payable(coreAuditor).call{value: bondAmount}("");
+        (bool success,) = payable(coreAuditor).call{value: bondAmount}("");
         require(success, "Transfer failed");
 
         emit BondSeized(facilityId, bondAmount);

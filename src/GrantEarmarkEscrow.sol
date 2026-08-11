@@ -6,8 +6,11 @@ pragma solidity ^0.8.20;
  * @dev Locked grant vault with time-bound clawback/refund guardrails for donors.
  */
 contract GrantEarmarkEscrow {
-
-    enum GrantStatus { Active, Completed, Clawbacked }
+    enum GrantStatus {
+        Active,
+        Completed,
+        Clawbacked
+    }
 
     struct Grant {
         bytes32 grantId;
@@ -35,11 +38,11 @@ contract GrantEarmarkEscrow {
         admin = msg.sender;
     }
 
-    function createGrant(
-        bytes32 _rawId,
-        address payable _grantee,
-        uint256 _durationSeconds
-    ) external payable returns (bytes32) {
+    function createGrant(bytes32 _rawId, address payable _grantee, uint256 _durationSeconds)
+        external
+        payable
+        returns (bytes32)
+    {
         require(msg.value > 0, "Grant amount must be > 0");
         bytes32 grantId = keccak256(abi.encodePacked(_rawId, msg.sender, _grantee, block.timestamp));
         require(grants[grantId].totalAmount == 0, "Grant exists");
@@ -68,7 +71,7 @@ contract GrantEarmarkEscrow {
             g.status = GrantStatus.Completed;
         }
 
-        (bool success, ) = g.grantee.call{value: _amount}("");
+        (bool success,) = g.grantee.call{value: _amount}("");
         require(success, "Disbursement failed");
 
         emit TrancheDisbursed(_grantId, _amount);
@@ -85,7 +88,7 @@ contract GrantEarmarkEscrow {
 
         g.status = GrantStatus.Clawbacked;
 
-        (bool success, ) = payable(g.donor).call{value: remainingFunds}("");
+        (bool success,) = payable(g.donor).call{value: remainingFunds}("");
         require(success, "Refund failed");
 
         emit GrantClawbacked(_grantId, remainingFunds);

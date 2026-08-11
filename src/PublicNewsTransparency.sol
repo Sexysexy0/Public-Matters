@@ -3,11 +3,10 @@ pragma solidity 0.8.35;
 
 /**
  * @title PublicNewsTransparency
- * @notice Nagtatala ng mga opisyal na balita, public advisories, at announcements 
+ * @notice Nagtatala ng mga opisyal na balita, public advisories, at announcements
  * para masigurong transparent at hindi nababago ang mga rekord.
  */
 contract PublicNewsTransparency {
-
     address public immutable steward;
 
     struct NewsBulletin {
@@ -35,14 +34,19 @@ contract PublicNewsTransparency {
     /**
      * @notice Mag-publish ng bagong public news bulletin
      */
-    function publishBulletin(string memory _category, string memory _headline, string memory _detailsUri) external onlySteward {
-        bulletins.push(NewsBulletin({
-            timestamp: block.timestamp,
-            category: _category,
-            headline: _headline,
-            detailsUri: _detailsUri,
-            verified: true
-        }));
+    function publishBulletin(string memory _category, string memory _headline, string memory _detailsUri)
+        external
+        onlySteward
+    {
+        bulletins.push(
+            NewsBulletin({
+                timestamp: block.timestamp,
+                category: _category,
+                headline: _headline,
+                detailsUri: _detailsUri,
+                verified: true
+            })
+        );
 
         emit BulletinPublished(bulletins.length - 1, _category, _headline);
     }

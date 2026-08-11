@@ -44,13 +44,12 @@ contract GenerativeSocialContract {
     }
 
     // Pamamahagi ng pondo para sa totoong pangangailangan ng komunidad (May transparency at pananagutan)
-    function disburseSafetyNet(
-        address payable _recipient,
-        uint256 _amount,
-        string memory _category
-    ) external onlyComptroller {
+    function disburseSafetyNet(address payable _recipient, uint256 _amount, string memory _category)
+        external
+        onlyComptroller
+    {
         require(_recipient != address(0), "Invalid recipient");
-        
+
         if (keccak256(bytes(_category)) == keccak256(bytes("housing"))) {
             require(address(this).balance >= _amount, "Insufficient vault balance");
             _recipient.transfer(_amount);

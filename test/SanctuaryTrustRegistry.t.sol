@@ -17,7 +17,7 @@ contract SanctuaryTrustRegistryTest is Test {
     function test_SanctuaryConfiguration() public {
         vm.prank(sanctuaryOwner);
         registry.setSanctuaryState(true, 60 seconds);
-        
+
         (bool active, uint256 cooldown,) = registry.nodes(sanctuaryOwner);
         assertTrue(active);
         assertEq(cooldown, 60 seconds);

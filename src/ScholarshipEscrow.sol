@@ -6,8 +6,11 @@ pragma solidity ^0.8.20;
  * @dev Manages milestone-based scholarship fund distributions with multi-stakeholder verification.
  */
 contract ScholarshipEscrow {
-    
-    enum MilestoneStatus { Pending, Approved, Disbursed }
+    enum MilestoneStatus {
+        Pending,
+        Approved,
+        Disbursed
+    }
 
     struct Student {
         bytes32 studentId;
@@ -52,11 +55,11 @@ contract ScholarshipEscrow {
 
     receive() external payable {}
 
-    function enrollStudent(
-        bytes32 _rawId, 
-        address payable _studentAddress, 
-        uint256 _totalGrant
-    ) external onlyAdmin returns (bytes32) {
+    function enrollStudent(bytes32 _rawId, address payable _studentAddress, uint256 _totalGrant)
+        external
+        onlyAdmin
+        returns (bytes32)
+    {
         bytes32 studentId = keccak256(abi.encodePacked(_rawId, _studentAddress));
         require(!students[studentId].isActive, "Student already enrolled");
 
@@ -72,28 +75,21 @@ contract ScholarshipEscrow {
         return studentId;
     }
 
-    function addMilestone(
-        bytes32 _studentId, 
-        uint256 _amount, 
-        bytes32 _proofHash
-    ) external onlyAdmin {
+    function addMilestone(bytes32 _studentId, uint256 _amount, bytes32 _proofHash) external onlyAdmin {
         require(students[_studentId].isActive, "Student not found");
-        
+
         uint256 currentTotal = students[_studentId].amountDisbursed;
         Milestone[] storage milestones = studentMilestones[_studentId];
-        
+
         for (uint256 i = 0; i < milestones.length; i++) {
             currentTotal += milestones[i].amount;
         }
         require(currentTotal + _amount <= students[_studentId].totalGrantAmount, "Exceeds total grant");
 
         uint256 mId = milestones.length;
-        milestones.push(Milestone({
-            milestoneId: mId,
-            amount: _amount,
-            proofHash: _proofHash,
-            status: MilestoneStatus.Pending
-        }));
+        milestones.push(
+            Milestone({milestoneId: mId, amount: _amount, proofHash: _proofHash, status: MilestoneStatus.Pending})
+        );
 
         emit MilestoneAdded(_studentId, mId, _amount);
     }
@@ -117,7 +113,7 @@ contract ScholarshipEscrow {
         m.status = MilestoneStatus.Disbursed;
         student.amountDisbursed += m.amount;
 
-        (bool success, ) = student.studentAddress.call{value: m.amount}("");
+        (bool success,) = student.studentAddress.call{value: m.amount}("");
         require(success, "Transfer failed");
 
         emit FundsDisbursed(_studentId, _milestoneId, m.amount);

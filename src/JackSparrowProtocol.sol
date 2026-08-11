@@ -17,7 +17,7 @@ contract JackSparrowProtocol {
 
     function chaosPlay() external returns (uint256) {
         uint256 chaosRoll = uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, msg.sender))) % 100;
-        
+
         string memory resultMsg;
         if (chaosRoll > 50) {
             infamyScore[msg.sender] += 10;

@@ -3,16 +3,15 @@ pragma solidity 0.8.35;
 
 /**
  * @title UbisoftRescueProtocol
- * @notice Isang on-chain governance at asset protection framework para i-restructure 
+ * @notice Isang on-chain governance at asset protection framework para i-restructure
  * ang utang, protektahan ang data sovereignty, at ibalik ang focus sa core quality.
  */
 contract UbisoftRescueProtocol {
-    
     // State Variables
     address public immutable foundingFamily;
     uint256 public totalDebtLoad;
     uint256 public qualityThreshold;
-    
+
     mapping(address => bool) public authorizedBoardMembers;
     mapping(bytes32 => bool) public protectedIPs; // e.g., Assassin's Creed, Far Cry
 

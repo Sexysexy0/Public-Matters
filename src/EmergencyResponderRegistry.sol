@@ -13,7 +13,12 @@ contract EmergencyResponderRegistry {
     address public immutable owner;
     ITrustIntegrator public immutable trustIntegrator;
 
-    enum UnitStatus { Inactive, Active, Dispatched, OnStandby }
+    enum UnitStatus {
+        Inactive,
+        Active,
+        Dispatched,
+        OnStandby
+    }
 
     struct RescueUnit {
         string teamName;
@@ -43,14 +48,10 @@ contract EmergencyResponderRegistry {
 
     function registerRescueUnit(string calldata teamName, address leader) external onlyOwner returns (uint256 unitId) {
         require(leader != address(0), "Invalid leader address");
-        
+
         unitId = ++unitCount;
         rescueUnits[unitId] = RescueUnit({
-            teamName: teamName,
-            leader: leader,
-            operationalBudget: 0,
-            completedRescues: 0,
-            status: UnitStatus.Active
+            teamName: teamName, leader: leader, operationalBudget: 0, completedRescues: 0, status: UnitStatus.Active
         });
 
         emit UnitRegistered(unitId, teamName, leader);
@@ -64,7 +65,7 @@ contract EmergencyResponderRegistry {
         unit.operationalBudget += msg.value;
         unit.status = UnitStatus.Dispatched;
 
-        (bool success, ) = payable(unit.leader).call{value: msg.value}("");
+        (bool success,) = payable(unit.leader).call{value: msg.value}("");
         require(success, "Fund transfer failed");
 
         emit FundsDispatched(unitId, msg.value, missionDetails);

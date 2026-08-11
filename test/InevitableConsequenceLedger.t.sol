@@ -14,19 +14,19 @@ contract InevitableConsequenceLedgerTest is Test {
 
     function test_LogAndSettleAction() public {
         vm.startPrank(actor);
-        
+
         // Log action with weight 100
         bytes32 actionId = ledger.logAction("ignored_protocol", 100);
-        
+
         // Check if weight multiplied by 2 as designed
         assertEq(ledger.accountabilityIndex(actor), 200);
 
         // Settle the consequence
         ledger.settleLedger(actionId);
-        
+
         (,,,, bool settled) = ledger.ledgers(actionId);
         assertTrue(settled);
-        
+
         vm.stopPrank();
     }
 }

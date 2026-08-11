@@ -13,7 +13,7 @@ contract DeployUbisoftRescue is Script {
         vm.startBroadcast(deployerPrivateKey);
 
         UbisoftRescueProtocol rescueProtocol = new UbisoftRescueProtocol(foundingFamily, initialDebt);
-        
+
         console.log("UbisoftRescueProtocol deployed at:", address(rescueProtocol));
 
         vm.stopBroadcast();

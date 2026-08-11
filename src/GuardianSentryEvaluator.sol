@@ -2,7 +2,12 @@
 pragma solidity ^0.8.20;
 
 contract GuardianSentryEvaluator {
-    enum ImpactLevel { Neutral, Beneficial, Catastrophic, Transformative }
+    enum ImpactLevel {
+        Neutral,
+        Beneficial,
+        Catastrophic,
+        Transformative
+    }
 
     struct Evaluation {
         string policyTitle;
@@ -28,12 +33,11 @@ contract GuardianSentryEvaluator {
         watchTowerMonk = msg.sender;
     }
 
-    function evaluateRippleEffect(
-        bytes32 _policyId,
-        string memory _title,
-        uint256 _riskScore,
-        ImpactLevel _impact
-    ) external onlyMonk returns (bool) {
+    function evaluateRippleEffect(bytes32 _policyId, string memory _title, uint256 _riskScore, ImpactLevel _impact)
+        external
+        onlyMonk
+        returns (bool)
+    {
         require(!sentryRecords[_policyId].evaluated, "Already evaluated by Sentry");
         require(_riskScore <= 100, "Invalid risk score range");
 
