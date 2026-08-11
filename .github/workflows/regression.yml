@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v7
 
       - name: Setup Foundry
-        uses: foundry-rs/foundry-toolchain@c30f40d6e679b375b066d92976b9f2d184fc3a0b # v1
+        uses: foundry-rs/foundry-toolchain@v1
         with:
           version: latest
 
