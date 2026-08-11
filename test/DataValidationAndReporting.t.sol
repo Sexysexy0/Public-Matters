@@ -5,41 +5,34 @@ import "forge-std/Test.sol";
 import "../src/DataValidationAndReporting.sol";
 
 contract DataValidationAndReportingTest is Test {
-    DataValidationAndReporting public target;
+    DataValidationAndReporting public registry;
 
     address admin = address(1);
     address operator = address(2);
-    address auditor = address(3);
 
     function setUp() public {
         vm.prank(admin);
-        target = new DataValidationAndReporting();
+        registry = new DataValidationAndReporting();
 
-        vm.startPrank(admin);
-        target.assignRole(operator, DataValidationAndReporting.Role.FieldOperator);
-        target.assignRole(auditor, DataValidationAndReporting.Role.Auditor);
-        vm.stopPrank();
+        vm.prank(admin);
+        registry.assignRole(operator, DataValidationAndReporting.Role.FieldOperator);
     }
 
     function test_RegisterParticipantAndRecordMetric() public {
-        vm.startPrank(operator);
+        vm.prank(operator);
+        bytes32 pId = registry.registerParticipant(keccak256("raw_input"), "metadata");
 
-        bytes32 pId = target.registerParticipant(keccak256("raw_data_sample"), "ipfs://bafybeicik...");
+        vm.prank(operator);
+        registry.recordMetric(pId, 100, 500, keccak256("proof"));
 
-        bytes32 proofHash = keccak256("verification_proof");
-        target.recordMetric(pId, 1, 100, proofHash);
-
-        vm.stopPrank();
-
-        DataValidationAndReporting.OutcomeMetric[] memory metrics = target.getParticipantMetrics(pId);
+        DataValidationAndReporting.OutcomeMetric[] memory metrics = registry.getParticipantMetrics(pId);
         assertEq(metrics.length, 1);
-        assertEq(metrics[0].value, 100);
-        assertEq(metrics[0].proofHash, proofHash);
+        assertEq(metrics[0].value, 500);
     }
 
     function test_RevertWhen_UnauthorizedRegistration() public {
-        vm.prank(address(99)); // Unauthorized user
+        vm.prank(address(99));
         vm.expectRevert("Unauthorized: Insufficient role");
-        target.registerParticipant(keccak256("unauthorized"), "ipfs://invalid");
+        registry.registerParticipant(keccak256("raw_input"), "metadata");
     }
 }

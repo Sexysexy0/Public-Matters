@@ -14,10 +14,11 @@ contract GrantEarmarkEscrowTest is Test {
     bytes32 grantId;
 
     function setUp() public {
+        vm.deal(donor, 10 ether);
+
         vm.prank(admin);
         vault = new GrantEarmarkEscrow();
 
-        vm.deal(donor, 10 ether);
         vm.prank(donor);
         grantId = vault.createGrant{value: 4 ether}(keccak256("grant_alpha"), grantee, 30 days);
     }
@@ -32,7 +33,6 @@ contract GrantEarmarkEscrowTest is Test {
     }
 
     function test_ClawbackAfterExpiry() public {
-        // Warp time past expiration
         vm.warp(block.timestamp + 31 days);
 
         uint256 initDonorBal = donor.balance;

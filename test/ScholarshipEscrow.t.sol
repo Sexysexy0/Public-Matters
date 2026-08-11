@@ -16,25 +16,21 @@ contract ScholarshipEscrowTest is Test {
     function setUp() public {
         vm.deal(admin, 10 ether);
 
-        vm.prank(admin);
+        vm.startPrank(admin);
         escrow = new ScholarshipEscrow{value: 5 ether}(verifier);
-
-        vm.prank(admin);
         studentId = escrow.enrollStudent(keccak256("student_001"), studentAddr, 2 ether);
+        vm.stopPrank();
     }
 
     function test_MilestoneWorkflowAndDisbursement() public {
         bytes32 proof = keccak256("gpa_3.8_transcript");
 
-        // 1. Admin adds milestone
         vm.prank(admin);
         escrow.addMilestone(studentId, 1 ether, proof);
 
-        // 2. Verifier approves milestone
         vm.prank(verifier);
         escrow.approveMilestone(studentId, 0);
 
-        // 3. Disburse funds
         uint256 initialBalance = studentAddr.balance;
 
         escrow.disburseMilestone(studentId, 0);
