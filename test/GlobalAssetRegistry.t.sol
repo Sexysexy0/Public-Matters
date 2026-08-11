@@ -17,17 +17,10 @@ contract GlobalAssetRegistryTest is Test {
         bytes32 assetId = keccak256("asset_one");
 
         vm.startPrank(auditor);
-        registry.initializeAssetBrick(
-            assetId,
-            GlobalAssetRegistry.AssetType(0),
-            63,
-            address(0x123),
-            1,
-            12345
-        );
+        registry.initializeAssetBrick(assetId, GlobalAssetRegistry.AssetType(0), 63, address(0x123), 1, 12345);
         registry.recordTransientApproval(assetId);
         vm.stopPrank();
-        
+
         uint256 count = registry.getTransientApprovals(assetId);
         assertEq(count, 1);
     }
