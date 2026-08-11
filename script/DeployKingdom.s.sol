@@ -72,7 +72,7 @@ contract DeployKingdom is Script {
         CCTVTransparencyRegistry cctv = new CCTVTransparencyRegistry();
         // --- 5. EDUCATION & SCHOLARSHIPS ---
         EducationCredential edu = new EducationCredential(address(0)); // placeholder
-        ScholarshipEscrow scholarship = new ScholarshipEscrow();
+        ScholarshipEscrow scholarship = new ScholarshipEscrow(msg.sender);
         // --- 6. JOB MARKET ---
         JobMatchingDAO job = new JobMatchingDAO(address(edu));
         // --- 7. RECOVERY (KNOX) ---
