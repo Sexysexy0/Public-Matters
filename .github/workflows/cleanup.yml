@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cleanup old artifacts
-        uses: geekyeggo/delete-artifact@v2
+        uses: geekyeggo/delete-artifact@v6
         with:
           age: 7 # delete artifacts older than 7 days
           skip-recent: 3 # keep last 3 artifacts
