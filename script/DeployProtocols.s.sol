@@ -11,7 +11,7 @@ contract DeployProtocols is Script {
         vm.startBroadcast();
 
         // 1. I-deploy ang TransparencyLedger (standard constructor call)
-        TransparencyLedger ledger = new TransparencyLedger(msg.sender);
+        TransparencyLedger ledger = new TransparencyLedger();
         console.log("TransparencyLedger deployed at:", address(ledger));
 
         // 2. I-deploy ang LocalGovernanceOverride
