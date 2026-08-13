@@ -4,8 +4,8 @@ pragma solidity ^0.8.20;
 contract TransparencyMandateRegistry {
     struct Mandate {
         string projectName;
-        uint256 filingTimestamp;
-        uint256 mandatoryWaitPeriod; // e.g. 6 to 12 months in seconds
+        uint256 filingBlock;
+        uint256 mandatoryWaitPeriod; // seconds
         bool disclosed;
         bool approved;
     }
@@ -28,7 +28,7 @@ contract TransparencyMandateRegistry {
     function fileProject(bytes32 projectId, string memory projectName, uint256 waitPeriodMonths) external onlySteward {
         mandates[projectId] = Mandate({
             projectName: projectName,
-            filingTimestamp: block.timestamp,
+            filingBlock: block.number,
             mandatoryWaitPeriod: waitPeriodMonths * 30 days,
             disclosed: true,
             approved: false
@@ -39,7 +39,8 @@ contract TransparencyMandateRegistry {
     function approveProject(bytes32 projectId) external onlySteward {
         Mandate storage m = mandates[projectId];
         require(m.disclosed, "Not filed");
-        require(block.timestamp >= m.filingTimestamp + m.mandatoryWaitPeriod, "Wait period active");
+        uint256 secondsPerBlock = 12;
+        require((block.number - m.filingBlock) * secondsPerBlock >= m.mandatoryWaitPeriod, "Wait period active");
         m.approved = true;
         emit ProjectApproved(projectId);
     }

@@ -5,7 +5,7 @@ contract SanctuaryTrustRegistry {
     struct NodeState {
         bool isSanctuaryActive;
         uint256 interactionCooldown;
-        uint256 lastInteraction;
+        uint256 lastInteractionBlock;
     }
 
     mapping(address => NodeState) public nodes;
@@ -23,7 +23,8 @@ contract SanctuaryTrustRegistry {
         if (nodes[_recipient].isSanctuaryActive && !permittedPeers[_recipient][msg.sender]) {
             revert UnauthorizedPeer();
         }
-        if (block.timestamp < nodes[_recipient].lastInteraction + nodes[_recipient].interactionCooldown) {
+        uint256 secondsPerBlock = 12;
+        if ((block.number - nodes[_recipient].lastInteractionBlock) * secondsPerBlock < nodes[_recipient].interactionCooldown) {
             revert CooldownActive();
         }
         _;
@@ -41,7 +42,7 @@ contract SanctuaryTrustRegistry {
     }
 
     function sendSignal(address _recipient, bytes32 _signalHash) external onlyPermitted(_recipient) {
-        nodes[_recipient].lastInteraction = block.timestamp;
+        nodes[_recipient].lastInteractionBlock = block.number;
         emit DirectSignalSent(msg.sender, _recipient, _signalHash);
     }
 }

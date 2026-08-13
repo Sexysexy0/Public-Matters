@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 contract LocalGovernanceOverride {
     address public immutable localCouncil;
     uint256 public constant MAX_TERM = 730 days; // Max 2 years limit (Sunset Clause)
-    uint256 public deploymentTime;
+    uint256 public deploymentBlock;
     bool public executiveOverrideActive = true;
 
     event PolicyOverridden(string reason, address initiator);
@@ -16,12 +16,13 @@ contract LocalGovernanceOverride {
 
     constructor(address _localCouncil) {
         localCouncil = _localCouncil;
-        deploymentTime = block.timestamp;
+        deploymentBlock = block.number;
     }
 
     function checkSunsetClause() public view returns (bool) {
-        if (block.timestamp > deploymentTime + MAX_TERM) {
-            return false; // Expired term, control reverts fully to local governance
+        uint256 secondsPerBlock = 12;
+        if ((block.number - deploymentBlock) * secondsPerBlock > MAX_TERM) {
+            return false;
         }
         return executiveOverrideActive;
     }
