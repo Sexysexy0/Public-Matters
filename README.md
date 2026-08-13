@@ -27,6 +27,17 @@ All core contracts are live, active, and fully verified on Ethereum Sepolia (Cha
 | **`CommunityFloodVault`** | `0xDF8C7Ed42bC124ac022120FE97f28C8436ab4439` | Verified |
 | **`ZKWhistleblowerOversight`** | `0x1069957FEdc2Fd99dE67a8E072f8E5AF224bc1A9` | Verified |
 | **`DeSciManuscriptEquity`** | `0xDD0722F89702df3a2f75aC3977cAbEDA0c8eDfBA` | Verified |
+| **`VerificationCodex`** | `0x73CEb342B2729f43cD41D02c64395030502BCeA4` | Verified |
+| **`AccountabilityArc`** | `0x1dBF326AF727A0aD3F7c1B0E2d062bF84C250717` | Verified |
+| **`EvidenceRegistry`** | `0xa9A3BB7c891E88293a5ba83d024FF058d2631945` | Verified |
+| **`SkepticismProtocol`** | `0x5e41A2fE650c098bf69ccF945EE38a09c3aEB235` | Pending |
+| **`TransparencyLedger`** | `0xdb9cF8708eE2d2c604EAd84F90d910d4a660765A` | Pending |
+| **`IntellectualDiversity`** | `0xE7008f37c066726B644091B9FE3C4013528DA493` | Pending |
+| **`MarketAccountability`** | `0x0e1582D384649a4592bF80D796D6A397c34796c5` | Pending |
+| **`FundamentalEducation`** | `0x60c0B3C53eBB54630f62Bca880dAba8C25a2a5B6` | Pending |
+| **`ResearchDecentralization`** | `0x82431253B44d2c96F20E6eE3E4AB1B3f8782C7D4` | Pending |
+| **`FairGovernanceFramework`** | `0x44717152838ba186Ba96E4d53dF8f0495099A078` | Verified |
+
 
 ## 🛠️ Development & Testing
 
