@@ -14,6 +14,6 @@ contract SystemParadigmSwitchTest is Test {
     function testSwitchParadigm() public {
         vm.roll(block.number + 20000);
         switcher.switchParadigm(SystemParadigmSwitch.Paradigm.Emergent);
-        assertEq(uint(switcher.current()), uint(SystemParadigmSwitch.Paradigm.Emergent));
+        assertEq(uint256(switcher.current()), uint256(SystemParadigmSwitch.Paradigm.Emergent));
     }
 }

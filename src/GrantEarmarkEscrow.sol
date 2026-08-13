@@ -2,7 +2,11 @@
 pragma solidity ^0.8.20;
 
 contract GrantEarmarkEscrow {
-    enum GrantStatus { Active, Completed, Clawbacked }
+    enum GrantStatus {
+        Active,
+        Completed,
+        Clawbacked
+    }
 
     struct Grant {
         bytes32 grantId;

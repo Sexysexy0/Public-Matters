@@ -2,7 +2,11 @@
 pragma solidity ^0.8.20;
 
 contract EnergyScheduler {
-    enum EnergyType { Physical, Mental, Emotional }
+    enum EnergyType {
+        Physical,
+        Mental,
+        Emotional
+    }
 
     struct Task {
         string description;

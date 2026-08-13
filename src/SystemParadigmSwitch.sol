@@ -2,7 +2,10 @@
 pragma solidity ^0.8.20;
 
 contract SystemParadigmSwitch {
-    enum Paradigm { PredictControl, Emergent }
+    enum Paradigm {
+        PredictControl,
+        Emergent
+    }
 
     Paradigm public current;
     uint256 public lastSwitchBlock;

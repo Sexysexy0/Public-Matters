@@ -24,7 +24,10 @@ contract SanctuaryTrustRegistry {
             revert UnauthorizedPeer();
         }
         uint256 secondsPerBlock = 12;
-        if ((block.number - nodes[_recipient].lastInteractionBlock) * secondsPerBlock < nodes[_recipient].interactionCooldown) {
+        if (
+            (block.number - nodes[_recipient].lastInteractionBlock) * secondsPerBlock
+                < nodes[_recipient].interactionCooldown
+        ) {
             revert CooldownActive();
         }
         _;
