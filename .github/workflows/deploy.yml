@@ -53,7 +53,7 @@ jobs:
           RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         run: |
-          forge script script/DeployKingdom.s.sol:DeployKingdom \
+          forge script script/DeployKingdom.s.sol:DeployKingdom --via-ir \
             --rpc-url $RPC_URL \
             --private-key $PRIVATE_KEY \
             --broadcast --slow

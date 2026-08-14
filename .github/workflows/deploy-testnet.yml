@@ -24,7 +24,7 @@ jobs:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           DEST_ADDR: ${{ secrets.DEST_ADDR }}
         run: |
-          forge script script/Deploy.s.sol:Deploy \
+          forge script script/Deploy.s.sol:Deploy --via-ir \
             --rpc-url $RPC_URL \
             --private-key $PRIVATE_KEY \
             --broadcast

@@ -19,7 +19,7 @@ jobs:
           version: nightly
 
       - name: Run tests with gas report
-        run: forge test --gas-report > gas-report.txt
+        run: forge test --via-ir --gas-report > gas-report.txt
 
       - name: Upload gas report artifact
         uses: actions/upload-artifact@v3
@@ -53,6 +53,6 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           TRANSPARENCY_REGISTRY: ${{ secrets.TRANSPARENCY_REGISTRY }}
-        run: forge script script/MasterDeployment.s.sol \
+        run: forge script script/MasterDeployment.s.sol --via-ir \
           --rpc-url ${{ secrets.SEPOLIA_RPC }} \
           --broadcast --slow
