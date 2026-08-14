@@ -24,9 +24,7 @@ contract CommunityTaxVault {
 
     modifier onlyAuthorized() {
         require(
-            msg.sender == steward ||
-            msg.sender == address(communityDAO) ||
-            authorizedAllocators[msg.sender],
+            msg.sender == steward || msg.sender == address(communityDAO) || authorizedAllocators[msg.sender],
             "Not authorized"
         );
         _;
@@ -45,10 +43,7 @@ contract CommunityTaxVault {
         uint256 trustWeight = msg.value / 1e16;
         if (trustWeight == 0) trustWeight = 1;
 
-        trustIntegrator.logPositiveAction(
-            string(abi.encodePacked("Tax deposit: ", msg.sender)),
-            trustWeight
-        );
+        trustIntegrator.logPositiveAction(string(abi.encodePacked("Tax deposit: ", msg.sender)), trustWeight);
 
         emit TaxDeposited(msg.sender, msg.value, trustWeight);
     }

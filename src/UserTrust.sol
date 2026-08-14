@@ -27,11 +27,10 @@ contract UserTrust {
         emit ScoreAdjusted(user, delta, newScore.toUint256(), reason);
     }
 
-    function batchAdjust(
-        address[] calldata users,
-        int256[] calldata deltas,
-        string calldata reason
-    ) external onlySteward {
+    function batchAdjust(address[] calldata users, int256[] calldata deltas, string calldata reason)
+        external
+        onlySteward
+    {
         require(users.length == deltas.length, "Length mismatch");
         for (uint256 i = 0; i < users.length; i++) {
             adjustScore(users[i], deltas[i], reason);

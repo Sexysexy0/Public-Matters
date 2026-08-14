@@ -48,12 +48,9 @@ contract CommunityFund {
         taxVault = _taxVault;
     }
 
-    function createProposal(
-        string calldata title,
-        string calldata description,
-        uint256 amount,
-        address recipient
-    ) external {
+    function createProposal(string calldata title, string calldata description, uint256 amount, address recipient)
+        external
+    {
         require(amount > 0, "Amount must be > 0");
         require(recipient != address(0), "Invalid recipient");
         require(userTrust.getScore(msg.sender) >= minVoteThreshold, "Trust too low to propose");
@@ -96,10 +93,7 @@ contract CommunityFund {
 
         // Reward voter with trust points (1 point per vote)
         uint256 trustReward = 1;
-        trustIntegrator.logPositiveAction(
-            string(abi.encodePacked("Voted on proposal: ", p.title)),
-            trustReward
-        );
+        trustIntegrator.logPositiveAction(string(abi.encodePacked("Voted on proposal: ", p.title)), trustReward);
 
         participationCount[msg.sender]++;
 
@@ -117,15 +111,10 @@ contract CommunityFund {
         require(!p.executed, "Already executed");
         require(msg.sender == steward || msg.sender == address(this), "Not authorized");
 
-        (bool success, ) = taxVault.call(
-            abi.encodeWithSignature("allocateFunds(uint256,string)", p.amount, p.title)
-        );
+        (bool success,) = taxVault.call(abi.encodeWithSignature("allocateFunds(uint256,string)", p.amount, p.title));
         require(success, "Allocation failed");
 
-        trustIntegrator.logPositiveAction(
-            string(abi.encodePacked("Fund allocation: ", p.title)),
-            5
-        );
+        trustIntegrator.logPositiveAction(string(abi.encodePacked("Fund allocation: ", p.title)), 5);
 
         p.executed = true;
         p.executedAt = block.timestamp;

@@ -9,13 +9,7 @@ contract TaxPaymentProcessor {
     address public taxVault; // CommunityTaxVault address
     uint256 public vatRate; // basis points, e.g., 1200 = 12%
 
-    event TaxPaid(
-        address indexed payer,
-        uint256 amount,
-        uint256 vatAmount,
-        uint256 trustWeight,
-        string category
-    );
+    event TaxPaid(address indexed payer, uint256 amount, uint256 vatAmount, uint256 trustWeight, string category);
     event VatRateUpdated(uint256 newRate);
     event TaxVaultUpdated(address newVault);
 
@@ -56,15 +50,12 @@ contract TaxPaymentProcessor {
         uint256 trustWeight = amount / 1e16;
         if (trustWeight == 0) trustWeight = 1;
 
-        trustIntegrator.logPositiveAction(
-            string(abi.encodePacked("Tax: ", category)),
-            trustWeight
-        );
+        trustIntegrator.logPositiveAction(string(abi.encodePacked("Tax: ", category)), trustWeight);
 
         emit TaxPaid(msg.sender, amount, vatAmount, trustWeight, category);
 
         // Forward the payment to the tax vault
-        (bool success, ) = taxVault.call{value: total}("");
+        (bool success,) = taxVault.call{value: total}("");
         require(success, "Vault transfer failed");
 
         // Refund excess if any
