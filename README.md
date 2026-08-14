@@ -72,3 +72,10 @@ forge script script/DeployMasterArchitecture.s.sol:DeployMasterArchitecture \
 
 ## 📄 License
 This ecosystem is open-source software provided under the terms of the Apache License 2.0.
+### Newly Deployed Contracts (Aug 2026)
+| Contract Name             | Deployed Address                                 | Status   |
+|---------------------------|--------------------------------------------------|----------|
+| TransparencyMandateRegistry | 0x3c056E19E423DE5346c79b7898A666E9Fd3475f1     | Verified |
+| GovernanceBundle          | 0x8e3408344422ccb8131A1E796D5d66AaBb14981f       | Verified |
+| PublicMattersCovenant     | 0x0f3Ef8a85D4E98B4a134a43141380A236305Ecd5       | Verified |
+
