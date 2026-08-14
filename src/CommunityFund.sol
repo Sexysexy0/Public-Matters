@@ -27,21 +27,17 @@ contract CommunityFund {
 
     mapping(uint256 => Proposal) public proposals;
     mapping(uint256 => mapping(address => bool)) public hasVoted;
+    mapping(address => uint256) public participationCount;
     uint256 public proposalCount;
     uint256 public minVoteThreshold = 1;
     uint256 public quorum = 1;
 
     event ProposalCreated(uint256 id, address proposer, string title, uint256 amount);
-    event Voted(uint256 id, address voter, bool support);
+    event Voted(uint256 id, address voter, bool support, uint256 trustReward);
     event ProposalExecuted(uint256 id, address recipient, uint256 amount);
 
     modifier onlySteward() {
         require(msg.sender == steward, "Only steward");
-        _;
-    }
-
-    modifier onlyVault() {
-        require(msg.sender == taxVault, "Only vault");
         _;
     }
 
@@ -98,7 +94,16 @@ contract CommunityFund {
             p.votesAgainst += weight;
         }
 
-        emit Voted(proposalId, msg.sender, support);
+        // Reward voter with trust points (1 point per vote)
+        uint256 trustReward = 1;
+        trustIntegrator.logPositiveAction(
+            string(abi.encodePacked("Voted on proposal: ", p.title)),
+            trustReward
+        );
+
+        participationCount[msg.sender]++;
+
+        emit Voted(proposalId, msg.sender, support, trustReward);
 
         // Auto-pass if quorum met and votesFor > votesAgainst
         if ((p.votesFor + p.votesAgainst) >= quorum && p.votesFor > p.votesAgainst) {
@@ -112,7 +117,6 @@ contract CommunityFund {
         require(!p.executed, "Already executed");
         require(msg.sender == steward || msg.sender == address(this), "Not authorized");
 
-        // Transfer funds from vault to recipient
         (bool success, ) = taxVault.call(
             abi.encodeWithSignature("allocateFunds(uint256,string)", p.amount, p.title)
         );

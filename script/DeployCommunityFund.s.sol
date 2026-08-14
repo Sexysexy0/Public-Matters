@@ -9,7 +9,7 @@ contract DeployCommunityFund is Script {
     function run() external {
         address userTrust = 0x067294c832d7aE858c7240dc31c8D965C1D917f1;
         address trustIntegrator = 0xEaB33E69B7599830Dc78D4e446CC02fC9D0aC0B6;
-        address taxVault = 0xBEb87cB2f38def956ff95058FD0b1EcC98D30A76;
+        address taxVault = 0x83ff7cdC86C1a98Fc97bB1625002ac5A47ba60a8;
 
         vm.startBroadcast();
         CommunityFund fund = new CommunityFund(userTrust, trustIntegrator, taxVault);
