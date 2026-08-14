@@ -29,10 +29,7 @@ contract PermissionlessBroadcast {
 
     function broadcast(string calldata content) external {
         broadcasts.push(Broadcast(msg.sender, content, block.timestamp));
-        trustIntegrator.logPositiveAction(
-            string(abi.encodePacked("Broadcast: ", content)),
-            10
-        );
+        trustIntegrator.logPositiveAction(string(abi.encodePacked("Broadcast: ", content)), 10);
         emit BroadcastSent(msg.sender, content, block.timestamp);
     }
 

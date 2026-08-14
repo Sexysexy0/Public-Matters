@@ -8,13 +8,7 @@ contract TaxPaymentProcessor {
     ITrustIntegrator public trustIntegrator;
     uint256 public vatRate; // basis points, e.g., 1200 = 12%
 
-    event TaxPaid(
-        address indexed payer,
-        uint256 amount,
-        uint256 vatAmount,
-        uint256 trustWeight,
-        string category
-    );
+    event TaxPaid(address indexed payer, uint256 amount, uint256 vatAmount, uint256 trustWeight, string category);
     event VatRateUpdated(uint256 newRate);
 
     modifier onlySteward() {
@@ -54,10 +48,7 @@ contract TaxPaymentProcessor {
         if (trustWeight == 0) trustWeight = 1;
 
         // Log positive action on TrustIntegratorV2
-        trustIntegrator.logPositiveAction(
-            string(abi.encodePacked("Tax: ", category)),
-            trustWeight
-        );
+        trustIntegrator.logPositiveAction(string(abi.encodePacked("Tax: ", category)), trustWeight);
 
         emit TaxPaid(msg.sender, amount, vatAmount, trustWeight, category);
 

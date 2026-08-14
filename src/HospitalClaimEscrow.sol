@@ -25,10 +25,7 @@ contract HospitalClaimEscrow {
 
     function processClaim(address patient) external onlySteward {
         patients[patient] = true;
-        trustIntegrator.logPositiveAction(
-            string(abi.encodePacked("Claim: ", patient)),
-            20
-        );
+        trustIntegrator.logPositiveAction(string(abi.encodePacked("Claim: ", patient)), 20);
         emit ClaimProcessed(patient, claimAmount);
     }
 

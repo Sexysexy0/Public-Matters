@@ -24,11 +24,8 @@ contract EducationCredential {
     function awardCredential(address student, string calldata credentialName) external onlySteward {
         require(!credentials[student][credentialName], "Already has credential");
         credentials[student][credentialName] = true;
-        
-        trustIntegrator.logPositiveAction(
-            string(abi.encodePacked("Credential: ", credentialName)),
-            10
-        );
+
+        trustIntegrator.logPositiveAction(string(abi.encodePacked("Credential: ", credentialName)), 10);
         emit CredentialAwarded(student, credentialName);
     }
 

@@ -38,10 +38,7 @@ contract CommunityFloodVault {
     function executeRelief(uint256 reliefId) external onlySteward {
         require(reliefs[reliefId].executed == false, "Already executed");
         reliefs[reliefId].executed = true;
-        trustIntegrator.logPositiveAction(
-            string(abi.encodePacked("Relief: ", reliefs[reliefId].contractorOrLeader)),
-            3
-        );
+        trustIntegrator.logPositiveAction(string(abi.encodePacked("Relief: ", reliefs[reliefId].contractorOrLeader)), 3);
         emit ReliefExecuted(reliefId);
     }
 

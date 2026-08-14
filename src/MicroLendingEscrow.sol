@@ -39,11 +39,8 @@ contract MicroLendingEscrow {
     function repayLoan(address borrower, uint256 amount) external onlySteward {
         require(borrowers[borrower].exists, "Not registered");
         require(amount > 0, "Amount must be > 0");
-        
-        trustIntegrator.logPositiveAction(
-            string(abi.encodePacked("Loan repaid: ", borrower)),
-            15
-        );
+
+        trustIntegrator.logPositiveAction(string(abi.encodePacked("Loan repaid: ", borrower)), 15);
         emit LoanRepaid(borrower, amount);
     }
 
