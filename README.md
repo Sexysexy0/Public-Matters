@@ -93,3 +93,11 @@ This ecosystem is open-source software provided under the terms of the Apache Li
 - Supreme Steward: 0x6bDf6D887038AB97957c2f57d05eDd0eb338589A
 - Jurisdictions encoded: Philippines, Singapore, Hong Kong SAR, Bermuda, United States, Global
 
+### Reforms Contracts (Aug 2026)
+| Contract Name             | Deployed Address                                 | Status   |
+|---------------------------|--------------------------------------------------|----------|
+| FundamentalEducation      | 0xd551526453b8F548D60eC59f4f3E764C42955DA5       | Verified |
+| IntellectualDiversity     | 0xB0DEa9cB49D96653Fd3dA6587986DD45Ef3fdB4c       | Verified |
+| MarketAccountability      | 0x0EDA94D0B80D35040bDA1E0d270bb52CFc8667A3       | Verified |
+| ResearchDecentralization  | 0x127Fdecfdc219Bb4AF65971AB81b50d83F107905       | Verified |
+
