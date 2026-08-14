@@ -127,3 +127,17 @@ This ecosystem is open-source software provided under the terms of the Apache Li
 | LocalRevenueGuard         | 0x88932Afc3DB48B20e5A11d28C8EC89E7a887DF8C       | Verified |
 | LocalHireConditional      | 0x3E0aFd48696d0b664Bbc8f00d2Fe13aa9578Df3c       | Verified |
 | CommunityDAO              | 0x00Dd17280FD2cA7B51A938D77533702aC08637bc       | Verified |
+
+## 🧩 Horizontal Progression (Evergreen Architecture)
+
+Ang `Public-Matters` ecosystem ay idinisenyo bilang isang **"evergreen"** system—hindi ito nagre-reset, hindi ito "seasonal."
+
+### Key Principles
+- **Permanent Data:** Lahat ng contracts, commits, at transactions ay naka-store permanently sa blockchain at GitHub.
+- **Layered Building:** Ang mga bagong features ay binuo sa ibabaw ng existing infrastructure—hindi pinapalitan.
+- **No "Seasonal" Resets:** Walang "wipe" o "restart"—ang system ay patuloy na lumalaki.
+
+### Examples
+- `SovereignRegistry.sol` — permanenteng registry ng lahat ng contracts at entities.
+- `TrustIntegrator.sol` — permanenteng trust scores na hindi na-reset.
+- `CommunityDAO.sol` — permanenteng voting history ng mga proposals.
