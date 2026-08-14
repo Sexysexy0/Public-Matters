@@ -1,30 +1,16 @@
-import "./ITrustIntegrator.sol";
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import {ITrustIntegrator} from "./ITrustIntegrator.sol";
+
 contract HospitalClaimEscrow {
-    address public immutable steward;
     ITrustIntegrator public trustIntegrator;
+    address public steward;
 
-    struct Claim {
-        address patient;
-        address hospital;
-        bytes32 diagnosisHash;
-        uint256 amount;
-        bool approved;
-        bool paid;
-    }
-
-    mapping(uint256 => Claim) public claims;
-    uint256 public claimCounter;
-
-    event ClaimSubmitted(uint256 id, address patient, address hospital, uint256 amount);
-    event ClaimApproved(uint256 id);
-    event ClaimPaid(uint256 id);
-    event TrustIntegratorUpdated(address newIntegrator);
+    event ClaimProcessed(address indexed patient, uint256 amount);
 
     modifier onlySteward() {
-        require(msg.sender == steward, "Only the steward");
+        require(msg.sender == steward, "Only steward");
         _;
     }
 
@@ -33,51 +19,31 @@ contract HospitalClaimEscrow {
         trustIntegrator = ITrustIntegrator(_trustIntegrator);
     }
 
-    function submitClaim(address _patient, address _hospital, bytes32 _diagnosisHash, uint256 _amount) external {
-        require(_patient != address(0), "Invalid patient");
-        require(_hospital != address(0), "Invalid hospital");
-        require(_diagnosisHash != bytes32(0), "Invalid diagnosis");
-        require(_amount > 0, "Amount must be > 0");
-
-        claimCounter++;
-        claims[claimCounter] = Claim({
-            patient: _patient,
-            hospital: _hospital,
-            diagnosisHash: _diagnosisHash,
-            amount: _amount,
-            approved: false,
-            paid: false
-        });
-
-        emit ClaimSubmitted(claimCounter, _patient, _hospital, _amount);
+    function processClaim(address patient, uint256 amount) external onlySteward {
+        trustIntegrator.logPositiveAction(
+            string(abi.encodePacked("Claim: ", Strings.toHexString(patient))),
+            20
+        );
+        emit ClaimProcessed(patient, amount);
     }
 
-    function approveClaim(uint256 _id) external onlySteward {
-        Claim storage claim = claims[_id];
-        require(!claim.approved, "Already approved");
-        require(claim.amount > 0, "Claim does not exist");
-
-        claim.approved = true;
-        emit ClaimApproved(_id);
+    function setTrustIntegrator(address _new) external onlySteward {
+        trustIntegrator = ITrustIntegrator(_new);
     }
+}
 
-    function payClaim(uint256 _id) external onlySteward {
-        Claim storage claim = claims[_id];
-        require(claim.approved, "Not approved");
-        require(!claim.paid, "Already paid");
-        require(address(this).balance >= claim.amount, "Insufficient balance");
+library Strings {
+    bytes16 private constant _HEX_SYMBOLS = "0123456789abcdef";
 
-        claim.paid = true;
-        payable(claim.hospital).transfer(claim.amount);
-        trustIntegrator.logPositiveAction(msg.sender, 20);
-
-        emit ClaimPaid(_id);
+    function toHexString(address addr) internal pure returns (string memory) {
+        bytes memory data = abi.encodePacked(addr);
+        bytes memory result = new bytes(2 + data.length * 2);
+        result[0] = "0";
+        result[1] = "x";
+        for (uint256 i = 0; i < data.length; i++) {
+            result[2 + i * 2] = _HEX_SYMBOLS[uint8(data[i] >> 4)];
+            result[3 + i * 2] = _HEX_SYMBOLS[uint8(data[i] & 0x0f)];
+        }
+        return string(result);
     }
-
-    function setTrustIntegrator(address _newIntegrator) external onlySteward {
-        trustIntegrator = ITrustIntegrator(_newIntegrator);
-        emit TrustIntegratorUpdated(_newIntegrator);
-    }
-
-    receive() external payable {}
 }

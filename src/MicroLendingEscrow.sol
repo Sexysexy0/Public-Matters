@@ -1,113 +1,49 @@
-import "./ITrustIntegrator.sol";
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import {ITrustIntegrator} from "./ITrustIntegrator.sol";
+
 contract MicroLendingEscrow {
-    address public immutable steward;
     ITrustIntegrator public trustIntegrator;
-    uint256 public baseInterestRate;
-    uint256 public totalLiquidity;
+    address public steward;
 
-    struct Loan {
-        address borrower;
-        uint256 principal;
-        uint256 dueAmount;
-        uint256 dueDate;
-        bool isActive;
-        bool isPaid;
-    }
-
-    mapping(address => Loan) public activeLoans;
-    mapping(address => uint256) public creditScore;
-
-    event LiquidityDeposited(address indexed from, uint256 amount);
-    event LoanIssued(address indexed borrower, uint256 amount, uint256 dueAmount, uint256 dueDate);
     event LoanRepaid(address indexed borrower, uint256 amount);
-    event LiquidityWithdrawn(address indexed to, uint256 amount);
-    event TrustIntegratorUpdated(address newIntegrator);
 
     modifier onlySteward() {
-        require(msg.sender == steward, "Only the steward");
+        require(msg.sender == steward, "Only steward");
         _;
     }
 
-    constructor(uint256 _baseInterestRate, address _trustIntegrator) {
+    constructor(address _trustIntegrator) {
         steward = msg.sender;
-        baseInterestRate = _baseInterestRate;
         trustIntegrator = ITrustIntegrator(_trustIntegrator);
     }
 
-    function depositLiquidity() external payable {
-        require(msg.value > 0, "Must deposit some funds");
-        totalLiquidity += msg.value;
-        emit LiquidityDeposited(msg.sender, msg.value);
+    function repayLoan(address borrower, uint256 amount) external onlySteward {
+        trustIntegrator.logPositiveAction(
+            string(abi.encodePacked("Loan repaid: ", Strings.toHexString(borrower))),
+            15
+        );
+        emit LoanRepaid(borrower, amount);
     }
 
-    receive() external payable {
-        totalLiquidity += msg.value;
-        emit LiquidityDeposited(msg.sender, msg.value);
+    function setTrustIntegrator(address _new) external onlySteward {
+        trustIntegrator = ITrustIntegrator(_new);
     }
+}
 
-    function requestLoan(uint256 _amount, uint256 _durationDays) external {
-        require(_amount > 0, "Loan amount must be > 0");
-        require(creditScore[msg.sender] >= 10, "Credit score too low");
-        require(!activeLoans[msg.sender].isActive, "Existing loan active");
+library Strings {
+    bytes16 private constant _HEX_SYMBOLS = "0123456789abcdef";
 
-        uint256 interest = (_amount * baseInterestRate * _durationDays) / (365 * 10000);
-        uint256 dueAmount = _amount + interest;
-        uint256 dueDate = block.timestamp + (_durationDays * 1 days);
-
-        require(totalLiquidity >= _amount, "Insufficient pool liquidity");
-
-        totalLiquidity -= _amount;
-        activeLoans[msg.sender] = Loan({
-            borrower: msg.sender,
-            principal: _amount,
-            dueAmount: dueAmount,
-            dueDate: dueDate,
-            isActive: true,
-            isPaid: false
-        });
-
-        payable(msg.sender).transfer(_amount);
-        emit LoanIssued(msg.sender, _amount, dueAmount, dueDate);
-    }
-
-    function repayLoan() external payable {
-        Loan storage loan = activeLoans[msg.sender];
-        require(loan.isActive, "No active loan");
-        require(msg.value >= loan.dueAmount, "Insufficient repayment amount");
-
-        uint256 refund = msg.value - loan.dueAmount;
-        loan.isActive = false;
-        loan.isPaid = true;
-        totalLiquidity += loan.dueAmount;
-
-        creditScore[msg.sender] += 5;
-
-        trustIntegrator.logPositiveAction(msg.sender, 15);
-
-        emit LoanRepaid(msg.sender, loan.dueAmount);
-
-        if (refund > 0) {
-            payable(msg.sender).transfer(refund);
+    function toHexString(address addr) internal pure returns (string memory) {
+        bytes memory data = abi.encodePacked(addr);
+        bytes memory result = new bytes(2 + data.length * 2);
+        result[0] = "0";
+        result[1] = "x";
+        for (uint256 i = 0; i < data.length; i++) {
+            result[2 + i * 2] = _HEX_SYMBOLS[uint8(data[i] >> 4)];
+            result[3 + i * 2] = _HEX_SYMBOLS[uint8(data[i] & 0x0f)];
         }
-    }
-
-    function registerBorrower(address _borrower, uint256 _initialScore) external onlySteward {
-        require(creditScore[_borrower] == 0, "Already registered");
-        creditScore[_borrower] = _initialScore;
-    }
-
-    function withdrawLiquidity(uint256 _amount) external onlySteward {
-        require(_amount <= totalLiquidity, "Insufficient balance");
-        totalLiquidity -= _amount;
-        payable(steward).transfer(_amount);
-        emit LiquidityWithdrawn(steward, _amount);
-    }
-
-    function setTrustIntegrator(address _newIntegrator) external onlySteward {
-        trustIntegrator = ITrustIntegrator(_newIntegrator);
-        emit TrustIntegratorUpdated(_newIntegrator);
+        return string(result);
     }
 }
