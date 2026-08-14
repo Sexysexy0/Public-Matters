@@ -1,7 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import {SafeCast} from "@openzeppelin/contracts/utils/math/SafeCast.sol";
+
 contract UserTrustV2 {
+    using SafeCast for int256;
+
     address public immutable steward;
     mapping(address => uint256) public score;
     mapping(address => bool) public authorized;
@@ -37,16 +41,15 @@ contract UserTrustV2 {
     function adjustScore(address user, int256 delta, string calldata reason) public onlyAuthorized {
         int256 newScore = int256(score[user]) + delta;
         require(newScore >= 0, "Score underflow");
-        // forge-lint: disable-next-line unsafe-typecast
-        score[user] = uint256(newScore);
-        // forge-lint: disable-next-line unsafe-typecast
-        emit ScoreAdjusted(user, delta, uint256(newScore), reason);
+        score[user] = newScore.toUint256();
+        emit ScoreAdjusted(user, delta, newScore.toUint256(), reason);
     }
 
-    function batchAdjust(address[] calldata users, int256[] calldata deltas, string calldata reason)
-        external
-        onlyAuthorized
-    {
+    function batchAdjust(
+        address[] calldata users,
+        int256[] calldata deltas,
+        string calldata reason
+    ) external onlyAuthorized {
         require(users.length == deltas.length, "Length mismatch");
         for (uint256 i = 0; i < users.length; i++) {
             adjustScore(users[i], deltas[i], reason);

@@ -3,8 +3,11 @@ pragma solidity ^0.8.20;
 
 import {ITrustIndex} from "./ITrustIndex.sol";
 import {IUserTrust} from "./IUserTrust.sol";
+import {SafeCast} from "@openzeppelin/contracts/utils/math/SafeCast.sol";
 
 contract TrustIntegratorV2 {
+    using SafeCast for uint256;
+
     ITrustIndex public trustIndex;
     IUserTrust public userTrust;
     address public steward;
@@ -31,8 +34,7 @@ contract TrustIntegratorV2 {
     function logPositiveAction(string memory action, uint256 weight) external {
         trustIndex.reportTrustAction(weight);
         if (address(userTrust) != address(0)) {
-            // forge-lint: disable-next-line unsafe-typecast
-            userTrust.adjustScore(msg.sender, int256(weight), action);
+            userTrust.adjustScore(msg.sender, weight.toInt256(), action);
         }
         emit TrustActionLogged(msg.sender, action, weight);
     }
@@ -40,8 +42,7 @@ contract TrustIntegratorV2 {
     function logSetback(string memory action, uint256 weight) external {
         trustIndex.reportTrustSetback(weight);
         if (address(userTrust) != address(0)) {
-            // forge-lint: disable-next-line unsafe-typecast
-            userTrust.adjustScore(msg.sender, -int256(weight), action);
+            userTrust.adjustScore(msg.sender, -(weight.toInt256()), action);
         }
         emit TrustActionLogged(msg.sender, action, weight);
     }
