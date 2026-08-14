@@ -8,7 +8,7 @@ contract DeployGuardedPool is Script {
     function run() external {
         vm.startBroadcast();
         bytes32 coreContext = keccak256("CORE_PROTOCOL_V1");
-        GuardedResourcePool pool = new GuardedResourcePool(coreContext);
+        new GuardedResourcePool(coreContext);
         vm.stopBroadcast();
     }
 }

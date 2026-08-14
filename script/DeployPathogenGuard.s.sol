@@ -7,7 +7,7 @@ import "../src/PathogenGuardRegistry.sol";
 contract DeployPathogenGuard is Script {
     function run() external {
         vm.startBroadcast();
-        PathogenGuardRegistry guard = new PathogenGuardRegistry();
+        new PathogenGuardRegistry();
         vm.stopBroadcast();
     }
 }

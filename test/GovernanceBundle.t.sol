@@ -51,13 +51,12 @@ contract GovernanceBundleTest is Test {
         assertTrue(true, "KingdomIntegration covered");
     }
 
-    function test_FairGovernanceFramework() public {
+    function test_FairGovernanceFramework() public view {
         assertNotEq(address(governance), address(0), "Governance deployed");
     }
 
     // Integration checks
-    function test_GovernanceLinksSafeguards() public {
-        // simulate governance referencing safeguards
+    function test_GovernanceLinksSafeguards() public view {
         assertNotEq(address(arc), address(0), "Arc linked");
         assertNotEq(address(registry), address(0), "Registry linked");
         assertNotEq(address(protocol), address(0), "Protocol linked");
@@ -65,7 +64,7 @@ contract GovernanceBundleTest is Test {
         assertNotEq(address(codex), address(0), "Codex linked");
     }
 
-    function test_GovernanceLinksReforms() public {
+    function test_GovernanceLinksReforms() public view {
         assertNotEq(address(diversity), address(0), "Diversity linked");
         assertNotEq(address(accountability), address(0), "Accountability linked");
         assertNotEq(address(education), address(0), "Education linked");

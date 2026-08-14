@@ -1,47 +1,59 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+/// @title Transparency Mandate Registry
+/// @notice Global ledger for governance projects, with special category for Human Preservation Covenants
 contract TransparencyMandateRegistry {
-    struct Mandate {
-        string projectName;
-        uint256 filingBlock;
-        uint256 mandatoryWaitPeriod; // seconds
-        bool disclosed;
-        bool approved;
+    struct Project {
+        bytes32 id;
+        address contractAddress;
+        string name;
+        string description;
+        string category;
     }
 
-    mapping(bytes32 => Mandate) public mandates;
-    address public steward;
+    mapping(bytes32 => Project) public projects;
+    bytes32[] public projectIds;
 
-    event ProjectFiled(bytes32 indexed projectId, string projectName, uint256 waitPeriod);
-    event ProjectApproved(bytes32 indexed projectId);
+    event ProjectFiled(
+        bytes32 indexed id,
+        address indexed contractAddress,
+        string name,
+        string description,
+        string category
+    );
 
-    modifier onlySteward() {
-        require(msg.sender == steward, "Unauthorized");
-        _;
+    /// @notice File a new project into the registry
+    function fileProject(
+        bytes32 id,
+        address contractAddress,
+        string memory name,
+        string memory description,
+        string memory category
+    ) public {
+        require(projects[id].id == 0, "Project already exists");
+        projects[id] = Project(id, contractAddress, name, description, category);
+        projectIds.push(id);
+        emit ProjectFiled(id, contractAddress, name, description, category);
     }
 
-    constructor() {
-        steward = msg.sender;
+    /// @notice Special helper for Human Preservation Covenants
+    function fileHumanPreservationCovenant(
+        bytes32 id,
+        address contractAddress,
+        string memory name,
+        string memory description
+    ) public {
+        fileProject(id, contractAddress, name, description, "HumanPreservation");
     }
 
-    function fileProject(bytes32 projectId, string memory projectName, uint256 waitPeriodMonths) external onlySteward {
-        mandates[projectId] = Mandate({
-            projectName: projectName,
-            filingBlock: block.number,
-            mandatoryWaitPeriod: waitPeriodMonths * 30 days,
-            disclosed: true,
-            approved: false
-        });
-        emit ProjectFiled(projectId, projectName, mandates[projectId].mandatoryWaitPeriod);
+    /// @notice Retrieve project details
+    function getProject(bytes32 id) external view returns (Project memory) {
+        return projects[id];
     }
 
-    function approveProject(bytes32 projectId) external onlySteward {
-        Mandate storage m = mandates[projectId];
-        require(m.disclosed, "Not filed");
-        uint256 secondsPerBlock = 12;
-        require((block.number - m.filingBlock) * secondsPerBlock >= m.mandatoryWaitPeriod, "Wait period active");
-        m.approved = true;
-        emit ProjectApproved(projectId);
+    /// @notice List all project IDs
+    function listProjects() external view returns (bytes32[] memory) {
+        return projectIds;
     }
 }

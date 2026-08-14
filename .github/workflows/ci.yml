@@ -1,0 +1,58 @@
+name: Public Matters CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Run tests with gas report
+        run: forge test --gas-report > gas-report.txt
+
+      - name: Upload gas report artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: gas-report
+          path: gas-report.txt
+
+      - name: Generate coverage
+        run: forge coverage --report lcov
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: lcov.info
+
+  deploy-sepolia:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Deploy Covenant Bundle
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          TRANSPARENCY_REGISTRY: ${{ secrets.TRANSPARENCY_REGISTRY }}
+        run: forge script script/MasterDeployment.s.sol \
+          --rpc-url ${{ secrets.SEPOLIA_RPC }} \
+          --broadcast --slow
