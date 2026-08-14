@@ -7,6 +7,8 @@ contract EducationCredential {
     ITrustIntegrator public trustIntegrator;
     address public steward;
 
+    mapping(address => mapping(string => bool)) public credentials;
+
     event CredentialAwarded(address indexed student, string credential);
 
     modifier onlySteward() {
@@ -20,11 +22,18 @@ contract EducationCredential {
     }
 
     function awardCredential(address student, string calldata credentialName) external onlySteward {
+        require(!credentials[student][credentialName], "Already has credential");
+        credentials[student][credentialName] = true;
+        
         trustIntegrator.logPositiveAction(
             string(abi.encodePacked("Credential: ", credentialName)),
             10
         );
         emit CredentialAwarded(student, credentialName);
+    }
+
+    function hasCredential(address student, string calldata credentialName) external view returns (bool) {
+        return credentials[student][credentialName];
     }
 
     function setTrustIntegrator(address _new) external onlySteward {

@@ -65,7 +65,7 @@ contract DeployKingdom is Script {
         PeopleSovereigntyCovenant covenant = new PeopleSovereigntyCovenant(address(endowment));
         endowment.setAuthorizedTrigger(address(covenant));
         CyberOperationalResilience cyber = new CyberOperationalResilience();
-        HospitalClaimEscrow hospital = new HospitalClaimEscrow(address(0)); // placeholder, will be updated
+        HospitalClaimEscrow hospital = new HospitalClaimEscrow(1000, address(0)); // placeholder, will be updated
         LandTitleNFT land = new LandTitleNFT();
         // --- 4. CONTENT & SURVEILLANCE ---
         ContentOwnershipRegistry content = new ContentOwnershipRegistry();
@@ -93,7 +93,7 @@ contract DeployKingdom is Script {
         MicroLendingEscrow lending = new MicroLendingEscrow(500, address(trustIntegrator));
         lending.registerBorrower(deployer, 50);
         // Re-deploy Hospital with TrustIntegrator
-        hospital = new HospitalClaimEscrow(address(trustIntegrator));
+        hospital = new HospitalClaimEscrow(1000, address(trustIntegrator));
         // Re-deploy Education with TrustIntegrator
         edu = new EducationCredential(address(trustIntegrator));
         // Re-deploy Broadcast with TrustIntegrator

@@ -6,22 +6,42 @@ import {ITrustIntegrator} from "./ITrustIntegrator.sol";
 contract MicroLendingEscrow {
     ITrustIntegrator public trustIntegrator;
     address public steward;
+    uint256 public maxLoanAmount;
+
+    struct Borrower {
+        uint256 maxBorrow;
+        uint256 currentLoan;
+        bool exists;
+    }
+
+    mapping(address => Borrower) public borrowers;
 
     event LoanRepaid(address indexed borrower, uint256 amount);
+    event BorrowerRegistered(address indexed borrower, uint256 maxBorrow);
 
     modifier onlySteward() {
         require(msg.sender == steward, "Only steward");
         _;
     }
 
-    constructor(address _trustIntegrator) {
+    constructor(uint256 _maxLoanAmount, address _trustIntegrator) {
         steward = msg.sender;
+        maxLoanAmount = _maxLoanAmount;
         trustIntegrator = ITrustIntegrator(_trustIntegrator);
     }
 
+    function registerBorrower(address borrower, uint256 maxBorrow) external onlySteward {
+        require(!borrowers[borrower].exists, "Already registered");
+        borrowers[borrower] = Borrower(maxBorrow, 0, true);
+        emit BorrowerRegistered(borrower, maxBorrow);
+    }
+
     function repayLoan(address borrower, uint256 amount) external onlySteward {
+        require(borrowers[borrower].exists, "Not registered");
+        require(amount > 0, "Amount must be > 0");
+        
         trustIntegrator.logPositiveAction(
-            string(abi.encodePacked("Loan repaid: ", Strings.toHexString(borrower))),
+            string(abi.encodePacked("Loan repaid: ", borrower)),
             15
         );
         emit LoanRepaid(borrower, amount);
@@ -29,21 +49,5 @@ contract MicroLendingEscrow {
 
     function setTrustIntegrator(address _new) external onlySteward {
         trustIntegrator = ITrustIntegrator(_new);
-    }
-}
-
-library Strings {
-    bytes16 private constant _HEX_SYMBOLS = "0123456789abcdef";
-
-    function toHexString(address addr) internal pure returns (string memory) {
-        bytes memory data = abi.encodePacked(addr);
-        bytes memory result = new bytes(2 + data.length * 2);
-        result[0] = "0";
-        result[1] = "x";
-        for (uint256 i = 0; i < data.length; i++) {
-            result[2 + i * 2] = _HEX_SYMBOLS[uint8(data[i] >> 4)];
-            result[3 + i * 2] = _HEX_SYMBOLS[uint8(data[i] & 0x0f)];
-        }
-        return string(result);
     }
 }

@@ -18,7 +18,7 @@ contract DeployVaults is Script {
         vm.startBroadcast(deployerPrivateKey);
 
         ScholarshipEscrow scholarship = new ScholarshipEscrow(admin);
-        HospitalClaimEscrow hospital = new HospitalClaimEscrow(admin);
+        HospitalClaimEscrow hospital = new HospitalClaimEscrow(1000, admin);
 
         MicroLendingEscrow micro = new MicroLendingEscrow(
             5, // example baseInterestRate (uint256)

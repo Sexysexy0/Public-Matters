@@ -7,12 +7,17 @@ contract CommunityFloodVault {
     ITrustIntegrator public trustIntegrator;
     address public steward;
 
-    struct Init {
+    struct Relief {
         address contractorOrLeader;
         uint256 amount;
+        bool executed;
     }
 
+    mapping(uint256 => Relief) public reliefs;
+    uint256 public reliefCount;
+
     event ReliefInitiated(address indexed initiator, uint256 amount);
+    event ReliefExecuted(uint256 indexed reliefId);
 
     modifier onlySteward() {
         require(msg.sender == steward, "Only steward");
@@ -24,36 +29,23 @@ contract CommunityFloodVault {
         trustIntegrator = ITrustIntegrator(_trustIntegrator);
     }
 
-    function initiateRelief(Init calldata init) external onlySteward {
-        // Log positive action with string description
+    function initiateRelief(address contractor, uint256 amount) external onlySteward {
+        reliefs[reliefCount] = Relief(contractor, amount, false);
+        emit ReliefInitiated(contractor, amount);
+        reliefCount++;
+    }
+
+    function executeRelief(uint256 reliefId) external onlySteward {
+        require(reliefs[reliefId].executed == false, "Already executed");
+        reliefs[reliefId].executed = true;
         trustIntegrator.logPositiveAction(
-            string(abi.encodePacked("Relief: ", Strings.toHexString(init.contractorOrLeader))),
+            string(abi.encodePacked("Relief: ", reliefs[reliefId].contractorOrLeader)),
             3
         );
-        emit ReliefInitiated(init.contractorOrLeader, init.amount);
+        emit ReliefExecuted(reliefId);
     }
 
     function setTrustIntegrator(address _new) external onlySteward {
         trustIntegrator = ITrustIntegrator(_new);
-    }
-}
-
-// Helper library for string conversion
-library Strings {
-    bytes16 private constant _HEX_SYMBOLS = "0123456789abcdef";
-
-    function toHexString(address addr) internal pure returns (string memory) {
-        return toHexString(abi.encodePacked(addr));
-    }
-
-    function toHexString(bytes memory data) internal pure returns (string memory) {
-        bytes memory result = new bytes(2 + data.length * 2);
-        result[0] = "0";
-        result[1] = "x";
-        for (uint256 i = 0; i < data.length; i++) {
-            result[2 + i * 2] = _HEX_SYMBOLS[uint8(data[i] >> 4)];
-            result[3 + i * 2] = _HEX_SYMBOLS[uint8(data[i] & 0x0f)];
-        }
-        return string(result);
     }
 }

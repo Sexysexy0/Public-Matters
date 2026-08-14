@@ -6,6 +6,9 @@ import {ITrustIntegrator} from "./ITrustIntegrator.sol";
 contract HospitalClaimEscrow {
     ITrustIntegrator public trustIntegrator;
     address public steward;
+    uint256 public claimAmount;
+
+    mapping(address => bool) public patients;
 
     event ClaimProcessed(address indexed patient, uint256 amount);
 
@@ -14,36 +17,22 @@ contract HospitalClaimEscrow {
         _;
     }
 
-    constructor(address _trustIntegrator) {
+    constructor(uint256 _claimAmount, address _trustIntegrator) {
         steward = msg.sender;
+        claimAmount = _claimAmount;
         trustIntegrator = ITrustIntegrator(_trustIntegrator);
     }
 
-    function processClaim(address patient, uint256 amount) external onlySteward {
+    function processClaim(address patient) external onlySteward {
+        patients[patient] = true;
         trustIntegrator.logPositiveAction(
-            string(abi.encodePacked("Claim: ", Strings.toHexString(patient))),
+            string(abi.encodePacked("Claim: ", patient)),
             20
         );
-        emit ClaimProcessed(patient, amount);
+        emit ClaimProcessed(patient, claimAmount);
     }
 
     function setTrustIntegrator(address _new) external onlySteward {
         trustIntegrator = ITrustIntegrator(_new);
-    }
-}
-
-library Strings {
-    bytes16 private constant _HEX_SYMBOLS = "0123456789abcdef";
-
-    function toHexString(address addr) internal pure returns (string memory) {
-        bytes memory data = abi.encodePacked(addr);
-        bytes memory result = new bytes(2 + data.length * 2);
-        result[0] = "0";
-        result[1] = "x";
-        for (uint256 i = 0; i < data.length; i++) {
-            result[2 + i * 2] = _HEX_SYMBOLS[uint8(data[i] >> 4)];
-            result[3 + i * 2] = _HEX_SYMBOLS[uint8(data[i] & 0x0f)];
-        }
-        return string(result);
     }
 }
