@@ -79,3 +79,17 @@ This ecosystem is open-source software provided under the terms of the Apache Li
 | GovernanceBundle          | 0x8e3408344422ccb8131A1E796D5d66AaBb14981f       | Verified |
 | PublicMattersCovenant     | 0x0f3Ef8a85D4E98B4a134a43141380A236305Ecd5       | Verified |
 
+### Safeguards Contracts (Aug 2026)
+| Contract Name        | Deployed Address                                 | Status   |
+|----------------------|--------------------------------------------------|----------|
+| VerificationCodex    | 0xd551526453b8F548D60eC59f4f3E764C42955DA5       | Verified |
+| AccountabilityArc    | 0xB0DEa9cB49D96653Fd3dA6587986DD45Ef3fdB4c       | Verified |
+| EvidenceRegistry     | 0x0EDA94D0B80D35040bDA1E0d270bb52CFc8667A3       | Verified |
+| SkepticismProtocol   | 0x127Fdecfdc219Bb4AF65971AB81b50d83F107905       | Verified |
+| TransparencyLedger   | 0xaD05Fb913062B22B1aFB51ac949F3fC3851C6329       | Verified |
+
+### Covenant Governance Context
+- PublicMattersCovenant Address: 0x0f3Ef8a85D4E98B4a134a43141380A236305Ecd5
+- Supreme Steward: 0x6bDf6D887038AB97957c2f57d05eDd0eb338589A
+- Jurisdictions encoded: Philippines, Singapore, Hong Kong SAR, Bermuda, United States, Global
+
