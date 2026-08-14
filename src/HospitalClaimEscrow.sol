@@ -69,7 +69,7 @@ contract HospitalClaimEscrow {
 
         claim.paid = true;
         payable(claim.hospital).transfer(claim.amount);
-        trustIntegrator.logPositiveAction(20);
+        trustIntegrator.logPositiveAction(msg.sender, 20);
 
         emit ClaimPaid(_id);
     }

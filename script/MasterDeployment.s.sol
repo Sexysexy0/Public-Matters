@@ -24,9 +24,7 @@ contract MasterDeployment is Script {
         // Deploy Covenant and auto-link
         bytes32 id = keccak256("BillOfHumanPreservation");
         address covenant = bundle.deployAndLinkCovenant(
-            id,
-            "Bill of Human Preservation Covenant",
-            "Humanity first, Living things next, System last"
+            id, "Bill of Human Preservation Covenant", "Humanity first, Living things next, System last"
         );
 
         // Add global jurisdictions

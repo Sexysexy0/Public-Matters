@@ -53,7 +53,7 @@ contract PermissionlessBroadcast {
         approvedCount++;
 
         // Automatically bump the Trust Index
-        trustIntegrator.logPositiveAction(10);
+        trustIntegrator.logPositiveAction(msg.sender, 10);
 
         emit SubmissionApproved(_index, submissions[_index].author, submissions[_index].message);
     }

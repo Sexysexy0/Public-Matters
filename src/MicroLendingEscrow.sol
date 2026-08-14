@@ -85,7 +85,7 @@ contract MicroLendingEscrow {
 
         creditScore[msg.sender] += 5;
 
-        trustIntegrator.logPositiveAction(15);
+        trustIntegrator.logPositiveAction(msg.sender, 15);
 
         emit LoanRepaid(msg.sender, loan.dueAmount);
 

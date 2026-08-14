@@ -101,3 +101,29 @@ This ecosystem is open-source software provided under the terms of the Apache Li
 | MarketAccountability      | 0x0EDA94D0B80D35040bDA1E0d270bb52CFc8667A3       | Verified |
 | ResearchDecentralization  | 0x127Fdecfdc219Bb4AF65971AB81b50d83F107905       | Verified |
 
+### Neuroscience Contracts (Aug 2026) - For Scientific Research Integrity
+| Contract Name             | Deployed Address                                 | Status   |
+|---------------------------|--------------------------------------------------|----------|
+| StudyDesignRegistry       | 0x651D8B3a79a1A83d7296971633e755Cd1F6efD52       | Verified |
+| DataIntegrityLedger       | 0x939e23bBa929aa3e7C35dc93a1eba6E9E667C7bB       | Verified |
+| AnalysisCodex             | 0xb6F00bfa8A9657328d60AfB9902c76884D047dc9       | Verified |
+| ReputationToken           | 0x053C9aB669966A05fa3D29936b7b359057e071Bb       | Verified |
+| PeerReviewOracle          | 0x25cF6318fCB1fEAfde827A2E4E7d22F8f08Ecd8e       | Verified |
+
+### Prediction Market Contracts (Aug 2026) — Ethical & Transparent Markets
+| Contract Name             | Deployed Address                                 | Status   |
+|---------------------------|--------------------------------------------------|----------|
+| MarketParticipantRegistry | 0xe180930C3d0062AF3216D873E44C68275CD969fd       | Verified |
+| KnowledgeOracle           | 0x7acf092b39C0f858a794c601e057a2c416f8db98       | Verified |
+| FairLiquidityPool         | 0x3A483a73991692d56BCd5E1A6DBF847Ae56B1D33       | Verified |
+| MarketAuditLedger         | 0xd01595caB829527Dd33B480Da9Ea7597451d94F0       | Verified |
+| RegulatoryCompliance      | 0xEc6aAC5eBb5082AD77BC57E0c9ce4ACbC1e1846b       | Verified |
+
+### Community Sovereignty Contracts (Aug 2026) — Data Center Accountability
+| Contract Name             | Deployed Address                                 | Status   |
+|---------------------------|--------------------------------------------------|----------|
+| PermitRegistry            | 0xCeb469C848e280F3472f737B501E77021cB2B1db       | Verified |
+| ResourceStewardshipEscrow | 0xf97617401790bfbB975fca1968B526b5D1a7Ca6D       | Verified |
+| LocalRevenueGuard         | 0x88932Afc3DB48B20e5A11d28C8EC89E7a887DF8C       | Verified |
+| LocalHireConditional      | 0x3E0aFd48696d0b664Bbc8f00d2Fe13aa9578Df3c       | Verified |
+| CommunityDAO              | 0x00Dd17280FD2cA7B51A938D77533702aC08637bc       | Verified |

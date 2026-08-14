@@ -58,7 +58,7 @@ contract EducationCredential is ERC721, Ownable {
         studentCredentials[_student].push(tokenId);
 
         // Boost the Trust Index when a new diploma is issued
-        trustIntegrator.logPositiveAction(10);
+        trustIntegrator.logPositiveAction(msg.sender, 10);
 
         emit CredentialIssued(tokenId, _student, _courseName, _institution);
         return tokenId;

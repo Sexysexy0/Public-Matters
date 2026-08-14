@@ -24,9 +24,7 @@ contract DeployCovenant is Script {
         covenant.addJurisdiction("Global");
 
         // Auto-register covenant in TransparencyMandateRegistry
-        TransparencyMandateRegistry registry = TransparencyMandateRegistry(
-            vm.envAddress("TRANSPARENCY_REGISTRY")
-        );
+        TransparencyMandateRegistry registry = TransparencyMandateRegistry(vm.envAddress("TRANSPARENCY_REGISTRY"));
 
         // FIX: use fileHumanPreservationCovenant (4 args) instead of fileProject (5 args)
         registry.fileHumanPreservationCovenant(

@@ -16,11 +16,7 @@ contract TransparencyMandateRegistry {
     bytes32[] public projectIds;
 
     event ProjectFiled(
-        bytes32 indexed id,
-        address indexed contractAddress,
-        string name,
-        string description,
-        string category
+        bytes32 indexed id, address indexed contractAddress, string name, string description, string category
     );
 
     /// @notice File a new project into the registry

@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.35;
 
-interface ITrustIntegrator {
-    function logPositiveAction(address entity, uint256 actionType) external;
-}
+import "./ITrustIntegrator.sol";
 
 /**
  * @title CommunityFloodVault

@@ -2,5 +2,5 @@
 pragma solidity ^0.8.20;
 
 interface ITrustIntegrator {
-    function logPositiveAction(uint256 _weight) external;
+    function logPositiveAction(address actor, uint256 weight) external;
 }
