@@ -10,11 +10,25 @@ contract CommunityTaxVault {
     ITrustIntegrator public trustIntegrator;
     uint256 public totalTaxCollected;
 
+    mapping(address => bool) public authorizedAllocators;
+
     event TaxDeposited(address indexed payer, uint256 amount, uint256 trustWeight);
     event FundsAllocated(uint256 amount, string proposal);
+    event AuthorizedAllocatorAdded(address allocator);
+    event AuthorizedAllocatorRemoved(address allocator);
 
     modifier onlySteward() {
         require(msg.sender == steward, "Only steward");
+        _;
+    }
+
+    modifier onlyAuthorized() {
+        require(
+            msg.sender == steward ||
+            msg.sender == address(communityDAO) ||
+            authorizedAllocators[msg.sender],
+            "Not authorized"
+        );
         _;
     }
 
@@ -24,7 +38,6 @@ contract CommunityTaxVault {
         trustIntegrator = ITrustIntegrator(_trustIntegrator);
     }
 
-    // Accept native ETH as tax payment – now public so receive can call it
     function depositTax() public payable {
         require(msg.value > 0, "Amount must be > 0");
         totalTaxCollected += msg.value;
@@ -40,16 +53,21 @@ contract CommunityTaxVault {
         emit TaxDeposited(msg.sender, msg.value, trustWeight);
     }
 
-    function allocateFunds(uint256 amount, string calldata proposal) external {
-        require(msg.sender == steward || msg.sender == address(communityDAO), "Not authorized");
+    function allocateFunds(uint256 amount, string calldata proposal) external onlyAuthorized {
         require(amount <= totalTaxCollected, "Insufficient funds");
         totalTaxCollected -= amount;
         emit FundsAllocated(amount, proposal);
     }
 
-    // Allow contract to receive ETH directly – now calls depositTax() internally
-    receive() external payable {
-        depositTax();
+    // Authorize a contract or address to allocate funds
+    function addAuthorizedAllocator(address allocator) external onlySteward {
+        authorizedAllocators[allocator] = true;
+        emit AuthorizedAllocatorAdded(allocator);
+    }
+
+    function removeAuthorizedAllocator(address allocator) external onlySteward {
+        authorizedAllocators[allocator] = false;
+        emit AuthorizedAllocatorRemoved(allocator);
     }
 
     function setCommunityDAO(address _new) external onlySteward {
@@ -58,5 +76,9 @@ contract CommunityTaxVault {
 
     function setTrustIntegrator(address _new) external onlySteward {
         trustIntegrator = ITrustIntegrator(_new);
+    }
+
+    receive() external payable {
+        depositTax();
     }
 }

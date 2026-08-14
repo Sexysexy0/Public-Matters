@@ -28,8 +28,8 @@ contract CommunityFund {
     mapping(uint256 => Proposal) public proposals;
     mapping(uint256 => mapping(address => bool)) public hasVoted;
     uint256 public proposalCount;
-    uint256 public minVoteThreshold = 100; // Minimum trust score to vote
-    uint256 public quorum = 1000; // Minimum total votes to pass
+    uint256 public minVoteThreshold = 1;
+    uint256 public quorum = 1;
 
     event ProposalCreated(uint256 id, address proposer, string title, uint256 amount);
     event Voted(uint256 id, address voter, bool support);
@@ -88,19 +88,20 @@ contract CommunityFund {
         require(userTrust.getScore(msg.sender) >= minVoteThreshold, "Trust too low to vote");
 
         hasVoted[proposalId][msg.sender] = true;
-        uint256 weight = userTrust.getScore(msg.sender) / 10; // Voting power = trust score / 10
+        uint256 weight = userTrust.getScore(msg.sender);
+        if (weight == 0) weight = 1;
 
+        Proposal storage p = proposals[proposalId];
         if (support) {
-            proposals[proposalId].votesFor += weight;
+            p.votesFor += weight;
         } else {
-            proposals[proposalId].votesAgainst += weight;
+            p.votesAgainst += weight;
         }
 
         emit Voted(proposalId, msg.sender, support);
 
-        // Automatically execute if quorum met and votesFor > votesAgainst
-        Proposal storage p = proposals[proposalId];
-        if (!p.passed && (p.votesFor + p.votesAgainst) >= quorum && p.votesFor > p.votesAgainst) {
+        // Auto-pass if quorum met and votesFor > votesAgainst
+        if ((p.votesFor + p.votesAgainst) >= quorum && p.votesFor > p.votesAgainst) {
             p.passed = true;
         }
     }
@@ -117,7 +118,6 @@ contract CommunityFund {
         );
         require(success, "Allocation failed");
 
-        // Log positive action for the recipient
         trustIntegrator.logPositiveAction(
             string(abi.encodePacked("Fund allocation: ", p.title)),
             5
@@ -128,7 +128,6 @@ contract CommunityFund {
         emit ProposalExecuted(proposalId, p.recipient, p.amount);
     }
 
-    // Admin functions
     function setMinVoteThreshold(uint256 _new) external onlySteward {
         minVoteThreshold = _new;
     }
