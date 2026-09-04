@@ -62,7 +62,7 @@ contract NeuroscienceTest is Test {
         assertTrue(verified);
     }
 
-    function test_ReputationToken() public {
+    function test_ReputationToken() public view {
         // ReputationToken constructor sets name and symbol
         assertEq(token.name(), "ReputationToken");
         assertEq(token.symbol(), "REP");
