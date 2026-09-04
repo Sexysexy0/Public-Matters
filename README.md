@@ -141,3 +141,37 @@ Ang `Public-Matters` ecosystem ay idinisenyo bilang isang **"evergreen"** system
 - `SovereignRegistry.sol` — permanenteng registry ng lahat ng contracts at entities.
 - `TrustIntegrator.sol` — permanenteng trust scores na hindi na-reset.
 - `CommunityDAO.sol` — permanenteng voting history ng mga proposals.
+
+## 🚀 Deployment Summary — Sepolia
+
+### Dependencies (4)
+| Contract | Address | Status |
+|----------|---------|--------|
+| NexusID | `0x2Af715bB1BfffcCAB09157bdcCC72Bd010Fe2b46` | ✅ Verified |
+| TrustScoreDAO | `0x4a6A14AdECafea13a7fDC8863083170c4bff5B60` | ✅ Verified |
+| SovereignOracle | `0xBD7B77212Cdc21e575848Cac48B27A048cE939f1` | ✅ Verified |
+| CitizenVotingDAO | `0xAD98f5BC5E9C44368A2035CAeB6a92AD6E9535CC` | ✅ Verified |
+
+### Candaba Flood Governance Suite (5)
+| Contract | Address | Status |
+|----------|---------|--------|
+| CandabaImpoundingDAO | `0x647639F24e16872212C49243B3d57425FEf1b93a` | ✅ Verified |
+| FarmerCompensationVault | `0x6D860784e3cA41E09A774173292958D90e917Db4` | ✅ Verified |
+| DredgingContractorRegistry | `0x7844018311D102AC2DE12e8E732c5427E93a6e49` | ✅ Verified |
+| CandabaEcologicalGuardian | `0xd25C1a9a941233A3b3277b74FEC773803aDeB3Bd` | ✅ Verified |
+| FloodSolutionArbiter | `0x4B5167E4d1A342939CB1Afaa2d2430917c627126` | ✅ Verified |
+
+### Integration Layer (4)
+| Contract | Address | Status |
+|----------|---------|--------|
+| CabinetDAO | `0x316e3cFa5BB9eb6B4CDA73ed5E17728d1027C068` | ✅ Verified |
+| PresidentialPolicyDAO | `0xb4c52De337fc87FBb14BfD95110A0dB753803EFd` | ✅ Verified |
+| NexusTreasuryV2 | `0x0F86D8a1A3Cc89799768ef4848004DbEBA9f3b15` | ✅ Verified |
+| GovNexusBridge | `0xACCF088337A8b6853517E4C4b878c0Fe84bFFf71` | ✅ Verified |
+
+### Continuity (1)
+| Contract | Address | Status |
+|----------|---------|--------|
+| SpiderNoirContinuityDAO | `0x0016EF940156566804735E58ba9b6442E04e5887` | ✅ Verified |
+
+### Total: 14 Contracts Deployed & Verified 🧙‍♂️
