@@ -104,26 +104,28 @@ contract FilipinnovationLedger {
 
     // --- Innovator, Grant, Commercialization, ImpactEvent functions unchanged (timestamps kept for audit logs) ---
 
-    function createVote(
-        uint256 _targetId,
-        string memory _targetType,
-        uint256 _durationBlocks
-    ) public onlyAdmin whenActive {
+    function createVote(uint256 _targetId, string memory _targetType, uint256 _durationBlocks)
+        public
+        onlyAdmin
+        whenActive
+    {
         require(_durationBlocks > 0, "Duration must be > 0");
 
         uint256 id = votes.length;
-        votes.push(Vote({
-            id: id,
-            targetId: _targetId,
-            targetType: _targetType,
-            votesFor: 0,
-            votesAgainst: 0,
-            startBlock: block.number,
-            endBlock: block.number + _durationBlocks,
-            executed: false,
-            passed: false,
-            proposer: msg.sender
-        }));
+        votes.push(
+            Vote({
+                id: id,
+                targetId: _targetId,
+                targetType: _targetType,
+                votesFor: 0,
+                votesAgainst: 0,
+                startBlock: block.number,
+                endBlock: block.number + _durationBlocks,
+                executed: false,
+                passed: false,
+                proposer: msg.sender
+            })
+        );
     }
 
     function castVote(uint256 _voteId, bool _support) public whenActive {

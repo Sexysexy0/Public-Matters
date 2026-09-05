@@ -3,6 +3,7 @@ pragma solidity ^0.8.24;
 
 contract PresidentialPolicyDAO {
     address public admin;
+
     struct Policy {
         string content;
         uint256 timestamp;
@@ -16,11 +17,7 @@ contract PresidentialPolicyDAO {
     }
 
     function issuePolicy(string memory _content) public onlyAdmin {
-        policies.push(Policy({
-            content: _content,
-            timestamp: block.timestamp,
-            active: true
-        }));
+        policies.push(Policy({content: _content, timestamp: block.timestamp, active: true}));
         emit PolicyIssued(policies.length - 1, _content);
     }
 

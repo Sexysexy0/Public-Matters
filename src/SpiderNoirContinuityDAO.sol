@@ -49,15 +49,17 @@ contract SpiderNoirContinuityDAO {
     }
 
     function addContinuation(string memory _title, string memory _story) public whenActive {
-        continuations.push(Continuation({
-            id: continuations.length,
-            title: _title,
-            story: _story,
-            author: msg.sender,
-            timestamp: block.timestamp,
-            votes: 0,
-            executed: false
-        }));
+        continuations.push(
+            Continuation({
+                id: continuations.length,
+                title: _title,
+                story: _story,
+                author: msg.sender,
+                timestamp: block.timestamp,
+                votes: 0,
+                executed: false
+            })
+        );
         emit ContinuationAdded(continuations.length - 1, msg.sender);
     }
 
@@ -69,16 +71,22 @@ contract SpiderNoirContinuityDAO {
         emit ContinuationVoted(_id, msg.sender);
     }
 
-    function addEpisode(string memory _title, string memory _summary, string memory _ipfsHash, address _creator) public onlyAdmin whenActive {
-        episodes.push(Episode({
-            id: episodes.length,
-            title: _title,
-            summary: _summary,
-            ipfsHash: _ipfsHash,
-            creator: _creator,
-            timestamp: block.timestamp,
-            canonical: true
-        }));
+    function addEpisode(string memory _title, string memory _summary, string memory _ipfsHash, address _creator)
+        public
+        onlyAdmin
+        whenActive
+    {
+        episodes.push(
+            Episode({
+                id: episodes.length,
+                title: _title,
+                summary: _summary,
+                ipfsHash: _ipfsHash,
+                creator: _creator,
+                timestamp: block.timestamp,
+                canonical: true
+            })
+        );
         emit EpisodeAdded(episodes.length - 1, _creator);
     }
 

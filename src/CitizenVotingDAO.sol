@@ -23,16 +23,18 @@ contract CitizenVotingDAO {
     function createProposal(string memory _description, uint256 _durationBlocks) public {
         require(_durationBlocks > 0, "Duration must be > 0");
         uint256 id = proposals.length;
-        proposals.push(Proposal({
-            id: id,
-            description: _description,
-            votesFor: 0,
-            votesAgainst: 0,
-            startBlock: block.number,
-            endBlock: block.number + _durationBlocks,
-            executed: false,
-            passed: false
-        }));
+        proposals.push(
+            Proposal({
+                id: id,
+                description: _description,
+                votesFor: 0,
+                votesAgainst: 0,
+                startBlock: block.number,
+                endBlock: block.number + _durationBlocks,
+                executed: false,
+                passed: false
+            })
+        );
         emit ProposalCreated(id, _description);
     }
 

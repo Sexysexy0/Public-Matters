@@ -23,7 +23,7 @@ contract CabinetDAO {
         require(bytes(ministers[_minister]).length > 0, "Not a minister");
         delete ministers[_minister];
         // Remove from list (swap with last)
-        for (uint i = 0; i < ministerList.length; i++) {
+        for (uint256 i = 0; i < ministerList.length; i++) {
             if (ministerList[i] == _minister) {
                 ministerList[i] = ministerList[ministerList.length - 1];
                 ministerList.pop();

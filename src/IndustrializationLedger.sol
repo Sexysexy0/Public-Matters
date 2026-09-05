@@ -57,18 +57,20 @@ contract IndustrializationLedger {
         require(_durationBlocks > 0, "Duration must be > 0");
 
         uint256 id = projects.length;
-        projects.push(Project({
-            id: id,
-            name: _name,
-            sector: _sector,
-            budget: _budget,
-            startBlock: block.number,
-            endBlock: block.number + _durationBlocks,
-            executed: false,
-            passed: false,
-            ipfsHash: _ipfsHash,
-            proposer: msg.sender
-        }));
+        projects.push(
+            Project({
+                id: id,
+                name: _name,
+                sector: _sector,
+                budget: _budget,
+                startBlock: block.number,
+                endBlock: block.number + _durationBlocks,
+                executed: false,
+                passed: false,
+                ipfsHash: _ipfsHash,
+                proposer: msg.sender
+            })
+        );
 
         emit ProjectRegistered(id, _name, _sector);
     }
