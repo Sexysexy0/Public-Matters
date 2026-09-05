@@ -2,8 +2,9 @@
 pragma solidity ^0.8.20;
 
 import "forge-std/Script.sol";
-import "../src/SpeedOfTrust.sol";
+import "../src/OperatorPrivileges.sol";
 import "../src/CoalitionBuilder.sol";
+import "../src/SpeedOfTrust.sol";
 import "../src/BrittleInstrument.sol";
 import "../src/InspirationIntimidation.sol";
 
@@ -12,7 +13,8 @@ contract TrustSuiteDeploy is Script {
         vm.startBroadcast();
 
         SpeedOfTrust trust = new SpeedOfTrust();
-        CoalitionBuilder coalition = new CoalitionBuilder();
+        OperatorPrivileges privileges = new OperatorPrivileges();
+        CoalitionBuilder coalition = new CoalitionBuilder(address(privileges));
         BrittleInstrument instrument = new BrittleInstrument();
         InspirationIntimidation ii = new InspirationIntimidation();
 

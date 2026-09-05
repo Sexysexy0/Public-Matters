@@ -1,7 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "./OperatorPrivileges.sol";
+
 contract CoalitionBuilder {
+    OperatorPrivileges public privileges;
+
     struct Coalition {
         string mission;
         address[] members;
@@ -9,26 +13,40 @@ contract CoalitionBuilder {
 
     Coalition[] public coalitions;
 
-    event CoalitionCreated(uint256 id, string mission);
-    event MemberJoined(uint256 id, address member);
+    event CoalitionCreated(uint256 indexed id, string mission);
+    event CoalitionJoined(uint256 indexed id, address member);
 
-    function createCoalition(string calldata mission) external {
-        coalitions.push(Coalition(mission, new address[](0)));
-        emit CoalitionCreated(coalitions.length - 1, mission);
+    constructor(address _privileges) {
+        privileges = OperatorPrivileges(_privileges);
     }
 
-    function joinCoalition(uint256 id) external {
+    modifier onlyOperator() {
+        require(privileges.isOperator(msg.sender), "Not authorized operator");
+        _;
+    }
+
+    function createCoalition(string calldata mission) external onlyOperator {
+        // Create new coalition in storage
+        uint256 id = coalitions.length;
+        coalitions.push();
+        coalitions[id].mission = mission;
         coalitions[id].members.push(msg.sender);
-        emit MemberJoined(id, msg.sender);
+        emit CoalitionCreated(id, mission);
     }
 
-    // ✅ Custom getter for members
+    function joinCoalition(uint256 id) external onlyOperator {
+        require(id < coalitions.length, "Invalid coalition");
+        coalitions[id].members.push(msg.sender);
+        emit CoalitionJoined(id, msg.sender);
+    }
+
     function getMembers(uint256 id) external view returns (address[] memory) {
+        require(id < coalitions.length, "Invalid coalition");
         return coalitions[id].members;
     }
 
-    // ✅ Custom getter for mission
     function getMission(uint256 id) external view returns (string memory) {
+        require(id < coalitions.length, "Invalid coalition");
         return coalitions[id].mission;
     }
 }

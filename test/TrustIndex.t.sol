@@ -2,40 +2,33 @@
 pragma solidity ^0.8.20;
 
 import "forge-std/Test.sol";
+import "../src/OperatorPrivileges.sol";
 import "../src/TrustIndex.sol";
 
 contract TrustIndexTest is Test {
-    TrustIndex public trust;
-
-    address public steward = address(this);
-    address public user = makeAddr("user");
+    OperatorPrivileges privileges;
+    TrustIndex trust;
+    address tester;
 
     function setUp() public {
-        trust = new TrustIndex(100, 10);
+        privileges = new OperatorPrivileges();
+        trust = new TrustIndex(address(privileges));
+        uint256 pk = 1;
+        tester = vm.addr(pk);
+
+        privileges.addOperator(tester);
+        assertTrue(privileges.isOperator(tester), "Operator not added");
     }
 
-    function test_ActionIncreasesIndex() public {
-        assertEq(trust.getTrustIndex(), 100);
-        trust.reportTrustAction(0); // uses base weight (10)
-        assertEq(trust.getTrustIndex(), 110);
+    function testUpdateTrustPositive() public {
+        vm.prank(tester);
+        trust.updateTrust(tester, 10);
+        assertEq(trust.getTrust(tester), 10);
     }
 
-    function test_CustomWeightWorks() public {
-        trust.reportTrustAction(25);
-        assertEq(trust.getTrustIndex(), 125);
-    }
-
-    function test_SetbackDecreasesIndex() public {
-        trust.reportTrustSetback(10);
-        assertEq(trust.getTrustIndex(), 90);
-    }
-
-    function test_OnlyStewardCanChangeBaseWeight() public {
-        vm.prank(user);
-        vm.expectRevert("Only the steward");
-        trust.setBaseWeight(50);
-
-        trust.setBaseWeight(50);
-        assertEq(trust.baseActionWeight(), 50);
+    function testUpdateTrustNegative() public {
+        vm.prank(tester);
+        trust.updateTrust(tester, -5);
+        assertEq(trust.getTrust(tester), 0);
     }
 }

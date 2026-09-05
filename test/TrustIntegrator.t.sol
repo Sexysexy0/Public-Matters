@@ -2,29 +2,38 @@
 pragma solidity ^0.8.20;
 
 import "forge-std/Test.sol";
+import "../src/OperatorPrivileges.sol";
 import "../src/TrustIndex.sol";
 import "../src/TrustIntegrator.sol";
 
 contract TrustIntegratorTest is Test {
-    TrustIndex public trust;
-    TrustIntegrator public integrator;
-
-    address public steward = address(this);
+    OperatorPrivileges privileges;
+    TrustIndex trust;
+    TrustIntegrator integrator;
+    address tester;
 
     function setUp() public {
-        trust = new TrustIndex(100, 10);
+        privileges = new OperatorPrivileges();
+        trust = new TrustIndex(address(privileges));
         integrator = new TrustIntegrator(address(trust));
+
+        uint256 pk = 1;
+        tester = vm.addr(pk);
+
+        // Authorize tester and the integrator contract itself as operators
+        privileges.addOperator(tester);
+        privileges.addOperator(address(integrator));
+
+        assertTrue(privileges.isOperator(tester), "Operator not added");
     }
 
-    function test_LogPositiveActionUpdatesTrust() public {
-        assertEq(trust.getTrustIndex(), 100);
-        integrator.logPositiveAction(0);
-        assertEq(trust.getTrustIndex(), 110);
+    function testInitialTrust() public view {
+        assertEq(trust.getTrust(tester), 0);
     }
 
-    function test_LogSetbackUpdatesTrust() public {
-        assertEq(trust.getTrustIndex(), 100);
-        integrator.logSetback(10);
-        assertEq(trust.getTrustIndex(), 90);
+    function testTrustActionIncreases() public {
+        vm.prank(tester);
+        integrator.updateTrustViaIntegrator(tester, 10);
+        assertEq(trust.getTrust(tester), 10);
     }
 }

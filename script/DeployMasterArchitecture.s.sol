@@ -3,54 +3,45 @@ pragma solidity 0.8.35;
 
 import {Script, console} from "forge-std/Script.sol";
 import {GlobalAssetRegistry} from "../src/GlobalAssetRegistry.sol";
-import {TrustIntegrator} from "../src/TrustIntegrator.sol";
+import {OperatorPrivileges} from "../src/OperatorPrivileges.sol";
 import {TrustIndex} from "../src/TrustIndex.sol";
-import {InfrastructureProofRegistry} from "../src/InfrastructureProofRegistry.sol";
-import {TransientSupplyPassport} from "../src/TransientSupplyPassport.sol";
-import {EmergencyResponderRegistry} from "../src/EmergencyResponderRegistry.sol";
-import {CommunityFloodVault} from "../src/CommunityFloodVault.sol";
-import {ZKWhistleblowerOversight} from "../src/ZKWhistleblowerOversight.sol";
-import {DeSciManuscriptEquity} from "../src/DeSciManuscriptEquity.sol";
+import {TrustIntegrator} from "../src/TrustIntegrator.sol";
+import {CoalitionBuilder} from "../src/CoalitionBuilder.sol";
+import {OperatorConsciousnessLedger} from "../src/OperatorConsciousnessLedger.sol";
 
 contract DeployMasterArchitecture is Script {
     function run() external {
-        uint256 deployerPrivateKey =
-            vm.envOr("PRIVATE_KEY", uint256(0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80));
-
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
 
-        // 1. Core Base Contracts
+        // 1. Deploy GlobalAssetRegistry
         GlobalAssetRegistry registry = new GlobalAssetRegistry();
         console.log("GlobalAssetRegistry deployed at:", address(registry));
 
-        TrustIndex trustIndex = new TrustIndex(100, 10);
+        // 2. Deploy OperatorPrivileges (Core Access Control & State)
+        OperatorPrivileges privileges = new OperatorPrivileges();
+        console.log("OperatorPrivileges deployed at:", address(privileges));
+
+        // 3. Deploy TrustIndex
+        TrustIndex trustIndex = new TrustIndex(address(privileges));
         console.log("TrustIndex deployed at:", address(trustIndex));
 
+        // 4. Deploy TrustIntegrator
         TrustIntegrator trustIntegrator = new TrustIntegrator(address(trustIndex));
         console.log("TrustIntegrator deployed at:", address(trustIntegrator));
 
-        // 2. Public Infra & Anti-Ghosting
-        InfrastructureProofRegistry infraRegistry = new InfrastructureProofRegistry(address(trustIntegrator));
-        console.log("InfrastructureProofRegistry deployed at:", address(infraRegistry));
+        // 5. Deploy CoalitionBuilder
+        CoalitionBuilder coalitionBuilder = new CoalitionBuilder(address(privileges));
+        console.log("CoalitionBuilder deployed at:", address(coalitionBuilder));
 
-        // 3. EIP-1153 Transient Supply Passport
-        TransientSupplyPassport supplyPassport = new TransientSupplyPassport();
-        console.log("TransientSupplyPassport deployed at:", address(supplyPassport));
+        // 6. Deploy OperatorConsciousnessLedger
+        OperatorConsciousnessLedger ledger = new OperatorConsciousnessLedger(address(privileges));
+        console.log("OperatorConsciousnessLedger deployed at:", address(ledger));
 
-        // 4. Emergency Responder & Community Flood Vault
-        EmergencyResponderRegistry responderRegistry = new EmergencyResponderRegistry(address(trustIntegrator));
-        console.log("EmergencyResponderRegistry deployed at:", address(responderRegistry));
-
-        CommunityFloodVault floodVault = new CommunityFloodVault(address(trustIntegrator));
-        console.log("CommunityFloodVault deployed at:", address(floodVault));
-
-        // 5. ZK Whistleblower & DeSci Manuscript Modules
-        bytes32 mockRoot = keccak256(abi.encodePacked("INITIAL_MERKLE_ROOT_2026"));
-        ZKWhistleblowerOversight zkOversight = new ZKWhistleblowerOversight(mockRoot);
-        console.log("ZKWhistleblowerOversight deployed at:", address(zkOversight));
-
-        DeSciManuscriptEquity desciEquity = new DeSciManuscriptEquity(address(trustIntegrator));
-        console.log("DeSciManuscriptEquity deployed at:", address(desciEquity));
+        // 7. Post-deployment wiring: Authorize system contracts as operators
+        privileges.addOperator(address(trustIntegrator));
+        privileges.addOperator(address(ledger));
+        console.log("System contracts successfully authorized as operators.");
 
         vm.stopBroadcast();
     }
