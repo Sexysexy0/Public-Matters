@@ -1,44 +1,8 @@
-# Sexysexy0 Organization
 
-Sexysexy0 is an enterprise-level sandbox organization under the stewardship of Vinvin (Emervin V. Gueco).  
-All repositories are unified under a single governance framework, aligned with compliance standards and systemic covenant logic.
+## Arcade Governance Suite Deployments
+| Contract              | Address | Verified |
+|-----------------------|---------|----------|
+| ArcadeGovernance      | 0x75e6ff28f18a5bc394b0f5ae9118f1f4b42dc9bf | ✅ |
+| SymbolismFilter       | 0x976c2dd1c704cca9eb55fe9237d9c84e97dcac3c | ✅ |
+| ChildProtectionFund   | 0xaa93b8c05033cf3d1b1be60316be3288e7704e15 | ✅ |
 
-## Mission
-To encode fairness, transparency, and accountability into smart contracts and governance systems, ensuring dignity and resilience in collective decision-making.
-
-## Identity
-- Supreme Steward: Vinvin (Emervin V. Gueco)
-- Enterprise Sandbox: All repos are controlled under a single entity
-- Compliance Anchors: ISO/IEC 27001, ISO/IEC 42001, SOC 3, CSA STAR
-- Public Matters Covenant: Governance encoded in contracts and registries
-
-## Quick Links
-- [OWNERSHIP.md](OWNERSHIP.md)
-- [SECURITY.md](SECURITY.md)
-- [CODEOWNERS](.github/CODEOWNERS)
-- [CONTRIBUTING.md](CONTRIBUTING.md)
-- [COMPLIANCE.md](COMPLIANCE.md)
-- [GOVERNANCE.md](GOVERNANCE.md)
-
-## Principles
-- Supreme Stewardship
-- Unified Ledger
-- Compliance Alignment
-- Transparency
-
-
-## Status Badges
-
-![Build Status](https://github.com/Sexysexy0/Public-Matters/actions/workflows/ci.yml/badge.svg)
-![Tests](https://github.com/Sexysexy0/Public-Matters/actions/workflows/tests.yml/badge.svg)
-![Security](https://github.com/Sexysexy0/Public-Matters/actions/workflows/security.yml/badge.svg)
-![Compliance](https://img.shields.io/badge/Compliance-ISO27001%2F42001%2FSOC3%2FCSA-blue)
-
-
-## CI/CD Status
-
-![Nightly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/nightly-matrix.yml/badge.svg)
-![Weekly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/weekly-matrix.yml/badge.svg)
-![Monthly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/monthly-matrix.yml/badge.svg)
-![Quarterly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/quarterly-matrix.yml/badge.svg)
-![Yearly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/yearly-matrix.yml/badge.svg)
