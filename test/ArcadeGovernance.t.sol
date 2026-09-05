@@ -30,7 +30,7 @@ contract ArcadeGovernanceTest is Test {
         gov.vote(0, true);
         gov.execute(0);
 
-        (, , , , bool executed) = gov.proposals(0);
+        (,,,, bool executed) = gov.proposals(0);
         assertTrue(executed);
     }
 }

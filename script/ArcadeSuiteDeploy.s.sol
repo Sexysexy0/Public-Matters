@@ -14,6 +14,10 @@ contract ArcadeSuiteDeploy is Script {
         SymbolismFilter filter = new SymbolismFilter();
         ChildProtectionFund fund = new ChildProtectionFund(msg.sender);
 
+        console.log("ArcadeGovernance deployed at:", address(gov));
+        console.log("SymbolismFilter deployed at:", address(filter));
+        console.log("ChildProtectionFund deployed at:", address(fund));
+
         vm.stopBroadcast();
     }
 }
