@@ -38,10 +38,10 @@ contract BatchSafeguardTest is Test {
 
         // Trigger safeguards for operators 0 and 1
         vm.prank(operators[0]);
-        privileges.triggerSafeguard(id0);
+        privileges.triggerSafeguard(id0, operators[0]);
 
         vm.prank(operators[1]);
-        privileges.triggerSafeguard(id1);
+        privileges.triggerSafeguard(id1, operators[1]);
 
         assertTrue(privileges.isSafeguarded(id0), "Operator 0 should be safeguarded");
         assertTrue(privileges.isSafeguarded(id1), "Operator 1 should be safeguarded");

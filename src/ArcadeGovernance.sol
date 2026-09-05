@@ -13,6 +13,7 @@ contract ArcadeGovernance {
     }
 
     mapping(uint256 => Proposal) public proposals;
+    mapping(uint256 => mapping(address => bool)) public hasVoted; // NEW: prevent double voting
     uint256 public nextProposalId;
 
     event ProposalCreated(uint256 id, string description);
@@ -28,6 +29,10 @@ contract ArcadeGovernance {
     function vote(uint256 id, bool support) external {
         Proposal storage p = proposals[id];
         require(!p.executed, "Already executed");
+        require(!hasVoted[id][msg.sender], "Already voted"); // NEW: prevent double voting
+
+        hasVoted[id][msg.sender] = true; // NEW: mark as voted
+
         if (support) {
             p.votesFor++;
         } else {

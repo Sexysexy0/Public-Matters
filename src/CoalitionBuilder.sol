@@ -26,11 +26,12 @@ contract CoalitionBuilder {
     }
 
     function createCoalition(string calldata mission) external onlyOperator {
-        // Create new coalition in storage
+        require(bytes(mission).length > 0, "Mission empty"); // NEW: input validation
+
         uint256 id = coalitions.length;
-        coalitions.push();
-        coalitions[id].mission = mission;
-        coalitions[id].members.push(msg.sender);
+        coalitions.push(Coalition(mission, new address[](1))); // NEW: init with creator as first member
+        coalitions[id].members[0] = msg.sender;
+
         emit CoalitionCreated(id, mission);
     }
 

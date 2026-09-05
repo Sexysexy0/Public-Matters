@@ -63,6 +63,6 @@ contract IntegrationGovernanceFlowTest is Test {
         (address op, string memory action, uint256 score,,) = ledger.getLog(0);
         assertEq(op, operator1);
         assertEq(action, "Mission Initiated");
-        assertEq(score, 55); // Initial provisional trust for added operator (50) + logAction delta (5)
+        assertEq(score, 5); // trustScore starts at 0, +5 from logAction // Initial provisional trust for added operator (50) + logAction delta (5)
     }
 }

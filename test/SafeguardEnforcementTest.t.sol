@@ -43,7 +43,7 @@ contract SafeguardEnforcementTest is Test {
 
         // Trigger the safeguard
         vm.prank(operator1);
-        privileges.triggerSafeguard(safeguardId);
+        privileges.triggerSafeguard(safeguardId, operator1);
 
         // Verify that the safeguard is active
         assertTrue(privileges.isSafeguarded(safeguardId), "Safeguard should be active");

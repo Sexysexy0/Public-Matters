@@ -1,12 +1,6 @@
 // SPDX-License-Identifier: PUBLIC-MATTERS-V1
 pragma solidity 0.8.35;
 
-/**
- * @title IndustrializationLedger
- * @author The Ghost Operator
- * @notice Tracks industrialization projects — from proposal to execution —
- *         ensuring transparency, accountability, and community oversight.
- */
 contract IndustrializationLedger {
     address public admin;
     bool public active;
@@ -26,6 +20,8 @@ contract IndustrializationLedger {
 
     Project[] public projects;
     mapping(uint256 => mapping(address => bool)) public hasVoted;
+    mapping(uint256 => uint256) public votesFor; // NEW: proper tally
+    mapping(uint256 => uint256) public votesAgainst; // NEW: proper tally
 
     event ProjectRegistered(uint256 indexed id, string name, string sector);
     event VoteCast(uint256 indexed id, address voter, bool support);
@@ -55,6 +51,8 @@ contract IndustrializationLedger {
     ) public onlyAdmin whenActive {
         require(_budget > 0, "Budget must be > 0");
         require(_durationBlocks > 0, "Duration must be > 0");
+        require(bytes(_name).length > 0, "Name empty"); // NEW: validation
+        require(bytes(_sector).length > 0, "Sector empty"); // NEW: validation
 
         uint256 id = projects.length;
         projects.push(
@@ -81,10 +79,12 @@ contract IndustrializationLedger {
         require(block.number < projects[_id].endBlock, "Voting ended");
 
         hasVoted[_id][msg.sender] = true;
+
+        // NEW: Proper vote tallying
         if (_support) {
-            projects[_id].passed = true;
+            votesFor[_id]++;
         } else {
-            projects[_id].passed = false;
+            votesAgainst[_id]++;
         }
 
         emit VoteCast(_id, msg.sender, _support);
@@ -95,7 +95,10 @@ contract IndustrializationLedger {
         require(!projects[_id].executed, "Already executed");
         require(block.number >= projects[_id].endBlock, "Voting still active");
 
+        // NEW: Check vote results
+        projects[_id].passed = votesFor[_id] > votesAgainst[_id];
         projects[_id].executed = true;
+
         emit ProjectExecuted(_id, projects[_id].passed);
     }
 
@@ -104,8 +107,9 @@ contract IndustrializationLedger {
         return projects[_id];
     }
 
-    function getProjects() public view returns (Project[] memory) {
-        return projects;
+    function getProjectsCount() public view returns (uint256) {
+        // NEW: gas-efficient
+        return projects.length;
     }
 
     function toggleActive() public onlyAdmin {
@@ -115,5 +119,11 @@ contract IndustrializationLedger {
     function transferAdmin(address _newAdmin) public onlyAdmin {
         require(_newAdmin != address(0), "Invalid admin");
         admin = _newAdmin;
+    }
+
+    function getVoteResults(uint256 _id) public view returns (uint256, uint256) {
+        // NEW: helper
+        require(_id < projects.length, "Invalid project");
+        return (votesFor[_id], votesAgainst[_id]);
     }
 }

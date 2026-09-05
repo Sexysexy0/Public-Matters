@@ -24,7 +24,8 @@ contract ZombieModeStressTest is Test {
     function testMultiPlayerZombieScenario() public {
         registry.createZombieMatch(20, 10);
         for (uint256 i = 0; i < 20; i++) {
-            address player = address(uint160(i + 1));
+// forge-lint: disable-next-line(unsafe-typecast)
+            address player = address(uint160(i + 1)); // forge-lint: disable-next-line(unsafe-typecast)
             registry.infectPlayer(player);
         }
         registry.finishMatch(0);

@@ -5,32 +5,53 @@ import "forge-std/Test.sol";
 import "../src/ArcadeGovernance.sol";
 
 contract ArcadeGovernanceTest is Test {
-    ArcadeGovernance gov;
+    ArcadeGovernance public arcade;
 
     function setUp() public {
-        gov = new ArcadeGovernance();
+        arcade = new ArcadeGovernance();
     }
 
     function testCreateAndVoteProposal() public {
-        gov.createProposal("Build the Wall Arcade");
-        gov.vote(0, true);
-        gov.vote(0, true);
-        gov.vote(0, false);
+        arcade.createProposal("Build the Wall Arcade");
+        arcade.vote(0, true);
 
-        (uint256 id, string memory desc, uint256 votesFor, uint256 votesAgainst, bool executed) = gov.proposals(0);
-        assertEq(id, 0);
-        assertEq(desc, "Build the Wall Arcade");
-        assertEq(votesFor, 2);
-        assertEq(votesAgainst, 1);
-        assertEq(executed, false);
+        address voter2 = address(0x2);
+        vm.prank(voter2);
+        arcade.vote(0, true);
+
+        (, , uint256 votesFor, uint256 votesAgainst, ) = arcade.proposals(0);
+        assertEq(votesFor, 2, "Should have 2 votes for");
+        assertEq(votesAgainst, 0, "Should have 0 votes against");
+    }
+
+    function testCannotVoteTwice() public {
+        arcade.createProposal("No Double Voting");
+        arcade.vote(0, true);
+
+        vm.expectRevert("Already voted");
+        arcade.vote(0, true);
     }
 
     function testExecuteProposal() public {
-        gov.createProposal("Save the Children Fund");
-        gov.vote(0, true);
-        gov.execute(0);
+        arcade.createProposal("Execute This");
 
-        (,,,, bool executed) = gov.proposals(0);
-        assertTrue(executed);
+        // Vote 1: true (test address)
+        arcade.vote(0, true);
+
+        // Vote 2: false (address 0x2)
+        address voter2 = address(0x2);
+        vm.prank(voter2);
+        arcade.vote(0, false);
+
+        // Vote 3: true (address 0x3) - tiebreaker!
+        address voter3 = address(0x3);
+        vm.prank(voter3);
+        arcade.vote(0, true);
+
+        // Now: votesFor = 2, votesAgainst = 1 → execute!
+        arcade.execute(0);
+
+        (, , , , bool executed) = arcade.proposals(0);
+        assertTrue(executed, "Should be executed");
     }
 }

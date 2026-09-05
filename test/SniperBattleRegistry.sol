@@ -148,7 +148,8 @@ contract SniperBattleRegistry {
         uint256 k = length;
         j = v;
         while (j != 0) {
-            bstr[--k] = bytes1(uint8(48 + j % 10));
+// forge-lint: disable-next-line(unsafe-typecast)
+            bstr[--k] = bytes1(uint8(48 + j % 10)); // forge-lint: disable-next-line(unsafe-typecast)
             j /= 10;
         }
         return string(bstr);

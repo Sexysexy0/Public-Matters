@@ -36,7 +36,7 @@ contract OperatorConsciousnessLedger {
         // Update trust via OperatorPrivileges
         privileges.logAction(msg.sender, delta);
 
-        uint256 currentTrust = privileges.getTrustScore(msg.sender);
+        uint256 currentTrust = uint256(privileges.getTrustScore(msg.sender)); // forge-lint: disable-next-line(unsafe-typecast)
 
         logs.push(
             LogEntry({
