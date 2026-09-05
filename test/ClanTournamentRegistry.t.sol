@@ -39,5 +39,6 @@ contract ClanTournamentRegistryTest is Test {
         assertEq(name, "ClanX");
         assertEq(flag, "PH");
         assertEq(members, 1);
+        assertEq(leader, address(this));
     }
 }
