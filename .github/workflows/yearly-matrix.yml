@@ -1,0 +1,37 @@
+name: Yearly Matrix Workflow Tests
+
+on:
+  schedule:
+    - cron: '0 5 1 1 *' # Every January 1 at 5 AM UTC
+  workflow_dispatch:
+
+jobs:
+  yearly-matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        workflow: [
+          "identity-verification.js",
+          "stress-tests.js",
+          "governance-audit.js",
+          "network-latency.js",
+          "incident-response.js",
+          "risk-assessment.js",
+          "governance-compliance.js",
+          "governance-dashboard.js",
+          "governance-forecast.js",
+          "governance-performance.js",
+          "governance-sustainability.js",
+          "governance-innovation.js",
+          "governance-ethics.js",
+          "governance-diversity.js",
+          "governance-integrity.js",
+          "governance-learning.js",
+          "governance-adaptation.js",
+          "governance-knowledge.js"
+        ]
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - name: Run yearly workflow script
+        run: node scripts/${{ matrix.workflow }}

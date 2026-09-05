@@ -34,3 +34,11 @@ To encode fairness, transparency, and accountability into smart contracts and go
 ![Security](https://github.com/Sexysexy0/Public-Matters/actions/workflows/security.yml/badge.svg)
 ![Compliance](https://img.shields.io/badge/Compliance-ISO27001%2F42001%2FSOC3%2FCSA-blue)
 
+
+## CI/CD Status
+
+![Nightly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/nightly-matrix.yml/badge.svg)
+![Weekly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/weekly-matrix.yml/badge.svg)
+![Monthly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/monthly-matrix.yml/badge.svg)
+![Quarterly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/quarterly-matrix.yml/badge.svg)
+![Yearly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/yearly-matrix.yml/badge.svg)

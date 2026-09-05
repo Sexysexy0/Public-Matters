@@ -1,0 +1,27 @@
+name: Auto-Update Badges
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # Every Monday at 6 AM UTC
+  workflow_dispatch:
+
+jobs:
+  update-badges:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Refresh README badges
+        run: |
+          sed -i '/## CI\/CD Status/,$!d' README.md
+          echo "![Nightly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/nightly-matrix.yml/badge.svg)" >> README.md
+          echo "![Weekly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/weekly-matrix.yml/badge.svg)" >> README.md
+          echo "![Monthly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/monthly-matrix.yml/badge.svg)" >> README.md
+          echo "![Quarterly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/quarterly-matrix.yml/badge.svg)" >> README.md
+          echo "![Yearly Matrix](https://github.com/Sexysexy0/Public-Matters/actions/workflows/yearly-matrix.yml/badge.svg)" >> README.md
+      - name: Commit and push
+        run: |
+          git config user.name "ci-bot"
+          git config user.email "ci-bot@example.com"
+          git add README.md
+          git commit -m "Auto-update CI/CD badges"
+          git push origin main

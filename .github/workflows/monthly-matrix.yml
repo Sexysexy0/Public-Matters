@@ -1,0 +1,33 @@
+name: Monthly Matrix Workflow Tests
+
+on:
+  schedule:
+    - cron: '0 3 1 * *' # First day of every month at 3 AM UTC
+  workflow_dispatch:
+
+jobs:
+  monthly-matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        workflow: [
+          "identity-verification.js",
+          "stress-tests.js",
+          "governance-audit.js",
+          "network-latency.js",
+          "incident-response.js",
+          "risk-assessment.js",
+          "governance-compliance.js",
+          "governance-dashboard.js",
+          "governance-forecast.js",
+          "governance-performance.js",
+          "governance-sustainability.js",
+          "governance-innovation.js",
+          "governance-ethics.js",
+          "governance-diversity.js"
+        ]
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - name: Run monthly workflow script
+        run: node scripts/${{ matrix.workflow }}
