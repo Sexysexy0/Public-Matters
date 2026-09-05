@@ -1,8 +1,33 @@
+## Deployment Ledger
 
-## Arcade Governance Suite Deployments
-| Contract              | Address | Verified |
-|-----------------------|---------|----------|
-| ArcadeGovernance      | 0x75e6ff28f18a5bc394b0f5ae9118f1f4b42dc9bf | ✅ |
-| SymbolismFilter       | 0x976c2dd1c704cca9eb55fe9237d9c84e97dcac3c | ✅ |
-| ChildProtectionFund   | 0xaa93b8c05033cf3d1b1be60316be3288e7704e15 | ✅ |
+### 11155111
+- ArcadeGovernance: 0x75e6ff28f18a5bc394b0f5ae9118f1f4b42dc9bf
+- SymbolismFilter: 0x976c2dd1c704cca9eb55fe9237d9c84e97dcac3c
+- ChildProtectionFund: 0xaa93b8c05033cf3d1b1be60316be3288e7704e15
+
+### 11155111
+- CandabaImpoundingDAO: 0x647639f24e16872212c49243b3d57425fef1b93a
+- FarmerCompensationVault: 0x6d860784e3ca41e09a774173292958d90e917db4
+- DredgingContractorRegistry: 0x7844018311d102ac2de12e8e732c5427e93a6e49
+- CandabaEcologicalGuardian: 0xd25c1a9a941233a3b3277b74fec773803adeb3bd
+- FloodSolutionArbiter: 0x4b5167e4d1a342939cb1afaa2d2430917c627126
+
+### 11155111
+- NexusID: 0x2af715bb1bfffccab09157bdccc72bd010fe2b46
+- TrustScoreDAO: 0x4a6a14adecafea13a7fdc8863083170c4bff5b60
+- SovereignOracle: 0xbd7b77212cdc21e575848cac48b27a048ce939f1
+- CitizenVotingDAO: 0xad98f5bc5e9c44368a2035caeb6a92ad6e9535cc
+
+### 11155111
+- BluntAdvice: 0xb161c551a3ae99086b583fe33c7ac1fb6d1fc4fa
+- CommandFeedback: 0x689ff6b8e8357910860cdcdc98923d856ae0e4e8
+- HistoryLightedPath: 0xe09199b37ac0823f69a7f8f9d0a7023cf7c7c003
+- PoliticalEndstate: 0x9410f6df38c295bd5eab8fdd4404d9009ed24885
+- DiplomaticNuance: 0x0cf71ee75f58170b7e6a6313974f896559e3eba3
+
+### 11155111
+- SpeedOfTrust: 0x94aabe78d927e87caadd07a01b6291f060e99e45
+- CoalitionBuilder: 0x280968b6465010879f2f75ad3ebaaba1dcb2f731
+- BrittleInstrument: 0xf83c2bd30499c835324ee56a72d135bce7615d45
+- InspirationIntimidation: 0x1f78c8595e3ff93203d2083efc183515923033ee
 
