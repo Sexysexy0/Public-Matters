@@ -21,4 +21,14 @@ contract CoalitionBuilder {
         coalitions[id].members.push(msg.sender);
         emit MemberJoined(id, msg.sender);
     }
+
+    // ✅ Custom getter for members
+    function getMembers(uint256 id) external view returns (address[] memory) {
+        return coalitions[id].members;
+    }
+
+    // ✅ Custom getter for mission
+    function getMission(uint256 id) external view returns (string memory) {
+        return coalitions[id].mission;
+    }
 }

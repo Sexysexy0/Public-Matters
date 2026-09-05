@@ -13,11 +13,7 @@ contract InspirationIntimidation {
 
     event ProposalFiled(address proposer, string description, uint256 inspiration, uint256 intimidation);
 
-    function fileProposal(
-        string calldata description,
-        uint256 inspiration,
-        uint256 intimidation
-    ) external {
+    function fileProposal(string calldata description, uint256 inspiration, uint256 intimidation) external {
         require(inspiration + intimidation > 0, "Scores required");
         proposals.push(Proposal(description, inspiration, intimidation, msg.sender));
         emit ProposalFiled(msg.sender, description, inspiration, intimidation);

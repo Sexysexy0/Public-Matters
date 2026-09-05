@@ -14,6 +14,12 @@ contract CoalitionBuilderTest is Test {
     function testCreateAndJoinCoalition() public {
         builder.createCoalition("Anti-mine mission");
         builder.joinCoalition(0);
-        assertEq(builder.coalitions(0).members.length, 1);
+
+        address[] memory members = builder.getMembers(0);
+        string memory mission = builder.getMission(0);
+
+        assertEq(members.length, 1);
+        assertEq(members[0], address(this));
+        assertEq(mission, "Anti-mine mission");
     }
 }

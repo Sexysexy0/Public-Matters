@@ -1,17 +1,16 @@
 #!/bin/bash
-JSON="broadcast/ArcadeSuiteDeploy.s.sol/11155111/run-latest.json"
+set -e
 
-ARC=$(jq -r '.transactions[0].contractAddress' $JSON)
-SYM=$(jq -r '.transactions[1].contractAddress' $JSON)
-CPF=$(jq -r '.transactions[2].contractAddress' $JSON)
+README="README.md"
 
-cat <<EOT > README.md
+echo "## Deployment Ledger" > $README
+echo "" >> $README
 
-## Arcade Governance Suite Deployments
-| Contract              | Address | Verified |
-|-----------------------|---------|----------|
-| ArcadeGovernance      | $ARC | ✅ |
-| SymbolismFilter       | $SYM | ✅ |
-| ChildProtectionFund   | $CPF | ✅ |
+for file in broadcast/*/*/run-latest.json; do
+  suite=$(basename $(dirname $file))
+  echo "### $suite" >> $README
+  jq -r '.transactions[] | select(.contractName != null) | "- " + .contractName + ": " + .contractAddress' $file >> $README
+  echo "" >> $README
+done
 
-EOT
+echo "Ledger updated with all broadcast contracts."
