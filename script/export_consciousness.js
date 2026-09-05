@@ -1,36 +1,43 @@
-#!/usr/bin/env node
-
-const fs = require("fs");
 const { ethers } = require("ethers");
-
-// Replace with your RPC endpoint
-const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
-
-// Replace with deployed contract address
-const ledgerAddress = process.env.LEDGER_ADDR;
-
-// Minimal ABI for OperatorConsciousnessLedger
-const ledgerAbi = [
-  "function getLogCount() view returns (uint256)",
-  "function getLog(uint256 index) view returns (address,string,uint256,uint256,bool)"
-];
+const fs = require("fs");
+const path = require("path");
 
 async function main() {
-  const ledger = new ethers.Contract(ledgerAddress, ledgerAbi, provider);
-  const count = await ledger.getLogCount();
+    // Use a reliable public Sepolia RPC endpoint
+    const rpcUrl = process.env.SEPOLIA_RPC || "https://ethereum-sepolia-rpc.publicnode.com";
+    const provider = new ethers.JsonRpcProvider(rpcUrl);
 
-  let output = "## Operator Consciousness Ledger\n\n";
-  for (let i = 0; i < count; i++) {
-    const [operator, action, trustScore, blockNumber, safeguardTriggered] =
-      await ledger.getLog(i);
-    output += `- Operator: ${operator}\n  Action: ${action}\n  Trust: ${trustScore}\n  Block: ${blockNumber}\n  Safeguard: ${safeguardTriggered}\n\n`;
-  }
+    // Locate the latest broadcast deployment file for OperatorConsciousnessLedger
+    const broadcastPath = path.join(__dirname, "../broadcast/DeployMasterArchitecture.s.sol/11155111/run-latest.json");
+    
+    if (!fs.existsSync(broadcastPath)) {
+        console.error("❌ Broadcast file not found. Please run your deployment script first.");
+        process.exit(1);
+    }
 
-  fs.appendFileSync("README.md", output);
-  console.log("Ledger exported and appended to README.md");
+    const broadcastData = JSON.parse(fs.readFileSync(broadcastPath, "utf8"));
+    const deploymentTx = broadcastData.transactions.find(tx => tx.contractName === "OperatorConsciousnessLedger");
+
+    if (!deploymentTx || !deploymentTx.contractAddress) {
+        console.error("❌ OperatorConsciousnessLedger address not found in broadcast data.");
+        process.exit(1);
+    }
+
+    const contractAddress = deploymentTx.contractAddress;
+    console.log(`Connecting to OperatorConsciousnessLedger at: ${contractAddress}`);
+
+    // Minimal ABI for fetching log count
+    const abi = [
+        "function getLogCount() view returns (uint256)"
+    ];
+
+    const ledgerContract = new ethers.Contract(contractAddress, abi, provider);
+    const count = await ledgerContract.getLogCount();
+    
+    console.log(`✅ Successfully connected! Current Consciousness Log Count: ${count.toString()}`);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
+main().catch((error) => {
+    console.error("❌ Error executing export script:", error);
+    process.exit(1);
 });
