@@ -17,13 +17,13 @@ contract FloodSolutionArbiter {
         uint256 id;
         string projectName;
         string description;
-        address blockingParty; // LGU or official who blocked
-        uint256 proposalDate;
-        uint256 blockDate;
-        uint256 resolutionDate;
+        address blockingParty;
+        uint256 proposalBlock;
+        uint256 blockRecorded;
+        uint256 resolutionBlock;
         bool resolved;
         bool communityApproved;
-        uint256 referendumId; // Link to CitizenVotingDAO vote
+        uint256 referendumId;
         string notes;
         string ipfsHash;
     }
@@ -70,14 +70,13 @@ contract FloodSolutionArbiter {
         string memory _projectName,
         string memory _description,
         address _blockingParty,
-        uint256 _proposalDate,
-        uint256 _blockDate,
+        uint256 _proposalBlock,
+        uint256 _blockRecorded,
         string memory _ipfsHash
     ) public onlyArbiter whenActive {
-        require(_blockDate > _proposalDate, "Block date must be after proposal");
-        // forgefmt: disable-next-line
-        // solhint-disable-next-line
-        require(_blockDate + 90 days < block.timestamp, "90 days not yet passed");
+        require(_blockRecorded > _proposalBlock, "Block must be after proposal");
+        // 90 days ≈ 648000 blocks (12s/block)
+        require(block.number >= _blockRecorded + 648000, "90 days not yet passed");
 
         uint256 disputeId = disputeCount;
         disputes[disputeId] = FloodDispute({
@@ -85,9 +84,9 @@ contract FloodSolutionArbiter {
             projectName: _projectName,
             description: _description,
             blockingParty: _blockingParty,
-            proposalDate: _proposalDate,
-            blockDate: _blockDate,
-            resolutionDate: 0,
+            proposalBlock: _proposalBlock,
+            blockRecorded: _blockRecorded,
+            resolutionBlock: 0,
             resolved: false,
             communityApproved: false,
             referendumId: 0,
@@ -104,10 +103,7 @@ contract FloodSolutionArbiter {
         require(!disputes[_disputeId].resolved, "Already resolved");
 
         FloodDispute storage d = disputes[_disputeId];
-
-        // Simulate creating referendum via CitizenVotingDAO
-        // In production: citizenVotingDAO.createProposal(...)
-        uint256 referendumId = block.timestamp; // Placeholder
+        uint256 referendumId = block.number; // placeholder
         d.referendumId = referendumId;
 
         emit ReferendumTriggered(_disputeId, referendumId);
@@ -121,7 +117,7 @@ contract FloodSolutionArbiter {
         FloodDispute storage d = disputes[_disputeId];
         d.resolved = true;
         d.communityApproved = _approved;
-        d.resolutionDate = block.timestamp;
+        d.resolutionBlock = block.number;
         d.notes = _notes;
 
         emit DisputeResolved(_disputeId, _approved);

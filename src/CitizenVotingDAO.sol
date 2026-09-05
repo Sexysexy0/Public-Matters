@@ -2,106 +2,61 @@
 pragma solidity 0.8.35;
 
 contract CitizenVotingDAO {
-    address public admin;
-    uint256 public proposalCount;
-
     struct Proposal {
         uint256 id;
-        string title;
         string description;
         uint256 votesFor;
         uint256 votesAgainst;
-        uint256 startTime;
-        uint256 endTime;
+        uint256 startBlock;
+        uint256 endBlock;
         bool executed;
         bool passed;
-        address proposer;
     }
 
-    mapping(uint256 => Proposal) public proposals;
+    Proposal[] public proposals;
     mapping(uint256 => mapping(address => bool)) public hasVoted;
-    mapping(address => bool) public isCitizen;
 
-    event ProposalCreated(uint256 indexed id, string title);
+    event ProposalCreated(uint256 indexed id, string description);
     event VoteCast(uint256 indexed id, address voter, bool support);
     event ProposalExecuted(uint256 indexed id, bool passed);
 
-    modifier onlyAdmin() {
-        require(msg.sender == admin, "Not admin");
-        _;
-    }
-
-    modifier onlyCitizen() {
-        require(isCitizen[msg.sender], "Not a citizen");
-        _;
-    }
-
-    constructor() {
-        admin = msg.sender;
-        isCitizen[msg.sender] = true;
-        proposalCount = 0;
-    }
-
-    function registerCitizen(address _citizen) public onlyAdmin {
-        isCitizen[_citizen] = true;
-    }
-
-    function createProposal(string memory _title, string memory _description, uint256 _votingDuration)
-        public
-        onlyCitizen
-    {
-        require(_votingDuration > 0, "Duration must be > 0");
-
-        uint256 proposalId = proposalCount;
-        proposals[proposalId] = Proposal({
-            id: proposalId,
-            title: _title,
+    function createProposal(string memory _description, uint256 _durationBlocks) public {
+        require(_durationBlocks > 0, "Duration must be > 0");
+        uint256 id = proposals.length;
+        proposals.push(Proposal({
+            id: id,
             description: _description,
             votesFor: 0,
             votesAgainst: 0,
-            startTime: block.timestamp,
-            endTime: block.timestamp + _votingDuration,
+            startBlock: block.number,
+            endBlock: block.number + _durationBlocks,
             executed: false,
-            passed: false,
-            proposer: msg.sender
-        });
-
-        proposalCount++;
-        emit ProposalCreated(proposalId, _title);
+            passed: false
+        }));
+        emit ProposalCreated(id, _description);
     }
 
-    function vote(uint256 _proposalId, bool _support) public onlyCitizen {
-        require(_proposalId < proposalCount, "Invalid proposal");
-        require(!hasVoted[_proposalId][msg.sender], "Already voted");
-        // forgefmt: disable-next-line
-        // solhint-disable-next-line
-        require(block.timestamp < proposals[_proposalId].endTime, "Voting ended");
+    function castVote(uint256 _id, bool _support) public {
+        require(_id < proposals.length, "Invalid proposal");
+        require(!hasVoted[_id][msg.sender], "Already voted");
+        require(block.number < proposals[_id].endBlock, "Voting ended");
 
-        hasVoted[_proposalId][msg.sender] = true;
+        hasVoted[_id][msg.sender] = true;
         if (_support) {
-            proposals[_proposalId].votesFor++;
+            proposals[_id].votesFor++;
         } else {
-            proposals[_proposalId].votesAgainst++;
+            proposals[_id].votesAgainst++;
         }
-
-        emit VoteCast(_proposalId, msg.sender, _support);
+        emit VoteCast(_id, msg.sender, _support);
     }
 
-    function executeProposal(uint256 _proposalId) public onlyAdmin {
-        require(_proposalId < proposalCount, "Invalid proposal");
-        // forgefmt: disable-next-line
-        // solhint-disable-next-line
-        require(!proposals[_proposalId].executed, "Already executed");
-        require(block.timestamp >= proposals[_proposalId].endTime, "Voting still active");
+    function executeProposal(uint256 _id) public {
+        require(_id < proposals.length, "Invalid proposal");
+        require(!proposals[_id].executed, "Already executed");
+        require(block.number >= proposals[_id].endBlock, "Voting still active");
 
-        proposals[_proposalId].executed = true;
-        proposals[_proposalId].passed = proposals[_proposalId].votesFor > proposals[_proposalId].votesAgainst;
-
-        emit ProposalExecuted(_proposalId, proposals[_proposalId].passed);
-    }
-
-    function getProposal(uint256 _proposalId) public view returns (Proposal memory) {
-        require(_proposalId < proposalCount, "Invalid proposal");
-        return proposals[_proposalId];
+        proposals[_id].executed = true;
+        proposals[_id].passed = proposals[_id].votesFor > proposals[_id].votesAgainst;
+        emit ProposalExecuted(_id, proposals[_id].passed);
     }
 }
