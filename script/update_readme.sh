@@ -2,19 +2,18 @@
 set -e
 
 README="README.md"
-
 echo "## Deployment Ledger" > "${README}"
 echo "" >> "${README}"
 
 for file in broadcast/*/*/run-latest.json; do
-  suite=$(basename $(dirname "$file"))
-  echo "### $suite" >> "${README}"
-  jq -r '.receipts[] 
-    | "- " + .contractName + ": " + .contractAddress 
-    + "\n  Block: " + (.blockNumber|tostring) 
-    + " | Gas: " + (.gasUsed|tostring) 
-    + " | Paid: " + (.gasCost|tostring) + " ETH"' "$file" >> "${README}"
-  echo "" >> "${README}"
+  if [ -f "$file" ]; then
+    suite=$(basename $(dirname "$file"))
+    echo "### Suite: $suite" >> "${README}"
+    
+    # Extract contract deployments from the transactions array
+    jq -r '.transactions[] | select(.contractName != null) | "- **" + .contractName + "**: `" + .contractAddress + "`"' "$file" >> "${README}"
+    echo "" >> "${README}"
+  fi
 done
 
 echo "Ledger updated with all broadcast contracts."
