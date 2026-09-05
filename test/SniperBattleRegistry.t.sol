@@ -6,6 +6,7 @@ import "./SniperBattleRegistry.sol";
 
 contract DummyEventBoard is IEventBoard {
     event EventPosted(string title, string description);
+
     function postEvent(string memory _title, string memory _description) external override {
         emit EventPosted(_title, _description);
     }
@@ -38,8 +39,15 @@ contract SniperBattleRegistryTest is Test {
         registry.checkPing(30);
         registry.assignBadge("Pro Sniper");
         registry.updateClanFlag("ClanElite", "JP");
-        (string memory name, uint256 rank, string memory clan, string memory flag, uint256 ping, string memory badge, bool reg) =
-            registry.players(address(this));
+        (
+            string memory name,
+            uint256 rank,
+            string memory clan,
+            string memory flag,
+            uint256 ping,
+            string memory badge,
+            bool reg
+        ) = registry.players(address(this));
         assertEq(name, "Vinvin");
         assertEq(rank, 10);
         assertEq(clan, "ClanElite");

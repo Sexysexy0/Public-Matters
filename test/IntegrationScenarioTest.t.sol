@@ -30,7 +30,7 @@ contract IntegrationScenarioTest is Test {
         eventBoard.postEvent("Map Rotation", string(abi.encodePacked("Winning map is ", winning)));
 
         // Retrieve event
-        (string memory title, string memory desc, ) = eventBoard.getEvent(0);
+        (string memory title, string memory desc,) = eventBoard.getEvent(0);
         assertEq(title, "Map Rotation");
         assertEq(desc, "Winning map is Hospital");
     }
@@ -51,7 +51,7 @@ contract IntegrationScenarioTest is Test {
         eventBoard.updateEvent(0, "Map Rotation", string(abi.encodePacked("Winning map is ", winning)));
 
         // Verify update
-        (, string memory desc, ) = eventBoard.getEvent(0);
+        (, string memory desc,) = eventBoard.getEvent(0);
         assertEq(desc, "Winning map is Desert");
     }
 }

@@ -39,12 +39,7 @@ contract SniperRegistry {
         emit PlayerJoined(_matchId, msg.sender);
     }
 
-    function registerPlayer(
-        string memory _name,
-        uint256 _rank,
-        string memory _clan,
-        string memory _flag
-    ) external {
+    function registerPlayer(string memory _name, uint256 _rank, string memory _clan, string memory _flag) external {
         players[msg.sender] = Player(_name, _rank, _clan, _flag, 0, "");
     }
 

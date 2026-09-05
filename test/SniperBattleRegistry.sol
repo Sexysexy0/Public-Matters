@@ -48,7 +48,7 @@ contract SniperBattleRegistry {
     constructor(address _eventBoard, string[] memory _maps) {
         owner = msg.sender;
         eventBoard = IEventBoard(_eventBoard);
-        for (uint i = 0; i < _maps.length; i++) {
+        for (uint256 i = 0; i < _maps.length; i++) {
             allowedMaps[_maps[i]] = true;
         }
     }
@@ -59,12 +59,7 @@ contract SniperBattleRegistry {
     }
 
     // Create a sniper match; openLobby true allows auto‑fill
-    function createMatch(
-        string memory _map,
-        bool _openLobby,
-        string memory _server,
-        uint8 _maxPlayers
-    ) external {
+    function createMatch(string memory _map, bool _openLobby, string memory _server, uint8 _maxPlayers) external {
         require(allowedMaps[_map], "map not allowed");
         matches.push(SniperMatch(_map, _openLobby, block.timestamp, _server, _maxPlayers));
         uint256 id = matches.length - 1;
@@ -85,7 +80,7 @@ contract SniperBattleRegistry {
     function leaveMatch(uint256 _matchId) external {
         require(_matchId < matches.length, "invalid match");
         address[] storage list = matchPlayers[_matchId];
-        for (uint i = 0; i < list.length; i++) {
+        for (uint256 i = 0; i < list.length; i++) {
             if (list[i] == msg.sender) {
                 list[i] = list[list.length - 1];
                 list.pop();
@@ -97,12 +92,7 @@ contract SniperBattleRegistry {
     }
 
     // Player registration and profile
-    function registerPlayer(
-        string memory _name,
-        uint256 _rank,
-        string memory _clan,
-        string memory _flag
-    ) external {
+    function registerPlayer(string memory _name, uint256 _rank, string memory _clan, string memory _flag) external {
         players[msg.sender] = Player(_name, _rank, _clan, _flag, 0, "", true);
         emit ClanFlagUpdated(msg.sender, _clan, _flag);
         eventBoard.postEvent("Player Registered", string(abi.encodePacked(_name, " joined with clan ", _clan)));
@@ -112,7 +102,9 @@ contract SniperBattleRegistry {
         require(players[msg.sender].registered, "not registered");
         players[msg.sender].rank = _newRank;
         emit RankUpdated(msg.sender, _newRank);
-        eventBoard.postEvent("Rank Update", string(abi.encodePacked(players[msg.sender].name, " new rank: ", uintToString(_newRank))));
+        eventBoard.postEvent(
+            "Rank Update", string(abi.encodePacked(players[msg.sender].name, " new rank: ", uintToString(_newRank)))
+        );
     }
 
     function checkPing(uint256 _ping) external {
@@ -125,7 +117,9 @@ contract SniperBattleRegistry {
         require(players[msg.sender].registered, "not registered");
         players[msg.sender].badge = _badge;
         emit BadgeAssigned(msg.sender, _badge);
-        eventBoard.postEvent("Badge Assigned", string(abi.encodePacked(players[msg.sender].name, " earned badge: ", _badge)));
+        eventBoard.postEvent(
+            "Badge Assigned", string(abi.encodePacked(players[msg.sender].name, " earned badge: ", _badge))
+        );
     }
 
     function updateClanFlag(string memory _clan, string memory _flag) external {
@@ -146,11 +140,17 @@ contract SniperBattleRegistry {
         if (v == 0) return "0";
         uint256 j = v;
         uint256 length;
-        while (j != 0) { length++; j /= 10; }
+        while (j != 0) {
+            length++;
+            j /= 10;
+        }
         bytes memory bstr = new bytes(length);
         uint256 k = length;
         j = v;
-        while (j != 0) { bstr[--k] = bytes1(uint8(48 + j % 10)); j /= 10; }
+        while (j != 0) {
+            bstr[--k] = bytes1(uint8(48 + j % 10));
+            j /= 10;
+        }
         return string(bstr);
     }
 }

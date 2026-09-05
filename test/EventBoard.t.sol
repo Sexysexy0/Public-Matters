@@ -13,7 +13,7 @@ contract EventBoardTest is Test {
 
     function testPostEvent() public {
         board.postEvent("Update", "Patch 1.0 released");
-        (string memory title, string memory desc, ) = board.getEvent(0);
+        (string memory title, string memory desc,) = board.getEvent(0);
         assertEq(title, "Update");
         assertEq(desc, "Patch 1.0 released");
     }
@@ -21,7 +21,7 @@ contract EventBoardTest is Test {
     function testUpdateEvent() public {
         board.postEvent("Notice", "Server maintenance");
         board.updateEvent(0, "Notice", "Server maintenance extended");
-        (, string memory desc, ) = board.getEvent(0);
+        (, string memory desc,) = board.getEvent(0);
         assertEq(desc, "Server maintenance extended");
     }
 }

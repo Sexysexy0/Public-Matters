@@ -6,6 +6,7 @@ import "./SniperBattleRegistry.sol";
 
 contract DummyEventBoard is IEventBoard {
     event EventPosted(string title, string description);
+
     function postEvent(string memory _title, string memory _description) external override {
         emit EventPosted(_title, _description);
     }
@@ -25,7 +26,7 @@ contract SniperBattleStressTest is Test {
         eventBoard = new DummyEventBoard();
         registry = new SniperBattleRegistry(address(eventBoard), maps);
 
-        for (uint i = 0; i < 12; i++) {
+        for (uint256 i = 0; i < 12; i++) {
             agents.push(address(uint160(i + 1)));
         }
     }
@@ -34,7 +35,7 @@ contract SniperBattleStressTest is Test {
         // create match with explicit maxPlayers (12)
         registry.createMatch("Desert Dunes", true, "EU", 12);
 
-        for (uint i = 0; i < agents.length; i++) {
+        for (uint256 i = 0; i < agents.length; i++) {
             vm.prank(agents[i]);
             registry.registerPlayer(string(abi.encodePacked("Agent", uintToString(i))), i, "ClanZ", "PH");
 
@@ -59,11 +60,17 @@ contract SniperBattleStressTest is Test {
         if (v == 0) return "0";
         uint256 j = v;
         uint256 length;
-        while (j != 0) { length++; j /= 10; }
+        while (j != 0) {
+            length++;
+            j /= 10;
+        }
         bytes memory bstr = new bytes(length);
         uint256 k = length;
         j = v;
-        while (j != 0) { bstr[--k] = bytes1(uint8(48 + j % 10)); j /= 10; }
+        while (j != 0) {
+            bstr[--k] = bytes1(uint8(48 + j % 10));
+            j /= 10;
+        }
         return string(bstr);
     }
 }
