@@ -1,0 +1,12 @@
+name: Governance Learning Reports
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 21 * * *'
+jobs:
+  governance-learning:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: node scripts/governance-learning.js

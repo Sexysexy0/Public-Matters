@@ -1,0 +1,22 @@
+name: Legal Compliance Checks
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 7 * * *' # Daily at 7 AM UTC
+
+jobs:
+  legal-compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run legal compliance checks
+        run: node scripts/legal-compliance.js
+      - name: Upload compliance reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: compliance-reports
+          path: reports

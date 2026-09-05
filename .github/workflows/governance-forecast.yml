@@ -1,0 +1,22 @@
+name: Governance Forecasting
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Daily at midnight UTC
+
+jobs:
+  governance-forecast:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run governance forecasting
+        run: node scripts/governance-forecast.js
+      - name: Upload forecast reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: governance-forecast
+          path: forecasts

@@ -1,0 +1,12 @@
+name: Governance Transparency Reports
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 16 * * *'
+jobs:
+  governance-transparency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: node scripts/governance-transparency.js

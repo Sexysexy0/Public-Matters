@@ -1,0 +1,12 @@
+name: Governance Sustainability Tracking
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 7 * * *'
+jobs:
+  governance-sustainability:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: node scripts/governance-sustainability.js

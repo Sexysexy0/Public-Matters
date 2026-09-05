@@ -1,0 +1,12 @@
+name: Governance Diversity Metrics
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 15 * * *'
+jobs:
+  governance-diversity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: node scripts/governance-diversity.js

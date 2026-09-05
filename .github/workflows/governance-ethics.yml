@@ -1,0 +1,12 @@
+name: Governance Ethics Review
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 13 * * *'
+jobs:
+  governance-ethics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: node scripts/governance-ethics.js

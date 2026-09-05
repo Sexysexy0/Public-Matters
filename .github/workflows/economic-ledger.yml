@@ -1,0 +1,22 @@
+name: Economic Ledger Tracking
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 * * *' # Daily at 4 AM UTC
+
+jobs:
+  economic-ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run economic ledger tracking
+        run: node scripts/economic-ledger.js
+      - name: Upload ledger artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: economic-ledger
+          path: ledger

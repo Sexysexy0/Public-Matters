@@ -1,0 +1,12 @@
+name: Governance Audit Trails
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 * * *'
+jobs:
+  governance-audit-trails:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: node scripts/governance-audit-trails.js

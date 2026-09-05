@@ -1,0 +1,22 @@
+name: Governance Audit
+
+on:
+  schedule:
+    - cron: '0 2 * * SUN' # Weekly every Sunday at 2 AM UTC
+  workflow_dispatch:
+
+jobs:
+  governance-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run governance audit
+        run: node scripts/governance-audit.js
+      - name: Upload audit report
+        uses: actions/upload-artifact@v3
+        with:
+          name: governance-audit-report
+          path: reports

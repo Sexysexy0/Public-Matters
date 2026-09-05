@@ -1,21 +1,13 @@
 # Security Policy
 
-## Supported Versions
-
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
-
 ## Reporting a Vulnerability
+If you discover a security issue in any repository under Sexysexy0:
+- Email: security@sexysexy0.org
+- Preferred: Open a private security advisory via GitHub Security Advisories.
 
-Use this section to tell people how to report a vulnerability.
+We will respond within 72 hours and work to resolve the issue promptly.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+## Supported Versions
+Security updates are applied to active covenant and governance contracts.  
+Legacy repos may not receive patches unless critical.
+

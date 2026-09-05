@@ -1,0 +1,22 @@
+name: Governance Integrity Checks
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 22 * * *' # Daily at 10 PM UTC
+
+jobs:
+  governance-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run integrity checks
+        run: node scripts/governance-integrity.js
+      - name: Upload integrity reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: governance-integrity
+          path: reports

@@ -1,0 +1,22 @@
+name: Governance Innovation Pipeline
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *' # Daily at 3 AM UTC
+
+jobs:
+  governance-innovation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run innovation pipeline
+        run: node scripts/governance-innovation.js
+      - name: Upload innovation artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: governance-innovation
+          path: artifacts

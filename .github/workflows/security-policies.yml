@@ -1,0 +1,22 @@
+name: Security Policies Enforcement
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 1 * * *' # Daily at 1 AM UTC
+
+jobs:
+  security-policies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run security policy checks
+        run: node scripts/security-policies.js
+      - name: Upload security reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-reports
+          path: reports

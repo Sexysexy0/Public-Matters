@@ -1,0 +1,12 @@
+name: Governance Performance Metrics
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 18 * * *'
+jobs:
+  governance-performance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: node scripts/governance-performance.js

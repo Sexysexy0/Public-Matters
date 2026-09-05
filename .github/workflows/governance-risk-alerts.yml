@@ -1,0 +1,22 @@
+name: Governance Risk Alerts
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/20 * * * *' # Every 20 minutes
+
+jobs:
+  governance-risk-alerts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run governance risk alerts
+        run: node scripts/governance-risk-alerts.js
+      - name: Upload risk alert logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: governance-risk-alerts
+          path: alerts

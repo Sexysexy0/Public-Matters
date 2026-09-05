@@ -1,0 +1,12 @@
+name: Governance Innovation Labs
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * *'
+jobs:
+  governance-innovation-labs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: node scripts/governance-innovation-labs.js

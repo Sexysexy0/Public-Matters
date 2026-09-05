@@ -1,0 +1,12 @@
+name: Governance Knowledge Base
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 19 * * *'
+jobs:
+  governance-knowledge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: node scripts/governance-knowledge.js

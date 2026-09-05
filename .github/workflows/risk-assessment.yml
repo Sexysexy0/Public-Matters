@@ -1,0 +1,22 @@
+name: Risk Assessment
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 12 * * *' # Daily at 12 PM UTC
+
+jobs:
+  risk-assessment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run risk assessment
+        run: node scripts/risk-assessment.js
+      - name: Upload risk reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: risk-reports
+          path: reports

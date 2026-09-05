@@ -1,0 +1,22 @@
+name: Governance Alerts
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/15 * * * *' # Every 15 minutes
+
+jobs:
+  governance-alerts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run governance alerts
+        run: node scripts/governance-alerts.js
+      - name: Upload alert logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: governance-alerts
+          path: alerts

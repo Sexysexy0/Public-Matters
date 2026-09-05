@@ -1,0 +1,22 @@
+name: Governance Compliance Audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 1 * * *' # Daily at 1 AM UTC
+
+jobs:
+  governance-compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Run compliance audit
+        run: node scripts/governance-compliance.js
+      - name: Upload compliance reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: governance-compliance
+          path: reports
