@@ -33,7 +33,7 @@ contract SafeguardEnforcementTest is Test {
 
     function testSafeguardBlocksAction() public {
         string memory action = "Dangerous Action";
-        
+
         // Target a specific future block to keep the safeguardId deterministic
         uint256 targetBlock = block.number + 1;
         vm.roll(targetBlock);

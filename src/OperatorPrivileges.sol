@@ -3,10 +3,10 @@ pragma solidity ^0.8.20;
 
 contract OperatorPrivileges {
     address public owner;
-    
+
     // Core Access
     mapping(address => bool) public isOperator;
-    
+
     // Functional Awareness State (Consciousness Simulation)
     mapping(address => uint256) public trustScores;
     mapping(bytes32 => bool) public activeSafeguards;
