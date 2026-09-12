@@ -19,7 +19,7 @@ contract ArcadeGovernanceTest is Test {
         vm.prank(voter2);
         arcade.vote(0, true);
 
-        (, , uint256 votesFor, uint256 votesAgainst, ) = arcade.proposals(0);
+        (,, uint256 votesFor, uint256 votesAgainst,) = arcade.proposals(0);
         assertEq(votesFor, 2, "Should have 2 votes for");
         assertEq(votesAgainst, 0, "Should have 0 votes against");
     }
@@ -51,7 +51,7 @@ contract ArcadeGovernanceTest is Test {
         // Now: votesFor = 2, votesAgainst = 1 → execute!
         arcade.execute(0);
 
-        (, , , , bool executed) = arcade.proposals(0);
+        (,,,, bool executed) = arcade.proposals(0);
         assertTrue(executed, "Should be executed");
     }
 }

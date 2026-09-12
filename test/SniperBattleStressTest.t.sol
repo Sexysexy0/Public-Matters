@@ -27,7 +27,7 @@ contract SniperBattleStressTest is Test {
         registry = new SniperBattleRegistry(address(eventBoard), maps);
 
         for (uint256 i = 0; i < 12; i++) {
-// forge-lint: disable-next-line(unsafe-typecast)
+            // forge-lint: disable-next-line(unsafe-typecast)
             agents.push(address(uint160(i + 1))); // forge-lint: disable-next-line(unsafe-typecast)
         }
     }
@@ -70,7 +70,7 @@ contract SniperBattleStressTest is Test {
         j = v;
         while (j != 0) {
             bstr[--k] = bytes1(uint8(48 + j % 10)); // forge-lint: disable-next-line(unsafe-typecast)
-// forge-lint: disable-next-line(unsafe-typecast)
+            // forge-lint: disable-next-line(unsafe-typecast)
             j /= 10;
         }
         return string(bstr);
