@@ -90,7 +90,9 @@ contract NuclearEvidenceRegistry {
     function submitCorrection(bytes32 correctionId, bytes32 originalId, bytes32 sourceHash) external {
         Evidence storage original = evidence[originalId];
         if (original.createdAt == 0) revert MissingEvidence();
-        if (original.status == Status.Frozen) revert FrozenRecord();
+        if (original.status != Status.CorrectionRequested) {
+            revert InvalidTransition();
+        }
         if (correctionId == bytes32(0) || sourceHash == bytes32(0)) revert MissingEvidence();
         if (evidence[correctionId].createdAt != 0) revert AlreadyExists();
 
@@ -134,6 +136,9 @@ contract NuclearEvidenceRegistry {
 
         if (original.createdAt == 0 || replacement.createdAt == 0) {
             revert MissingEvidence();
+        }
+        if (original.subject != replacement.subject) {
+            revert InvalidTransition();
         }
         if (original.status == Status.Frozen || original.status == Status.Superseded) {
             revert FrozenRecord();

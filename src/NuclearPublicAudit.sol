@@ -96,6 +96,9 @@ contract NuclearPublicAudit {
         AuditEntry storage previous = entries[previousEntryId];
         if (previous.createdAt == 0) revert MissingEntry();
         if (previous.frozen) revert FrozenEntry();
+        if (latestEntryBySubject[previous.subject] != previousEntryId) {
+            revert InvalidInput();
+        }
 
         _logEntry(replacementEntryId, previous.subject, action, payloadHash, msg.sender);
 
@@ -105,6 +108,7 @@ contract NuclearPublicAudit {
     function freezeEntry(bytes32 entryId) external onlyOwner {
         AuditEntry storage entry = entries[entryId];
         if (entry.createdAt == 0) revert MissingEntry();
+        if (entry.frozen) revert FrozenEntry();
         entry.frozen = true;
         emit AuditEntryFrozen(entryId);
     }

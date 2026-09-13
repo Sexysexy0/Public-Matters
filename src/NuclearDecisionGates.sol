@@ -105,6 +105,7 @@ contract NuclearDecisionGates {
         Gate storage gate = gates[gateId];
         if (!gate.exists) revert MissingGate();
         if (gate.status != GateStatus.Open) revert GateClosed();
+        if (gate.approvals != 0) revert CannotModify();
         if (!evidenceRegistry.isUsable(evidenceId)) revert EvidenceNotUsable();
 
         NuclearEvidenceRegistry.Evidence memory evidence = evidenceRegistry.getEvidence(evidenceId);

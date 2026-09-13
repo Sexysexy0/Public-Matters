@@ -55,6 +55,9 @@ contract NuclearEvidenceRegistryTest is Test {
         vm.prank(submitter);
         registry.registerEvidence(EVIDENCE_ID, SUBJECT, SOURCE_HASH);
 
+        vm.prank(reviewer);
+        registry.reviewEvidence(EVIDENCE_ID, NuclearEvidenceRegistry.Status.CorrectionRequested);
+
         vm.prank(submitter);
         registry.submitCorrection(CORRECTION_ID, EVIDENCE_ID, CORRECTION_HASH);
 
