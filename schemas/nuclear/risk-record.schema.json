@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Nuclear Risk Record",
+  "type": "object",
+  "required": ["id", "description", "owner", "likelihood", "impact", "status"],
+  "properties": {
+    "id": {"type": "string"},
+    "description": {"type": "string"},
+    "owner": {"type": "string"},
+    "likelihood": {"type": "integer", "minimum": 1, "maximum": 5},
+    "impact": {"type": "integer", "minimum": 1, "maximum": 5},
+    "status": {"enum": ["open", "mitigated", "accepted", "closed"]}
+  }
+}

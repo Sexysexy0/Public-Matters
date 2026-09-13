@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Vendor Disclosure",
+  "type": "object",
+  "required": ["vendor", "beneficial_owners", "conflicts"],
+  "properties": {
+    "vendor": {"type": "string"},
+    "beneficial_owners": {"type": "array"},
+    "conflicts": {"type": "array"},
+    "disclosed_at": {"type": "string"}
+  }
+}

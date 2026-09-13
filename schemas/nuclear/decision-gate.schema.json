@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Nuclear Decision Gate",
+  "type": "object",
+  "required": ["gate_id", "decision", "evidence_ids", "status"],
+  "properties": {
+    "gate_id": {"type": "string"},
+    "decision": {"type": "string"},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}},
+    "status": {"enum": ["open", "passed", "failed", "conditional", "frozen"]},
+    "conditions": {"type": "array"},
+    "reviewer": {"type": "string"}
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Nuclear Contract Record",
+  "type": "object",
+  "required": ["id", "scope", "owner", "acceptance_criteria", "audit_rights"],
+  "properties": {
+    "id": {"type": "string"},
+    "scope": {"type": "string"},
+    "owner": {"type": "string"},
+    "acceptance_criteria": {"type": "array"},
+    "audit_rights": {"type": "boolean"},
+    "conflict_declaration": {"type": "string"}
+  }
+}
