@@ -32,10 +32,7 @@ contract NuclearConflictRegistry {
         bytes32 disclosureHash,
         uint64 expiresAt
     );
-    event ConflictRevoked(
-        uint256 indexed conflictId,
-        address indexed declarant
-    );
+    event ConflictRevoked(uint256 indexed conflictId, address indexed declarant);
     event ConflictExpired(uint256 indexed conflictId);
 
     modifier onlyOwner() {
@@ -54,20 +51,16 @@ contract NuclearConflictRegistry {
         emit AdministratorUpdated(msg.sender, true);
     }
 
-    function setAdministrator(
-        address administrator,
-        bool authorized
-    ) external onlyOwner {
+    function setAdministrator(address administrator, bool authorized) external onlyOwner {
         if (administrator == address(0)) revert InvalidInput();
         administrators[administrator] = authorized;
         emit AdministratorUpdated(administrator, authorized);
     }
 
-    function declareConflict(
-        bytes32 subject,
-        bytes32 disclosureHash,
-        uint64 expiresAt
-    ) external returns (uint256 conflictId) {
+    function declareConflict(bytes32 subject, bytes32 disclosureHash, uint64 expiresAt)
+        external
+        returns (uint256 conflictId)
+    {
         if (subject == bytes32(0) || disclosureHash == bytes32(0)) {
             revert InvalidInput();
         }
@@ -87,13 +80,7 @@ contract NuclearConflictRegistry {
         });
         activeConflictId[msg.sender][subject] = conflictId;
 
-        emit ConflictDeclared(
-            conflictId,
-            msg.sender,
-            subject,
-            disclosureHash,
-            expiresAt
-        );
+        emit ConflictDeclared(conflictId, msg.sender, subject, disclosureHash, expiresAt);
     }
 
     function revokeConflict(uint256 conflictId) external {
@@ -128,10 +115,7 @@ contract NuclearConflictRegistry {
         emit ConflictExpired(conflictId);
     }
 
-    function isConflicted(
-        address declarant,
-        bytes32 subject
-    ) public view returns (bool) {
+    function isConflicted(address declarant, bytes32 subject) public view returns (bool) {
         uint256 conflictId = activeConflictId[declarant][subject];
         if (conflictId == 0) return false;
 
@@ -143,9 +127,7 @@ contract NuclearConflictRegistry {
         return true;
     }
 
-    function getConflict(
-        uint256 conflictId
-    ) external view returns (Conflict memory) {
+    function getConflict(uint256 conflictId) external view returns (Conflict memory) {
         if (conflicts[conflictId].declarant == address(0)) {
             revert MissingConflict();
         }

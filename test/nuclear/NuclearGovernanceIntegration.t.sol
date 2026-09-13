@@ -24,10 +24,7 @@ contract NuclearGovernanceIntegrationTest is Test {
     function setUp() public {
         evidence = new NuclearEvidenceRegistry();
         conflicts = new NuclearConflictRegistry();
-        gates = new NuclearDecisionGates(
-            address(evidence),
-            address(conflicts)
-        );
+        gates = new NuclearDecisionGates(address(evidence), address(conflicts));
         audit = new NuclearPublicAudit();
 
         evidence.setReviewer(reviewer1, true);
@@ -38,27 +35,16 @@ contract NuclearGovernanceIntegrationTest is Test {
 
     function testFullGovernanceChain() public {
         vm.prank(reviewer1);
-        evidence.registerEvidence(
-            EVIDENCE_ID,
-            SUBJECT,
-            keccak256("source")
-        );
+        evidence.registerEvidence(EVIDENCE_ID, SUBJECT, keccak256("source"));
 
         vm.prank(reviewer1);
-        evidence.reviewEvidence(
-            EVIDENCE_ID,
-            NuclearEvidenceRegistry.Status.Accepted
-        );
+        evidence.reviewEvidence(EVIDENCE_ID, NuclearEvidenceRegistry.Status.Accepted);
 
         gates.createGate(GATE_ID, SUBJECT, 2);
         gates.attachEvidence(GATE_ID, EVIDENCE_ID);
 
         vm.prank(reviewer1);
-        uint256 conflictId = conflicts.declareConflict(
-            SUBJECT,
-            keccak256("disclosure"),
-            0
-        );
+        uint256 conflictId = conflicts.declareConflict(SUBJECT, keccak256("disclosure"), 0);
 
         vm.expectRevert(NuclearDecisionGates.ConflictedReviewer.selector);
         vm.prank(reviewer1);
@@ -74,12 +60,7 @@ contract NuclearGovernanceIntegrationTest is Test {
 
         assertTrue(gates.isPassed(GATE_ID));
 
-        audit.logEntry(
-            AUDIT_ID,
-            SUBJECT,
-            keccak256("gate-passed"),
-            keccak256("decision-payload")
-        );
+        audit.logEntry(AUDIT_ID, SUBJECT, keccak256("gate-passed"), keccak256("decision-payload"));
 
         assertTrue(audit.entryExists(AUDIT_ID));
     }
@@ -87,16 +68,9 @@ contract NuclearGovernanceIntegrationTest is Test {
     function testRejectedEvidenceCannotEnterGate() public {
         bytes32 rejectedId = keccak256("rejected-evidence");
 
-        evidence.registerEvidence(
-            rejectedId,
-            SUBJECT,
-            keccak256("bad-source")
-        );
+        evidence.registerEvidence(rejectedId, SUBJECT, keccak256("bad-source"));
 
-        evidence.reviewEvidence(
-            rejectedId,
-            NuclearEvidenceRegistry.Status.Rejected
-        );
+        evidence.reviewEvidence(rejectedId, NuclearEvidenceRegistry.Status.Rejected);
 
         gates.createGate(GATE_ID, SUBJECT, 1);
 
@@ -108,19 +82,9 @@ contract NuclearGovernanceIntegrationTest is Test {
         bytes32 first = keccak256("audit-first");
         bytes32 second = keccak256("audit-second");
 
-        audit.logEntry(
-            first,
-            SUBJECT,
-            keccak256("initial"),
-            keccak256("payload-one")
-        );
+        audit.logEntry(first, SUBJECT, keccak256("initial"), keccak256("payload-one"));
 
-        audit.supersedeEntry(
-            first,
-            second,
-            keccak256("corrected"),
-            keccak256("payload-two")
-        );
+        audit.supersedeEntry(first, second, keccak256("corrected"), keccak256("payload-two"));
 
         assertEq(audit.latestEntryBySubject(SUBJECT), second);
         assertTrue(audit.entryExists(first));

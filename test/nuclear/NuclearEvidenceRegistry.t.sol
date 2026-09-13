@@ -24,8 +24,7 @@ contract NuclearEvidenceRegistryTest is Test {
         vm.prank(submitter);
         registry.registerEvidence(EVIDENCE_ID, SUBJECT, SOURCE_HASH);
 
-        NuclearEvidenceRegistry.Evidence memory record =
-            registry.getEvidence(EVIDENCE_ID);
+        NuclearEvidenceRegistry.Evidence memory record = registry.getEvidence(EVIDENCE_ID);
 
         assertEq(record.subject, SUBJECT);
         assertEq(record.sourceHash, SOURCE_HASH);
@@ -38,10 +37,7 @@ contract NuclearEvidenceRegistryTest is Test {
         registry.registerEvidence(EVIDENCE_ID, SUBJECT, SOURCE_HASH);
 
         vm.prank(reviewer);
-        registry.reviewEvidence(
-            EVIDENCE_ID,
-            NuclearEvidenceRegistry.Status.Accepted
-        );
+        registry.reviewEvidence(EVIDENCE_ID, NuclearEvidenceRegistry.Status.Accepted);
 
         assertTrue(registry.isUsable(EVIDENCE_ID));
     }
@@ -52,10 +48,7 @@ contract NuclearEvidenceRegistryTest is Test {
 
         vm.expectRevert(NuclearEvidenceRegistry.InvalidReviewer.selector);
         vm.prank(address(0x1234));
-        registry.reviewEvidence(
-            EVIDENCE_ID,
-            NuclearEvidenceRegistry.Status.Accepted
-        );
+        registry.reviewEvidence(EVIDENCE_ID, NuclearEvidenceRegistry.Status.Accepted);
     }
 
     function testCorrectionPreservesOriginal() public {
@@ -65,10 +58,8 @@ contract NuclearEvidenceRegistryTest is Test {
         vm.prank(submitter);
         registry.submitCorrection(CORRECTION_ID, EVIDENCE_ID, CORRECTION_HASH);
 
-        NuclearEvidenceRegistry.Evidence memory original =
-            registry.getEvidence(EVIDENCE_ID);
-        NuclearEvidenceRegistry.Evidence memory correction =
-            registry.getEvidence(CORRECTION_ID);
+        NuclearEvidenceRegistry.Evidence memory original = registry.getEvidence(EVIDENCE_ID);
+        NuclearEvidenceRegistry.Evidence memory correction = registry.getEvidence(CORRECTION_ID);
 
         assertEq(original.sourceHash, SOURCE_HASH);
         assertEq(correction.sourceHash, CORRECTION_HASH);
@@ -80,10 +71,7 @@ contract NuclearEvidenceRegistryTest is Test {
         registry.registerEvidence(EVIDENCE_ID, SUBJECT, SOURCE_HASH);
 
         vm.prank(reviewer);
-        registry.reviewEvidence(
-            EVIDENCE_ID,
-            NuclearEvidenceRegistry.Status.Rejected
-        );
+        registry.reviewEvidence(EVIDENCE_ID, NuclearEvidenceRegistry.Status.Rejected);
 
         assertFalse(registry.isUsable(EVIDENCE_ID));
     }
@@ -95,9 +83,6 @@ contract NuclearEvidenceRegistryTest is Test {
         registry.freezeEvidence(EVIDENCE_ID);
 
         vm.expectRevert(NuclearEvidenceRegistry.FrozenRecord.selector);
-        registry.reviewEvidence(
-            EVIDENCE_ID,
-            NuclearEvidenceRegistry.Status.Accepted
-        );
+        registry.reviewEvidence(EVIDENCE_ID, NuclearEvidenceRegistry.Status.Accepted);
     }
 }

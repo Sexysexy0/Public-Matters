@@ -18,10 +18,7 @@ contract NuclearGovernanceLocalDeploy is Script {
     function deploy() public returns (Deployment memory deployment) {
         deployment.evidence = new NuclearEvidenceRegistry();
         deployment.conflicts = new NuclearConflictRegistry();
-        deployment.gates = new NuclearDecisionGates(
-            address(deployment.evidence),
-            address(deployment.conflicts)
-        );
+        deployment.gates = new NuclearDecisionGates(address(deployment.evidence), address(deployment.conflicts));
         deployment.audit = new NuclearPublicAudit();
     }
 

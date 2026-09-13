@@ -33,10 +33,7 @@ contract NuclearPublicAudit {
         address actor
     );
     event AuditEntryFrozen(bytes32 indexed entryId);
-    event AuditEntrySuperseded(
-        bytes32 indexed previousEntryId,
-        bytes32 indexed replacementEntryId
-    );
+    event AuditEntrySuperseded(bytes32 indexed previousEntryId, bytes32 indexed replacementEntryId);
 
     modifier onlyOwner() {
         if (msg.sender != owner) revert Unauthorized();
@@ -60,28 +57,12 @@ contract NuclearPublicAudit {
         emit AuditorUpdated(auditor, authorized);
     }
 
-    function logEntry(
-        bytes32 entryId,
-        bytes32 subject,
-        bytes32 action,
-        bytes32 payloadHash
-    ) external onlyAuditor {
+    function logEntry(bytes32 entryId, bytes32 subject, bytes32 action, bytes32 payloadHash) external onlyAuditor {
         _logEntry(entryId, subject, action, payloadHash, msg.sender);
     }
 
-    function _logEntry(
-        bytes32 entryId,
-        bytes32 subject,
-        bytes32 action,
-        bytes32 payloadHash,
-        address actor
-    ) internal {
-        if (
-            entryId == bytes32(0) ||
-            subject == bytes32(0) ||
-            action == bytes32(0) ||
-            payloadHash == bytes32(0)
-        ) {
+    function _logEntry(bytes32 entryId, bytes32 subject, bytes32 action, bytes32 payloadHash, address actor) internal {
+        if (entryId == bytes32(0) || subject == bytes32(0) || action == bytes32(0) || payloadHash == bytes32(0)) {
             revert InvalidInput();
         }
         if (entries[entryId].createdAt != 0) revert AlreadyExists();
@@ -90,9 +71,7 @@ contract NuclearPublicAudit {
         bytes32 previousEntryHash;
 
         if (previousEntryId != bytes32(0)) {
-            previousEntryHash = keccak256(
-                abi.encode(previousEntryId, entries[previousEntryId])
-            );
+            previousEntryHash = keccak256(abi.encode(previousEntryId, entries[previousEntryId]));
         }
 
         entries[entryId] = AuditEntry({
@@ -107,33 +86,18 @@ contract NuclearPublicAudit {
 
         latestEntryBySubject[subject] = entryId;
 
-        emit AuditEntryLogged(
-            entryId,
-            subject,
-            action,
-            payloadHash,
-            previousEntryHash,
-            actor
-        );
+        emit AuditEntryLogged(entryId, subject, action, payloadHash, previousEntryHash, actor);
     }
 
-    function supersedeEntry(
-        bytes32 previousEntryId,
-        bytes32 replacementEntryId,
-        bytes32 action,
-        bytes32 payloadHash
-    ) external onlyAuditor {
+    function supersedeEntry(bytes32 previousEntryId, bytes32 replacementEntryId, bytes32 action, bytes32 payloadHash)
+        external
+        onlyAuditor
+    {
         AuditEntry storage previous = entries[previousEntryId];
         if (previous.createdAt == 0) revert MissingEntry();
         if (previous.frozen) revert FrozenEntry();
 
-        _logEntry(
-            replacementEntryId,
-            previous.subject,
-            action,
-            payloadHash,
-            msg.sender
-        );
+        _logEntry(replacementEntryId, previous.subject, action, payloadHash, msg.sender);
 
         emit AuditEntrySuperseded(previousEntryId, replacementEntryId);
     }

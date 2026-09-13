@@ -38,24 +38,11 @@ contract NuclearEvidenceRegistry {
 
     event ReviewerUpdated(address indexed reviewer, bool authorized);
     event EvidenceRegistered(
-        bytes32 indexed evidenceId,
-        bytes32 indexed subject,
-        bytes32 sourceHash,
-        address indexed submitter
+        bytes32 indexed evidenceId, bytes32 indexed subject, bytes32 sourceHash, address indexed submitter
     );
-    event EvidenceReviewed(
-        bytes32 indexed evidenceId,
-        address indexed reviewer,
-        Status status
-    );
-    event EvidenceCorrected(
-        bytes32 indexed originalId,
-        bytes32 indexed correctionId
-    );
-    event EvidenceSuperseded(
-        bytes32 indexed originalId,
-        bytes32 indexed replacementId
-    );
+    event EvidenceReviewed(bytes32 indexed evidenceId, address indexed reviewer, Status status);
+    event EvidenceCorrected(bytes32 indexed originalId, bytes32 indexed correctionId);
+    event EvidenceSuperseded(bytes32 indexed originalId, bytes32 indexed replacementId);
     event EvidenceFrozen(bytes32 indexed evidenceId);
 
     modifier onlyOwner() {
@@ -80,11 +67,7 @@ contract NuclearEvidenceRegistry {
         emit ReviewerUpdated(reviewer, authorized);
     }
 
-    function registerEvidence(
-        bytes32 evidenceId,
-        bytes32 subject,
-        bytes32 sourceHash
-    ) external {
+    function registerEvidence(bytes32 evidenceId, bytes32 subject, bytes32 sourceHash) external {
         if (evidenceId == bytes32(0) || subject == bytes32(0) || sourceHash == bytes32(0)) {
             revert MissingEvidence();
         }
@@ -104,11 +87,7 @@ contract NuclearEvidenceRegistry {
         emit EvidenceRegistered(evidenceId, subject, sourceHash, msg.sender);
     }
 
-    function submitCorrection(
-        bytes32 correctionId,
-        bytes32 originalId,
-        bytes32 sourceHash
-    ) external {
+    function submitCorrection(bytes32 correctionId, bytes32 originalId, bytes32 sourceHash) external {
         Evidence storage original = evidence[originalId];
         if (original.createdAt == 0) revert MissingEvidence();
         if (original.status == Status.Frozen) revert FrozenRecord();
@@ -129,20 +108,15 @@ contract NuclearEvidenceRegistry {
         emit EvidenceCorrected(originalId, correctionId);
     }
 
-    function reviewEvidence(
-        bytes32 evidenceId,
-        Status newStatus
-    ) external onlyReviewer {
+    function reviewEvidence(bytes32 evidenceId, Status newStatus) external onlyReviewer {
         Evidence storage record = evidence[evidenceId];
         if (record.createdAt == 0) revert MissingEvidence();
         if (record.status == Status.Frozen || record.status == Status.Superseded) {
             revert FrozenRecord();
         }
         if (
-            newStatus != Status.Accepted &&
-            newStatus != Status.AcceptedWithConditions &&
-            newStatus != Status.Rejected &&
-            newStatus != Status.CorrectionRequested
+            newStatus != Status.Accepted && newStatus != Status.AcceptedWithConditions && newStatus != Status.Rejected
+                && newStatus != Status.CorrectionRequested
         ) {
             revert InvalidTransition();
         }
@@ -154,10 +128,7 @@ contract NuclearEvidenceRegistry {
         emit EvidenceReviewed(evidenceId, msg.sender, newStatus);
     }
 
-    function supersedeEvidence(
-        bytes32 originalId,
-        bytes32 replacementId
-    ) external onlyReviewer {
+    function supersedeEvidence(bytes32 originalId, bytes32 replacementId) external onlyReviewer {
         Evidence storage original = evidence[originalId];
         Evidence storage replacement = evidence[replacementId];
 

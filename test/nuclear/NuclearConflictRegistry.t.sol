@@ -23,8 +23,7 @@ contract NuclearConflictRegistryTest is Test {
 
         assertTrue(registry.isConflicted(declarant, SUBJECT));
 
-        NuclearConflictRegistry.Conflict memory conflict =
-            registry.getConflict(id);
+        NuclearConflictRegistry.Conflict memory conflict = registry.getConflict(id);
 
         assertEq(conflict.declarant, declarant);
         assertEq(conflict.subject, SUBJECT);
@@ -72,8 +71,7 @@ contract NuclearConflictRegistryTest is Test {
 
         registry.expireConflict(id);
 
-        NuclearConflictRegistry.Conflict memory conflict =
-            registry.getConflict(id);
+        NuclearConflictRegistry.Conflict memory conflict = registry.getConflict(id);
 
         assertFalse(conflict.active);
     }

@@ -10,33 +10,23 @@ import {NuclearPublicAudit} from "../../src/NuclearPublicAudit.sol";
 
 contract NuclearLocalDeploymentTest is Test {
     function testLocalDeploymentWiresRegistries() public {
-        NuclearGovernanceLocalDeploy deployer =
-            new NuclearGovernanceLocalDeploy();
+        NuclearGovernanceLocalDeploy deployer = new NuclearGovernanceLocalDeploy();
 
-        NuclearGovernanceLocalDeploy.Deployment memory deployment =
-            deployer.deploy();
+        NuclearGovernanceLocalDeploy.Deployment memory deployment = deployer.deploy();
 
         assertTrue(address(deployment.evidence) != address(0));
         assertTrue(address(deployment.conflicts) != address(0));
         assertTrue(address(deployment.gates) != address(0));
         assertTrue(address(deployment.audit) != address(0));
 
-        assertEq(
-            address(deployment.gates.evidenceRegistry()),
-            address(deployment.evidence)
-        );
-        assertEq(
-            address(deployment.gates.conflictRegistry()),
-            address(deployment.conflicts)
-        );
+        assertEq(address(deployment.gates.evidenceRegistry()), address(deployment.evidence));
+        assertEq(address(deployment.gates.conflictRegistry()), address(deployment.conflicts));
     }
 
     function testLocalDeploymentOwnersAreDeployer() public {
-        NuclearGovernanceLocalDeploy deployer =
-            new NuclearGovernanceLocalDeploy();
+        NuclearGovernanceLocalDeploy deployer = new NuclearGovernanceLocalDeploy();
 
-        NuclearGovernanceLocalDeploy.Deployment memory deployment =
-            deployer.deploy();
+        NuclearGovernanceLocalDeploy.Deployment memory deployment = deployer.deploy();
 
         assertEq(deployment.evidence.owner(), address(deployer));
         assertEq(deployment.conflicts.owner(), address(deployer));
@@ -45,11 +35,9 @@ contract NuclearLocalDeploymentTest is Test {
     }
 
     function testNoFundsOrExternalCallsAreRequired() public {
-        NuclearGovernanceLocalDeploy deployer =
-            new NuclearGovernanceLocalDeploy();
+        NuclearGovernanceLocalDeploy deployer = new NuclearGovernanceLocalDeploy();
 
-        NuclearGovernanceLocalDeploy.Deployment memory deployment =
-            deployer.deploy();
+        NuclearGovernanceLocalDeploy.Deployment memory deployment = deployer.deploy();
 
         assertEq(address(deployment.evidence).balance, 0);
         assertEq(address(deployment.conflicts).balance, 0);

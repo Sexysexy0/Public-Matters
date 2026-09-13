@@ -8,7 +8,7 @@ import {NuclearDecisionGates} from "../../src/NuclearDecisionGates.sol";
 
 contract NuclearDecisionGatesTest is Test {
     NuclearEvidenceRegistry evidence;
-NuclearConflictRegistry conflicts;
+    NuclearConflictRegistry conflicts;
     NuclearDecisionGates gates;
 
     address reviewer1 = address(0xBEEF);
@@ -29,10 +29,7 @@ NuclearConflictRegistry conflicts;
         evidence.registerEvidence(EVIDENCE_ID, SUBJECT, SOURCE_HASH);
 
         vm.prank(reviewer1);
-        evidence.reviewEvidence(
-            EVIDENCE_ID,
-            NuclearEvidenceRegistry.Status.Accepted
-        );
+        evidence.reviewEvidence(EVIDENCE_ID, NuclearEvidenceRegistry.Status.Accepted);
 
         conflicts = new NuclearConflictRegistry();
         gates = new NuclearDecisionGates(address(evidence), address(conflicts));
@@ -114,17 +111,10 @@ NuclearConflictRegistry conflicts;
 
     function test_RevertWhenFailedEvidenceAttached() public {
         vm.prank(reviewer1);
-        evidence.registerEvidence(
-            keccak256("rejected"),
-            SUBJECT,
-            keccak256("rejected-source")
-        );
+        evidence.registerEvidence(keccak256("rejected"), SUBJECT, keccak256("rejected-source"));
 
         vm.prank(reviewer1);
-        evidence.reviewEvidence(
-            keccak256("rejected"),
-            NuclearEvidenceRegistry.Status.Rejected
-        );
+        evidence.reviewEvidence(keccak256("rejected"), NuclearEvidenceRegistry.Status.Rejected);
 
         gates.createGate(GATE_ID, SUBJECT, 1);
 
@@ -144,20 +134,14 @@ NuclearConflictRegistry conflicts;
         gates.createGate(GATE_ID, SUBJECT, 2);
 
         vm.expectRevert(NuclearDecisionGates.InsufficientApprovals.selector);
-        gates.resolveGate(
-            GATE_ID,
-            NuclearDecisionGates.GateStatus.Conditional
-        );
+        gates.resolveGate(GATE_ID, NuclearDecisionGates.GateStatus.Conditional);
     }
+
     function testRegistryConflictBlocksApproval() public {
         _createAndAttach(1);
 
         vm.prank(reviewer1);
-        conflicts.declareConflict(
-            SUBJECT,
-            keccak256("reviewer-1-disclosure"),
-            0
-        );
+        conflicts.declareConflict(SUBJECT, keccak256("reviewer-1-disclosure"), 0);
 
         vm.expectRevert(NuclearDecisionGates.ConflictedReviewer.selector);
         vm.prank(reviewer1);
@@ -168,11 +152,7 @@ NuclearConflictRegistry conflicts;
         _createAndAttach(1);
 
         vm.prank(reviewer1);
-        uint256 conflictId = conflicts.declareConflict(
-            SUBJECT,
-            keccak256("reviewer-1-disclosure"),
-            0
-        );
+        uint256 conflictId = conflicts.declareConflict(SUBJECT, keccak256("reviewer-1-disclosure"), 0);
 
         conflicts.revokeConflict(conflictId);
 
@@ -186,11 +166,7 @@ NuclearConflictRegistry conflicts;
         _createAndAttach(1);
 
         vm.prank(reviewer1);
-        conflicts.declareConflict(
-            SUBJECT,
-            keccak256("reviewer-1-disclosure"),
-            uint64(block.timestamp + 1 days)
-        );
+        conflicts.declareConflict(SUBJECT, keccak256("reviewer-1-disclosure"), uint64(block.timestamp + 1 days));
 
         vm.warp(block.timestamp + 1 days);
 

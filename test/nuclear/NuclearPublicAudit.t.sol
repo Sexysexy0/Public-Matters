@@ -25,8 +25,7 @@ contract NuclearPublicAuditTest is Test {
         vm.prank(auditor);
         audit.logEntry(ENTRY_ID, SUBJECT, ACTION, PAYLOAD);
 
-        NuclearPublicAudit.AuditEntry memory entry =
-            audit.getEntry(ENTRY_ID);
+        NuclearPublicAudit.AuditEntry memory entry = audit.getEntry(ENTRY_ID);
 
         assertEq(entry.subject, SUBJECT);
         assertEq(entry.action, ACTION);
@@ -53,18 +52,11 @@ contract NuclearPublicAuditTest is Test {
     function testChainLinksToPreviousEntry() public {
         vm.startPrank(auditor);
         audit.logEntry(ENTRY_ID, SUBJECT, ACTION, PAYLOAD);
-        audit.logEntry(
-            REPLACEMENT_ID,
-            SUBJECT,
-            keccak256("gate-conditional"),
-            keccak256("payload-2")
-        );
+        audit.logEntry(REPLACEMENT_ID, SUBJECT, keccak256("gate-conditional"), keccak256("payload-2"));
         vm.stopPrank();
 
-        NuclearPublicAudit.AuditEntry memory previous =
-            audit.getEntry(ENTRY_ID);
-        NuclearPublicAudit.AuditEntry memory current =
-            audit.getEntry(REPLACEMENT_ID);
+        NuclearPublicAudit.AuditEntry memory previous = audit.getEntry(ENTRY_ID);
+        NuclearPublicAudit.AuditEntry memory current = audit.getEntry(REPLACEMENT_ID);
 
         assertEq(previous.previousEntryHash, bytes32(0));
         assertTrue(current.previousEntryHash != bytes32(0));
@@ -77,8 +69,7 @@ contract NuclearPublicAuditTest is Test {
 
         audit.freezeEntry(ENTRY_ID);
 
-        NuclearPublicAudit.AuditEntry memory entry =
-            audit.getEntry(ENTRY_ID);
+        NuclearPublicAudit.AuditEntry memory entry = audit.getEntry(ENTRY_ID);
         assertTrue(entry.frozen);
     }
 
@@ -90,12 +81,7 @@ contract NuclearPublicAuditTest is Test {
 
         vm.expectRevert(NuclearPublicAudit.FrozenEntry.selector);
         vm.prank(auditor);
-        audit.supersedeEntry(
-            ENTRY_ID,
-            REPLACEMENT_ID,
-            keccak256("correction"),
-            keccak256("payload-2")
-        );
+        audit.supersedeEntry(ENTRY_ID, REPLACEMENT_ID, keccak256("correction"), keccak256("payload-2"));
     }
 
     function testSupersedeEntry() public {
@@ -103,12 +89,7 @@ contract NuclearPublicAuditTest is Test {
         audit.logEntry(ENTRY_ID, SUBJECT, ACTION, PAYLOAD);
 
         vm.prank(auditor);
-        audit.supersedeEntry(
-            ENTRY_ID,
-            REPLACEMENT_ID,
-            keccak256("correction"),
-            keccak256("payload-2")
-        );
+        audit.supersedeEntry(ENTRY_ID, REPLACEMENT_ID, keccak256("correction"), keccak256("payload-2"));
 
         assertTrue(audit.entryExists(REPLACEMENT_ID));
         assertEq(audit.latestEntryBySubject(SUBJECT), REPLACEMENT_ID);

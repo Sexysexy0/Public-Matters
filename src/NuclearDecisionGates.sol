@@ -39,7 +39,7 @@ contract NuclearDecisionGates {
     error ConflictedReviewer();
 
     NuclearEvidenceRegistry public immutable evidenceRegistry;
-NuclearConflictRegistry public immutable conflictRegistry;
+    NuclearConflictRegistry public immutable conflictRegistry;
     address public owner;
 
     mapping(address => bool) public reviewers;
@@ -50,25 +50,10 @@ NuclearConflictRegistry public immutable conflictRegistry;
     mapping(bytes32 => bytes32[]) private gateEvidence;
 
     event ReviewerUpdated(address indexed reviewer, bool authorized);
-    event ReviewerConflictUpdated(
-        address indexed reviewer,
-        bytes32 indexed subject,
-        bool conflicted
-    );
-    event GateCreated(
-        bytes32 indexed gateId,
-        bytes32 indexed subject,
-        uint256 requiredApprovals
-    );
-    event EvidenceAttached(
-        bytes32 indexed gateId,
-        bytes32 indexed evidenceId
-    );
-    event GateApproved(
-        bytes32 indexed gateId,
-        address indexed reviewer,
-        uint256 approvals
-    );
+    event ReviewerConflictUpdated(address indexed reviewer, bytes32 indexed subject, bool conflicted);
+    event GateCreated(bytes32 indexed gateId, bytes32 indexed subject, uint256 requiredApprovals);
+    event EvidenceAttached(bytes32 indexed gateId, bytes32 indexed evidenceId);
+    event GateApproved(bytes32 indexed gateId, address indexed reviewer, uint256 approvals);
     event GateResolved(bytes32 indexed gateId, GateStatus status);
     event GateFrozen(bytes32 indexed gateId);
 
@@ -86,7 +71,7 @@ NuclearConflictRegistry public immutable conflictRegistry;
         if (evidenceRegistryAddress == address(0) || conflictRegistryAddress == address(0)) revert InvalidInput();
         owner = msg.sender;
         evidenceRegistry = NuclearEvidenceRegistry(evidenceRegistryAddress);
-conflictRegistry = NuclearConflictRegistry(conflictRegistryAddress);
+        conflictRegistry = NuclearConflictRegistry(conflictRegistryAddress);
         reviewers[msg.sender] = true;
         emit ReviewerUpdated(msg.sender, true);
     }
@@ -97,48 +82,32 @@ conflictRegistry = NuclearConflictRegistry(conflictRegistryAddress);
         emit ReviewerUpdated(reviewer, authorized);
     }
 
-    function setReviewerConflict(
-        address reviewer,
-        bytes32 subject,
-        bool conflicted
-    ) external onlyOwner {
+    function setReviewerConflict(address reviewer, bytes32 subject, bool conflicted) external onlyOwner {
         if (reviewer == address(0) || subject == bytes32(0)) revert InvalidInput();
         reviewerConflicts[reviewer][subject] = conflicted;
         emit ReviewerConflictUpdated(reviewer, subject, conflicted);
     }
 
-    function createGate(
-        bytes32 gateId,
-        bytes32 subject,
-        uint256 requiredApprovals
-    ) external onlyOwner {
+    function createGate(bytes32 gateId, bytes32 subject, uint256 requiredApprovals) external onlyOwner {
         if (gateId == bytes32(0) || subject == bytes32(0) || requiredApprovals == 0) {
             revert InvalidInput();
         }
         if (gates[gateId].exists) revert AlreadyExists();
 
         gates[gateId] = Gate({
-            subject: subject,
-            requiredApprovals: requiredApprovals,
-            approvals: 0,
-            status: GateStatus.Open,
-            exists: true
+            subject: subject, requiredApprovals: requiredApprovals, approvals: 0, status: GateStatus.Open, exists: true
         });
 
         emit GateCreated(gateId, subject, requiredApprovals);
     }
 
-    function attachEvidence(
-        bytes32 gateId,
-        bytes32 evidenceId
-    ) external onlyOwner {
+    function attachEvidence(bytes32 gateId, bytes32 evidenceId) external onlyOwner {
         Gate storage gate = gates[gateId];
         if (!gate.exists) revert MissingGate();
         if (gate.status != GateStatus.Open) revert GateClosed();
         if (!evidenceRegistry.isUsable(evidenceId)) revert EvidenceNotUsable();
 
-        NuclearEvidenceRegistry.Evidence memory evidence =
-            evidenceRegistry.getEvidence(evidenceId);
+        NuclearEvidenceRegistry.Evidence memory evidence = evidenceRegistry.getEvidence(evidenceId);
 
         if (evidence.subject != gate.subject) revert MissingEvidence();
 
@@ -155,10 +124,7 @@ conflictRegistry = NuclearConflictRegistry(conflictRegistryAddress);
         Gate storage gate = gates[gateId];
         if (!gate.exists) revert MissingGate();
         if (gate.status != GateStatus.Open) revert GateClosed();
-        if (
-            reviewerConflicts[msg.sender][gate.subject]
-                || conflictRegistry.isConflicted(msg.sender, gate.subject)
-        ) {
+        if (reviewerConflicts[msg.sender][gate.subject] || conflictRegistry.isConflicted(msg.sender, gate.subject)) {
             revert ConflictedReviewer();
         }
         if (hasApproved[gateId][msg.sender]) revert AlreadyApproved();
@@ -172,9 +138,7 @@ conflictRegistry = NuclearConflictRegistry(conflictRegistryAddress);
 
         hasApproved[gateId][msg.sender] = true;
         gate.approvals += 1;
-        approvals[gateId].push(
-            Approval({reviewer: msg.sender, approvedAt: uint64(block.timestamp)})
-        );
+        approvals[gateId].push(Approval({reviewer: msg.sender, approvedAt: uint64(block.timestamp)}));
 
         emit GateApproved(gateId, msg.sender, gate.approvals);
 
@@ -184,10 +148,7 @@ conflictRegistry = NuclearConflictRegistry(conflictRegistryAddress);
         }
     }
 
-    function resolveGate(
-        bytes32 gateId,
-        GateStatus status
-    ) external onlyOwner {
+    function resolveGate(bytes32 gateId, GateStatus status) external onlyOwner {
         Gate storage gate = gates[gateId];
         if (!gate.exists) revert MissingGate();
         if (gate.status != GateStatus.Open) revert CannotModify();
