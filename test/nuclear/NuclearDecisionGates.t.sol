@@ -3,10 +3,12 @@ pragma solidity ^0.8.24;
 
 import {Test} from "forge-std/Test.sol";
 import {NuclearEvidenceRegistry} from "../../src/NuclearEvidenceRegistry.sol";
+import {NuclearConflictRegistry} from "../../src/NuclearConflictRegistry.sol";
 import {NuclearDecisionGates} from "../../src/NuclearDecisionGates.sol";
 
 contract NuclearDecisionGatesTest is Test {
     NuclearEvidenceRegistry evidence;
+NuclearConflictRegistry conflicts;
     NuclearDecisionGates gates;
 
     address reviewer1 = address(0xBEEF);
@@ -32,7 +34,8 @@ contract NuclearDecisionGatesTest is Test {
             NuclearEvidenceRegistry.Status.Accepted
         );
 
-        gates = new NuclearDecisionGates(address(evidence));
+        conflicts = new NuclearConflictRegistry();
+        gates = new NuclearDecisionGates(address(evidence), address(conflicts));
         gates.setReviewer(reviewer1, true);
         gates.setReviewer(reviewer2, true);
     }
@@ -145,5 +148,55 @@ contract NuclearDecisionGatesTest is Test {
             GATE_ID,
             NuclearDecisionGates.GateStatus.Conditional
         );
+    }
+    function testRegistryConflictBlocksApproval() public {
+        _createAndAttach(1);
+
+        vm.prank(reviewer1);
+        conflicts.declareConflict(
+            SUBJECT,
+            keccak256("reviewer-1-disclosure"),
+            0
+        );
+
+        vm.expectRevert(NuclearDecisionGates.ConflictedReviewer.selector);
+        vm.prank(reviewer1);
+        gates.approveGate(GATE_ID);
+    }
+
+    function testRevokedRegistryConflictAllowsApproval() public {
+        _createAndAttach(1);
+
+        vm.prank(reviewer1);
+        uint256 conflictId = conflicts.declareConflict(
+            SUBJECT,
+            keccak256("reviewer-1-disclosure"),
+            0
+        );
+
+        conflicts.revokeConflict(conflictId);
+
+        vm.prank(reviewer1);
+        gates.approveGate(GATE_ID);
+
+        assertTrue(gates.isPassed(GATE_ID));
+    }
+
+    function testExpiredRegistryConflictAllowsApproval() public {
+        _createAndAttach(1);
+
+        vm.prank(reviewer1);
+        conflicts.declareConflict(
+            SUBJECT,
+            keccak256("reviewer-1-disclosure"),
+            uint64(block.timestamp + 1 days)
+        );
+
+        vm.warp(block.timestamp + 1 days);
+
+        vm.prank(reviewer1);
+        gates.approveGate(GATE_ID);
+
+        assertTrue(gates.isPassed(GATE_ID));
     }
 }

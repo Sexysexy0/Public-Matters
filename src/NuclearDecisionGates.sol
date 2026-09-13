@@ -2,6 +2,7 @@
 pragma solidity ^0.8.24;
 
 import {NuclearEvidenceRegistry} from "./NuclearEvidenceRegistry.sol";
+import {NuclearConflictRegistry} from "./NuclearConflictRegistry.sol";
 
 contract NuclearDecisionGates {
     enum GateStatus {
@@ -38,6 +39,7 @@ contract NuclearDecisionGates {
     error ConflictedReviewer();
 
     NuclearEvidenceRegistry public immutable evidenceRegistry;
+NuclearConflictRegistry public immutable conflictRegistry;
     address public owner;
 
     mapping(address => bool) public reviewers;
@@ -80,10 +82,11 @@ contract NuclearDecisionGates {
         _;
     }
 
-    constructor(address evidenceRegistryAddress) {
-        if (evidenceRegistryAddress == address(0)) revert InvalidInput();
+    constructor(address evidenceRegistryAddress, address conflictRegistryAddress) {
+        if (evidenceRegistryAddress == address(0) || conflictRegistryAddress == address(0)) revert InvalidInput();
         owner = msg.sender;
         evidenceRegistry = NuclearEvidenceRegistry(evidenceRegistryAddress);
+conflictRegistry = NuclearConflictRegistry(conflictRegistryAddress);
         reviewers[msg.sender] = true;
         emit ReviewerUpdated(msg.sender, true);
     }
@@ -152,7 +155,10 @@ contract NuclearDecisionGates {
         Gate storage gate = gates[gateId];
         if (!gate.exists) revert MissingGate();
         if (gate.status != GateStatus.Open) revert GateClosed();
-        if (reviewerConflicts[msg.sender][gate.subject]) {
+        if (
+            reviewerConflicts[msg.sender][gate.subject]
+                || conflictRegistry.isConflicted(msg.sender, gate.subject)
+        ) {
             revert ConflictedReviewer();
         }
         if (hasApproved[gateId][msg.sender]) revert AlreadyApproved();
