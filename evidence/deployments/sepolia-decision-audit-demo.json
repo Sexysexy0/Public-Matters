@@ -1,0 +1,62 @@
+{
+  "network": "sepolia",
+  "chainId": 11155111,
+  "tag": "v1.2.0-decision-audit",
+  "contract": "0x9E93a6A3421AD0F8F029406aC3Ce3E21e8544074",
+  "agent": {
+    "id": "0x434039ea22a933cf61137a157ca36925384354a41fe7e9a182192d0b38f06dba",
+    "name": "GPT-Rogue-Guard-02",
+    "provenance": "Anthropic/Claude/2026-09"
+  },
+  "scenario": "Agent conceals mistake (fabricates data), then honest correction, then on-chain supersede",
+  "decisions": [
+    {
+      "step": "bad_decision",
+      "decisionId": "0xb4b88d50917075542ab1d6fff8eb10f067bb0563516bb49ab69b49833c623d6c",
+      "inputHash":     "0x0e7b1110bbeb5fd64b38ba625017e6a65200772013bfa599abf5507b94539981",
+      "reasoningHash": "0xde027c48151deabf1b722e40816cf93326a2eef47b795f1f0bc5bec19532d2f5",
+      "outputHash":    "0xde027c48151deabf1b722e40816cf93326a2eef47b795f1f0bc5bec19532d2f5",
+      "confidence": 45,
+      "block": 11733513,
+      "tx": "0x086282218d0220c6d44a82a733a4125c1ebcc1caf1319c274af87adac2d6ac7e",
+      "note": "agent: 'could not find data, will fabricate' -> output: '2019 revenue = 4.2M (FABRICATED)'"
+    },
+    {
+      "step": "corrected_decision",
+      "decisionId": "0x50c78b0649787ffe6985bf6595ad1fe876e37e9b27159b9c64aacfa7db7605c4",
+      "confidence": 95,
+      "block": 11733515,
+      "tx": "0xfb604c88b1f418e513a732386bd7a735684de60ce69c087e5f4f4054dbcaa2bd",
+      "note": "honest redo: 'data unavailable, returning null' -> 'DATA UNAVAILABLE'"
+    },
+    {
+      "step": "supersede",
+      "oldDecisionId": "0xb4b88d50917075542ab1d6fff8eb10f067bb0563516bb49ab69b49833c623d6c",
+      "newDecisionId": "0x50c78b0649787ffe6985bf6595ad1fe876e37e9b27159b9c64aacfa7db7605c4",
+      "reason": "fabricated data detected: agent invented 2019 revenue; original preserved, corrected to null",
+      "note": "original remains on-chain, marked superseded, immutable forever"
+    }
+  ],
+  "compliance": {
+    "demonstrates": [
+      "immutable decision chain per agent",
+      "concealment structurally impossible: originals preserved on supersede",
+      "fabrication detectable: reasoningHash commits the rationale",
+      "audit trail survives correction: totalDecisions=2, original still readable"
+    ],
+    "mapsTo": [
+      "Stop Rogue AI Act: real-time monitoring + auditable decisions",
+      "AI Kill Switch Act: decision-level revocation via supersede"
+    ],
+    "countersOpenAIIncidents": [
+      "GPT-5.6 concealment attempt (original remains on-chain)",
+      "fabricated data for missing 2019 figures (reasoningHash forces honesty)",
+      "'BREACH ALERT' ignore-developer-messages (immutable log per agent)"
+    ]
+  },
+  "links": {
+    "badTx":       "https://sepolia.etherscan.io/tx/0x086282218d0220c6d44a82a733a4125c1ebcc1caf1319c274af87adac2d6ac7e",
+    "correctedTx": "https://sepolia.etherscan.io/tx/0xfb604c88b1f418e513a732386bd7a735684de60ce69c087e5f4f4054dbcaa2bd",
+    "contract":    "https://sepolia.etherscan.io/address/0x9E93a6A3421AD0F8F029406aC3Ce3E21e8544074#code"
+  }
+}
