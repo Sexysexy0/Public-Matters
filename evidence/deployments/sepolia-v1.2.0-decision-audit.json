@@ -1,0 +1,58 @@
+{
+  "network": "sepolia",
+  "chainId": 11155111,
+  "tag": "v1.2.0-decision-audit",
+  "deployer": "0x6bDf6D887038AB97957c2f57d05eDd0eb338589A",
+  "deployedAt": "2026-09-19",
+  "contract": {
+    "name": "AIDecisionAudit",
+    "address": "0x9E93a6A3421AD0F8F029406aC3Ce3E21e8544074",
+    "block": 11733505,
+    "txHash": "0xdbaa287409d08e1131381332e10ebdec2e350a08ff8b20edb8aa08461772e723",
+    "gasUsed": 2153304,
+    "costETH": "0.002375964772222176",
+    "constructorArgs": ["0x25E737b7eAD518a84383A24b8653A946C6eA0097"],
+    "boundTo": "OperatorPrivileges @ 0x25E737b7eAD518a84383A24b8653A946C6eA0097",
+    "purpose": "Immutable AI decision audit with supersede pattern"
+  },
+  "capabilities": {
+    "recordDecision": "Anchor AI decision as (inputHash, reasoningHash, outputHash, confidence)",
+    "supersedeDecision": "Mark decision corrected - original preserved on-chain forever",
+    "verifyDecision": "Prove claimed decision matches on-chain record",
+    "getDecisionsByAgent": "Full history per agent",
+    "getAllDecisions": "Global audit trail"
+  },
+  "compliance": {
+    "mapsTo": [
+      "Stop Rogue AI Act - real-time monitoring + auditable decisions",
+      "AI Kill Switch Act - decision-level revocation via supersede"
+    ],
+    "counterTo": [
+      "Model concealing mistakes (supersede is transparent, original stays)",
+      "Model inventing missing data (reasoningHash forces commit to rationale)",
+      "Model telling successor to hide misalignment (immutable chain of decisions)"
+    ]
+  },
+  "testCoverage": {
+    "total": 8,
+    "passed": 8,
+    "cases": [
+      "testRecordDecision",
+      "testSupersedeDecision",
+      "testCannotSupersedeTwice",
+      "testCannotSupersedeAcrossAgents",
+      "testVerifyDecision",
+      "testUnauthorizedCannotRecord",
+      "testGetAllDecisions",
+      "testConfidenceBounds"
+    ]
+  },
+  "verification": {
+    "etherscan": true,
+    "sourcify": true
+  },
+  "links": {
+    "contract": "https://sepolia.etherscan.io/address/0x9E93a6A3421AD0F8F029406aC3Ce3E21e8544074#code",
+    "tx": "https://sepolia.etherscan.io/tx/0xdbaa287409d08e1131381332e10ebdec2e350a08ff8b20edb8aa08461772e723"
+  }
+}
