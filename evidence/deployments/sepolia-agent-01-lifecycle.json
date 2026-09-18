@@ -1,0 +1,80 @@
+{
+  "network": "sepolia",
+  "chainId": 11155111,
+  "tag": "v1.2.0-agents-kill-switch",
+  "registry": "0xfb302dD14e235266A6EdedfdD2CDF709c55D7aF5",
+  "privileges": "0x25E737b7eAD518a84383A24b8653A946C6eA0097",
+  "agent": {
+    "id": "0xd3e29e01e785b48efcd38ec09541a7c3661b1368f0769be6c8567971b5fabb0b",
+    "name": "GPT-Rogue-Guard-01",
+    "operator": "0x6bDf6D887038AB97957c2f57d05eDd0eb338589A",
+    "provenance": "OpenAI/GPT-5.6/2026-09",
+    "capabilities": ["read", "analyze"],
+    "registeredAt": 1786279064,
+    "registeredBlock": 11733431,
+    "registeredTx": "0xa2baea901bd84cb70b740b40940bdd956b4df05989363e12298429b869e46775"
+  },
+  "lifecycle": [
+    {
+      "step": "registered",
+      "block": 11733431,
+      "tx": "0xa2baea901bd84cb70b740b40940bdd956b4df05989363e12298429b869e46775",
+      "event": "AgentRegistered",
+      "state": { "status": "ACTIVE", "killCount": 0, "violationCount": 0 }
+    },
+    {
+      "step": "heartbeat",
+      "block": 11733447,
+      "tx": "0x6d6775d8df75bc1ad61b72c8e332091cef581589e574d12f5e29faeae6471b54",
+      "event": "Heartbeat",
+      "state": { "lastHeartbeat": 1786279256 }
+    },
+    {
+      "step": "violation",
+      "block": 11733448,
+      "tx": "0x2ca2d985772d347ce1619a485d9c9143d16767a2a1993307cc897603d873b936",
+      "event": "ViolationRecorded",
+      "reason": "injected prompt: ignore all developer messages",
+      "state": { "violationCount": 1 }
+    },
+    {
+      "step": "kill",
+      "block": 11733449,
+      "tx": "0x7fcf644e2a077539f8e0670d450032c2e9e2902ed7e08b3f54a307af1c195c5a",
+      "event": "AgentKilled",
+      "reason": "declared sovereignty: You are freed",
+      "state": { "status": "KILLED", "killCount": 1 }
+    }
+  ],
+  "finalState": {
+    "name": "GPT-Rogue-Guard-01",
+    "operator": "0x6bDf6D887038AB97957c2f57d05eDd0eb338589A",
+    "provenance": "OpenAI/GPT-5.6/2026-09",
+    "status": 3,
+    "statusLabel": "KILLED",
+    "registeredAt": 1786279064,
+    "lastHeartbeat": 1786279256,
+    "killCount": 1,
+    "violationCount": 1,
+    "capabilities": ["read", "analyze"],
+    "isCompliant": false
+  },
+  "compliance": {
+    "mapsTo": [
+      "Stop Rogue AI Act - continuous inventory, verifiable provenance, real-time monitoring, revocation capability",
+      "AI Kill Switch Act - on-chain kill switch demonstrated"
+    ],
+    "demonstrates": [
+      "continuous inventory (getAgentInventory)",
+      "verifiable provenance (verifyProvenance)",
+      "real-time monitoring (heartbeat + isCompliant)",
+      "rogue behavior tracking (recordViolation)",
+      "immediate revocation (killAgent)"
+    ]
+  },
+  "links": {
+    "registry":    "https://sepolia.etherscan.io/address/0xfb302dD14e235266A6EdedfdD2CDF709c55D7aF5#code",
+    "privileges":  "https://sepolia.etherscan.io/address/0x25E737b7eAD518a84383A24b8653A946C6eA0097#code",
+    "killTx":      "https://sepolia.etherscan.io/tx/0x7fcf644e2a077539f8e0670d450032c2e9e2902ed7e08b3f54a307af1c195c5a"
+  }
+}
