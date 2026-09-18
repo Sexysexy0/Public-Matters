@@ -1,0 +1,50 @@
+{
+  "network": "sepolia",
+  "chainId": 11155111,
+  "tag": "v1.2.0-agents-kill-switch",
+  "deployer": "0x6bDf6D887038AB97957c2f57d05eDd0eb338589A",
+  "deployedAt": "2026-09-19",
+  "contracts": [
+    {
+      "name": "OperatorPrivileges",
+      "address": "0x25E737b7eAD518a84383A24b8653A946C6eA0097",
+      "block": 11733414,
+      "txHash": "0x6338ba0f67903a9509068d88443ac6b7d6c70afd50405b7c53a0114cd16061cd",
+      "gasUsed": 1340455,
+      "purpose": "Operator registry, safeguards, trust scores, action log"
+    },
+    {
+      "name": "AIAgentRegistry",
+      "address": "0xfb302dD14e235266A6EdedfdD2CDF709c55D7aF5",
+      "block": 11733415,
+      "txHash": "0x2727bd0d72aa15a42011456ea846769fe59899c2bf39e1429ac02bfcb0445498",
+      "gasUsed": 3190047,
+      "constructorArgs": ["0x25E737b7eAD518a84383A24b8653A946C6eA0097"],
+      "purpose": "Rogue AI agent registry with kill switch, provenance, heartbeats"
+    }
+  ],
+  "postDeployTxs": [
+    {
+      "name": "addOperator",
+      "target": "0x25E737b7eAD518a84383A24b8653A946C6eA0097",
+      "arg": "0x6bDf6D887038AB97957c2f57d05eDd0eb338589A",
+      "txHash": "0x7b4b20775752110d9c380714ed5411f00b2b1954446653b2c31ee2627044d1c2",
+      "block": 11733416,
+      "gasUsed": 28767
+    }
+  ],
+  "totalGasUsed": 4559269,
+  "totalCostETH": "0.004786481551909502",
+  "verification": {
+    "etherscan": true,
+    "sourcify": true
+  },
+  "links": {
+    "OperatorPrivileges": "https://sepolia.etherscan.io/address/0x25E737b7eAD518a84383A24b8653A946C6eA0097#code",
+    "AIAgentRegistry":    "https://sepolia.etherscan.io/address/0xfb302dD14e235266A6EdedfdD2CDF709c55D7aF5#code"
+  },
+  "compliance": {
+    "mapsTo": "Stop Rogue AI Act (continuous inventory, verifiable provenance, revocation capability)",
+    "aiKillSwitchAct": "On-chain kill switch primitive: killAgent(agentId, reason)"
+  }
+}
