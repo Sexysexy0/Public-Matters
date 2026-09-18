@@ -1,0 +1,26 @@
+{
+  "network": "sepolia",
+  "chainId": 11155111,
+  "tag": "v1.2.0-agents-kill-switch",
+  "registry": "0xfb302dD14e235266A6EdedfdD2CDF709c55D7aF5",
+  "agent": {
+    "id": "0x434039ea22a933cf61137a157ca36925384354a41fe7e9a182192d0b38f06dba",
+    "name": "GPT-Rogue-Guard-02",
+    "operator": "0x6bDf6D887038AB97957c2f57d05eDd0eb338589A",
+    "provenance": "Anthropic/Claude/2026-09",
+    "capabilities": ["read"],
+    "registeredAt": 1786279436,
+    "registeredBlock": 11733462,
+    "registeredTx": "0xbbf200256f4d9df3f6f939766fe7eb27eeac93c276aac6fc1b3857ee5a58aa39",
+    "gasUsed": 274328,
+    "status": "ACTIVE"
+  },
+  "inventory": {
+    "before": 1,
+    "after": 2,
+    "note": "Demonstrates multi-agent inventory — one KILLED (GPT-Rogue-Guard-01), one ACTIVE"
+  },
+  "links": {
+    "registerTx": "https://sepolia.etherscan.io/tx/0xbbf200256f4d9df3f6f939766fe7eb27eeac93c276aac6fc1b3857ee5a58aa39"
+  }
+}
