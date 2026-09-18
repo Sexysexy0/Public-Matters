@@ -8,7 +8,7 @@ contract DeployGovernance is Script {
     function run() external {
         vm.startBroadcast();
         FairGovernanceFramework gov = new FairGovernanceFramework();
-        console.log(unicode"⚖️ Fair Governance Framework deployed at:", address(gov));
+        console.log(unicode"?? Fair Governance Framework deployed at:", address(gov));
         vm.stopBroadcast();
     }
 }

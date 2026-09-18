@@ -8,7 +8,7 @@ contract DeployGenerativeSocialContract is Script {
     function run() external {
         vm.startBroadcast();
         GenerativeSocialContract contractInstance = new GenerativeSocialContract();
-        console.log(unicode"🤝 Generative Social Contract deployed at:", address(contractInstance));
+        console.log(unicode"? Generative Social Contract deployed at:", address(contractInstance));
         vm.stopBroadcast();
     }
 }

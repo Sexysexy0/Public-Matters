@@ -8,7 +8,7 @@ contract DeployMatchmaking is Script {
     function run() external {
         vm.startBroadcast();
         CommunityMatchmaking mm = new CommunityMatchmaking();
-        console.log(unicode"🎮 Matchmaking Override deployed at:", address(mm));
+        console.log(unicode"? Matchmaking Override deployed at:", address(mm));
         vm.stopBroadcast();
     }
 }

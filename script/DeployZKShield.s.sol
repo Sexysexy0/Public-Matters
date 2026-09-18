@@ -8,7 +8,7 @@ contract DeployZKShield is Script {
     function run() external {
         vm.startBroadcast();
         ZKWhistleblowerShield shield = new ZKWhistleblowerShield();
-        console.log(unicode"🛡️ ZKWhistleblowerShield deployed at:", address(shield));
+        console.log(unicode"?? ZKWhistleblowerShield deployed at:", address(shield));
         vm.stopBroadcast();
     }
 }

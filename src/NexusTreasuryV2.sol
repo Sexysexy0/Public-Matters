@@ -14,10 +14,10 @@ contract NexusTreasuryV2 {
         _;
     }
 
-    // Para maka‑receive ng ETH
+    // Para maka-receive ng ETH
     receive() external payable {}
 
-    // Mag‑allocate ng totoong ETH mula sa Treasury papunta sa recipient
+    // Mag-allocate ng totoong ETH mula sa Treasury papunta sa recipient
     function allocate(address _to, uint256 _amount, string memory _reason) public onlyAdmin {
         require(address(this).balance >= _amount, "Insufficient ETH balance");
         (bool success,) = _to.call{value: _amount}("");
