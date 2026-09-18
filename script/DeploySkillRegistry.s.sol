@@ -8,7 +8,7 @@ contract DeploySkillRegistry is Script {
     function run() external {
         vm.startBroadcast();
         SkillRegistry registry = new SkillRegistry();
-        console.log(unicode"🛠️ Community Skill Share Registry deployed at:", address(registry));
+        console.log(unicode"?? Community Skill Share Registry deployed at:", address(registry));
         vm.stopBroadcast();
     }
 }

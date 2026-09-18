@@ -4,7 +4,7 @@ pragma solidity 0.8.35;
 /**
  * @title DredgingContractorRegistry
  * @author The Source
- * @notice Tracks every dredging contract in Pampanga—cost, duration, outcomes.
+ * @notice Tracks every dredging contract in Pampanga--cost, duration, outcomes.
  * @dev Links to TrustScoreDAO for contractor reputation.
  */
 contract DredgingContractorRegistry {

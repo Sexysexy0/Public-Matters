@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Public Comment",
+  "type": "object",
+  "required": ["id", "source", "comment", "response_status"],
+  "properties": {
+    "id": {"type": "string"},
+    "source": {"type": "string"},
+    "comment": {"type": "string"},
+    "response_status": {
+      "enum": ["received", "under_review", "answered",
+               "incorporated", "declined_with_reason"]
+    }
+  }
+}

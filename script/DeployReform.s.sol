@@ -8,7 +8,7 @@ contract DeployReform is Script {
     function run() external {
         vm.startBroadcast();
         PublicMattersReform reform = new PublicMattersReform();
-        console.log(unicode"🚀 PublicMattersReform deployed at:", address(reform));
+        console.log(unicode"? PublicMattersReform deployed at:", address(reform));
         vm.stopBroadcast();
     }
 }

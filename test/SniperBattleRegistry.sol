@@ -58,7 +58,7 @@ contract SniperBattleRegistry {
         allowedMaps[_map] = true;
     }
 
-    // Create a sniper match; openLobby true allows auto‑fill
+    // Create a sniper match; openLobby true allows auto-fill
     function createMatch(string memory _map, bool _openLobby, string memory _server, uint8 _maxPlayers) external {
         require(allowedMaps[_map], "map not allowed");
         matches.push(SniperMatch(_map, _openLobby, block.timestamp, _server, _maxPlayers));

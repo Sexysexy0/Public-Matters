@@ -2,69 +2,120 @@
 pragma solidity ^0.8.20;
 
 contract OperatorPrivileges {
-    address public admin;
+    address public owner;
     mapping(address => bool) public isOperator;
-    mapping(address => int256) public trustScores;
-    mapping(bytes32 => bool) public isSafeguarded; // NEW: for safeguard tracking
+    mapping(bytes32 => bool) public isSafeguarded;
+
+    mapping(address => int256) public actionLog;
+    mapping(address => uint256) public trustScore;
+    uint256 public totalActions;
+
+    mapping(bytes32 => bool) public safeguardTriggered;
 
     event OperatorAdded(address indexed operator);
     event OperatorRemoved(address indexed operator);
-    event TrustUpdated(address indexed operator, int256 newScore);
-    event SafeguardTriggered(bytes32 indexed id, address indexed operator);
+    event SafeguardAdded(bytes32 indexed safeguardId);
+    event SafeguardRemoved(bytes32 indexed safeguardId);
+    event SafeguardTriggered(bytes32 indexed safeguardId, address indexed operator, uint256 timestamp);
+    event ActionLogged(address indexed actor, int256 delta, uint256 timestamp);
+    event TrustScoreUpdated(address indexed actor, uint256 newScore);
 
-    modifier onlyAdmin() {
-        require(msg.sender == admin, "Not admin");
+    constructor() {
+        owner = msg.sender;
+        isOperator[msg.sender] = true;
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not owner");
         _;
     }
 
-    constructor() {
-        admin = msg.sender;
+    modifier onlyOperator() {
+        require(isOperator[msg.sender], "Not authorized operator");
+        _;
     }
 
-    function addOperator(address operator) external onlyAdmin {
-        isOperator[operator] = true;
-        emit OperatorAdded(operator);
+    // Operator management
+    function addOperator(address _operator) external onlyOwner {
+        isOperator[_operator] = true;
+        emit OperatorAdded(_operator);
     }
 
-    function removeOperator(address operator) external onlyAdmin {
-        isOperator[operator] = false;
-        emit OperatorRemoved(operator);
+    function removeOperator(address _operator) external onlyOwner {
+        isOperator[_operator] = false;
+        emit OperatorRemoved(_operator);
     }
 
-    function updateTrust(address operator, int256 delta) external onlyAdmin {
-        // Safe handling of negative delta without unsafe casts
-        if (delta >= 0) {
-            trustScores[operator] += delta;
-        } else {
-            int256 penalty = -delta;
-            trustScores[operator] -= penalty;
+    function addOperatorBatch(address[] calldata _operators) external onlyOwner {
+        for (uint256 i = 0; i < _operators.length; i++) {
+            isOperator[_operators[i]] = true;
+            emit OperatorAdded(_operators[i]);
         }
-        emit TrustUpdated(operator, trustScores[operator]);
     }
 
-    function logAction(address operator, int256 delta) external {
-        // Called by OperatorConsciousnessLedger
-        // forge-lint: disable-next-line(unsafe-typecast)
-        if (delta >= 0) {
-            trustScores[operator] += delta;
-        } else {
-            int256 penalty = -delta;
-            trustScores[operator] -= penalty;
-        }
-        emit TrustUpdated(operator, trustScores[operator]);
-    }
-
-    function triggerSafeguard(bytes32 safeguardId, address operator) external {
+    // Safeguard API
+    function addSafeguard(bytes32 safeguardId) external onlyOperator {
         isSafeguarded[safeguardId] = true;
-        emit SafeguardTriggered(safeguardId, operator);
+        emit SafeguardAdded(safeguardId);
     }
 
-    function getTrustScore(address operator) external view returns (int256) {
-        return trustScores[operator];
+    function removeSafeguard(bytes32 safeguardId) external onlyOperator {
+        isSafeguarded[safeguardId] = false;
+        emit SafeguardRemoved(safeguardId);
     }
 
-    function transferAdmin(address _newAdmin) external onlyAdmin {
-        require(_newAdmin != address(0), "Invalid admin");
-        admin = _newAdmin;
+    function triggerSafeguard(bytes32 safeguardId, address operator) external onlyOperator {
+        isSafeguarded[safeguardId] = true;
+        safeguardTriggered[safeguardId] = true;
+        emit SafeguardTriggered(safeguardId, operator, block.timestamp);
+    }
+
+    // Action Log API (also syncs trustScore so ledgers can read one source of truth)
+    function logAction(address actor, int256 delta) external onlyOperator {
+        actionLog[actor] += delta;
+        totalActions++;
+
+        // Sync trustScore with the signed action delta
+        if (delta >= 0) {
+            trustScore[actor] += uint256(delta);
+        } else {
+            uint256 decrease = uint256(-delta);
+            if (trustScore[actor] < decrease) {
+                trustScore[actor] = 0;
+            } else {
+                trustScore[actor] -= decrease;
+            }
+        }
+
+        emit ActionLogged(actor, delta, block.timestamp);
+        emit TrustScoreUpdated(actor, trustScore[actor]);
+    }
+
+    function getActionLog(address actor) external view returns (int256) {
+        return actionLog[actor];
+    }
+
+    // Trust Score API
+    function getTrustScore(address actor) external view returns (uint256) {
+        return trustScore[actor];
+    }
+
+    function setTrustScore(address actor, uint256 score) external onlyOperator {
+        trustScore[actor] = score;
+        emit TrustScoreUpdated(actor, score);
+    }
+
+    function incrementTrustScore(address actor, uint256 amount) external onlyOperator {
+        trustScore[actor] += amount;
+        emit TrustScoreUpdated(actor, trustScore[actor]);
+    }
+
+    function decrementTrustScore(address actor, uint256 amount) external onlyOperator {
+        if (trustScore[actor] < amount) {
+            trustScore[actor] = 0;
+        } else {
+            trustScore[actor] -= amount;
+        }
+        emit TrustScoreUpdated(actor, trustScore[actor]);
     }
 }

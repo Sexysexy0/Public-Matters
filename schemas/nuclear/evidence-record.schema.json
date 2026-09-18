@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Nuclear Evidence Record",
+  "type": "object",
+  "required": ["id", "subject", "status", "source_hash"],
+  "properties": {
+    "id": {"type": "string"},
+    "subject": {"type": "string"},
+    "status": {
+      "enum": ["draft", "submitted", "under_review", "accepted",
+               "accepted_with_conditions", "rejected",
+               "correction_requested", "superseded", "frozen"]
+    },
+    "source_hash": {"type": "string"},
+    "submitted_by": {"type": "string"},
+    "reviewed_by": {"type": "string"},
+    "assumptions": {"type": "array"},
+    "limitations": {"type": "array"},
+    "conflicts_declared": {"type": "array"}
+  }
+}

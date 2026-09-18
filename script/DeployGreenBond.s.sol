@@ -8,7 +8,7 @@ contract DeployGreenBond is Script {
     function run() external {
         vm.startBroadcast();
         GreenBondEscrow escrow = new GreenBondEscrow();
-        console.log(unicode"🌱 GreenBondEscrow deployed at:", address(escrow));
+        console.log(unicode"? GreenBondEscrow deployed at:", address(escrow));
         vm.stopBroadcast();
     }
 }

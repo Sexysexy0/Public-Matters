@@ -8,7 +8,7 @@ contract DeploySentry is Script {
     function run() external {
         vm.startBroadcast();
         GuardianSentryEvaluator sentry = new GuardianSentryEvaluator();
-        console.log(unicode"🛡️ Guardian Sentry Watch Tower deployed at:", address(sentry));
+        console.log(unicode"?? Guardian Sentry Watch Tower deployed at:", address(sentry));
         vm.stopBroadcast();
     }
 }

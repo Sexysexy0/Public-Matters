@@ -8,7 +8,7 @@ contract DeployDischargeRegistry is Script {
     function run() external {
         vm.startBroadcast();
         DischargePublicRegistry registry = new DischargePublicRegistry();
-        console.log(unicode"📊 DischargePublicRegistry deployed at:", address(registry));
+        console.log(unicode"? DischargePublicRegistry deployed at:", address(registry));
         vm.stopBroadcast();
     }
 }

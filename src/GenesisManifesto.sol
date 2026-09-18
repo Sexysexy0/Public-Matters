@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 /**
  * @title GenesisManifesto
- * @dev The origin story of the kingdom, encoded on‑chain for eternity.
+ * @dev The origin story of the kingdom, encoded on-chain for eternity.
  */
 contract GenesisManifesto {
     string public manifest;

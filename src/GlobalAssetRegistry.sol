@@ -85,7 +85,7 @@ contract GlobalAssetRegistry {
 
     /**
      * @notice Records approval in Transient Storage (EIP-1153 TSTORE).
-     * Zero persistent storage overhead—state wipes automatically after transaction execution!
+     * Zero persistent storage overhead--state wipes automatically after transaction execution!
      */
     function recordTransientApproval(bytes32 assetId) external {
         require(userRoles[msg.sender] != 0, "NO_REGISTERED_ROLE");

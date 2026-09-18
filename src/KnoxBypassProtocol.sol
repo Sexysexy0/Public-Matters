@@ -26,7 +26,7 @@ contract KnoxBypassProtocol {
         emergencySignal = false;
     }
 
-    // Step 1: Engage recovery mode – this raises the signal
+    // Step 1: Engage recovery mode - this raises the signal
     function engageEmergencyRecovery() external onlyOdin {
         require(!isBootloaderUnlocked, "Already unlocked");
         isBootloaderUnlocked = true;

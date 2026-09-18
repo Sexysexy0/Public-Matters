@@ -48,7 +48,7 @@ contract ArcadeGovernanceTest is Test {
         vm.prank(voter3);
         arcade.vote(0, true);
 
-        // Now: votesFor = 2, votesAgainst = 1 → execute!
+        // Now: votesFor = 2, votesAgainst = 1 -> execute!
         arcade.execute(0);
 
         (,,,, bool executed) = arcade.proposals(0);

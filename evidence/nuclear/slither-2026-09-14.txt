@@ -1,0 +1,1158 @@
+'forge clean' running (wd: /root/Public-Matters)
+'forge config --json' running
+'forge build --build-info --deny never --skip ./test/** ./script/** --force' running (wd: /root/Public-Matters)
+INFO:Detectors:
+Detector: arbitrary-send-eth
+AntiCorruptionWhistleblowerVault.claimBounty(uint256,bytes32) (src/AntiCorruptionWhistleblowerVault.sol#100-123) sends eth to arbitrary user
+	Dangerous calls:
+	- (success,None) = address(msg.sender).call{value: report.fee}() (src/AntiCorruptionWhistleblowerVault.sol#118)
+TaxPaymentProcessor.payTax(uint256,string) (src/TaxPaymentProcessor.sol#42-65) sends eth to arbitrary user
+	Dangerous calls:
+	- (success,None) = taxVault.call{value: total}() (src/TaxPaymentProcessor.sol#58)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#functions-that-send-ether-to-arbitrary-destinations
+INFO:Detectors:
+Detector: weak-prng
+JackSparrowProtocol.chaosPlay() (src/JackSparrowProtocol.sol#18-34) uses a weak PRNG: "chaosRoll = uint256(keccak256(bytes)(abi.encodePacked(block.timestamp,block.prevrandao,msg.sender))) % 100 (src/JackSparrowProtocol.sol#19)" 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#weak-PRNG
+INFO:Detectors:
+Detector: encode-packed-collision
+DischargePublicRegistry.publishRecord(string,string,uint256,bool) (src/DischargePublicRegistry.sol#29-47) calls abi.encodePacked() with multiple dynamic arguments:
+	- recordId = keccak256(bytes)(abi.encodePacked(facilityId,chemicalCompound,block.timestamp)) (src/DischargePublicRegistry.sol#34)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#abi-encodePacked-collision
+INFO:Detectors:
+Detector: uninitialized-state
+FilipinnovationLedger.isVerifiedInnovator (src/FilipinnovationLedger.sol#74) is never initialized. It is used in:
+NuclearDecisionGates.gateEvidence (src/NuclearDecisionGates.sol#50) is never initialized. It is used in:
+	- NuclearDecisionGates.attachEvidence(bytes32,bytes32) (src/NuclearDecisionGates.sol#104-122)
+	- NuclearDecisionGates.approveGate(bytes32) (src/NuclearDecisionGates.sol#124-150)
+	- NuclearDecisionGates.getGateEvidence(bytes32) (src/NuclearDecisionGates.sol#181-184)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-state-variables
+INFO:Detectors:
+Detector: incorrect-equality
+AntiCorruptionWhistleblowerVault.submitProof(bytes32,bytes32) (src/AntiCorruptionWhistleblowerVault.sol#58-64) uses a dangerous strict equality:
+	- require(bool,string)(vault[bundleId].timestamp == 0,Bundle ID already exists.) (src/AntiCorruptionWhistleblowerVault.sol#59)
+GrantEarmarkEscrow.createGrant(bytes32,address,uint256) (src/GrantEarmarkEscrow.sol#37-59) uses a dangerous strict equality:
+	- require(bool,string)(grants[grantId].totalAmount == 0,Grant exists) (src/GrantEarmarkEscrow.sol#44)
+NuclearEvidenceRegistry.getEvidence(bytes32) (src/NuclearEvidenceRegistry.sol#161-164) uses a dangerous strict equality:
+	- evidence[evidenceId].createdAt == 0 (src/NuclearEvidenceRegistry.sol#162)
+NuclearEvidenceRegistry.isUsable(bytes32) (src/NuclearEvidenceRegistry.sol#166-169) uses a dangerous strict equality:
+	- status == Status.Accepted || status == Status.AcceptedWithConditions (src/NuclearEvidenceRegistry.sol#168)
+NuclearPublicAudit.getEntry(bytes32) (src/NuclearPublicAudit.sol#116-119) uses a dangerous strict equality:
+	- entries[entryId].createdAt == 0 (src/NuclearPublicAudit.sol#117)
+TokenizedTreatyBase.onlyActive(uint256) (src/TokenizedTreatyBase.sol#32-35) uses a dangerous strict equality:
+	- require(bool,string)(treaties[_treatyId].status == TreatyStatus.ACTIVE,Treaty is not active) (src/TokenizedTreatyBase.sol#33)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-strict-equalities
+INFO:Detectors:
+Detector: locked-ether
+Contract locking ether found:
+	Contract CommunityTaxVault (src/CommunityTaxVault.sol#7-79) has payable functions:
+	 - CommunityTaxVault.depositTax() (src/CommunityTaxVault.sol#39-49)
+	 - CommunityTaxVault.receive() (src/CommunityTaxVault.sol#76-78)
+	But does not have a function to withdraw the ether
+Contract locking ether found:
+	Contract GovNexusBridge (src/GovNexusBridge.sol#17-61) has payable functions:
+	 - GovNexusBridge.receive() (src/GovNexusBridge.sol#60)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#contracts-that-lock-ether
+INFO:Detectors:
+Detector: reentrancy-no-eth
+Reentrancy in CommunityFund.executeProposal(uint256) (src/CommunityFund.sol#108-122):
+	External calls:
+	- (success,None) = taxVault.call(abi.encodeWithSignature(allocateFunds(uint256,string),p.amount,p.title)) (src/CommunityFund.sol#114)
+	- trustIntegrator.logPositiveAction(string(abi.encodePacked(Fund allocation: ,p.title)),5) (src/CommunityFund.sol#117)
+	State variables written after the call(s):
+	- p.executed = true (src/CommunityFund.sol#119)
+	CommunityFund.proposals (src/CommunityFund.sol#28) can be used in cross function reentrancies:
+	- CommunityFund.createProposal(string,string,uint256,address) (src/CommunityFund.sol#51-75)
+	- CommunityFund.executeProposal(uint256) (src/CommunityFund.sol#108-122)
+	- CommunityFund.proposals (src/CommunityFund.sol#28)
+	- CommunityFund.vote(uint256,bool) (src/CommunityFund.sol#77-106)
+	- p.executedAt = block.timestamp (src/CommunityFund.sol#120)
+	CommunityFund.proposals (src/CommunityFund.sol#28) can be used in cross function reentrancies:
+	- CommunityFund.createProposal(string,string,uint256,address) (src/CommunityFund.sol#51-75)
+	- CommunityFund.executeProposal(uint256) (src/CommunityFund.sol#108-122)
+	- CommunityFund.proposals (src/CommunityFund.sol#28)
+	- CommunityFund.vote(uint256,bool) (src/CommunityFund.sol#77-106)
+Reentrancy in CommunityFund.vote(uint256,bool) (src/CommunityFund.sol#77-106):
+	External calls:
+	- trustIntegrator.logPositiveAction(string(abi.encodePacked(Voted on proposal: ,p.title)),trustReward) (src/CommunityFund.sol#96)
+	State variables written after the call(s):
+	- p.passed = true (src/CommunityFund.sol#104)
+	CommunityFund.proposals (src/CommunityFund.sol#28) can be used in cross function reentrancies:
+	- CommunityFund.createProposal(string,string,uint256,address) (src/CommunityFund.sol#51-75)
+	- CommunityFund.executeProposal(uint256) (src/CommunityFund.sol#108-122)
+	- CommunityFund.proposals (src/CommunityFund.sol#28)
+	- CommunityFund.vote(uint256,bool) (src/CommunityFund.sol#77-106)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-2
+INFO:Detectors:
+Detector: uninitialized-local
+NuclearPublicAudit._logEntry(bytes32,bytes32,bytes32,bytes32,address).previousEntryHash (src/NuclearPublicAudit.sol#71) is a local variable never initialized
+MemoryAuction.makeDecision(uint256).chosenAction (src/MemoryAuction.sol#69) is a local variable never initialized
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-local-variables
+INFO:Detectors:
+Detector: unused-return
+ProjectMilestoneEscrow.completeMilestone(uint256,uint256) (src/ProjectMilestoneEscrow.sol#92-112) ignores return value by vault.submitTransaction(project.recipient,milestone.amount,) (src/ProjectMilestoneEscrow.sol#109)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-return
+INFO:Detectors:
+Detector: events-access
+IndustrializationLedger.transferAdmin(address) (src/IndustrializationLedger.sol#119-122) should emit an event for: 
+	- admin = _newAdmin (src/IndustrializationLedger.sol#121) 
+OperatorPrivileges.transferAdmin(address) (src/OperatorPrivileges.sol#66-69) should emit an event for: 
+	- admin = _newAdmin (src/OperatorPrivileges.sol#68) 
+YellowMaskProtocol.updateCurator(address) (src/YellowMaskProtocol.sol#35-37) should emit an event for: 
+	- curator = _newCurator (src/YellowMaskProtocol.sol#36) 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-events-access-control
+INFO:Detectors:
+Detector: events-maths
+CommunityFund.setMinVoteThreshold(uint256) (src/CommunityFund.sol#124-126) should emit an event for: 
+	- minVoteThreshold = _new (src/CommunityFund.sol#125) 
+CommunityFund.setQuorum(uint256) (src/CommunityFund.sol#128-130) should emit an event for: 
+	- quorum = _new (src/CommunityFund.sol#129) 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-events-arithmetic
+INFO:Detectors:
+Detector: missing-zero-check
+AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._registry (src/AnchorGovernanceVault.sol#44) lacks a zero-check on :
+		- registry = _registry (src/AnchorGovernanceVault.sol#53)
+AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._vault (src/AnchorGovernanceVault.sol#45) lacks a zero-check on :
+		- vault = _vault (src/AnchorGovernanceVault.sol#54)
+AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._treatyBase (src/AnchorGovernanceVault.sol#46) lacks a zero-check on :
+		- treatyBase = _treatyBase (src/AnchorGovernanceVault.sol#55)
+AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._escrow (src/AnchorGovernanceVault.sol#47) lacks a zero-check on :
+		- escrow = _escrow (src/AnchorGovernanceVault.sol#56)
+AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._whistleblower (src/AnchorGovernanceVault.sol#48) lacks a zero-check on :
+		- whistleblowerVault = _whistleblower (src/AnchorGovernanceVault.sol#57)
+AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._covenant (src/AnchorGovernanceVault.sol#49) lacks a zero-check on :
+		- sovereignCovenant = _covenant (src/AnchorGovernanceVault.sol#58)
+AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._cyber (src/AnchorGovernanceVault.sol#50) lacks a zero-check on :
+		- cyberResilience = _cyber (src/AnchorGovernanceVault.sol#59)
+AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._arbitration (src/AnchorGovernanceVault.sol#51) lacks a zero-check on :
+		- arbitration = _arbitration (src/AnchorGovernanceVault.sol#60)
+AwakeningCodex.constructor(address)._supremeSteward (src/AwakeningCodex.sol#21) lacks a zero-check on :
+		- supremeSteward = _supremeSteward (src/AwakeningCodex.sol#22)
+BethesdaQualityProtocol.constructor(address,uint256)._executiveDirector (src/BethesdaQualityProtocol.sol#25) lacks a zero-check on :
+		- executiveDirector = _executiveDirector (src/BethesdaQualityProtocol.sol#26)
+CandabaEcologicalGuardian.constructor(address)._sovereignOracle (src/CandabaEcologicalGuardian.sol#63) lacks a zero-check on :
+		- sovereignOracle = _sovereignOracle (src/CandabaEcologicalGuardian.sol#65)
+ChildProtectionFund.constructor(address)._gov (src/ChildProtectionFund.sol#12) lacks a zero-check on :
+		- governance = _gov (src/ChildProtectionFund.sol#13)
+CommunityFund.constructor(address,address,address)._taxVault (src/CommunityFund.sol#44) lacks a zero-check on :
+		- taxVault = _taxVault (src/CommunityFund.sol#48)
+CommunityFund.setTaxVault(address)._new (src/CommunityFund.sol#132) lacks a zero-check on :
+		- taxVault = _new (src/CommunityFund.sol#133)
+DredgingContractorRegistry.constructor(address)._trustScoreDAO (src/DredgingContractorRegistry.sol#66) lacks a zero-check on :
+		- trustScoreDAO = _trustScoreDAO (src/DredgingContractorRegistry.sol#68)
+EdwardProtocol.distributePlunder(address,uint256)._crew (src/EdwardProtocol.sol#33) lacks a zero-check on :
+		- (success,None) = _crew.call{value: _share}() (src/EdwardProtocol.sol#37)
+EndowmentGovernor.constructor(address)._anchor (src/EndowmentGovernor.sol#32) lacks a zero-check on :
+		- anchor = _anchor (src/EndowmentGovernor.sol#34)
+EndowmentGovernor.setAuthorizedTrigger(address)._trigger (src/EndowmentGovernor.sol#44) lacks a zero-check on :
+		- authorizedTrigger = _trigger (src/EndowmentGovernor.sol#45)
+EndowmentGovernor.disburse(address,uint256)._to (src/EndowmentGovernor.sol#58) lacks a zero-check on :
+		- (success,None) = _to.call{value: _amount}() (src/EndowmentGovernor.sol#61)
+EnvironmentalHealthEscrow.confiscateForRemediation(bytes32,address).target (src/EnvironmentalHealthEscrow.sol#27) lacks a zero-check on :
+		- target.transfer(amount) (src/EnvironmentalHealthEscrow.sol#32)
+FarmerCompensationVault.constructor(address)._nexusID (src/FarmerCompensationVault.sol#51) lacks a zero-check on :
+		- nexusID = _nexusID (src/FarmerCompensationVault.sol#53)
+FloodSolutionArbiter.constructor(address)._citizenVotingDAO (src/FloodSolutionArbiter.sol#53) lacks a zero-check on :
+		- citizenVotingDAO = _citizenVotingDAO (src/FloodSolutionArbiter.sol#55)
+GlobalAssetRegistry.validateAndExecute(bytes32,address,bytes).target (src/GlobalAssetRegistry.sol#122) lacks a zero-check on :
+		- (success,None) = target.call(payload) (src/GlobalAssetRegistry.sol#141)
+GovNexusBridge.constructor(address,address,address)._landTrust (src/GovNexusBridge.sol#25) lacks a zero-check on :
+		- landTrust = _landTrust (src/GovNexusBridge.sol#27)
+GovNexusBridge.constructor(address,address,address)._nexusID (src/GovNexusBridge.sol#25) lacks a zero-check on :
+		- nexusID = _nexusID (src/GovNexusBridge.sol#28)
+GovNexusBridge.constructor(address,address,address)._infraDAO (src/GovNexusBridge.sol#25) lacks a zero-check on :
+		- infraDAO = _infraDAO (src/GovNexusBridge.sol#29)
+GovNexusBridge.verifyCitizen(address)._wallet (src/GovNexusBridge.sol#33) lacks a zero-check on :
+		- (success,data) = address(nexusID).staticcall(abi.encodeWithSignature(isVerified(address),_wallet)) (src/GovNexusBridge.sol#34-35)
+GovernanceBundle.constructor(address,address)._supremeSteward (src/GovernanceBundle.sol#28) lacks a zero-check on :
+		- supremeSteward = _supremeSteward (src/GovernanceBundle.sol#30)
+IndigenousKnowledgeRegistry.constructor(address)._protocolGuardian (src/IndigenousKnowledgeRegistry.sol#41) lacks a zero-check on :
+		- protocolGuardian = _protocolGuardian (src/IndigenousKnowledgeRegistry.sol#42)
+JobMatchingDAO.constructor(address)._educationCredentialContract (src/JobMatchingDAO.sol#43) lacks a zero-check on :
+		- educationCredentialContract = _educationCredentialContract (src/JobMatchingDAO.sol#45)
+KnoxBypassProtocol.constructor(address)._anchor (src/KnoxBypassProtocol.sol#22) lacks a zero-check on :
+		- anchor = _anchor (src/KnoxBypassProtocol.sol#24)
+LocalGovernanceOverride.constructor(address)._localCouncil (src/LocalGovernanceOverride.sol#17) lacks a zero-check on :
+		- localCouncil = _localCouncil (src/LocalGovernanceOverride.sol#18)
+MorrisResilienceProtocol.constructor(address)._networkSteward (src/MorrisResilienceProtocol.sol#32) lacks a zero-check on :
+		- networkSteward = _networkSteward (src/MorrisResilienceProtocol.sol#33)
+MythologicalDirectorialIntegrity.constructor(address)._studioAuteur (src/MythologicalDirectorialIntegrity.sol#25) lacks a zero-check on :
+		- studioAuteur = _studioAuteur (src/MythologicalDirectorialIntegrity.sol#26)
+NexusTreasuryV2.allocate(address,uint256,string)._to (src/NexusTreasuryV2.sol#21) lacks a zero-check on :
+		- (success,None) = _to.call{value: _amount}() (src/NexusTreasuryV2.sol#23)
+PublicMattersCovenant.constructor(address)._steward (src/PublicMattersCovenant.sol#23) lacks a zero-check on :
+		- steward = _steward (src/PublicMattersCovenant.sol#24)
+ScholarshipEscrow.constructor(address)._verifier (src/ScholarshipEscrow.sol#51) lacks a zero-check on :
+		- verifier = _verifier (src/ScholarshipEscrow.sol#53)
+SonyCreativeResilience.constructor(address,uint256)._boardExecutive (src/SonyCreativeResilience.sol#25) lacks a zero-check on :
+		- boardExecutive = _boardExecutive (src/SonyCreativeResilience.sol#26)
+SpiritualDataIntegrity.constructor(address)._seeker (src/SpiritualDataIntegrity.sol#23) lacks a zero-check on :
+		- seeker = _seeker (src/SpiritualDataIntegrity.sol#24)
+TaxPaymentProcessor.constructor(address,uint256,address)._taxVault (src/TaxPaymentProcessor.sol#21) lacks a zero-check on :
+		- taxVault = _taxVault (src/TaxPaymentProcessor.sol#25)
+TaxPaymentProcessor.setTaxVault(address)._newVault (src/TaxPaymentProcessor.sol#37) lacks a zero-check on :
+		- taxVault = _newVault (src/TaxPaymentProcessor.sol#38)
+UbisoftRescueProtocol.constructor(address,uint256)._foundingFamily (src/UbisoftRescueProtocol.sol#27) lacks a zero-check on :
+		- foundingFamily = _foundingFamily (src/UbisoftRescueProtocol.sol#28)
+YellowMaskProtocol.updateCurator(address)._newCurator (src/YellowMaskProtocol.sol#35) lacks a zero-check on :
+		- curator = _newCurator (src/YellowMaskProtocol.sol#36)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+INFO:Detectors:
+Detector: calls-loop
+GovernanceBundle.emergencyOverride(string,address[],uint256[]) (src/GovernanceBundle.sol#62-79) has external calls inside a loop: address(beneficiaries[i]).transfer(amounts[i]) (src/GovernanceBundle.sol#74)
+NuclearDecisionGates.approveGate(bytes32) (src/NuclearDecisionGates.sol#124-150) has external calls inside a loop: ! evidenceRegistry.isUsable(gateEvidence[gateId][i]) (src/NuclearDecisionGates.sol#135)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop
+INFO:Detectors:
+Detector: reentrancy-benign
+Reentrancy in OperatorConsciousnessLedger.recordAction(string,int256) (src/OperatorConsciousnessLedger.sol#30-52):
+	External calls:
+	- privileges.logAction(msg.sender,delta) (src/OperatorConsciousnessLedger.sol#37)
+	State variables written after the call(s):
+	- logs.push(LogEntry({operator:msg.sender,action:action,trustScore:currentTrust,blockNumber:block.number,safeguardTriggered:false})) (src/OperatorConsciousnessLedger.sol#41-49)
+Reentrancy in CommunityFund.vote(uint256,bool) (src/CommunityFund.sol#77-106):
+	External calls:
+	- trustIntegrator.logPositiveAction(string(abi.encodePacked(Voted on proposal: ,p.title)),trustReward) (src/CommunityFund.sol#96)
+	State variables written after the call(s):
+	- participationCount[msg.sender] ++ (src/CommunityFund.sol#98)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3
+INFO:Detectors:
+Detector: reentrancy-events
+Reentrancy in NexusTreasuryV2.allocate(address,uint256,string) (src/NexusTreasuryV2.sol#21-26):
+	External calls:
+	- (success,None) = _to.call{value: _amount}() (src/NexusTreasuryV2.sol#23)
+	Event emitted after the call(s):
+	- Allocated(_to,_amount,_reason) (src/NexusTreasuryV2.sol#25)
+Reentrancy in InfrastructureProofRegistry.approveMilestone(uint256) (src/InfrastructureProofRegistry.sol#85-103):
+	External calls:
+	- trustIntegrator.logPositiveAction(proj.contractor,1) (src/InfrastructureProofRegistry.sol#96)
+	- (success,None) = address(proj.contractor).call{value: payout}() (src/InfrastructureProofRegistry.sol#99)
+	External calls sending eth:
+	- (success,None) = address(proj.contractor).call{value: payout}() (src/InfrastructureProofRegistry.sol#99)
+	Event emitted after the call(s):
+	- MilestoneApproved(projectId,proj.completedMilestones,payout) (src/InfrastructureProofRegistry.sol#102)
+Reentrancy in EducationCredential.awardCredential(address,string) (src/EducationCredential.sol#24-30):
+	External calls:
+	- trustIntegrator.logPositiveAction(string(abi.encodePacked(Credential: ,credentialName)),10) (src/EducationCredential.sol#28)
+	Event emitted after the call(s):
+	- CredentialAwarded(student,credentialName) (src/EducationCredential.sol#29)
+Reentrancy in PermissionlessBroadcast.broadcast(string) (src/PermissionlessBroadcast.sol#30-34):
+	External calls:
+	- trustIntegrator.logPositiveAction(string(abi.encodePacked(Broadcast: ,content)),10) (src/PermissionlessBroadcast.sol#32)
+	Event emitted after the call(s):
+	- BroadcastSent(msg.sender,content,block.timestamp) (src/PermissionlessBroadcast.sol#33)
+Reentrancy in AntiCorruptionWhistleblowerVault.claimBounty(uint256,bytes32) (src/AntiCorruptionWhistleblowerVault.sol#100-123):
+	External calls:
+	- (success,None) = address(msg.sender).call{value: report.fee}() (src/AntiCorruptionWhistleblowerVault.sol#118)
+	Event emitted after the call(s):
+	- BountyClaimed(reportId,msg.sender) (src/AntiCorruptionWhistleblowerVault.sol#122)
+Reentrancy in GrantEarmarkEscrow.clawbackExpiredGrant(bytes32) (src/GrantEarmarkEscrow.sol#77-92):
+	External calls:
+	- (success,None) = address(g.donor).call{value: remainingFunds}() (src/GrantEarmarkEscrow.sol#88)
+	Event emitted after the call(s):
+	- GrantClawbacked(_grantId,remainingFunds) (src/GrantEarmarkEscrow.sol#91)
+Reentrancy in ProjectMilestoneEscrow.completeMilestone(uint256,uint256) (src/ProjectMilestoneEscrow.sol#92-112):
+	External calls:
+	- vault.submitTransaction(project.recipient,milestone.amount,) (src/ProjectMilestoneEscrow.sol#109)
+	Event emitted after the call(s):
+	- MilestoneCompleted(_projectId,_milestoneIndex,milestone.amount) (src/ProjectMilestoneEscrow.sol#111)
+Reentrancy in GovernanceBundle.deployAndLinkCovenant(bytes32,string,string) (src/GovernanceBundle.sol#34-43):
+	External calls:
+	- registry.fileHumanPreservationCovenant(id,address(covenant),name,description) (src/GovernanceBundle.sol#40)
+	Event emitted after the call(s):
+	- CovenantLinked(address(covenant),id,name) (src/GovernanceBundle.sol#41)
+Reentrancy in CommunityTaxVault.depositTax() (src/CommunityTaxVault.sol#39-49):
+	External calls:
+	- trustIntegrator.logPositiveAction(string(abi.encodePacked(Tax deposit: ,msg.sender)),trustWeight) (src/CommunityTaxVault.sol#46)
+	Event emitted after the call(s):
+	- TaxDeposited(msg.sender,msg.value,trustWeight) (src/CommunityTaxVault.sol#48)
+Reentrancy in EndowmentGovernor.disburse(address,uint256) (src/EndowmentGovernor.sol#58-64):
+	External calls:
+	- (success,None) = _to.call{value: _amount}() (src/EndowmentGovernor.sol#61)
+	Event emitted after the call(s):
+	- FundsDisbursed(_to,_amount) (src/EndowmentGovernor.sol#63)
+Reentrancy in ScholarshipEscrow.disburseMilestone(bytes32,uint256) (src/ScholarshipEscrow.sol#105-120):
+	External calls:
+	- (success,None) = student.studentAddress.call{value: m.amount}() (src/ScholarshipEscrow.sol#116)
+	Event emitted after the call(s):
+	- FundsDisbursed(_studentId,_milestoneId,m.amount) (src/ScholarshipEscrow.sol#119)
+Reentrancy in GrantEarmarkEscrow.disburseTranche(bytes32,uint256) (src/GrantEarmarkEscrow.sol#61-75):
+	External calls:
+	- (success,None) = g.grantee.call{value: _amount}() (src/GrantEarmarkEscrow.sol#71)
+	Event emitted after the call(s):
+	- TrancheDisbursed(_grantId,_amount) (src/GrantEarmarkEscrow.sol#74)
+Reentrancy in EdwardProtocol.distributePlunder(address,uint256) (src/EdwardProtocol.sol#33-41):
+	External calls:
+	- (success,None) = _crew.call{value: _share}() (src/EdwardProtocol.sol#37)
+	Event emitted after the call(s):
+	- PlunderDistributed(_crew,_share) (src/EdwardProtocol.sol#40)
+Reentrancy in CommunityFund.executeProposal(uint256) (src/CommunityFund.sol#108-122):
+	External calls:
+	- (success,None) = taxVault.call(abi.encodeWithSignature(allocateFunds(uint256,string),p.amount,p.title)) (src/CommunityFund.sol#114)
+	- trustIntegrator.logPositiveAction(string(abi.encodePacked(Fund allocation: ,p.title)),5) (src/CommunityFund.sol#117)
+	Event emitted after the call(s):
+	- ProposalExecuted(proposalId,p.recipient,p.amount) (src/CommunityFund.sol#121)
+Reentrancy in CommunityFloodVault.executeRelief(uint256) (src/CommunityFloodVault.sol#38-43):
+	External calls:
+	- trustIntegrator.logPositiveAction(string(abi.encodePacked(Relief: ,reliefs[reliefId].contractorOrLeader)),3) (src/CommunityFloodVault.sol#41)
+	Event emitted after the call(s):
+	- ReliefExecuted(reliefId) (src/CommunityFloodVault.sol#42)
+Reentrancy in MultiSigEscrowVault.executeTransaction(uint256) (src/MultiSigEscrowVault.sol#111-124):
+	External calls:
+	- (success,None) = transaction.to.call{value: transaction.value}(transaction.data) (src/MultiSigEscrowVault.sol#120)
+	Event emitted after the call(s):
+	- TransactionExecuted(_txId) (src/MultiSigEscrowVault.sol#123)
+Reentrancy in EmergencyResponderRegistry.fundAndDispatchUnit(uint256,string) (src/EmergencyResponderRegistry.sol#60-72):
+	External calls:
+	- (success,None) = address(unit.leader).call{value: msg.value}() (src/EmergencyResponderRegistry.sol#68)
+	Event emitted after the call(s):
+	- FundsDispatched(unitId,msg.value,missionDetails) (src/EmergencyResponderRegistry.sol#71)
+Reentrancy in PeopleSovereigntyCovenant.grantHousing(address,uint256) (src/PeopleSovereigntyCovenant.sol#59-64):
+	External calls:
+	- endowment.disburse(_recipient,_amount) (src/PeopleSovereigntyCovenant.sol#62)
+	Event emitted after the call(s):
+	- GrantReleased(Housing Construction Fund,_recipient,_amount) (src/PeopleSovereigntyCovenant.sol#63)
+Reentrancy in PeopleSovereigntyCovenant.grantPeace(address,uint256) (src/PeopleSovereigntyCovenant.sol#42-47):
+	External calls:
+	- endowment.disburse(_recipient,_amount) (src/PeopleSovereigntyCovenant.sol#45)
+	Event emitted after the call(s):
+	- GrantReleased(Peace & Stability Fund,_recipient,_amount) (src/PeopleSovereigntyCovenant.sol#46)
+Reentrancy in TrustIntegratorV2.logPositiveAction(string,uint256) (src/TrustIntegratorV2.sol#34-40):
+	External calls:
+	- trustIndex.reportTrustAction(weight) (src/TrustIntegratorV2.sol#35)
+	- userTrust.adjustScore(msg.sender,weight.toInt256(),action) (src/TrustIntegratorV2.sol#37)
+	Event emitted after the call(s):
+	- TrustActionLogged(msg.sender,action,weight) (src/TrustIntegratorV2.sol#39)
+Reentrancy in TrustIntegratorV2.logSetback(string,uint256) (src/TrustIntegratorV2.sol#42-48):
+	External calls:
+	- trustIndex.reportTrustSetback(weight) (src/TrustIntegratorV2.sol#43)
+	- userTrust.adjustScore(msg.sender,- (weight.toInt256()),action) (src/TrustIntegratorV2.sol#45)
+	Event emitted after the call(s):
+	- TrustActionLogged(msg.sender,action,weight) (src/TrustIntegratorV2.sol#47)
+Reentrancy in DeSciManuscriptEquity.payCitationRoyalty(uint256) (src/DeSciManuscriptEquity.sol#56-67):
+	External calls:
+	- (success,None) = address(ms.author).call{value: msg.value}() (src/DeSciManuscriptEquity.sol#63)
+	Event emitted after the call(s):
+	- RoyaltyPaid(manuscriptId,msg.sender,msg.value) (src/DeSciManuscriptEquity.sol#66)
+Reentrancy in TaxPaymentProcessor.payTax(uint256,string) (src/TaxPaymentProcessor.sol#42-65):
+	External calls:
+	- trustIntegrator.logPositiveAction(string(abi.encodePacked(Tax: ,category)),trustWeight) (src/TaxPaymentProcessor.sol#53)
+	Event emitted after the call(s):
+	- TaxPaid(msg.sender,amount,vatAmount,trustWeight,category) (src/TaxPaymentProcessor.sol#55)
+Reentrancy in GreenBondEscrow.penalizeFacility(string) (src/GreenBondEscrow.sol#27-40):
+	External calls:
+	- (success,None) = address(coreAuditor).call{value: bondAmount}() (src/GreenBondEscrow.sol#36)
+	Event emitted after the call(s):
+	- BondSeized(facilityId,bondAmount) (src/GreenBondEscrow.sol#39)
+Reentrancy in HospitalClaimEscrow.processClaim(address) (src/HospitalClaimEscrow.sol#26-30):
+	External calls:
+	- trustIntegrator.logPositiveAction(string(abi.encodePacked(Claim: ,patient)),20) (src/HospitalClaimEscrow.sol#28)
+	Event emitted after the call(s):
+	- ClaimProcessed(patient,claimAmount) (src/HospitalClaimEscrow.sol#29)
+Reentrancy in OperatorConsciousnessLedger.recordAction(string,int256) (src/OperatorConsciousnessLedger.sol#30-52):
+	External calls:
+	- privileges.logAction(msg.sender,delta) (src/OperatorConsciousnessLedger.sol#37)
+	Event emitted after the call(s):
+	- ConsciousnessLogged(msg.sender,action,currentTrust,block.number,false) (src/OperatorConsciousnessLedger.sol#51)
+Reentrancy in DeSciManuscriptEquity.registerManuscript(string,address,uint256) (src/DeSciManuscriptEquity.sol#40-54):
+	External calls:
+	- trustIntegrator.logPositiveAction(author,4) (src/DeSciManuscriptEquity.sol#51)
+	Event emitted after the call(s):
+	- ManuscriptRegistered(manuscriptId,ipfsCid,author,royaltyFee) (src/DeSciManuscriptEquity.sol#53)
+Reentrancy in MicroLendingEscrow.repayLoan(address,uint256) (src/MicroLendingEscrow.sol#39-45):
+	External calls:
+	- trustIntegrator.logPositiveAction(string(abi.encodePacked(Loan repaid: ,borrower)),15) (src/MicroLendingEscrow.sol#43)
+	Event emitted after the call(s):
+	- LoanRepaid(borrower,amount) (src/MicroLendingEscrow.sol#44)
+Reentrancy in InfrastructureProofRegistry.reportAuditFailure(uint256) (src/InfrastructureProofRegistry.sol#105-113):
+	External calls:
+	- trustIntegrator.logSetback(proj.contractor,1) (src/InfrastructureProofRegistry.sol#110)
+	Event emitted after the call(s):
+	- ProjectStatusUpdated(projectId,ProjectStatus.Failed) (src/InfrastructureProofRegistry.sol#112)
+Reentrancy in GlobalAssetRegistry.validateAndExecute(bytes32,address,bytes) (src/GlobalAssetRegistry.sol#122-145):
+	External calls:
+	- (success,None) = target.call(payload) (src/GlobalAssetRegistry.sol#141)
+	Event emitted after the call(s):
+	- ActionExecuted(assetId,target,success) (src/GlobalAssetRegistry.sol#144)
+Reentrancy in EmergencyResponderRegistry.verifyRescueCompletion(uint256) (src/EmergencyResponderRegistry.sol#74-84):
+	External calls:
+	- trustIntegrator.logPositiveAction(unit.leader,2) (src/EmergencyResponderRegistry.sol#81)
+	Event emitted after the call(s):
+	- RescueCompleted(unitId,unit.completedRescues) (src/EmergencyResponderRegistry.sol#83)
+Reentrancy in CommunityFund.vote(uint256,bool) (src/CommunityFund.sol#77-106):
+	External calls:
+	- trustIntegrator.logPositiveAction(string(abi.encodePacked(Voted on proposal: ,p.title)),trustReward) (src/CommunityFund.sol#96)
+	Event emitted after the call(s):
+	- Voted(proposalId,msg.sender,support,trustReward) (src/CommunityFund.sol#100)
+Reentrancy in FairPriceBudgetVault.withdrawEmergencyReserve(uint256) (src/FairPriceBudgetVault.sol#84-92):
+	External calls:
+	- (success,None) = address(steward).call{value: amount}() (src/FairPriceBudgetVault.sol#88)
+	Event emitted after the call(s):
+	- EmergencyBufferWithdrawn(amount,steward) (src/FairPriceBudgetVault.sol#91)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+INFO:Detectors:
+Detector: timestamp
+AntiCorruptionWhistleblowerVault.submitProof(bytes32,bytes32) (src/AntiCorruptionWhistleblowerVault.sol#58-64) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(vault[bundleId].timestamp == 0,Bundle ID already exists.) (src/AntiCorruptionWhistleblowerVault.sol#59)
+AntiCorruptionWhistleblowerVault.lockProof(bytes32) (src/AntiCorruptionWhistleblowerVault.sol#66-70) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(vault[bundleId].timestamp != 0,Proof does not exist.) (src/AntiCorruptionWhistleblowerVault.sol#67)
+AntiCorruptionWhistleblowerVault.verifyReport(uint256) (src/AntiCorruptionWhistleblowerVault.sol#94-98) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(reports[reportId].timestamp != 0,Report does not exist) (src/AntiCorruptionWhistleblowerVault.sol#95)
+AntiCorruptionWhistleblowerVault.claimBounty(uint256,bytes32) (src/AntiCorruptionWhistleblowerVault.sol#100-123) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(report.timestamp != 0,Report does not exist) (src/AntiCorruptionWhistleblowerVault.sol#102)
+	- require(bool,string)(! report.claimed,Bounty already claimed) (src/AntiCorruptionWhistleblowerVault.sol#103)
+	- require(bool,string)(report.resolved,Report not yet verified by auditors) (src/AntiCorruptionWhistleblowerVault.sol#104)
+	- require(bool,string)(report.commitment == secretKey || report.commitment == keccak256(bytes)(abi.encodePacked(secretKey)) || report.commitment == keccak256(bytes)(abi.encodePacked(secretKey,report.submitter)),Invalid secret key) (src/AntiCorruptionWhistleblowerVault.sol#107-111)
+CCTVTransparencyRegistry.logDailyFootage(uint256,bytes32) (src/CCTVTransparencyRegistry.sol#73-83) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(cameras[_cameraId].isActive,Camera inactive) (src/CCTVTransparencyRegistry.sol#74)
+CCTVTransparencyRegistry.requestFootageAccess(uint256,uint256,string) (src/CCTVTransparencyRegistry.sol#86-103) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(cameras[_cameraId].isActive,Camera inactive) (src/CCTVTransparencyRegistry.sol#87)
+CandabaEcologicalGuardian.approveAssessment(uint256,bool,string) (src/CandabaEcologicalGuardian.sol#126-140) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(! assessments[_assessmentId].executed,Already executed) (src/CandabaEcologicalGuardian.sol#132)
+CommunityFund.vote(uint256,bool) (src/CommunityFund.sol#77-106) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(! proposals[proposalId].executed,Already executed) (src/CommunityFund.sol#79)
+CommunityFund.executeProposal(uint256) (src/CommunityFund.sol#108-122) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(p.passed,Proposal not passed) (src/CommunityFund.sol#110)
+	- require(bool,string)(! p.executed,Already executed) (src/CommunityFund.sol#111)
+DataValidationAndReporting.registerParticipant(bytes32,string) (src/DataValidationAndReporting.sol#53-70) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(! participants[pId].isActive,Participant already exists) (src/DataValidationAndReporting.sol#59)
+DataValidationAndReporting.recordMetric(bytes32,uint256,uint256,bytes32) (src/DataValidationAndReporting.sol#72-83) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(participants[_participantId].isActive,Participant not found) (src/DataValidationAndReporting.sol#76)
+DisputeResolutionArbitration.resolveDispute(uint256,bool) (src/DisputeResolutionArbitration.sol#65-71) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(dispute.status == DisputeStatus.DISPUTED,Dispute not active) (src/DisputeResolutionArbitration.sol#67)
+DredgingContractorRegistry.completeContract(uint256,bool,uint256,string) (src/DredgingContractorRegistry.sol#132-156) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(! contracts[_contractId].completed,Already completed) (src/DredgingContractorRegistry.sol#138)
+EnvironmentalAuditVault.verifyReport(bytes32) (src/EnvironmentalAuditVault.sol#51-55) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(reports[reportId].timestamp > 0,Report does not exist) (src/EnvironmentalAuditVault.sol#52)
+FairGovernanceFramework.proposePolicy(string,string) (src/FairGovernanceFramework.sol#33-43) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(! policies[policyId].exists,Policy already exists) (src/FairGovernanceFramework.sol#35)
+FamilyOfficeRegistry.updateOfficeHash(uint256,bytes32) (src/FamilyOfficeRegistry.sol#53-57) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(offices[_id].isActive,FamilyOfficeRegistry: Entity is inactive) (src/FamilyOfficeRegistry.sol#54)
+FamilyOfficeRegistry.deactivateOffice(uint256) (src/FamilyOfficeRegistry.sol#60-64) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(offices[_id].isActive,FamilyOfficeRegistry: Already inactive) (src/FamilyOfficeRegistry.sol#61)
+FarmerCompensationVault.registerFarmer(address,uint256,uint256,uint256,string) (src/FarmerCompensationVault.sol#68-92) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(farmers[_farmer].farmer == address(0),Farmer already registered) (src/FarmerCompensationVault.sol#75)
+FarmerCompensationVault.claimCompensation() (src/FarmerCompensationVault.sol#94-107) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(farmer.farmer == msg.sender,Not registered) (src/FarmerCompensationVault.sol#96)
+	- require(bool,string)(farmer.verified,Not verified) (src/FarmerCompensationVault.sol#97)
+	- require(bool,string)(! farmer.claimed,Already claimed) (src/FarmerCompensationVault.sol#98)
+	- require(bool,string)(address(this).balance >= farmer.compensationAmount,Insufficient funds) (src/FarmerCompensationVault.sol#99)
+IndigenousKnowledgeRegistry.authorizeResearcher(bytes32,address) (src/IndigenousKnowledgeRegistry.sol#88-95) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(record.communityRepresentative != address(0),Knowledge record does not exist) (src/IndigenousKnowledgeRegistry.sol#90)
+	- require(bool,string)(msg.sender == record.communityRepresentative,Only the sovereign community can authorize researchers) (src/IndigenousKnowledgeRegistry.sol#91)
+IndigenousKnowledgeRegistry.auditAndBlockBiopiracy(bytes32,address) (src/IndigenousKnowledgeRegistry.sol#100-109) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(record.communityRepresentative != address(0),Knowledge record does not exist) (src/IndigenousKnowledgeRegistry.sol#102)
+InevitableConsequenceLedger.settleLedger(bytes32) (src/InevitableConsequenceLedger.sol#43-50) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(msg.sender == rec.actor,Unauthorized settlement) (src/InevitableConsequenceLedger.sol#45)
+	- require(bool,string)(! rec.settled,Already settled) (src/InevitableConsequenceLedger.sol#46)
+JackSparrowProtocol.chaosPlay() (src/JackSparrowProtocol.sol#18-34) uses timestamp for comparisons
+	Dangerous comparisons:
+	- chaosRoll > 50 (src/JackSparrowProtocol.sol#22)
+JusticeRegistry.logCommitment(bytes32,string,string) (src/JusticeRegistry.sol#30-46) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(records[_recordId].filingTimestamp == 0,Record already exists) (src/JusticeRegistry.sol#34)
+JusticeRegistry.challengeAccountability(bytes32) (src/JusticeRegistry.sol#48-57) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(rec.filingTimestamp > 0,Record does not exist) (src/JusticeRegistry.sol#50)
+	- require(bool,string)(! rec.fulfilled,Already marked as fulfilled) (src/JusticeRegistry.sol#51)
+JusticeRegistry.verifyFulfillment(bytes32,bool) (src/JusticeRegistry.sol#59-65) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(rec.filingTimestamp > 0,Record does not exist) (src/JusticeRegistry.sol#61)
+MultiSigEscrowVault.executeTransaction(uint256) (src/MultiSigEscrowVault.sol#111-124) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp >= transaction.creationTime + EXECUTION_DELAY,MultiSigVault: Timelock active) (src/MultiSigEscrowVault.sol#116)
+NuclearConflictRegistry.declareConflict(bytes32,bytes32,uint64) (src/NuclearConflictRegistry.sol#60-84) uses timestamp for comparisons
+	Dangerous comparisons:
+	- expiresAt != 0 && expiresAt <= block.timestamp (src/NuclearConflictRegistry.sol#67)
+NuclearConflictRegistry.expireConflict(uint256) (src/NuclearConflictRegistry.sol#102-116) uses timestamp for comparisons
+	Dangerous comparisons:
+	- conflict.expiresAt == 0 || block.timestamp < conflict.expiresAt (src/NuclearConflictRegistry.sol#106)
+NuclearConflictRegistry.isConflicted(address,bytes32) (src/NuclearConflictRegistry.sol#118-128) uses timestamp for comparisons
+	Dangerous comparisons:
+	- conflict.expiresAt != 0 && block.timestamp >= conflict.expiresAt (src/NuclearConflictRegistry.sol#124)
+NuclearConflictRegistry.getConflict(uint256) (src/NuclearConflictRegistry.sol#130-135) uses timestamp for comparisons
+	Dangerous comparisons:
+	- conflicts[conflictId].declarant == address(0) (src/NuclearConflictRegistry.sol#131)
+NuclearEvidenceRegistry.registerEvidence(bytes32,bytes32,bytes32) (src/NuclearEvidenceRegistry.sol#70-88) uses timestamp for comparisons
+	Dangerous comparisons:
+	- evidence[evidenceId].createdAt != 0 (src/NuclearEvidenceRegistry.sol#74)
+NuclearEvidenceRegistry.submitCorrection(bytes32,bytes32,bytes32) (src/NuclearEvidenceRegistry.sol#90-111) uses timestamp for comparisons
+	Dangerous comparisons:
+	- evidence[correctionId].createdAt != 0 (src/NuclearEvidenceRegistry.sol#97)
+NuclearEvidenceRegistry.getEvidence(bytes32) (src/NuclearEvidenceRegistry.sol#161-164) uses timestamp for comparisons
+	Dangerous comparisons:
+	- evidence[evidenceId].createdAt == 0 (src/NuclearEvidenceRegistry.sol#162)
+NuclearEvidenceRegistry.isUsable(bytes32) (src/NuclearEvidenceRegistry.sol#166-169) uses timestamp for comparisons
+	Dangerous comparisons:
+	- status == Status.Accepted || status == Status.AcceptedWithConditions (src/NuclearEvidenceRegistry.sol#168)
+NuclearPublicAudit._logEntry(bytes32,bytes32,bytes32,bytes32,address) (src/NuclearPublicAudit.sol#64-90) uses timestamp for comparisons
+	Dangerous comparisons:
+	- entries[entryId].createdAt != 0 (src/NuclearPublicAudit.sol#68)
+NuclearPublicAudit.getEntry(bytes32) (src/NuclearPublicAudit.sol#116-119) uses timestamp for comparisons
+	Dangerous comparisons:
+	- entries[entryId].createdAt == 0 (src/NuclearPublicAudit.sol#117)
+NuclearPublicAudit.entryExists(bytes32) (src/NuclearPublicAudit.sol#121-123) uses timestamp for comparisons
+	Dangerous comparisons:
+	- entries[entryId].createdAt != 0 (src/NuclearPublicAudit.sol#122)
+OilPriceBufferTracker.getLatestPriceLog() (src/OilPriceBufferTracker.sol#55-59) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(priceHistory.length > 0,No price logs available) (src/OilPriceBufferTracker.sol#56)
+PathogenGuardRegistry.submitGenome(bytes32,uint256) (src/PathogenGuardRegistry.sol#34-47) uses timestamp for comparisons
+	Dangerous comparisons:
+	- registry[_genomeHash].researcher != address(0) (src/PathogenGuardRegistry.sol#35)
+PermissionlessBroadcast.getBroadcast(uint256) (src/PermissionlessBroadcast.sol#40-44) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(index < broadcasts.length,Index out of bounds) (src/PermissionlessBroadcast.sol#41)
+PresidentialPolicyDAO.getPolicy(uint256) (src/PresidentialPolicyDAO.sol#24-28) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(_id < policies.length,Invalid ID) (src/PresidentialPolicyDAO.sol#25)
+PresidentialPolicyDAO.revokePolicy(uint256) (src/PresidentialPolicyDAO.sol#30-33) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(_id < policies.length,Invalid ID) (src/PresidentialPolicyDAO.sol#31)
+ProjectMilestoneEscrow.completeMilestone(uint256,uint256) (src/ProjectMilestoneEscrow.sol#92-112) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(_milestoneIndex < project.milestones.length,Invalid milestone index) (src/ProjectMilestoneEscrow.sol#98)
+	- require(bool,string)(project.isActive,Project is closed) (src/ProjectMilestoneEscrow.sol#99)
+	- require(bool,string)(! milestone.isCompleted,Milestone already done) (src/ProjectMilestoneEscrow.sol#102)
+SpiderNoirContinuityDAO.voteContinuation(uint256) (src/SpiderNoirContinuityDAO.sol#66-72) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(_id < continuations.length,Invalid continuation) (src/SpiderNoirContinuityDAO.sol#67)
+SpiderNoirContinuityDAO.getContinuation(uint256) (src/SpiderNoirContinuityDAO.sol#93-96) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(_id < continuations.length,Invalid continuation) (src/SpiderNoirContinuityDAO.sol#94)
+TokenizedTreatyBase.updateStatus(uint256,TokenizedTreatyBase.TreatyStatus) (src/TokenizedTreatyBase.sol#56-60) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(treaties[_treatyId].signedAt > 0,Treaty does not exist) (src/TokenizedTreatyBase.sol#57)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+INFO:Detectors:
+Detector: assembly
+GlobalAssetRegistry.recordTransientApproval(bytes32) (src/GlobalAssetRegistry.sol#90-117) uses assembly
+	- INLINE ASM (src/GlobalAssetRegistry.sol#98-114)
+GlobalAssetRegistry.validateAndExecute(bytes32,address,bytes) (src/GlobalAssetRegistry.sol#122-145) uses assembly
+	- INLINE ASM (src/GlobalAssetRegistry.sol#133-137)
+GlobalAssetRegistry.getTransientApprovals(bytes32) (src/GlobalAssetRegistry.sol#147-152) uses assembly
+	- INLINE ASM (src/GlobalAssetRegistry.sol#149-151)
+TransientSupplyPassport.setTransientBatchData(bytes32) (src/TransientSupplyPassport.sol#27-36) uses assembly
+	- INLINE ASM (src/TransientSupplyPassport.sol#32-35)
+TransientSupplyPassport.getTransientBatchData() (src/TransientSupplyPassport.sol#38-46) uses assembly
+	- INLINE ASM (src/TransientSupplyPassport.sol#42-45)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#assembly-usage
+INFO:Detectors:
+Detector: boolean-equal
+CommunityFloodVault.executeRelief(uint256) (src/CommunityFloodVault.sol#38-43) compares to a boolean constant:
+	-require(bool,string)(reliefs[reliefId].executed == false,Already executed) (src/CommunityFloodVault.sol#39)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#boolean-equality
+INFO:Detectors:
+Detector: costly-loop
+CabinetDAO.removeMinister(address) (src/CabinetDAO.sol#22-34) has costly operations inside a loop:
+	- ministerList.pop() (src/CabinetDAO.sol#29)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#costly-operations-inside-a-loop
+INFO:Detectors:
+Detector: dead-code
+ContextEngineGuard._triggerEmergencyLock() (src/ContextEngineGuard.sol#34-36) is never used and should be removed
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dead-code
+INFO:Detectors:
+Detector: solc-version
+Version constraint ^0.8.13 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)
+	- VerbatimInvalidDeduplication
+	- FullInlinerNonExpressionSplitArgumentEvaluationOrder
+	- MissingSideEffectsOnSelectorAccess
+	- StorageWriteRemovalBeforeConditionalTermination
+	- AbiReencodingHeadOverflowWithStaticArrayCleanup
+	- DirtyBytesArrayToStorage
+	- InlineAssemblyMemorySideEffects
+	- DataLocationChangeInInternalOverride
+	- NestedCalldataArrayAbiReencodingSizeValidation.
+It is used by:
+	- ^0.8.13 (src/Counter.sol#2)
+Version constraint ^0.8.0 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)
+	- FullInlinerNonExpressionSplitArgumentEvaluationOrder
+	- MissingSideEffectsOnSelectorAccess
+	- AbiReencodingHeadOverflowWithStaticArrayCleanup
+	- DirtyBytesArrayToStorage
+	- DataLocationChangeInInternalOverride
+	- NestedCalldataArrayAbiReencodingSizeValidation
+	- SignedImmutables
+	- ABIDecodeTwoDimensionalArrayMemory
+	- KeccakCaching.
+It is used by:
+	- ^0.8.0 (src/GovNexusBridge.sol#2)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+INFO:Detectors:
+Detector: low-level-calls
+Low level call in AntiCorruptionWhistleblowerVault.claimBounty(uint256,bytes32) (src/AntiCorruptionWhistleblowerVault.sol#100-123):
+	- (success,None) = address(msg.sender).call{value: report.fee}() (src/AntiCorruptionWhistleblowerVault.sol#118)
+Low level call in CommunityFund.executeProposal(uint256) (src/CommunityFund.sol#108-122):
+	- (success,None) = taxVault.call(abi.encodeWithSignature(allocateFunds(uint256,string),p.amount,p.title)) (src/CommunityFund.sol#114)
+Low level call in DeSciManuscriptEquity.payCitationRoyalty(uint256) (src/DeSciManuscriptEquity.sol#56-67):
+	- (success,None) = address(ms.author).call{value: msg.value}() (src/DeSciManuscriptEquity.sol#63)
+Low level call in EdwardProtocol.distributePlunder(address,uint256) (src/EdwardProtocol.sol#33-41):
+	- (success,None) = _crew.call{value: _share}() (src/EdwardProtocol.sol#37)
+Low level call in EmergencyResponderRegistry.fundAndDispatchUnit(uint256,string) (src/EmergencyResponderRegistry.sol#60-72):
+	- (success,None) = address(unit.leader).call{value: msg.value}() (src/EmergencyResponderRegistry.sol#68)
+Low level call in EndowmentGovernor.disburse(address,uint256) (src/EndowmentGovernor.sol#58-64):
+	- (success,None) = _to.call{value: _amount}() (src/EndowmentGovernor.sol#61)
+Low level call in FairPriceBudgetVault.withdrawEmergencyReserve(uint256) (src/FairPriceBudgetVault.sol#84-92):
+	- (success,None) = address(steward).call{value: amount}() (src/FairPriceBudgetVault.sol#88)
+Low level call in GlobalAssetRegistry.validateAndExecute(bytes32,address,bytes) (src/GlobalAssetRegistry.sol#122-145):
+	- (success,None) = target.call(payload) (src/GlobalAssetRegistry.sol#141)
+Low level call in GovNexusBridge.verifyCitizen(address) (src/GovNexusBridge.sol#33-38):
+	- (success,data) = address(nexusID).staticcall(abi.encodeWithSignature(isVerified(address),_wallet)) (src/GovNexusBridge.sol#34-35)
+Low level call in GovNexusBridge.verifyLandOwnership(uint256) (src/GovNexusBridge.sol#41-46):
+	- (success,data) = address(landTrust).staticcall(abi.encodeWithSignature(landDeedNFT(uint256),_plotId)) (src/GovNexusBridge.sol#42-43)
+Low level call in GovNexusBridge.getInfraSpent(uint256) (src/GovNexusBridge.sol#49-58):
+	- (success,data) = address(infraDAO).staticcall(abi.encodeWithSignature(getProjectDetails(uint256),_projectId)) (src/GovNexusBridge.sol#50-51)
+Low level call in GrantEarmarkEscrow.disburseTranche(bytes32,uint256) (src/GrantEarmarkEscrow.sol#61-75):
+	- (success,None) = g.grantee.call{value: _amount}() (src/GrantEarmarkEscrow.sol#71)
+Low level call in GrantEarmarkEscrow.clawbackExpiredGrant(bytes32) (src/GrantEarmarkEscrow.sol#77-92):
+	- (success,None) = address(g.donor).call{value: remainingFunds}() (src/GrantEarmarkEscrow.sol#88)
+Low level call in GreenBondEscrow.penalizeFacility(string) (src/GreenBondEscrow.sol#27-40):
+	- (success,None) = address(coreAuditor).call{value: bondAmount}() (src/GreenBondEscrow.sol#36)
+Low level call in InfrastructureProofRegistry.approveMilestone(uint256) (src/InfrastructureProofRegistry.sol#85-103):
+	- (success,None) = address(proj.contractor).call{value: payout}() (src/InfrastructureProofRegistry.sol#99)
+Low level call in MultiSigEscrowVault.executeTransaction(uint256) (src/MultiSigEscrowVault.sol#111-124):
+	- (success,None) = transaction.to.call{value: transaction.value}(transaction.data) (src/MultiSigEscrowVault.sol#120)
+Low level call in NexusTreasuryV2.allocate(address,uint256,string) (src/NexusTreasuryV2.sol#21-26):
+	- (success,None) = _to.call{value: _amount}() (src/NexusTreasuryV2.sol#23)
+Low level call in RealityAnchorVault.payInFull() (src/RealityAnchorVault.sol#35-48):
+	- (success,None) = address(msg.sender).call{value: msg.value - debt}() (src/RealityAnchorVault.sol#45)
+Low level call in ScholarshipEscrow.disburseMilestone(bytes32,uint256) (src/ScholarshipEscrow.sol#105-120):
+	- (success,None) = student.studentAddress.call{value: m.amount}() (src/ScholarshipEscrow.sol#116)
+Low level call in TaxPaymentProcessor.payTax(uint256,string) (src/TaxPaymentProcessor.sol#42-65):
+	- (success,None) = taxVault.call{value: total}() (src/TaxPaymentProcessor.sol#58)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+INFO:Detectors:
+Detector: missing-inheritance
+EndowmentGovernor (src/EndowmentGovernor.sol#9-71) should inherit from IEndowmentGovernor (src/PeopleSovereigntyCovenant.sol#4-6)
+MultiSigEscrowVault (src/MultiSigEscrowVault.sol#4-129) should inherit from IMultiSigVault (src/ProjectMilestoneEscrow.sol#5-7)
+TrustIntegratorV2 (src/TrustIntegratorV2.sol#8-49) should inherit from ITrustIntegrator (src/ITrustIntegrator.sol#4-7)
+UserTrust (src/UserTrust.sol#6-43) should inherit from IUserTrust (src/IUserTrust.sol#4-7)
+UserTrustV2 (src/UserTrustV2.sol#6-61) should inherit from IUserTrust (src/IUserTrust.sol#4-7)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-inheritance
+INFO:Detectors:
+Detector: naming-convention
+Parameter AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._registry (src/AnchorGovernanceVault.sol#44) is not in mixedCase
+Parameter AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._vault (src/AnchorGovernanceVault.sol#45) is not in mixedCase
+Parameter AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._treatyBase (src/AnchorGovernanceVault.sol#46) is not in mixedCase
+Parameter AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._escrow (src/AnchorGovernanceVault.sol#47) is not in mixedCase
+Parameter AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._whistleblower (src/AnchorGovernanceVault.sol#48) is not in mixedCase
+Parameter AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._covenant (src/AnchorGovernanceVault.sol#49) is not in mixedCase
+Parameter AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._cyber (src/AnchorGovernanceVault.sol#50) is not in mixedCase
+Parameter AnchorGovernanceVault.setCoreContracts(address,address,address,address,address,address,address,address)._arbitration (src/AnchorGovernanceVault.sol#51) is not in mixedCase
+Parameter AntiCorruptionWhistleblowerVault.submitProof(bytes32,bytes32)._merkleRoot (src/AntiCorruptionWhistleblowerVault.sol#58) is not in mixedCase
+Parameter BethesdaQualityProtocol.secureFranchise(string)._franchiseName (src/BethesdaQualityProtocol.sol#34) is not in mixedCase
+Parameter BethesdaQualityProtocol.extendQAPeriod(uint256)._daysToAdd (src/BethesdaQualityProtocol.sol#43) is not in mixedCase
+Parameter BroadcasterRegistry.addBroadcaster(address)._new (src/BroadcasterRegistry.sol#35) is not in mixedCase
+Parameter BroadcasterRegistry.removeBroadcaster(address)._old (src/BroadcasterRegistry.sol#40) is not in mixedCase
+Parameter BroadcasterRegistry.broadcast(string)._message (src/BroadcasterRegistry.sol#46) is not in mixedCase
+Parameter CCTVTransparencyRegistry.registerCamera(string,bytes32)._location (src/CCTVTransparencyRegistry.sol#59) is not in mixedCase
+Parameter CCTVTransparencyRegistry.registerCamera(string,bytes32)._publicKeyHash (src/CCTVTransparencyRegistry.sol#59) is not in mixedCase
+Parameter CCTVTransparencyRegistry.logDailyFootage(uint256,bytes32)._cameraId (src/CCTVTransparencyRegistry.sol#73) is not in mixedCase
+Parameter CCTVTransparencyRegistry.logDailyFootage(uint256,bytes32)._footageHash (src/CCTVTransparencyRegistry.sol#73) is not in mixedCase
+Parameter CCTVTransparencyRegistry.requestFootageAccess(uint256,uint256,string)._cameraId (src/CCTVTransparencyRegistry.sol#86) is not in mixedCase
+Parameter CCTVTransparencyRegistry.requestFootageAccess(uint256,uint256,string)._dayIndex (src/CCTVTransparencyRegistry.sol#86) is not in mixedCase
+Parameter CCTVTransparencyRegistry.requestFootageAccess(uint256,uint256,string)._purpose (src/CCTVTransparencyRegistry.sol#86) is not in mixedCase
+Parameter CCTVTransparencyRegistry.approveAccess(uint256,uint256)._cameraId (src/CCTVTransparencyRegistry.sol#106) is not in mixedCase
+Parameter CCTVTransparencyRegistry.approveAccess(uint256,uint256)._requestIndex (src/CCTVTransparencyRegistry.sol#106) is not in mixedCase
+Parameter CCTVTransparencyRegistry.markFootageReleased(uint256,uint256)._cameraId (src/CCTVTransparencyRegistry.sol#116) is not in mixedCase
+Parameter CCTVTransparencyRegistry.markFootageReleased(uint256,uint256)._requestIndex (src/CCTVTransparencyRegistry.sol#116) is not in mixedCase
+Parameter CCTVTransparencyRegistry.getCameraInfo(uint256)._id (src/CCTVTransparencyRegistry.sol#125) is not in mixedCase
+Parameter CCTVTransparencyRegistry.getFootageHash(uint256,uint256)._cameraId (src/CCTVTransparencyRegistry.sol#130) is not in mixedCase
+Parameter CCTVTransparencyRegistry.getFootageHash(uint256,uint256)._dayIndex (src/CCTVTransparencyRegistry.sol#130) is not in mixedCase
+Parameter CabinetDAO.appointMinister(address,string)._minister (src/CabinetDAO.sol#15) is not in mixedCase
+Parameter CabinetDAO.appointMinister(address,string)._role (src/CabinetDAO.sol#15) is not in mixedCase
+Parameter CabinetDAO.removeMinister(address)._minister (src/CabinetDAO.sol#22) is not in mixedCase
+Parameter CabinetDAO.getMinisterRole(address)._minister (src/CabinetDAO.sol#36) is not in mixedCase
+Parameter CandabaEcologicalGuardian.addEcologist(address)._ecologist (src/CandabaEcologicalGuardian.sol#72) is not in mixedCase
+Parameter CandabaEcologicalGuardian.removeEcologist(address)._ecologist (src/CandabaEcologicalGuardian.sol#76) is not in mixedCase
+Parameter CandabaEcologicalGuardian.createProtectedZone(string,string,uint256,string)._name (src/CandabaEcologicalGuardian.sol#81) is not in mixedCase
+Parameter CandabaEcologicalGuardian.createProtectedZone(string,string,uint256,string)._location (src/CandabaEcologicalGuardian.sol#82) is not in mixedCase
+Parameter CandabaEcologicalGuardian.createProtectedZone(string,string,uint256,string)._areaHectares (src/CandabaEcologicalGuardian.sol#83) is not in mixedCase
+Parameter CandabaEcologicalGuardian.createProtectedZone(string,string,uint256,string)._ipfsHash (src/CandabaEcologicalGuardian.sol#84) is not in mixedCase
+Parameter CandabaEcologicalGuardian.submitAssessment(string,string,uint256,string,string)._projectName (src/CandabaEcologicalGuardian.sol#101) is not in mixedCase
+Parameter CandabaEcologicalGuardian.submitAssessment(string,string,uint256,string,string)._description (src/CandabaEcologicalGuardian.sol#102) is not in mixedCase
+Parameter CandabaEcologicalGuardian.submitAssessment(string,string,uint256,string,string)._areaImpacted (src/CandabaEcologicalGuardian.sol#103) is not in mixedCase
+Parameter CandabaEcologicalGuardian.submitAssessment(string,string,uint256,string,string)._ecologist (src/CandabaEcologicalGuardian.sol#104) is not in mixedCase
+Parameter CandabaEcologicalGuardian.submitAssessment(string,string,uint256,string,string)._ipfsHash (src/CandabaEcologicalGuardian.sol#105) is not in mixedCase
+Parameter CandabaEcologicalGuardian.approveAssessment(uint256,bool,string)._assessmentId (src/CandabaEcologicalGuardian.sol#126) is not in mixedCase
+Parameter CandabaEcologicalGuardian.approveAssessment(uint256,bool,string)._approved (src/CandabaEcologicalGuardian.sol#126) is not in mixedCase
+Parameter CandabaEcologicalGuardian.approveAssessment(uint256,bool,string)._findings (src/CandabaEcologicalGuardian.sol#126) is not in mixedCase
+Parameter CandabaEcologicalGuardian.getAssessment(uint256)._assessmentId (src/CandabaEcologicalGuardian.sol#142) is not in mixedCase
+Parameter CandabaEcologicalGuardian.getProtectedZone(uint256)._zoneId (src/CandabaEcologicalGuardian.sol#147) is not in mixedCase
+Parameter CandabaImpoundingDAO.addValidator(address)._validator (src/CandabaImpoundingDAO.sol#61) is not in mixedCase
+Parameter CandabaImpoundingDAO.removeValidator(address)._validator (src/CandabaImpoundingDAO.sol#65) is not in mixedCase
+Parameter CandabaImpoundingDAO.createProposal(string,string,uint256,uint256,uint256,string)._title (src/CandabaImpoundingDAO.sol#70) is not in mixedCase
+Parameter CandabaImpoundingDAO.createProposal(string,string,uint256,uint256,uint256,string)._description (src/CandabaImpoundingDAO.sol#71) is not in mixedCase
+Parameter CandabaImpoundingDAO.createProposal(string,string,uint256,uint256,uint256,string)._areaHectares (src/CandabaImpoundingDAO.sol#72) is not in mixedCase
+Parameter CandabaImpoundingDAO.createProposal(string,string,uint256,uint256,uint256,string)._estimatedCost (src/CandabaImpoundingDAO.sol#73) is not in mixedCase
+Parameter CandabaImpoundingDAO.createProposal(string,string,uint256,uint256,uint256,string)._durationBlocks (src/CandabaImpoundingDAO.sol#74) is not in mixedCase
+Parameter CandabaImpoundingDAO.createProposal(string,string,uint256,uint256,uint256,string)._ipfsHash (src/CandabaImpoundingDAO.sol#75) is not in mixedCase
+Parameter CandabaImpoundingDAO.vote(uint256,bool)._proposalId (src/CandabaImpoundingDAO.sol#101) is not in mixedCase
+Parameter CandabaImpoundingDAO.vote(uint256,bool)._support (src/CandabaImpoundingDAO.sol#101) is not in mixedCase
+Parameter CandabaImpoundingDAO.executeProposal(uint256)._proposalId (src/CandabaImpoundingDAO.sol#116) is not in mixedCase
+Parameter CandabaImpoundingDAO.getProposal(uint256)._proposalId (src/CandabaImpoundingDAO.sol#127) is not in mixedCase
+Parameter CitizenVotingDAO.createProposal(string,uint256)._description (src/CitizenVotingDAO.sol#23) is not in mixedCase
+Parameter CitizenVotingDAO.createProposal(string,uint256)._durationBlocks (src/CitizenVotingDAO.sol#23) is not in mixedCase
+Parameter CitizenVotingDAO.castVote(uint256,bool)._id (src/CitizenVotingDAO.sol#41) is not in mixedCase
+Parameter CitizenVotingDAO.castVote(uint256,bool)._support (src/CitizenVotingDAO.sol#41) is not in mixedCase
+Parameter CitizenVotingDAO.executeProposal(uint256)._id (src/CitizenVotingDAO.sol#55) is not in mixedCase
+Parameter CommunityFloodVault.setTrustIntegrator(address)._new (src/CommunityFloodVault.sol#45) is not in mixedCase
+Parameter CommunityFund.setMinVoteThreshold(uint256)._new (src/CommunityFund.sol#124) is not in mixedCase
+Parameter CommunityFund.setQuorum(uint256)._new (src/CommunityFund.sol#128) is not in mixedCase
+Parameter CommunityFund.setTaxVault(address)._new (src/CommunityFund.sol#132) is not in mixedCase
+Parameter CommunityFund.setUserTrust(address)._new (src/CommunityFund.sol#136) is not in mixedCase
+Parameter CommunityFund.setTrustIntegrator(address)._new (src/CommunityFund.sol#140) is not in mixedCase
+Parameter CommunityTaxVault.setCommunityDAO(address)._new (src/CommunityTaxVault.sol#68) is not in mixedCase
+Parameter CommunityTaxVault.setTrustIntegrator(address)._new (src/CommunityTaxVault.sol#72) is not in mixedCase
+Parameter ContentOwnershipRegistry.registerContent(string,string,string,uint256,uint256,address)._title (src/ContentOwnershipRegistry.sol#29) is not in mixedCase
+Parameter ContentOwnershipRegistry.registerContent(string,string,string,uint256,uint256,address)._creator (src/ContentOwnershipRegistry.sol#30) is not in mixedCase
+Parameter ContentOwnershipRegistry.registerContent(string,string,string,uint256,uint256,address)._mediaHash (src/ContentOwnershipRegistry.sol#31) is not in mixedCase
+Parameter ContentOwnershipRegistry.registerContent(string,string,string,uint256,uint256,address)._price (src/ContentOwnershipRegistry.sol#32) is not in mixedCase
+Parameter ContentOwnershipRegistry.registerContent(string,string,string,uint256,uint256,address)._royaltyBps (src/ContentOwnershipRegistry.sol#33) is not in mixedCase
+Parameter ContentOwnershipRegistry.registerContent(string,string,string,uint256,uint256,address)._creatorAddress (src/ContentOwnershipRegistry.sol#34) is not in mixedCase
+Parameter ContentOwnershipRegistry.buyContent(uint256)._tokenId (src/ContentOwnershipRegistry.sol#59) is not in mixedCase
+Parameter ContentOwnershipRegistry.setPrice(uint256,uint256)._tokenId (src/ContentOwnershipRegistry.sol#83) is not in mixedCase
+Parameter ContentOwnershipRegistry.setPrice(uint256,uint256)._newPrice (src/ContentOwnershipRegistry.sol#83) is not in mixedCase
+Parameter ContentOwnershipRegistry.getContent(uint256)._tokenId (src/ContentOwnershipRegistry.sol#89) is not in mixedCase
+Variable ContextEngineGuard.SYSTEM_CONTEXT (src/ContextEngineGuard.sol#5) is not in mixedCase
+Parameter CyberOperationalResilience.registerCyberUnit(address,string,uint8)._commander (src/CyberOperationalResilience.sol#46) is not in mixedCase
+Parameter CyberOperationalResilience.registerCyberUnit(address,string,uint8)._codename (src/CyberOperationalResilience.sol#46) is not in mixedCase
+Parameter CyberOperationalResilience.registerCyberUnit(address,string,uint8)._initialMerit (src/CyberOperationalResilience.sol#46) is not in mixedCase
+Parameter CyberOperationalResilience.updateMeritScore(address,uint8)._commander (src/CyberOperationalResilience.sol#60) is not in mixedCase
+Parameter CyberOperationalResilience.updateMeritScore(address,uint8)._newScore (src/CyberOperationalResilience.sol#60) is not in mixedCase
+Parameter CyberOperationalResilience.setAlert(bool)._status (src/CyberOperationalResilience.sol#67) is not in mixedCase
+Parameter CyberOperationalResilience.setMissionPriority(string)._newMission (src/CyberOperationalResilience.sol#73) is not in mixedCase
+Parameter DailyResilience.setMessage(string)._newMessage (src/DailyResilience.sol#27) is not in mixedCase
+Parameter DataValidationAndReporting.registerParticipant(bytes32,string)._rawInput (src/DataValidationAndReporting.sol#53) is not in mixedCase
+Parameter DataValidationAndReporting.registerParticipant(bytes32,string)._encryptedMetadataURI (src/DataValidationAndReporting.sol#53) is not in mixedCase
+Parameter DataValidationAndReporting.recordMetric(bytes32,uint256,uint256,bytes32)._participantId (src/DataValidationAndReporting.sol#72) is not in mixedCase
+Parameter DataValidationAndReporting.recordMetric(bytes32,uint256,uint256,bytes32)._categoryId (src/DataValidationAndReporting.sol#72) is not in mixedCase
+Parameter DataValidationAndReporting.recordMetric(bytes32,uint256,uint256,bytes32)._value (src/DataValidationAndReporting.sol#72) is not in mixedCase
+Parameter DataValidationAndReporting.recordMetric(bytes32,uint256,uint256,bytes32)._proofHash (src/DataValidationAndReporting.sol#72) is not in mixedCase
+Parameter DataValidationAndReporting.getParticipantMetrics(bytes32)._participantId (src/DataValidationAndReporting.sol#85) is not in mixedCase
+Parameter DataValidationAndReporting.triggerReportView(DataValidationAndReporting.StakeholderType)._viewType (src/DataValidationAndReporting.sol#89) is not in mixedCase
+Parameter DependencyMonitor.updateHash(bytes32)._newHash (src/DependencyMonitor.sol#26) is not in mixedCase
+Parameter DependencyMonitor.reportCriticalDependency(string)._message (src/DependencyMonitor.sol#33) is not in mixedCase
+Parameter DisputeResolutionArbitration.raiseDispute(uint256,address,bytes32)._treatyId (src/DisputeResolutionArbitration.sol#42) is not in mixedCase
+Parameter DisputeResolutionArbitration.raiseDispute(uint256,address,bytes32)._respondent (src/DisputeResolutionArbitration.sol#42) is not in mixedCase
+Parameter DisputeResolutionArbitration.raiseDispute(uint256,address,bytes32)._evidenceHash (src/DisputeResolutionArbitration.sol#42) is not in mixedCase
+Parameter DisputeResolutionArbitration.resolveDispute(uint256,bool)._disputeId (src/DisputeResolutionArbitration.sol#65) is not in mixedCase
+Parameter DisputeResolutionArbitration.resolveDispute(uint256,bool)._inFavorOfDisputant (src/DisputeResolutionArbitration.sol#65) is not in mixedCase
+Parameter DisputeResolutionArbitration.getDispute(uint256)._id (src/DisputeResolutionArbitration.sol#73) is not in mixedCase
+Parameter DredgingContractorRegistry.addRegistrar(address)._registrar (src/DredgingContractorRegistry.sol#74) is not in mixedCase
+Parameter DredgingContractorRegistry.removeRegistrar(address)._registrar (src/DredgingContractorRegistry.sol#78) is not in mixedCase
+Parameter DredgingContractorRegistry.registerContractor(address,string)._wallet (src/DredgingContractorRegistry.sol#82) is not in mixedCase
+Parameter DredgingContractorRegistry.registerContractor(address,string)._name (src/DredgingContractorRegistry.sol#82) is not in mixedCase
+Parameter DredgingContractorRegistry.registerContract(address,string,string,uint256,uint256,string)._contractor (src/DredgingContractorRegistry.sol#98) is not in mixedCase
+Parameter DredgingContractorRegistry.registerContract(address,string,string,uint256,uint256,string)._projectName (src/DredgingContractorRegistry.sol#99) is not in mixedCase
+Parameter DredgingContractorRegistry.registerContract(address,string,string,uint256,uint256,string)._location (src/DredgingContractorRegistry.sol#100) is not in mixedCase
+Parameter DredgingContractorRegistry.registerContract(address,string,string,uint256,uint256,string)._contractValue (src/DredgingContractorRegistry.sol#101) is not in mixedCase
+Parameter DredgingContractorRegistry.registerContract(address,string,string,uint256,uint256,string)._duration (src/DredgingContractorRegistry.sol#102) is not in mixedCase
+Parameter DredgingContractorRegistry.registerContract(address,string,string,uint256,uint256,string)._ipfsHash (src/DredgingContractorRegistry.sol#103) is not in mixedCase
+Parameter DredgingContractorRegistry.completeContract(uint256,bool,uint256,string)._contractId (src/DredgingContractorRegistry.sol#132) is not in mixedCase
+Parameter DredgingContractorRegistry.completeContract(uint256,bool,uint256,string)._successful (src/DredgingContractorRegistry.sol#132) is not in mixedCase
+Parameter DredgingContractorRegistry.completeContract(uint256,bool,uint256,string)._actualCost (src/DredgingContractorRegistry.sol#132) is not in mixedCase
+Parameter DredgingContractorRegistry.completeContract(uint256,bool,uint256,string)._notes (src/DredgingContractorRegistry.sol#132) is not in mixedCase
+Parameter DredgingContractorRegistry.getContract(uint256)._contractId (src/DredgingContractorRegistry.sol#158) is not in mixedCase
+Parameter DredgingContractorRegistry.getContractor(address)._contractor (src/DredgingContractorRegistry.sol#163) is not in mixedCase
+Parameter EducationCredential.setTrustIntegrator(address)._new (src/EducationCredential.sol#36) is not in mixedCase
+Parameter EdwardProtocol.commissionFleet(bytes32,string)._fleetId (src/EdwardProtocol.sol#27) is not in mixedCase
+Parameter EdwardProtocol.commissionFleet(bytes32,string)._route (src/EdwardProtocol.sol#27) is not in mixedCase
+Parameter EdwardProtocol.distributePlunder(address,uint256)._crew (src/EdwardProtocol.sol#33) is not in mixedCase
+Parameter EdwardProtocol.distributePlunder(address,uint256)._share (src/EdwardProtocol.sol#33) is not in mixedCase
+Parameter EndowmentGovernor.registerCompany(address)._company (src/EndowmentGovernor.sol#38) is not in mixedCase
+Parameter EndowmentGovernor.setAuthorizedTrigger(address)._trigger (src/EndowmentGovernor.sol#44) is not in mixedCase
+Parameter EndowmentGovernor.disburse(address,uint256)._to (src/EndowmentGovernor.sol#58) is not in mixedCase
+Parameter EndowmentGovernor.disburse(address,uint256)._amount (src/EndowmentGovernor.sol#58) is not in mixedCase
+Parameter EzioProtocol.mentorApprentice(address)._apprentice (src/EzioProtocol.sol#24) is not in mixedCase
+Parameter EzioProtocol.grantWisdom(address)._apprentice (src/EzioProtocol.sol#29) is not in mixedCase
+Parameter FairGovernanceFramework.proposePolicy(string,string)._title (src/FairGovernanceFramework.sol#33) is not in mixedCase
+Parameter FairGovernanceFramework.proposePolicy(string,string)._description (src/FairGovernanceFramework.sol#33) is not in mixedCase
+Parameter FairGovernanceFramework.voteOnPolicy(bytes32,bool)._policyId (src/FairGovernanceFramework.sol#45) is not in mixedCase
+Parameter FairGovernanceFramework.voteOnPolicy(bytes32,bool)._support (src/FairGovernanceFramework.sol#45) is not in mixedCase
+Parameter FairGovernanceFramework.evaluateAndExecutePolicy(bytes32)._policyId (src/FairGovernanceFramework.sol#62) is not in mixedCase
+Parameter FairPriceBudgetVault.toggleLock(bool)._lock (src/FairPriceBudgetVault.sol#100) is not in mixedCase
+Parameter FamilyOfficeRegistry.registerOffice(string,FamilyOfficeRegistry.Jurisdiction,bytes32)._name (src/FamilyOfficeRegistry.sol#44) is not in mixedCase
+Parameter FamilyOfficeRegistry.registerOffice(string,FamilyOfficeRegistry.Jurisdiction,bytes32)._location (src/FamilyOfficeRegistry.sol#44) is not in mixedCase
+Parameter FamilyOfficeRegistry.registerOffice(string,FamilyOfficeRegistry.Jurisdiction,bytes32)._contactHash (src/FamilyOfficeRegistry.sol#44) is not in mixedCase
+Parameter FamilyOfficeRegistry.updateOfficeHash(uint256,bytes32)._id (src/FamilyOfficeRegistry.sol#53) is not in mixedCase
+Parameter FamilyOfficeRegistry.updateOfficeHash(uint256,bytes32)._newHash (src/FamilyOfficeRegistry.sol#53) is not in mixedCase
+Parameter FamilyOfficeRegistry.deactivateOffice(uint256)._id (src/FamilyOfficeRegistry.sol#60) is not in mixedCase
+Parameter FamilyOfficeRegistry.getOffice(uint256)._id (src/FamilyOfficeRegistry.sol#67) is not in mixedCase
+Parameter FarmerCompensationVault.addVerifier(address)._verifier (src/FarmerCompensationVault.sol#60) is not in mixedCase
+Parameter FarmerCompensationVault.removeVerifier(address)._verifier (src/FarmerCompensationVault.sol#64) is not in mixedCase
+Parameter FarmerCompensationVault.registerFarmer(address,uint256,uint256,uint256,string)._farmer (src/FarmerCompensationVault.sol#69) is not in mixedCase
+Parameter FarmerCompensationVault.registerFarmer(address,uint256,uint256,uint256,string)._landArea (src/FarmerCompensationVault.sol#70) is not in mixedCase
+Parameter FarmerCompensationVault.registerFarmer(address,uint256,uint256,uint256,string)._compensationAmount (src/FarmerCompensationVault.sol#71) is not in mixedCase
+Parameter FarmerCompensationVault.registerFarmer(address,uint256,uint256,uint256,string)._cropYieldHistory (src/FarmerCompensationVault.sol#72) is not in mixedCase
+Parameter FarmerCompensationVault.registerFarmer(address,uint256,uint256,uint256,string)._location (src/FarmerCompensationVault.sol#73) is not in mixedCase
+Parameter FarmerCompensationVault.getFarmer(address)._farmer (src/FarmerCompensationVault.sol#119) is not in mixedCase
+Parameter FilipinnovationLedger.createVote(uint256,string,uint256)._targetId (src/FilipinnovationLedger.sol#107) is not in mixedCase
+Parameter FilipinnovationLedger.createVote(uint256,string,uint256)._targetType (src/FilipinnovationLedger.sol#107) is not in mixedCase
+Parameter FilipinnovationLedger.createVote(uint256,string,uint256)._durationBlocks (src/FilipinnovationLedger.sol#107) is not in mixedCase
+Parameter FilipinnovationLedger.castVote(uint256,bool)._voteId (src/FilipinnovationLedger.sol#131) is not in mixedCase
+Parameter FilipinnovationLedger.castVote(uint256,bool)._support (src/FilipinnovationLedger.sol#131) is not in mixedCase
+Parameter FilipinnovationLedger.executeVote(uint256)._voteId (src/FilipinnovationLedger.sol#146) is not in mixedCase
+Parameter FloodSolutionArbiter.addArbiter(address)._arbiter (src/FloodSolutionArbiter.sol#61) is not in mixedCase
+Parameter FloodSolutionArbiter.removeArbiter(address)._arbiter (src/FloodSolutionArbiter.sol#65) is not in mixedCase
+Parameter FloodSolutionArbiter.fileDispute(string,string,address,uint256,uint256,string)._projectName (src/FloodSolutionArbiter.sol#70) is not in mixedCase
+Parameter FloodSolutionArbiter.fileDispute(string,string,address,uint256,uint256,string)._description (src/FloodSolutionArbiter.sol#71) is not in mixedCase
+Parameter FloodSolutionArbiter.fileDispute(string,string,address,uint256,uint256,string)._blockingParty (src/FloodSolutionArbiter.sol#72) is not in mixedCase
+Parameter FloodSolutionArbiter.fileDispute(string,string,address,uint256,uint256,string)._proposalBlock (src/FloodSolutionArbiter.sol#73) is not in mixedCase
+Parameter FloodSolutionArbiter.fileDispute(string,string,address,uint256,uint256,string)._blockRecorded (src/FloodSolutionArbiter.sol#74) is not in mixedCase
+Parameter FloodSolutionArbiter.fileDispute(string,string,address,uint256,uint256,string)._ipfsHash (src/FloodSolutionArbiter.sol#75) is not in mixedCase
+Parameter FloodSolutionArbiter.triggerReferendum(uint256)._disputeId (src/FloodSolutionArbiter.sol#101) is not in mixedCase
+Parameter FloodSolutionArbiter.resolveDispute(uint256,bool,string)._disputeId (src/FloodSolutionArbiter.sol#112) is not in mixedCase
+Parameter FloodSolutionArbiter.resolveDispute(uint256,bool,string)._approved (src/FloodSolutionArbiter.sol#112) is not in mixedCase
+Parameter FloodSolutionArbiter.resolveDispute(uint256,bool,string)._notes (src/FloodSolutionArbiter.sol#112) is not in mixedCase
+Parameter FloodSolutionArbiter.getDispute(uint256)._disputeId (src/FloodSolutionArbiter.sol#126) is not in mixedCase
+Parameter GameUtilityAndAuditRegistry.logInternalUtility(bytes32,GameUtilityAndAuditRegistry.UtilityType,bytes32)._rawInput (src/GameUtilityAndAuditRegistry.sol#51) is not in mixedCase
+Parameter GameUtilityAndAuditRegistry.logInternalUtility(bytes32,GameUtilityAndAuditRegistry.UtilityType,bytes32)._utilType (src/GameUtilityAndAuditRegistry.sol#51) is not in mixedCase
+Parameter GameUtilityAndAuditRegistry.logInternalUtility(bytes32,GameUtilityAndAuditRegistry.UtilityType,bytes32)._proofHash (src/GameUtilityAndAuditRegistry.sol#51) is not in mixedCase
+Parameter GameUtilityAndAuditRegistry.attestHumanCraft(bytes32,string,bytes32)._assetId (src/GameUtilityAndAuditRegistry.sol#72) is not in mixedCase
+Parameter GameUtilityAndAuditRegistry.attestHumanCraft(bytes32,string,bytes32)._category (src/GameUtilityAndAuditRegistry.sol#72) is not in mixedCase
+Parameter GameUtilityAndAuditRegistry.attestHumanCraft(bytes32,string,bytes32)._sigHash (src/GameUtilityAndAuditRegistry.sol#72) is not in mixedCase
+Parameter GenerativeSocialContract.disburseSafetyNet(address,uint256,string)._recipient (src/GenerativeSocialContract.sol#47) is not in mixedCase
+Parameter GenerativeSocialContract.disburseSafetyNet(address,uint256,string)._amount (src/GenerativeSocialContract.sol#47) is not in mixedCase
+Parameter GenerativeSocialContract.disburseSafetyNet(address,uint256,string)._category (src/GenerativeSocialContract.sol#47) is not in mixedCase
+Parameter GovNexusBridge.verifyCitizen(address)._wallet (src/GovNexusBridge.sol#33) is not in mixedCase
+Parameter GovNexusBridge.verifyLandOwnership(uint256)._plotId (src/GovNexusBridge.sol#41) is not in mixedCase
+Parameter GovNexusBridge.getInfraSpent(uint256)._projectId (src/GovNexusBridge.sol#49) is not in mixedCase
+Parameter GrantEarmarkEscrow.createGrant(bytes32,address,uint256)._rawId (src/GrantEarmarkEscrow.sol#37) is not in mixedCase
+Parameter GrantEarmarkEscrow.createGrant(bytes32,address,uint256)._grantee (src/GrantEarmarkEscrow.sol#37) is not in mixedCase
+Parameter GrantEarmarkEscrow.createGrant(bytes32,address,uint256)._durationSeconds (src/GrantEarmarkEscrow.sol#37) is not in mixedCase
+Parameter GrantEarmarkEscrow.disburseTranche(bytes32,uint256)._grantId (src/GrantEarmarkEscrow.sol#61) is not in mixedCase
+Parameter GrantEarmarkEscrow.disburseTranche(bytes32,uint256)._amount (src/GrantEarmarkEscrow.sol#61) is not in mixedCase
+Parameter GrantEarmarkEscrow.clawbackExpiredGrant(bytes32)._grantId (src/GrantEarmarkEscrow.sol#77) is not in mixedCase
+Parameter GuardedResourcePool.allocate(bytes32,uint256,address)._context (src/GuardedResourcePool.sol#14) is not in mixedCase
+Parameter GuardedResourcePool.allocate(bytes32,uint256,address)._amount (src/GuardedResourcePool.sol#14) is not in mixedCase
+Parameter GuardedResourcePool.allocate(bytes32,uint256,address)._recipient (src/GuardedResourcePool.sol#14) is not in mixedCase
+Parameter GuardianSentryEvaluator.evaluateRippleEffect(bytes32,string,uint256,GuardianSentryEvaluator.ImpactLevel)._policyId (src/GuardianSentryEvaluator.sol#36) is not in mixedCase
+Parameter GuardianSentryEvaluator.evaluateRippleEffect(bytes32,string,uint256,GuardianSentryEvaluator.ImpactLevel)._title (src/GuardianSentryEvaluator.sol#36) is not in mixedCase
+Parameter GuardianSentryEvaluator.evaluateRippleEffect(bytes32,string,uint256,GuardianSentryEvaluator.ImpactLevel)._riskScore (src/GuardianSentryEvaluator.sol#36) is not in mixedCase
+Parameter GuardianSentryEvaluator.evaluateRippleEffect(bytes32,string,uint256,GuardianSentryEvaluator.ImpactLevel)._impact (src/GuardianSentryEvaluator.sol#36) is not in mixedCase
+Parameter HospitalClaimEscrow.setTrustIntegrator(address)._new (src/HospitalClaimEscrow.sol#32) is not in mixedCase
+Parameter IndigenousKnowledgeRegistry.registerCommunity(address,string,string)._communityAddress (src/IndigenousKnowledgeRegistry.sol#48) is not in mixedCase
+Parameter IndigenousKnowledgeRegistry.registerCommunity(address,string,string)._name (src/IndigenousKnowledgeRegistry.sol#48) is not in mixedCase
+Parameter IndigenousKnowledgeRegistry.registerCommunity(address,string,string)._domain (src/IndigenousKnowledgeRegistry.sol#48) is not in mixedCase
+Parameter IndigenousKnowledgeRegistry.protectKnowledge(string,address,bool,string)._title (src/IndigenousKnowledgeRegistry.sol#61) is not in mixedCase
+Parameter IndigenousKnowledgeRegistry.protectKnowledge(string,address,bool,string)._communityAddress (src/IndigenousKnowledgeRegistry.sol#62) is not in mixedCase
+Parameter IndigenousKnowledgeRegistry.protectKnowledge(string,address,bool,string)._allowCommercial (src/IndigenousKnowledgeRegistry.sol#63) is not in mixedCase
+Parameter IndigenousKnowledgeRegistry.protectKnowledge(string,address,bool,string)._proofHash (src/IndigenousKnowledgeRegistry.sol#64) is not in mixedCase
+Parameter IndigenousKnowledgeRegistry.authorizeResearcher(bytes32,address)._knowledgeId (src/IndigenousKnowledgeRegistry.sol#88) is not in mixedCase
+Parameter IndigenousKnowledgeRegistry.authorizeResearcher(bytes32,address)._researcher (src/IndigenousKnowledgeRegistry.sol#88) is not in mixedCase
+Parameter IndigenousKnowledgeRegistry.auditAndBlockBiopiracy(bytes32,address)._knowledgeId (src/IndigenousKnowledgeRegistry.sol#100) is not in mixedCase
+Parameter IndigenousKnowledgeRegistry.auditAndBlockBiopiracy(bytes32,address)._actor (src/IndigenousKnowledgeRegistry.sol#100) is not in mixedCase
+Parameter IndustrializationLedger.registerProject(string,string,uint256,uint256,string)._name (src/IndustrializationLedger.sol#46) is not in mixedCase
+Parameter IndustrializationLedger.registerProject(string,string,uint256,uint256,string)._sector (src/IndustrializationLedger.sol#47) is not in mixedCase
+Parameter IndustrializationLedger.registerProject(string,string,uint256,uint256,string)._budget (src/IndustrializationLedger.sol#48) is not in mixedCase
+Parameter IndustrializationLedger.registerProject(string,string,uint256,uint256,string)._durationBlocks (src/IndustrializationLedger.sol#49) is not in mixedCase
+Parameter IndustrializationLedger.registerProject(string,string,uint256,uint256,string)._ipfsHash (src/IndustrializationLedger.sol#50) is not in mixedCase
+Parameter IndustrializationLedger.castVote(uint256,bool)._id (src/IndustrializationLedger.sol#76) is not in mixedCase
+Parameter IndustrializationLedger.castVote(uint256,bool)._support (src/IndustrializationLedger.sol#76) is not in mixedCase
+Parameter IndustrializationLedger.executeProject(uint256)._id (src/IndustrializationLedger.sol#93) is not in mixedCase
+Parameter IndustrializationLedger.getProject(uint256)._id (src/IndustrializationLedger.sol#105) is not in mixedCase
+Parameter IndustrializationLedger.transferAdmin(address)._newAdmin (src/IndustrializationLedger.sol#119) is not in mixedCase
+Parameter IndustrializationLedger.getVoteResults(uint256)._id (src/IndustrializationLedger.sol#124) is not in mixedCase
+Parameter InevitableConsequenceLedger.logAction(string,uint256)._actionHash (src/InevitableConsequenceLedger.sol#26) is not in mixedCase
+Parameter InevitableConsequenceLedger.logAction(string,uint256)._weight (src/InevitableConsequenceLedger.sol#26) is not in mixedCase
+Parameter InevitableConsequenceLedger.settleLedger(bytes32)._actionId (src/InevitableConsequenceLedger.sol#43) is not in mixedCase
+Parameter JobMatchingDAO.postJob(address,string,string,uint256)._employer (src/JobMatchingDAO.sol#49) is not in mixedCase
+Parameter JobMatchingDAO.postJob(address,string,string,uint256)._role (src/JobMatchingDAO.sol#49) is not in mixedCase
+Parameter JobMatchingDAO.postJob(address,string,string,uint256)._description (src/JobMatchingDAO.sol#49) is not in mixedCase
+Parameter JobMatchingDAO.postJob(address,string,string,uint256)._salary (src/JobMatchingDAO.sol#49) is not in mixedCase
+Parameter JobMatchingDAO.applyForJob(uint256,uint256)._jobId (src/JobMatchingDAO.sol#73) is not in mixedCase
+Parameter JobMatchingDAO.applyForJob(uint256,uint256)._educationTokenId (src/JobMatchingDAO.sol#73) is not in mixedCase
+Parameter JobMatchingDAO.hireApplicant(uint256,address)._jobId (src/JobMatchingDAO.sol#89) is not in mixedCase
+Parameter JobMatchingDAO.hireApplicant(uint256,address)._applicant (src/JobMatchingDAO.sol#89) is not in mixedCase
+Parameter JobMatchingDAO.getJob(uint256)._jobId (src/JobMatchingDAO.sol#112) is not in mixedCase
+Parameter JobMatchingDAO.getApplications(uint256)._jobId (src/JobMatchingDAO.sol#117) is not in mixedCase
+Parameter JusticeRegistry.logCommitment(bytes32,string,string)._recordId (src/JusticeRegistry.sol#30) is not in mixedCase
+Parameter JusticeRegistry.logCommitment(bytes32,string,string)._institutionOrLeader (src/JusticeRegistry.sol#30) is not in mixedCase
+Parameter JusticeRegistry.logCommitment(bytes32,string,string)._commitment (src/JusticeRegistry.sol#30) is not in mixedCase
+Parameter JusticeRegistry.challengeAccountability(bytes32)._recordId (src/JusticeRegistry.sol#48) is not in mixedCase
+Parameter JusticeRegistry.verifyFulfillment(bytes32,bool)._recordId (src/JusticeRegistry.sol#59) is not in mixedCase
+Parameter JusticeRegistry.verifyFulfillment(bytes32,bool)._status (src/JusticeRegistry.sol#59) is not in mixedCase
+Parameter JusticeRegistry.getRecord(bytes32)._recordId (src/JusticeRegistry.sol#67) is not in mixedCase
+Parameter LandTitleNFT.issueTitle(address,string,string,bytes32)._owner (src/LandTitleNFT.sol#26) is not in mixedCase
+Parameter LandTitleNFT.issueTitle(address,string,string,bytes32)._location (src/LandTitleNFT.sol#26) is not in mixedCase
+Parameter LandTitleNFT.issueTitle(address,string,string,bytes32)._lotNumber (src/LandTitleNFT.sol#26) is not in mixedCase
+Parameter LandTitleNFT.issueTitle(address,string,string,bytes32)._documentHash (src/LandTitleNFT.sol#26) is not in mixedCase
+Parameter LandTitleNFT.transferTitle(address,uint256)._to (src/LandTitleNFT.sol#50) is not in mixedCase
+Parameter LandTitleNFT.transferTitle(address,uint256)._tokenId (src/LandTitleNFT.sol#50) is not in mixedCase
+Parameter LandTitleNFT.getTitle(uint256)._tokenId (src/LandTitleNFT.sol#64) is not in mixedCase
+Parameter LegacyMint.mintBridge(address)._to (src/LegacyMint.sol#17) is not in mixedCase
+Parameter MicroLendingEscrow.setTrustIntegrator(address)._new (src/MicroLendingEscrow.sol#47) is not in mixedCase
+Parameter MoratoriumEnforcer.toggleMoratorium(bool)._active (src/MoratoriumEnforcer.sol#19) is not in mixedCase
+Parameter MorrisResilienceProtocol.monitorAndVerifyNode(address)._node (src/MorrisResilienceProtocol.sol#40) is not in mixedCase
+Parameter MultiSigEscrowVault.addSigner(address)._newSigner (src/MultiSigEscrowVault.sol#58) is not in mixedCase
+Parameter MultiSigEscrowVault.removeSigner(address)._signer (src/MultiSigEscrowVault.sol#65) is not in mixedCase
+Parameter MultiSigEscrowVault.submitTransaction(address,uint256,bytes)._to (src/MultiSigEscrowVault.sol#74) is not in mixedCase
+Parameter MultiSigEscrowVault.submitTransaction(address,uint256,bytes)._value (src/MultiSigEscrowVault.sol#74) is not in mixedCase
+Parameter MultiSigEscrowVault.submitTransaction(address,uint256,bytes)._data (src/MultiSigEscrowVault.sol#74) is not in mixedCase
+Parameter MultiSigEscrowVault.confirmTransaction(uint256)._txId (src/MultiSigEscrowVault.sol#91) is not in mixedCase
+Parameter MultiSigEscrowVault.revokeConfirmation(uint256)._txId (src/MultiSigEscrowVault.sol#101) is not in mixedCase
+Parameter MultiSigEscrowVault.executeTransaction(uint256)._txId (src/MultiSigEscrowVault.sol#111) is not in mixedCase
+Parameter MythologicalDirectorialIntegrity.commitToMythos(string,uint8)._projectName (src/MythologicalDirectorialIntegrity.sol#32) is not in mixedCase
+Parameter MythologicalDirectorialIntegrity.commitToMythos(string,uint8)._approach (src/MythologicalDirectorialIntegrity.sol#32) is not in mixedCase
+Parameter MythologicalDirectorialIntegrity.safeguardOriginalMorality(string)._projectName (src/MythologicalDirectorialIntegrity.sol#48) is not in mixedCase
+Parameter NexusID.verify(address)._user (src/NexusID.sol#19) is not in mixedCase
+Parameter NexusID.revoke(address)._user (src/NexusID.sol#24) is not in mixedCase
+Parameter NexusID.isVerified(address)._user (src/NexusID.sol#28) is not in mixedCase
+Parameter NexusTreasuryV2.allocate(address,uint256,string)._to (src/NexusTreasuryV2.sol#21) is not in mixedCase
+Parameter NexusTreasuryV2.allocate(address,uint256,string)._amount (src/NexusTreasuryV2.sol#21) is not in mixedCase
+Parameter NexusTreasuryV2.allocate(address,uint256,string)._reason (src/NexusTreasuryV2.sol#21) is not in mixedCase
+Parameter OilPriceBufferTracker.logPriceAdjustment(int256,int256,string)._gasChange (src/OilPriceBufferTracker.sol#37) is not in mixedCase
+Parameter OilPriceBufferTracker.logPriceAdjustment(int256,int256,string)._dieselChange (src/OilPriceBufferTracker.sol#37) is not in mixedCase
+Parameter OilPriceBufferTracker.logPriceAdjustment(int256,int256,string)._reason (src/OilPriceBufferTracker.sol#37) is not in mixedCase
+Parameter OperatorPrivileges.transferAdmin(address)._newAdmin (src/OperatorPrivileges.sol#66) is not in mixedCase
+Parameter PathogenGuardRegistry.submitGenome(bytes32,uint256)._genomeHash (src/PathogenGuardRegistry.sol#34) is not in mixedCase
+Parameter PathogenGuardRegistry.submitGenome(bytes32,uint256)._riskLevel (src/PathogenGuardRegistry.sol#34) is not in mixedCase
+Parameter PathogenGuardRegistry.reviewAndApprove(bytes32)._genomeHash (src/PathogenGuardRegistry.sol#49) is not in mixedCase
+Parameter PathogenGuardRegistry.revokeGenome(bytes32)._genomeHash (src/PathogenGuardRegistry.sol#60) is not in mixedCase
+Parameter PeopleSovereigntyCovenant.setEndowment(address)._endowment (src/PeopleSovereigntyCovenant.sol#37) is not in mixedCase
+Parameter PeopleSovereigntyCovenant.grantPeace(address,uint256)._recipient (src/PeopleSovereigntyCovenant.sol#42) is not in mixedCase
+Parameter PeopleSovereigntyCovenant.grantPeace(address,uint256)._amount (src/PeopleSovereigntyCovenant.sol#42) is not in mixedCase
+Parameter PeopleSovereigntyCovenant.grantHousing(address,uint256)._recipient (src/PeopleSovereigntyCovenant.sol#59) is not in mixedCase
+Parameter PeopleSovereigntyCovenant.grantHousing(address,uint256)._amount (src/PeopleSovereigntyCovenant.sol#59) is not in mixedCase
+Parameter PermissionlessBroadcast.setTrustIntegrator(address)._new (src/PermissionlessBroadcast.sol#46) is not in mixedCase
+Parameter PresidentialPolicyDAO.issuePolicy(string)._content (src/PresidentialPolicyDAO.sol#19) is not in mixedCase
+Parameter PresidentialPolicyDAO.getPolicy(uint256)._id (src/PresidentialPolicyDAO.sol#24) is not in mixedCase
+Parameter PresidentialPolicyDAO.revokePolicy(uint256)._id (src/PresidentialPolicyDAO.sol#30) is not in mixedCase
+Parameter ProjectMilestoneEscrow.createProject(uint256,address,string[],uint256[])._treatyId (src/ProjectMilestoneEscrow.sol#57) is not in mixedCase
+Parameter ProjectMilestoneEscrow.createProject(uint256,address,string[],uint256[])._recipient (src/ProjectMilestoneEscrow.sol#58) is not in mixedCase
+Parameter ProjectMilestoneEscrow.createProject(uint256,address,string[],uint256[])._milestoneDescriptions (src/ProjectMilestoneEscrow.sol#59) is not in mixedCase
+Parameter ProjectMilestoneEscrow.createProject(uint256,address,string[],uint256[])._milestoneAmounts (src/ProjectMilestoneEscrow.sol#60) is not in mixedCase
+Parameter ProjectMilestoneEscrow.completeMilestone(uint256,uint256)._projectId (src/ProjectMilestoneEscrow.sol#92) is not in mixedCase
+Parameter ProjectMilestoneEscrow.completeMilestone(uint256,uint256)._milestoneIndex (src/ProjectMilestoneEscrow.sol#92) is not in mixedCase
+Parameter ProjectMilestoneEscrow.getProject(uint256)._id (src/ProjectMilestoneEscrow.sol#114) is not in mixedCase
+Parameter PublicNewsTransparency.publishBulletin(string,string,string)._category (src/PublicNewsTransparency.sol#37) is not in mixedCase
+Parameter PublicNewsTransparency.publishBulletin(string,string,string)._headline (src/PublicNewsTransparency.sol#37) is not in mixedCase
+Parameter PublicNewsTransparency.publishBulletin(string,string,string)._detailsUri (src/PublicNewsTransparency.sol#37) is not in mixedCase
+Parameter RealityAnchorVault.assignLiability(address,uint256)._debtor (src/RealityAnchorVault.sol#27) is not in mixedCase
+Parameter RealityAnchorVault.assignLiability(address,uint256)._amount (src/RealityAnchorVault.sol#27) is not in mixedCase
+Parameter ResourceCommons.requestResource(uint256,string)._amount (src/ResourceCommons.sol#10) is not in mixedCase
+Parameter ResourceCommons.requestResource(uint256,string)._resourceType (src/ResourceCommons.sol#10) is not in mixedCase
+Parameter SanctuaryTrustRegistry.setSanctuaryState(bool,uint256)._active (src/SanctuaryTrustRegistry.sol#36) is not in mixedCase
+Parameter SanctuaryTrustRegistry.setSanctuaryState(bool,uint256)._cooldown (src/SanctuaryTrustRegistry.sol#36) is not in mixedCase
+Parameter SanctuaryTrustRegistry.grantAccess(address)._peer (src/SanctuaryTrustRegistry.sol#42) is not in mixedCase
+Parameter SanctuaryTrustRegistry.sendSignal(address,bytes32)._recipient (src/SanctuaryTrustRegistry.sol#47) is not in mixedCase
+Parameter SanctuaryTrustRegistry.sendSignal(address,bytes32)._signalHash (src/SanctuaryTrustRegistry.sol#47) is not in mixedCase
+Parameter ScholarshipEscrow.enrollStudent(bytes32,address,uint256)._rawId (src/ScholarshipEscrow.sol#58) is not in mixedCase
+Parameter ScholarshipEscrow.enrollStudent(bytes32,address,uint256)._studentAddress (src/ScholarshipEscrow.sol#58) is not in mixedCase
+Parameter ScholarshipEscrow.enrollStudent(bytes32,address,uint256)._totalGrant (src/ScholarshipEscrow.sol#58) is not in mixedCase
+Parameter ScholarshipEscrow.addMilestone(bytes32,uint256,bytes32)._studentId (src/ScholarshipEscrow.sol#78) is not in mixedCase
+Parameter ScholarshipEscrow.addMilestone(bytes32,uint256,bytes32)._amount (src/ScholarshipEscrow.sol#78) is not in mixedCase
+Parameter ScholarshipEscrow.addMilestone(bytes32,uint256,bytes32)._proofHash (src/ScholarshipEscrow.sol#78) is not in mixedCase
+Parameter ScholarshipEscrow.approveMilestone(bytes32,uint256)._studentId (src/ScholarshipEscrow.sol#97) is not in mixedCase
+Parameter ScholarshipEscrow.approveMilestone(bytes32,uint256)._milestoneId (src/ScholarshipEscrow.sol#97) is not in mixedCase
+Parameter ScholarshipEscrow.disburseMilestone(bytes32,uint256)._studentId (src/ScholarshipEscrow.sol#105) is not in mixedCase
+Parameter ScholarshipEscrow.disburseMilestone(bytes32,uint256)._milestoneId (src/ScholarshipEscrow.sol#105) is not in mixedCase
+Parameter SkillRegistry.registerSkill(string,string,uint256)._name (src/SkillRegistry.sol#29) is not in mixedCase
+Parameter SkillRegistry.registerSkill(string,string,uint256)._skillCategory (src/SkillRegistry.sol#29) is not in mixedCase
+Parameter SkillRegistry.registerSkill(string,string,uint256)._proficiencyLevel (src/SkillRegistry.sol#29) is not in mixedCase
+Parameter SkillRegistry.verifySkill(address,bool)._user (src/SkillRegistry.sol#43) is not in mixedCase
+Parameter SkillRegistry.verifySkill(address,bool)._status (src/SkillRegistry.sol#43) is not in mixedCase
+Parameter SkillRegistry.getProfile(address)._user (src/SkillRegistry.sol#55) is not in mixedCase
+Parameter SonyCreativeResilience.secureMasterpieceIP(string)._ipName (src/SonyCreativeResilience.sol#34) is not in mixedCase
+Parameter SonyCreativeResilience.adjustLiveServiceCap(uint256)._newCap (src/SonyCreativeResilience.sol#43) is not in mixedCase
+Parameter SonyCreativeResilience.grantStudioAutonomy(string)._studioName (src/SonyCreativeResilience.sol#51) is not in mixedCase
+Parameter SovereignOracle.setRecord(bytes32,bytes)._key (src/SovereignOracle.sol#19) is not in mixedCase
+Parameter SovereignOracle.setRecord(bytes32,bytes)._value (src/SovereignOracle.sol#19) is not in mixedCase
+Parameter SovereignOracle.getRecord(bytes32)._key (src/SovereignOracle.sol#24) is not in mixedCase
+Parameter SovereignOracle.setEnvironmentalReport(string,bytes)._location (src/SovereignOracle.sol#28) is not in mixedCase
+Parameter SovereignOracle.setEnvironmentalReport(string,bytes)._data (src/SovereignOracle.sol#28) is not in mixedCase
+Parameter SovereignOracle.getEnvironmentalReport(string)._location (src/SovereignOracle.sol#34) is not in mixedCase
+Parameter SpiderNoirContinuityDAO.addContinuation(string,string)._title (src/SpiderNoirContinuityDAO.sol#51) is not in mixedCase
+Parameter SpiderNoirContinuityDAO.addContinuation(string,string)._story (src/SpiderNoirContinuityDAO.sol#51) is not in mixedCase
+Parameter SpiderNoirContinuityDAO.voteContinuation(uint256)._id (src/SpiderNoirContinuityDAO.sol#66) is not in mixedCase
+Parameter SpiderNoirContinuityDAO.addEpisode(string,string,string,address)._title (src/SpiderNoirContinuityDAO.sol#74) is not in mixedCase
+Parameter SpiderNoirContinuityDAO.addEpisode(string,string,string,address)._summary (src/SpiderNoirContinuityDAO.sol#74) is not in mixedCase
+Parameter SpiderNoirContinuityDAO.addEpisode(string,string,string,address)._ipfsHash (src/SpiderNoirContinuityDAO.sol#74) is not in mixedCase
+Parameter SpiderNoirContinuityDAO.addEpisode(string,string,string,address)._creator (src/SpiderNoirContinuityDAO.sol#74) is not in mixedCase
+Parameter SpiderNoirContinuityDAO.getContinuation(uint256)._id (src/SpiderNoirContinuityDAO.sol#93) is not in mixedCase
+Parameter SpiritualDataIntegrity.recordExperience(string,bytes32)._description (src/SpiritualDataIntegrity.sol#30) is not in mixedCase
+Parameter SpiritualDataIntegrity.recordExperience(string,bytes32)._logicHash (src/SpiritualDataIntegrity.sol#30) is not in mixedCase
+Parameter TaxPaymentProcessor.setVatRate(uint256)._newRate (src/TaxPaymentProcessor.sol#28) is not in mixedCase
+Parameter TaxPaymentProcessor.setTrustIntegrator(address)._newIntegrator (src/TaxPaymentProcessor.sol#33) is not in mixedCase
+Parameter TaxPaymentProcessor.setTaxVault(address)._newVault (src/TaxPaymentProcessor.sol#37) is not in mixedCase
+Parameter TokenizedTreatyBase.createTreaty(string,string,bytes32,uint256)._name (src/TokenizedTreatyBase.sol#38) is not in mixedCase
+Parameter TokenizedTreatyBase.createTreaty(string,string,bytes32,uint256)._signatories (src/TokenizedTreatyBase.sol#39) is not in mixedCase
+Parameter TokenizedTreatyBase.createTreaty(string,string,bytes32,uint256)._treatyHash (src/TokenizedTreatyBase.sol#40) is not in mixedCase
+Parameter TokenizedTreatyBase.createTreaty(string,string,bytes32,uint256)._implementationDeadline (src/TokenizedTreatyBase.sol#41) is not in mixedCase
+Parameter TokenizedTreatyBase.updateStatus(uint256,TokenizedTreatyBase.TreatyStatus)._treatyId (src/TokenizedTreatyBase.sol#56) is not in mixedCase
+Parameter TokenizedTreatyBase.updateStatus(uint256,TokenizedTreatyBase.TreatyStatus)._newStatus (src/TokenizedTreatyBase.sol#56) is not in mixedCase
+Parameter TokenizedTreatyBase.getTreaty(uint256)._id (src/TokenizedTreatyBase.sol#62) is not in mixedCase
+Variable TransientSupplyPassport.PRIVATE_BATCH_HASH_SLOT (src/TransientSupplyPassport.sol#13) is not in mixedCase
+Variable TransientSupplyPassport.PRIVATE_INSPECTOR_SLOT (src/TransientSupplyPassport.sol#14) is not in mixedCase
+Parameter TrustIntegratorV2.setUserTrust(address)._newUserTrust (src/TrustIntegratorV2.sol#29) is not in mixedCase
+Parameter TrustScoreDAO.setTrustScore(address,uint256)._user (src/TrustScoreDAO.sol#19) is not in mixedCase
+Parameter TrustScoreDAO.setTrustScore(address,uint256)._score (src/TrustScoreDAO.sol#19) is not in mixedCase
+Parameter TrustScoreDAO.getTrustScore(address)._user (src/TrustScoreDAO.sol#24) is not in mixedCase
+Parameter TrustScoreDAO.increaseScore(address,uint256)._user (src/TrustScoreDAO.sol#28) is not in mixedCase
+Parameter TrustScoreDAO.increaseScore(address,uint256)._amount (src/TrustScoreDAO.sol#28) is not in mixedCase
+Parameter TrustScoreDAO.decreaseScore(address,uint256)._user (src/TrustScoreDAO.sol#33) is not in mixedCase
+Parameter TrustScoreDAO.decreaseScore(address,uint256)._amount (src/TrustScoreDAO.sol#33) is not in mixedCase
+Parameter UbisoftRescueProtocol.restructureDebt(uint256)._amountPaidOff (src/UbisoftRescueProtocol.sol#37) is not in mixedCase
+Parameter UbisoftRescueProtocol.secureCoreIP(string)._ipName (src/UbisoftRescueProtocol.sol#46) is not in mixedCase
+Parameter UbisoftRescueProtocol.enforceQualityStandard(uint256)._newThreshold (src/UbisoftRescueProtocol.sol#55) is not in mixedCase
+Parameter YellowMaskProtocol.addMask(string)._interpretation (src/YellowMaskProtocol.sol#28) is not in mixedCase
+Parameter YellowMaskProtocol.updateCurator(address)._newCurator (src/YellowMaskProtocol.sol#35) is not in mixedCase
+Parameter ZKWhistleblowerOversight.setMerkleRoot(bytes32)._newRoot (src/ZKWhistleblowerOversight.sol#34) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+INFO:Detectors:
+Detector: reentrancy-unlimited-gas
+Reentrancy in FarmerCompensationVault.claimCompensation() (src/FarmerCompensationVault.sol#94-107):
+	External calls:
+	- address(msg.sender).transfer(amount) (src/FarmerCompensationVault.sol#105)
+	Event emitted after the call(s):
+	- CompensationClaimed(msg.sender,amount) (src/FarmerCompensationVault.sol#106)
+Reentrancy in EnvironmentalHealthEscrow.confiscateForRemediation(bytes32,address) (src/EnvironmentalHealthEscrow.sol#27-34):
+	External calls:
+	- target.transfer(amount) (src/EnvironmentalHealthEscrow.sol#32)
+	Event emitted after the call(s):
+	- FundsConfiscated(projectId) (src/EnvironmentalHealthEscrow.sol#33)
+Reentrancy in GenerativeSocialContract.disburseSafetyNet(address,uint256,string) (src/GenerativeSocialContract.sol#47-67):
+	External calls:
+	- _recipient.transfer(_amount) (src/GenerativeSocialContract.sol#55)
+	- _recipient.transfer(_amount) (src/GenerativeSocialContract.sol#58)
+	- _recipient.transfer(_amount) (src/GenerativeSocialContract.sol#61)
+	Event emitted after the call(s):
+	- FundsDisbursed(_recipient,_amount,_category) (src/GenerativeSocialContract.sol#66)
+Reentrancy in GovernanceBundle.emergencyOverride(string,address[],uint256[]) (src/GovernanceBundle.sol#62-79):
+	External calls:
+	- address(beneficiaries[i]).transfer(amounts[i]) (src/GovernanceBundle.sol#74)
+	Event emitted after the call(s):
+	- EmergencyOverrideTriggered(reason,block.timestamp) (src/GovernanceBundle.sol#78)
+	- ReserveRedistributed(beneficiaries[i],amounts[i]) (src/GovernanceBundle.sol#75)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-5
+INFO:Detectors:
+Detector: unindexed-event-address
+Event ArcadeGovernance.Voted(uint256,address,bool) (src/ArcadeGovernance.sol#20) has address parameters but no indexed parameters
+Event BluntAdvice.AdviceLogged(address,string) (src/BluntAdvice.sol#5) has address parameters but no indexed parameters
+Event ChildProtectionFund.FundAllocated(address,uint256) (src/ChildProtectionFund.sol#10) has address parameters but no indexed parameters
+Event CommandFeedback.CommandIssued(address,string) (src/CommandFeedback.sol#5) has address parameters but no indexed parameters
+Event CommandFeedback.FeedbackReceived(address,string) (src/CommandFeedback.sol#6) has address parameters but no indexed parameters
+Event CommunityFund.ProposalCreated(uint256,address,string,uint256) (src/CommunityFund.sol#35) has address parameters but no indexed parameters
+Event CommunityFund.Voted(uint256,address,bool,uint256) (src/CommunityFund.sol#36) has address parameters but no indexed parameters
+Event CommunityFund.ProposalExecuted(uint256,address,uint256) (src/CommunityFund.sol#37) has address parameters but no indexed parameters
+Event CommunityTaxVault.AuthorizedAllocatorAdded(address) (src/CommunityTaxVault.sol#17) has address parameters but no indexed parameters
+Event CommunityTaxVault.AuthorizedAllocatorRemoved(address) (src/CommunityTaxVault.sol#18) has address parameters but no indexed parameters
+Event ContributionLedger.ContributionLogged(address,string) (src/ContributionLedger.sol#13) has address parameters but no indexed parameters
+Event DiplomaticNuance.AllyRegistered(address,string) (src/DiplomaticNuance.sol#12) has address parameters but no indexed parameters
+Event EnergyScheduler.TaskAssigned(string,EnergyScheduler.EnergyType,address) (src/EnergyScheduler.sol#19) has address parameters but no indexed parameters
+Event GovernanceBundle.CovenantLinked(address,bytes32,string) (src/GovernanceBundle.sol#18) has address parameters but no indexed parameters
+Event GuardedResourcePool.ResourceAllocated(address,uint256) (src/GuardedResourcePool.sol#10) has address parameters but no indexed parameters
+Event HistoryLightedPath.DecisionLogged(address,string,uint256) (src/HistoryLightedPath.sol#13) has address parameters but no indexed parameters
+Event InspirationIntimidation.ProposalFiled(address,string,uint256,uint256) (src/InspirationIntimidation.sol#14) has address parameters but no indexed parameters
+Event LocalGovernanceOverride.PolicyOverridden(string,address) (src/LocalGovernanceOverride.sol#10) has address parameters but no indexed parameters
+Event PeopleSovereigntyCovenant.EndowmentUpdated(address) (src/PeopleSovereigntyCovenant.sol#25) has address parameters but no indexed parameters
+Event PoliticalEndstate.ProposalFiled(address,string,string) (src/PoliticalEndstate.sol#13) has address parameters but no indexed parameters
+Event SpeedOfTrust.TrustUpdated(address,uint256) (src/SpeedOfTrust.sol#7) has address parameters but no indexed parameters
+Event TaxPaymentProcessor.TaxVaultUpdated(address) (src/TaxPaymentProcessor.sol#14) has address parameters but no indexed parameters
+Event TrustIntegratorV2.UserTrustAddressUpdated(address) (src/TrustIntegratorV2.sol#16) has address parameters but no indexed parameters
+Event UserTrustV2.AuthorizedCallerAdded(address) (src/UserTrustV2.sol#14) has address parameters but no indexed parameters
+Event UserTrustV2.AuthorizedCallerRemoved(address) (src/UserTrustV2.sol#15) has address parameters but no indexed parameters
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unindexed-event-address-parameters
+INFO:Detectors:
+Detector: constable-states
+LocalGovernanceOverride.executiveOverrideActive (src/LocalGovernanceOverride.sol#8) should be constant 
+SystemParadigmSwitch.cooldown (src/SystemParadigmSwitch.sol#12) should be constant 
+TransientSupplyPassport.PRIVATE_BATCH_HASH_SLOT (src/TransientSupplyPassport.sol#13) should be constant 
+TransientSupplyPassport.PRIVATE_INSPECTOR_SLOT (src/TransientSupplyPassport.sol#14) should be constant 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-constant
+INFO:Detectors:
+Detector: immutable-states
+AltairProtocol.master (src/AltairProtocol.sol#9) should be immutable 
+ArnoProtocol.overseer (src/ArnoProtocol.sol#9) should be immutable 
+AwakeningCodex.supremeSteward (src/AwakeningCodex.sol#8) should be immutable 
+BayekProtocol.founder (src/BayekProtocol.sol#9) should be immutable 
+BethesdaQualityProtocol.creativeFreedomIndex (src/BethesdaQualityProtocol.sol#12) should be immutable 
+CabinetDAO.admin (src/CabinetDAO.sol#5) should be immutable 
+CandabaEcologicalGuardian.admin (src/CandabaEcologicalGuardian.sol#11) should be immutable 
+CandabaEcologicalGuardian.sovereignOracle (src/CandabaEcologicalGuardian.sol#12) should be immutable 
+CandabaImpoundingDAO.admin (src/CandabaImpoundingDAO.sol#11) should be immutable 
+ChildProtectionFund.governance (src/ChildProtectionFund.sol#7) should be immutable 
+CoalitionBuilder.privileges (src/CoalitionBuilder.sol#7) should be immutable 
+CommunityFloodVault.steward (src/CommunityFloodVault.sol#8) should be immutable 
+CommunityFund.steward (src/CommunityFund.sol#8) should be immutable 
+CommunityTaxVault.steward (src/CommunityTaxVault.sol#8) should be immutable 
+ConnorProtocol.warrior (src/ConnorProtocol.sol#9) should be immutable 
+DataValidationAndReporting.owner (src/DataValidationAndReporting.sol#30) should be immutable 
+DredgingContractorRegistry.admin (src/DredgingContractorRegistry.sol#11) should be immutable 
+DredgingContractorRegistry.trustScoreDAO (src/DredgingContractorRegistry.sol#12) should be immutable 
+EducationCredential.steward (src/EducationCredential.sol#8) should be immutable 
+EdwardProtocol.masterCaptain (src/EdwardProtocol.sol#9) should be immutable 
+EndowmentGovernor.anchor (src/EndowmentGovernor.sol#11) should be immutable 
+EnvironmentalHealthEscrow.steward (src/EnvironmentalHealthEscrow.sol#5) should be immutable 
+EzioProtocol.mentor (src/EzioProtocol.sol#9) should be immutable 
+FarmerCompensationVault.admin (src/FarmerCompensationVault.sol#11) should be immutable 
+FarmerCompensationVault.nexusID (src/FarmerCompensationVault.sol#12) should be immutable 
+FilipinnovationLedger.active (src/FilipinnovationLedger.sol#6) should be immutable 
+FilipinnovationLedger.admin (src/FilipinnovationLedger.sol#5) should be immutable 
+FloodSolutionArbiter.admin (src/FloodSolutionArbiter.sol#11) should be immutable 
+FloodSolutionArbiter.citizenVotingDAO (src/FloodSolutionArbiter.sol#12) should be immutable 
+GameUtilityAndAuditRegistry.owner (src/GameUtilityAndAuditRegistry.sol#32) should be immutable 
+GenesisManifesto.timestamp (src/GenesisManifesto.sol#10) should be immutable 
+GovNexusBridge.admin (src/GovNexusBridge.sol#18) should be immutable 
+GovNexusBridge.infraDAO (src/GovNexusBridge.sol#23) should be immutable 
+GovNexusBridge.landTrust (src/GovNexusBridge.sol#21) should be immutable 
+GovNexusBridge.nexusID (src/GovNexusBridge.sol#22) should be immutable 
+GovernanceBundle.registry (src/GovernanceBundle.sol#11) should be immutable 
+GovernanceBundle.supremeSteward (src/GovernanceBundle.sol#12) should be immutable 
+GrantEarmarkEscrow.admin (src/GrantEarmarkEscrow.sol#21) should be immutable 
+HospitalClaimEscrow.claimAmount (src/HospitalClaimEscrow.sol#9) should be immutable 
+HospitalClaimEscrow.steward (src/HospitalClaimEscrow.sol#8) should be immutable 
+JackSparrowProtocol.masterPirate (src/JackSparrowProtocol.sol#9) should be immutable 
+JobMatchingDAO.educationCredentialContract (src/JobMatchingDAO.sol#12) should be immutable 
+KnoxBypassProtocol.anchor (src/KnoxBypassProtocol.sol#10) should be immutable 
+LocalGovernanceOverride.deploymentBlock (src/LocalGovernanceOverride.sol#7) should be immutable 
+MicroLendingEscrow.maxLoanAmount (src/MicroLendingEscrow.sol#9) should be immutable 
+MicroLendingEscrow.steward (src/MicroLendingEscrow.sol#8) should be immutable 
+MoratoriumEnforcer.steward (src/MoratoriumEnforcer.sol#6) should be immutable 
+MultiSigEscrowVault.requiredConfirmations (src/MultiSigEscrowVault.sol#7) should be immutable 
+NexusID.admin (src/NexusID.sol#5) should be immutable 
+NexusTreasuryV2.admin (src/NexusTreasuryV2.sol#5) should be immutable 
+NuclearConflictRegistry.owner (src/NuclearConflictRegistry.sol#20) should be immutable 
+NuclearDecisionGates.owner (src/NuclearDecisionGates.sol#43) should be immutable 
+NuclearEvidenceRegistry.owner (src/NuclearEvidenceRegistry.sol#37) should be immutable 
+NuclearPublicAudit.owner (src/NuclearPublicAudit.sol#21) should be immutable 
+OperatorConsciousnessLedger.privileges (src/OperatorConsciousnessLedger.sol#9) should be immutable 
+PermissionlessBroadcast.steward (src/PermissionlessBroadcast.sol#8) should be immutable 
+PresidentialPolicyDAO.admin (src/PresidentialPolicyDAO.sol#5) should be immutable 
+ProjectMilestoneEscrow.vault (src/ProjectMilestoneEscrow.sol#17) should be immutable 
+PublicMattersCovenant.steward (src/PublicMattersCovenant.sol#8) should be immutable 
+ScholarshipEscrow.admin (src/ScholarshipEscrow.sol#30) should be immutable 
+ScholarshipEscrow.verifier (src/ScholarshipEscrow.sol#31) should be immutable 
+SonyCreativeResilience.qualityReviewThreshold (src/SonyCreativeResilience.sol#12) should be immutable 
+SovereignOracle.admin (src/SovereignOracle.sol#5) should be immutable 
+SpiderNoirContinuityDAO.admin (src/SpiderNoirContinuityDAO.sol#5) should be immutable 
+TrustIndex.privileges (src/TrustIndex.sol#7) should be immutable 
+TrustIntegrator.trust (src/TrustIntegrator.sol#7) should be immutable 
+TrustIntegratorV2.steward (src/TrustIntegratorV2.sol#13) should be immutable 
+TrustIntegratorV2.trustIndex (src/TrustIntegratorV2.sol#11) should be immutable 
+TrustScoreDAO.admin (src/TrustScoreDAO.sol#5) should be immutable 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-immutable
+INFO:Slither:. analyzed (166 contracts with 102 detectors), 656 result(s) found

@@ -43,7 +43,7 @@ contract MythologicalDirectorialIntegrity {
     }
 
     /**
-     * @notice Protektahan ang orihinal na katangian ng bida (tulad ng Mētis o katusuhan) laban sa pilit na pagpapasisi (repentance arc)
+     * @notice Protektahan ang orihinal na katangian ng bida (tulad ng M?tis o katusuhan) laban sa pilit na pagpapasisi (repentance arc)
      */
     function safeguardOriginalMorality(string memory _projectName) external onlyAuteur {
         bytes32 projectHash = keccak256(abi.encodePacked(_projectName));

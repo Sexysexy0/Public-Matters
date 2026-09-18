@@ -4,7 +4,7 @@ pragma solidity 0.8.35;
 /**
  * @title FloodSolutionArbiter
  * @author The Source
- * @notice Breaks LGU deadlocks—triggers community referendum if blocked for 90+ days.
+ * @notice Breaks LGU deadlocks--triggers community referendum if blocked for 90+ days.
  * @dev Uses CitizenVotingDAO for community polling.
  */
 contract FloodSolutionArbiter {
@@ -75,7 +75,7 @@ contract FloodSolutionArbiter {
         string memory _ipfsHash
     ) public onlyArbiter whenActive {
         require(_blockRecorded > _proposalBlock, "Block must be after proposal");
-        // 90 days ≈ 648000 blocks (12s/block)
+        // 90 days ? 648000 blocks (12s/block)
         require(block.number >= _blockRecorded + 648000, "90 days not yet passed");
 
         uint256 disputeId = disputeCount;

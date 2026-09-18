@@ -39,7 +39,7 @@ contract GovernanceStressTest is Test {
             auction.addAction(agents[i], "Approve", 10 + i);
             auction.addAction(agents[i], "Reject", 5);
 
-            // Casting to int256 is safe because i % 3 ∈ {0,1,2}
+            // Casting to int256 is safe because i % 3 in {0,1,2}
             // forge-lint: disable-next-line(unsafe-typecast)
             auction.recordMemory(agents[i], "Past success boosted trust", int256(i % 3));
         }

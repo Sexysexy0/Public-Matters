@@ -8,7 +8,7 @@ contract DeployJusticeRegistry is Script {
     function run() external {
         vm.startBroadcast();
         JusticeRegistry registry = new JusticeRegistry();
-        console.log(unicode"⚖️ Universal Justice Registry deployed at:", address(registry));
+        console.log(unicode"?? Universal Justice Registry deployed at:", address(registry));
         vm.stopBroadcast();
     }
 }
