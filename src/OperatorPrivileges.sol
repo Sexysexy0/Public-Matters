@@ -70,11 +70,25 @@ contract OperatorPrivileges {
         emit SafeguardTriggered(safeguardId, operator, block.timestamp);
     }
 
-    // Action Log API
+    // Action Log API (also syncs trustScore so ledgers can read one source of truth)
     function logAction(address actor, int256 delta) external onlyOperator {
         actionLog[actor] += delta;
         totalActions++;
+
+        // Sync trustScore with the signed action delta
+        if (delta >= 0) {
+            trustScore[actor] += uint256(delta);
+        } else {
+            uint256 decrease = uint256(-delta);
+            if (trustScore[actor] < decrease) {
+                trustScore[actor] = 0;
+            } else {
+                trustScore[actor] -= decrease;
+            }
+        }
+
         emit ActionLogged(actor, delta, block.timestamp);
+        emit TrustScoreUpdated(actor, trustScore[actor]);
     }
 
     function getActionLog(address actor) external view returns (int256) {
