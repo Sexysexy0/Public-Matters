@@ -87,15 +87,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17630
+- Total commits: 17631
 - Total contracts (src/): 161
 - Total test files: 74
 - Total tags: 381
 - Last test count: (run 'forge test' to refresh)
-- Last commit: b7b6bf970 — fix(ai-governance): V2 escalation on repeated lockouts
+- Last commit: b7c27d847 — chore(evidence): Wave 6 remaining deployed to Sepolia
 
 ## 🎯 Recent Activity
 
+- `b7c27d847` chore(evidence): Wave 6 remaining deployed to Sepolia
 - `b7b6bf970` fix(ai-governance): V2 escalation on repeated lockouts
 - `9424bd0ab` feat(ai-governance): Wave 6 remaining — 3 contracts
 - `ac734907a` feat(ai-governance): AIAgentCredentialGuardV2 with multisig escalation
@@ -110,7 +111,6 @@
 - `8666b8c29` feat(ai-governance): Wave 5 — single source of truth
 - `0db6c95b7` docs(signals): world observation log + first entry
 - `db504470d` chore(evidence): v1.3.0 AI governance full stack on Sepolia
-- `ae1e60882` docs(ai-governance): Wave 4 — full documentation set
 
 ## 🔑 Reminders for Future Conversations
 
