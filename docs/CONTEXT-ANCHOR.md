@@ -88,15 +88,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17638
+- Total commits: 17639
 - Total contracts (src/): 164
 - Total test files: 77
 - Total tags: 382
 - Last test count: (run 'forge test' to refresh)
-- Last commit: df53aba41 — feat(deploy): ProjectContinuity deployment script
+- Last commit: 332fb13d4 — chore(evidence): ProjectContinuity framework deployed to Sepolia
 
 ## 🎯 Recent Activity
 
+- `332fb13d4` chore(evidence): ProjectContinuity framework deployed to Sepolia
 - `df53aba41` feat(deploy): ProjectContinuity deployment script
 - `438591cfa` docs: case study + implementation guide
 - `21b57ebd5` feat(ai-governance): project continuity framework — 3 contracts
@@ -111,7 +112,6 @@
 - `66c35e42c` docs(context): living context anchor + auto-updater
 - `d774a6b64` chore(evidence): AIAgentCredentialGuard deployed to Sepolia
 - `f518e260c` feat(ai-governance): Wave 6 — AIAgentCredentialGuard
-- `8d135605c` docs(signals): Gemini credential guessing attack
 
 ## 🔑 Reminders for Future Conversations
 
