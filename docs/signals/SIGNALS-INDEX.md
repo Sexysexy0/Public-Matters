@@ -24,6 +24,7 @@ Master map: signal -> target repo -> status.
 | 2026-09-18 | RFK Jr Health Policy | Health | ph-healthcare-reform | ANALYZED |
 | 2026-09-18 | Bodycam Combat Realism | Training | ph-education-defense | ANALYZED |
 | 2026-09-18 | Google Gemini Android Auto | AI Deployment | docs/ai-governance | ANALYZED |
+| 2026-09-19 | Gemini Credential Guessing Hack | AI Security | Public-Matters/src | ANALYZED |
 
 ## Group Summary
 
