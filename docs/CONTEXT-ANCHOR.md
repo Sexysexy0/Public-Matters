@@ -87,15 +87,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17632
+- Total commits: 17633
 - Total contracts (src/): 161
 - Total test files: 74
 - Total tags: 381
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 50365f31b — docs(context): auto-update after Wave 6 + Phase B signals
+- Last commit: 4da243b1c — chore(infra): multi-chain RPC endpoints + env backup ignore
 
 ## 🎯 Recent Activity
 
+- `4da243b1c` chore(infra): multi-chain RPC endpoints + env backup ignore
 - `50365f31b` docs(context): auto-update after Wave 6 + Phase B signals
 - `b7c27d847` chore(evidence): Wave 6 remaining deployed to Sepolia
 - `b7b6bf970` fix(ai-governance): V2 escalation on repeated lockouts
@@ -110,7 +111,6 @@
 - `6721cee8b` chore(evidence): v1.4.0 V2 deployed + multisig-owned on Sepolia
 - `e33470b15` chore(config): lint config + signers.env in gitignore
 - `8666b8c29` feat(ai-governance): Wave 5 — single source of truth
-- `0db6c95b7` docs(signals): world observation log + first entry
 
 ## 🔑 Reminders for Future Conversations
 
