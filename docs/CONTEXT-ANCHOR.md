@@ -86,15 +86,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17627
+- Total commits: 17628
 - Total contracts (src/): 161
 - Total test files: 74
 - Total tags: 379
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 66c35e42c — docs(context): living context anchor + auto-updater
+- Last commit: ac734907a — feat(ai-governance): AIAgentCredentialGuardV2 with multisig escalation
 
 ## 🎯 Recent Activity
 
+- `ac734907a` feat(ai-governance): AIAgentCredentialGuardV2 with multisig escalation
 - `66c35e42c` docs(context): living context anchor + auto-updater
 - `d774a6b64` chore(evidence): AIAgentCredentialGuard deployed to Sepolia
 - `f518e260c` feat(ai-governance): Wave 6 — AIAgentCredentialGuard
@@ -109,7 +110,6 @@
 - `ae1e60882` docs(ai-governance): Wave 4 — full documentation set
 - `0ee2fce81` feat(ai-governance): Wave 3 — multisig + upgrade timelock
 - `e52c7d8b5` feat(ai-governance): Wave 2 — reputation + training record + resource cap
-- `962284e23` feat(ai-governance): Wave 1 — sandbox + behavior monitor + global freeze + communication guard
 
 ## 🔑 Reminders for Future Conversations
 
