@@ -14,4 +14,9 @@ sepolia = { key = "${ETHERSCAN_API_KEY}" }
 mainnet = { key = "${ETHERSCAN_API_KEY}" }
 
 [lint]
-ignore = ["modifier-used-only-once"]
+ignore = [
+  "modifier-used-only-once",
+  "internal-function-used-once",
+  "custom-errors",
+  "asm-keccak256"
+]
