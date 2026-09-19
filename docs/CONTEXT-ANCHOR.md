@@ -84,18 +84,20 @@
 - **v1.4.0 single source of truth**: `0x6bDf6D887038AB97957c2f57d05eDd0eb338589A 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98 0xB4f4D1828b60B94BF5AE6D3e1f492B79b5CC9aD9 `
 - **v1.5.0 credential guard**: `0x7F817129531D298158f3C155Ee2CB0f0566Bd9E7 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98 `
 - **v1.5.0 wave6 remaining**: `0x779A01Ee2B95810e66E51BdFa2737eFD3C05eA15 0x4D280dFC9aaB2abF0F5E3B467C83296f35aC7B3c 0xD92EEc115DEDbA8CE41028a41E1472113D42958e `
+- **v1.8.0 project continuity**: `0x9b450FFCc0F84EAa901C6Eb7532986BD2563c4E8 0x69C4B7523917B8Fe3c67aabd51dfA5a5DA3a7cA1 0x469Cc1625ccaEA148427d5B85B9FE3DcA7C6CeDc `
 
 ## 📊 Repository Stats
 
-- Total commits: 17637
+- Total commits: 17638
 - Total contracts (src/): 164
 - Total test files: 77
 - Total tags: 382
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 438591cfa — docs: case study + implementation guide
+- Last commit: df53aba41 — feat(deploy): ProjectContinuity deployment script
 
 ## 🎯 Recent Activity
 
+- `df53aba41` feat(deploy): ProjectContinuity deployment script
 - `438591cfa` docs: case study + implementation guide
 - `21b57ebd5` feat(ai-governance): project continuity framework — 3 contracts
 - `1c016d583` docs(history): coding evolution + system overview
@@ -110,7 +112,6 @@
 - `d774a6b64` chore(evidence): AIAgentCredentialGuard deployed to Sepolia
 - `f518e260c` feat(ai-governance): Wave 6 — AIAgentCredentialGuard
 - `8d135605c` docs(signals): Gemini credential guessing attack
-- `16a0f6a60` docs(signals): add master index
 
 ## 🔑 Reminders for Future Conversations
 

@@ -1,0 +1,11 @@
+{
+  "version": "v1.8.0-project-continuity",
+  "network": "sepolia",
+  "chainId": 11155111,
+  "ProjectContinuityRegistry": "0x9b450FFCc0F84EAa901C6Eb7532986BD2563c4E8",
+  "ContinuityGuard": "0x69C4B7523917B8Fe3c67aabd51dfA5a5DA3a7cA1",
+  "InvestigatorShield": "0x469Cc1625ccaEA148427d5B85B9FE3DcA7C6CeDc",
+  "privileges": "0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98",
+  "purpose": "Response to California HSR pattern — institutional discontinuity",
+  "testSuite": "344/344 passing"
+}
