@@ -87,15 +87,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17636
+- Total commits: 17637
 - Total contracts (src/): 164
 - Total test files: 77
 - Total tags: 382
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 21b57ebd5 — feat(ai-governance): project continuity framework — 3 contracts
+- Last commit: 438591cfa — docs: case study + implementation guide
 
 ## 🎯 Recent Activity
 
+- `438591cfa` docs: case study + implementation guide
 - `21b57ebd5` feat(ai-governance): project continuity framework — 3 contracts
 - `1c016d583` docs(history): coding evolution + system overview
 - `4292980f1` docs(signals): CuUnjieng economic analysis
@@ -110,7 +111,6 @@
 - `f518e260c` feat(ai-governance): Wave 6 — AIAgentCredentialGuard
 - `8d135605c` docs(signals): Gemini credential guessing attack
 - `16a0f6a60` docs(signals): add master index
-- `5366fa06a` docs(signals): batch process 11 world signals
 
 ## 🔑 Reminders for Future Conversations
 
