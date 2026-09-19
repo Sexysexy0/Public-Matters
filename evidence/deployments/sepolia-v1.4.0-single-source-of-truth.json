@@ -1,0 +1,12 @@
+{
+  "version": "v1.4.0-single-source-of-truth",
+  "network": "sepolia",
+  "chainId": 11155111,
+  "deployer": "0x6bDf6D887038AB97957c2f57d05eDd0eb338589A",
+  "OperatorPrivilegesV2": "0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98",
+  "AIAgentRegistryV2": "0xB4f4D1828b60B94BF5AE6D3e1f492B79b5CC9aD9",
+  "pendingOwner": "0xE696BaD9ee41affE5865344B1197C5A18dd7c7F6",
+  "status": "pending_acceptance",
+  "nextStep": "Multisig must call acceptOwnership() on V2",
+  "testSuite": "279/279 passing"
+}
