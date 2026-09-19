@@ -1,0 +1,10 @@
+{
+  "version": "v1.5.0-ai-governance-wave6-complete",
+  "network": "sepolia",
+  "chainId": 11155111,
+  "AIAgentIncidentRegistry": "0x779A01Ee2B95810e66E51BdFa2737eFD3C05eA15",
+  "AIAgentSunsetProtocol": "0x4D280dFC9aaB2abF0F5E3B467C83296f35aC7B3c",
+  "AIDecisionChallenge": "0xD92EEc115DEDbA8CE41028a41E1472113D42958e",
+  "privileges": "0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98",
+  "testSuite": "318/318 passing"
+}

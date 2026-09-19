@@ -83,18 +83,20 @@
 - **v1.3.0 ai governance full**: `0x6bDf6D887038AB97957c2f57d05eDd0eb338589A 0x9b9C35BDFcc69478669B640c9E7D106dCF612dCE 0xaf2979dEBA5b1aa43134762A4923b54D536DD56a `
 - **v1.4.0 single source of truth**: `0x6bDf6D887038AB97957c2f57d05eDd0eb338589A 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98 0xB4f4D1828b60B94BF5AE6D3e1f492B79b5CC9aD9 `
 - **v1.5.0 credential guard**: `0x7F817129531D298158f3C155Ee2CB0f0566Bd9E7 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98 `
+- **v1.5.0 wave6 remaining**: `0x779A01Ee2B95810e66E51BdFa2737eFD3C05eA15 0x4D280dFC9aaB2abF0F5E3B467C83296f35aC7B3c 0xD92EEc115DEDbA8CE41028a41E1472113D42958e `
 
 ## 📊 Repository Stats
 
-- Total commits: 17629
+- Total commits: 17630
 - Total contracts (src/): 161
 - Total test files: 74
-- Total tags: 380
+- Total tags: 381
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 9424bd0ab — feat(ai-governance): Wave 6 remaining — 3 contracts
+- Last commit: b7b6bf970 — fix(ai-governance): V2 escalation on repeated lockouts
 
 ## 🎯 Recent Activity
 
+- `b7b6bf970` fix(ai-governance): V2 escalation on repeated lockouts
 - `9424bd0ab` feat(ai-governance): Wave 6 remaining — 3 contracts
 - `ac734907a` feat(ai-governance): AIAgentCredentialGuardV2 with multisig escalation
 - `66c35e42c` docs(context): living context anchor + auto-updater
@@ -109,7 +111,6 @@
 - `0db6c95b7` docs(signals): world observation log + first entry
 - `db504470d` chore(evidence): v1.3.0 AI governance full stack on Sepolia
 - `ae1e60882` docs(ai-governance): Wave 4 — full documentation set
-- `0ee2fce81` feat(ai-governance): Wave 3 — multisig + upgrade timelock
 
 ## 🔑 Reminders for Future Conversations
 
