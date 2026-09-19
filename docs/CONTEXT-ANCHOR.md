@@ -86,15 +86,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17626
-- Total contracts (src/): 160
-- Total test files: 73
-- Total tags: 377
+- Total commits: 17627
+- Total contracts (src/): 161
+- Total test files: 74
+- Total tags: 379
 - Last test count: (run 'forge test' to refresh)
-- Last commit: d774a6b64 — chore(evidence): AIAgentCredentialGuard deployed to Sepolia
+- Last commit: 66c35e42c — docs(context): living context anchor + auto-updater
 
 ## 🎯 Recent Activity
 
+- `66c35e42c` docs(context): living context anchor + auto-updater
 - `d774a6b64` chore(evidence): AIAgentCredentialGuard deployed to Sepolia
 - `f518e260c` feat(ai-governance): Wave 6 — AIAgentCredentialGuard
 - `8d135605c` docs(signals): Gemini credential guessing attack
@@ -109,7 +110,6 @@
 - `0ee2fce81` feat(ai-governance): Wave 3 — multisig + upgrade timelock
 - `e52c7d8b5` feat(ai-governance): Wave 2 — reputation + training record + resource cap
 - `962284e23` feat(ai-governance): Wave 1 — sandbox + behavior monitor + global freeze + communication guard
-- `f71219833` chore(evidence): decision audit supersede demo on Sepolia
 
 ## 🔑 Reminders for Future Conversations
 
