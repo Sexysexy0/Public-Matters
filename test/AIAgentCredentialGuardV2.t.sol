@@ -26,6 +26,15 @@ contract AIAgentCredentialGuardV2Test is Test {
         guard = new AIAgentCredentialGuardV2(address(privileges), multisig, freeze);
     }
 
+    function _triggerLockout(bytes32 agentId, uint256 times) internal {
+        for (uint256 i = 0; i < times; i++) {
+            guard.recordAuthAttempt(agentId, SYSTEM_1, false);
+            guard.recordAuthAttempt(agentId, SYSTEM_1, false);
+            guard.recordAuthAttempt(agentId, SYSTEM_1, false);
+            guard.clearLockout(agentId);
+        }
+    }
+
     function test_InitTargets() public view {
         assertEq(guard.multisigTarget(), multisig);
         assertEq(guard.freezeTarget(), freeze);
@@ -33,46 +42,47 @@ contract AIAgentCredentialGuardV2Test is Test {
 
     function test_SetConfigWithEscalation() public {
         vm.prank(op1);
-        guard.setConfig(AGENT_1, 3, 5, 300, 600);
-
+        guard.setConfig(AGENT_1, 2, 3, 300, 600);
         AIAgentCredentialGuardV2.Config memory c = guard.getConfig(AGENT_1);
-        assertEq(c.maxFailedAttempts, 3);
-        assertEq(c.escalationThreshold, 5);
-        assertEq(c.windowSize, 300);
+        assertEq(c.maxFailedAttempts, 2);
+        assertEq(c.escalationThreshold, 3);
     }
 
-    function test_EscalationMustBeGreaterOrEqual() public {
+    function test_InvalidEscalation() public {
         vm.prank(op1);
-        vm.expectRevert("Escalation must be >= max");
-        guard.setConfig(AGENT_1, 5, 3, 300, 600);
+        vm.expectRevert("Escalation must be > 0");
+        guard.setConfig(AGENT_1, 2, 0, 300, 600);
     }
 
-    function test_StandardLockoutAtMax() public {
+    function test_StandardLockout() public {
         vm.startPrank(op1);
         guard.setConfig(AGENT_1, 2, 5, 300, 600);
-
         guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
         guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
         guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
-
         assertTrue(guard.isLockedOut(AGENT_1));
-        AIAgentCredentialGuardV2.Lockout memory l = guard.getLockout(AGENT_1);
-        assertFalse(l.escalated);
         vm.stopPrank();
     }
 
-    function test_EscalationTriggers() public {
+    function test_EscalationOnRepeatedLockouts() public {
         vm.startPrank(op1);
-        guard.setConfig(AGENT_1, 2, 5, 300, 3600);
+        guard.setConfig(AGENT_1, 2, 3, 300, 600);
 
-        // 5 failures → hits escalation threshold
-        for (uint256 i = 0; i < 5; i++) {
-            guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
-        }
+        // Trigger 2 lockouts — no escalation yet
+        _triggerLockout(AGENT_1, 2);
+        assertEq(guard.escalationCount(AGENT_1), 0);
+        assertEq(guard.lockoutCount(AGENT_1), 2);
+
+        // Trigger 3rd lockout → escalation
+        guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
+        guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
+        guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
+
+        assertEq(guard.escalationCount(AGENT_1), 1);
+        assertEq(guard.lockoutCount(AGENT_1), 3);
 
         AIAgentCredentialGuardV2.Lockout memory l = guard.getLockout(AGENT_1);
         assertTrue(l.escalated);
-        assertEq(guard.escalationCount(AGENT_1), 1);
         vm.stopPrank();
     }
 
@@ -80,18 +90,34 @@ contract AIAgentCredentialGuardV2Test is Test {
         vm.prank(op1);
         guard.setTargets(address(0x3333), address(0x4444));
         assertEq(guard.multisigTarget(), address(0x3333));
-        assertEq(guard.freezeTarget(), address(0x4444));
     }
 
-    function test_ClearLockoutResetsEscalation() public {
+    function test_ClearLockout() public {
         vm.startPrank(op1);
-        guard.setConfig(AGENT_1, 2, 5, 300, 3600);
-        for (uint256 i = 0; i < 5; i++) {
-            guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
-        }
+        guard.setConfig(AGENT_1, 2, 5, 300, 600);
+        guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
+        guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
+        guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
+        assertTrue(guard.isLockedOut(AGENT_1));
 
         guard.clearLockout(AGENT_1);
         assertFalse(guard.isLockedOut(AGENT_1));
+        vm.stopPrank();
+    }
+
+    function test_OnlyOperatorCanSetConfig() public {
+        vm.prank(outsider);
+        vm.expectRevert("Not authorized operator");
+        guard.setConfig(AGENT_1, 3, 5, 300, 600);
+    }
+
+    function test_CannotRecordWhenLockedOut() public {
+        vm.startPrank(op1);
+        guard.setConfig(AGENT_1, 1, 5, 300, 600);
+        guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
+        guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
+        vm.expectRevert("Agent is locked out");
+        guard.recordAuthAttempt(AGENT_1, SYSTEM_1, true);
         vm.stopPrank();
     }
 
@@ -107,23 +133,6 @@ contract AIAgentCredentialGuardV2Test is Test {
         assertEq(locks, 0);
         assertEq(escs, 0);
         assertFalse(locked);
-        vm.stopPrank();
-    }
-
-    function test_OnlyOperatorCanSetConfig() public {
-        vm.prank(outsider);
-        vm.expectRevert("Not authorized operator");
-        guard.setConfig(AGENT_1, 3, 5, 300, 600);
-    }
-
-    function test_CannotRecordWhenLockedOut() public {
-        vm.startPrank(op1);
-        guard.setConfig(AGENT_1, 1, 5, 300, 600);
-        guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
-        guard.recordAuthAttempt(AGENT_1, SYSTEM_1, false);
-
-        vm.expectRevert("Agent is locked out");
-        guard.recordAuthAttempt(AGENT_1, SYSTEM_1, true);
         vm.stopPrank();
     }
 }

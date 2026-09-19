@@ -7,16 +7,14 @@ import "./OperatorPrivilegesV2.sol";
  * @title AIAgentCredentialGuardV2
  * @notice Credential attempt tracking with multisig escalation.
  *
- *         V1 tracked attempts and locked out agents.
+ *         V1: tracked attempts, locked out agents.
  *         V2 adds:
- *         - Escalation threshold (extra severe failures)
- *         - Multisig escalation function (calls multisig to propose action)
- *         - Shared incident reporting integration
+ *         - Escalation on REPEATED lockouts (cumulative)
+ *         - Multisig target integration for persistent offenders
+ *         - Freeze target hook for global emergency
  */
 contract AIAgentCredentialGuardV2 {
     OperatorPrivilegesV2 public privileges;
-
-    // Multisig contract that receives escalations
     address public multisigTarget;
     address public freezeTarget;
 
@@ -24,7 +22,7 @@ contract AIAgentCredentialGuardV2 {
         uint256 maxFailedAttempts;
         uint256 windowSize;
         uint256 lockoutDuration;
-        uint256 escalationThreshold; // extra-severe: triggers multisig
+        uint256 escalationThreshold; // cumulative lockouts before escalation
         bool set;
     }
 
@@ -53,12 +51,11 @@ contract AIAgentCredentialGuardV2 {
     bytes32[] public trackedAgents;
     mapping(bytes32 => bool) public isTracked;
 
-    event AgentTracked(bytes32 indexed agentId);
     event ConfigSet(bytes32 indexed agentId, uint256 maxFailed, uint256 escalation, uint256 window, uint256 lockout);
     event AuthAttemptRecorded(bytes32 indexed agentId, bytes32 indexed targetSystem, bool success, uint256 failedCount);
     event AgentLockedOut(bytes32 indexed agentId, bytes32 reason, uint256 until, address lockedBy);
     event LockoutCleared(bytes32 indexed agentId, address clearedBy);
-    event EscalationTriggered(bytes32 indexed agentId, uint256 failedCount, address escalationTarget);
+    event EscalationTriggered(bytes32 indexed agentId, uint256 lockoutCount, address escalationTarget);
     event TargetsUpdated(address multisig, address freeze);
 
     modifier onlyOperator() {
@@ -73,8 +70,6 @@ contract AIAgentCredentialGuardV2 {
         freezeTarget = _freeze;
     }
 
-    // ─── CONFIG ───
-
     function setConfig(
         bytes32 agentId,
         uint256 maxFailedAttempts,
@@ -85,7 +80,7 @@ contract AIAgentCredentialGuardV2 {
         require(windowSize > 0, "Window must be > 0");
         require(maxFailedAttempts > 0, "Max failed must be > 0");
         require(lockoutDuration > 0, "Lockout must be > 0");
-        require(escalationThreshold >= maxFailedAttempts, "Escalation must be >= max");
+        require(escalationThreshold > 0, "Escalation must be > 0");
 
         _configs[agentId] = Config({
             maxFailedAttempts: maxFailedAttempts,
@@ -98,7 +93,6 @@ contract AIAgentCredentialGuardV2 {
         if (!isTracked[agentId]) {
             trackedAgents.push(agentId);
             isTracked[agentId] = true;
-            emit AgentTracked(agentId);
         }
 
         emit ConfigSet(agentId, maxFailedAttempts, escalationThreshold, windowSize, lockoutDuration);
@@ -110,19 +104,12 @@ contract AIAgentCredentialGuardV2 {
         emit TargetsUpdated(_multisig, _freeze);
     }
 
-    // ─── ATTEMPT RECORDING ───
-
-    function recordAuthAttempt(
-        bytes32 agentId,
-        bytes32 targetSystem,
-        bool success
-    ) external onlyOperator {
+    function recordAuthAttempt(bytes32 agentId, bytes32 targetSystem, bool success) external onlyOperator {
         Config storage c = _configs[agentId];
         require(c.set, "Config not set");
         require(!_lockouts[agentId].active, "Agent is locked out");
 
         AuthWindow storage w = _windows[agentId];
-
         if (w.windowStart == 0 || block.timestamp - w.windowStart > c.windowSize) {
             w.windowStart = block.timestamp;
             w.successCount = 0;
@@ -140,33 +127,26 @@ contract AIAgentCredentialGuardV2 {
 
         emit AuthAttemptRecorded(agentId, targetSystem, success, w.failedCount);
 
-        // Escalation check (severe)
-        if (w.failedCount >= c.escalationThreshold) {
-            _escalate(agentId, w.failedCount);
-            _lockout(agentId, keccak256("escalation-threshold"), c.lockoutDuration, msg.sender, true);
-            return;
-        }
-
-        // Standard lockout
+        // Standard lockout within window
         if (w.failedCount > c.maxFailedAttempts) {
-            _lockout(agentId, keccak256("threshold-exceeded"), c.lockoutDuration, msg.sender, false);
+            _lockout(agentId, keccak256("threshold-exceeded"), c.lockoutDuration, msg.sender);
         }
     }
-
-    function _escalate(bytes32 agentId, uint256 failedCount) internal {
-        escalationCount[agentId]++;
-        emit EscalationTriggered(agentId, failedCount, multisigTarget);
-        // Off-chain: multisig should propose action (freeze, investigate)
-    }
-
-    // ─── LOCKOUT ───
 
     function forceLockout(bytes32 agentId, bytes32 reason, uint256 duration) external onlyOperator {
         require(isTracked[agentId], "Agent not tracked");
-        _lockout(agentId, reason, duration, msg.sender, false);
+        _lockout(agentId, reason, duration, msg.sender);
     }
 
-    function _lockout(bytes32 agentId, bytes32 reason, uint256 duration, address by, bool escalated) internal {
+    function _lockout(bytes32 agentId, bytes32 reason, uint256 duration, address by) internal {
+        Config storage c = _configs[agentId];
+
+        // Increment first
+        lockoutCount[agentId]++;
+
+        // Check if cumulative lockouts have reached escalation threshold
+        bool escalated = lockoutCount[agentId] >= c.escalationThreshold;
+
         _lockouts[agentId] = Lockout({
             active: true,
             until: block.timestamp + duration,
@@ -174,8 +154,13 @@ contract AIAgentCredentialGuardV2 {
             lockedBy: by,
             escalated: escalated
         });
-        lockoutCount[agentId]++;
+
         emit AgentLockedOut(agentId, reason, block.timestamp + duration, by);
+
+        if (escalated) {
+            escalationCount[agentId]++;
+            emit EscalationTriggered(agentId, lockoutCount[agentId], multisigTarget);
+        }
     }
 
     function clearLockout(bytes32 agentId) external onlyOperator {
@@ -187,15 +172,11 @@ contract AIAgentCredentialGuardV2 {
             lockedBy: address(0),
             escalated: false
         });
-
         _windows[agentId].windowStart = 0;
         _windows[agentId].successCount = 0;
         _windows[agentId].failedCount = 0;
-
         emit LockoutCleared(agentId, msg.sender);
     }
-
-    // ─── VIEWS ───
 
     function isLockedOut(bytes32 agentId) external view returns (bool) {
         Lockout storage l = _lockouts[agentId];
@@ -225,13 +206,7 @@ contract AIAgentCredentialGuardV2 {
     ) {
         Lockout storage l = _lockouts[agentId];
         bool locked = l.active && block.timestamp < l.until;
-        return (
-            totalAttempts[agentId],
-            totalFailedAttempts[agentId],
-            lockoutCount[agentId],
-            escalationCount[agentId],
-            locked
-        );
+        return (totalAttempts[agentId], totalFailedAttempts[agentId], lockoutCount[agentId], escalationCount[agentId], locked);
     }
 
     function totalTracked() external view returns (uint256) {
