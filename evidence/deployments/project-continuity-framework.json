@@ -1,0 +1,13 @@
+{
+  "version": "v1.8.0-project-continuity",
+  "date": "2026-09-20",
+  "signal": "California HSR investigation (Nick Shirley)",
+  "contracts": {
+    "ProjectContinuityRegistry": "ready-for-deployment",
+    "ContinuityGuard": "ready-for-deployment",
+    "InvestigatorShield": "ready-for-deployment"
+  },
+  "testSuite": "344/344 passing",
+  "newTests": 26,
+  "purpose": "Prevent institutional discontinuity + protect investigators"
+}

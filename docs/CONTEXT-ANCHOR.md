@@ -87,15 +87,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17634
-- Total contracts (src/): 161
-- Total test files: 74
+- Total commits: 17635
+- Total contracts (src/): 164
+- Total test files: 77
 - Total tags: 381
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 4292980f1 — docs(signals): CuUnjieng economic analysis
+- Last commit: 1c016d583 — docs(history): coding evolution + system overview
 
 ## 🎯 Recent Activity
 
+- `1c016d583` docs(history): coding evolution + system overview
 - `4292980f1` docs(signals): CuUnjieng economic analysis
 - `4da243b1c` chore(infra): multi-chain RPC endpoints + env backup ignore
 - `50365f31b` docs(context): auto-update after Wave 6 + Phase B signals
@@ -110,7 +111,6 @@
 - `16a0f6a60` docs(signals): add master index
 - `5366fa06a` docs(signals): batch process 11 world signals
 - `6721cee8b` chore(evidence): v1.4.0 V2 deployed + multisig-owned on Sepolia
-- `e33470b15` chore(config): lint config + signers.env in gitignore
 
 ## 🔑 Reminders for Future Conversations
 
