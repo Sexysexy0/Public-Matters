@@ -1,0 +1,31 @@
+{
+  "version": "v1.3.0-ai-governance",
+  "network": "sepolia",
+  "chainId": 11155111,
+  "deployer": "0x6bDf6D887038AB97957c2f57d05eDd0eb338589A",
+  "timestamp": "2026-09-19",
+  "wave1": {
+    "OperatorPrivileges":         "0x9b9C35BDFcc69478669B640c9E7D106dCF612dCE",
+    "AIAgentSandbox":             "0xaf2979dEBA5b1aa43134762A4923b54D536DD56a",
+    "AIAgentBehaviorMonitor":     "0x7248d1048D3de2bbc657bB640a7aDf4Ea1448455",
+    "GlobalEmergencyFreeze":      "0x45e667DAf3dD59e5da683642aB8901867847666C",
+    "AIAgentCommunicationGuard":  "0x50eD57a9a787862ADb7aDb267292585F9906D09d"
+  },
+  "wave2": {
+    "AIAgentReputation":          "0x87FFB5D0d1c2143A838E4894670E2fe84417c115",
+    "AIAgentTrainingRecord":      "0x883aDC79CCc7293Fd132943dED6c31b6E1eb5884",
+    "AIAgentResourceCap":         "0x1d45281A3Eb9800A5Bf4d3093E301a24b3a25731"
+  },
+  "wave3": {
+    "AIGovernanceMultisig":       "0xE696BaD9ee41affE5865344B1197C5A18dd7c7F6",
+    "AIAgentUpgradeTimelock":     "0x960Cca9Ab0A3d8fd8d15D776A78651eB0971523f",
+    "signers": [
+      "0xF66b23603160dd880Ad1f77E459E014aFfcc6511",
+      "0xF580403f2Fb2075984a36FF41504b6ADD151C721",
+      "0x4b902973767F2315758CC051A78089f90981a820"
+    ],
+    "threshold": 2
+  },
+  "testSuite": "260/260 passing",
+  "gasSpent": "0.0177 ETH"
+}
