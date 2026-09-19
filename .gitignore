@@ -9,3 +9,4 @@ node_modules/
 .env.local
 signers.env
 foundry.toml.bak
+.env.backup*

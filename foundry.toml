@@ -6,12 +6,45 @@ solc = "0.8.35"
 via-ir = true
 
 [rpc_endpoints]
-sepolia = "https://eth-sepolia.g.alchemy.com/v2/3ju8iuKMO0HV-z4qXYisk"
-mainnet = "https://eth-mainnet.g.alchemy.com/v2/3ju8iuKMO0HV-z4qXYisk"
+# Ethereum L1
+mainnet = "${ETH_MAINNET_RPC}"
+sepolia = "${ETH_SEPOLIA_RPC}"
+
+# Base L2 (recommended primary)
+base = "${BASE_MAINNET_RPC}"
+base_sepolia = "${BASE_SEPOLIA_RPC}"
+
+# OP L2
+optimism = "${OP_MAINNET_RPC}"
+op_sepolia = "${OP_SEPOLIA_RPC}"
+
+# Arbitrum
+arbitrum = "${ARB_MAINNET_RPC}"
+arb_sepolia = "${ARB_SEPOLIA_RPC}"
+
+# Polygon
+polygon = "${POLYGON_MAINNET_RPC}"
+amoy = "${POLYGON_AMOY_RPC}"
+
+# ZKsync
+zksync = "${ZK_MAINNET_RPC}"
+zksync_sepolia = "${ZK_SEPOLIA_RPC}"
+
+# Linea
+linea = "${LINEA_MAINNET_RPC}"
+linea_sepolia = "${LINEA_SEPOLIA_RPC}"
 
 [etherscan]
-sepolia = { key = "${ETHERSCAN_API_KEY}" }
 mainnet = { key = "${ETHERSCAN_API_KEY}" }
+sepolia = { key = "${ETHERSCAN_API_KEY}" }
+base = { key = "${BASESCAN_API_KEY}" }
+base_sepolia = { key = "${BASESCAN_API_KEY}" }
+optimism = { key = "${OPTIMISM_API_KEY}" }
+op_sepolia = { key = "${OPTIMISM_API_KEY}" }
+arbitrum = { key = "${ARBISCAN_API_KEY}" }
+arb_sepolia = { key = "${ARBISCAN_API_KEY}" }
+polygon = { key = "${POLYGONSCAN_API_KEY}" }
+amoy = { key = "${POLYGONSCAN_API_KEY}" }
 
 [lint]
 ignore = [
