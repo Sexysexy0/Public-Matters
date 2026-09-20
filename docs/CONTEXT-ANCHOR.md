@@ -88,15 +88,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17641
-- Total contracts (src/): 164
-- Total test files: 77
+- Total commits: 17642
+- Total contracts (src/): 165
+- Total test files: 78
 - Total tags: 382
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 6e5a74f9b — docs(research): archive pattern analysis + entity setup roadmap
+- Last commit: 7bec4ddcb — docs(research): add archive index (file list only)
 
 ## 🎯 Recent Activity
 
+- `7bec4ddcb` docs(research): add archive index (file list only)
 - `6e5a74f9b` docs(research): archive pattern analysis + entity setup roadmap
 - `c48f54cc5` docs(signals): Metro Manila housing crisis
 - `332fb13d4` chore(evidence): ProjectContinuity framework deployed to Sepolia
@@ -111,7 +112,6 @@
 - `b7b6bf970` fix(ai-governance): V2 escalation on repeated lockouts
 - `9424bd0ab` feat(ai-governance): Wave 6 remaining — 3 contracts
 - `ac734907a` feat(ai-governance): AIAgentCredentialGuardV2 with multisig escalation
-- `66c35e42c` docs(context): living context anchor + auto-updater
 
 ## 🔑 Reminders for Future Conversations
 
