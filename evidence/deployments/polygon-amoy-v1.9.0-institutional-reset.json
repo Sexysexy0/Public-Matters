@@ -1,0 +1,10 @@
+{
+  "version": "v1.9.0-institutional-reset",
+  "network": "polygon-amoy",
+  "chainId": 80002,
+  "InstitutionalResetRegistry": "0xE8E0e4F795A1A285395F6F8d5EA80adEf8c076F1",
+  "privileges": "0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98",
+  "purpose": "Success trap tracking — Singapore 2026 reset pattern (CASE-014)",
+  "testSuite": "354/354 passing",
+  "note": "Deployed on Polygon Amoy due to Sepolia ETH shortage"
+}

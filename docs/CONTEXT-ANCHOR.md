@@ -75,6 +75,7 @@
 
 ## 🏗️ Live Contracts (Sepolia)
 
+- **polygon amoy v1.9.0 institutional reset**: `0xE8E0e4F795A1A285395F6F8d5EA80adEf8c076F1 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98 `
 - **agent 01 lifecycle**: `0xfb302dD14e235266A6EdedfdD2CDF709c55D7aF5 0x25E737b7eAD518a84383A24b8653A946C6eA0097 0xd3e29e01e785b48efcd38ec09541a7c3661b1368 `
 - **agent 02 registered**: `0xfb302dD14e235266A6EdedfdD2CDF709c55D7aF5 0x434039ea22a933cf61137a157ca36925384354a4 0x6bDf6D887038AB97957c2f57d05eDd0eb338589A `
 - **decision audit demo**: `0x9E93a6A3421AD0F8F029406aC3Ce3E21e8544074 0x434039ea22a933cf61137a157ca36925384354a4 0xb4b88d50917075542ab1d6fff8eb10f067bb0563 `
@@ -88,15 +89,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17648
+- Total commits: 17649
 - Total contracts (src/): 165
 - Total test files: 78
 - Total tags: 383
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 959884bb4 — fix(evidence): correct InstitutionalResetRegistry status to pending
+- Last commit: 4bcb83cf2 — feat(scripts): add monitoring + verification toolkit
 
 ## 🎯 Recent Activity
 
+- `4bcb83cf2` feat(scripts): add monitoring + verification toolkit
 - `959884bb4` fix(evidence): correct InstitutionalResetRegistry status to pending
 - `2bbea392c` chore(evidence): InstitutionalResetRegistry deployed to Sepolia
 - `c3391cd6b` docs(research): Singapore policy source references
@@ -111,7 +113,6 @@
 - `438591cfa` docs: case study + implementation guide
 - `21b57ebd5` feat(ai-governance): project continuity framework — 3 contracts
 - `1c016d583` docs(history): coding evolution + system overview
-- `4292980f1` docs(signals): CuUnjieng economic analysis
 
 ## 🔑 Reminders for Future Conversations
 
