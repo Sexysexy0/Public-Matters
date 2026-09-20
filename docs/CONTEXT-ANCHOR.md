@@ -75,7 +75,7 @@
 
 ## 🏗️ Live Contracts (Sepolia)
 
-- **polygon amoy v1.2.0 governed action gate**: `0x6bDf6D887038AB97957c2f57d05eDd0eb338589A 0xd0Ba898e929D319cf9b287FcB2710B84de9582cc 0x25E737b7eAD518a84383A24b8653A946C6eA0097 `
+- **anvil v1.2.0 governed action gate**: `0x6bDf6D887038AB97957c2f57d05eDd0eb338589A 0xC7f18e755F15298ADAB72a0E90022d43d57bad68 0x25E737b7eAD518a84383A24b8653A946C6eA0097 `
 - **polygon amoy v1.9.0 institutional reset**: `0xE8E0e4F795A1A285395F6F8d5EA80adEf8c076F1 0x0abf56c1af9500cf9691627571985c403e1aff78 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98 `
 - **agent 01 lifecycle**: `0xfb302dD14e235266A6EdedfdD2CDF709c55D7aF5 0x25E737b7eAD518a84383A24b8653A946C6eA0097 0xd3e29e01e785b48efcd38ec09541a7c3661b1368 `
 - **agent 02 registered**: `0xfb302dD14e235266A6EdedfdD2CDF709c55D7aF5 0x434039ea22a933cf61137a157ca36925384354a4 0x6bDf6D887038AB97957c2f57d05eDd0eb338589A `
@@ -90,15 +90,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17656
+- Total commits: 17657
 - Total contracts (src/): 166
 - Total test files: 79
-- Total tags: 385
+- Total tags: 384
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 5d6fcaec4 — feat(treasury): GovernedActionGate - N-of-M council approval for AI actions
+- Last commit: 6ea008b00 — chore(evidence): GovernedActionGate live on Polygon Amoy (fix broken Sepolia JSON)
 
 ## 🎯 Recent Activity
 
+- `6ea008b00` chore(evidence): GovernedActionGate live on Polygon Amoy (fix broken Sepolia JSON)
 - `5d6fcaec4` feat(treasury): GovernedActionGate - N-of-M council approval for AI actions
 - `4f122610c` docs: mark Polygon Amoy as active chain
 - `bce90e811` chore(evidence): InstitutionalResetRegistry VERIFIED on Polygon Amoy
@@ -113,7 +114,6 @@
 - `7ef034f0a` docs(research): academic literature search — success trap
 - `e6bd0d296` docs: success trap signal + framework
 - `0b081bc48` feat(ai-governance): InstitutionalResetRegistry — success trap tracking
-- `7bec4ddcb` docs(research): add archive index (file list only)
 
 ## 🔑 Reminders for Future Conversations
 

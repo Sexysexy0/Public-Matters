@@ -1,25 +1,32 @@
 #!/bin/bash
+cd ~/Public-Matters
 set -a; source .env; set +a
 
 OUTPUT=~/Public-Matters/research/contract-audit-$(date +%Y%m%d).md
 
-echo "# Contract Audit Report" > "$OUTPUT"
-echo "Generated: $(date -u)" >> "$OUTPUT"
-echo "" >> "$OUTPUT"
-echo "## Contracts from Broadcast Files" >> "$OUTPUT"
-echo "" >> "$OUTPUT"
-echo "| Name | Address | Creator | Block | Verified |" >> "$OUTPUT"
-echo "|---|---|---|---|---|" >> "$OUTPUT"
+{
+  echo "# Contract Audit Report"
+  echo "Generated: $(date -u)"
+  echo ""
+  echo "## Verified On-Chain Contracts"
+  echo ""
+  echo "| Contract | Address | Verified |"
+  echo "|---|---|---|"
+} > "$OUTPUT"
 
-for file in ~/Public-Matters/broadcast/Deploy*.json; do
-  [ -f "$file" ] || continue
+# Only include contracts with actual bytecode
+find broadcast -name "run-latest.json" -path "*/11155111/*" 2>/dev/null | while read file; do
   jq -r '.transactions[]? | select(.transactionType=="CREATE") | "\(.contractName)|\(.contractAddress)"' "$file" 2>/dev/null
 done | sort -u | while IFS='|' read name addr; do
-  info=$(curl -s "https://api-sepolia.etherscan.io/api?module=contract&action=getcontractcreation&contractaddresses=$addr&apikey=$ETHERSCAN_API_KEY")
-  creator=$(echo "$info" | jq -r '.result[0].contractCreator // "?"')
-  txhash=$(echo "$info" | jq -r '.result[0].txHash // "?"')
-  verified="⏳"
-  echo "| $name | $addr | $creator | $txhash | $verified |" >> "$OUTPUT"
+  if [ -z "$name" ] || [ -z "$addr" ]; then continue; fi
+  
+  # Check if address actually has bytecode
+  CODE=$(cast code "$addr" --rpc-url $ETH_SEPOLIA_RPC 2>/dev/null)
+  if [ "$CODE" != "0x" ] && [ -n "$CODE" ]; then
+    echo "| $name | \`$addr\` | ✅ |" >> "$OUTPUT"
+  else
+    echo "| $name | \`$addr\` | ❌ (no code) |" >> "$OUTPUT"
+  fi
 done
 
 echo "✅ Report: $OUTPUT"
