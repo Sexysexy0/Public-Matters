@@ -88,15 +88,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17647
+- Total commits: 17648
 - Total contracts (src/): 165
 - Total test files: 78
 - Total tags: 383
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 2bbea392c — chore(evidence): InstitutionalResetRegistry deployed to Sepolia
+- Last commit: 959884bb4 — fix(evidence): correct InstitutionalResetRegistry status to pending
 
 ## 🎯 Recent Activity
 
+- `959884bb4` fix(evidence): correct InstitutionalResetRegistry status to pending
 - `2bbea392c` chore(evidence): InstitutionalResetRegistry deployed to Sepolia
 - `c3391cd6b` docs(research): Singapore policy source references
 - `7ef034f0a` docs(research): academic literature search — success trap
@@ -111,7 +112,6 @@
 - `21b57ebd5` feat(ai-governance): project continuity framework — 3 contracts
 - `1c016d583` docs(history): coding evolution + system overview
 - `4292980f1` docs(signals): CuUnjieng economic analysis
-- `4da243b1c` chore(infra): multi-chain RPC endpoints + env backup ignore
 
 ## 🔑 Reminders for Future Conversations
 
