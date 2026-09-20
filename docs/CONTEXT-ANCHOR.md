@@ -90,15 +90,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17657
+- Total commits: 17658
 - Total contracts (src/): 166
 - Total test files: 79
-- Total tags: 384
+- Total tags: 385
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 6ea008b00 — chore(evidence): GovernedActionGate live on Polygon Amoy (fix broken Sepolia JSON)
+- Last commit: 19b65ef76 — feat(treasury): GovernedActionGate - N-of-M approval for AI actions
 
 ## 🎯 Recent Activity
 
+- `19b65ef76` feat(treasury): GovernedActionGate - N-of-M approval for AI actions
 - `6ea008b00` chore(evidence): GovernedActionGate live on Polygon Amoy (fix broken Sepolia JSON)
 - `5d6fcaec4` feat(treasury): GovernedActionGate - N-of-M council approval for AI actions
 - `4f122610c` docs: mark Polygon Amoy as active chain
@@ -113,7 +114,6 @@
 - `c3391cd6b` docs(research): Singapore policy source references
 - `7ef034f0a` docs(research): academic literature search — success trap
 - `e6bd0d296` docs: success trap signal + framework
-- `0b081bc48` feat(ai-governance): InstitutionalResetRegistry — success trap tracking
 
 ## 🔑 Reminders for Future Conversations
 
