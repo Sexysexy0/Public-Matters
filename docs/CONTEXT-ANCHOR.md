@@ -88,15 +88,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17642
+- Total commits: 17643
 - Total contracts (src/): 165
 - Total test files: 78
 - Total tags: 382
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 7bec4ddcb — docs(research): add archive index (file list only)
+- Last commit: 0b081bc48 — feat(ai-governance): InstitutionalResetRegistry — success trap tracking
 
 ## 🎯 Recent Activity
 
+- `0b081bc48` feat(ai-governance): InstitutionalResetRegistry — success trap tracking
 - `7bec4ddcb` docs(research): add archive index (file list only)
 - `6e5a74f9b` docs(research): archive pattern analysis + entity setup roadmap
 - `c48f54cc5` docs(signals): Metro Manila housing crisis
@@ -111,7 +112,6 @@
 - `b7c27d847` chore(evidence): Wave 6 remaining deployed to Sepolia
 - `b7b6bf970` fix(ai-governance): V2 escalation on repeated lockouts
 - `9424bd0ab` feat(ai-governance): Wave 6 remaining — 3 contracts
-- `ac734907a` feat(ai-governance): AIAgentCredentialGuardV2 with multisig escalation
 
 ## 🔑 Reminders for Future Conversations
 
