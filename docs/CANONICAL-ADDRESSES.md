@@ -120,3 +120,19 @@
 
 *Generated from on-chain verification sweep 2026-09-20.*
 *50 live contracts. 4 deprecated. 1 dead.*
+
+---
+
+## 🧪 LOCAL (Anvil, chain 31337) — DEVELOPMENT ONLY
+
+| Contract | Address | Notes |
+|----------|---------|-------|
+| **InstitutionalResetRegistry** | `0x5039f21a1D0F6465f33002F40F420A863d24Ad7c` | Local dev — on-chain redeploy pending faucet |
+
+**Testnet deploy pending:**
+- Sepolia: short 0.0026 ETH
+- Amoy: short 0.125 POL
+
+Faucets:
+- https://faucet.polygon.technology/
+- https://sepoliafaucet.com/
