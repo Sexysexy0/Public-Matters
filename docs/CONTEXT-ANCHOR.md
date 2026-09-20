@@ -75,6 +75,7 @@
 
 ## 🏗️ Live Contracts (Sepolia)
 
+- **polygon amoy v1.9.0 institutional reset**: `0xE8E0e4F795A1A285395F6F8d5EA80adEf8c076F1 0x0abf56c1af9500cf9691627571985c403e1aff78 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98 `
 - **agent 01 lifecycle**: `0xfb302dD14e235266A6EdedfdD2CDF709c55D7aF5 0x25E737b7eAD518a84383A24b8653A946C6eA0097 0xd3e29e01e785b48efcd38ec09541a7c3661b1368 `
 - **agent 02 registered**: `0xfb302dD14e235266A6EdedfdD2CDF709c55D7aF5 0x434039ea22a933cf61137a157ca36925384354a4 0x6bDf6D887038AB97957c2f57d05eDd0eb338589A `
 - **decision audit demo**: `0x9E93a6A3421AD0F8F029406aC3Ce3E21e8544074 0x434039ea22a933cf61137a157ca36925384354a4 0xb4b88d50917075542ab1d6fff8eb10f067bb0563 `
@@ -88,15 +89,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17652
+- Total commits: 17653
 - Total contracts (src/): 165
 - Total test files: 78
 - Total tags: 383
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 896c3e01f — fix(evidence): InstitutionalResetRegistry pending — 4 deployment attempts failed
+- Last commit: 61a748432 — docs: update MULTI-CHAIN + README with current state
 
 ## 🎯 Recent Activity
 
+- `61a748432` docs: update MULTI-CHAIN + README with current state
 - `896c3e01f` fix(evidence): InstitutionalResetRegistry pending — 4 deployment attempts failed
 - `bd8443b68` fix(evidence): correct Polygon Amoy deployment status — FAILED
 - `c6c5aa325` chore(evidence): InstitutionalResetRegistry deployed to Polygon Amoy
@@ -111,7 +113,6 @@
 - `6e5a74f9b` docs(research): archive pattern analysis + entity setup roadmap
 - `c48f54cc5` docs(signals): Metro Manila housing crisis
 - `332fb13d4` chore(evidence): ProjectContinuity framework deployed to Sepolia
-- `df53aba41` feat(deploy): ProjectContinuity deployment script
 
 ## 🔑 Reminders for Future Conversations
 

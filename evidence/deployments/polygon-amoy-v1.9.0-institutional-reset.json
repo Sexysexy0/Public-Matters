@@ -1,0 +1,19 @@
+{
+  "version": "v1.9.0-institutional-reset",
+  "network": "polygon-amoy",
+  "chainId": 80002,
+  "InstitutionalResetRegistry": "0xE8E0e4F795A1A285395F6F8d5EA80adEf8c076F1",
+  "transactionHash": "0x0abf56c1af9500cf9691627571985c403e1aff78a4bca084c6b1133578249217",
+  "blockNumber": 48052918,
+  "privileges": "0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98",
+  "deployer": "0x6bDf6D887038AB97957c2f57d05eDd0eb338589A",
+  "purpose": "Success trap tracking — Singapore 2026 reset pattern (CASE-014)",
+  "testSuite": "354/354 passing",
+  "verified": true,
+  "verificationMethod": "cast code + cast call",
+  "liveReadChecks": {
+    "privileges()": "0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98",
+    "totalResets()": "0",
+    "APPROVAL_THRESHOLD()": "2"
+  }
+}
