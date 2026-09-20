@@ -136,3 +136,50 @@
 Faucets:
 - https://faucet.polygon.technology/
 - https://sepoliafaucet.com/
+
+---
+
+## EIP-7702 DELEGATION LAYER
+
+**Wallet:** `0x6bDf6D887038AB97957c2f57d05eDd0eb338589A`
+**Delegator:** `0x63c0c19a282a1B52b07dD5a65b58948A07DAE32B`
+**Name:** EIP7702StatelessDeleGator
+**Version:** 1.3.0
+**Standard:** EIP-7702 (EOA-to-smart-account)
+**Framework:** MetaMask Delegation Framework
+
+### Network Components
+| Component | Address | Standard |
+|-----------|---------|----------|
+| EntryPoint | `0x0000000071727De22E5E9d8BAf0edAc6f37da032` | ERC-4337 v0.7 |
+| DelegationManager | `0xdb9B1e94B5b69Df7e401DDbedE43491141047dB3` | MetaMask Delegation Framework |
+
+### Capabilities
+- `enableDelegation` - authorize delegates with caveats
+- `disableDelegation` - revoke authorization
+- `redeemDelegations` - execute batched calls under constraints
+- `isDelegationDisabled` - check status
+
+### Caveat Enforcers (policy primitives)
+- Time bounds (onlyActiveUntil)
+- Function allowlists (allowedMethods)
+- Value caps (valueLte)
+- Balance requirements (erc20BalanceGte)
+- Multi-sig thresholds
+
+### Governance Stack (top to bottom)
+
+```
+[0] Wallet          0x6bDf6D887038AB97957c2f57d05eDd0eb338589A
+[1] Delegator       0x63c0c19a282a1B52b07dD5a65b58948A07DAE32B
+[2] OperatorPriv    0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+[3] Multisig        0xe696bad9ee41affe5865344b1197c5a18dd7c7f6
+[4] AI Stack        50 contracts (see sections above)
+[5] Legal           research/entity-setup-roadmap.md
+```
+
+### Security Properties
+- Single-key compromise cannot bypass caveats + multisig
+- Every delegation revocable, inspectable, immutable on-chain
+- Batched execution possible via EntryPoint
+- ERC-4337 compatible with paymasters for gas abstraction

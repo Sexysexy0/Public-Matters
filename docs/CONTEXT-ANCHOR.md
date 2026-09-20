@@ -90,15 +90,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17660
+- Total commits: 17661
 - Total contracts (src/): 166
 - Total test files: 79
 - Total tags: 386
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 815c94b70 — docs: canonical address registry (50 live, 4 deprecated, 1 dead)
+- Last commit: abeb44f70 — chore: deploy InstitutionalResetRegistry on Anvil (local dev)
 
 ## 🎯 Recent Activity
 
+- `abeb44f70` chore: deploy InstitutionalResetRegistry on Anvil (local dev)
 - `815c94b70` docs: canonical address registry (50 live, 4 deprecated, 1 dead)
 - `740fc05d2` chore(research): add contract audit + wallet history (2026-09-20)
 - `19b65ef76` feat(treasury): GovernedActionGate - N-of-M approval for AI actions
@@ -113,7 +114,6 @@
 - `4bcb83cf2` feat(scripts): add monitoring + verification toolkit
 - `959884bb4` fix(evidence): correct InstitutionalResetRegistry status to pending
 - `2bbea392c` chore(evidence): InstitutionalResetRegistry deployed to Sepolia
-- `c3391cd6b` docs(research): Singapore policy source references
 
 ## 🔑 Reminders for Future Conversations
 
