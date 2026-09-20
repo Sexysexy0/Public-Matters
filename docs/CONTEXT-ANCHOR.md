@@ -88,15 +88,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17650
+- Total commits: 17651
 - Total contracts (src/): 165
 - Total test files: 78
 - Total tags: 383
 - Last test count: (run 'forge test' to refresh)
-- Last commit: c6c5aa325 — chore(evidence): InstitutionalResetRegistry deployed to Polygon Amoy
+- Last commit: bd8443b68 — fix(evidence): correct Polygon Amoy deployment status — FAILED
 
 ## 🎯 Recent Activity
 
+- `bd8443b68` fix(evidence): correct Polygon Amoy deployment status — FAILED
 - `c6c5aa325` chore(evidence): InstitutionalResetRegistry deployed to Polygon Amoy
 - `4bcb83cf2` feat(scripts): add monitoring + verification toolkit
 - `959884bb4` fix(evidence): correct InstitutionalResetRegistry status to pending
@@ -111,7 +112,6 @@
 - `332fb13d4` chore(evidence): ProjectContinuity framework deployed to Sepolia
 - `df53aba41` feat(deploy): ProjectContinuity deployment script
 - `438591cfa` docs: case study + implementation guide
-- `21b57ebd5` feat(ai-governance): project continuity framework — 3 contracts
 
 ## 🔑 Reminders for Future Conversations
 
