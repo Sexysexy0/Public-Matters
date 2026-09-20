@@ -81,6 +81,7 @@
 - **decision audit demo**: `0x9E93a6A3421AD0F8F029406aC3Ce3E21e8544074 0x434039ea22a933cf61137a157ca36925384354a4 0xb4b88d50917075542ab1d6fff8eb10f067bb0563 `
 - **v1.2.0 agents kill switch**: `0x6bDf6D887038AB97957c2f57d05eDd0eb338589A 0x25E737b7eAD518a84383A24b8653A946C6eA0097 0x6338ba0f67903a9509068d88443ac6b7d6c70afd `
 - **v1.2.0 decision audit**: `0x6bDf6D887038AB97957c2f57d05eDd0eb338589A 0x9E93a6A3421AD0F8F029406aC3Ce3E21e8544074 0xdbaa287409d08e1131381332e10ebdec2e350a08 `
+- **v1.2.0 governed action gate**: `0x6bDf6D887038AB97957c2f57d05eDd0eb338589A 0x25E737b7eAD518a84383A24b8653A946C6eA0097 0xfb302dD14e235266A6EdedfdD2CDF709c55D7aF5 `
 - **v1.3.0 ai governance full**: `0x6bDf6D887038AB97957c2f57d05eDd0eb338589A 0x9b9C35BDFcc69478669B640c9E7D106dCF612dCE 0xaf2979dEBA5b1aa43134762A4923b54D536DD56a `
 - **v1.4.0 single source of truth**: `0x6bDf6D887038AB97957c2f57d05eDd0eb338589A 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98 0xB4f4D1828b60B94BF5AE6D3e1f492B79b5CC9aD9 `
 - **v1.5.0 credential guard**: `0x7F817129531D298158f3C155Ee2CB0f0566Bd9E7 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98 `
@@ -89,15 +90,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17654
-- Total contracts (src/): 165
-- Total test files: 78
-- Total tags: 383
+- Total commits: 17655
+- Total contracts (src/): 166
+- Total test files: 79
+- Total tags: 384
 - Last test count: (run 'forge test' to refresh)
-- Last commit: bce90e811 — chore(evidence): InstitutionalResetRegistry VERIFIED on Polygon Amoy
+- Last commit: 4f122610c — docs: mark Polygon Amoy as active chain
 
 ## 🎯 Recent Activity
 
+- `4f122610c` docs: mark Polygon Amoy as active chain
 - `bce90e811` chore(evidence): InstitutionalResetRegistry VERIFIED on Polygon Amoy
 - `61a748432` docs: update MULTI-CHAIN + README with current state
 - `896c3e01f` fix(evidence): InstitutionalResetRegistry pending — 4 deployment attempts failed
@@ -112,7 +114,6 @@
 - `0b081bc48` feat(ai-governance): InstitutionalResetRegistry — success trap tracking
 - `7bec4ddcb` docs(research): add archive index (file list only)
 - `6e5a74f9b` docs(research): archive pattern analysis + entity setup roadmap
-- `c48f54cc5` docs(signals): Metro Manila housing crisis
 
 ## 🔑 Reminders for Future Conversations
 
