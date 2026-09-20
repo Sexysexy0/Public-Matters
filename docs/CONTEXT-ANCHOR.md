@@ -85,18 +85,20 @@
 - **v1.5.0 credential guard**: `0x7F817129531D298158f3C155Ee2CB0f0566Bd9E7 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98 `
 - **v1.5.0 wave6 remaining**: `0x779A01Ee2B95810e66E51BdFa2737eFD3C05eA15 0x4D280dFC9aaB2abF0F5E3B467C83296f35aC7B3c 0xD92EEc115DEDbA8CE41028a41E1472113D42958e `
 - **v1.8.0 project continuity**: `0x9b450FFCc0F84EAa901C6Eb7532986BD2563c4E8 0x69C4B7523917B8Fe3c67aabd51dfA5a5DA3a7cA1 0x469Cc1625ccaEA148427d5B85B9FE3DcA7C6CeDc `
+- **v1.9.0 institutional reset**: `0xB41444AD384EBF3fc7612043fA3187E11f9B0C00 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98 `
 
 ## 📊 Repository Stats
 
-- Total commits: 17645
+- Total commits: 17646
 - Total contracts (src/): 165
 - Total test files: 78
 - Total tags: 383
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 7ef034f0a — docs(research): academic literature search — success trap
+- Last commit: c3391cd6b — docs(research): Singapore policy source references
 
 ## 🎯 Recent Activity
 
+- `c3391cd6b` docs(research): Singapore policy source references
 - `7ef034f0a` docs(research): academic literature search — success trap
 - `e6bd0d296` docs: success trap signal + framework
 - `0b081bc48` feat(ai-governance): InstitutionalResetRegistry — success trap tracking
@@ -111,7 +113,6 @@
 - `4292980f1` docs(signals): CuUnjieng economic analysis
 - `4da243b1c` chore(infra): multi-chain RPC endpoints + env backup ignore
 - `50365f31b` docs(context): auto-update after Wave 6 + Phase B signals
-- `b7c27d847` chore(evidence): Wave 6 remaining deployed to Sepolia
 
 ## 🔑 Reminders for Future Conversations
 

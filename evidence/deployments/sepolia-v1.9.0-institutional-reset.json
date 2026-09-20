@@ -1,0 +1,9 @@
+{
+  "version": "v1.9.0-institutional-reset",
+  "network": "sepolia",
+  "chainId": 11155111,
+  "InstitutionalResetRegistry": "0xB41444AD384EBF3fc7612043fA3187E11f9B0C00",
+  "privileges": "0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98",
+  "purpose": "Success trap tracking — Singapore 2026 reset pattern (CASE-014)",
+  "testSuite": "354/354 passing"
+}
