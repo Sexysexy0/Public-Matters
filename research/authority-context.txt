@@ -1,0 +1,314 @@
+════════════════════════════════════════════════════════
+AUTHORITY — CONTEXT ANALYSIS
+════════════════════════════════════════════════════════
+
+═══════════════════════════════════════
+TERM: comptroller
+═══════════════════════════════════════
+
+─── 0efd0bcd-en.txt ───
+responsibility for merit protection lies with other relevant              relevant oversight institutions over public employment laws
+authorities. In Chile, for example, the Comptroller General of the        and policies from a choice of advisory (issuing guidance and
+Republic carries out merit protection functions while in Sweden           advice) investigative/adjudicative (investigating and making
+the National Board of Appeals, a judicial or administrative tribunal,     decisions) and enforcement (issuing and implementing
+
+─── 1976Churchcommittee.txt ───
+108 FBI Domestic Intelligence Operations -- Their Purpose and Scope: Issues That
+Need To Be Resolved," Report by the Comptroller General to the House Judiciary
+Committee, 2/24/76, pp. 138-147. The FBI contends that these statistics may be
+unfair in that they concentrate on investigations of individuals rather than groups.
+
+═══════════════════════════════════════
+TERM: controlling interest
+═══════════════════════════════════════
+
+─── 2022-MDI-Definitive_20IS-1.txt ───
+                                                      8,265,465,073       7,778,678,351      486,786,722       6%
+ Non-controlling interest                                23,526,960          23,819,499        (292,539)     (1%)
+ SHAREHOLDERS' EQUITY                                 8,288,992,033       7,802,497,850      486,494,183      6%
+ TOTAL LIABILITIES AND EQUITY                        11,636,320,691      11,460,089,401      176,231,290      2%
+--
+
+Non-controlling interest refers to the proportionate share of the other owners of Computerized Imaging Institute, Inc.,
+a 60% owned subsidiary of the Parent Company.
+
+
+─── 2019 Definitive Information Statement.txt ───
+Profit or loss and each component of other comprehensive income (OCI) are attributed to the equity
+holders of the parent of the Group and to the non-controlling interests, even if this results in the non-
+controlling interests having a deficit balance. When necessary, adjustments are made to the financial
+statements of subsidiaries to bring their accounting policies in line with the Group’s accounting
+policies. All intra-group assets and liabilities, equity, income, expenses and cash flows relating to
+--
+If the Group loses control over a subsidiary, it derecognizes the related assets (including goodwill),
+liabilities, non-controlling interest and other components of equity while any resulting gain or loss is
+recognized in profit or loss. Any investment retained is recognized at fair value.
+
+
+─── 0c25204828e549dbc66e07f42223fc19-MM1_RC4_PBD_Works.txt ───
+                  its chairperson and president, shall be blacklisted after they have been
+                  determined to hold the same controlling interest in a previously
+                  blacklisted corporation or in two corporations that have been
+                  blacklisted; the corporations of which they are part shall also be
+--
+             recognized by the GPPB; by itself or by reason of its relation,
+             membership, association, affiliation, or controlling interest with another
+             blacklisted person or entity;
+
+--
+        debarred        by the World Bank; by itself or by relation, membership, association,
+        affiliation, or controlling interest with another blacklisted person or entity;
+
+─── 0723dfa7-be5f-4227-9da6-eff3cce376a8.txt ───
+Foreign currency losses, net                                                                      (131)               -11%                    -17%                 (147)
+Noncontrolling interests in income                                                                (222)                21%                     21%                 (184)
+Gains (losses) from marketable and non-marketable investments, net                               2,811                   *                       *                 (278)
+Other income, net                                                                                  309                241%                    242%                   91
+--
+     Total Oracle Corporation stockholders’ equity                                                                                      42,508                20,451
+Noncontrolling interests                                                                                                                   548                   518
+     Total stockholders’ equity                                                                                                         43,056                20,969
+        Total liabilities and stockholders’ equity                                                                              $      261,759       $       168,361
+--
+Basis of Financial Statements
+The consolidated financial statements include our accounts and the accounts of our wholly- and majority-owned subsidiaries. Noncontrolling interest
+
+─── 2017-001-auditors-report-final-rule.txt ───
+issuers. Rather, brokers and dealers are often owned by a holding company, an
+individual, or a group of individuals that holds a controlling interest. The owners of
+brokers and dealers are generally part of the management of the entity and therefore
+would have direct access to the auditor. Given that, in many cases, there is much less
+
+═══════════════════════════════════════
+TERM: controlling shareholder
+═══════════════════════════════════════
+
+─── 0001193125-23-275285.txt ───
+
+ (1)   Lucazoom S.a.r.l. (“LZoom”) is the sole member of LucasZoom, LLC. Permira V L.P.2 is the controlling shareholder of LZoom. Permira V L.P.2
+       acts through its general partner, Permira V GP L.P., which acts through its general partner, Permira V GP Limited. Permira V GP Limited
+       therefore has indirect voting and investment power over the shares held by LucasZoom, LLC. Each of Alistair Boyle, Nigel Carey, Danielle
+--
+
+ (2)   Lucazoom S.a.r.l. (“LZoom”) is the sole member of LucasZoom, LLC. Permira V L.P.2 is the controlling shareholder of LZoom. Permira V L.P.2 acts through its general partner,
+       Permira V GP L.P., which acts through its general partner, Permira V GP Limited. Permira V GP Limited therefore has indirect voting and investment power over the shares held by
+       LucasZoom, LLC. Each of Alistair Boyle, Nigel Carey, Danielle McIver and Simon Holden are directors of Permira V GP Limited, and as such, may participate in decisions regarding
+
+─── 0c25204828e549dbc66e07f42223fc19-MM1_RC4_PBD_Works.txt ───
+
+            a)     A Bidder has controlling shareholders or beneficial owners in common
+                   with another Bidder;
+
+
+═══════════════════════════════════════
+TERM: authorized representative
+═══════════════════════════════════════
+
+─── 2022-MDI-Definitive_20IS-1.txt ───
+
+Duly authorized representatives of Isla Lipana will be present at the ASM to respond to appropriate questions concerning
+the 2021 audited financial statements. Isla Lipana auditors will also be given the opportunity to make a representation
+or statement in case they decide to do so.
+--
+                   participate by remote communication for, and on behalf of the Corporation/Partnership.
+               (b) Copy of the authorized representative’s valid government issued ID (such as passport, driver’s
+                   license, or unified multipurpose ID)
+               (c) Authorized representative’s valid and active e-mail address and contact number
+
+
+
+─── 2019 Definitive Information Statement.txt ───
+                                    designates RDT Jr Associates, Inc. and any of its officers, employees or
+                                    agents, to act as the Corporation’s duly authorized representative to process
+                                    and file the necessary application/s for the building permit and all other
+                                    permits required for the renovation of the Office Space;
+--
+                                    designates RDT JR ASSOCIATES, INC. and any of its officers, employees
+                                    or agents, to act as the Corporation’s duly authorized representative to
+                                    process and file the necessary application/s for the building permit and all
+                                    other permits required for the renovation of the Office Space;
+--
+                                    RESOLVED, FURTHERMORE, that METROBANK, its directors,
+                                    officers, employees, agents or authorized representatives (“Metrobank
+
+─── 09751363-823e-4d5a-8715-5c8ea944873c.txt ───
+
+     [Insert, if applicable — UNLESS THIS NOTE IS PRESENTED BY AN AUTHORIZED REPRESENTATIVE OF THE DEPOSITORY TRUST
+COMPANY, A NEW YORK CORPORATION (“DTC”), TO THE ISSUER OR ITS AGENT FOR REGISTRATION OF TRANSFER, EXCHANGE
+OR PAYMENT, AND ANY CERTIFICATE ISSUED IS REGISTERED IN THE NAME OF CEDE & CO. OR IN SUCH OTHER NAME AS IS
+REQUESTED BY AN AUTHORIZED REPRESENTATIVE OF DTC (AND ANY PAYMENT IS MADE TO CEDE & CO. OR TO SUCH OTHER
+ENTITY AS IS REQUESTED BY AN AUTHORIZED REPRESENTATIVE OF DTC), ANY TRANSFER, PLEDGE OR OTHER USE HEREOF FOR
+VALUE OR OTHERWISE BY OR TO ANY PERSON IS WRONGFUL INASMUCH AS THE REGISTERED OWNER HEREOF, CEDE & CO., HAS
+AN INTEREST HEREIN.
+--
+              DEPOSITARY OR ANY SUCH NOMINEE TO A SUCCESSOR DEPOSITARY OR A NOMINEE OF SUCH SUCCESSOR
+              DEPOSITARY. UNLESS THIS GLOBAL NOTE IS PRESENTED BY AN AUTHORIZED REPRESENTATIVE OF THE DEPOSITORY
+              TRUST COMPANY, A NEW YORK CORPORATION (“DTC”), TO THE COMPANY OR ITS AGENT FOR REGISTRATION OF
+
+─── 1005016.txt ───
+         In accordance with the power of attorney on file with this office, a copy of this
+letter is being sent to X’s authorized representative.
+
+
+
+─── 0c25204828e549dbc66e07f42223fc19-MM1_RC4_PBD_Works.txt ───
+
+     Bid proposals may be submitted by authorized representatives of the bidder or
+     through courier. Interested bidders that submit bids through courier must make
+     sure that the bid document fee is paid and the copy of the official receipt be
+--
+     Presence in the DICT premises and/or leaving a bid proposal/submission with
+     the lobby guards by the bidder, bidder’s authorized representative or courier
+     service personnel do not constitute “submission on time” which shall refer to
+     the actual hand-over of the bid proposal to the authorized personnel of the BAC
+--
+                                             17
+                      c)       A bidder has the same legally authorized representative as that of
+
+─── 02-08-13-SC-1.txt ───
+               acts. lr.1 the event of his incapacity to personally appear, the, submission of the
+               notice may be performed by his duly authorized representative ..
+
+                      SEC. 3.    Publication of Resignation. - The Executive Judge shall
+
+─── 0901-BO October 2024 Final.txt ───
+     Finally, I/we give my/our consent to the processing of my /our information as contemplated under the Data Privacy Act of 2012 (R.A. No.
+ 10173) for legitimate and lawful purposes. (If signatory is an authorized representative, attach authorization letter).
+
+                                                                                                      Received by:
+--
+
+    Signature over Printed Name of Beneficial Owner/Authorized Representative/                                  Signature over Printed Name of Income
+                                     Tax Agent                                                                     Payor/Authorized Representative
+   Tax Agent Accreditation No./ Attorney’s
+            Roll No. (if applicable)
+
+═══════════════════════════════════════
+TERM: authorized signatory
+═══════════════════════════════════════
+
+─── 09751363-823e-4d5a-8715-5c8ea944873c.txt ───
+                                                                                              By:
+                                                                                              Authorized Signatory
+
+                                                                             11
+--
+                                                                                     By:
+                                                                                           Authorized Signatory
+
+                                                                 Exhibit A-3
+--
+                                                                                     By:
+                                                                                           Authorized Signatory
+
+═══════════════════════════════════════
+TERM: managing director
+═══════════════════════════════════════
+
+─── 2022-MDI-Definitive_20IS-1.txt ───
+Corporation in the Philippines from 1997 to 1998. He has held various positions within First Pacific as Group Vice
+President for Corporate Development of First Pacific in Hong Kong, and Group Managing Director of FP Marketing
+(Malaysia) Sdn. Bhd. in Malaysia. Before he joined First Pacific in 1983, he was Vice President of Monte Real
+Investors, Inc. in the Philippines. Mr. Palisoc earned his Bachelor of Arts Degree, Major in Economics (with Honors)
+--
+Corporate Governance & Compliance Committee of the MDI Board. Mr. Pangilinan founded First Pacific Company
+Limited in 1981 and serves as its Managing Director and Chief Executive Officer. He was appointed Executive
+Chairman until June 2003, when he was named as CEO and Managing Director. Within the First Pacific Group, he
+holds the positions of President Commissioner of P.T. Indofood SuksesMakmurTbk, the largest food company in
+Indonesia. In the Philippines, he is the Chairman of the Board of Philippine Long Distance Telephone Company (PLDT),
+
+─── 0001193125-26-170325.txt ───
+                                       rejoined in March 2020. Prior to rejoining TCV, Mr. Tolaney was a Deal Partner at Francisco Partners from 2016 to
+                                       2020 and Managing Director at PersonalizationMall.com from 2013 to 2016. Mr. Tolaney serves on the board of
+                                       directors of Strava, Inc., a private company.
+
+
+═══════════════════════════════════════
+TERM: general partner
+═══════════════════════════════════════
+
+─── 2019 Definitive Information Statement.txt ───
+       (1) Any bankruptcy petition filed by or against any business of which any of the
+           above persons was a general partner or executive officer either at the time of
+           bankruptcy or within two (2) years prior to that time;
+
+
+─── 1786574719062.txt ───
+
+General Partner
+A general partner is someone who jointly owns a business and has
+unlimited liability. They have the power to make business decisions without
+the prior approval of other partners.
+--
+A limited partner owns a stake in a business partnership with limited
+liability. They work with at least one general partner who manages the
+day-to-day operations of the business.
+
+
+─── 0001193125-23-275285.txt ───
+ (1)   Lucazoom S.a.r.l. (“LZoom”) is the sole member of LucasZoom, LLC. Permira V L.P.2 is the controlling shareholder of LZoom. Permira V L.P.2
+       acts through its general partner, Permira V GP L.P., which acts through its general partner, Permira V GP Limited. Permira V GP Limited
+       therefore has indirect voting and investment power over the shares held by LucasZoom, LLC. Each of Alistair Boyle, Nigel Carey, Danielle
+       McIver and Simon Holden are directors of Permira V GP Limited, and as such, may participate in decisions regarding Permira V GP Limited’s
+--
+       common control with the lock-up party or affiliates of the lock-up party (including, for the avoidance of doubt, where the lock-up party is a
+       partnership, to its general partner or a successor partnership or fund, or any other funds managed by such partnership), or (B) as part of a
+       distribution, transfer or disposition without consideration by the lock-up party to its stockholders, partners, members, managers, limited partners,
+       subsidiaries, affiliates or other equity holders (or, in each case, the lock-up party’s nominee or custodian);
+--
+
+ (2)   Lucazoom S.a.r.l. (“LZoom”) is the sole member of LucasZoom, LLC. Permira V L.P.2 is the controlling shareholder of LZoom. Permira V L.P.2 acts through its general partner,
+
+─── 2017-001-auditors-report-final-rule.txt ───
+of an unincorporated entity should be addressed as circumstances dictate, for example,
+to the partners, to the general partner, or to the proprietor. Occasionally, an auditor is
+retained to audit the financial statements of a company that is not a client; in such a
+case, the report is customarily addressed to the client and not to the directors or
+
+─── 0001193125-26-170325.txt ───
+ Neil Tolaney †                                                              43        2022            ✓                  -           Audit
+      General Partner, TCV                                                                                                            M&A (Chair)
+ Sivan Whiteley                                                              49        2022            ✓                  -           Compensation (Chair)
+     Former Chief Legal Officer and Corporate Secretary,                                                                              M&A
+--
+
+                                       Neil Tolaney is a General Partner at TCV, a growth equity firm focused on investments in public and private
+                                       technology companies. Mr. Tolaney first joined TCV as Vice President, Growth Equity from 2011 to 2013 and
+                                       rejoined in March 2020. Prior to rejoining TCV, Mr. Tolaney was a Deal Partner at Francisco Partners from 2016 to
+--
+ The Eligible Directors eligible to participate in the Policy are Elizabeth Hamren, Nathan Gooden, John Murphy and Sivan Whiteley. Neil Tolaney is not
+ eligible to participate in the Policy due to being a general partner at TCV. Certain principal features of the compensation provided under the Policy are
+
+═══════════════════════════════════════
+TERM: sole proprietor
+═══════════════════════════════════════
+
+─── 06262014_staff_guidance.txt ───
+                    investment company; except that a broker or dealer
+                    transacting business as a sole proprietor may also effect
+                    occasional transactions in other securities for its own account
+                    with or through another registered broker or dealer;
+
+─── 0c25204828e549dbc66e07f42223fc19-MM1_RC4_PBD_Works.txt ───
+
+                      a)       In the case of individuals or sole proprietorships, to the Bidders and
+                               their spouses;
+
+--
+
+           a)     Duly licensed Filipino citizens or sole proprietorships;
+
+           b)     Partnerships duly organized under the laws of the Philippines and of
+--
+  1) Select one, delete the others:
+      a. If sole proprietorship: I am the sole proprietor or authorized representative of
+
+═══════════════════════════════════════
+TERM: ultimate beneficial owner
+═══════════════════════════════════════
+
+─── 0c25204828e549dbc66e07f42223fc19-MM1_RC4_PBD_Works.txt ───
+
+            4.3       The Bidder shall also disclose the ultimate beneficial ownership of the entity it
+                      represents. Failure to comply shall be a ground for the automatic
+                      disqualification of the bid in consonance with Section 59 of the IRR. For this

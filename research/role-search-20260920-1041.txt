@@ -1,0 +1,66 @@
+════════════════════════════════════════════════════════
+ARCHIVE ROLE SEARCH
+Generated: Sun Sep 20 02:41:51 UTC 2026
+════════════════════════════════════════════════════════
+
+▶ Total text files: 106
+
+════════════════════════════════════════════════════════
+SECTION 1: ROLE / AUTHORITY / CONTROL TERMS
+════════════════════════════════════════════════════════
+
+  comptroller:                        2 files
+  controlling entity:                 1 files
+  controlling interest:               5 files
+  beneficial owner:                   14 files
+  sole proprietor:                    2 files
+  majority shareholder:               2 files
+  authorized representative:          7 files
+  authorized signatory:               1 files
+  managing director:                  2 files
+  general partner:                    5 files
+  trustee:                            19 files
+  family office:                      1 files
+  controlling person:                 1 files
+  ultimate beneficial owner:          1 files
+  controlling shareholder:            2 files
+
+════════════════════════════════════════════════════════
+SECTION 2: FRAMEWORK / STRUCTURE TERMS
+════════════════════════════════════════════════════════
+
+  deed of trust:                      3 files
+  articles of incorporation:          4 files
+  by laws:                            3 files
+  stockholders:                       13 files
+  shareholders:                       17 files
+  capital stock:                      9 files
+  beneficial ownership:               10 files
+
+════════════════════════════════════════════════════════
+SECTION 3: PLACEHOLDER / PENDING PATTERNS
+════════════════════════════════════════════════════════
+
+  to be determined:                   6 files
+  to be updated:                      5 files
+  pending:                            38 files
+  for completion:                     2 files
+  will be provided:                   4 files
+
+════════════════════════════════════════════════════════
+SECTION 4: FAMILY OFFICE FILES (direct)
+════════════════════════════════════════════════════════
+
+
+════════════════════════════════════════════════════════
+SECTION 5: COMPLIANCE FILES (direct)
+════════════════════════════════════════════════════════
+
+  00b_background_client-advisor_relationship.txt
+  082726_DDF-Complaint-Stars-and-Stripes-Journalists.txt
+  15IJELS-103202411-TheSocial.txt
+
+════════════════════════════════════════════════════════
+✅ Search complete
+Saved: /data/data/com.termux/files/home/Public-Matters/research/role-search-20260920-1041.txt
+════════════════════════════════════════════════════════
