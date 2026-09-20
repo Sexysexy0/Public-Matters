@@ -89,15 +89,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17653
+- Total commits: 17654
 - Total contracts (src/): 165
 - Total test files: 78
 - Total tags: 383
 - Last test count: (run 'forge test' to refresh)
-- Last commit: 61a748432 — docs: update MULTI-CHAIN + README with current state
+- Last commit: bce90e811 — chore(evidence): InstitutionalResetRegistry VERIFIED on Polygon Amoy
 
 ## 🎯 Recent Activity
 
+- `bce90e811` chore(evidence): InstitutionalResetRegistry VERIFIED on Polygon Amoy
 - `61a748432` docs: update MULTI-CHAIN + README with current state
 - `896c3e01f` fix(evidence): InstitutionalResetRegistry pending — 4 deployment attempts failed
 - `bd8443b68` fix(evidence): correct Polygon Amoy deployment status — FAILED
@@ -112,7 +113,6 @@
 - `7bec4ddcb` docs(research): add archive index (file list only)
 - `6e5a74f9b` docs(research): archive pattern analysis + entity setup roadmap
 - `c48f54cc5` docs(signals): Metro Manila housing crisis
-- `332fb13d4` chore(evidence): ProjectContinuity framework deployed to Sepolia
 
 ## 🔑 Reminders for Future Conversations
 

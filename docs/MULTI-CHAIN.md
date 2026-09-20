@@ -7,7 +7,7 @@
 | Chain | Chain ID | Contracts | Status |
 |---|---|---|---|
 | **Ethereum Sepolia** | 11155111 | 50+ | ✅ Active |
-| Polygon Amoy | 80002 | 0 | ⏳ Pending |
+| Polygon Amoy | 80002 | 1 | ✅ Active |
 | Base Sepolia | 84532 | 0 | ⏳ Pending |
 | OP Sepolia | 11155420 | 0 | ⏳ Pending |
 | Arbitrum Sepolia | 421614 | 0 | ⏳ Pending |
