@@ -88,15 +88,16 @@
 
 ## 📊 Repository Stats
 
-- Total commits: 17644
+- Total commits: 17645
 - Total contracts (src/): 165
 - Total test files: 78
 - Total tags: 383
 - Last test count: (run 'forge test' to refresh)
-- Last commit: e6bd0d296 — docs: success trap signal + framework
+- Last commit: 7ef034f0a — docs(research): academic literature search — success trap
 
 ## 🎯 Recent Activity
 
+- `7ef034f0a` docs(research): academic literature search — success trap
 - `e6bd0d296` docs: success trap signal + framework
 - `0b081bc48` feat(ai-governance): InstitutionalResetRegistry — success trap tracking
 - `7bec4ddcb` docs(research): add archive index (file list only)
@@ -111,7 +112,6 @@
 - `4da243b1c` chore(infra): multi-chain RPC endpoints + env backup ignore
 - `50365f31b` docs(context): auto-update after Wave 6 + Phase B signals
 - `b7c27d847` chore(evidence): Wave 6 remaining deployed to Sepolia
-- `b7b6bf970` fix(ai-governance): V2 escalation on repeated lockouts
 
 ## 🔑 Reminders for Future Conversations
 
