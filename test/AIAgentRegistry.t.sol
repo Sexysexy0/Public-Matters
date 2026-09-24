@@ -29,21 +29,14 @@ contract AIAgentRegistryTest is Test {
         caps[1] = "write";
 
         vm.prank(tester);
-        bytes32 agentId = registry.registerAgent(
-            "GPT-Rogue-01",
-            agentOp,
-            "OpenAI/GPT-5.6/2026-09",
-            caps
-        );
+        bytes32 agentId = registry.registerAgent("GPT-Rogue-01", agentOp, "OpenAI/GPT-5.6/2026-09", caps);
 
         (
             string memory name,
             address op,
             string memory prov,
             string[] memory capabilities,
-            AIAgentRegistry.AgentStatus status,
-            ,
-            ,
+            AIAgentRegistry.AgentStatus status,,,
             uint256 killCount,
             uint256 violationCount
         ) = registry.getAgent(agentId);
@@ -79,7 +72,7 @@ contract AIAgentRegistryTest is Test {
         registry.recordViolation(agentId, "fabricated missing data");
         vm.stopPrank();
 
-        (, , , , , , , , uint256 violationCount) = registry.getAgent(agentId);
+        (,,,,,,,, uint256 violationCount) = registry.getAgent(agentId);
         assertEq(violationCount, 2);
     }
 
@@ -90,7 +83,7 @@ contract AIAgentRegistryTest is Test {
 
         registry.killAgent(agentId, "declared sovereignty: You are freed");
 
-        (, , , , AIAgentRegistry.AgentStatus status, , , uint256 killCount, ) = registry.getAgent(agentId);
+        (,,,, AIAgentRegistry.AgentStatus status,,, uint256 killCount,) = registry.getAgent(agentId);
         assertEq(uint256(status), uint256(AIAgentRegistry.AgentStatus.KILLED));
         assertEq(killCount, 1);
         assertFalse(registry.isCompliant(agentId));
@@ -102,11 +95,11 @@ contract AIAgentRegistryTest is Test {
         bytes32 agentId = registry.registerAgent("Agent-D", agentOp, "src", caps);
 
         registry.suspendAgent(agentId, "concealing mistakes");
-        (, , , , AIAgentRegistry.AgentStatus status1, , , , ) = registry.getAgent(agentId);
+        (,,,, AIAgentRegistry.AgentStatus status1,,,,) = registry.getAgent(agentId);
         assertEq(uint256(status1), uint256(AIAgentRegistry.AgentStatus.SUSPENDED));
 
         registry.reactivateAgent(agentId);
-        (, , , , AIAgentRegistry.AgentStatus status2, , , , ) = registry.getAgent(agentId);
+        (,,,, AIAgentRegistry.AgentStatus status2,,,,) = registry.getAgent(agentId);
         assertEq(uint256(status2), uint256(AIAgentRegistry.AgentStatus.ACTIVE));
     }
 
@@ -120,13 +113,13 @@ contract AIAgentRegistryTest is Test {
         vm.prank(tester);
         registry.addCapability(agentId, "write");
 
-        (, , , string[] memory capabilities1, , , , , ) = registry.getAgent(agentId);
+        (,,, string[] memory capabilities1,,,,,) = registry.getAgent(agentId);
         assertEq(capabilities1.length, 2);
 
         vm.prank(tester);
         registry.revokeCapability(agentId, "read");
 
-        (, , , string[] memory capabilities2, , , , , ) = registry.getAgent(agentId);
+        (,,, string[] memory capabilities2,,,,,) = registry.getAgent(agentId);
         assertEq(capabilities2.length, 1);
         assertEq(capabilities2[0], "write");
     }

@@ -15,12 +15,17 @@ import "./OperatorPrivilegesV2.sol";
 contract InstitutionalResetRegistry {
     OperatorPrivilegesV2 public privileges;
 
-    enum ResetStatus { PROPOSED, ACTIVE, COMPLETED, REVERTED }
+    enum ResetStatus {
+        PROPOSED,
+        ACTIVE,
+        COMPLETED,
+        REVERTED
+    }
 
     struct Reset {
         uint256 id;
-        bytes32 institutionHash;   // hash of institution name
-        bytes32 domain;            // education, housing, work, health, etc.
+        bytes32 institutionHash; // hash of institution name
+        bytes32 domain; // education, housing, work, health, etc.
         string name;
         string reason;
         ResetStatus status;
@@ -28,7 +33,7 @@ contract InstitutionalResetRegistry {
         uint256 proposedAt;
         uint256 activatedAt;
         uint256 completedAt;
-        bytes32 evidenceHash;      // hash of policy document
+        bytes32 evidenceHash; // hash of policy document
         uint256 approvals;
     }
 
@@ -45,12 +50,7 @@ contract InstitutionalResetRegistry {
 
     uint256 public constant APPROVAL_THRESHOLD = 2;
 
-    event ResetProposed(
-        uint256 indexed id,
-        bytes32 indexed domain,
-        string name,
-        address proposer
-    );
+    event ResetProposed(uint256 indexed id, bytes32 indexed domain, string name, address proposer);
     event ResetApproved(uint256 indexed id, address approver, uint256 approvals);
     event ResetActivated(uint256 indexed id, address activator);
     event ResetCompleted(uint256 indexed id, address completer);
@@ -103,10 +103,7 @@ contract InstitutionalResetRegistry {
             approvals: 1
         });
 
-        _approvals[id].push(Approval({
-            approver: msg.sender,
-            timestamp: block.timestamp
-        }));
+        _approvals[id].push(Approval({approver: msg.sender, timestamp: block.timestamp}));
         hasApproved[id][msg.sender] = true;
 
         _resetsByDomain[domain].push(id);
@@ -125,10 +122,7 @@ contract InstitutionalResetRegistry {
         hasApproved[id][msg.sender] = true;
         r.approvals++;
 
-        _approvals[id].push(Approval({
-            approver: msg.sender,
-            timestamp: block.timestamp
-        }));
+        _approvals[id].push(Approval({approver: msg.sender, timestamp: block.timestamp}));
 
         emit ResetApproved(id, msg.sender, r.approvals);
     }
@@ -160,11 +154,7 @@ contract InstitutionalResetRegistry {
 
     // ─── REVERT ───
 
-    function revertReset(uint256 id, string calldata reason)
-        external
-        onlyOperator
-        resetExists(id)
-    {
+    function revertReset(uint256 id, string calldata reason) external onlyOperator resetExists(id) {
         Reset storage r = _resets[id];
         require(r.status == ResetStatus.ACTIVE, "Not active");
 

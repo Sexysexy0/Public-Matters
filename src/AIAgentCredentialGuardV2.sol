@@ -148,11 +148,7 @@ contract AIAgentCredentialGuardV2 {
         bool escalated = lockoutCount[agentId] >= c.escalationThreshold;
 
         _lockouts[agentId] = Lockout({
-            active: true,
-            until: block.timestamp + duration,
-            reason: reason,
-            lockedBy: by,
-            escalated: escalated
+            active: true, until: block.timestamp + duration, reason: reason, lockedBy: by, escalated: escalated
         });
 
         emit AgentLockedOut(agentId, reason, block.timestamp + duration, by);
@@ -165,13 +161,8 @@ contract AIAgentCredentialGuardV2 {
 
     function clearLockout(bytes32 agentId) external onlyOperator {
         require(_lockouts[agentId].active, "Not locked out");
-        _lockouts[agentId] = Lockout({
-            active: false,
-            until: 0,
-            reason: bytes32(0),
-            lockedBy: address(0),
-            escalated: false
-        });
+        _lockouts[agentId] =
+            Lockout({active: false, until: 0, reason: bytes32(0), lockedBy: address(0), escalated: false});
         _windows[agentId].windowStart = 0;
         _windows[agentId].successCount = 0;
         _windows[agentId].failedCount = 0;
@@ -197,16 +188,21 @@ contract AIAgentCredentialGuardV2 {
         return _windows[agentId];
     }
 
-    function getStats(bytes32 agentId) external view returns (
-        uint256 total,
-        uint256 failed,
-        uint256 locks,
-        uint256 escalations,
-        bool currentlyLocked
-    ) {
+    function getStats(bytes32 agentId)
+        external
+        view
+        returns (uint256 total, uint256 failed, uint256 locks, uint256 escalations, bool currentlyLocked)
+    {
         Lockout storage l = _lockouts[agentId];
         bool locked = l.active && block.timestamp < l.until;
-        return (totalAttempts[agentId], totalFailedAttempts[agentId], lockoutCount[agentId], escalationCount[agentId], locked);
+        return
+            (
+                totalAttempts[agentId],
+                totalFailedAttempts[agentId],
+                lockoutCount[agentId],
+                escalationCount[agentId],
+                locked
+            );
     }
 
     function totalTracked() external view returns (uint256) {

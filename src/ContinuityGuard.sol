@@ -63,11 +63,7 @@ contract ContinuityGuard {
 
     // ─── CANCELLATION ATTEMPT ───
 
-    function logCancellationAttempt(uint256 projectId, bytes32 reasonHash)
-        external
-        onlyOperator
-        returns (uint256)
-    {
+    function logCancellationAttempt(uint256 projectId, bytes32 reasonHash) external onlyOperator returns (uint256) {
         require(reasonHash != bytes32(0), "Reason required");
 
         attemptCount++;
@@ -120,10 +116,7 @@ contract ContinuityGuard {
         emit CancellationAttemptExecuted(attemptId);
     }
 
-    function blockCancellationAttempt(uint256 attemptId, bytes32 reason)
-        external
-        onlyOperator
-    {
+    function blockCancellationAttempt(uint256 attemptId, bytes32 reason) external onlyOperator {
         CancellationAttempt storage a = _attempts[attemptId];
         require(a.initiator != address(0), "Attempt not found");
         require(!a.executed, "Already executed");
@@ -137,10 +130,7 @@ contract ContinuityGuard {
 
     // ─── PUBLIC NOTICE ───
 
-    function publishPublicNotice(uint256 projectId, string calldata notice)
-        external
-        onlyOperator
-    {
+    function publishPublicNotice(uint256 projectId, string calldata notice) external onlyOperator {
         require(bytes(notice).length > 0, "Notice required");
 
         publicNotices[projectId] = PublicNotice({
@@ -155,10 +145,7 @@ contract ContinuityGuard {
 
     // ─── SUPPRESSION REPORTING ───
 
-    function reportSuppressionAttempt(uint256 projectId, bytes32 lawRef)
-        external
-        onlyOperator
-    {
+    function reportSuppressionAttempt(uint256 projectId, bytes32 lawRef) external onlyOperator {
         emit SuppressionAttemptReported(projectId, msg.sender, lawRef);
     }
 

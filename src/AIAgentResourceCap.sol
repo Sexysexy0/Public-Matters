@@ -44,13 +44,10 @@ contract AIAgentResourceCap {
         privileges = OperatorPrivileges(_privileges);
     }
 
-    function setCap(
-        bytes32 agentId,
-        uint256 maxGas,
-        uint256 maxValue,
-        uint256 maxActionsPerWindow,
-        uint256 windowSize
-    ) external onlyOperator {
+    function setCap(bytes32 agentId, uint256 maxGas, uint256 maxValue, uint256 maxActionsPerWindow, uint256 windowSize)
+        external
+        onlyOperator
+    {
         require(windowSize > 0, "Window must be > 0");
         require(maxActionsPerWindow > 0, "Max actions must be > 0");
 

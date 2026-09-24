@@ -44,20 +44,12 @@ contract AIDecisionAuditTest is Test {
     function testSupersedeDecision() public {
         vm.prank(tester);
         bytes32 original = audit.recordDecision(
-            agentId,
-            keccak256("bad input"),
-            keccak256("bad reasoning"),
-            keccak256("wrong output"),
-            90
+            agentId, keccak256("bad input"), keccak256("bad reasoning"), keccak256("wrong output"), 90
         );
 
         vm.prank(tester);
         bytes32 correction = audit.recordDecision(
-            agentId,
-            keccak256("bad input"),
-            keccak256("corrected reasoning"),
-            keccak256("correct output"),
-            95
+            agentId, keccak256("bad input"), keccak256("corrected reasoning"), keccak256("correct output"), 95
         );
 
         vm.prank(tester);

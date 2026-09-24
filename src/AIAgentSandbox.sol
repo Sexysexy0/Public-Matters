@@ -11,7 +11,12 @@ import "./OperatorPrivileges.sol";
 contract AIAgentSandbox {
     OperatorPrivileges public privileges;
 
-    enum SandboxStatus { NONE, TESTING, PASSED, FAILED }
+    enum SandboxStatus {
+        NONE,
+        TESTING,
+        PASSED,
+        FAILED
+    }
 
     struct Sandbox {
         bytes32 agentId;

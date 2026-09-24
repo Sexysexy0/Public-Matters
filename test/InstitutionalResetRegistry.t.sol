@@ -29,13 +29,8 @@ contract InstitutionalResetRegistryTest is Test {
 
     function test_ProposeReset() public {
         vm.prank(op1);
-        uint256 id = registry.proposeReset(
-            INSTITUTION,
-            DOMAIN,
-            "De-stream education",
-            "Hyper-competitive model",
-            EVIDENCE
-        );
+        uint256 id =
+            registry.proposeReset(INSTITUTION, DOMAIN, "De-stream education", "Hyper-competitive model", EVIDENCE);
         assertEq(id, 1);
         assertEq(registry.totalResets(), 1);
     }

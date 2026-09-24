@@ -78,13 +78,11 @@ contract GlobalEmergencyFreeze {
         return frozen;
     }
 
-    function getFreezeInfo() external view returns (
-        bool isCurrentlyFrozen,
-        uint256 timestamp,
-        bytes32 reason,
-        address triggeredBy,
-        uint256 approvals
-    ) {
+    function getFreezeInfo()
+        external
+        view
+        returns (bool isCurrentlyFrozen, uint256 timestamp, bytes32 reason, address triggeredBy, uint256 approvals)
+    {
         return (frozen, frozenAt, freezeReason, frozenBy, currentLiftApprovals);
     }
 }

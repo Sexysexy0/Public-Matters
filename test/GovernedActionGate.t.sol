@@ -46,7 +46,7 @@ contract GovernedActionGateTest is Test {
     function testProposeCreatesPending() public {
         vm.prank(proposer);
         uint256 pid = gate.propose(agentId, bytes32(0), 100 ether, "Pay supplier");
-        (, , , , , , , GovernedActionGate.ProposalStatus status, , ) = gate.getProposal(pid);
+        (,,,,,,, GovernedActionGate.ProposalStatus status,,) = gate.getProposal(pid);
         assertEq(uint256(status), uint256(GovernedActionGate.ProposalStatus.PENDING));
     }
 
@@ -59,7 +59,7 @@ contract GovernedActionGateTest is Test {
         vm.prank(council2);
         gate.approve(pid);
 
-        (, , , , , , , GovernedActionGate.ProposalStatus status, uint256 approvals, ) = gate.getProposal(pid);
+        (,,,,,,, GovernedActionGate.ProposalStatus status, uint256 approvals,) = gate.getProposal(pid);
         assertEq(uint256(status), uint256(GovernedActionGate.ProposalStatus.APPROVED));
         assertEq(approvals, 2);
     }
@@ -71,7 +71,7 @@ contract GovernedActionGateTest is Test {
         vm.prank(council1);
         gate.approve(pid);
 
-        (, , , , , , , GovernedActionGate.ProposalStatus status, , ) = gate.getProposal(pid);
+        (,,,,,,, GovernedActionGate.ProposalStatus status,,) = gate.getProposal(pid);
         assertEq(uint256(status), uint256(GovernedActionGate.ProposalStatus.PENDING));
     }
 
@@ -104,7 +104,7 @@ contract GovernedActionGateTest is Test {
         vm.prank(council1);
         gate.reject(pid, "suspicious supplier");
 
-        (, , , , , , , GovernedActionGate.ProposalStatus status, , ) = gate.getProposal(pid);
+        (,,,,,,, GovernedActionGate.ProposalStatus status,,) = gate.getProposal(pid);
         assertEq(uint256(status), uint256(GovernedActionGate.ProposalStatus.REJECTED));
     }
 
@@ -113,7 +113,7 @@ contract GovernedActionGateTest is Test {
         vm.prank(proposer);
         uint256 pid = gate.propose(agentId, bytes32(0), 5 ether, "Small expense");
 
-        (, , , , , , , GovernedActionGate.ProposalStatus status, , ) = gate.getProposal(pid);
+        (,,,,,,, GovernedActionGate.ProposalStatus status,,) = gate.getProposal(pid);
         assertEq(uint256(status), uint256(GovernedActionGate.ProposalStatus.EXECUTED));
     }
 
@@ -129,7 +129,7 @@ contract GovernedActionGateTest is Test {
         vm.prank(proposer);
         gate.execute(pid);
 
-        (, , , , , , , GovernedActionGate.ProposalStatus status, , ) = gate.getProposal(pid);
+        (,,,,,,, GovernedActionGate.ProposalStatus status,,) = gate.getProposal(pid);
         assertEq(uint256(status), uint256(GovernedActionGate.ProposalStatus.EXECUTED));
     }
 
@@ -159,7 +159,7 @@ contract GovernedActionGateTest is Test {
         vm.warp(block.timestamp + 2 days);
         gate.expire(pid);
 
-        (, , , , , , , GovernedActionGate.ProposalStatus status, , ) = gate.getProposal(pid);
+        (,,,,,,, GovernedActionGate.ProposalStatus status,,) = gate.getProposal(pid);
         assertEq(uint256(status), uint256(GovernedActionGate.ProposalStatus.EXPIRED));
     }
 

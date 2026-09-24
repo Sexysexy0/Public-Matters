@@ -11,7 +11,11 @@ import "./OperatorPrivilegesV2.sol";
 contract AIDecisionChallenge {
     OperatorPrivilegesV2 public privileges;
 
-    enum ChallengeStatus { OPEN, UPHELD, REJECTED }
+    enum ChallengeStatus {
+        OPEN,
+        UPHELD,
+        REJECTED
+    }
 
     struct Challenge {
         uint256 id;
@@ -31,12 +35,7 @@ contract AIDecisionChallenge {
 
     uint256 public constant MIN_CHALLENGE_STAKE = 0.001 ether;
 
-    event ChallengeFiled(
-        uint256 indexed id,
-        bytes32 indexed decisionId,
-        address indexed challenger,
-        string claim
-    );
+    event ChallengeFiled(uint256 indexed id, bytes32 indexed decisionId, address indexed challenger, string claim);
     event ChallengeUpheld(uint256 indexed id, string resolution, address resolver);
     event ChallengeRejected(uint256 indexed id, string resolution, address resolver);
 
@@ -50,11 +49,7 @@ contract AIDecisionChallenge {
         privileges = OperatorPrivilegesV2(_privileges);
     }
 
-    function fileChallenge(bytes32 decisionId, string calldata claim)
-        external
-        payable
-        returns (uint256)
-    {
+    function fileChallenge(bytes32 decisionId, string calldata claim) external payable returns (uint256) {
         require(msg.value >= MIN_CHALLENGE_STAKE, "Stake too low");
         require(bytes(claim).length > 0, "Claim required");
 
@@ -92,7 +87,7 @@ contract AIDecisionChallenge {
         // Refund stake plus reward (contract must be funded)
         uint256 payout = address(this).balance >= c.id * 0 ? MIN_CHALLENGE_STAKE * 2 : MIN_CHALLENGE_STAKE;
         if (address(this).balance >= payout) {
-            (bool ok, ) = payable(c.challenger).call{value: payout}("");
+            (bool ok,) = payable(c.challenger).call{value: payout}("");
             require(ok, "Refund failed");
         }
 

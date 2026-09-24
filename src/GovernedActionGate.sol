@@ -17,15 +17,20 @@ import "./AIDecisionAudit.sol";
  *   - Full on-chain audit trail
  */
 contract GovernedActionGate {
-
-    enum ProposalStatus { PENDING, APPROVED, REJECTED, EXECUTED, EXPIRED }
+    enum ProposalStatus {
+        PENDING,
+        APPROVED,
+        REJECTED,
+        EXECUTED,
+        EXPIRED
+    }
 
     struct Proposal {
         uint256 proposalId;
         bytes32 agentId;
         bytes32 decisionId;
         uint256 value;
-        string  action;
+        string action;
         address proposer;
         uint256 createdAt;
         uint256 expiresAt;
@@ -59,18 +64,24 @@ contract GovernedActionGate {
     event ThresholdUpdated(uint256 newThreshold);
     event AutoExecLimitUpdated(uint256 newLimit);
 
-    modifier onlyOperator() { require(privileges.isOperator(msg.sender), "Not authorized operator"); _; }
-    modifier onlyCouncil() { require(councilMembers[msg.sender], "Not council member"); _; }
-    modifier onlyAdmin() { require(msg.sender == privileges.owner(), "Not admin"); _; }
-    modifier proposalExists(uint256 id) { require(proposals[id].createdAt != 0, "Proposal not found"); _; }
+    modifier onlyOperator() {
+        require(privileges.isOperator(msg.sender), "Not authorized operator");
+        _;
+    }
+    modifier onlyCouncil() {
+        require(councilMembers[msg.sender], "Not council member");
+        _;
+    }
+    modifier onlyAdmin() {
+        require(msg.sender == privileges.owner(), "Not admin");
+        _;
+    }
+    modifier proposalExists(uint256 id) {
+        require(proposals[id].createdAt != 0, "Proposal not found");
+        _;
+    }
 
-    constructor(
-        address _privileges,
-        address _registry,
-        address _audit,
-        uint256 _threshold,
-        uint256 _ttl
-    ) {
+    constructor(address _privileges, address _registry, address _audit, uint256 _threshold, uint256 _ttl) {
         privileges = OperatorPrivileges(_privileges);
         registry = AIAgentRegistry(_registry);
         audit = AIDecisionAudit(_audit);
@@ -106,12 +117,11 @@ contract GovernedActionGate {
     }
 
     // Action lifecycle
-    function propose(
-        bytes32 agentId,
-        bytes32 decisionId,
-        uint256 value,
-        string calldata action
-    ) external onlyOperator returns (uint256) {
+    function propose(bytes32 agentId, bytes32 decisionId, uint256 value, string calldata action)
+        external
+        onlyOperator
+        returns (uint256)
+    {
         registry.getAgent(agentId); // reverts if missing
 
         uint256 id = totalProposals++;
@@ -181,23 +191,35 @@ contract GovernedActionGate {
         emit ProposalExpired(id);
     }
 
-    function getProposal(uint256 id) external view proposalExists(id) returns (
-        bytes32 agentId,
-        bytes32 decisionId,
-        uint256 value,
-        string memory action,
-        address proposer,
-        uint256 createdAt,
-        uint256 expiresAt,
-        ProposalStatus status,
-        uint256 approvals,
-        uint256 rejections
-    ) {
+    function getProposal(uint256 id)
+        external
+        view
+        proposalExists(id)
+        returns (
+            bytes32 agentId,
+            bytes32 decisionId,
+            uint256 value,
+            string memory action,
+            address proposer,
+            uint256 createdAt,
+            uint256 expiresAt,
+            ProposalStatus status,
+            uint256 approvals,
+            uint256 rejections
+        )
+    {
         Proposal storage p = proposals[id];
         return (
-            p.agentId, p.decisionId, p.value, p.action,
-            p.proposer, p.createdAt, p.expiresAt,
-            p.status, p.approvals, p.rejections
+            p.agentId,
+            p.decisionId,
+            p.value,
+            p.action,
+            p.proposer,
+            p.createdAt,
+            p.expiresAt,
+            p.status,
+            p.approvals,
+            p.rejections
         );
     }
 }

@@ -16,7 +16,7 @@ contract InvestigatorShield {
 
     struct Investigator {
         address addr;
-        bytes32 publicKeyHash;   // ZK-commitment for anonymity
+        bytes32 publicKeyHash; // ZK-commitment for anonymity
         string jurisdiction;
         uint256 registeredAt;
         bool active;
@@ -52,7 +52,9 @@ contract InvestigatorShield {
 
     event InvestigatorRegistered(address indexed addr, string jurisdiction);
     event InvestigatorDeregistered(address indexed addr, bytes32 reason);
-    event EvidenceSubmitted(uint256 indexed id, address indexed investigator, bytes32 targetInstitution, string category);
+    event EvidenceSubmitted(
+        uint256 indexed id, address indexed investigator, bytes32 targetInstitution, string category
+    );
     event EvidenceVerified(uint256 indexed id, address verifier);
     event SuppressionLawRecorded(uint256 indexed id, bytes32 lawId, string jurisdiction, string description);
 
@@ -68,11 +70,10 @@ contract InvestigatorShield {
 
     // ─── INVESTIGATOR REGISTRATION ───
 
-    function registerInvestigator(
-        address addr,
-        bytes32 publicKeyHash,
-        string calldata jurisdiction
-    ) external onlyOperator {
+    function registerInvestigator(address addr, bytes32 publicKeyHash, string calldata jurisdiction)
+        external
+        onlyOperator
+    {
         require(addr != address(0), "Invalid address");
         require(publicKeyHash != bytes32(0), "Public key hash required");
         require(!_investigators[addr].active, "Already registered");
@@ -101,11 +102,10 @@ contract InvestigatorShield {
 
     // ─── EVIDENCE SUBMISSION ───
 
-    function submitEvidence(
-        bytes32 evidenceHash,
-        bytes32 targetInstitution,
-        string calldata category
-    ) external returns (uint256) {
+    function submitEvidence(bytes32 evidenceHash, bytes32 targetInstitution, string calldata category)
+        external
+        returns (uint256)
+    {
         require(evidenceHash != bytes32(0), "Evidence hash required");
         require(targetInstitution != bytes32(0), "Target required");
         require(_investigators[msg.sender].active, "Investigator not registered");
@@ -140,11 +140,11 @@ contract InvestigatorShield {
 
     // ─── SUPPRESSION LAW TRACKING ───
 
-    function recordSuppressionLaw(
-        bytes32 lawId,
-        string calldata jurisdiction,
-        string calldata description
-    ) external onlyOperator returns (uint256) {
+    function recordSuppressionLaw(bytes32 lawId, string calldata jurisdiction, string calldata description)
+        external
+        onlyOperator
+        returns (uint256)
+    {
         require(lawId != bytes32(0), "Law ID required");
 
         suppressionLawCount++;

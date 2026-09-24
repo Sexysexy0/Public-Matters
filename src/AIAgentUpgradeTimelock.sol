@@ -43,12 +43,10 @@ contract AIAgentUpgradeTimelock {
         privileges = OperatorPrivileges(_privileges);
     }
 
-    function scheduleUpgrade(
-        bytes32 agentId,
-        bytes32 newModelHash,
-        string calldata metadataURI,
-        uint256 delay
-    ) external onlyOperator {
+    function scheduleUpgrade(bytes32 agentId, bytes32 newModelHash, string calldata metadataURI, uint256 delay)
+        external
+        onlyOperator
+    {
         require(!hasPending[agentId], "Upgrade already pending");
         require(newModelHash != bytes32(0), "Invalid model hash");
 

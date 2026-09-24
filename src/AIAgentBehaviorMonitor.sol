@@ -52,18 +52,13 @@ contract AIAgentBehaviorMonitor {
         privileges = OperatorPrivileges(_privileges);
     }
 
-    function setBaseline(
-        bytes32 agentId,
-        uint256 expectedRate,
-        uint256 expectedMagnitude,
-        uint256 windowSize
-    ) external onlyOperator {
+    function setBaseline(bytes32 agentId, uint256 expectedRate, uint256 expectedMagnitude, uint256 windowSize)
+        external
+        onlyOperator
+    {
         require(windowSize > 0, "Window must be > 0");
         _baselines[agentId] = Baseline({
-            expectedRate: expectedRate,
-            expectedMagnitude: expectedMagnitude,
-            windowSize: windowSize,
-            set: true
+            expectedRate: expectedRate, expectedMagnitude: expectedMagnitude, windowSize: windowSize, set: true
         });
         emit BaselineSet(agentId, expectedRate, expectedMagnitude, windowSize);
     }
@@ -95,12 +90,9 @@ contract AIAgentBehaviorMonitor {
     }
 
     function _flagAnomaly(bytes32 agentId, bytes32 reason, uint256 actionCount, uint256 magnitude) internal {
-        _anomalies[agentId].push(Anomaly({
-            reason: reason,
-            timestamp: block.timestamp,
-            actionCount: actionCount,
-            magnitude: magnitude
-        }));
+        _anomalies[agentId].push(
+            Anomaly({reason: reason, timestamp: block.timestamp, actionCount: actionCount, magnitude: magnitude})
+        );
         anomalyCount[agentId]++;
         flagged[agentId] = true;
         emit AnomalyDetected(agentId, reason, actionCount, magnitude);

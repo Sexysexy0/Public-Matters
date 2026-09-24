@@ -16,10 +16,14 @@ import "./OperatorPrivileges.sol";
  * Uses COMPOSITION, not inheritance, for clean separation of concerns.
  */
 contract AIAgentRegistry {
-
     OperatorPrivileges public privileges;
 
-    enum AgentStatus { INACTIVE, ACTIVE, SUSPENDED, KILLED }
+    enum AgentStatus {
+        INACTIVE,
+        ACTIVE,
+        SUSPENDED,
+        KILLED
+    }
 
     struct AIAgent {
         bytes32 agentId;
@@ -64,10 +68,7 @@ contract AIAgentRegistry {
     }
 
     modifier onlyKillSwitch() {
-        require(
-            killSwitchAuthorized[msg.sender] || msg.sender == admin,
-            "Not kill-switch authorized"
-        );
+        require(killSwitchAuthorized[msg.sender] || msg.sender == admin, "Not kill-switch authorized");
         _;
     }
 
@@ -93,9 +94,7 @@ contract AIAgentRegistry {
         string calldata provenance,
         string[] calldata capabilities
     ) external onlyOperator returns (bytes32) {
-        bytes32 agentId = keccak256(
-            abi.encodePacked(name, agentOperator, provenance, block.timestamp)
-        );
+        bytes32 agentId = keccak256(abi.encodePacked(name, agentOperator, provenance, block.timestamp));
         require(agents[agentId].registeredAt == 0, "Agent already registered");
 
         AIAgent storage a = agents[agentId];
@@ -119,21 +118,13 @@ contract AIAgentRegistry {
     // REAL-TIME MONITORING
     // ?????????????????????????????????????????????????????????????
 
-    function heartbeat(bytes32 agentId)
-        external
-        onlyOperator
-        agentExists(agentId)
-    {
+    function heartbeat(bytes32 agentId) external onlyOperator agentExists(agentId) {
         require(agents[agentId].status == AgentStatus.ACTIVE, "Agent not active");
         agents[agentId].lastHeartbeat = block.timestamp;
         emit Heartbeat(agentId, block.timestamp);
     }
 
-    function recordViolation(bytes32 agentId, string calldata violation)
-        external
-        onlyOperator
-        agentExists(agentId)
-    {
+    function recordViolation(bytes32 agentId, string calldata violation) external onlyOperator agentExists(agentId) {
         agents[agentId].violationCount++;
         emit ViolationRecorded(agentId, violation, agents[agentId].violationCount);
     }
@@ -150,34 +141,19 @@ contract AIAgentRegistry {
     // STATUS MANAGEMENT
     // ?????????????????????????????????????????????????????????????
 
-    function setStatus(bytes32 agentId, AgentStatus status)
-        external
-        onlyOperator
-        agentExists(agentId)
-    {
+    function setStatus(bytes32 agentId, AgentStatus status) external onlyOperator agentExists(agentId) {
         agents[agentId].status = status;
         emit AgentStatusChanged(agentId, status);
     }
 
-    function suspendAgent(bytes32 agentId, string calldata reason)
-        external
-        onlyKillSwitch
-        agentExists(agentId)
-    {
+    function suspendAgent(bytes32 agentId, string calldata reason) external onlyKillSwitch agentExists(agentId) {
         agents[agentId].status = AgentStatus.SUSPENDED;
         emit AgentStatusChanged(agentId, AgentStatus.SUSPENDED);
         emit ViolationRecorded(agentId, reason, agents[agentId].violationCount);
     }
 
-    function reactivateAgent(bytes32 agentId)
-        external
-        onlyKillSwitch
-        agentExists(agentId)
-    {
-        require(
-            agents[agentId].status == AgentStatus.SUSPENDED,
-            "Agent not suspended"
-        );
+    function reactivateAgent(bytes32 agentId) external onlyKillSwitch agentExists(agentId) {
+        require(agents[agentId].status == AgentStatus.SUSPENDED, "Agent not suspended");
         agents[agentId].status = AgentStatus.ACTIVE;
         agents[agentId].lastHeartbeat = block.timestamp;
         emit AgentStatusChanged(agentId, AgentStatus.ACTIVE);
@@ -187,11 +163,7 @@ contract AIAgentRegistry {
     // KILL SWITCH
     // ?????????????????????????????????????????????????????????????
 
-    function killAgent(bytes32 agentId, string calldata reason)
-        external
-        onlyKillSwitch
-        agentExists(agentId)
-    {
+    function killAgent(bytes32 agentId, string calldata reason) external onlyKillSwitch agentExists(agentId) {
         agents[agentId].status = AgentStatus.KILLED;
         agents[agentId].killCount++;
         emit AgentKilled(agentId, reason, msg.sender);
@@ -202,20 +174,12 @@ contract AIAgentRegistry {
     // CAPABILITY MANAGEMENT
     // ?????????????????????????????????????????????????????????????
 
-    function addCapability(bytes32 agentId, string calldata capability)
-        external
-        onlyOperator
-        agentExists(agentId)
-    {
+    function addCapability(bytes32 agentId, string calldata capability) external onlyOperator agentExists(agentId) {
         agents[agentId].capabilities.push(capability);
         emit CapabilityAdded(agentId, capability);
     }
 
-    function revokeCapability(bytes32 agentId, string calldata capability)
-        external
-        onlyOperator
-        agentExists(agentId)
-    {
+    function revokeCapability(bytes32 agentId, string calldata capability) external onlyOperator agentExists(agentId) {
         string[] storage caps = agents[agentId].capabilities;
         for (uint256 i = 0; i < caps.length; i++) {
             if (keccak256(bytes(caps[i])) == keccak256(bytes(capability))) {
@@ -256,12 +220,7 @@ contract AIAgentRegistry {
         return agentIds;
     }
 
-    function verifyProvenance(bytes32 agentId)
-        external
-        view
-        agentExists(agentId)
-        returns (string memory)
-    {
+    function verifyProvenance(bytes32 agentId) external view agentExists(agentId) returns (string memory) {
         return agents[agentId].provenance;
     }
 

@@ -14,7 +14,12 @@ contract AIAgentSunsetProtocol {
     uint256 public constant MIN_GRACE = 1 hours;
     uint256 public constant MAX_GRACE = 30 days;
 
-    enum SunsetStatus { NONE, SCHEDULED, COMPLETED, CANCELLED }
+    enum SunsetStatus {
+        NONE,
+        SCHEDULED,
+        COMPLETED,
+        CANCELLED
+    }
 
     struct Sunset {
         bytes32 agentId;
@@ -43,10 +48,7 @@ contract AIAgentSunsetProtocol {
         privileges = OperatorPrivilegesV2(_privileges);
     }
 
-    function scheduleSunset(bytes32 agentId, uint256 gracePeriod, string calldata reason)
-        external
-        onlyOperator
-    {
+    function scheduleSunset(bytes32 agentId, uint256 gracePeriod, string calldata reason) external onlyOperator {
         require(_sunsets[agentId].status != SunsetStatus.SCHEDULED, "Already scheduled");
         require(gracePeriod >= MIN_GRACE && gracePeriod <= MAX_GRACE, "Invalid grace period");
 

@@ -34,7 +34,9 @@ contract AIGovernanceMultisig {
     address[] public signers;
     mapping(address => bool) public isSigner;
 
-    event ProposalCreated(uint256 indexed id, address indexed proposer, address target, uint256 value, string description);
+    event ProposalCreated(
+        uint256 indexed id, address indexed proposer, address target, uint256 value, string description
+    );
     event ProposalApproved(uint256 indexed id, address indexed signer, uint256 approvals);
     event ProposalExecuted(uint256 indexed id, address indexed executor);
     event ProposalCancelled(uint256 indexed id, address indexed canceller);
@@ -68,12 +70,11 @@ contract AIGovernanceMultisig {
         }
     }
 
-    function createProposal(
-        address target,
-        uint256 value,
-        bytes calldata data,
-        string calldata description
-    ) external onlySigner returns (uint256) {
+    function createProposal(address target, uint256 value, bytes calldata data, string calldata description)
+        external
+        onlySigner
+        returns (uint256)
+    {
         require(target != address(0), "Invalid target");
 
         proposalCount++;
@@ -117,7 +118,7 @@ contract AIGovernanceMultisig {
         Proposal storage p = _proposals[proposalId];
         p.executed = true;
 
-        (bool success, ) = p.target.call{value: p.value}(p.data);
+        (bool success,) = p.target.call{value: p.value}(p.data);
         require(success, "Execution failed");
 
         emit ProposalExecuted(proposalId, msg.sender);

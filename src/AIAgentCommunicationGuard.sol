@@ -55,13 +55,8 @@ contract AIAgentCommunicationGuard {
 
     function createChannel(bytes32 channelId, string calldata name) external onlyOperator {
         require(_channels[channelId].createdAt == 0, "Channel exists");
-        _channels[channelId] = Channel({
-            channelId: channelId,
-            name: name,
-            authorized: true,
-            messageCount: 0,
-            createdAt: block.timestamp
-        });
+        _channels[channelId] =
+            Channel({channelId: channelId, name: name, authorized: true, messageCount: 0, createdAt: block.timestamp});
         channelIds.push(channelId);
         emit ChannelCreated(channelId, name);
     }
@@ -77,23 +72,22 @@ contract AIAgentCommunicationGuard {
         emit AgentAuthorized(agentId, authorized);
     }
 
-    function logMessage(
-        bytes32 fromAgent,
-        bytes32 toAgent,
-        bytes32 messageHash,
-        bytes32 channelId
-    ) external onlyOperator {
-        bool authorized = agentAuthorized[fromAgent]
-            && agentAuthorized[toAgent]
-            && _channels[channelId].authorized;
+    function logMessage(bytes32 fromAgent, bytes32 toAgent, bytes32 messageHash, bytes32 channelId)
+        external
+        onlyOperator
+    {
+        bool authorized =
+            agentAuthorized[fromAgent] && agentAuthorized[toAgent] && _channels[channelId].authorized;
 
-        _messages.push(Message({
-            fromAgent: fromAgent,
-            toAgent: toAgent,
-            messageHash: messageHash,
-            timestamp: block.timestamp,
-            authorized: authorized
-        }));
+        _messages.push(
+            Message({
+                fromAgent: fromAgent,
+                toAgent: toAgent,
+                messageHash: messageHash,
+                timestamp: block.timestamp,
+                authorized: authorized
+            })
+        );
 
         uint256 idx = _messages.length - 1;
         _messagesByAgent[fromAgent].push(idx);

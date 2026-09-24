@@ -14,10 +14,7 @@ contract DeployAIDecisionAudit is Script {
 
         // Reuse existing OperatorPrivileges from the AIAgentRegistry deploy
         // If it's already deployed at 0x25E7..., just pass that address
-        address privileges = vm.envOr(
-            "PRIVILEGES_ADDRESS",
-            address(0x25E737b7eAD518a84383A24b8653A946C6eA0097)
-        );
+        address privileges = vm.envOr("PRIVILEGES_ADDRESS", address(0x25E737b7eAD518a84383A24b8653A946C6eA0097));
 
         AIDecisionAudit audit = new AIDecisionAudit(privileges);
         console.log("AIDecisionAudit:", address(audit));

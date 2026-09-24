@@ -17,11 +17,18 @@ import "./OperatorPrivilegesV2.sol";
 contract ProjectContinuityRegistry {
     OperatorPrivilegesV2 public privileges;
 
-    enum ProjectStatus { PROPOSED, ACTIVE, COMPLETED, STALLED, CANCELLATION_PENDING, CANCELLED }
+    enum ProjectStatus {
+        PROPOSED,
+        ACTIVE,
+        COMPLETED,
+        STALLED,
+        CANCELLATION_PENDING,
+        CANCELLED
+    }
 
     struct Project {
         uint256 id;
-        bytes32 projectHash;        // keccak of name + jurisdiction
+        bytes32 projectHash; // keccak of name + jurisdiction
         string name;
         string jurisdiction;
         uint256 totalBudget;
@@ -112,23 +119,24 @@ contract ProjectContinuityRegistry {
 
     // ─── DISBURSEMENTS ───
 
-    function recordDisbursement(
-        uint256 projectId,
-        uint256 amount,
-        address recipient,
-        bytes32 purposeHash
-    ) external onlyOperator projectExists(projectId) {
+    function recordDisbursement(uint256 projectId, uint256 amount, address recipient, bytes32 purposeHash)
+        external
+        onlyOperator
+        projectExists(projectId)
+    {
         Project storage p = _projects[projectId];
         require(p.status == ProjectStatus.ACTIVE, "Project not active");
         require(p.totalDisbursed + amount <= p.totalBudget, "Exceeds budget");
 
-        _disbursements[projectId].push(Disbursement({
-            projectId: projectId,
-            amount: amount,
-            recipient: recipient,
-            purposeHash: purposeHash,
-            timestamp: block.timestamp
-        }));
+        _disbursements[projectId].push(
+            Disbursement({
+                projectId: projectId,
+                amount: amount,
+                recipient: recipient,
+                purposeHash: purposeHash,
+                timestamp: block.timestamp
+            })
+        );
 
         p.totalDisbursed += amount;
         p.lastUpdated = block.timestamp;
@@ -156,11 +164,7 @@ contract ProjectContinuityRegistry {
 
     // ─── CANCELLATION GUARD ───
 
-    function requestCancellation(uint256 projectId, bytes32 reasonHash)
-        external
-        onlyOperator
-        projectExists(projectId)
-    {
+    function requestCancellation(uint256 projectId, bytes32 reasonHash) external onlyOperator projectExists(projectId) {
         Project storage p = _projects[projectId];
         require(p.status == ProjectStatus.ACTIVE, "Project not active");
         require(reasonHash != bytes32(0), "Reason required");

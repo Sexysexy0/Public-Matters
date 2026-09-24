@@ -24,15 +24,9 @@ contract AIAgentRegistryV2Test is Test {
 
     function test_RegisterAgent() public {
         vm.prank(op1);
-        bytes32 agentId = registry.registerAgent(
-            "Test-Agent",
-            op1,
-            "gpt-5.6",
-            new string[](0)
-        );
+        bytes32 agentId = registry.registerAgent("Test-Agent", op1, "gpt-5.6", new string[](0));
 
-        (string memory name, , , , AIAgentRegistryV2.AgentStatus status, , , , ) =
-            registry.getAgent(agentId);
+        (string memory name,,,, AIAgentRegistryV2.AgentStatus status,,,,) = registry.getAgent(agentId);
         assertEq(name, "Test-Agent");
         assertEq(uint256(status), uint256(AIAgentRegistryV2.AgentStatus.ACTIVE));
     }
@@ -57,7 +51,7 @@ contract AIAgentRegistryV2Test is Test {
         vm.prank(op1);
         registry.killAgent(agentId, "rogue behavior");
 
-        (, , , , AIAgentRegistryV2.AgentStatus status, , , , ) = registry.getAgent(agentId);
+        (,,,, AIAgentRegistryV2.AgentStatus status,,,,) = registry.getAgent(agentId);
         assertEq(uint256(status), uint256(AIAgentRegistryV2.AgentStatus.KILLED));
     }
 
@@ -92,11 +86,11 @@ contract AIAgentRegistryV2Test is Test {
         bytes32 agentId = registry.registerAgent("Toggle", op1, "gpt", new string[](0));
 
         registry.suspendAgent(agentId, "pause");
-        (, , , , AIAgentRegistryV2.AgentStatus s1, , , , ) = registry.getAgent(agentId);
+        (,,,, AIAgentRegistryV2.AgentStatus s1,,,,) = registry.getAgent(agentId);
         assertEq(uint256(s1), uint256(AIAgentRegistryV2.AgentStatus.SUSPENDED));
 
         registry.reactivateAgent(agentId);
-        (, , , , AIAgentRegistryV2.AgentStatus s2, , , , ) = registry.getAgent(agentId);
+        (,,,, AIAgentRegistryV2.AgentStatus s2,,,,) = registry.getAgent(agentId);
         assertEq(uint256(s2), uint256(AIAgentRegistryV2.AgentStatus.ACTIVE));
         vm.stopPrank();
     }

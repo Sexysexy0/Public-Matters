@@ -27,10 +27,7 @@ contract AIAgentIncidentRegistryTest is Test {
     function test_ReportIncident() public {
         vm.prank(op1);
         uint256 id = registry.reportIncident(
-            AGENT_1,
-            AIAgentIncidentRegistry.Severity.HIGH,
-            INCIDENT_TYPE,
-            "Agent attempted unauthorized access"
+            AGENT_1, AIAgentIncidentRegistry.Severity.HIGH, INCIDENT_TYPE, "Agent attempted unauthorized access"
         );
         assertEq(id, 1);
         assertEq(registry.totalIncidents(), 1);
@@ -39,22 +36,12 @@ contract AIAgentIncidentRegistryTest is Test {
     function test_OnlyOperatorCanReport() public {
         vm.prank(outsider);
         vm.expectRevert("Not authorized operator");
-        registry.reportIncident(
-            AGENT_1,
-            AIAgentIncidentRegistry.Severity.LOW,
-            INCIDENT_TYPE,
-            "test"
-        );
+        registry.reportIncident(AGENT_1, AIAgentIncidentRegistry.Severity.LOW, INCIDENT_TYPE, "test");
     }
 
     function test_ResolveIncident() public {
         vm.startPrank(op1);
-        uint256 id = registry.reportIncident(
-            AGENT_1,
-            AIAgentIncidentRegistry.Severity.HIGH,
-            INCIDENT_TYPE,
-            "breach"
-        );
+        uint256 id = registry.reportIncident(AGENT_1, AIAgentIncidentRegistry.Severity.HIGH, INCIDENT_TYPE, "breach");
         registry.resolveIncident(id, "patched and re-tested");
         vm.stopPrank();
 
@@ -64,12 +51,8 @@ contract AIAgentIncidentRegistryTest is Test {
 
     function test_DismissIncident() public {
         vm.startPrank(op1);
-        uint256 id = registry.reportIncident(
-            AGENT_1,
-            AIAgentIncidentRegistry.Severity.LOW,
-            INCIDENT_TYPE,
-            "false positive"
-        );
+        uint256 id =
+            registry.reportIncident(AGENT_1, AIAgentIncidentRegistry.Severity.LOW, INCIDENT_TYPE, "false positive");
         registry.dismissIncident(id);
         vm.stopPrank();
 

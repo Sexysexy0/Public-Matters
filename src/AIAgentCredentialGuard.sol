@@ -73,21 +73,16 @@ contract AIAgentCredentialGuard {
 
     // ─── CONFIG ───
 
-    function setConfig(
-        bytes32 agentId,
-        uint256 maxFailedAttempts,
-        uint256 windowSize,
-        uint256 lockoutDuration
-    ) external onlyOperator {
+    function setConfig(bytes32 agentId, uint256 maxFailedAttempts, uint256 windowSize, uint256 lockoutDuration)
+        external
+        onlyOperator
+    {
         require(windowSize > 0, "Window must be > 0");
         require(maxFailedAttempts > 0, "Max failed must be > 0");
         require(lockoutDuration > 0, "Lockout duration must be > 0");
 
         _configs[agentId] = Config({
-            maxFailedAttempts: maxFailedAttempts,
-            windowSize: windowSize,
-            lockoutDuration: lockoutDuration,
-            set: true
+            maxFailedAttempts: maxFailedAttempts, windowSize: windowSize, lockoutDuration: lockoutDuration, set: true
         });
 
         if (!isTracked[agentId]) {
@@ -101,11 +96,7 @@ contract AIAgentCredentialGuard {
 
     // ─── ATTEMPT RECORDING ───
 
-    function recordAuthAttempt(
-        bytes32 agentId,
-        bytes32 targetSystem,
-        bool success
-    ) external onlyOperator {
+    function recordAuthAttempt(bytes32 agentId, bytes32 targetSystem, bool success) external onlyOperator {
         Config storage c = _configs[agentId];
         require(c.set, "Config not set");
         require(!_lockouts[agentId].active, "Agent is locked out");
@@ -128,13 +119,7 @@ contract AIAgentCredentialGuard {
             totalFailedAttempts[agentId]++;
         }
 
-        emit AuthAttemptRecorded(
-            agentId,
-            targetSystem,
-            success,
-            w.failedCount,
-            w.successCount
-        );
+        emit AuthAttemptRecorded(agentId, targetSystem, success, w.failedCount, w.successCount);
 
         // Check threshold
         if (w.failedCount > c.maxFailedAttempts) {
@@ -151,12 +136,7 @@ contract AIAgentCredentialGuard {
     }
 
     function _lockout(bytes32 agentId, bytes32 reason, uint256 duration, address by) internal {
-        _lockouts[agentId] = Lockout({
-            active: true,
-            until: block.timestamp + duration,
-            reason: reason,
-            lockedBy: by
-        });
+        _lockouts[agentId] = Lockout({active: true, until: block.timestamp + duration, reason: reason, lockedBy: by});
         lockoutCount[agentId]++;
         emit AgentLockedOut(agentId, reason, block.timestamp + duration, by);
     }
@@ -204,12 +184,7 @@ contract AIAgentCredentialGuard {
     function getStats(bytes32 agentId)
         external
         view
-        returns (
-            uint256 total,
-            uint256 failed,
-            uint256 locks,
-            bool currentlyLocked
-        )
+        returns (uint256 total, uint256 failed, uint256 locks, bool currentlyLocked)
     {
         Lockout storage l = _lockouts[agentId];
         bool locked = l.active && block.timestamp < l.until;

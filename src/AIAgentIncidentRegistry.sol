@@ -10,8 +10,17 @@ import "./OperatorPrivilegesV2.sol";
 contract AIAgentIncidentRegistry {
     OperatorPrivilegesV2 public privileges;
 
-    enum Severity { LOW, MEDIUM, HIGH, CRITICAL }
-    enum Status { OPEN, RESOLVED, DISMISSED }
+    enum Severity {
+        LOW,
+        MEDIUM,
+        HIGH,
+        CRITICAL
+    }
+    enum Status {
+        OPEN,
+        RESOLVED,
+        DISMISSED
+    }
 
     struct Incident {
         uint256 id;
@@ -33,11 +42,7 @@ contract AIAgentIncidentRegistry {
     mapping(bytes32 => uint256) public incidentCountByType;
 
     event IncidentReported(
-        uint256 indexed id,
-        bytes32 indexed agentId,
-        Severity severity,
-        bytes32 incidentType,
-        address reportedBy
+        uint256 indexed id, bytes32 indexed agentId, Severity severity, bytes32 incidentType, address reportedBy
     );
     event IncidentResolved(uint256 indexed id, string resolution, address resolvedBy);
     event IncidentDismissed(uint256 indexed id, address dismissedBy);
@@ -52,12 +57,11 @@ contract AIAgentIncidentRegistry {
         privileges = OperatorPrivilegesV2(_privileges);
     }
 
-    function reportIncident(
-        bytes32 agentId,
-        Severity severity,
-        bytes32 incidentType,
-        string calldata description
-    ) external onlyOperator returns (uint256) {
+    function reportIncident(bytes32 agentId, Severity severity, bytes32 incidentType, string calldata description)
+        external
+        onlyOperator
+        returns (uint256)
+    {
         incidentCount++;
         uint256 id = incidentCount;
 

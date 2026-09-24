@@ -75,13 +75,9 @@ contract AIAgentReputation {
         r.totalRewards++;
         r.lastUpdated = block.timestamp;
 
-        _history[agentId].push(Change({
-            delta: delta,
-            newScore: newScore,
-            reason: reason,
-            timestamp: block.timestamp,
-            actor: msg.sender
-        }));
+        _history[agentId].push(
+            Change({delta: delta, newScore: newScore, reason: reason, timestamp: block.timestamp, actor: msg.sender})
+        );
 
         emit ReputationRewarded(agentId, amount, newScore, reason);
     }
@@ -97,13 +93,9 @@ contract AIAgentReputation {
         r.totalSlashes++;
         r.lastUpdated = block.timestamp;
 
-        _history[agentId].push(Change({
-            delta: delta,
-            newScore: newScore,
-            reason: reason,
-            timestamp: block.timestamp,
-            actor: msg.sender
-        }));
+        _history[agentId].push(
+            Change({delta: delta, newScore: newScore, reason: reason, timestamp: block.timestamp, actor: msg.sender})
+        );
 
         emit ReputationSlashed(agentId, amount, newScore, reason);
     }

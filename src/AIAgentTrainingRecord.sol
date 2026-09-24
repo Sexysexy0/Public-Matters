@@ -41,24 +41,26 @@ contract AIAgentTrainingRecord {
         privileges = OperatorPrivileges(_privileges);
     }
 
-    function recordTraining(
-        bytes32 agentId,
-        bytes32 modelHash,
-        string calldata metadataURI
-    ) external onlyOperator returns (uint256) {
+    function recordTraining(bytes32 agentId, bytes32 modelHash, string calldata metadataURI)
+        external
+        onlyOperator
+        returns (uint256)
+    {
         require(modelHash != bytes32(0), "Invalid model hash");
 
-        _records[agentId].push(TrainingRecord({
-            agentId: agentId,
-            modelHash: modelHash,
-            metadataURI: metadataURI,
-            recordedBy: msg.sender,
-            recordedAt: block.timestamp,
-            authorizedBy: address(0),
-            authorizedAt: 0,
-            active: false,
-            revocationReason: bytes32(0)
-        }));
+        _records[agentId].push(
+            TrainingRecord({
+                agentId: agentId,
+                modelHash: modelHash,
+                metadataURI: metadataURI,
+                recordedBy: msg.sender,
+                recordedAt: block.timestamp,
+                authorizedBy: address(0),
+                authorizedAt: 0,
+                active: false,
+                revocationReason: bytes32(0)
+            })
+        );
 
         uint256 idx = _records[agentId].length - 1;
         emit TrainingRecorded(agentId, idx, modelHash, metadataURI);
