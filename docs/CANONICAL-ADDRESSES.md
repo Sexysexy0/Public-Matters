@@ -183,3 +183,19 @@ Faucets:
 - Every delegation revocable, inspectable, immutable on-chain
 - Batched execution possible via EntryPoint
 - ERC-4337 compatible with paymasters for gas abstraction
+
+### Defense Modules (Sepolia Verified 2026-09-24)
+| Contract            | Address                                      | Purpose                  |
+|---------------------|----------------------------------------------|--------------------------|
+| InvestigatorShield  | 0x9F0C85e7Fa1442ACCb96243e4DaA51e045F3b170   | Whistleblower protection |
+| ContinuityGuard     | 0x69C4B7523917B8Fe3c67aabd51dfA5a5DA3a7cA1   | Continuity enforcement   |
+| AIDecisionChallenge | 0x34d130B174F4a30A846FED7C02FCF53A19a4c2B6   | Public dispute mechanism |
+
+### Governance Core (Sepolia Verified 2026-09-24)
+| Contract               | Address                                      | Purpose                |
+|------------------------|----------------------------------------------|------------------------|
+| PublicMattersCovenant  | 0xDAa47BE34e1f76353E4198Cf106E36bd8895832e   | Covenant principles    |
+| GovernanceBundle       | 0x610970c1280cE9380f75Be5aD599F768fDEcB6c5   | Governance suite       |
+| ProjectContinuityReg.  | 0x1b8094a487dc98e6cd936445a57f41d2c120372e   | Project persistence    |
+| GlobalAssetRegistry    | 0x29f4d4e36412c374d3fF9aba2c8Ff72C32A29C0c   | Global asset catalog   |
+| OperatorPrivileges     | 0x3F2ac68b192041fc82593dF6d9ebDB07c08063FE   | Operator registry      |
