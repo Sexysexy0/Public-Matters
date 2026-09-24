@@ -51,3 +51,4 @@ Signals with strongest repo fit, ready to encode:
 2. PH Systemic Hardship -> ph-reform
 3. AI Water Footprint -> ph-environmental-justice
 4. Impeachment Attendance -> ph-accountability-tracker
+| 2026-09-24 | Global Crisis Map | Multi-domain | Public-Matters/docs/signals | OBSERVED |
