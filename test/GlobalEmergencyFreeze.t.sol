@@ -27,7 +27,7 @@ contract GlobalEmergencyFreezeTest is Test {
         freeze = new GlobalEmergencyFreeze(address(privileges));
     }
 
-    function test_InitialStateNotFrozen() public {
+    function test_InitialStateNotFrozen() public view {
         assertFalse(freeze.isFrozen());
     }
 
