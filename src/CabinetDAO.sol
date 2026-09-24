@@ -1,28 +1,38 @@
-// SPDX-License-Identifier: WIZARD-GENESIS-V1
-pragma solidity ^0.8.24;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.35;
+
+import {OperatorPrivileges} from "./OperatorPrivileges.sol";
 
 contract CabinetDAO {
-    address public admin;
-    mapping(address => string) public ministers; // wallet => role
+    OperatorPrivileges public immutable privileges;
+    mapping(address => string) public ministers; 
     address[] public ministerList;
+
     event MinisterAppointed(address indexed minister, string role);
     event MinisterRemoved(address indexed minister);
 
-    constructor() {
-        admin = msg.sender;
+    constructor(address _privilegesAddress) {
+        privileges = OperatorPrivileges(_privilegesAddress);
     }
 
-    function appointMinister(address _minister, string memory _role) public onlyAdmin {
+    modifier onlySystemAdmin() {
+        require(privileges.isOperator(msg.sender), "Only enterprise system operator authorized");
+        _;
+    }
+
+    function appointMinister(address _minister, string memory _role) public onlySystemAdmin {
         require(bytes(ministers[_minister]).length == 0, "Already appointed");
         ministers[_minister] = _role;
         ministerList.push(_minister);
+        
+        privileges.logAction(msg.sender, 10);
         emit MinisterAppointed(_minister, _role);
     }
 
-    function removeMinister(address _minister) public onlyAdmin {
+    function removeMinister(address _minister) public onlySystemAdmin {
         require(bytes(ministers[_minister]).length > 0, "Not a minister");
         delete ministers[_minister];
-        // Remove from list (swap with last)
+        
         for (uint256 i = 0; i < ministerList.length; i++) {
             if (ministerList[i] == _minister) {
                 ministerList[i] = ministerList[ministerList.length - 1];
@@ -30,6 +40,7 @@ contract CabinetDAO {
                 break;
             }
         }
+        privileges.logAction(msg.sender, -5);
         emit MinisterRemoved(_minister);
     }
 
@@ -39,10 +50,5 @@ contract CabinetDAO {
 
     function getAllMinisters() public view returns (address[] memory) {
         return ministerList;
-    }
-
-    modifier onlyAdmin() {
-        require(msg.sender == admin, "Only admin");
-        _;
     }
 }

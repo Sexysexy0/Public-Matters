@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity 0.8.35;
 
 import "./OperatorPrivileges.sol";
 
@@ -47,7 +47,7 @@ contract AIAgentSandbox {
     }
 
     constructor(address _privileges) {
-        require(_privileges != address(0), "Invalid privileges");
+        require(_privileges != address(0), "Invalid privileges address");
         privileges = OperatorPrivileges(_privileges);
     }
 
@@ -78,7 +78,6 @@ contract AIAgentSandbox {
 
     function exitSandbox(bytes32 agentId, bool passed, string calldata reason) external onlyOperator {
         require(_sandboxes[agentId].status == SandboxStatus.TESTING, "Agent not in sandbox");
-
         Sandbox storage s = _sandboxes[agentId];
         s.status = passed ? SandboxStatus.PASSED : SandboxStatus.FAILED;
         s.exitedAt = block.timestamp;
@@ -98,22 +97,18 @@ contract AIAgentSandbox {
         if (s.actionsPerformed > s.maxActions) {
             emit SandboxLimitExceeded(agentId, "actions");
             s.status = SandboxStatus.FAILED;
-            s.failureReason = "Exceeded action limit";
-            return;
-        }
-
-        if (s.maxValue > 0 && s.valueUsed > s.maxValue) {
+            s.failureReason = "Exceeded sandbox actions ceiling limit threshold";
+        } else if (s.maxValue > 0 && s.valueUsed > s.maxValue) {
             emit SandboxLimitExceeded(agentId, "value");
             s.status = SandboxStatus.FAILED;
-            s.failureReason = "Exceeded value limit";
-            return;
+            s.failureReason = "Exceeded sandbox target value capacity threshold";
         }
 
         emit SandboxActionRecorded(agentId, s.actionsPerformed, s.valueUsed);
     }
 
     function updateSandboxLimits(bytes32 agentId, uint256 maxActions, uint256 maxValue) external onlyOperator {
-        require(_sandboxes[agentId].status == SandboxStatus.TESTING, "Agent not in sandbox testing");
+        require(_sandboxes[agentId].status == SandboxStatus.TESTING, "Agent not in an active sandbox state");
         require(maxActions > 0, "Max actions must be > 0");
 
         _sandboxes[agentId].maxActions = maxActions;
@@ -134,7 +129,11 @@ contract AIAgentSandbox {
         return _sandboxes[agentId];
     }
 
-    function totalSandboxed() external view returns (uint256) {
+    function getSandboxedAgentsCount() public view returns (uint256) {
         return sandboxedAgents.length;
+    }
+
+    function totalSandboxed() external view returns (uint256) {
+        return getSandboxedAgentsCount();
     }
 }

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity 0.8.35;
 
 contract OperatorPrivileges {
     address public owner;
@@ -35,8 +35,8 @@ contract OperatorPrivileges {
         _;
     }
 
-    // Operator management
     function addOperator(address _operator) external onlyOwner {
+        require(_operator != address(0), "Zero address validation guard");
         isOperator[_operator] = true;
         emit OperatorAdded(_operator);
     }
@@ -48,12 +48,12 @@ contract OperatorPrivileges {
 
     function addOperatorBatch(address[] calldata _operators) external onlyOwner {
         for (uint256 i = 0; i < _operators.length; i++) {
+            require(_operators[i] != address(0), "Zero address validation guard");
             isOperator[_operators[i]] = true;
             emit OperatorAdded(_operators[i]);
         }
     }
 
-    // Safeguard API
     function addSafeguard(bytes32 safeguardId) external onlyOperator {
         isSafeguarded[safeguardId] = true;
         emit SafeguardAdded(safeguardId);
@@ -70,15 +70,16 @@ contract OperatorPrivileges {
         emit SafeguardTriggered(safeguardId, operator, block.timestamp);
     }
 
-    // Action Log API (also syncs trustScore so ledgers can read one source of truth)
     function logAction(address actor, int256 delta) external onlyOperator {
         actionLog[actor] += delta;
         totalActions++;
 
-        // Sync trustScore with the signed action delta
         if (delta >= 0) {
-            trustScore[actor] += uint256(delta);
+            // Explicit tracking pattern to isolate typecast boundaries
+            uint256 positiveDelta = uint256(delta);
+            trustScore[actor] += positiveDelta;
         } else {
+            // Safe inverse evaluation prevents arithmetic underflow truncation
             uint256 decrease = uint256(-delta);
             if (trustScore[actor] < decrease) {
                 trustScore[actor] = 0;
@@ -86,7 +87,6 @@ contract OperatorPrivileges {
                 trustScore[actor] -= decrease;
             }
         }
-
         emit ActionLogged(actor, delta, block.timestamp);
         emit TrustScoreUpdated(actor, trustScore[actor]);
     }
@@ -95,7 +95,6 @@ contract OperatorPrivileges {
         return actionLog[actor];
     }
 
-    // Trust Score API
     function getTrustScore(address actor) external view returns (uint256) {
         return trustScore[actor];
     }

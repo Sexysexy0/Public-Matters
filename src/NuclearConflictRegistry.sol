@@ -1,136 +1,80 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+pragma solidity 0.8.35;
 
 contract NuclearConflictRegistry {
-    struct Conflict {
-        address declarant;
-        bytes32 subject;
-        bytes32 disclosureHash;
+    address public administrativeSteward;
+    address public owner; 
+    uint256 public expiresAt;
+    uint256 public conflictCounter; 
+
+    struct IncidentRecord {
         uint64 declaredAt;
-        uint64 expiresAt;
-        bool active;
+        bool structuralStatus;
+        bytes32 verificationProof;
+        bytes32 subjectId;
     }
+    
+    mapping(uint256 => IncidentRecord) public incidents;
+    mapping(bytes32 => bool) public isSubjectConflicted;
 
-    error Unauthorized();
-    error InvalidInput();
-    error AlreadyExists();
-    error MissingConflict();
-    error AlreadyInactive();
+    event IncidentLogged(uint256 indexed assignedId, bytes32 indexed subjectId, uint64 declaredAt);
+    event IncidentRevoked(uint256 indexed assignedId, bytes32 indexed subjectId);
+    event ConflictProofAttached(uint256 indexed conflictId, bytes32 proof);
 
-    address public owner;
-    uint256 public nextConflictId = 1;
-
-    mapping(address => bool) public administrators;
-    mapping(uint256 => Conflict) private conflicts;
-    mapping(address => mapping(bytes32 => uint256)) public activeConflictId;
-
-    event AdministratorUpdated(address indexed administrator, bool authorized);
-    event ConflictDeclared(
-        uint256 indexed conflictId,
-        address indexed declarant,
-        bytes32 indexed subject,
-        bytes32 disclosureHash,
-        uint64 expiresAt
-    );
-    event ConflictRevoked(uint256 indexed conflictId, address indexed declarant);
-    event ConflictExpired(uint256 indexed conflictId);
-
-    modifier onlyOwner() {
-        if (msg.sender != owner) revert Unauthorized();
-        _;
-    }
-
-    modifier onlyAdministrator() {
-        if (!administrators[msg.sender]) revert Unauthorized();
-        _;
-    }
-
-    constructor() {
+    constructor() { 
+        administrativeSteward = msg.sender; 
         owner = msg.sender;
-        administrators[msg.sender] = true;
-        emit AdministratorUpdated(msg.sender, true);
     }
 
-    function setAdministrator(address administrator, bool authorized) external onlyOwner {
-        if (administrator == address(0)) revert InvalidInput();
-        administrators[administrator] = authorized;
-        emit AdministratorUpdated(administrator, authorized);
+    function setExpiration(uint256 _expiresAt) external {
+        require(msg.sender == administrativeSteward, "Not structural steward");
+        expiresAt = _expiresAt;
     }
 
-    function declareConflict(bytes32 subject, bytes32 disclosureHash, uint64 expiresAt)
-        external
-        returns (uint256 conflictId)
-    {
-        if (subject == bytes32(0) || disclosureHash == bytes32(0)) {
-            revert InvalidInput();
-        }
+    function verifyExpirationValidity() external view returns (bool) {
+        // forge-lint: disable-next-line(block-timestamp)
         if (expiresAt != 0 && expiresAt <= block.timestamp) {
-            revert InvalidInput();
+            return true;
         }
-        if (isConflicted(msg.sender, subject)) revert AlreadyExists();
+        return false;
+    }
 
-        conflictId = nextConflictId++;
-        conflicts[conflictId] = Conflict({
-            declarant: msg.sender,
-            subject: subject,
-            disclosureHash: disclosureHash,
-            declaredAt: uint64(block.timestamp),
-            expiresAt: expiresAt,
-            active: true
+    function declareIncident(bytes32 incidentId) public returns (uint256 assignedId) {
+        require(msg.sender == administrativeSteward, "Not administrative steward");
+        conflictCounter++;
+        assignedId = conflictCounter;
+
+        uint64 compressedTimestamp = uint64(block.timestamp);
+        incidents[assignedId] = IncidentRecord({
+            declaredAt: compressedTimestamp,
+            structuralStatus: true,
+            verificationProof: bytes32(0),
+            subjectId: incidentId
         });
-        activeConflictId[msg.sender][subject] = conflictId;
 
-        emit ConflictDeclared(conflictId, msg.sender, subject, disclosureHash, expiresAt);
+        isSubjectConflicted[incidentId] = true;
+        emit IncidentLogged(assignedId, incidentId, compressedTimestamp);
+    }
+
+    function isConflicted(address /* reviewer */, bytes32 subjectId) external view returns (bool) {
+        return isSubjectConflicted[subjectId];
+    }
+
+    function declareConflict(bytes32 subjectId, bytes32 proof, uint256 /* classification */) external returns (uint256 conflictId) {
+        conflictId = declareIncident(subjectId);
+        incidents[conflictId].verificationProof = proof;
+        // Fixed: Emit tracking indicator event for off-chain metrics visibility
+        emit ConflictProofAttached(conflictId, proof);
     }
 
     function revokeConflict(uint256 conflictId) external {
-        Conflict storage conflict = conflicts[conflictId];
-        if (conflict.declarant == address(0)) revert MissingConflict();
-        if (conflict.declarant != msg.sender && !administrators[msg.sender]) {
-            revert Unauthorized();
-        }
-        if (!conflict.active) revert AlreadyInactive();
-
-        conflict.active = false;
-        if (activeConflictId[conflict.declarant][conflict.subject] == conflictId) {
-            delete activeConflictId[conflict.declarant][conflict.subject];
-        }
-
-        emit ConflictRevoked(conflictId, conflict.declarant);
-    }
-
-    function expireConflict(uint256 conflictId) external {
-        Conflict storage conflict = conflicts[conflictId];
-        if (conflict.declarant == address(0)) revert MissingConflict();
-        if (!conflict.active) revert AlreadyInactive();
-        if (conflict.expiresAt == 0 || block.timestamp < conflict.expiresAt) {
-            revert InvalidInput();
-        }
-
-        conflict.active = false;
-        if (activeConflictId[conflict.declarant][conflict.subject] == conflictId) {
-            delete activeConflictId[conflict.declarant][conflict.subject];
-        }
-
-        emit ConflictExpired(conflictId);
-    }
-
-    function isConflicted(address declarant, bytes32 subject) public view returns (bool) {
-        uint256 conflictId = activeConflictId[declarant][subject];
-        if (conflictId == 0) return false;
-
-        Conflict memory conflict = conflicts[conflictId];
-        if (!conflict.active) return false;
-        if (conflict.expiresAt != 0 && block.timestamp >= conflict.expiresAt) {
-            return false;
-        }
-        return true;
-    }
-
-    function getConflict(uint256 conflictId) external view returns (Conflict memory) {
-        if (conflicts[conflictId].declarant == address(0)) {
-            revert MissingConflict();
-        }
-        return conflicts[conflictId];
+        require(msg.sender == administrativeSteward, "Not administrative steward");
+        require(incidents[conflictId].structuralStatus, "Incident does not exist or is inactive");
+        
+        incidents[conflictId].structuralStatus = false;
+        bytes32 subject = incidents[conflictId].subjectId;
+        isSubjectConflicted[subject] = false;
+        
+        emit IncidentRevoked(conflictId, subject);
     }
 }

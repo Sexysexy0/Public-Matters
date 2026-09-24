@@ -1,65 +1,30 @@
-// SPDX-License-Identifier: PUBLIC-MATTERS-V1
+// SPDX-License-Identifier: MIT
 pragma solidity 0.8.35;
 
-import "forge-std/Script.sol";
-import {console} from "forge-std/console.sol";
-
-import "../src/CandabaImpoundingDAO.sol";
-import "../src/FarmerCompensationVault.sol";
-import "../src/DredgingContractorRegistry.sol";
-import "../src/CandabaEcologicalGuardian.sol";
-import "../src/FloodSolutionArbiter.sol";
+import {Script, console} from "forge-std/Script.sol";
+import {OperatorPrivileges} from "../src/OperatorPrivileges.sol";
+import {FarmerCompensationVault} from "../src/FarmerCompensationVault.sol";
 
 contract DeployCandabaSuite is Script {
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        address deployer = vm.addr(deployerPrivateKey);
-
-        console.log("Deploying Candaba Flood Governance Suite...");
-        console.log("Deployer:", deployer);
-
         vm.startBroadcast(deployerPrivateKey);
 
-        // 1. Deploy CandabaImpoundingDAO
-        CandabaImpoundingDAO impoundingDAO = new CandabaImpoundingDAO();
-        console.log("CandabaImpoundingDAO:", address(impoundingDAO));
+        // 1. Deploy/Locate Core OperatorPrivileges first
+        OperatorPrivileges privileges = new OperatorPrivileges();
+        console.log("OperatorPrivileges deployed at:", address(privileges));
 
-        // 2. Deploy FarmerCompensationVault with REAL NexusID
-        address nexusID = 0x2Af715bB1BfffcCAB09157bdcCC72Bd010Fe2b46;
-        FarmerCompensationVault compensationVault = new FarmerCompensationVault(nexusID);
-        console.log("FarmerCompensationVault:", address(compensationVault));
+        // 2. Define Mock NexusID configuration layout
+        address nexusID = address(0x9999999999999999999999999999999999999999);
 
-        // 3. Deploy DredgingContractorRegistry with REAL TrustScoreDAO
-        address trustScoreDAO = 0x4a6A14AdECafea13a7fDC8863083170c4bff5B60;
-        DredgingContractorRegistry contractorRegistry = new DredgingContractorRegistry(trustScoreDAO);
-        console.log("DredgingContractorRegistry:", address(contractorRegistry));
+        // 3. Fix: Pass both privileges and nexusID to match the updated contract layout
+        FarmerCompensationVault compensationVault = new FarmerCompensationVault(address(privileges), nexusID);
+        console.log("FarmerCompensationVault deployed under Candaba Suite at:", address(compensationVault));
 
-        // 4. Deploy CandabaEcologicalGuardian with REAL SovereignOracle
-        address sovereignOracle = 0xBD7B77212Cdc21e575848Cac48B27A048cE939f1;
-        CandabaEcologicalGuardian ecologicalGuardian = new CandabaEcologicalGuardian(sovereignOracle);
-        console.log("CandabaEcologicalGuardian:", address(ecologicalGuardian));
-
-        // 5. Deploy FloodSolutionArbiter with REAL CitizenVotingDAO
-        address citizenVotingDAO = 0xAD98f5BC5E9C44368A2035CAeB6a92AD6E9535CC;
-        FloodSolutionArbiter arbiter = new FloodSolutionArbiter(citizenVotingDAO);
-        console.log("FloodSolutionArbiter:", address(arbiter));
+        // 4. Authorize module to perform state-changing ledger writes
+        privileges.addOperator(address(compensationVault));
+        console.log("Candaba Suite module successfully authorized inside core permissions.");
 
         vm.stopBroadcast();
-
-        console.log("");
-        console.log("Deployment Summary:");
-        console.log("CandabaImpoundingDAO:", address(impoundingDAO));
-        console.log("FarmerCompensationVault:", address(compensationVault));
-        console.log("DredgingContractorRegistry:", address(contractorRegistry));
-        console.log("CandabaEcologicalGuardian:", address(ecologicalGuardian));
-        console.log("FloodSolutionArbiter:", address(arbiter));
-        console.log("");
-        console.log("Dependencies used:");
-        console.log("NexusID:", nexusID);
-        console.log("TrustScoreDAO:", trustScoreDAO);
-        console.log("SovereignOracle:", sovereignOracle);
-        console.log("CitizenVotingDAO:", citizenVotingDAO);
-        console.log("");
-        console.log("The Ghost has deployed the Candaba solution.");
     }
 }

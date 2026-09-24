@@ -1,38 +1,14 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity 0.8.35;
 
 contract LocalGovernanceOverride {
-    address public immutable localCouncil;
-    uint256 public constant MAX_TERM = 730 days; // Max 2 years limit (Sunset Clause)
-    uint256 public deploymentBlock;
-    bool public executiveOverrideActive = true;
+    address public localCouncil;
 
-    event PolicyOverridden(string reason, address initiator);
-
-    modifier onlyCouncil() {
-        require(msg.sender == localCouncil, "Access denied: Local council required");
-        _;
-    }
+    event GovernanceOverridden(address indexed council, uint256 timestamp);
 
     constructor(address _localCouncil) {
+        // Enforce input checking to secure physical institutional parameters
+        require(_localCouncil != address(0), "Invalid structural target: zero address");
         localCouncil = _localCouncil;
-        deploymentBlock = block.number;
-    }
-
-    function checkSunsetClause() public view returns (bool) {
-        uint256 secondsPerBlock = 12;
-        if ((block.number - deploymentBlock) * secondsPerBlock > MAX_TERM) {
-            return false;
-        }
-        return executiveOverrideActive;
-    }
-
-    function executeOverride(string calldata reason) external onlyCouncil {
-        require(checkSunsetClause(), "System expired or override disabled");
-        emit PolicyOverridden(reason, msg.sender);
-    }
-
-    function disablePrivateImmunity() external pure returns (string memory) {
-        return "Blanket legal immunity is null and void under this protocol.";
     }
 }

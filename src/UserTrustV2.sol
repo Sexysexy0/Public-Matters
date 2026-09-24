@@ -1,61 +1,18 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
-
-import {SafeCast} from "@openzeppelin/contracts/utils/math/SafeCast.sol";
+pragma solidity 0.8.35;
 
 contract UserTrustV2 {
-    using SafeCast for int256;
-
-    address public immutable steward;
-    mapping(address => uint256) public score;
-    mapping(address => bool) public authorized;
-
-    event ScoreAdjusted(address indexed user, int256 delta, uint256 newScore, string reason);
-    event AuthorizedCallerAdded(address caller);
-    event AuthorizedCallerRemoved(address caller);
-
-    modifier onlySteward() {
-        require(msg.sender == steward, "Only steward");
-        _;
-    }
-
-    modifier onlyAuthorized() {
-        require(msg.sender == steward || authorized[msg.sender], "Not authorized");
-        _;
-    }
-
+    address public poolAdmin;
     constructor() {
-        steward = msg.sender;
+        poolAdmin = msg.sender;
     }
 
-    function addAuthorizedCaller(address caller) external onlySteward {
-        authorized[caller] = true;
-        emit AuthorizedCallerAdded(caller);
-    }
-
-    function removeAuthorizedCaller(address caller) external onlySteward {
-        authorized[caller] = false;
-        emit AuthorizedCallerRemoved(caller);
-    }
-
-    function adjustScore(address user, int256 delta, string calldata reason) public onlyAuthorized {
-        int256 newScore = int256(score[user]) + delta;
-        require(newScore >= 0, "Score underflow");
-        score[user] = newScore.toUint256();
-        emit ScoreAdjusted(user, delta, newScore.toUint256(), reason);
-    }
-
-    function batchAdjust(address[] calldata users, int256[] calldata deltas, string calldata reason)
-        external
-        onlyAuthorized
-    {
-        require(users.length == deltas.length, "Length mismatch");
-        for (uint256 i = 0; i < users.length; i++) {
-            adjustScore(users[i], deltas[i], reason);
+    function batchValidateScores(int256[] calldata scores) external view {
+        require(msg.sender == poolAdmin, "Not pool admin");
+        for (uint256 i = 0; i < scores.length; i++) {
+            int256 newScore = scores[i];
+            // forge-lint: disable-next-line(require-revert-in-loop)
+            require(newScore >= 0, "Score underflow");
         }
-    }
-
-    function getScore(address user) external view returns (uint256) {
-        return score[user];
     }
 }

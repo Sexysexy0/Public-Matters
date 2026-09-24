@@ -1,45 +1,50 @@
-// SPDX-License-Identifier: PUBLIC-MATTERS-V1
+// SPDX-License-Identifier: MIT
 pragma solidity 0.8.35;
 
-/**
- * @title FarmerCompensationVault
- * @author The Source
- * @notice Locks funds for farmers displaced by the impounding project.
- * @dev Releases compensation only via verified NexusID.
- */
+import {OperatorPrivileges} from "./OperatorPrivileges.sol";
+
 contract FarmerCompensationVault {
-    address public admin;
+    OperatorPrivileges public immutable privileges;
     address public nexusID;
     bool public active;
     uint256 public totalLocked;
     uint256 public totalClaimed;
+    bool private locked; 
 
     struct FarmerClaim {
         address farmer;
-        uint256 landArea; // In hectares
+        uint256 landArea; 
         uint256 compensationAmount;
-        uint256 cropYieldHistory; // Average yield over 3 years
+        uint256 cropYieldHistory; 
         bool verified;
         bool claimed;
         uint256 timestamp;
-        string location; // Barangay/Sitio
+        string location; 
     }
 
     mapping(address => FarmerClaim) public farmers;
     mapping(address => bool) public isVerifier;
     address[] public farmerList;
 
+    event VerifierStatusUpdated(address indexed verifier, bool indexed status);
     event FarmerVerified(address indexed farmer, uint256 landArea, uint256 compensation);
     event CompensationClaimed(address indexed farmer, uint256 amount);
     event FundsDeposited(address indexed from, uint256 amount);
 
-    modifier onlyAdmin() {
-        require(msg.sender == admin, "Not admin");
+    modifier nonReentrant() {
+        require(!locked, "ReentrancyGuard: reentrant call");
+        locked = true;
+        _;
+        locked = false;
+    }
+
+    modifier onlySystemAdmin() {
+        require(privileges.isOperator(msg.sender), "Not enterprise system operator");
         _;
     }
 
     modifier onlyVerifier() {
-        require(isVerifier[msg.sender], "Not a verifier");
+        require(isVerifier[msg.sender], "Not an authorized verifier");
         _;
     }
 
@@ -48,21 +53,25 @@ contract FarmerCompensationVault {
         _;
     }
 
-    constructor(address _nexusID) {
-        admin = msg.sender;
+    constructor(address _privilegesAddress, address _nexusID) {
+        require(_nexusID != address(0), "NexusID validation zero-check gate");
+        privileges = OperatorPrivileges(_privilegesAddress);
         nexusID = _nexusID;
         active = true;
-        totalLocked = 0;
-        totalClaimed = 0;
         isVerifier[msg.sender] = true;
+        emit VerifierStatusUpdated(msg.sender, true);
     }
 
-    function addVerifier(address _verifier) public onlyAdmin whenActive {
+    function addVerifier(address _verifier) public onlySystemAdmin whenActive {
+        require(_verifier != address(0), "Zero address input validation guard");
         isVerifier[_verifier] = true;
+        emit VerifierStatusUpdated(_verifier, true);
     }
 
-    function removeVerifier(address _verifier) public onlyAdmin whenActive {
+    function removeVerifier(address _verifier) public onlySystemAdmin whenActive {
+        require(_verifier != address(0), "Zero address input validation guard");
         isVerifier[_verifier] = false;
+        emit VerifierStatusUpdated(_verifier, false);
     }
 
     function registerFarmer(
@@ -86,24 +95,32 @@ contract FarmerCompensationVault {
             timestamp: block.timestamp,
             location: _location
         });
-
+        
         farmerList.push(_farmer);
+        
+        // Fixed: Emit the logging events BEFORE any external interaction patterns
         emit FarmerVerified(_farmer, _landArea, _compensationAmount);
+        privileges.logAction(_farmer, 5); 
     }
 
-    function claimCompensation() public whenActive {
+    // Fixed: Placed nonReentrant as the absolute first modifier block to clear linter rules
+    function claimCompensation() public nonReentrant whenActive {
         FarmerClaim storage farmer = farmers[msg.sender];
         require(farmer.farmer == msg.sender, "Not registered");
         require(farmer.verified, "Not verified");
         require(!farmer.claimed, "Already claimed");
-        require(address(this).balance >= farmer.compensationAmount, "Insufficient funds");
+        require(address(this).balance >= farmer.compensationAmount, "Insufficient vault balance");
 
         uint256 amount = farmer.compensationAmount;
         farmer.claimed = true;
         totalClaimed += amount;
 
-        payable(msg.sender).transfer(amount);
+        // Fixed: Synchronize system state variables prior to running low-level transfer payloads
+        privileges.logAction(msg.sender, 15);
         emit CompensationClaimed(msg.sender, amount);
+
+        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        require(success, "Compensation payment transfer failed");
     }
 
     function deposit() public payable {
@@ -124,11 +141,10 @@ contract FarmerCompensationVault {
         return address(this).balance;
     }
 
-    function toggleActive() public onlyAdmin {
+    function toggleActive() public onlySystemAdmin {
         active = !active;
     }
 
-    // Allow contract to receive ETH
     receive() external payable {
         totalLocked += msg.value;
         emit FundsDeposited(msg.sender, msg.value);

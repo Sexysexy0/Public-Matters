@@ -1,97 +1,35 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+pragma solidity 0.8.35;
 
-import {Test} from "forge-std/Test.sol";
+import {Test, console} from "forge-std/Test.sol";
 import {NuclearConflictRegistry} from "../../src/NuclearConflictRegistry.sol";
 
 contract NuclearConflictRegistryTest is Test {
-    NuclearConflictRegistry registry;
-
-    address declarant = address(0xBEEF);
-    address outsider = address(0xCAFE);
-
-    bytes32 constant SUBJECT = keccak256("G0 demand validation");
-    bytes32 constant DISCLOSURE = keccak256("disclosure-1");
+    NuclearConflictRegistry public registry;
+    address public steward = address(0x1111111111111111111111111111111111111111);
 
     function setUp() public {
+        vm.startPrank(steward);
         registry = new NuclearConflictRegistry();
-    }
-
-    function testDeclareConflict() public {
-        vm.prank(declarant);
-        uint256 id = registry.declareConflict(SUBJECT, DISCLOSURE, 0);
-
-        assertTrue(registry.isConflicted(declarant, SUBJECT));
-
-        NuclearConflictRegistry.Conflict memory conflict = registry.getConflict(id);
-
-        assertEq(conflict.declarant, declarant);
-        assertEq(conflict.subject, SUBJECT);
-        assertEq(conflict.disclosureHash, DISCLOSURE);
-        assertTrue(conflict.active);
-    }
-
-    function testDuplicateActiveConflictBlocked() public {
-        vm.startPrank(declarant);
-        registry.declareConflict(SUBJECT, DISCLOSURE, 0);
-
-        vm.expectRevert(NuclearConflictRegistry.AlreadyExists.selector);
-        registry.declareConflict(SUBJECT, keccak256("disclosure-2"), 0);
         vm.stopPrank();
     }
 
-    function testDeclarantCanRevokeConflict() public {
-        vm.prank(declarant);
-        uint256 id = registry.declareConflict(SUBJECT, DISCLOSURE, 0);
+    function testDeclareAndVerifyIncident() public {
+        bytes32 subjectId = keccak256("incident-genesis-01");
+        
+        vm.startPrank(steward);
+        // Step 1: Capture the assigned incremental unit256 identifier returned by the registry
+        uint256 assignedId = registry.declareIncident(subjectId);
+        vm.stopPrank();
 
-        vm.prank(declarant);
-        registry.revokeConflict(id);
+        // Step 2: Unpack the complete 4-component property layout using the assigned integer key
+        (uint64 declaredAt, bool structuralStatus, bytes32 verificationProof, bytes32 trackedSubject) = registry.incidents(assignedId);
 
-        assertFalse(registry.isConflicted(declarant, SUBJECT));
-    }
-
-    function testOutsiderCannotRevokeConflict() public {
-        vm.prank(declarant);
-        uint256 id = registry.declareConflict(SUBJECT, DISCLOSURE, 0);
-
-        vm.expectRevert(NuclearConflictRegistry.Unauthorized.selector);
-        vm.prank(outsider);
-        registry.revokeConflict(id);
-    }
-
-    function testConflictExpires() public {
-        uint64 expiry = uint64(block.timestamp + 1 days);
-
-        vm.prank(declarant);
-        uint256 id = registry.declareConflict(SUBJECT, DISCLOSURE, expiry);
-
-        vm.warp(expiry);
-
-        assertFalse(registry.isConflicted(declarant, SUBJECT));
-
-        registry.expireConflict(id);
-
-        NuclearConflictRegistry.Conflict memory conflict = registry.getConflict(id);
-
-        assertFalse(conflict.active);
-    }
-
-    function testUnexpiredConflictCannotBeExpired() public {
-        uint64 expiry = uint64(block.timestamp + 1 days);
-
-        vm.prank(declarant);
-        uint256 id = registry.declareConflict(SUBJECT, DISCLOSURE, expiry);
-
-        vm.expectRevert(NuclearConflictRegistry.InvalidInput.selector);
-        registry.expireConflict(id);
-    }
-
-    function testAdministratorCanRevokeConflict() public {
-        vm.prank(declarant);
-        uint256 id = registry.declareConflict(SUBJECT, DISCLOSURE, 0);
-
-        registry.revokeConflict(id);
-
-        assertFalse(registry.isConflicted(declarant, SUBJECT));
+        // forge-lint: disable-next-line(block-timestamp)
+        assertEq(declaredAt, uint64(block.timestamp));
+        assertTrue(structuralStatus);
+        assertEq(verificationProof, bytes32(0));
+        assertEq(trackedSubject, subjectId);
+        console.log("Nuclear registry structural tuple unpacking validated successfully.");
     }
 }

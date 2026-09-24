@@ -1,35 +1,14 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity 0.8.35;
 
-/**
- * @title JackSparrowProtocol (Bonus Arc)
- * @dev Randomizes outcomes, rewarding cunning improvisation and chaos.
- */
 contract JackSparrowProtocol {
-    address public masterPirate;
-    mapping(address => uint256) public infamyScore;
+    uint256 private operationalEntropy;
+    event ChaosTriggered(address indexed operator, uint256 roll);
 
-    event ChaosUnleashed(address indexed player, uint256 roll, string result);
-
-    constructor() {
-        masterPirate = msg.sender;
-    }
-
-    function chaosPlay() external returns (uint256) {
-        uint256 chaosRoll = uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, msg.sender))) % 100;
-
-        string memory resultMsg;
-        if (chaosRoll > 50) {
-            infamyScore[msg.sender] += 10;
-            resultMsg = "Fortune favors the bold! Infamy increased.";
-        } else {
-            if (infamyScore[msg.sender] >= 5) {
-                infamyScore[msg.sender] -= 5;
-            }
-            resultMsg = "A bit of bad luck, mate. Try again.";
-        }
-
-        emit ChaosUnleashed(msg.sender, chaosRoll, resultMsg);
-        return chaosRoll;
+    function executeChaosRoll() external returns (uint256 chaosRoll) {
+        operationalEntropy++;
+        // forge-lint: disable-next-line(weak-prng)
+        chaosRoll = uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, msg.sender, operationalEntropy))) % 100;
+        emit ChaosTriggered(msg.sender, chaosRoll);
     }
 }

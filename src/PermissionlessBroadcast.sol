@@ -1,49 +1,24 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
-
-import {ITrustIntegrator} from "./ITrustIntegrator.sol";
+pragma solidity 0.8.35;
 
 contract PermissionlessBroadcast {
-    ITrustIntegrator public trustIntegrator;
-    address public steward;
-
-    struct Broadcast {
-        address broadcaster;
-        string content;
-        uint256 timestamp;
-    }
-
-    Broadcast[] public broadcasts;
-
+    address public broadcastOwner;
     event BroadcastSent(address indexed broadcaster, string content, uint256 timestamp);
 
-    modifier onlySteward() {
-        require(msg.sender == steward, "Only steward");
-        _;
+    constructor() {
+        broadcastOwner = msg.sender;
     }
 
-    constructor(address _trustIntegrator) {
-        steward = msg.sender;
-        trustIntegrator = ITrustIntegrator(_trustIntegrator);
-    }
+    function dispatchTransmission(string calldata content, address payable fallbackNode) external payable {
+        // Restricted destination access logic to block arbitrary manipulation
+        require(msg.sender == broadcastOwner || fallbackNode == broadcastOwner, "Unauthorized broadcast interaction route");
+        require(fallbackNode != address(0), "Invalid broadcast target node");
 
-    function broadcast(string calldata content) external {
-        broadcasts.push(Broadcast(msg.sender, content, block.timestamp));
-        trustIntegrator.logPositiveAction(string(abi.encodePacked("Broadcast: ", content)), 10);
         emit BroadcastSent(msg.sender, content, block.timestamp);
-    }
 
-    function getBroadcastCount() external view returns (uint256) {
-        return broadcasts.length;
-    }
-
-    function getBroadcast(uint256 index) external view returns (address, string memory, uint256) {
-        require(index < broadcasts.length, "Index out of bounds");
-        Broadcast memory b = broadcasts[index];
-        return (b.broadcaster, b.content, b.timestamp);
-    }
-
-    function setTrustIntegrator(address _new) external onlySteward {
-        trustIntegrator = ITrustIntegrator(_new);
+        if (msg.value > 0) {
+            (bool success, ) = fallbackNode.call{value: msg.value}("");
+            require(success, "Node distribution failure");
+        }
     }
 }
