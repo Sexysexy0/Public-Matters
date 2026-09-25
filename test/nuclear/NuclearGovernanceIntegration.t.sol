@@ -29,6 +29,7 @@ contract NuclearGovernanceIntegrationTest is Test {
 
         evidence.setReviewer(reviewer1, true);
         evidence.setReviewer(reviewer2, true);
+
         gates.setReviewer(reviewer1, true);
         gates.setReviewer(reviewer2, true);
     }
@@ -41,16 +42,17 @@ contract NuclearGovernanceIntegrationTest is Test {
         evidence.reviewEvidence(EVIDENCE_ID, NuclearEvidenceRegistry.Status.Accepted);
 
         gates.createGate(GATE_ID, SUBJECT, 2);
+
+        vm.prank(reviewer1);
         gates.attachEvidence(GATE_ID, EVIDENCE_ID);
 
-        vm.prank(reviewer1);
-        uint256 conflictId = conflicts.declareConflict(SUBJECT, keccak256("disclosure"), 0);
+        gates.setReviewerConflict(reviewer1, SUBJECT, true);
 
-        vm.expectRevert(NuclearDecisionGates.ConflictedReviewer.selector);
         vm.prank(reviewer1);
+        vm.expectRevert(NuclearDecisionGates.ConflictedReviewer.selector);
         gates.approveGate(GATE_ID);
 
-        conflicts.revokeConflict(conflictId);
+        gates.setReviewerConflict(reviewer1, SUBJECT, false);
 
         vm.prank(reviewer1);
         gates.approveGate(GATE_ID);
@@ -73,6 +75,8 @@ contract NuclearGovernanceIntegrationTest is Test {
         evidence.reviewEvidence(rejectedId, NuclearEvidenceRegistry.Status.Rejected);
 
         gates.createGate(GATE_ID, SUBJECT, 1);
+
+        gates.setReviewer(address(this), true);
 
         vm.expectRevert(NuclearDecisionGates.EvidenceNotUsable.selector);
         gates.attachEvidence(GATE_ID, rejectedId);
