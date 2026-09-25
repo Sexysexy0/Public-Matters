@@ -70,6 +70,7 @@ contract OperatorPrivilegesV2 {
     // ─── OPERATOR MANAGEMENT ───
 
     function addOperator(address _operator) external onlyOwner {
+        require(_operator != address(0), "Invalid operator");
         isOperator[_operator] = true;
         emit OperatorAdded(_operator);
     }
@@ -81,6 +82,7 @@ contract OperatorPrivilegesV2 {
 
     function addOperatorBatch(address[] calldata _operators) external onlyOwner {
         for (uint256 i = 0; i < _operators.length; i++) {
+            require(_operators[i] != address(0), "Invalid operator");
             isOperator[_operators[i]] = true;
             emit OperatorAdded(_operators[i]);
         }
