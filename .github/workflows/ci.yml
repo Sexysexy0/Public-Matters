@@ -2,13 +2,17 @@ name: Public Matters CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
+
+permissions:
+  contents: read
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -40,6 +44,7 @@ jobs:
     needs: build-and-test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -53,6 +58,7 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           TRANSPARENCY_REGISTRY: ${{ secrets.TRANSPARENCY_REGISTRY }}
-        run: forge script script/MasterDeployment.s.sol --via-ir \
-          --rpc-url ${{ secrets.SEPOLIA_RPC }} \
-          --broadcast --slow
+        run: |
+          forge script script/MasterDeployment.s.sol --via-ir \
+            --rpc-url ${{ secrets.SEPOLIA_RPC }} \
+            --broadcast --slow
