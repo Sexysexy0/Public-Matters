@@ -1,4 +1,4 @@
-name: Foundry CI + Deploy
+name: Foundry CI
 
 on:
   push:
