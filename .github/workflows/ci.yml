@@ -1,58 +1,55 @@
-name: Public Matters CI/CD
+name: Public Matters CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
 
-      - name: Run tests with gas report
-        run: forge test --via-ir --gas-report > gas-report.txt
+      - name: Show tool versions
+        run: |
+          forge --version
+          cast --version
 
-      - name: Upload gas report artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: gas-report
-          path: gas-report.txt
+      - name: Build
+        run: forge build
+
+      - name: Test with gas report
+        run: forge test --via-ir --gas-report | tee gas-report.txt
 
       - name: Generate coverage
         run: forge coverage --report lcov
 
-      - name: Upload coverage artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload gas report
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: coverage
+          name: gas-report
+          path: gas-report.txt
+          if-no-files-found: warn
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-lcov
           path: lcov.info
-
-  deploy-sepolia:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@v1
-        with:
-          version: nightly
-
-      - name: Deploy Covenant Bundle
-        env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          TRANSPARENCY_REGISTRY: ${{ secrets.TRANSPARENCY_REGISTRY }}
-        run: forge script script/MasterDeployment.s.sol --via-ir \
-          --rpc-url ${{ secrets.SEPOLIA_RPC }} \
-          --broadcast --slow
+          if-no-files-found: warn

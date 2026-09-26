@@ -1,0 +1,46 @@
+name: Deploy Sepolia
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: Type DEPLOY_TO_SEPOLIA to authorize broadcast
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    if: github.event.inputs.confirm == 'DEPLOY_TO_SEPOLIA'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: sepolia
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Build contracts
+        run: forge build
+
+      - name: Deploy Master Architecture
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          SEPOLIA_RPC: ${{ secrets.SEPOLIA_RPC }}
+          TRANSPARENCY_REGISTRY: ${{ secrets.TRANSPARENCY_REGISTRY }}
+        run: |
+          test -n "$PRIVATE_KEY"
+          test -n "$SEPOLIA_RPC"
+          test -n "$TRANSPARENCY_REGISTRY"
+          forge script script/MasterDeployment.s.sol \
+            --via-ir \
+            --rpc-url "$SEPOLIA_RPC" \
+            --broadcast \
+            --slow
