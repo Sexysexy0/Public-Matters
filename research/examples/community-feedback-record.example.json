@@ -1,0 +1,36 @@
+{
+  "record_type": "community_feedback_record",
+  "record_id": "CF-EXAMPLE-001",
+  "received_date": "2026-09-27",
+  "evidence_status": "fictional_example",
+  "category": "performance",
+  "secondary_categories": [
+    "reliability"
+  ],
+  "summary": "Illustrative-only record describing a fictional report of inconsistent frame pacing after a hypothetical update.",
+  "source": {
+    "source_type": "user_report",
+    "received_or_observed_by": "Example documentation source",
+    "product_version": null,
+    "platform_or_environment": "Illustrative environment only",
+    "context_notes": "No real user, product, platform, or test result is represented."
+  },
+  "impact": {
+    "severity": "unknown",
+    "affected_group_summary": "Unknown; fictional example only.",
+    "reported_frequency": null,
+    "safety_privacy_accessibility_notes": "No measurement or user-impact claim is made."
+  },
+  "triage": {
+    "status": "needs_evidence",
+    "priority": "unprioritized",
+    "reproduction_steps": "Not available; fictional example only.",
+    "decision_rationale": "This record demonstrates schema structure and must not be used as evidence of a real issue.",
+    "next_review_date": null
+  },
+  "privacy": {
+    "safe_to_publish": true,
+    "redaction_notes": "Fictional example; contains no personal data."
+  },
+  "evidence_reference": "illustrative-only-not-a-real-feedback-report"
+}

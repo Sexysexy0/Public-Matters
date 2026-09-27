@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://public-matters.local/schemas/community-feedback-record.schema.json",
+  "title": "Community Feedback Record",
+  "description": "Schema for evidence-labeled feedback records. A valid record does not prove technical cause, legal fault, intent, or majority preference.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "record_id",
+    "received_date",
+    "evidence_status",
+    "category",
+    "summary",
+    "source",
+    "impact",
+    "triage",
+    "privacy",
+    "evidence_reference"
+  ],
+  "properties": {
+    "record_type": {
+      "const": "community_feedback_record"
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^CF-[A-Z0-9-]+$"
+    },
+    "received_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "reported",
+        "observed",
+        "reproduced",
+        "disputed",
+        "unsupported",
+        "fictional_example"
+      ]
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "reliability",
+        "performance",
+        "usability",
+        "accessibility",
+        "safety_or_abuse",
+        "fairness_or_balance",
+        "progression_or_monetization",
+        "content_or_capability",
+        "documentation_or_support",
+        "other"
+      ]
+    },
+    "secondary_categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "reliability",
+          "performance",
+          "usability",
+          "accessibility",
+          "safety_or_abuse",
+          "fairness_or_balance",
+          "progression_or_monetization",
+          "content_or_capability",
+          "documentation_or_support",
+          "other"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_type",
+        "received_or_observed_by"
+      ],
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "user_report",
+            "review",
+            "support_ticket",
+            "issue_tracker",
+            "telemetry",
+            "moderation_report",
+            "independent_test",
+            "other"
+          ]
+        },
+        "received_or_observed_by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "product_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "platform_or_environment": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "context_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "impact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "severity",
+        "affected_group_summary"
+      ],
+      "properties": {
+        "severity": {
+          "type": "string",
+          "enum": [
+            "low",
+            "moderate",
+            "high",
+            "critical",
+            "unknown"
+          ]
+        },
+        "affected_group_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reported_frequency": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "safety_privacy_accessibility_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "triage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "priority"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "received",
+            "investigating",
+            "confirmed",
+            "implemented",
+            "declined",
+            "needs_evidence",
+            "closed"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "p0",
+            "p1",
+            "p2",
+            "p3",
+            "unprioritized"
+          ]
+        },
+        "reproduction_steps": {
+          "type": "string"
+        },
+        "decision_rationale": {
+          "type": "string"
+        },
+        "next_review_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "safe_to_publish"
+      ],
+      "properties": {
+        "safe_to_publish": {
+          "type": "boolean"
+        },
+        "redaction_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "evidence_reference": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}
