@@ -1,6 +1,6 @@
 # Pyrowave Source Register
 
-**Created:** 2026-09-27  
+**Created:** 2026-09-27
 **Purpose:** Preserve an evidence trail for the Pyrowave latency–bandwidth review.
 
 ## Source classification

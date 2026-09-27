@@ -1,7 +1,7 @@
 # Pyrowave: Latency–Bandwidth Trade-off Review
 
-**Review date:** 2026-09-27  
-**Status:** Observation and research note  
+**Review date:** 2026-09-27
+**Status:** Observation and research note
 **Scope:** Experimental Steam Remote Play codec for local game streaming
 
 ## Summary
