@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://public-matters.local/schemas/pyrowave-benchmark.schema.json",
+  "title": "Pyrowave Local Streaming Benchmark Record",
+  "description": "Schema for recording reproducible local game-streaming benchmark observations. This schema does not prove performance claims by itself.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "evidence_status",
+    "test_date",
+    "codec",
+    "host",
+    "client",
+    "network",
+    "stream",
+    "measurements",
+    "method",
+    "evidence_reference"
+  ],
+  "properties": {
+    "record_type": {
+      "const": "pyrowave_local_streaming_benchmark"
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "reported",
+        "reproduced",
+        "fictional_example",
+        "unsupported"
+      ]
+    },
+    "test_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "codec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "release_channel"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "release_channel": {
+          "type": "string",
+          "enum": [
+            "stable",
+            "beta",
+            "experimental",
+            "unknown"
+          ]
+        },
+        "build_or_version": {
+          "type": "string"
+        }
+      }
+    },
+    "host": {
+      "$ref": "#/$defs/device"
+    },
+    "client": {
+      "$ref": "#/$defs/device"
+    },
+    "network": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "connection_type",
+        "path_summary",
+        "link_speed_mbps"
+      ],
+      "properties": {
+        "connection_type": {
+          "type": "string",
+          "enum": [
+            "wired",
+            "wifi",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "path_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "link_speed_mbps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "competing_traffic_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "stream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resolution",
+        "refresh_hz",
+        "bitrate_mbps",
+        "hdr_enabled",
+        "test_duration_minutes"
+      ],
+      "properties": {
+        "resolution": {
+          "type": "string",
+          "pattern": "^[0-9]+x[0-9]+$"
+        },
+        "refresh_hz": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "bitrate_mbps": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "hdr_enabled": {
+          "type": "boolean"
+        },
+        "test_duration_minutes": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "measurements": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "average_latency_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "p95_latency_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "packet_loss_percent": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "jitter_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "host_gpu_utilization_percent": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "client_gpu_utilization_percent": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "visual_quality_notes": {
+          "type": "string"
+        },
+        "stability_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "latency_measurement_method"
+      ],
+      "properties": {
+        "latency_measurement_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "packet_loss_measurement_method": {
+          "type": "string"
+        },
+        "gpu_measurement_method": {
+          "type": "string"
+        },
+        "controlled_variables_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "evidence_reference": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "device": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "os",
+        "cpu",
+        "gpu"
+      ],
+      "properties": {
+        "os": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cpu": {
+          "type": "string",
+          "minLength": 1
+        },
+        "gpu": {
+          "type": "string",
+          "minLength": 1
+        },
+        "memory_gb": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "record_type": "pyrowave_local_streaming_benchmark",
+  "evidence_status": "fictional_example",
+  "test_date": "2026-09-27",
+  "codec": {
+    "name": "Pyrowave",
+    "release_channel": "experimental",
+    "build_or_version": "illustrative-only"
+  },
+  "host": {
+    "os": "Example OS",
+    "cpu": "Example CPU",
+    "gpu": "Example GPU",
+    "memory_gb": 32
+  },
+  "client": {
+    "os": "Example Client OS",
+    "cpu": "Example Client CPU",
+    "gpu": "Example Client GPU",
+    "memory_gb": 16
+  },
+  "network": {
+    "connection_type": "wired",
+    "path_summary": "Example host-to-switch-to-client path",
+    "link_speed_mbps": 1000,
+    "competing_traffic_notes": "Illustrative record only; no real network test was performed."
+  },
+  "stream": {
+    "resolution": "1920x1080",
+    "refresh_hz": 120,
+    "bitrate_mbps": 250,
+    "hdr_enabled": false,
+    "test_duration_minutes": 30
+  },
+  "measurements": {
+    "average_latency_ms": null,
+    "p95_latency_ms": null,
+    "packet_loss_percent": null,
+    "jitter_ms": null,
+    "host_gpu_utilization_percent": null,
+    "client_gpu_utilization_percent": null,
+    "visual_quality_notes": "No measurement: fictional schema demonstration only.",
+    "stability_notes": "No measurement: fictional schema demonstration only."
+  },
+  "method": {
+    "latency_measurement_method": "Not measured; fictional schema demonstration only.",
+    "packet_loss_measurement_method": "Not measured.",
+    "gpu_measurement_method": "Not measured.",
+    "controlled_variables_notes": "Example record only. It must not be cited as a benchmark result."
+  },
+  "evidence_reference": "illustrative-only-not-a-measured-result"
+}
