@@ -6,10 +6,10 @@
 
 | Metric | Value |
 |---|---|
-| Live contracts | 50+ |
+| Public testnet deployments | 50+ repository-recorded contract deployments |
 | Test suites | 78 |
 | Tests passing | 354/354 |
-| Deployments | Sepolia (primary) |
+| Deployment environment | Ethereum Sepolia public testnet (primary) |
 | Tags | v1.0.0 → v1.9.0 |
 | License | MIT |
 
@@ -55,7 +55,11 @@
 
 ## Deployment
 
-See `docs/MULTI-CHAIN.md` for current status and pending deployments.
+See `docs/MULTI-CHAIN.md` for repository-recorded testnet status and
+deployment evidence.
+
+Sepolia and Amoy records do not by themselves establish production operation,
+legal authority, institutional adoption, or control of third-party systems.
 
 ## Testing
 
