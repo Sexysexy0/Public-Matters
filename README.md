@@ -1,77 +1,9 @@
-# Public-Matters
+# Public-Matters Repository
 
-**An on-chain governance framework for civic, AI, and institutional systems.**
+Enterprise-grade infrastructure, security guardrails, and automated performance management for agentic workflows and smart contracts.
 
-## Status (2026-09-20)
-
-| Metric | Value |
-|---|---|
-| Public testnet deployments | 50+ repository-recorded contract deployments |
-| Test suites | 78 |
-| Tests passing | 354/354 |
-| Deployment environment | Ethereum Sepolia public testnet (primary) |
-| Tags | v1.0.0 → v1.9.0 |
-| License | MIT |
-
-## What's Inside
-
-### AI Governance Stack
-- `AIAgentRegistry` — agent identity + kill switch
-- `AIDecisionAudit` — immutable decision log
-- `OperatorPrivileges` — role-based access
-- `AIAgentCredentialGuard` — credential attack defense
-- `GlobalEmergencyFreeze` — 2-of-N halt
-- `AIGovernanceMultisig` — N-of-M approvals
-- + 6 more contracts
-
-### Governance Frameworks
-- `CabinetDAO`, `PresidentialPolicyDAO`, `GovNexusBridge`
-- `CommunityTaxVault`, `CommunityFund`, `TrustIntegratorV2`
-- `TransparencyLedger`, `LocalGovernance`, `ResourceCommons`
-- + 20 more
-
-### Vaults & Protocols
-- `MultiSigEscrowVault`, `HospitalClaimEscrow`, `ScholarshipEscrow`
-- `MorrisResilienceProtocol`, `NuclearConflictRegistry`
-- `InstitutionalResetRegistry` (pending deploy)
-- + 15 more
-
-## Quick Start
-
-    git clone https://github.com/Sexysexy0/Public-Matters
-    cd Public-Matters
-    forge install
-    forge test
-
-## Documentation
-
-- `ARCHITECTURE.md` — system overview
-- `docs/ai-governance/` — AI governance docs
-- `docs/signals/` — world observations
-- `docs/MULTI-CHAIN.md` — deployment status
-- `docs/SUCCESS-TRAP-FRAMEWORK.md` — meta-framework
-- `research/` — research reports
-- `evidence/` — deployment evidence
-
-## Deployment
-
-See `docs/MULTI-CHAIN.md` for repository-recorded testnet status and
-deployment evidence.
-
-Sepolia and Amoy records do not by themselves establish production operation,
-legal authority, institutional adoption, or control of third-party systems.
-
-## Testing
-
-    forge test              # 354 tests
-    forge test --gas-report # gas analysis
-    forge fmt               # format code
-
-## Related Repos
-
-- [ph-reform](https://github.com/Sexysexy0/ph-reform) — national policy framework (14 cases)
-- Domain-specific ph-* repos
-
-## License
-
-MIT — see LICENSE file.
+## Features Added
+- **Unified Security & Performance Guardrails:** GitHub Actions workflow to check dependencies and secure code.
+- **Agent Performance Management:** Structured logging utility (`utils/agentPerformance.js`) for tracking digital workers and scripts.
+- **Automated Health Checks:** Diagnostic scripts for local node and infrastructure monitoring.
+- **Clean Architecture:** Standardized `.gitignore` and optimized folder structures to prevent siloed execution.
