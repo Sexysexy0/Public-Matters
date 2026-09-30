@@ -1,12 +1,12 @@
 # Public Petition & Governance Directive: BSKE 2026 & Constitutional Oversight
 
-## 1. Layunin at Pundasyon
-Ang direktibang ito ay direktang tumutugon sa panawagan ng publiko at mamamayang Pilipino na ipagtanggol ang Konstitusyon, itaguyod ang prinsipyong *No One Is Above the Law*, at tiyaking matutuloy ang Barangay and Sangguniang Kabataan Elections (BSKE 2026) nang walang hindi makatwirang pagkaantala o pag-antala ng mga karapatang pang-demokrasya.
+## 1. Objective and Foundation
+This directive directly responds to the public call of Filipino citizens to uphold the Constitution, champion the principle that *No One Is Above the Law*, and ensure that the Barangay and Sangguniang Kabataan Elections (BSKE 2026) proceed without unjustified delays or the suppression of democratic rights.
 
-## 2. Mga Pangunahing Prinsipyo at Kahilingan ng Mamamayan
-- **Proteksyon sa Karapatang Bumoto:** Hindi dapat ipagkait sa mga mamamayan ang kanilang karapatang pumili ng lokal na lider sa pamamagitan ng BSKE 2026.
-- **Pagtatanggol sa Konstitusyon:** Pagtitiyak na ang mga desisyon ng mga institusyon (kabilang ang Korte Suprema at iba pang sangay ng pamahalaan) ay nananatiling tapat sa diwa ng Saligang Batas at malaya sa anumang pampulitikang impluwensya o overreach.
-- **Transparency at Pananagutan:** Ang mga opisyal na may kapangyarihan ay may pananagutang magbigay ng malinaw, tapat, at agarang aksyon sa mga isyung nakasalalay sa taumbayan.
+## 2. Core Principles and Citizen Demands
+- **Protection of Suffrage Rights:** Citizens must not be deprived of their fundamental right to choose local leaders through the BSKE 2026.
+- **Constitutional Defense:** Ensuring that institutional decisions—including those from the Supreme Court and other branches of government—remain faithful to the spirit of the Constitution and free from political overreach.
+- **Transparency and Accountability:** Authorities bear the binding responsibility to provide clear, honest, and prompt actions on matters vital to the public interest.
 
-## 3. Aksyon ng Sistema (Public-Matters Accountability Engine)
-Ang dokumentong ito ay magsisilbing opisyal na rehistro sa ating repository upang i-monitor ang mga desisyon ng mga institusyon kaugnay ng BSKE 2026 at matiyak na ang boses ng taumbayan ay naitala nang may katarungan at katotohanan.
+## 3. System Action (Public-Matters Accountability Engine)
+This document serves as an official registry within our repository to monitor institutional decisions regarding BSKE 2026 and ensure that the voice of the citizenry is recorded with absolute justice and truth.
