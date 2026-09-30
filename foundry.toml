@@ -4,32 +4,28 @@ out = "out"
 libs = ["lib"]
 solc = "0.8.35"
 via-ir = true
+optimizer = true
+optimizer_runs = 200
 
 [rpc_endpoints]
 # Ethereum L1
 mainnet = "${ETH_MAINNET_RPC}"
 sepolia = "${ETH_SEPOLIA_RPC}"
-
 # Base L2 (recommended primary)
 base = "${BASE_MAINNET_RPC}"
 base_sepolia = "${BASE_SEPOLIA_RPC}"
-
 # OP L2
 optimism = "${OP_MAINNET_RPC}"
 op_sepolia = "${OP_SEPOLIA_RPC}"
-
 # Arbitrum
 arbitrum = "${ARB_MAINNET_RPC}"
 arb_sepolia = "${ARB_SEPOLIA_RPC}"
-
 # Polygon
 polygon = "${POLYGON_MAINNET_RPC}"
 amoy = "${POLYGON_AMOY_RPC}"
-
 # ZKsync
 zksync = "${ZK_MAINNET_RPC}"
 zksync_sepolia = "${ZK_SEPOLIA_RPC}"
-
 # Linea
 linea = "${LINEA_MAINNET_RPC}"
 linea_sepolia = "${LINEA_SEPOLIA_RPC}"
@@ -53,4 +49,3 @@ ignore = [
   "custom-errors",
   "asm-keccak256"
 ]
-
