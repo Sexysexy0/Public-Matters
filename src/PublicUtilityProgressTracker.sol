@@ -16,8 +16,8 @@ contract PublicUtilityProgressTracker {
 
     struct Project {
         uint256 projectId;
-        string name;          // e.g., "McArthur Highway Main Pipeline Reconstruction"
-        string location;      // e.g., "Malolos, Bulacan"
+        string name; // e.g., "McArthur Highway Main Pipeline Reconstruction"
+        string location; // e.g., "Malolos, Bulacan"
         uint256 totalMilestones;
         uint256 completedMilestones;
         bool active;
@@ -60,22 +60,21 @@ contract PublicUtilityProgressTracker {
     function addMilestone(uint256 projectId, string memory description) external onlyOperator {
         require(projects[projectId].active, "Project inactive or not found");
         uint256 mIndex = projects[projectId].totalMilestones;
-        
-        projectMilestones[projectId][mIndex] = Milestone({
-            description: description,
-            completed: false,
-            timestamp: 0,
-            proofHash: ""
-        });
+
+        projectMilestones[projectId][mIndex] =
+            Milestone({description: description, completed: false, timestamp: 0, proofHash: ""});
 
         projects[projectId].totalMilestones++;
         emit MilestoneAdded(projectId, mIndex, description);
     }
 
-    function completeMilestone(uint256 projectId, uint256 milestoneIndex, string memory proofHash) external onlyOperator {
+    function completeMilestone(uint256 projectId, uint256 milestoneIndex, string memory proofHash)
+        external
+        onlyOperator
+    {
         require(projects[projectId].active, "Project inactive");
         require(milestoneIndex < projects[projectId].totalMilestones, "Invalid milestone index");
-        
+
         Milestone storage m = projectMilestones[projectId][milestoneIndex];
         require(!m.completed, "Already completed");
 
@@ -88,7 +87,11 @@ contract PublicUtilityProgressTracker {
         emit MilestoneCompleted(projectId, milestoneIndex, proofHash);
     }
 
-    function getProjectProgress(uint256 projectId) external view returns (string memory name, uint256 total, uint256 completed) {
+    function getProjectProgress(uint256 projectId)
+        external
+        view
+        returns (string memory name, uint256 total, uint256 completed)
+    {
         Project memory p = projects[projectId];
         return (p.name, p.totalMilestones, p.completedMilestones);
     }

@@ -1,12 +1,35 @@
+# Foundry / Smart Contracts
 out/
 cache/
 broadcast/
-.env
 lib/
-.env.local
-node_modules/
-.env
-.env.local
-signers.env
 foundry.toml.bak
+
+# Node.js & Framework Outputs (Nuxt / Nitro)
+node_modules/
+dist/
+.output/
+.nuxt/
+.nitro/
+
+# Environment Variables & Sensitive Keys
+.env
+.env.*
+!.env.example
+.env.local
 .env.backup*
+signers.env
+*.pem
+*.key
+credentials.json
+
+# System Logs & Performance Data
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS Files
+.DS_Store
+Thumbs.db

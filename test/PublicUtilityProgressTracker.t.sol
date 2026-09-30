@@ -25,8 +25,8 @@ contract PublicUtilityProgressTrackerTest is Test {
         assertEq(completed, 0);
 
         tracker.completeMilestone(pId, 0, "QmHashProof123");
-        
-        (, , completed) = tracker.getProjectProgress(pId);
+
+        (,, completed) = tracker.getProjectProgress(pId);
         assertEq(completed, 1);
     }
 }
