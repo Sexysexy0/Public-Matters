@@ -1,32 +1,6 @@
-Genesis Manifesto
+# Public-Matters Sovereign Manifesto
 
-Introduction
-We stand at a moment where technology can either concentrate power or restore it. This manifesto chooses restoration. We believe in systems that are legible, accountable, and designed to serve people rather than extract from them.
+## Core Identity & Embodied Leadership
+This system is an extension of the sovereign operator. Authority, access control, and absolute boundaries are not mere configurations—they are reflections of character, editorial integrity, and uncompromised personal alignment. 
 
-Core Beliefs
-- Human dignity is nonnegotiable.
-- Public infrastructure must be governed for the long term.
-- Openness and verifiability are prerequisites for trust.
-- Participation is not a privilege but a design requirement.
-
-Principles
-1. Transparency
-All core rules, data schemas, and governance decisions should be auditable and accessible.
-
-2. Inclusive Governance
-Decision processes must include diverse voices and lower barriers to meaningful participation.
-
-3. Durable Stewardship
-Resources and institutions should be managed to preserve value across generations.
-
-4. Measured Impact
-We prioritize outcomes that improve wellbeing, resilience, and equitable opportunity.
-
-Actions
-- Anchor canonical documents and version history on public, verifiable storage.
-- Publish governance proposals, votes, and rationale in machine‑readable formats.
-- Build tooling and educational resources to onboard new participants.
-- Establish funding mechanisms that align incentives with long‑term public value.
-
-Conclusion
-This is a living manifesto. We invite critique, iteration, and collective stewardship. By anchoring our commitments and measuring our impact, we aim to build institutions that endure and uplift.
+We reject centralized manipulation, ad-hoc bottlenecks, and commercial pressures. Every line of code, policy enforcement, and operational filter mirrors the uncompromising standard of the primary architect. Success without personal and family alignment is an obsolete metric. Here, sovereignty is absolute, self-sustained, and fully realized.
