@@ -21,7 +21,6 @@ import "./TieredApproval.sol";
  * actor alone carried that threshold.
  */
 contract BudgetDeliberationRegistry is TieredApproval {
-
     OperatorPrivileges public privileges;
 
     enum Stage {
@@ -84,12 +83,7 @@ contract BudgetDeliberationRegistry is TieredApproval {
     uint256 public totalDisbursed;
 
     event ProposalCreated(
-        bytes32 indexed id,
-        string title,
-        string category,
-        uint256 amount,
-        address indexed proposer,
-        Tier requiredTier
+        bytes32 indexed id, string title, string category, uint256 amount, address indexed proposer, Tier requiredTier
     );
     event DeliberationStarted(bytes32 indexed id);
     event VoteCast(bytes32 indexed id, address indexed voter, bool inFavor);
@@ -138,9 +132,7 @@ contract BudgetDeliberationRegistry is TieredApproval {
     ) external onlyOperator returns (bytes32) {
         require(requiredTier != Tier.NONE, "requiredTier=NONE");
 
-        bytes32 id = keccak256(
-            abi.encode(title, category, amount, proposer, block.timestamp, totalProposals)
-        );
+        bytes32 id = keccak256(abi.encode(title, category, amount, proposer, block.timestamp, totalProposals));
         require(proposals[id].createdAt == 0, "Proposal already exists");
 
         Proposal storage p = proposals[id];
@@ -207,11 +199,7 @@ contract BudgetDeliberationRegistry is TieredApproval {
     ///         stockholder tier tally. Operators are trusted to declare
     ///         their true weight; a lying operator is visible on-chain
     ///         and removable via OperatorPrivileges.
-    function castStockholderVote(bytes32 id, uint256 weightBps, bool inFavor)
-        external
-        onlyOperator
-        proposalExists(id)
-    {
+    function castStockholderVote(bytes32 id, uint256 weightBps, bool inFavor) external onlyOperator proposalExists(id) {
         Proposal storage p = proposals[id];
         require(p.stage == Stage.DELIBERATING, "Not in DELIBERATING stage");
         require(weightBps <= 10000, "weightBps > 10000");
@@ -227,11 +215,7 @@ contract BudgetDeliberationRegistry is TieredApproval {
         emit StockholderVoteCast(id, msg.sender, weightBps, inFavor);
     }
 
-    function sealDeliberation(bytes32 id, bytes32 deliberationHash)
-        external
-        onlyOperator
-        proposalExists(id)
-    {
+    function sealDeliberation(bytes32 id, bytes32 deliberationHash) external onlyOperator proposalExists(id) {
         Proposal storage p = proposals[id];
         require(p.stage == Stage.DELIBERATING, "Not in DELIBERATING stage");
         p.deliberationHash = deliberationHash;
@@ -242,18 +226,11 @@ contract BudgetDeliberationRegistry is TieredApproval {
     // 3. APPROVAL / REJECTION
     // ─────────────────────────────────────────────────────────────
 
-    function approveProposal(bytes32 id, uint256 finalAmount)
-        external
-        onlyOperator
-        proposalExists(id)
-    {
+    function approveProposal(bytes32 id, uint256 finalAmount) external onlyOperator proposalExists(id) {
         Proposal storage p = proposals[id];
         require(p.stage == Stage.DELIBERATING, "Not in DELIBERATING stage");
         require(p.votesFor > p.votesAgainst, "Majority did not approve");
-        require(
-            meetsThreshold(p.requiredTier, p.boardVotesFor, p.stockholderForBps),
-            "Tier not achieved"
-        );
+        require(meetsThreshold(p.requiredTier, p.boardVotesFor, p.stockholderForBps), "Tier not achieved");
 
         _resolveAction(
             id,
@@ -274,16 +251,9 @@ contract BudgetDeliberationRegistry is TieredApproval {
         emit ProposalApproved(id, finalAmount, p.requiredTier);
     }
 
-    function rejectProposal(bytes32 id, string calldata reason)
-        external
-        onlyOperator
-        proposalExists(id)
-    {
+    function rejectProposal(bytes32 id, string calldata reason) external onlyOperator proposalExists(id) {
         Proposal storage p = proposals[id];
-        require(
-            p.stage == Stage.DELIBERATING || p.stage == Stage.PROPOSED,
-            "Cannot reject at this stage"
-        );
+        require(p.stage == Stage.DELIBERATING || p.stage == Stage.PROPOSED, "Cannot reject at this stage");
         p.stage = Stage.REJECTED;
         emit ProposalRejected(id, reason);
     }
@@ -292,21 +262,14 @@ contract BudgetDeliberationRegistry is TieredApproval {
     // 4. DISBURSEMENT
     // ─────────────────────────────────────────────────────────────
 
-    function releaseDisbursement(
-        bytes32 id,
-        uint256 amount,
-        string calldata purpose,
-        bytes32 evidenceHash
-    ) external onlyOperator proposalExists(id) {
+    function releaseDisbursement(bytes32 id, uint256 amount, string calldata purpose, bytes32 evidenceHash)
+        external
+        onlyOperator
+        proposalExists(id)
+    {
         Proposal storage p = proposals[id];
-        require(
-            p.stage == Stage.APPROVED || p.stage == Stage.DISBURSING,
-            "Proposal not approved"
-        );
-        require(
-            p.disbursedAmount + amount <= p.amount,
-            "Disbursement exceeds approved amount"
-        );
+        require(p.stage == Stage.APPROVED || p.stage == Stage.DISBURSING, "Proposal not approved");
+        require(p.disbursedAmount + amount <= p.amount, "Disbursement exceeds approved amount");
 
         p.disbursedAmount += amount;
         p.stage = Stage.DISBURSING;
@@ -314,14 +277,16 @@ contract BudgetDeliberationRegistry is TieredApproval {
             p.stage = Stage.COMPLETED;
         }
 
-        disbursements[id].push(Disbursement({
-            proposalId: id,
-            amount: amount,
-            timestamp: block.timestamp,
-            releasedBy: msg.sender,
-            purpose: purpose,
-            evidenceHash: evidenceHash
-        }));
+        disbursements[id].push(
+            Disbursement({
+                proposalId: id,
+                amount: amount,
+                timestamp: block.timestamp,
+                releasedBy: msg.sender,
+                purpose: purpose,
+                evidenceHash: evidenceHash
+            })
+        );
 
         totalDisbursed += amount;
         totalDisbursedByCategory[p.category] += amount;
@@ -333,12 +298,16 @@ contract BudgetDeliberationRegistry is TieredApproval {
     // 5. AUDIT
     // ─────────────────────────────────────────────────────────────
 
-    function recordAudit(
-        bytes32 id,
-        bytes32 auditHash,
-        string calldata verdict
-    ) external onlyOperator proposalExists(id) {
+    function recordAudit(bytes32 id, bytes32 auditHash, string calldata verdict)
+        external
+        onlyOperator
+        proposalExists(id)
+    {
         Proposal storage p = proposals[id];
+        // Audit finalizes only a fully-disbursed proposal. Without this
+        // guard, an operator could mark a PROPOSED or DELIBERATING
+        // proposal as AUDITED — a false "funds verified" record on-chain.
+        require(p.stage == Stage.COMPLETED, "Not completed");
         p.auditHash = auditHash;
         p.auditVerdict = verdict;
         p.stage = Stage.AUDITED;
@@ -349,20 +318,11 @@ contract BudgetDeliberationRegistry is TieredApproval {
     // 6. PUBLIC QUERIES
     // ─────────────────────────────────────────────────────────────
 
-    function getProposal(bytes32 id)
-        external
-        view
-        proposalExists(id)
-        returns (Proposal memory)
-    {
+    function getProposal(bytes32 id) external view proposalExists(id) returns (Proposal memory) {
         return proposals[id];
     }
 
-    function getDisbursements(bytes32 id)
-        external
-        view
-        returns (Disbursement[] memory)
-    {
+    function getDisbursements(bytes32 id) external view returns (Disbursement[] memory) {
         return disbursements[id];
     }
 
@@ -375,11 +335,8 @@ contract BudgetDeliberationRegistry is TieredApproval {
         view
         returns (uint256 proposed, uint256 approved, uint256 disbursed)
     {
-        return (
-            totalProposedByCategory[category],
-            totalApprovedByCategory[category],
-            totalDisbursedByCategory[category]
-        );
+        return
+            (totalProposedByCategory[category], totalApprovedByCategory[category], totalDisbursedByCategory[category]);
     }
 
     function getProposalCount() external view returns (uint256) {
