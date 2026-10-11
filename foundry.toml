@@ -35,61 +35,23 @@ arb_sepolia = { key = "${ARBISCAN_API_KEY}" }
 polygon = { key = "${POLYGONSCAN_API_KEY}" }
 amoy = { key = "${POLYGONSCAN_API_KEY}" }
 
-[
+[lint]
+exclude_lints = [
   "modifier-used-only-once",
   "internal-function-used-once",
   "custom-errors",
   "asm-keccak256",
-  "missing-zero-check",
-  "reentrancy-events",
   "weak-prng",
-  "missing-events-access-control",
   "block-timestamp",
   "unsafe-typecast",
   "require-revert-in-loop",
-  "arbitrary-send-eth",
-  "encode-packed-collision",
-  "uninitialized-state",
   "calls-loop",
-  "unused-return",
-  "uninitialized-local",
-  "locked-ether",
-  "environment-read-across-mutation"
+  "environment-read-across-mutation",
+  "missing-zero-check"
 ]
 
-[
-    "block-timestamp",
-    "unsafe-typecast",
-    "environment-read-across-mutation",
-    "require-revert-in-loop",
-    "weak-prng",
-]
-
-[lint]
-# ──── Styles and false positives — safe to silence ─────────────
-ignore = [
-  "modifier-used-only-once",
-  "internal-function-used-once",
-  "custom-errors",
-  "asm-keccak256",
-  "weak-prng",                       # record IDs, not randomness
-  "block-timestamp",                 # window checks, not lottery draws
-  "unsafe-typecast",                 # uint64(block.timestamp) safe until year 584B
-  "require-revert-in-loop",          # fail-fast is intentional
-  "calls-loop",                      # gas hint, not a safety issue
-  "environment-read-across-mutation" # test-only concern
-]
-
-# ──── Security-relevant rules — DO NOT silence here ────────────
-# If one fires, fix the code OR disable it per-line with a rationale
-# comment. Never remove from this list globally.
-#
-#   encode-packed-collision         real hash collision risk
-#   missing-zero-check              real bug class
-#   missing-events-access-control   real transparency gap
-#   reentrancy-events               real ordering hazard
-#   unused-return                   real silent-failure hazard
-#   uninitialized-state             real bug class
-#   uninitialized-local             real bug class
-#   arbitrary-send-eth              real; per-line disable with rationale
-#   locked-ether                    real; per-line disable with rationale
+# Security-relevant rules remain enforced. If one fires, fix the
+# code or disable per-line with a rationale comment:
+#   encode-packed-collision, missing-events-access-control,
+#   reentrancy-events, unused-return, uninitialized-state,
+#   uninitialized-local, arbitrary-send-eth, locked-ether
