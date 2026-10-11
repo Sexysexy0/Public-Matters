@@ -1,7 +1,9 @@
 # Mission: TAX-TRANSPARENCY-001
 
 **Filed:** 2026-10-11
-**Status:** Contract complete (13 tests). Sepolia deployment next.
+**Status:** Deployed and source-verified on Sepolia testnet
+**Registry:** `0xdc1ec6d8C78DF97fA09AAE37Dcb07C1F76639D5C`
+  https://sepolia.etherscan.io/address/0xdc1ec6d8C78DF97fA09AAE37Dcb07C1F76639D5C
 **Author:** Sovereign Operator
 **Contracts:** `TaxTransparencyRegistry`, `OperatorPrivilegesV2`
 

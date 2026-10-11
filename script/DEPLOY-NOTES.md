@@ -188,3 +188,22 @@ Superseded deployments (all left on-chain as historical records):
   0xB41D9175...    v2, bytecode identical to v1 (patch failed to apply)
   0x8E4f12c7...    v3, recordAudit guarded, meetsThreshold fail-open
   0x7C332bbEfe...  integrator v1, points at v1 registry
+
+## TaxTransparencyRegistry (2026-10-11)
+
+Registry: 0xdc1ec6d8C78DF97fA09AAE37Dcb07C1F76639D5C
+Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+Deployer: 0x6bDf6D887038AB97957c2f57d05eDd0eb338589A
+Tx: 0xd491a7f66d12f146b2306e81a548c83d4c375e785221093e1777a0c9436d52b8
+
+Source-verified on Etherscan.
+
+Two submission channels:
+  - BIR_OPERATOR: onlyOperator (gated by OperatorPrivilegesV2)
+  - TAXPAYER: permissionless, permanently attributed on-chain
+
+Salted taxpayer hash, shared reduction base for two-sided rate
+comparison. Reduction rates readable via getRDOReductionRate,
+getExaminerReductionRate, getCategoryReductionRate.
+
+Mission doc: docs/missions/TAX-TRANSPARENCY-001.md
