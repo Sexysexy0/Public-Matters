@@ -33,3 +33,9 @@ yarn-error.log*
 # OS Files
 .DS_Store
 Thumbs.db
+
+# Backups and scratch files
+*.bak
+*.broken
+foundry.toml.broken
+deploy-temp/

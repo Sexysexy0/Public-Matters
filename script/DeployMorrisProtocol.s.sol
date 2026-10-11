@@ -7,7 +7,7 @@ import "forge-std/Script.sol";
 contract DeployMorrisProtocol is Script {
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        address steward = vm.addr(deployerPrivateKey);
+        address steward = 0x6bDf6D887038AB97957c2f57d05eDd0eb338589A;
 
         vm.startBroadcast(deployerPrivateKey);
 
