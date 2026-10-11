@@ -162,3 +162,29 @@ required and the fact that one address alone satisfied it.
 
 When additional operators and stockholders are registered, the flag
 stops firing on its own — no contract change required.
+
+## Canonical deployment v4 (2026-10-11)
+
+Registry:   0xcC0Bc1a6CF61De621952b5d74983577b306c2930
+Integrator: 0x6075F5E8cA4975094347f7D5F9F843324Bb58367
+
+Both source-verified on Etherscan.
+
+Includes two fixes discovered during live testing:
+
+1. recordAudit stage guard (from v3)
+   - reverts with "Not completed" unless the proposal reached COMPLETED
+   - verified live on v3 at block 11889696
+
+2. meetsThreshold fail-closed (new in v4)
+   - non-OPERATOR tiers cannot be satisfied when boardTotal or
+     stockholderTotal is 0
+   - verified live on v4 at block 11889848: proposal 0x01686651...
+     reverted with "Tier not achieved" before composition was set;
+     same proposal approved after setComposition(3, 10000)
+
+Superseded deployments (all left on-chain as historical records):
+  0x948e9059c4...  v1, first deploy, recordAudit unguarded
+  0xB41D9175...    v2, bytecode identical to v1 (patch failed to apply)
+  0x8E4f12c7...    v3, recordAudit guarded, meetsThreshold fail-open
+  0x7C332bbEfe...  integrator v1, points at v1 registry

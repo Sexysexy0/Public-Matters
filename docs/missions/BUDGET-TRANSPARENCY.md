@@ -2,10 +2,10 @@
 
 **Filed:** 2026-10-11
 **Status:** Deployed and source-verified on Sepolia testnet
-**Registry:** `0x8E4f12c712E9d995a6C226a2d7a79c8403E5De53`
-  https://sepolia.etherscan.io/address/0x8E4f12c712E9d995a6C226a2d7a79c8403E5De53
-**Integrator:** `0x7C332bbEfe2F96eFf7850482A8D25EFd2f0f7B11`
-  https://sepolia.etherscan.io/address/0x7C332bbEfe2F96eFf7850482A8D25EFd2f0f7B11
+**Registry:** `0xcC0Bc1a6CF61De621952b5d74983577b306c2930`
+  https://sepolia.etherscan.io/address/0xcC0Bc1a6CF61De621952b5d74983577b306c2930
+**Integrator:** `0x6075F5E8cA4975094347f7D5F9F843324Bb58367`
+  https://sepolia.etherscan.io/address/0x6075F5E8cA4975094347f7D5F9F843324Bb58367
 **Author:** Sovereign Operator
 **Contracts:** `BudgetDeliberationRegistry`, `BudgetAuditIntegrator`,
 `TieredApproval`, `AIDecisionAudit`
