@@ -102,7 +102,7 @@ contract FilipinnovationLedger {
         active = true;
     }
 
-    // --- Innovator, Grant, Commercialization, ImpactEvent functions unchanged (timestamps kept for audit logs) ---
+    // --- Voting ---
 
     function createVote(uint256 _targetId, string memory _targetType, uint256 _durationBlocks)
         public
@@ -153,4 +153,135 @@ contract FilipinnovationLedger {
 
         emit VoteExecuted(_voteId, votes[_voteId].passed);
     }
+
+    // --- Innovator, Grant, Commercialization, ImpactEvent functions ---
+
+    function registerInnovator(
+        address _wallet,
+        string calldata _name,
+        string calldata _category,
+        string calldata _company,
+        string calldata _description,
+        string calldata _ipfsHash
+    ) external onlyAdmin whenActive {
+        require(_wallet != address(0), "wallet=0");
+        require(!isVerifiedInnovator[_wallet], "Already verified");
+
+        isVerifiedInnovator[_wallet] = true;
+
+        innovators.push(Innovator({
+            wallet:      _wallet,
+            name:        _name,
+            category:    _category,
+            company:     _company,
+            description: _description,
+            verified:    true,
+            timestamp:   block.timestamp,
+            ipfsHash:    _ipfsHash
+        }));
+
+        emit InnovatorRegistered(_wallet, _name, _category);
+    }
+
+    function awardGrant(
+        address _innovator,
+        string calldata _projectName,
+        uint256 _amount,
+        string calldata _milestone,
+        string calldata _ipfsHash
+    ) external onlyAdmin whenActive returns (uint256) {
+        require(_innovator != address(0), "innovator=0");
+        require(isVerifiedInnovator[_innovator], "Not verified");
+        require(_amount > 0, "amount=0");
+
+        uint256 id = grants.length;
+        grants.push(Grant({
+            id:              id,
+            innovator:       _innovator,
+            projectName:     _projectName,
+            amount:          _amount,
+            awardedDate:     block.timestamp,
+            disbursedAmount: 0,
+            fullyDisbursed:  false,
+            milestone:       _milestone,
+            timestamp:       block.timestamp,
+            ipfsHash:        _ipfsHash
+        }));
+
+        emit GrantAwarded(id, _innovator, _amount);
+        return id;
+    }
+
+    function disburseGrant(uint256 _grantId, uint256 _amount) external onlyAdmin whenActive {
+        require(_grantId < grants.length, "Grant not found");
+        Grant storage g = grants[_grantId];
+        require(!g.fullyDisbursed, "Already fully disbursed");
+        require(g.disbursedAmount + _amount <= g.amount, "Exceeds grant amount");
+
+        g.disbursedAmount += _amount;
+        if (g.disbursedAmount == g.amount) {
+            g.fullyDisbursed = true;
+        }
+
+        emit GrantDisbursed(_grantId, _amount);
+    }
+
+    function logCommercialization(
+        uint256 _grantId,
+        string calldata _productName,
+        string calldata _market,
+        uint256 _revenue,
+        string calldata _notes,
+        string calldata _ipfsHash
+    ) external onlyAdmin whenActive returns (uint256) {
+        require(_grantId < grants.length, "Grant not found");
+
+        uint256 id = commercializations.length;
+        commercializations.push(Commercialization({
+            id:          id,
+            grantId:     _grantId,
+            productName: _productName,
+            market:      _market,
+            revenue:     _revenue,
+            launched:    true,
+            launchDate:  block.timestamp,
+            notes:       _notes,
+            timestamp:   block.timestamp,
+            ipfsHash:    _ipfsHash
+        }));
+
+        emit CommercializationLogged(id, _grantId, _productName);
+        return id;
+    }
+
+    function logImpactEvent(
+        string calldata _eventType,
+        string calldata _description,
+        uint256 _score,
+        string calldata _ipfsHash
+    ) external onlyAdmin whenActive returns (uint256) {
+        uint256 id = impactEvents.length;
+        impactEvents.push(ImpactEvent({
+            id:          id,
+            eventType:   _eventType,
+            description: _description,
+            score:       _score,
+            timestamp:   block.timestamp,
+            ipfsHash:    _ipfsHash,
+            proposer:    msg.sender
+        }));
+
+        emit ImpactEventLogged(id, _eventType, _score);
+        return id;
+    }
+
+
+    // --- Convenience getters ---
+
+    function innovatorsLength() external view returns (uint256) { return innovators.length; }
+    function grantsLength() external view returns (uint256) { return grants.length; }
+    function commercializationsLength() external view returns (uint256) { return commercializations.length; }
+    function impactEventsLength() external view returns (uint256) { return impactEvents.length; }
+    function votesLength() external view returns (uint256) { return votes.length; }
+
 }

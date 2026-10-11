@@ -13,7 +13,7 @@ contract CommunityTaxVault {
     mapping(address => bool) public authorizedAllocators;
 
     event TaxDeposited(address indexed payer, uint256 amount, uint256 trustWeight);
-    event FundsAllocated(uint256 amount, string proposal);
+    event FundsAllocated(address indexed recipient, uint256 amount, string proposal);
     event AuthorizedAllocatorAdded(address allocator);
     event AuthorizedAllocatorRemoved(address allocator);
 
@@ -48,10 +48,17 @@ contract CommunityTaxVault {
         emit TaxDeposited(msg.sender, msg.value, trustWeight);
     }
 
-    function allocateFunds(uint256 amount, string calldata proposal) external onlyAuthorized {
+    function allocateFunds(address payable recipient, uint256 amount, string calldata proposal) external onlyAuthorized {
+        require(recipient != address(0), "recipient=0");
         require(amount <= totalTaxCollected, "Insufficient funds");
+
+        // CEI: state change before external call
         totalTaxCollected -= amount;
-        emit FundsAllocated(amount, proposal);
+
+        emit FundsAllocated(recipient, amount, proposal);
+
+        (bool ok, ) = recipient.call{value: amount}("");
+        require(ok, "Transfer failed");
     }
 
     // Authorize a contract or address to allocate funds

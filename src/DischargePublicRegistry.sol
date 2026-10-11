@@ -31,7 +31,7 @@ contract DischargePublicRegistry {
         onlyOwner
         returns (bytes32)
     {
-        bytes32 recordId = keccak256(abi.encodePacked(facilityId, chemicalCompound, block.timestamp));
+        bytes32 recordId = keccak256(abi.encode(facilityId, chemicalCompound, block.timestamp));
 
         publicRecords[recordId] = PublicDischargeRecord({
             facilityId: facilityId,

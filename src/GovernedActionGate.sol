@@ -122,6 +122,8 @@ contract GovernedActionGate {
         onlyOperator
         returns (uint256)
     {
+        // Intentional: call for its revert side-effect only.
+        // forge-lint: disable-next-line(unused-return)
         registry.getAgent(agentId); // reverts if missing
 
         uint256 id = totalProposals++;

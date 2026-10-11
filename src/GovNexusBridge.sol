@@ -14,6 +14,8 @@ Purpose: The official API bridge to the Philippine eGov PH system.
   ledger, rather than "pushing" data into a vulnerable central database.
 ========================================================
 */
+// Intentional: read-only bridge. No payable entry points; ETH cannot enter.
+// forge-lint: disable-next-line(locked-ether)
 contract GovNexusBridge {
     address public admin;
 

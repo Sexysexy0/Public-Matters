@@ -68,7 +68,7 @@ contract NuclearPublicAudit {
         if (entries[entryId].createdAt != 0) revert AlreadyExists();
 
         bytes32 previousEntryId = latestEntryBySubject[subject];
-        bytes32 previousEntryHash;
+        bytes32 previousEntryHash = bytes32(0);
 
         if (previousEntryId != bytes32(0)) {
             previousEntryHash = keccak256(abi.encode(previousEntryId, entries[previousEntryId]));

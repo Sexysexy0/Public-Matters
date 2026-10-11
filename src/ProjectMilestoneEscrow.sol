@@ -36,7 +36,7 @@ contract ProjectMilestoneEscrow {
     mapping(uint256 => Project) public projects;
 
     event ProjectCreated(uint256 indexed id, uint256 treatyId, address recipient);
-    event MilestoneCompleted(uint256 indexed projectId, uint256 milestoneIndex, uint256 amountReleased);
+    event MilestoneCompleted(uint256 indexed projectId, uint256 milestoneIndex, uint256 amountReleased, uint256 vaultTxId);
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Not the owner");
@@ -106,9 +106,9 @@ contract ProjectMilestoneEscrow {
         project.fundsDisbursed += milestone.amount;
 
         // Automatically submit the funding request to the MultiSig Vault
-        vault.submitTransaction(project.recipient, milestone.amount, "");
+        uint256 vaultTxId = vault.submitTransaction(project.recipient, milestone.amount, "");
 
-        emit MilestoneCompleted(_projectId, _milestoneIndex, milestone.amount);
+        emit MilestoneCompleted(_projectId, _milestoneIndex, milestone.amount, vaultTxId);
     }
 
     function getProject(uint256 _id) external view returns (Project memory) {

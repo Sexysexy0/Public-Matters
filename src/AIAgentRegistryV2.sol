@@ -77,7 +77,7 @@ contract AIAgentRegistryV2 {
         string calldata provenance,
         string[] calldata capabilities
     ) external onlyOperator returns (bytes32) {
-        bytes32 agentId = keccak256(abi.encodePacked(name, agentOperator, provenance, block.timestamp));
+        bytes32 agentId = keccak256(abi.encode(name, agentOperator, provenance, block.timestamp));
         require(agents[agentId].registeredAt == 0, "Agent already registered");
 
         AIAgent storage a = agents[agentId];

@@ -111,7 +111,9 @@ contract CommunityFund {
         require(!p.executed, "Already executed");
         require(msg.sender == steward || msg.sender == address(this), "Not authorized");
 
-        (bool success,) = taxVault.call(abi.encodeWithSignature("allocateFunds(uint256,string)", p.amount, p.title));
+        (bool success,) = taxVault.call(
+            abi.encodeWithSignature("allocateFunds(address,uint256,string)", p.recipient, p.amount, p.title)
+        );
         require(success, "Allocation failed");
 
         trustIntegrator.logPositiveAction(string(abi.encodePacked("Fund allocation: ", p.title)), 5);

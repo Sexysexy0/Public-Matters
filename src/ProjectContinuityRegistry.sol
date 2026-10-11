@@ -98,7 +98,7 @@ contract ProjectContinuityRegistry {
 
         _projects[id] = Project({
             id: id,
-            projectHash: keccak256(abi.encodePacked(name, jurisdiction)),
+            projectHash: keccak256(abi.encode(name, jurisdiction)),
             name: name,
             jurisdiction: jurisdiction,
             totalBudget: totalBudget,
