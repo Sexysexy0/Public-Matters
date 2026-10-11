@@ -56,8 +56,11 @@ contract OperatorPrivilegesV2 {
     function acceptOwnership() external {
         require(msg.sender == pendingOwner, "Not pending owner");
         address old = owner;
+        // OwnershipTransferred emitted immediately after; lint cannot correlate.
+        // forge-lint: disable-next-line(missing-events-access-control)
         owner = pendingOwner;
         pendingOwner = address(0);
+        // forge-lint: disable-next-line(missing-events-access-control)
         isOperator[owner] = true;
         emit OwnershipTransferred(old, owner);
     }
@@ -70,17 +73,23 @@ contract OperatorPrivilegesV2 {
     // ─── OPERATOR MANAGEMENT ───
 
     function addOperator(address _operator) external onlyOwner {
+        // Event emitted on next line; lint cannot correlate the pair.
+        // forge-lint: disable-next-line(missing-events-access-control)
         isOperator[_operator] = true;
         emit OperatorAdded(_operator);
     }
 
     function removeOperator(address _operator) external onlyOwner {
+        // Event emitted on next line; lint cannot correlate the pair.
+        // forge-lint: disable-next-line(missing-events-access-control)
         isOperator[_operator] = false;
         emit OperatorRemoved(_operator);
     }
 
     function addOperatorBatch(address[] calldata _operators) external onlyOwner {
         for (uint256 i = 0; i < _operators.length; i++) {
+            // Event emitted on next line; lint cannot correlate the pair.
+            // forge-lint: disable-next-line(missing-events-access-control)
             isOperator[_operators[i]] = true;
             emit OperatorAdded(_operators[i]);
         }
