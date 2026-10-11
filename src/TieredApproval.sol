@@ -22,21 +22,27 @@ pragma solidity ^0.8.20;
  * pretend a coalition existed.
  */
 abstract contract TieredApproval {
-    enum Tier { NONE, OPERATOR, MAJORITY, SUPERMAJORITY, UNANIMOUS }
+    enum Tier {
+        NONE,
+        OPERATOR,
+        MAJORITY,
+        SUPERMAJORITY,
+        UNANIMOUS
+    }
 
     struct Threshold {
         uint16 numerator;
         uint16 denominator;
-        bool   strict;      // true => "more than"; false => "at least"
+        bool strict; // true => "more than"; false => "at least"
     }
 
     struct Action {
-        Tier     required;
-        uint256  boardFor;
-        uint256  stockholderFor;
-        address  soleActor;
-        bool     resolved;
-        uint256  resolvedAt;
+        Tier required;
+        uint256 boardFor;
+        uint256 stockholderFor;
+        address soleActor;
+        bool resolved;
+        uint256 resolvedAt;
     }
 
     mapping(Tier => Threshold) public boardRule;
@@ -49,28 +55,24 @@ abstract contract TieredApproval {
 
     event CompositionUpdated(uint256 boardTotal, uint256 stockholderTotal);
     event ActionResolved(
-        bytes32 indexed actionId,
-        Tier            tier,
-        uint256         boardFor,
-        uint256         stockholderFor,
-        address indexed soleActor
+        bytes32 indexed actionId, Tier tier, uint256 boardFor, uint256 stockholderFor, address indexed soleActor
     );
 
     constructor() {
         // OPERATOR: no threshold
-        boardRule[Tier.OPERATOR]       = Threshold(0, 1, false);
+        boardRule[Tier.OPERATOR] = Threshold(0, 1, false);
         stockholderRule[Tier.OPERATOR] = Threshold(0, 1, false);
 
         // MAJORITY: strictly more than 1/2
-        boardRule[Tier.MAJORITY]       = Threshold(1, 2, true);
+        boardRule[Tier.MAJORITY] = Threshold(1, 2, true);
         stockholderRule[Tier.MAJORITY] = Threshold(1, 2, true);
 
         // SUPERMAJORITY: at least 2/3
-        boardRule[Tier.SUPERMAJORITY]       = Threshold(2, 3, false);
+        boardRule[Tier.SUPERMAJORITY] = Threshold(2, 3, false);
         stockholderRule[Tier.SUPERMAJORITY] = Threshold(2, 3, false);
 
         // UNANIMOUS: 100%
-        boardRule[Tier.UNANIMOUS]       = Threshold(1, 1, false);
+        boardRule[Tier.UNANIMOUS] = Threshold(1, 1, false);
         stockholderRule[Tier.UNANIMOUS] = Threshold(1, 1, false);
     }
 
@@ -92,15 +94,14 @@ abstract contract TieredApproval {
         return _required(stockholderTotal, stockholderRule[tier]);
     }
 
-    function meetsThreshold(
-        Tier    tier,
-        uint256 boardFor,
-        uint256 stockholderFor
-    ) public view returns (bool) {
+    function meetsThreshold(Tier tier, uint256 boardFor, uint256 stockholderFor) public view returns (bool) {
         if (tier == Tier.NONE) return false;
         if (tier == Tier.OPERATOR) return true;
-        return boardFor >= requiredBoard(tier)
-            && stockholderFor >= requiredStockholder(tier);
+        // Fail closed: if composition is unset, no non-trivial tier can be
+        // satisfied. Without this guard, requiredBoard/requiredStockholder
+        // compute to zero and any vote passes any tier.
+        if (boardTotal == 0 || stockholderTotal == 0) return false;
+        return boardFor >= requiredBoard(tier) && stockholderFor >= requiredStockholder(tier);
     }
 
     function _required(uint256 total, Threshold memory t) internal pure returns (uint256) {
@@ -109,12 +110,12 @@ abstract contract TieredApproval {
         if (t.strict) {
             return base / t.denominator + 1;
         }
-        return (base + t.denominator - 1) / t.denominator;  // ceiling
+        return (base + t.denominator - 1) / t.denominator; // ceiling
     }
 
     function _resolveAction(
         bytes32 actionId,
-        Tier    tier,
+        Tier tier,
         uint256 boardFor,
         uint256 stockholderFor,
         address actor,
@@ -134,12 +135,12 @@ abstract contract TieredApproval {
         }
 
         _actions[actionId] = Action({
-            required:        tier,
-            boardFor:        boardFor,
-            stockholderFor:  stockholderFor,
-            soleActor:       sole,
-            resolved:        true,
-            resolvedAt:      block.timestamp
+            required: tier,
+            boardFor: boardFor,
+            stockholderFor: stockholderFor,
+            soleActor: sole,
+            resolved: true,
+            resolvedAt: block.timestamp
         });
 
         emit ActionResolved(actionId, tier, boardFor, stockholderFor, sole);
