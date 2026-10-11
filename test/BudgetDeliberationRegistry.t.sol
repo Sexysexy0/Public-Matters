@@ -4,6 +4,7 @@ pragma solidity ^0.8.20;
 import "forge-std/Test.sol";
 import "../src/OperatorPrivileges.sol";
 import "../src/BudgetDeliberationRegistry.sol";
+import "../src/TieredApproval.sol";
 
 contract BudgetDeliberationRegistryTest is Test {
     OperatorPrivileges privileges;
@@ -37,7 +38,8 @@ contract BudgetDeliberationRegistryTest is Test {
             "Universal Healthcare 2027",
             "health",
             100 ether,
-            proposer
+            proposer,
+            TieredApproval.Tier.OPERATOR
         );
 
         assertEq(registry.getProposalCount(), 1);
@@ -98,7 +100,7 @@ contract BudgetDeliberationRegistryTest is Test {
 
     function testRejectProposal() public {
         vm.prank(operator);
-        bytes32 id = registry.createProposal("Controversial Bill", "other", 50 ether, proposer);
+        bytes32 id = registry.createProposal("Controversial Bill", "other", 50 ether, proposer, TieredApproval.Tier.OPERATOR);
 
         vm.prank(operator);
         registry.startDeliberation(id);
@@ -112,7 +114,7 @@ contract BudgetDeliberationRegistryTest is Test {
 
     function testCannotApproveWithoutMajority() public {
         vm.prank(operator);
-        bytes32 id = registry.createProposal("Weak Bill", "other", 10 ether, proposer);
+        bytes32 id = registry.createProposal("Weak Bill", "other", 10 ether, proposer, TieredApproval.Tier.OPERATOR);
 
         vm.prank(operator);
         registry.startDeliberation(id);
@@ -129,7 +131,7 @@ contract BudgetDeliberationRegistryTest is Test {
 
     function testCannotOverDisburse() public {
         vm.prank(operator);
-        bytes32 id = registry.createProposal("Small Fund", "edu", 5 ether, proposer);
+        bytes32 id = registry.createProposal("Small Fund", "edu", 5 ether, proposer, TieredApproval.Tier.OPERATOR);
 
         vm.prank(operator);
         registry.startDeliberation(id);
@@ -147,14 +149,14 @@ contract BudgetDeliberationRegistryTest is Test {
         address stranger = vm.addr(999);
         vm.prank(stranger);
         vm.expectRevert("Not authorized operator");
-        registry.createProposal("Evil Bill", "other", 1000 ether, stranger);
+        registry.createProposal("Evil Bill", "other", 1000 ether, stranger, TieredApproval.Tier.OPERATOR);
     }
 
     function testCategoryAggregates() public {
         vm.startPrank(operator);
-        registry.createProposal("Health A", "health", 10 ether, proposer);
-        registry.createProposal("Health B", "health", 20 ether, proposer);
-        registry.createProposal("Infra A", "infra", 30 ether, proposer);
+        registry.createProposal("Health A", "health", 10 ether, proposer, TieredApproval.Tier.OPERATOR);
+        registry.createProposal("Health B", "health", 20 ether, proposer, TieredApproval.Tier.OPERATOR);
+        registry.createProposal("Infra A", "infra", 30 ether, proposer, TieredApproval.Tier.OPERATOR);
         vm.stopPrank();
 
         (uint256 healthProposed, , ) = registry.getCategorySummary("health");

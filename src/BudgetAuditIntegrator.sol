@@ -61,20 +61,20 @@ contract BudgetAuditIntegrator {
     function auditBudgetEvent(
         bytes32 proposalId,
         string calldata eventType,
-        uint8 confidence,
-        TieredApproval.Tier tier
+        uint8 confidence
     ) external onlyOperator returns (bytes32) {
         require(confidence <= 100, "Confidence must be 0-100");
 
         BudgetDeliberationRegistry.Proposal memory p = budget.getProposal(proposalId);
 
-        return _record(proposalId, eventType, confidence, uint8(tier), p);
+        return _record(proposalId, eventType, confidence, uint8(p.requiredTier), p);
     }
 
-    function auditFullLifecycle(
-        bytes32 proposalId,
-        TieredApproval.Tier tier
-    ) external onlyOperator returns (bytes32) {
+    function auditFullLifecycle(bytes32 proposalId)
+        external
+        onlyOperator
+        returns (bytes32)
+    {
         BudgetDeliberationRegistry.Proposal memory p = budget.getProposal(proposalId);
 
         uint8 confidence = 0;
@@ -83,7 +83,7 @@ contract BudgetAuditIntegrator {
             confidence = uint8((p.votesFor * 100) / total);
         }
 
-        return _record(proposalId, _stageName(p.stage), confidence, uint8(tier), p);
+        return _record(proposalId, _stageName(p.stage), confidence, uint8(p.requiredTier), p);
     }
 
     function _record(

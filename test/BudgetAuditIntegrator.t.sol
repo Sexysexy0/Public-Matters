@@ -36,7 +36,7 @@ contract BudgetAuditIntegratorTest is Test {
 
     function testAuditBudgetEvent() public {
         vm.prank(op1);
-        bytes32 pid = budget.createProposal("Health 2027", "health", 100 ether, proposer);
+        bytes32 pid = budget.createProposal("Health 2027", "health", 100 ether, proposer, TieredApproval.Tier.OPERATOR);
 
         vm.prank(op1);
         budget.startDeliberation(pid);
@@ -53,9 +53,7 @@ contract BudgetAuditIntegratorTest is Test {
         budget.approveProposal(pid, 100 ether);
 
         vm.prank(op2);
-        bytes32 decisionId = integrator.auditBudgetEvent(
-            pid, "APPROVED", 100, TieredApproval.Tier.SUPERMAJORITY
-        );
+        bytes32 decisionId = integrator.auditBudgetEvent(pid, "APPROVED", 100);
 
         AIDecisionAudit.Decision memory d = audit.getDecision(decisionId);
         assertEq(d.confidence, 100);
@@ -64,13 +62,13 @@ contract BudgetAuditIntegratorTest is Test {
 
     function testAnyOperatorCanAudit() public {
         vm.prank(op1);
-        bytes32 pid = budget.createProposal("Any op", "other", 1 ether, proposer);
+        bytes32 pid = budget.createProposal("Any op", "other", 1 ether, proposer, TieredApproval.Tier.OPERATOR);
 
         vm.prank(op1);
-        integrator.auditBudgetEvent(pid, "PROPOSED", 0, TieredApproval.Tier.OPERATOR);
+        integrator.auditBudgetEvent(pid, "PROPOSED", 0);
 
         vm.prank(op2);
-        integrator.auditBudgetEvent(pid, "PROPOSED", 0, TieredApproval.Tier.OPERATOR);
+        integrator.auditBudgetEvent(pid, "PROPOSED", 0);
 
         assertEq(integrator.getBudgetAuditCount(), 2);
     }
@@ -80,7 +78,7 @@ contract BudgetAuditIntegratorTest is Test {
         privileges.addOperator(voter3);
 
         vm.prank(op1);
-        bytes32 pid = budget.createProposal("Infra 2027", "infra", 500 ether, proposer);
+        bytes32 pid = budget.createProposal("Infra 2027", "infra", 500 ether, proposer, TieredApproval.Tier.OPERATOR);
 
         vm.prank(op1);
         budget.startDeliberation(pid);
@@ -99,7 +97,7 @@ contract BudgetAuditIntegratorTest is Test {
         budget.approveProposal(pid, 500 ether);
 
         vm.prank(op1);
-        bytes32 decisionId = integrator.auditFullLifecycle(pid, TieredApproval.Tier.SUPERMAJORITY);
+        bytes32 decisionId = integrator.auditFullLifecycle(pid);
 
         AIDecisionAudit.Decision memory d = audit.getDecision(decisionId);
         assertEq(d.confidence, 66);
@@ -107,29 +105,29 @@ contract BudgetAuditIntegratorTest is Test {
 
     function testStrangerCannotAudit() public {
         vm.prank(op1);
-        bytes32 pid = budget.createProposal("Test", "other", 1 ether, proposer);
+        bytes32 pid = budget.createProposal("Test", "other", 1 ether, proposer, TieredApproval.Tier.OPERATOR);
 
         address stranger = vm.addr(999);
         vm.prank(stranger);
         vm.expectRevert("Not an operator");
-        integrator.auditBudgetEvent(pid, "PROPOSED", 50, TieredApproval.Tier.OPERATOR);
+        integrator.auditBudgetEvent(pid, "PROPOSED", 50);
     }
 
     function testAuditTrailAccumulates() public {
         vm.prank(op1);
-        bytes32 pid = budget.createProposal("Multi-stage", "edu", 50 ether, proposer);
+        bytes32 pid = budget.createProposal("Multi-stage", "edu", 50 ether, proposer, TieredApproval.Tier.OPERATOR);
 
         vm.prank(op1);
-        integrator.auditBudgetEvent(pid, "PROPOSED", 0, TieredApproval.Tier.OPERATOR);
+        integrator.auditBudgetEvent(pid, "PROPOSED", 0);
 
         vm.prank(op2);
         budget.startDeliberation(pid);
 
         vm.prank(op2);
-        integrator.auditBudgetEvent(pid, "DELIBERATING", 0, TieredApproval.Tier.MAJORITY);
+        integrator.auditBudgetEvent(pid, "DELIBERATING", 0);
 
         vm.prank(op1);
-        integrator.auditBudgetEvent(pid, "DELIBERATING", 0, TieredApproval.Tier.MAJORITY);
+        integrator.auditBudgetEvent(pid, "DELIBERATING", 0);
 
         assertEq(integrator.getBudgetAuditCount(), 3);
         bytes32[] memory trail = integrator.getBudgetAuditTrail();
