@@ -108,6 +108,9 @@ contract ProjectMilestoneEscrow {
         // Automatically submit the funding request to the MultiSig Vault
         uint256 vaultTxId = vault.submitTransaction(project.recipient, milestone.amount, "");
 
+        // Event carries vaultTxId, which is the return value of the call
+        // above; reordering would require dropping the cross-contract link.
+        // forge-lint: disable-next-line(reentrancy-events)
         emit MilestoneCompleted(_projectId, _milestoneIndex, milestone.amount, vaultTxId);
     }
 

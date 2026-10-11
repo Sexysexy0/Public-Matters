@@ -43,9 +43,10 @@ contract CommunityTaxVault {
         uint256 trustWeight = msg.value / 1e16;
         if (trustWeight == 0) trustWeight = 1;
 
-        trustIntegrator.logPositiveAction(string(abi.encodePacked("Tax deposit: ", msg.sender)), trustWeight);
-
+        // CEI: emit before external call so logs cannot be reordered
         emit TaxDeposited(msg.sender, msg.value, trustWeight);
+
+        trustIntegrator.logPositiveAction(string(abi.encodePacked("Tax deposit: ", msg.sender)), trustWeight);
     }
 
     function allocateFunds(address payable recipient, uint256 amount, string calldata proposal) external onlyAuthorized {
@@ -57,6 +58,8 @@ contract CommunityTaxVault {
 
         emit FundsAllocated(recipient, amount, proposal);
 
+        // Recipient is gated by onlyAuthorized + zero-checked above.
+        // forge-lint: disable-next-line(arbitrary-send-eth)
         (bool ok, ) = recipient.call{value: amount}("");
         require(ok, "Transfer failed");
     }

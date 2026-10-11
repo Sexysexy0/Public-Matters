@@ -117,6 +117,9 @@ contract BudgetAuditIntegrator {
 
         totalAudited++;
 
+        // Event carries decisionId, which is the return value of the call
+        // above; reordering would require dropping the audit link.
+        // forge-lint: disable-next-line(reentrancy-events)
         emit BudgetEventAudited(proposalId, decisionId, eventType, confidence, tier, msg.sender);
         return decisionId;
     }
