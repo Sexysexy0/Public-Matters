@@ -143,3 +143,22 @@ Full lifecycle query from any block explorer:
   https://sepolia.etherscan.io/address/0x8E4f12c712E9d995a6C226a2d7a79c8403E5De53
 
 This is the worked example from BUDGET-TRANSPARENCY-001, running.
+
+## Supermajority demo — sole-actor flag (2026-10-11)
+
+Registry: 0x8E4f12c712E9d995a6C226a2d7a79c8403E5De53
+
+Configured composition: 3 board seats, 10000 bps stockholders.
+Created proposal at Tier.SUPERMAJORITY (enum 3).
+Deployer cast 2/3 board votes AND 7000 bps stockholder vote.
+Approval required: board >= 2 AND stockholders >= 6667 bps.
+
+Result: proposal APPROVED. getAction() shows soleActor = deployer.
+
+This is Option C in practice: the contract does not block a single
+actor from carrying a supermajority tier. It records it, permanently,
+in the audit trail. A citizen querying the action sees both the tier
+required and the fact that one address alone satisfied it.
+
+When additional operators and stockholders are registered, the flag
+stops firing on its own — no contract change required.
