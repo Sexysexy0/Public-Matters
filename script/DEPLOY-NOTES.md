@@ -207,3 +207,33 @@ comparison. Reduction rates readable via getRDOReductionRate,
 getExaminerReductionRate, getCategoryReductionRate.
 
 Mission doc: docs/missions/TAX-TRANSPARENCY-001.md
+
+## TaxTransparencyRegistry demo (2026-10-11)
+
+Registry: 0xdc1ec6d8C78DF97fA09AAE37Dcb07C1F76639D5C
+
+Data filed:
+  Assessment 0x9f3df4d8... — RDO-039, examiner-042, MSME, PHP 5,000
+    recordedBy: 0x6bDf...589A (BIR operator)
+  Reduction (BIR):     500 (10%)  — recordedBy: 0x6bDf...589A
+  Reduction (taxpayer): 4000 (80%) — recordedBy: 0xD489...2A01
+  Payment:             1000       — recordedBy: 0xD489...2A01
+
+Read back:
+  getRDOReductionRate(RDO-039, BIR_OPERATOR)  -> 1000 bps (10%)
+  getRDOReductionRate(RDO-039, TAXPAYER)      -> 8000 bps (80%)
+  getCategoryReductionRate(MSME, BIR_OPERATOR) -> 1000 bps
+  getCategoryReductionRate(MSME, TAXPAYER)     -> 8000 bps
+  getTotals()                                  -> (5000, 4500, 1000)
+  Counts                                       -> (1, 2, 1)
+
+Two-sided reduction rates against a shared base assessment. The gap
+between the two submitters is the signal. This is the mission of
+TAX-TRANSPARENCY-001, demonstrated end-to-end on Sepolia.
+
+Gas observations (for future demos):
+  recordAssessment:  estimate 1.92M, actual ~1.9M  (use 2.5M limit)
+  recordReduction:   estimate 2.04M, actual 2.02M  (use 3.0M limit)
+  recordPayment:     estimate 1.36M, actual 1.35M  (use 2.0M limit)
+
+Estimates are accurate; add 50% headroom, do not double.
