@@ -1,7 +1,11 @@
 # Mission: BUDGET-TRANSPARENCY-001
 
 **Filed:** 2026-10-11
-**Status:** Contracts deployed to testnet, pending Sepolia verification
+**Status:** Deployed and source-verified on Sepolia testnet
+**Registry:** `0x948e9059c465980b5bE186212d09720F5D1D03f4`
+  https://sepolia.etherscan.io/address/0x948e9059c465980b5bE186212d09720F5D1D03f4
+**Integrator:** `0x7C332bbEfe2F96eFf7850482A8D25EFd2f0f7B11`
+  https://sepolia.etherscan.io/address/0x7C332bbEfe2F96eFf7850482A8D25EFd2f0f7B11
 **Author:** Sovereign Operator
 **Contracts:** `BudgetDeliberationRegistry`, `BudgetAuditIntegrator`,
 `TieredApproval`, `AIDecisionAudit`
