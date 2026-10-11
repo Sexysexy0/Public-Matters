@@ -117,6 +117,8 @@ contract MultiSigEscrowVault {
 
         transaction.executed = true;
 
+        // Target set at submit time; gated by m-of-n confirmations + timelock.
+        // forge-lint: disable-next-line(arbitrary-send-eth)
         (bool success,) = transaction.to.call{value: transaction.value}(transaction.data);
         require(success, "MultiSigVault: Execution failed");
 

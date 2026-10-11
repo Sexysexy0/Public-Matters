@@ -113,6 +113,8 @@ contract ScholarshipEscrow {
         m.status = MilestoneStatus.Disbursed;
         student.amountDisbursed += m.amount;
 
+        // Recipient is the registered student; amount is the approved milestone.
+        // forge-lint: disable-next-line(arbitrary-send-eth)
         (bool success,) = student.studentAddress.call{value: m.amount}("");
         require(success, "Transfer failed");
 

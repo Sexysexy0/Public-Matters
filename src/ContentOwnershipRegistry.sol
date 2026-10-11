@@ -68,7 +68,10 @@ contract ContentOwnershipRegistry is ERC721, Ownable {
         uint256 sellerProceeds = msg.value - royalty;
 
         // Pay creator (royalty) and seller (proceeds)
+        // Recipients: stored content creator + current NFT owner, not caller-supplied.
+        // forge-lint: disable-next-line(arbitrary-send-eth)
         content.creatorAddress.transfer(royalty);
+        // forge-lint: disable-next-line(arbitrary-send-eth)
         payable(currentOwner).transfer(sellerProceeds);
 
         // Transfer the NFT

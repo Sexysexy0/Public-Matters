@@ -60,6 +60,8 @@ contract DeSciManuscriptEquity {
 
         ms.totalRoyaltiesEarned += msg.value;
 
+        // Recipient is the manuscript's stored author; msg.value is the royalty fee.
+        // forge-lint: disable-next-line(arbitrary-send-eth)
         (bool success,) = payable(ms.author).call{value: msg.value}("");
         require(success, "Royalty transfer failed");
 

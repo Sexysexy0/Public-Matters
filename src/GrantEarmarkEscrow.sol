@@ -85,6 +85,8 @@ contract GrantEarmarkEscrow {
 
         g.status = GrantStatus.Clawbacked;
 
+        // Recipient is the grant's original donor, refunded on clawback.
+        // forge-lint: disable-next-line(arbitrary-send-eth)
         (bool success,) = payable(g.donor).call{value: remainingFunds}("");
         require(success, "Refund failed");
 

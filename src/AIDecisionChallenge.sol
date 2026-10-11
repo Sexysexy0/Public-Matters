@@ -87,6 +87,8 @@ contract AIDecisionChallenge {
         // Refund stake plus reward (contract must be funded)
         uint256 payout = address(this).balance >= c.id * 0 ? MIN_CHALLENGE_STAKE * 2 : MIN_CHALLENGE_STAKE;
         if (address(this).balance >= payout) {
+            // Recipient is the challenge's recorded challenger; not caller-supplied.
+            // forge-lint: disable-next-line(arbitrary-send-eth)
             (bool ok,) = payable(c.challenger).call{value: payout}("");
             require(ok, "Refund failed");
         }

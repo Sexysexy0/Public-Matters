@@ -55,6 +55,8 @@ contract TaxPaymentProcessor {
         emit TaxPaid(msg.sender, amount, vatAmount, trustWeight, category);
 
         // Forward the payment to the tax vault
+        // Recipient is the steward-configured taxVault contract.
+        // forge-lint: disable-next-line(arbitrary-send-eth)
         (bool success,) = taxVault.call{value: total}("");
         require(success, "Vault transfer failed");
 

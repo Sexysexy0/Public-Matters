@@ -118,6 +118,8 @@ contract AIGovernanceMultisig {
         Proposal storage p = _proposals[proposalId];
         p.executed = true;
 
+        // Target + value set at proposal time; execution gated by m-of-n quorum.
+        // forge-lint: disable-next-line(arbitrary-send-eth)
         (bool success,) = p.target.call{value: p.value}(p.data);
         require(success, "Execution failed");
 
