@@ -100,3 +100,46 @@ Tx:          0xf2f0264cad9eab5f5cb9c84ff51469b08536d34ea9b17299bfd4ce01763e22df
 
 Query at:
   https://sepolia.etherscan.io/address/0x948e9059c465980b5bE186212d09720F5D1D03f4
+
+## Superseded deployment 1
+
+0x948e9059c465980b5bE186212d09720F5D1D03f4 deployed before the
+recordAudit stage guard was added. Contains one proposal
+(0xb0d8e5ac...) that was marked AUDITED from DELIBERATING stage,
+demonstrating the bug in a live record. Left on-chain as a
+historical artifact.
+
+## Superseded deployment 2
+
+0xB41D91751D209859037FE850A86b886AB9796e70 deployed during a
+patch attempt where the source edit failed before broadcast.
+Bytecode is identical to deployment 1. No proposals.
+
+## Full lifecycle demo — fixed registry (2026-10-11)
+
+Registry: 0x8E4f12c712E9d995a6C226a2d7a79c8403E5De53 (with recordAudit guard)
+
+Proposal 0x369e92b34fa6a1fce76708ad18df4597b64ec7fd72a12ea6b592af809c5ad935:
+
+  stage:            AUDITED
+  requiredTier:     OPERATOR
+  votesFor:         2
+  boardVotesFor:    1
+  disbursedAmount:  1 ETH
+  disbursements:    Q1 Hospitals 0.6 ETH (evidence 0x9f9f74f1...)
+                    Q2 Clinics   0.4 ETH (evidence 0x5423975c...)
+  auditVerdict:     "PASSED - funds used as intended"
+
+Verification of the fix — an attempt to audit the proposal from
+APPROVED stage (before disbursement) was made at block 11889696.
+Result: status 0, revertReason "Not completed". The guard fires.
+
+Category summary for "health":
+  proposed:  1e18
+  approved:  1e18
+  disbursed: 1e18
+
+Full lifecycle query from any block explorer:
+  https://sepolia.etherscan.io/address/0x8E4f12c712E9d995a6C226a2d7a79c8403E5De53
+
+This is the worked example from BUDGET-TRANSPARENCY-001, running.
