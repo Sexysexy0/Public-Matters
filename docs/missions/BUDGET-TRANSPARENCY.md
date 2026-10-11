@@ -208,9 +208,25 @@ All in one place. All verifiable. All permanent.
 
 ### Phase 5 — Institutional Adoption
 
+The legislative analogue of this mission is the proposed **Cadena Bill**,
+which would require blockchain-based real-time monitoring of government
+spending. The bill responds to the same gap the contracts address:
+in the ₱7.2-trillion 2027 budget, ₱1.1 trillion goes to debt interest,
+₱1.9 trillion to personnel services, ₱1.1 trillion to capital outlays,
+and ₱3 trillion to maintenance and other operating expenses — with no
+real-time public visibility into where the MOOE actually lands.
+
+The nation's outstanding debt is ₱19 trillion. Without verifiable
+transparency per peso, the debt cycle compounds without accountability.
+
+This mission does not require the Cadena Bill to pass to be useful.
+But if it does, the on-chain format already deployed in Phase 2 is a
+working reference implementation:
+
 - Partnership with COA, DBM, or congressional oversight bodies
 - Standard data format for budget deliberation records
 - Legal framework for on-chain budget attestation
+- Alignment with Cadena Bill provisions on real-time spending audit
 
 ---
 
