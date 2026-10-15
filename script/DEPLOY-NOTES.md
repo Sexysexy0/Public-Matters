@@ -279,3 +279,25 @@ Superseded (hardcoded msg.sender, no transfer path):
   SovereigntyPolicyRegistry v1: 0xb23ef644c6696Dc9C6eCeEEd36596418ccFbE338
 
 Tests: 30 passing.
+
+## Integrator v4 registered as operator (2026-10-16)
+
+BudgetAuditIntegrator v4: 0x6075F5E8cA4975094347f7D5F9F843324Bb58367
+
+Registered via AIGovernanceMultisig (0xE696BaD9ee41affE5865344B1197C5A18dd7c7F6),
+2-of-3 threshold, targeting OperatorPrivilegesV2 (0x1ec4a1fB4e...EF98).
+
+Proposal id: 2
+Signer 1 approval:   block 11923661
+Signer 2 approval:   block 11923663 (auto-executed)
+OperatorAdded event: 0x1ec4a1fB4e...EF98 block 11923663
+
+Verified:
+  cast call OPV2 "isOperator(address)(bool)" 0x6075F5E8...
+  -> true
+
+The budget audit trail is now fully wired. Every budget stage transition
+that flows through BudgetDeliberationRegistry and then
+BudgetAuditIntegrator will populate AIDecisionAudit with a permanent,
+queryable record. The integrator holds operator status for that purpose
+only; it cannot propose, vote, or approve budget decisions.
