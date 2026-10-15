@@ -18,13 +18,13 @@ contract TimelockBufferTest is Test {
         bytes32 actionId = buffer.proposeAction(target, "0x");
 
         // Get initial executeAfter time
-        (, , uint256 initialExecuteAfter, , ) = buffer.pendingActions(actionId);
+        (,, uint256 initialExecuteAfter,,) = buffer.pendingActions(actionId);
 
         // Extend timelock by 3 days
         vm.prank(operator);
         buffer.extendTimelock(actionId, 3 days, "Requiring deeper audit");
 
-        (, , uint256 newExecuteAfter, , ) = buffer.pendingActions(actionId);
+        (,, uint256 newExecuteAfter,,) = buffer.pendingActions(actionId);
         assertEq(newExecuteAfter, initialExecuteAfter + 3 days);
     }
 

@@ -26,9 +26,7 @@ contract BudgetAuditIntegratorTest is Test {
         privileges.addOperator(op1);
         privileges.addOperator(op2);
 
-        integrator = new BudgetAuditIntegrator(
-            address(privileges), address(audit), address(budget)
-        );
+        integrator = new BudgetAuditIntegrator(address(privileges), address(audit), address(budget));
         privileges.addOperator(address(integrator));
 
         assertTrue(privileges.isOperator(address(integrator)), "integrator not registered");

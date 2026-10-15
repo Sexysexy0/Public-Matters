@@ -169,16 +169,18 @@ contract FilipinnovationLedger {
 
         isVerifiedInnovator[_wallet] = true;
 
-        innovators.push(Innovator({
-            wallet:      _wallet,
-            name:        _name,
-            category:    _category,
-            company:     _company,
-            description: _description,
-            verified:    true,
-            timestamp:   block.timestamp,
-            ipfsHash:    _ipfsHash
-        }));
+        innovators.push(
+            Innovator({
+                wallet: _wallet,
+                name: _name,
+                category: _category,
+                company: _company,
+                description: _description,
+                verified: true,
+                timestamp: block.timestamp,
+                ipfsHash: _ipfsHash
+            })
+        );
 
         emit InnovatorRegistered(_wallet, _name, _category);
     }
@@ -195,18 +197,20 @@ contract FilipinnovationLedger {
         require(_amount > 0, "amount=0");
 
         uint256 id = grants.length;
-        grants.push(Grant({
-            id:              id,
-            innovator:       _innovator,
-            projectName:     _projectName,
-            amount:          _amount,
-            awardedDate:     block.timestamp,
-            disbursedAmount: 0,
-            fullyDisbursed:  false,
-            milestone:       _milestone,
-            timestamp:       block.timestamp,
-            ipfsHash:        _ipfsHash
-        }));
+        grants.push(
+            Grant({
+                id: id,
+                innovator: _innovator,
+                projectName: _projectName,
+                amount: _amount,
+                awardedDate: block.timestamp,
+                disbursedAmount: 0,
+                fullyDisbursed: false,
+                milestone: _milestone,
+                timestamp: block.timestamp,
+                ipfsHash: _ipfsHash
+            })
+        );
 
         emit GrantAwarded(id, _innovator, _amount);
         return id;
@@ -237,18 +241,20 @@ contract FilipinnovationLedger {
         require(_grantId < grants.length, "Grant not found");
 
         uint256 id = commercializations.length;
-        commercializations.push(Commercialization({
-            id:          id,
-            grantId:     _grantId,
-            productName: _productName,
-            market:      _market,
-            revenue:     _revenue,
-            launched:    true,
-            launchDate:  block.timestamp,
-            notes:       _notes,
-            timestamp:   block.timestamp,
-            ipfsHash:    _ipfsHash
-        }));
+        commercializations.push(
+            Commercialization({
+                id: id,
+                grantId: _grantId,
+                productName: _productName,
+                market: _market,
+                revenue: _revenue,
+                launched: true,
+                launchDate: block.timestamp,
+                notes: _notes,
+                timestamp: block.timestamp,
+                ipfsHash: _ipfsHash
+            })
+        );
 
         emit CommercializationLogged(id, _grantId, _productName);
         return id;
@@ -261,27 +267,41 @@ contract FilipinnovationLedger {
         string calldata _ipfsHash
     ) external onlyAdmin whenActive returns (uint256) {
         uint256 id = impactEvents.length;
-        impactEvents.push(ImpactEvent({
-            id:          id,
-            eventType:   _eventType,
-            description: _description,
-            score:       _score,
-            timestamp:   block.timestamp,
-            ipfsHash:    _ipfsHash,
-            proposer:    msg.sender
-        }));
+        impactEvents.push(
+            ImpactEvent({
+                id: id,
+                eventType: _eventType,
+                description: _description,
+                score: _score,
+                timestamp: block.timestamp,
+                ipfsHash: _ipfsHash,
+                proposer: msg.sender
+            })
+        );
 
         emit ImpactEventLogged(id, _eventType, _score);
         return id;
     }
 
-
     // --- Convenience getters ---
 
-    function innovatorsLength() external view returns (uint256) { return innovators.length; }
-    function grantsLength() external view returns (uint256) { return grants.length; }
-    function commercializationsLength() external view returns (uint256) { return commercializations.length; }
-    function impactEventsLength() external view returns (uint256) { return impactEvents.length; }
-    function votesLength() external view returns (uint256) { return votes.length; }
+    function innovatorsLength() external view returns (uint256) {
+        return innovators.length;
+    }
 
+    function grantsLength() external view returns (uint256) {
+        return grants.length;
+    }
+
+    function commercializationsLength() external view returns (uint256) {
+        return commercializations.length;
+    }
+
+    function impactEventsLength() external view returns (uint256) {
+        return impactEvents.length;
+    }
+
+    function votesLength() external view returns (uint256) {
+        return votes.length;
+    }
 }

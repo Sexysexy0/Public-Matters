@@ -14,7 +14,7 @@ contract PrivacyGuardTest is Test {
         operator = address(this);
         automationScript = address(0x123);
         unauthorizedUser = address(0x456);
-        
+
         guard = new PrivacyGuard(operator);
     }
 
@@ -31,7 +31,7 @@ contract PrivacyGuardTest is Test {
 
     function test_AuthorizedExecution() public {
         guard.setAuthorization(automationScript, true);
-        
+
         vm.prank(automationScript);
         guard.verifyAndExecute("PDF_GENERATION");
     }

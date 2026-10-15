@@ -35,11 +35,7 @@ contract BudgetDeliberationRegistryTest is Test {
         // 1. Create
         vm.prank(operator);
         proposalId = registry.createProposal(
-            "Universal Healthcare 2027",
-            "health",
-            100 ether,
-            proposer,
-            TieredApproval.Tier.OPERATOR
+            "Universal Healthcare 2027", "health", 100 ether, proposer, TieredApproval.Tier.OPERATOR
         );
 
         assertEq(registry.getProposalCount(), 1);
@@ -63,20 +59,14 @@ contract BudgetDeliberationRegistryTest is Test {
 
         // 4. Disburse in tranches
         vm.prank(operator);
-        registry.releaseDisbursement(
-            proposalId, 50 ether, "Q1 Hospitals", keccak256("evidence-q1")
-        );
+        registry.releaseDisbursement(proposalId, 50 ether, "Q1 Hospitals", keccak256("evidence-q1"));
 
         vm.prank(operator);
-        registry.releaseDisbursement(
-            proposalId, 50 ether, "Q2 Clinics", keccak256("evidence-q2")
-        );
+        registry.releaseDisbursement(proposalId, 50 ether, "Q2 Clinics", keccak256("evidence-q2"));
 
         // 5. Audit
         vm.prank(operator);
-        registry.recordAudit(
-            proposalId, keccak256("audit-report"), "PASSED - funds used as intended"
-        );
+        registry.recordAudit(proposalId, keccak256("audit-report"), "PASSED - funds used as intended");
 
         // Verify final state
         BudgetDeliberationRegistry.Proposal memory p = registry.getProposal(proposalId);
@@ -100,7 +90,8 @@ contract BudgetDeliberationRegistryTest is Test {
 
     function testRejectProposal() public {
         vm.prank(operator);
-        bytes32 id = registry.createProposal("Controversial Bill", "other", 50 ether, proposer, TieredApproval.Tier.OPERATOR);
+        bytes32 id =
+            registry.createProposal("Controversial Bill", "other", 50 ether, proposer, TieredApproval.Tier.OPERATOR);
 
         vm.prank(operator);
         registry.startDeliberation(id);
@@ -159,8 +150,8 @@ contract BudgetDeliberationRegistryTest is Test {
         registry.createProposal("Infra A", "infra", 30 ether, proposer, TieredApproval.Tier.OPERATOR);
         vm.stopPrank();
 
-        (uint256 healthProposed, , ) = registry.getCategorySummary("health");
-        (uint256 infraProposed, , ) = registry.getCategorySummary("infra");
+        (uint256 healthProposed,,) = registry.getCategorySummary("health");
+        (uint256 infraProposed,,) = registry.getCategorySummary("infra");
 
         assertEq(healthProposed, 30 ether);
         assertEq(infraProposed, 30 ether);

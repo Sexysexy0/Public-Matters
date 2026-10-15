@@ -49,7 +49,10 @@ contract CommunityTaxVault {
         trustIntegrator.logPositiveAction(string(abi.encodePacked("Tax deposit: ", msg.sender)), trustWeight);
     }
 
-    function allocateFunds(address payable recipient, uint256 amount, string calldata proposal) external onlyAuthorized {
+    function allocateFunds(address payable recipient, uint256 amount, string calldata proposal)
+        external
+        onlyAuthorized
+    {
         require(recipient != address(0), "recipient=0");
         require(amount <= totalTaxCollected, "Insufficient funds");
 
@@ -60,7 +63,7 @@ contract CommunityTaxVault {
 
         // Recipient is gated by onlyAuthorized + zero-checked above.
         // forge-lint: disable-next-line(arbitrary-send-eth)
-        (bool ok, ) = recipient.call{value: amount}("");
+        (bool ok,) = recipient.call{value: amount}("");
         require(ok, "Transfer failed");
     }
 

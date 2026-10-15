@@ -21,9 +21,7 @@ contract FilipinnovationLedgerTest is Test {
         assertEq(ledger.innovatorsLength(), 1);
         assertTrue(ledger.isVerifiedInnovator(innovatorA));
 
-        (
-            address wallet,,,,,,,
-        ) = ledger.innovators(0);
+        (address wallet,,,,,,,) = ledger.innovators(0);
         assertEq(wallet, innovatorA);
     }
 
@@ -149,16 +147,16 @@ contract FilipinnovationLedgerTest is Test {
         ) = ledger.grants(gid);
 
         return FilipinnovationLedger.Grant({
-            id:              id,
-            innovator:       innovator,
-            projectName:     projectName,
-            amount:          amount,
-            awardedDate:     awardedDate,
+            id: id,
+            innovator: innovator,
+            projectName: projectName,
+            amount: amount,
+            awardedDate: awardedDate,
             disbursedAmount: disbursedAmount,
-            fullyDisbursed:  fullyDisbursed,
-            milestone:       milestone,
-            timestamp:       timestamp,
-            ipfsHash:        ipfsHash
+            fullyDisbursed: fullyDisbursed,
+            milestone: milestone,
+            timestamp: timestamp,
+            ipfsHash: ipfsHash
         });
     }
 }
