@@ -255,3 +255,27 @@ Four registries, same access pattern as budget and tax:
     addOperator/removeOperator call on the shared registry
 
 Tests: 49 passing across the four.
+
+## Governance contracts v2 - operator-based (2026-10-16)
+
+Rewritten to use OperatorPrivilegesV2 at 0x1ec4a1fB4e...EF98 instead
+of hardcoded msg.sender. Previous versions had no transfer path.
+
+AccessControlGovernance:     0x540Ac52035EdB24e25A9E5e85B0a0dAC7bb5FE99
+CorporateUBOControl:         0xb3dDCc239375EF3cB86C332a84eeC0d0a4d6D8d9
+SovereigntyPolicyRegistry:   0xE2516746fdBf0823d9A144229b662C2B83D4Ef8a
+
+Changes:
+- AccessControlGovernance: rootGovernor removed; role grants gated by
+  OperatorPrivileges.isOperator
+- CorporateUBOControl: multiple UBOs per entity; aggregate ownership
+  enforced <= 10000 bps; verifier must differ from recorder
+- SovereigntyPolicyRegistry: supersede chain added; policies never
+  deleted; revokePolicy retained for cancellation without successor
+
+Superseded (hardcoded msg.sender, no transfer path):
+  AccessControlGovernance v1: 0xC1C2630076cC8Ada5544506B38C900d3D7506e64
+  CorporateUBOControl v1:     0xB4eB4B01b6e2C3e8cD092891306626dC831F82f9
+  SovereigntyPolicyRegistry v1: 0xb23ef644c6696Dc9C6eCeEEd36596418ccFbE338
+
+Tests: 30 passing.
