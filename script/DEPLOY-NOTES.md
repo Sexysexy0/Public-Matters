@@ -237,3 +237,21 @@ Gas observations (for future demos):
   recordPayment:     estimate 1.36M, actual 1.35M  (use 2.0M limit)
 
 Estimates are accurate; add 50% headroom, do not double.
+
+## Four neutral accountability registries (2026-10-15)
+
+All bound to OperatorPrivilegesV2 at 0x1ec4a1fB4e...EF98.
+All deployed with forge create --constructor-args-path.
+
+EnergyProductionRegistry:     0x486AEa41d529148a9577d1DCE4f24ef3E956bCa7
+ImmigrationProcessingRegistry: 0x4FA55c4474Fb3f1664E6c2E91EF79649984D3d72
+CitizenshipReviewRegistry:     0x8c61C1Ae301c5Ee664EF15bEF959C7a459e02Df2
+PublicSafetyMetricsRegistry:   0x1871aA62a3870E9BAC7c2B3161dEd7F4Df7dd3f5
+
+Four registries, same access pattern as budget and tax:
+  - Writes gated by OperatorPrivileges.isOperator
+  - Reads permissionless
+  - No hardcoded owner; authority rotation is a single
+    addOperator/removeOperator call on the shared registry
+
+Tests: 49 passing across the four.
