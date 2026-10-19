@@ -20,8 +20,8 @@ contract PublicSafetyMetricsRegistry {
     struct Incident {
         bytes32 id;
         bytes32 regionHash;
-        bytes32 categoryHash;   // e.g. keccak("violent"), keccak("traffic")
-        bytes32 outcomeHash;    // e.g. keccak("arrested"), keccak("cleared")
+        bytes32 categoryHash; // e.g. keccak("violent"), keccak("traffic")
+        bytes32 outcomeHash; // e.g. keccak("arrested"), keccak("cleared")
         uint256 reportedAt;
         uint256 respondedAt;
         uint256 resolvedAt;
@@ -35,7 +35,7 @@ contract PublicSafetyMetricsRegistry {
     mapping(bytes32 => uint256) public incidentCountByRegion;
     mapping(bytes32 => uint256) public incidentCountByCategory;
     mapping(bytes32 => mapping(bytes32 => uint256)) public incidentCountByRegionAndCategory;
-    mapping(bytes32 => uint256) public totalResponseTimeByRegion;   // seconds, sum
+    mapping(bytes32 => uint256) public totalResponseTimeByRegion; // seconds, sum
     mapping(bytes32 => uint256) public responseCountByRegion;
     mapping(bytes32 => uint256) public resolvedCountByRegion;
 
@@ -64,17 +64,15 @@ contract PublicSafetyMetricsRegistry {
         privileges = OperatorPrivileges(_privileges);
     }
 
-    function reportIncident(
-        bytes32 regionHash,
-        bytes32 categoryHash,
-        bytes32 evidenceHash
-    ) external onlyOperator returns (bytes32) {
+    function reportIncident(bytes32 regionHash, bytes32 categoryHash, bytes32 evidenceHash)
+        external
+        onlyOperator
+        returns (bytes32)
+    {
         require(regionHash != bytes32(0), "regionHash=0");
         require(categoryHash != bytes32(0), "categoryHash=0");
 
-        bytes32 id = keccak256(abi.encode(
-            regionHash, categoryHash, msg.sender, block.timestamp, incidentIds.length
-        ));
+        bytes32 id = keccak256(abi.encode(regionHash, categoryHash, msg.sender, block.timestamp, incidentIds.length));
         require(incidents[id].reportedAt == 0, "Incident exists");
 
         incidents[id] = Incident({
@@ -138,22 +136,18 @@ contract PublicSafetyMetricsRegistry {
     }
 
     function getRegionStats(bytes32 regionHash)
-        external view returns (uint256 incidents_, uint256 responded_, uint256 resolved_)
+        external
+        view
+        returns (uint256 incidents_, uint256 responded_, uint256 resolved_)
     {
-        return (
-            incidentCountByRegion[regionHash],
-            responseCountByRegion[regionHash],
-            resolvedCountByRegion[regionHash]
-        );
+        return (incidentCountByRegion[regionHash], responseCountByRegion[regionHash], resolvedCountByRegion[regionHash]);
     }
 
     function getCategoryCount(bytes32 categoryHash) external view returns (uint256) {
         return incidentCountByCategory[categoryHash];
     }
 
-    function getTotals()
-        external view returns (uint256 incidents_, uint256 responded_, uint256 resolved_)
-    {
+    function getTotals() external view returns (uint256 incidents_, uint256 responded_, uint256 resolved_) {
         return (totalIncidents, totalResponded, totalResolved);
     }
 }

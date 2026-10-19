@@ -17,7 +17,14 @@ import "./OperatorPrivileges.sol";
 contract ImmigrationProcessingRegistry {
     OperatorPrivileges public immutable privileges;
 
-    enum Outcome { FILED, APPROVED, DENIED, APPEALED, GRANTED_ON_APPEAL, WITHDRAWN }
+    enum Outcome {
+        FILED,
+        APPROVED,
+        DENIED,
+        APPEALED,
+        GRANTED_ON_APPEAL,
+        WITHDRAWN
+    }
 
     struct Application {
         bytes32 id;
@@ -55,12 +62,7 @@ contract ImmigrationProcessingRegistry {
         address recordedBy,
         bytes32 evidenceHash
     );
-    event DecisionRecorded(
-        bytes32 indexed id,
-        Outcome outcome,
-        address recordedBy,
-        bytes32 evidenceHash
-    );
+    event DecisionRecorded(bytes32 indexed id, Outcome outcome, address recordedBy, bytes32 evidenceHash);
 
     modifier onlyOperator() {
         require(privileges.isOperator(msg.sender), "Not authorized operator");
@@ -83,10 +85,11 @@ contract ImmigrationProcessingRegistry {
         require(categoryHash != bytes32(0), "categoryHash=0");
         require(applicantHash != bytes32(0), "applicantHash=0");
 
-        bytes32 id = keccak256(abi.encode(
-            officeHash, categoryHash, applicantHash, policyHash,
-            msg.sender, block.timestamp, applicationIds.length
-        ));
+        bytes32 id = keccak256(
+            abi.encode(
+                officeHash, categoryHash, applicantHash, policyHash, msg.sender, block.timestamp, applicationIds.length
+            )
+        );
         require(applications[id].filedAt == 0, "Application exists");
 
         applications[id] = Application({
@@ -111,11 +114,7 @@ contract ImmigrationProcessingRegistry {
         return id;
     }
 
-    function recordDecision(
-        bytes32 applicationId,
-        Outcome outcome,
-        bytes32 evidenceHash
-    ) external onlyOperator {
+    function recordDecision(bytes32 applicationId, Outcome outcome, bytes32 evidenceHash) external onlyOperator {
         Application storage a = applications[applicationId];
         require(a.filedAt != 0, "Application not found");
         require(a.decidedAt == 0, "Already decided");
@@ -141,18 +140,11 @@ contract ImmigrationProcessingRegistry {
         emit DecisionRecorded(applicationId, outcome, msg.sender, evidenceHash);
     }
 
-    function recordAppeal(
-        bytes32 applicationId,
-        Outcome finalOutcome,
-        bytes32 evidenceHash
-    ) external onlyOperator {
+    function recordAppeal(bytes32 applicationId, Outcome finalOutcome, bytes32 evidenceHash) external onlyOperator {
         Application storage a = applications[applicationId];
         require(a.filedAt != 0, "Application not found");
         require(a.outcome == Outcome.DENIED, "Only denied applications can be appealed");
-        require(
-            finalOutcome == Outcome.GRANTED_ON_APPEAL || finalOutcome == Outcome.DENIED,
-            "Invalid appeal outcome"
-        );
+        require(finalOutcome == Outcome.GRANTED_ON_APPEAL || finalOutcome == Outcome.DENIED, "Invalid appeal outcome");
 
         appealedByOffice[a.officeHash] += 1;
         totalAppealed += 1;
@@ -184,7 +176,9 @@ contract ImmigrationProcessingRegistry {
     }
 
     function getOfficeStats(bytes32 officeHash)
-        external view returns (uint256 filed, uint256 approved, uint256 denied, uint256 appealed)
+        external
+        view
+        returns (uint256 filed, uint256 approved, uint256 denied, uint256 appealed)
     {
         return (
             filedByOffice[officeHash],
@@ -194,20 +188,14 @@ contract ImmigrationProcessingRegistry {
         );
     }
 
-    function getCategoryCount(bytes32 officeHash, bytes32 categoryHash)
-        external view returns (uint256)
-    {
+    function getCategoryCount(bytes32 officeHash, bytes32 categoryHash) external view returns (uint256) {
         return filedByCategory[officeHash][categoryHash];
     }
 
     function getTotals()
-        external view returns (
-            uint256 filed,
-            uint256 approved,
-            uint256 denied,
-            uint256 appealed,
-            uint256 grantedOnAppeal
-        )
+        external
+        view
+        returns (uint256 filed, uint256 approved, uint256 denied, uint256 appealed, uint256 grantedOnAppeal)
     {
         return (totalFiled, totalApproved, totalDenied, totalAppealed, totalGrantedOnAppeal);
     }

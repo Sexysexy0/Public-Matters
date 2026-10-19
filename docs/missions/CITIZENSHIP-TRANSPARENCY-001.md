@@ -1,7 +1,9 @@
 # Mission: CITIZENSHIP-TRANSPARENCY-001
 
 **Filed:** 2026-10-15
-**Status:** Contract complete (14 tests). Sepolia deployment next.
+**Status:** Deployed and source-verified on Sepolia testnet
+**Registry:** `0x8c61C1Ae301c5Ee664EF15bEF959C7a459e02Df2`
+  https://sepolia.etherscan.io/address/0x8c61C1Ae301c5Ee664EF15bEF959C7a459e02Df2
 **Author:** Sovereign Operator
 **Contract:** CitizenshipReviewRegistry
 

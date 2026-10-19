@@ -16,15 +16,24 @@ import "./OperatorPrivileges.sol";
 contract EnergyProductionRegistry {
     OperatorPrivileges public immutable privileges;
 
-    enum Source { OIL, GAS, NUCLEAR, SOLAR, WIND, HYDRO, COAL, OTHER }
+    enum Source {
+        OIL,
+        GAS,
+        NUCLEAR,
+        SOLAR,
+        WIND,
+        HYDRO,
+        COAL,
+        OTHER
+    }
     uint8 public constant SOURCE_COUNT = 8;
 
     struct ProductionRecord {
         bytes32 id;
         bytes32 regionHash;
-        Source  source;
-        uint256 volume;         // caller-defined unit (MWh, barrels, etc.)
-        uint256 costPerUnit;    // smallest currency unit
+        Source source;
+        uint256 volume; // caller-defined unit (MWh, barrels, etc.)
+        uint256 costPerUnit; // smallest currency unit
         address recordedBy;
         bytes32 evidenceHash;
         uint256 timestamp;
@@ -45,7 +54,7 @@ contract EnergyProductionRegistry {
     event ProductionRecorded(
         bytes32 indexed id,
         bytes32 indexed regionHash,
-        Source  source,
+        Source source,
         uint256 volume,
         uint256 costPerUnit,
         address recordedBy,
@@ -64,7 +73,7 @@ contract EnergyProductionRegistry {
 
     function recordProduction(
         bytes32 regionHash,
-        Source  source,
+        Source source,
         uint256 volume,
         uint256 costPerUnit,
         bytes32 evidenceHash
@@ -72,10 +81,9 @@ contract EnergyProductionRegistry {
         require(regionHash != bytes32(0), "regionHash=0");
         require(volume > 0, "volume=0");
 
-        bytes32 id = keccak256(abi.encode(
-            regionHash, uint8(source), volume, costPerUnit,
-            msg.sender, block.timestamp, recordIds.length
-        ));
+        bytes32 id = keccak256(
+            abi.encode(regionHash, uint8(source), volume, costPerUnit, msg.sender, block.timestamp, recordIds.length)
+        );
         require(records[id].timestamp == 0, "Record exists");
 
         records[id] = ProductionRecord({
@@ -125,24 +133,19 @@ contract EnergyProductionRegistry {
         return costSumByRegionAndSource[regionHash][uint8(source)] / count;
     }
 
-    function getSourceTotals(Source source)
-        external view returns (uint256 volume, uint256 count)
-    {
+    function getSourceTotals(Source source) external view returns (uint256 volume, uint256 count) {
         uint8 s = uint8(source);
         return (totalVolumeBySource[s], totalCountBySource[s]);
     }
 
-    function getRegionTotals(bytes32 regionHash)
-        external view returns (uint256 volume, uint256 count)
-    {
-        return (totalVolumeByRegion[regionHash], countByRegionAndSource[regionHash][0]
-            + countByRegionAndSource[regionHash][1]
-            + countByRegionAndSource[regionHash][2]
-            + countByRegionAndSource[regionHash][3]
-            + countByRegionAndSource[regionHash][4]
-            + countByRegionAndSource[regionHash][5]
-            + countByRegionAndSource[regionHash][6]
-            + countByRegionAndSource[regionHash][7]);
+    function getRegionTotals(bytes32 regionHash) external view returns (uint256 volume, uint256 count) {
+        return (
+            totalVolumeByRegion[regionHash],
+            countByRegionAndSource[regionHash][0] + countByRegionAndSource[regionHash][1]
+                + countByRegionAndSource[regionHash][2] + countByRegionAndSource[regionHash][3]
+                + countByRegionAndSource[regionHash][4] + countByRegionAndSource[regionHash][5]
+                + countByRegionAndSource[regionHash][6] + countByRegionAndSource[regionHash][7]
+        );
     }
 
     function getTotals() external view returns (uint256 volume) {

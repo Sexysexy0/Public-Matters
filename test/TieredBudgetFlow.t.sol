@@ -252,9 +252,8 @@ contract TieredBudgetFlowTest is Test {
 
     function testAuditRejectedBeforeCompletion() public {
         vm.prank(op1);
-        bytes32 id = registry.createProposal(
-            "Premature audit", "other", 10 ether, proposer, TieredApproval.Tier.OPERATOR
-        );
+        bytes32 id =
+            registry.createProposal("Premature audit", "other", 10 ether, proposer, TieredApproval.Tier.OPERATOR);
         vm.prank(op1);
         registry.startDeliberation(id);
 

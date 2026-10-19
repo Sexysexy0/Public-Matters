@@ -1,7 +1,9 @@
 # Mission: PUBLICSAFETY-TRANSPARENCY-001
 
 **Filed:** 2026-10-15
-**Status:** Contract complete (11 tests). Sepolia deployment next.
+**Status:** Deployed and source-verified on Sepolia testnet
+**Registry:** `0x1871aA62a3870E9BAC7c2B3161dEd7F4Df7dd3f5`
+  https://sepolia.etherscan.io/address/0x1871aA62a3870E9BAC7c2B3161dEd7F4Df7dd3f5
 **Author:** Sovereign Operator
 **Contract:** PublicSafetyMetricsRegistry
 

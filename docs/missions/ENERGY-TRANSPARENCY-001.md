@@ -1,7 +1,9 @@
 # Mission: ENERGY-TRANSPARENCY-001
 
 **Filed:** 2026-10-15
-**Status:** Contract complete (10 tests). Sepolia deployment next.
+**Status:** Deployed and source-verified on Sepolia testnet
+**Registry:** `0x486AEa41d529148a9577d1DCE4f24ef3E956bCa7`
+  https://sepolia.etherscan.io/address/0x486AEa41d529148a9577d1DCE4f24ef3E956bCa7
 **Author:** Sovereign Operator
 **Contract:** EnergyProductionRegistry
 

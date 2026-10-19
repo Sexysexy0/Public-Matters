@@ -24,25 +24,29 @@ contract TaxTransparencyRegistryTest is Test {
         privileges.addOperator(operator);
     }
 
-    function _fileBIRAssessment(uint256 amount, TaxTransparencyRegistry.Category cat)
-        internal
-        returns (bytes32)
-    {
+    function _fileBIRAssessment(uint256 amount, TaxTransparencyRegistry.Category cat) internal returns (bytes32) {
         vm.prank(operator);
         return registry.recordAssessment(
-            TAXPAYER_HASH, RDO_HASH, EXAMINER_HASH, amount, cat,
-            TaxTransparencyRegistry.Submitter.BIR_OPERATOR, keccak256("doc")
+            TAXPAYER_HASH,
+            RDO_HASH,
+            EXAMINER_HASH,
+            amount,
+            cat,
+            TaxTransparencyRegistry.Submitter.BIR_OPERATOR,
+            keccak256("doc")
         );
     }
 
-    function _fileTPAssessment(uint256 amount, TaxTransparencyRegistry.Category cat)
-        internal
-        returns (bytes32)
-    {
+    function _fileTPAssessment(uint256 amount, TaxTransparencyRegistry.Category cat) internal returns (bytes32) {
         vm.prank(taxpayer);
         return registry.recordAssessment(
-            TAXPAYER_HASH, RDO_HASH, EXAMINER_HASH, amount, cat,
-            TaxTransparencyRegistry.Submitter.TAXPAYER, keccak256("screenshot")
+            TAXPAYER_HASH,
+            RDO_HASH,
+            EXAMINER_HASH,
+            amount,
+            cat,
+            TaxTransparencyRegistry.Submitter.TAXPAYER,
+            keccak256("screenshot")
         );
     }
 
@@ -59,7 +63,10 @@ contract TaxTransparencyRegistryTest is Test {
         vm.prank(stranger);
         vm.expectRevert("Not authorized operator");
         registry.recordAssessment(
-            TAXPAYER_HASH, RDO_HASH, EXAMINER_HASH, 5000 ether,
+            TAXPAYER_HASH,
+            RDO_HASH,
+            EXAMINER_HASH,
+            5000 ether,
             TaxTransparencyRegistry.Category.MSME,
             TaxTransparencyRegistry.Submitter.BIR_OPERATOR,
             keccak256("fake")
@@ -81,17 +88,13 @@ contract TaxTransparencyRegistryTest is Test {
         // BIR claims they reduced by 500 (10%)
         vm.prank(operator);
         registry.recordReduction(
-            id, 500 ether,
-            TaxTransparencyRegistry.ReductionReason.NEGOTIATED,
-            keccak256("bir-memo")
+            id, 500 ether, TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("bir-memo")
         );
 
         // Taxpayer claims the BIR actually knocked it down by 4000 (80%)
         vm.prank(taxpayer);
         registry.recordReduction(
-            id, 4000 ether,
-            TaxTransparencyRegistry.ReductionReason.NEGOTIATED,
-            keccak256("tp-screenshot")
+            id, 4000 ether, TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("tp-screenshot")
         );
 
         // Both versions are recorded, side-by-side
@@ -99,12 +102,8 @@ contract TaxTransparencyRegistryTest is Test {
         assertEq(reds.length, 2);
 
         // Aggregate rates are split by submitter
-        uint256 birRate = registry.getRDOReductionRate(
-            RDO_HASH, TaxTransparencyRegistry.Submitter.BIR_OPERATOR
-        );
-        uint256 tpRate = registry.getRDOReductionRate(
-            RDO_HASH, TaxTransparencyRegistry.Submitter.TAXPAYER
-        );
+        uint256 birRate = registry.getRDOReductionRate(RDO_HASH, TaxTransparencyRegistry.Submitter.BIR_OPERATOR);
+        uint256 tpRate = registry.getRDOReductionRate(RDO_HASH, TaxTransparencyRegistry.Submitter.TAXPAYER);
 
         // BIR says 10%, taxpayer says 80%. The gap is the signal.
         assertEq(birRate, 1000);
@@ -116,20 +115,14 @@ contract TaxTransparencyRegistryTest is Test {
 
         vm.prank(taxpayer);
         vm.expectRevert("Reduction exceeds assessment");
-        registry.recordReduction(
-            id, 1001 ether,
-            TaxTransparencyRegistry.ReductionReason.NEGOTIATED,
-            keccak256("x")
-        );
+        registry.recordReduction(id, 1001 ether, TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("x"));
     }
 
     function testPaymentAttachesToAssessment() public {
         bytes32 id = _fileBIRAssessment(5000 ether, TaxTransparencyRegistry.Category.MSME);
 
         vm.prank(taxpayer);
-        bytes32 payId = registry.recordPayment(
-            id, TAXPAYER_HASH, 5000 ether, keccak256("receipt")
-        );
+        bytes32 payId = registry.recordPayment(id, TAXPAYER_HASH, 5000 ether, keccak256("receipt"));
 
         TaxTransparencyRegistry.Payment memory p = registry.getPayment(payId);
         assertEq(p.amount, 5000 ether);
@@ -141,9 +134,7 @@ contract TaxTransparencyRegistryTest is Test {
 
     function testAdvancePaymentWithoutAssessment() public {
         vm.prank(taxpayer);
-        registry.recordPayment(
-            bytes32(0), TAXPAYER_HASH, 100 ether, keccak256("advance")
-        );
+        registry.recordPayment(bytes32(0), TAXPAYER_HASH, 100 ether, keccak256("advance"));
         assertEq(registry.totalPaid(), 100 ether);
     }
 
@@ -153,26 +144,21 @@ contract TaxTransparencyRegistryTest is Test {
         bytes32 id2 = _fileBIRAssessment(200 ether, TaxTransparencyRegistry.Category.MSME);
 
         vm.prank(operator);
-        registry.recordReduction(id1, 80 ether,
-            TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("r1"));
+        registry.recordReduction(id1, 80 ether, TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("r1"));
         vm.prank(operator);
-        registry.recordReduction(id2, 160 ether,
-            TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("r2"));
+        registry.recordReduction(id2, 160 ether, TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("r2"));
 
         // One large assessment with low reduction
         bytes32 id3 = _fileBIRAssessment(10000 ether, TaxTransparencyRegistry.Category.LARGE);
 
         vm.prank(operator);
-        registry.recordReduction(id3, 200 ether,
-            TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("r3"));
+        registry.recordReduction(id3, 200 ether, TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("r3"));
 
         uint256 msmeRate = registry.getCategoryReductionRate(
-            TaxTransparencyRegistry.Category.MSME,
-            TaxTransparencyRegistry.Submitter.BIR_OPERATOR
+            TaxTransparencyRegistry.Category.MSME, TaxTransparencyRegistry.Submitter.BIR_OPERATOR
         );
         uint256 largeRate = registry.getCategoryReductionRate(
-            TaxTransparencyRegistry.Category.LARGE,
-            TaxTransparencyRegistry.Submitter.BIR_OPERATOR
+            TaxTransparencyRegistry.Category.LARGE, TaxTransparencyRegistry.Submitter.BIR_OPERATOR
         );
 
         // MSME: (80+160)/(100+200) = 240/300 = 80%
@@ -185,26 +171,24 @@ contract TaxTransparencyRegistryTest is Test {
         // RDO-039 has a high reduction pattern
         bytes32 idA = _fileBIRAssessment(100 ether, TaxTransparencyRegistry.Category.MSME);
         vm.prank(operator);
-        registry.recordReduction(idA, 80 ether,
-            TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("a"));
+        registry.recordReduction(idA, 80 ether, TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("a"));
 
         // RDO-001 has a low reduction pattern
         vm.prank(operator);
         bytes32 idB = registry.recordAssessment(
-            TAXPAYER_HASH, RDO_OTHER, EXAMINER_HASH, 100 ether,
+            TAXPAYER_HASH,
+            RDO_OTHER,
+            EXAMINER_HASH,
+            100 ether,
             TaxTransparencyRegistry.Category.MSME,
-            TaxTransparencyRegistry.Submitter.BIR_OPERATOR, keccak256("b")
+            TaxTransparencyRegistry.Submitter.BIR_OPERATOR,
+            keccak256("b")
         );
         vm.prank(operator);
-        registry.recordReduction(idB, 5 ether,
-            TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("b2"));
+        registry.recordReduction(idB, 5 ether, TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("b2"));
 
-        uint256 rate39 = registry.getRDOReductionRate(
-            RDO_HASH, TaxTransparencyRegistry.Submitter.BIR_OPERATOR
-        );
-        uint256 rate01 = registry.getRDOReductionRate(
-            RDO_OTHER, TaxTransparencyRegistry.Submitter.BIR_OPERATOR
-        );
+        uint256 rate39 = registry.getRDOReductionRate(RDO_HASH, TaxTransparencyRegistry.Submitter.BIR_OPERATOR);
+        uint256 rate01 = registry.getRDOReductionRate(RDO_OTHER, TaxTransparencyRegistry.Submitter.BIR_OPERATOR);
 
         assertEq(rate39, 8000);
         assertEq(rate01, 500);
@@ -214,9 +198,13 @@ contract TaxTransparencyRegistryTest is Test {
         vm.prank(taxpayer);
         vm.expectRevert("amount=0");
         registry.recordAssessment(
-            TAXPAYER_HASH, RDO_HASH, EXAMINER_HASH, 0,
+            TAXPAYER_HASH,
+            RDO_HASH,
+            EXAMINER_HASH,
+            0,
             TaxTransparencyRegistry.Category.MSME,
-            TaxTransparencyRegistry.Submitter.TAXPAYER, keccak256("x")
+            TaxTransparencyRegistry.Submitter.TAXPAYER,
+            keccak256("x")
         );
     }
 
@@ -224,9 +212,13 @@ contract TaxTransparencyRegistryTest is Test {
         vm.prank(taxpayer);
         vm.expectRevert("taxpayerHash=0");
         registry.recordAssessment(
-            bytes32(0), RDO_HASH, EXAMINER_HASH, 1,
+            bytes32(0),
+            RDO_HASH,
+            EXAMINER_HASH,
+            1,
             TaxTransparencyRegistry.Category.MSME,
-            TaxTransparencyRegistry.Submitter.TAXPAYER, keccak256("x")
+            TaxTransparencyRegistry.Submitter.TAXPAYER,
+            keccak256("x")
         );
     }
 
@@ -234,8 +226,7 @@ contract TaxTransparencyRegistryTest is Test {
         vm.prank(taxpayer);
         vm.expectRevert("Assessment not found");
         registry.recordReduction(
-            keccak256("nonexistent"), 1 ether,
-            TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("x")
+            keccak256("nonexistent"), 1 ether, TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("x")
         );
     }
 
@@ -251,8 +242,7 @@ contract TaxTransparencyRegistryTest is Test {
         assertEq(registry.totalPaid(), 500 ether);
 
         vm.prank(operator);
-        registry.recordReduction(id, 100 ether,
-            TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("r"));
+        registry.recordReduction(id, 100 ether, TaxTransparencyRegistry.ReductionReason.NEGOTIATED, keccak256("r"));
         assertEq(registry.totalReduced(), 100 ether);
     }
 }

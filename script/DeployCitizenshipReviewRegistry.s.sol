@@ -7,10 +7,8 @@ import "../src/CitizenshipReviewRegistry.sol";
 contract DeployCitizenshipReviewRegistry is Script {
     function run() external {
         uint256 pk = vm.envUint("PRIVATE_KEY");
-        address privileges = vm.envOr(
-            "OPERATOR_PRIVILEGES_V2_ADDRESS",
-            address(0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98)
-        );
+        address privileges =
+            vm.envOr("OPERATOR_PRIVILEGES_V2_ADDRESS", address(0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98));
         vm.startBroadcast(pk);
         CitizenshipReviewRegistry r = new CitizenshipReviewRegistry(privileges);
         vm.stopBroadcast();

@@ -45,7 +45,7 @@ contract CitizenshipReviewRegistry {
     mapping(bytes32 => Review) public reviews;
     bytes32[] public reviewIds;
 
-    uint256 public appealWindow;   // seconds; default 30 days
+    uint256 public appealWindow; // seconds; default 30 days
 
     uint256 public totalFiled;
     uint256 public totalResolved;
@@ -75,16 +75,11 @@ contract CitizenshipReviewRegistry {
         appealWindow = _seconds;
     }
 
-    function fileReview(
-        bytes32 subjectHash,
-        bytes32 groundsHash
-    ) external onlyOperator returns (bytes32) {
+    function fileReview(bytes32 subjectHash, bytes32 groundsHash) external onlyOperator returns (bytes32) {
         require(subjectHash != bytes32(0), "subjectHash=0");
         require(groundsHash != bytes32(0), "groundsHash=0");
 
-        bytes32 id = keccak256(abi.encode(
-            subjectHash, groundsHash, msg.sender, block.timestamp, reviewIds.length
-        ));
+        bytes32 id = keccak256(abi.encode(subjectHash, groundsHash, msg.sender, block.timestamp, reviewIds.length));
         require(reviews[id].filedAt == 0, "Review exists");
 
         reviews[id] = Review({
@@ -173,9 +168,7 @@ contract CitizenshipReviewRegistry {
         return reviewIds.length;
     }
 
-    function getTotals()
-        external view returns (uint256 filed, uint256 resolved, uint256 appealed, uint256 cancelled)
-    {
+    function getTotals() external view returns (uint256 filed, uint256 resolved, uint256 appealed, uint256 cancelled) {
         return (totalFiled, totalResolved, totalAppealed, totalCancelled);
     }
 }

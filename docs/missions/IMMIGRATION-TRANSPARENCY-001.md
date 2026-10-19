@@ -1,7 +1,9 @@
 # Mission: IMMIGRATION-TRANSPARENCY-001
 
 **Filed:** 2026-10-15
-**Status:** Contract complete (14 tests). Sepolia deployment next.
+**Status:** Deployed and source-verified on Sepolia testnet
+**Registry:** `0x4FA55c4474Fb3f1664E6c2E91EF79649984D3d72`
+  https://sepolia.etherscan.io/address/0x4FA55c4474Fb3f1664E6c2E91EF79649984D3d72
 **Author:** Sovereign Operator
 **Contract:** ImmigrationProcessingRegistry
 

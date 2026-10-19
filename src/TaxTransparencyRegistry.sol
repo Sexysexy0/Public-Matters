@@ -27,9 +27,21 @@ import "./OperatorPrivileges.sol";
 contract TaxTransparencyRegistry {
     OperatorPrivileges public immutable privileges;
 
-    enum Category { MSME, LARGE, INDIVIDUAL }
-    enum ReductionReason { NEGOTIATED, ADJUSTED_ON_APPEAL, VOIDED, PROTEST_UPHELD }
-    enum Submitter { BIR_OPERATOR, TAXPAYER }
+    enum Category {
+        MSME,
+        LARGE,
+        INDIVIDUAL
+    }
+    enum ReductionReason {
+        NEGOTIATED,
+        ADJUSTED_ON_APPEAL,
+        VOIDED,
+        PROTEST_UPHELD
+    }
+    enum Submitter {
+        BIR_OPERATOR,
+        TAXPAYER
+    }
 
     struct Assessment {
         bytes32 id;
@@ -57,7 +69,7 @@ contract TaxTransparencyRegistry {
 
     struct Payment {
         bytes32 id;
-        bytes32 assessmentId;   // 0 = advance payment (unattached)
+        bytes32 assessmentId; // 0 = advance payment (unattached)
         bytes32 taxpayerHash;
         uint256 amount;
         address recordedBy;
@@ -79,23 +91,23 @@ contract TaxTransparencyRegistry {
     // Aggregates by submitter: dim => submitterIndex => amount
     mapping(bytes32 => mapping(uint8 => uint256)) public assessedByRDO;
     mapping(bytes32 => mapping(uint8 => uint256)) public assessedByExaminer;
-    mapping(uint8   => mapping(uint8 => uint256)) public assessedByCategory;
+    mapping(uint8 => mapping(uint8 => uint256)) public assessedByCategory;
 
     mapping(bytes32 => mapping(uint8 => uint256)) public reducedByRDO;
     mapping(bytes32 => mapping(uint8 => uint256)) public reducedByExaminer;
-    mapping(uint8   => mapping(uint8 => uint256)) public reducedByCategory;
+    mapping(uint8 => mapping(uint8 => uint256)) public reducedByCategory;
 
     // Reduction base per submitter: sum of assessed amounts for assessments
     // this submitter has filed a reduction against. Counted once per
     // assessment, per submitter.
     mapping(bytes32 => mapping(uint8 => uint256)) public reducedBaseByRDO;
     mapping(bytes32 => mapping(uint8 => uint256)) public reducedBaseByExaminer;
-    mapping(uint8   => mapping(uint8 => uint256)) public reducedBaseByCategory;
-    mapping(bytes32 => mapping(uint8 => bool))    public baseCounted;
+    mapping(uint8 => mapping(uint8 => uint256)) public reducedBaseByCategory;
+    mapping(bytes32 => mapping(uint8 => bool)) public baseCounted;
 
     mapping(bytes32 => uint256) public assessmentCountByRDO;
     mapping(bytes32 => uint256) public assessmentCountByExaminer;
-    mapping(uint8   => uint256) public assessmentCountByCategory;
+    mapping(uint8 => uint256) public assessmentCountByCategory;
 
     uint256 public totalAssessed;
     uint256 public totalReduced;
@@ -160,11 +172,19 @@ contract TaxTransparencyRegistry {
             require(privileges.isOperator(msg.sender), "Not authorized operator");
         }
 
-        bytes32 id = keccak256(abi.encode(
-            taxpayerHash, rdoHash, examinerHash,
-            assessedAmount, category, submitter,
-            msg.sender, block.timestamp, assessmentIds.length
-        ));
+        bytes32 id = keccak256(
+            abi.encode(
+                taxpayerHash,
+                rdoHash,
+                examinerHash,
+                assessedAmount,
+                category,
+                submitter,
+                msg.sender,
+                block.timestamp,
+                assessmentIds.length
+            )
+        );
         require(assessments[id].timestamp == 0, "Assessment exists");
 
         assessments[id] = Assessment({
@@ -192,31 +212,25 @@ contract TaxTransparencyRegistry {
         totalAssessed += assessedAmount;
 
         emit AssessmentRecorded(
-            id, rdoHash, examinerHash, assessedAmount,
-            category, submitter, msg.sender, evidenceHash
+            id, rdoHash, examinerHash, assessedAmount, category, submitter, msg.sender, evidenceHash
         );
         return id;
     }
 
-    function recordReduction(
-        bytes32 assessmentId,
-        uint256 reducedAmount,
-        ReductionReason reason,
-        bytes32 evidenceHash
-    ) external returns (bytes32) {
+    function recordReduction(bytes32 assessmentId, uint256 reducedAmount, ReductionReason reason, bytes32 evidenceHash)
+        external
+        returns (bytes32)
+    {
         Assessment storage a = assessments[assessmentId];
         require(a.timestamp != 0, "Assessment not found");
         require(reducedAmount > 0, "amount=0");
         require(reducedAmount <= a.assessedAmount, "Reduction exceeds assessment");
 
-        Submitter submitter = privileges.isOperator(msg.sender)
-            ? Submitter.BIR_OPERATOR
-            : Submitter.TAXPAYER;
+        Submitter submitter = privileges.isOperator(msg.sender) ? Submitter.BIR_OPERATOR : Submitter.TAXPAYER;
 
-        bytes32 id = keccak256(abi.encode(
-            assessmentId, reducedAmount, reason, submitter,
-            msg.sender, block.timestamp, reductionIds.length
-        ));
+        bytes32 id = keccak256(
+            abi.encode(assessmentId, reducedAmount, reason, submitter, msg.sender, block.timestamp, reductionIds.length)
+        );
         require(reductions[id].timestamp == 0, "Reduction exists");
 
         reductions[id] = Reduction({
@@ -248,29 +262,22 @@ contract TaxTransparencyRegistry {
             reducedBaseByCategory[c][s] += a.assessedAmount;
         }
 
-        emit ReductionRecorded(
-            id, assessmentId, reducedAmount, reason, submitter,
-            msg.sender, evidenceHash
-        );
+        emit ReductionRecorded(id, assessmentId, reducedAmount, reason, submitter, msg.sender, evidenceHash);
         return id;
     }
 
-    function recordPayment(
-        bytes32 assessmentId,
-        bytes32 taxpayerHash,
-        uint256 amount,
-        bytes32 evidenceHash
-    ) external returns (bytes32) {
+    function recordPayment(bytes32 assessmentId, bytes32 taxpayerHash, uint256 amount, bytes32 evidenceHash)
+        external
+        returns (bytes32)
+    {
         require(taxpayerHash != bytes32(0), "taxpayerHash=0");
         require(amount > 0, "amount=0");
         if (assessmentId != bytes32(0)) {
             require(assessments[assessmentId].timestamp != 0, "Assessment not found");
         }
 
-        bytes32 id = keccak256(abi.encode(
-            assessmentId, taxpayerHash, amount,
-            msg.sender, block.timestamp, paymentIds.length
-        ));
+        bytes32 id =
+            keccak256(abi.encode(assessmentId, taxpayerHash, amount, msg.sender, block.timestamp, paymentIds.length));
         require(payments[id].timestamp == 0, "Payment exists");
 
         payments[id] = Payment({
@@ -288,9 +295,7 @@ contract TaxTransparencyRegistry {
         }
         totalPaid += amount;
 
-        emit PaymentRecorded(
-            id, assessmentId, taxpayerHash, amount, msg.sender, evidenceHash
-        );
+        emit PaymentRecorded(id, assessmentId, taxpayerHash, amount, msg.sender, evidenceHash);
         return id;
     }
 
@@ -322,39 +327,29 @@ contract TaxTransparencyRegistry {
         return paymentIds.length;
     }
 
-    function getReductionsForAssessment(bytes32 assessmentId)
-        external view returns (bytes32[] memory)
-    {
+    function getReductionsForAssessment(bytes32 assessmentId) external view returns (bytes32[] memory) {
         return reductionIdsByAssessment[assessmentId];
     }
 
-    function getPaymentsForAssessment(bytes32 assessmentId)
-        external view returns (bytes32[] memory)
-    {
+    function getPaymentsForAssessment(bytes32 assessmentId) external view returns (bytes32[] memory) {
         return paymentIdsByAssessment[assessmentId];
     }
 
     /// @notice Reduction rate for an RDO, split by submitter, in bps.
     /// 7800 = 78% of assessed value was reduced.
-    function getRDOReductionRate(bytes32 rdoHash, Submitter submitter)
-        external view returns (uint256)
-    {
+    function getRDOReductionRate(bytes32 rdoHash, Submitter submitter) external view returns (uint256) {
         uint256 base = reducedBaseByRDO[rdoHash][uint8(submitter)];
         if (base == 0) return 0;
         return (reducedByRDO[rdoHash][uint8(submitter)] * 10000) / base;
     }
 
-    function getExaminerReductionRate(bytes32 examinerHash, Submitter submitter)
-        external view returns (uint256)
-    {
+    function getExaminerReductionRate(bytes32 examinerHash, Submitter submitter) external view returns (uint256) {
         uint256 base = reducedBaseByExaminer[examinerHash][uint8(submitter)];
         if (base == 0) return 0;
         return (reducedByExaminer[examinerHash][uint8(submitter)] * 10000) / base;
     }
 
-    function getCategoryReductionRate(Category category, Submitter submitter)
-        external view returns (uint256)
-    {
+    function getCategoryReductionRate(Category category, Submitter submitter) external view returns (uint256) {
         uint8 c = uint8(category);
         uint256 base = reducedBaseByCategory[c][uint8(submitter)];
         if (base == 0) return 0;
@@ -362,7 +357,9 @@ contract TaxTransparencyRegistry {
     }
 
     function getRDOStats(bytes32 rdoHash, Submitter submitter)
-        external view returns (uint256 assessed, uint256 reduced, uint256 count)
+        external
+        view
+        returns (uint256 assessed, uint256 reduced, uint256 count)
     {
         return (
             assessedByRDO[rdoHash][uint8(submitter)],
@@ -372,7 +369,9 @@ contract TaxTransparencyRegistry {
     }
 
     function getExaminerStats(bytes32 examinerHash, Submitter submitter)
-        external view returns (uint256 assessed, uint256 reduced, uint256 count)
+        external
+        view
+        returns (uint256 assessed, uint256 reduced, uint256 count)
     {
         return (
             assessedByExaminer[examinerHash][uint8(submitter)],
@@ -382,14 +381,17 @@ contract TaxTransparencyRegistry {
     }
 
     function getCategoryStats(Category category, Submitter submitter)
-        external view returns (uint256 assessed, uint256 reduced, uint256 count)
+        external
+        view
+        returns (uint256 assessed, uint256 reduced, uint256 count)
     {
         uint8 c = uint8(category);
-        return (
-            assessedByCategory[c][uint8(submitter)],
-            reducedByCategory[c][uint8(submitter)],
-            assessmentCountByCategory[c]
-        );
+        return
+            (
+                assessedByCategory[c][uint8(submitter)],
+                reducedByCategory[c][uint8(submitter)],
+                assessmentCountByCategory[c]
+            );
     }
 
     function getTotals() external view returns (uint256 assessed, uint256 reduced, uint256 paid) {
