@@ -133,8 +133,7 @@ contract ImmigrationProcessingRegistryTest is Test {
         registry.recordDecision(id, ImmigrationProcessingRegistry.Outcome.APPROVED, bytes32(0));
         vm.stopPrank();
 
-        (uint256 filed, uint256 approved, uint256 denied, uint256 appealed) =
-            registry.getOfficeStats(OFFICE_A);
+        (uint256 filed, uint256 approved, uint256 denied, uint256 appealed) = registry.getOfficeStats(OFFICE_A);
         assertEq(filed, 1);
         assertEq(approved, 1);
         assertEq(denied, 0);
@@ -157,8 +156,7 @@ contract ImmigrationProcessingRegistryTest is Test {
         registry.recordAppeal(id, ImmigrationProcessingRegistry.Outcome.GRANTED_ON_APPEAL, bytes32(0));
         vm.stopPrank();
 
-        (uint256 filed, uint256 approved, uint256 denied, uint256 appealed, uint256 granted) =
-            registry.getTotals();
+        (uint256 filed,, uint256 denied, uint256 appealed, uint256 granted) = registry.getTotals();
         assertEq(filed, 1);
         assertEq(denied, 1);
         assertEq(appealed, 1);

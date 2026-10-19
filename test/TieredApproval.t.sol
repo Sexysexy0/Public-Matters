@@ -30,7 +30,7 @@ contract TieredApprovalTest is Test {
         t.setComposition(3, 10000);
     }
 
-    function testDefaults() public {
+    function testDefaults() public view {
         // boardTotal = 3
         assertEq(t.requiredBoard(TieredApproval.Tier.MAJORITY), 2); // >50% of 3
         assertEq(t.requiredBoard(TieredApproval.Tier.SUPERMAJORITY), 2); // >=2/3 of 3
@@ -42,13 +42,13 @@ contract TieredApprovalTest is Test {
         assertEq(t.requiredStockholder(TieredApproval.Tier.UNANIMOUS), 10000);
     }
 
-    function testMajorityRequiresBoth() public {
+    function testMajorityRequiresBoth() public view {
         assertFalse(t.meetsThreshold(TieredApproval.Tier.MAJORITY, 2, 4000));
         assertFalse(t.meetsThreshold(TieredApproval.Tier.MAJORITY, 1, 9000));
         assertTrue(t.meetsThreshold(TieredApproval.Tier.MAJORITY, 2, 5001));
     }
 
-    function testSupermajorityExactTwoThirds() public {
+    function testSupermajorityExactTwoThirds() public view {
         assertTrue(t.meetsThreshold(TieredApproval.Tier.SUPERMAJORITY, 2, 6667));
         assertFalse(t.meetsThreshold(TieredApproval.Tier.SUPERMAJORITY, 1, 10000));
     }
@@ -88,7 +88,7 @@ contract TieredApprovalTest is Test {
         t.resolve(id, TieredApproval.Tier.SUPERMAJORITY, 1, 1000, address(this), 1, 1000);
     }
 
-    function testUnanimousRequiresEveryone() public {
+    function testUnanimousRequiresEveryone() public view {
         assertFalse(t.meetsThreshold(TieredApproval.Tier.UNANIMOUS, 3, 9999));
         assertTrue(t.meetsThreshold(TieredApproval.Tier.UNANIMOUS, 3, 10000));
     }

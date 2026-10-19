@@ -10,14 +10,13 @@ import "../src/OperatorPrivileges.sol";
 contract DeployKingdom is Script {
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        address deployer = vm.addr(deployerPrivateKey);
         vm.startBroadcast(deployerPrivateKey);
 
         // ... other bricks
 
         OperatorPrivileges privileges = new OperatorPrivileges();
         TrustIndex trust = new TrustIndex(address(privileges));
-        TrustIntegrator trustIntegrator = new TrustIntegrator(address(trust));
+        new TrustIntegrator(address(trust));
 
         // ... rest of wiring
 

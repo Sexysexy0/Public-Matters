@@ -22,7 +22,8 @@ contract EnergyProductionRegistryTest is Test {
     }
 
     function _record(bytes32 region, EnergyProductionRegistry.Source source, uint256 volume, uint256 cost)
-        internal returns (bytes32)
+        internal
+        returns (bytes32)
     {
         vm.prank(operator);
         return registry.recordProduction(region, source, volume, cost, keccak256("evidence"));
@@ -72,7 +73,7 @@ contract EnergyProductionRegistryTest is Test {
         assertEq(registry.getAverageCost(REGION_A, EnergyProductionRegistry.Source.OIL), 15);
     }
 
-    function testAverageCostEmptyRegion() public {
+    function testAverageCostEmptyRegion() public view {
         assertEq(registry.getAverageCost(REGION_A, EnergyProductionRegistry.Source.OIL), 0);
     }
 

@@ -8,7 +8,6 @@ import "../src/AIDecisionAudit.sol";
 contract DeployAIDecisionAudit is Script {
     function run() external {
         uint256 pk = vm.envUint("PRIVATE_KEY");
-        address deployer = vm.addr(pk);
 
         vm.startBroadcast(pk);
 
