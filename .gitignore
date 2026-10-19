@@ -39,3 +39,7 @@ Thumbs.db
 *.broken
 foundry.toml.broken
 deploy-temp/
+
+# Local backups and private notes
+foundry.toml.bak-*
+RECOGNITIONS_PRIVATE.md
