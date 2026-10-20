@@ -48,22 +48,14 @@ contract CivicLaborIntegrationTest is Test {
         //    transition commitment.
         vm.prank(governor);
         laborRegistry.proposeDeployment(
-            laborDeploymentId,
-            "Example Corp",
-            "Customer Support AI",
-            evidenceHash,
-            120,
-            2_500,
-            futureDeadline
+            laborDeploymentId, "Example Corp", "Customer Support AI", evidenceHash, 120, 2_500, futureDeadline
         );
 
         // 3. The worker council reviews and approves only with a
         //    transition plan.
         vm.prank(workerCouncil);
         laborRegistry.workerCouncilDecision(
-            laborDeploymentId,
-            true,
-            "Approved: retraining, redeployment, and wage protection required"
+            laborDeploymentId, true, "Approved: retraining, redeployment, and wage protection required"
         );
 
         // 4. The civic auditor acknowledges the public concern and records
@@ -76,11 +68,9 @@ contract CivicLaborIntegrationTest is Test {
         );
 
         // 5. Verify both registries preserve the linked evidence hash.
-        CivicAccountabilityRegistry.Record memory civicRecord =
-            civicRegistry.getRecord(civicRecordId);
+        CivicAccountabilityRegistry.Record memory civicRecord = civicRegistry.getRecord(civicRecordId);
 
-        HumanFirstAIDeploymentRegistry.Deployment memory deployment =
-            laborRegistry.getDeployment(laborDeploymentId);
+        HumanFirstAIDeploymentRegistry.Deployment memory deployment = laborRegistry.getDeployment(laborDeploymentId);
 
         assertEq(civicRecord.evidenceHash, evidenceHash);
         assertEq(deployment.impactAssessmentHash, evidenceHash);
@@ -90,19 +80,10 @@ contract CivicLaborIntegrationTest is Test {
         assertEq(deployment.transitionFundBps, 2_500);
         assertTrue(deployment.workerCouncilApproved);
 
-        assertEq(
-            uint256(civicRecord.status),
-            uint256(
-                CivicAccountabilityRegistry.RecordStatus.UNDER_REVIEW
-            )
-        );
+        assertEq(uint256(civicRecord.status), uint256(CivicAccountabilityRegistry.RecordStatus.UNDER_REVIEW));
         assertEq(
             uint256(deployment.status),
-            uint256(
-                HumanFirstAIDeploymentRegistry
-                    .DeploymentStatus
-                    .APPROVED_WITH_TRANSITION_PLAN
-            )
+            uint256(HumanFirstAIDeploymentRegistry.DeploymentStatus.APPROVED_WITH_TRANSITION_PLAN)
         );
 
         assertEq(civicRegistry.totalRecords(), 1);
@@ -122,21 +103,11 @@ contract CivicLaborIntegrationTest is Test {
 
         vm.prank(governor);
         laborRegistry.proposeDeployment(
-            laborDeploymentId,
-            "Example Corp",
-            "Customer Support AI",
-            evidenceHash,
-            120,
-            0,
-            futureDeadline
+            laborDeploymentId, "Example Corp", "Customer Support AI", evidenceHash, 120, 0, futureDeadline
         );
 
         vm.prank(workerCouncil);
-        laborRegistry.workerCouncilDecision(
-            laborDeploymentId,
-            false,
-            "Rejected: no credible transition plan"
-        );
+        laborRegistry.workerCouncilDecision(laborDeploymentId, false, "Rejected: no credible transition plan");
 
         vm.prank(civicAuditor);
         civicRegistry.updateRecord(
@@ -145,24 +116,12 @@ contract CivicLaborIntegrationTest is Test {
             "Deployment rejected; worker transition concerns documented"
         );
 
-        HumanFirstAIDeploymentRegistry.Deployment memory deployment =
-            laborRegistry.getDeployment(laborDeploymentId);
+        HumanFirstAIDeploymentRegistry.Deployment memory deployment = laborRegistry.getDeployment(laborDeploymentId);
 
-        CivicAccountabilityRegistry.Record memory civicRecord =
-            civicRegistry.getRecord(civicRecordId);
+        CivicAccountabilityRegistry.Record memory civicRecord = civicRegistry.getRecord(civicRecordId);
 
         assertFalse(deployment.workerCouncilApproved);
-        assertEq(
-            uint256(deployment.status),
-            uint256(
-                HumanFirstAIDeploymentRegistry.DeploymentStatus.REJECTED
-            )
-        );
-        assertEq(
-            uint256(civicRecord.status),
-            uint256(
-                CivicAccountabilityRegistry.RecordStatus.RESOLVED
-            )
-        );
+        assertEq(uint256(deployment.status), uint256(HumanFirstAIDeploymentRegistry.DeploymentStatus.REJECTED));
+        assertEq(uint256(civicRecord.status), uint256(CivicAccountabilityRegistry.RecordStatus.RESOLVED));
     }
 }

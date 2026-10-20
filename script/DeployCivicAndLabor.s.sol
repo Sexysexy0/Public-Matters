@@ -23,11 +23,9 @@ contract DeployCivicAndLabor is Script {
 
         vm.startBroadcast(deployerPrivateKey);
 
-        CivicAccountabilityRegistry civicRegistry =
-            new CivicAccountabilityRegistry(civicAuditor);
+        CivicAccountabilityRegistry civicRegistry = new CivicAccountabilityRegistry(civicAuditor);
 
-        HumanFirstAIDeploymentRegistry laborRegistry =
-            new HumanFirstAIDeploymentRegistry(workerCouncil);
+        HumanFirstAIDeploymentRegistry laborRegistry = new HumanFirstAIDeploymentRegistry(workerCouncil);
 
         vm.stopBroadcast();
 
