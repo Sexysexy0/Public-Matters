@@ -122,13 +122,9 @@ contract HogIndustryPolicyRegistry {
     // Constructor
     // ------------------------------------------------------------------
 
-    constructor(address admin_, address federationRep_) {
-        if (admin_ == address(0) || federationRep_ == address(0)) {
-            revert Unauthorized();
-        }
-
-        admin = admin_;
-        federationRep = federationRep_;
+    constructor() {
+        admin = msg.sender;
+        federationRep = msg.sender;
 
         defaults = PolicyDefaults({
             inQuotaTariffBps: 3000,
