@@ -9,7 +9,7 @@ jobs:
   update-badges:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3
       - name: Refresh README badges
         run: |
           sed -i '/## CI\/CD Status/,$!d' README.md
