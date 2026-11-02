@@ -8,6 +8,9 @@ on:
   schedule:
     - cron: '0 3 * * 0' # weekly scan every Sunday at 3 AM UTC
 
+# Default to read-only; jobs elevate only what they need.
+permissions:
+  contents: read
 jobs:
   codeql:
     runs-on: ubuntu-latest
