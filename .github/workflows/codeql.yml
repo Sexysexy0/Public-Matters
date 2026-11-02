@@ -8,6 +8,9 @@ on:
   schedule:
     - cron: '19 17 * * 2'
 
+# Default to read-only; jobs elevate only what they need.
+permissions:
+  contents: read
 jobs:
   analyze:
     name: Analyze (${{ matrix.language }})

@@ -5,9 +5,14 @@ on:
     - cron: '0 6 * * 1' # Every Monday at 6 AM UTC
   workflow_dispatch:
 
+# Default to read-only; the badge job explicitly needs contents: write.
+permissions:
+  contents: read
 jobs:
   update-badges:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3
       - name: Refresh README badges
