@@ -39,7 +39,7 @@ jobs:
   deploy-sepolia:
     needs: build-and-test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: false # Security hold: automatic CI deployment disabled.
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
