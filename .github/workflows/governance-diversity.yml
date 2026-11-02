@@ -1,3 +1,5 @@
+permissions:
+  contents: read
 name: Governance Diversity Metrics
 on:
   workflow_dispatch:
