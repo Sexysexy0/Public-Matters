@@ -15,7 +15,7 @@ jobs:
         with:
           submodules: recursive
       - name: Setup Foundry
-        uses: foundry-rs/foundry-toolchain@v1
+        uses: foundry-rs/foundry-toolchain@dba66c27052e63476d886f22216e119ba7e615bf # v1
         with:
           version: latest
 
@@ -28,7 +28,7 @@ jobs:
         run: forge test --gas-report -vv
 
       - name: Upload benchmark report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: benchmark-report
           path: ./gas-report.txt
