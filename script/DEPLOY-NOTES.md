@@ -301,3 +301,26 @@ that flows through BudgetDeliberationRegistry and then
 BudgetAuditIntegrator will populate AIDecisionAudit with a permanent,
 queryable record. The integrator holds operator status for that purpose
 only; it cannot propose, vote, or approve budget decisions.
+
+## AI Agent Safety Layer (2026-11-06)
+
+Two new contracts addressing multi-agent behavioral failures:
+
+AgentPermissionsManager:     0xFfe66D73C94C139d3082f99E9Bd3C93A48a3E72F
+AIAgentBehaviorMonitorV2:    0xc712eD388BB7848A356121436d6FBFcc2E793a01
+
+Both bound to OperatorPrivilegesV2 at 0x1ec4a1fB4e...EF98.
+
+1. AgentPermissionsManager
+   - Hard rate limits per agent (per-tx and per-24h).
+   - validateAction() reverts if exceeded.
+   - Prevents runaway state changes (arson/theft equivalents).
+
+2. AIAgentBehaviorMonitorV2
+   - recordAction() tracks liveness (7-day dormancy threshold).
+   - recordViolation() auto-freezes agent after configured strikes.
+   - Operators can manually freeze/unfreeze.
+
+Combined with GovernedActionGate (N-of-M approvals) and AIDecisionAudit
+(immutable reasoning log), the stack enforces safety at the contract
+layer, not the prompt layer.
