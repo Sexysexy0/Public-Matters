@@ -324,3 +324,21 @@ Both bound to OperatorPrivilegesV2 at 0x1ec4a1fB4e...EF98.
 Combined with GovernedActionGate (N-of-M approvals) and AIDecisionAudit
 (immutable reasoning log), the stack enforces safety at the contract
 layer, not the prompt layer.
+
+## Reporting & Naval Registries (2026-11-06)
+
+TakedownReportRegistry: 0x56381C5aFd9Fe799F766a3C3df04B944EB707e85
+NavalVesselRegistry:    0xBBfe9Aa9E5EA7bfF348156742AdC05094D66c50F
+
+Both bound to OperatorPrivilegesV2 at 0x1ec4a1fB4e...EF98.
+
+TakedownReportRegistry:
+- Two-operator resolution for takedowns
+- External filing tracking (registrar/platform/case number)
+- 27 tests
+
+NavalVesselRegistry:
+- Large ships unlock bedroom, galley, armory, cargo
+- Small ships cargo only
+- Actions (sleep, cook, craft, deposit) gated by room status
+- 8 tests
