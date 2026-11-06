@@ -342,3 +342,28 @@ NavalVesselRegistry:
 - Small ships cargo only
 - Actions (sleep, cook, craft, deposit) gated by room status
 - 8 tests
+
+## Game & Industry Registries (2026-11-06)
+
+WorkerDeploymentRegistry:          0xC9ce1B410F3f606c8bd06d6282Ba5C932f7235Af
+PropertyMaintenanceRegistry:       0xAe9eAd1fE35d48458b0D303C571577EcA1CbE5d4
+AIContentProvenanceRegistry:       0xA33b60D5cA4d9c36199DBa362D0be8578A4bf824
+SecurityIncidentResponseRegistryV2:0xB1C5BA39fDDc1Db645F4212D18E2f07D838c7771
+HardwareAllocationRegistry:        0xfBF2bBA3F68cc2b7AD4c524C46E24eA9C2ed547d
+
+All bound to OperatorPrivilegesV2 at 0x1ec4a1fB4e...EF98.
+
+WorkerDeploymentRegistry:
+- Prevents NPC vanishing. Unassigned workers remain queryable on-chain.
+
+PropertyMaintenanceRegistry:
+- Community dirty-zone reporting. 3 reports flags a property for operator review.
+
+AIContentProvenanceRegistry:
+- Tracks AI vs human-made assets. Requires independent operator verification.
+
+SecurityIncidentResponseRegistryV2:
+- Incident lifecycle tracking (Reported -> Investigating -> Contained -> Resolved).
+
+HardwareAllocationRegistry:
+- Tracks manufacturing vs distribution to prevent hoarding and scalping.
