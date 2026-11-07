@@ -375,3 +375,19 @@ Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
 
 Source-verified on Etherscan.
 Dynamic caps prevent arbitrary fleet limits while ensuring rider compliance.
+
+## Agent Telemetry Registry (2026-11-07)
+
+AgentTelemetryRegistry: 0x361F1C7415c9c7d4c7Ace1403EA5833F78F118a1
+Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+
+Source-verified on Etherscan.
+
+Bridges off-chain JavaScript logs (agentPerformance.js) directly to the blockchain.
+Every time an AI agent or system persona performs a task, the metrics hash, status, and timestamp are permanently recorded on-chain.
+
+Event confirmed:
+Tx: 0xf0359b6cefc7ee9191b1a381c0c0a546aa5d095b8989e74eadaadf28fc88298c
+Record ID: 1
+Agent: machiavelli-agent
+Status: success
