@@ -1,0 +1,29 @@
+{
+  "name": "public-matters",
+  "version": "1.0.0",
+  "description": "Enterprise-grade infrastructure, security guardrails, and automated performance management for agentic workflows and smart contracts.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sexysexy0/Public-Matters.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sexysexy0/Public-Matters/issues"
+  },
+  "homepage": "https://github.com/Sexysexy0/Public-Matters#readme",
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "ethers": "^6.17.0"
+  }
+}
