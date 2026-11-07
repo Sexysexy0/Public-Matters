@@ -367,3 +367,11 @@ SecurityIncidentResponseRegistryV2:
 
 HardwareAllocationRegistry:
 - Tracks manufacturing vs distribution to prevent hoarding and scalping.
+
+## Dynamic Fleet Compliance (2026-11-07)
+
+DynamicFleetComplianceRegistry: 0x2b1E220bE3B6351CE38F80B04186E917732034bB
+Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+
+Source-verified on Etherscan.
+Dynamic caps prevent arbitrary fleet limits while ensuring rider compliance.
