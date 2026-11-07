@@ -66,6 +66,8 @@ contract CivicBillClearingRegistry {
         targetBill.isCleared = true;
         targetBill.clearedBy = msg.sender;
 
+        // Intentional: beneficiary is a recorded, validated target from the bill.
+        // forge-lint: disable-next-line(arbitrary-send-eth)
         (bool success,) = targetBill.beneficiary.call{value: targetBill.amount}("");
         require(success, "Transfer failed");
 
