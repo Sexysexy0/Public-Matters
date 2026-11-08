@@ -391,3 +391,21 @@ Tx: 0xf0359b6cefc7ee9191b1a381c0c0a546aa5d095b8989e74eadaadf28fc88298c
 Record ID: 1
 Agent: machiavelli-agent
 Status: success
+
+## Environmental Governance Contracts (2026-11-08)
+
+ExtractivePermitRegistry: 0xa6f1f6822be5F0e2cC96dd9877C7ED0cBB73eF43
+EnvironmentalBondEscrow:  0xFb4a4064a561AEBb010d3908023B014Eb0bb9F31
+
+Both source-verified on Sepolia. Bound to OperatorPrivilegesV2.
+
+1. ExtractivePermitRegistry
+- Immutably records the issuing officer for every mining/extractive permit.
+- Prevents anonymous approval of environmental destruction.
+- Public can query who signed the permit for a specific location.
+
+2. EnvironmentalBondEscrow
+- Holds financial bonds from extractive companies.
+- If disaster occurs (landslide, flood), operator triggers forfeit.
+- Funds bypass government and go directly to CommunityFund (Multisig).
+- Protects vulnerable communities from corporate negligence.
