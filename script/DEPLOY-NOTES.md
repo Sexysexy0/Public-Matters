@@ -409,3 +409,24 @@ Both source-verified on Sepolia. Bound to OperatorPrivilegesV2.
 - If disaster occurs (landslide, flood), operator triggers forfeit.
 - Funds bypass government and go directly to CommunityFund (Multisig).
 - Protects vulnerable communities from corporate negligence.
+
+## Crimson Desert Gameplay Mechanics (2026-11-08)
+
+Five new registries deployed to Sepolia, all verified and bound to OperatorPrivilegesV2:
+
+1. RoyalCourtRegistry: 0xFdcF9bC14B537be5ee6b3A776D06B78Be72CD6Fd
+   - Throne room petitions and dispatch missions.
+
+2. MarriageRegistry: 0x078fD895Ad387C8058975cA93D48dB2B1072229e
+   - Character marriage proposals and Queen crowning.
+
+3. GameplayQAOracle: 0x64D6be518AF45c378e8e1A1A43dAdEF7c7DcB9eA
+   - Player bug reporting and dev patch tracking.
+
+4. ShipAutoPilotRegistry: 0x88c55cEE0d6eC4e4EDD7C0Fe7730082F2754A0dB
+   - Auto-pilot destination setting for naval travel.
+
+5. BarberRegistry: 0x6637Cf561A0357435B9C3a0231974169Fd173Daa
+   - Character haircut styles and applications.
+
+Tests: 6 passing across all gameplay modules.
