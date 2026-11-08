@@ -430,3 +430,14 @@ Five new registries deployed to Sepolia, all verified and bound to OperatorPrivi
    - Character haircut styles and applications.
 
 Tests: 6 passing across all gameplay modules.
+
+## Authenticity Oracle (2026-11-08)
+
+AuthenticityOracle: 0x25dDDbb840e485910e42Aa76ae70387F240315Db
+Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+
+Source-verified on Sepolia.
+
+Immutable proof of creation for original works (games, code, art).
+Prevents AI-generated clones from claiming prior art by recording 
+the keccak256 hash of the build on-chain. First to register wins the timestamp.
