@@ -441,3 +441,18 @@ Source-verified on Sepolia.
 Immutable proof of creation for original works (games, code, art).
 Prevents AI-generated clones from claiming prior art by recording 
 the keccak256 hash of the build on-chain. First to register wins the timestamp.
+
+## Foreign Aid & Civic Sovereignty Layer (2026-11-09)
+
+1. AidProjectRegistry: 0x88D46705F2b1517754C9B6D20EB05a8014a92e6A
+2. LocalMaintenanceTrainingRegistry: 0xd7203647dCC841e11931e594eff97fF34548abE6
+3. MilestoneMaintenanceEscrow: 0x6710bE1cc0B064Ea9116d7Eb14650765eaB6D653
+4. CivicSovereigntyRegistry: 0x0384dDA16EDa64B84683d6F262583314A3F0b91F
+
+All bound to OperatorPrivilegesV2 (0x1ec4a1fB4e...EF98).
+Tests: 8 passing across both modules.
+
+- AidProjectRegistry tracks donor funds and local operators.
+- LocalMaintenanceTrainingRegistry prevents the dependency trap by requiring verifiable education.
+- MilestoneMaintenanceEscrow releases funds ONLY IF operator is certified and submits maintenance proof.
+- CivicSovereigntyRegistry tracks on-chain citizen identity and Civic Score.
