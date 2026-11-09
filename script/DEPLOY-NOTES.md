@@ -632,7 +632,10 @@ Deployment transaction: 0x67b22bbcd65f3877cce5ac7c8c07b2a82a97336cdc87ad000261b4
 
 Deployment reported successful by forge create.
 Tests: 3 passed, 0 failed.
-Explorer source verification: submitted via forge verify-contract --watch.
+Explorer source verification:
+- Etherscan Sepolia: Pass - Verified.
+- Sourcify: submitted; final result not yet confirmed.
+- Source verification is not a security audit.
 
 V2 improvements over V1:
 - Pull-based withdrawal for company refund (no push-based call to user-controlled address).
@@ -651,7 +654,10 @@ Deployment transaction: 0x1421b2b1e0c171012c3e686ecf0dc8f6d9e0283e19e0ff6445a29f
 
 Deployment reported successful by forge create.
 Tests: 3 passed, 0 failed.
-Explorer source verification: submitted via forge verify-contract --watch.
+Explorer source verification:
+- Etherscan Sepolia: Pass - Verified.
+- Sourcify: submitted; final result not yet confirmed.
+- Source verification is not a security audit.
 
 V2 improvements over V1:
 - Pull-based withdrawal for operator release and donor refund (no push-based call to user-controlled address).
