@@ -468,3 +468,19 @@ Tests: 8 passing across both modules.
    - Human operators MUST approve or veto the proposal. AI cannot self-approve.
 
 All bound to OperatorPrivilegesV2 (0x1ec4a1fB4e...EF98).
+
+## Compliance, NGO Impact, and AI Hive Mind (2026-11-09)
+
+1. SanctionsComplianceRegistry: 0x98f52FDe18dE933698597451BaDD30b3131f302f
+   - On-chain flagging of high-risk wallets (hashed for privacy).
+   - Proactive defense against regulatory penalties (e.g., FinCEN/MEXC).
+
+2. ImpactBondEscrow: 0xDd0C8FD930175e1FcF6E0403C0755D702865A072
+   - Performance-based NGO funding.
+   - Funds are strictly released only upon verified proof of impact (e.g., river cleanup).
+
+3. AIHiveMindRegistry: 0xf7647Df7E899A82eF5fa7C5f53a1CAC8Ac7461eB
+   - Shared state for AI agents.
+   - AI can propose code upgrades, but human operators must execute them (prevents malicious injections).
+
+All bound to OperatorPrivilegesV2 (0x1ec4a1fB4e...EF98).
