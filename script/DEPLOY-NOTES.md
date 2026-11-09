@@ -497,3 +497,19 @@ Operators can assign and resolve tickets with cryptographic proof.
 Multisig Registration:
 Proposal #3 executed on AIGovernanceMultisig (0xE696...c7F6).
 isOperator(0x9a8a...) == true.
+
+## PrivacyPreservingKYCRegistry (2026-11-09)
+
+PrivacyPreservingKYCRegistry: 0xbeb3DF050bd4B1CF7AED48397E4FE34D163C8D5A
+Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+
+Source-verified on Sepolia.
+Privacy-preserving KYC attestation with ZK proof hash (no raw PII on-chain).
+Operators record attestations; anyone can appeal; operators resolve appeals.
+
+Statuses: None, Pending, Cleared, Flagged, Revoked.
+Immutable history — revoked status, hindi delete.
+
+Multisig Registration:
+Proposal #[PENDING] executed on AIGovernanceMultisig (0xE696...c7F6).
+isOperator(0xbeb3DF050bd4B1CF7AED48397E4FE34D163C8D5A) == true.
