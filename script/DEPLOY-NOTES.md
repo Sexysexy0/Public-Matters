@@ -506,7 +506,11 @@ Deployment transaction: 0xc462d042287bf3aae52100bc46911c75ed08bf42254bbd9e061985
 
 Deployment reported successful by forge create.
 Tests: 6 passed, 0 failed.
-Explorer source verification: not yet confirmed.
+Explorer source verification:
+- Etherscan Sepolia: Pass - Verified.
+- Sourcify: submitted; final result not yet confirmed.
+- Explorer: https://sepolia.etherscan.io/address/0xbeb3DF050bd4B1CF7AED48397E4FE34D163C8D5A#code
+- Source verification is not a security audit.
 
 Access control:
 - Writes check the caller's operator status through OperatorPrivilegesV2.
