@@ -456,3 +456,15 @@ Tests: 8 passing across both modules.
 - LocalMaintenanceTrainingRegistry prevents the dependency trap by requiring verifiable education.
 - MilestoneMaintenanceEscrow releases funds ONLY IF operator is certified and submits maintenance proof.
 - CivicSovereigntyRegistry tracks on-chain citizen identity and Civic Score.
+
+## Societal Contribution & AI Veto Layer (2026-11-09)
+
+1. SocietalContributionRegistry: 0x64aAfE0C0338fd139a28e168278B58d27c30280f
+   - Tracks objective civic contributions (Caregiving, Civic Duty, Skill Building) linked to the CivicSovereigntyRegistry.
+
+2. AIVetoPowerRegistry: 0xA5C0aA609dc54CeD05e84D065731f94669a499A8
+   - Enforces human-in-the-loop on AI actions.
+   - AI agents can only PROPOSE destructive actions (e.g., firing, slashing funds).
+   - Human operators MUST approve or veto the proposal. AI cannot self-approve.
+
+All bound to OperatorPrivilegesV2 (0x1ec4a1fB4e...EF98).
