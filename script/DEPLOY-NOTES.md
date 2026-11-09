@@ -526,3 +526,32 @@ Implementation limitations:
 - Appeals are permissionless and repeatable.
 - resolveAppeal does not require an existing open appeal.
 
+
+## PrivacyPreservingKYCRegistryV2 (2026-11-09)
+
+Contract: 0x7A35573Ae35E5D7D7A3849015bbc2f2b7b65dAfe
+Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+Deployment transaction: 0x41fe2b88b8d67ec160ed077c5be507831f2f4de97623604beeb72ab41d6445c3
+
+Deployment reported successful by forge create.
+Tests: 8 passed, 0 failed.
+Explorer source verification: submitted via forge verify-contract --watch.
+
+Access control:
+- Writes check the caller's operator status through OperatorPrivilegesV2.
+- No multisig registration required for this contract.
+- Self-registration is not required by the current implementation.
+
+V2 improvements over V1:
+- Append-only attestation history (versions[]).
+- Tracked appeal lifecycle (Open / Resolved).
+- One open appeal per subject hash.
+- resolveAppeal requires an existing open appeal.
+- bytes32 reasonHash instead of free-text reason.
+
+Implementation limitations:
+- Stores a proof hash; does not verify a zero-knowledge proof.
+- Events log changes; no append-only attestation version store beyond versions[].
+- reasonHash is opaque; off-chain mapping needed for human-readable reasons.
+- Appeals are permissionless but rate-limited by one-open-appeal rule.
+
