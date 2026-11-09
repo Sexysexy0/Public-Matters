@@ -500,16 +500,25 @@ isOperator(0x9a8a...) == true.
 
 ## PrivacyPreservingKYCRegistry (2026-11-09)
 
-PrivacyPreservingKYCRegistry: 0xbeb3DF050bd4B1CF7AED48397E4FE34D163C8D5A
+Contract: 0xbeb3DF050bd4B1CF7AED48397E4FE34D163C8D5A
 Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+Deployment transaction: 0xc462d042287bf3aae52100bc46911c75ed08bf42254bbd9e0619858be3871561
 
-Source-verified on Sepolia.
-Privacy-preserving KYC attestation with ZK proof hash (no raw PII on-chain).
-Operators record attestations; anyone can appeal; operators resolve appeals.
+Deployment reported successful by forge create.
+Tests: 6 passed, 0 failed.
+Explorer source verification: not yet confirmed.
 
-Statuses: None, Pending, Cleared, Flagged, Revoked.
-Immutable history — revoked status, hindi delete.
+Access control:
+- Writes check the caller's operator status through OperatorPrivilegesV2.
+- Contract's own operator status returned false.
+- No multisig registration for this contract is confirmed.
+- Self-registration is not required by the current implementation.
 
-Multisig Registration:
-Proposal #[PENDING] executed on AIGovernanceMultisig (0xE696...c7F6).
-isOperator(0xbeb3DF050bd4B1CF7AED48397E4FE34D163C8D5A) == true.
+Implementation limitations:
+- Stores a proof hash; does not verify a zero-knowledge proof.
+- Current attestation fields can be overwritten.
+- Events log changes; no append-only attestation version store exists.
+- Free-text reasons are public and must not contain sensitive information.
+- Appeals are permissionless and repeatable.
+- resolveAppeal does not require an existing open appeal.
+
