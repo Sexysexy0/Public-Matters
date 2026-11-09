@@ -622,3 +622,41 @@ Use case:
 - Funds released only upon verified proof of impact.
 - Withdrawal pattern prevents reentrancy and gas griefing.
 
+
+## EnvironmentalBondEscrowV2 (2026-11-09)
+
+Contract: 0xDB3E6b6BbF011fd04Aaa24bcCDC41Af3004a0d6a
+Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+             communityFund = 0xE696BaD9ee41affE5865344B1197C5A18dd7c7F6
+Deployment transaction: 0x67b22bbcd65f3877cce5ac7c8c07b2a82a97336cdc87ad000261b40db67ca84b
+
+Deployment reported successful by forge create.
+Tests: 3 passed, 0 failed.
+Explorer source verification: submitted via forge verify-contract --watch.
+
+V2 improvements over V1:
+- Pull-based withdrawal for company refund (no push-based call to user-controlled address).
+- CEI pattern (state before external call).
+- nonReentrant modifier first in modifier list.
+- pendingWithdrawals mapping (credit before finalize).
+- Company address recorded at deposit time, not operator-specified at release.
+- communityFund remains push-based (immutable, trusted multisig).
+
+## MilestoneMaintenanceEscrowV2 (2026-11-09)
+
+Contract: 0x857723B9E415a2ca575d47De37815E3a8e0468C6
+Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+             trainingRegistry = 0xd7203647dCC841e11931e594eff97fF34548abE6
+Deployment transaction: 0x1421b2b1e0c171012c3e686ecf0dc8f6d9e0283e19e0ff6445a29f86b186342c
+
+Deployment reported successful by forge create.
+Tests: 3 passed, 0 failed.
+Explorer source verification: submitted via forge verify-contract --watch.
+
+V2 improvements over V1:
+- Pull-based withdrawal for operator release and donor refund (no push-based call to user-controlled address).
+- CEI pattern (state before external call).
+- nonReentrant modifier first in modifier list.
+- pendingWithdrawals mapping (credit before finalize).
+- Donor and localOperator recorded at deposit time, not operator-specified at release/refund.
+
