@@ -590,3 +590,31 @@ Use case:
 - Capacity commitments (wafer capacity, HBM vs consumer split).
 - Variance reports (expected vs actual output, divergence in bps).
 
+
+## ImpactBondEscrowV2 (2026-11-09)
+
+Contract: 0xB9fc53262cf4AaE1E345a745d09f5D4F90c5573e
+Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+Deployment transaction: 0x17fee93e341a98b5cb9fe59a521c2bc6b10f9f1408000ab789a0361932c7649a
+
+Deployment reported successful by forge create.
+Tests: 6 passed, 0 failed.
+Explorer source verification: submitted via forge verify-contract --watch.
+
+Access control:
+- Writes check the caller's operator status through OperatorPrivilegesV2.
+- No multisig registration required for this contract.
+- Self-registration is not required by the current implementation.
+
+V2 improvements over V1:
+- Pull-based withdrawal (no push-based call in state-changing function).
+- CEI pattern (state before external call).
+- nonReentrant modifier first in modifier list.
+- pendingWithdrawals mapping (credit before finalize).
+- No external call inside state-changing function.
+
+Use case:
+- Performance-based NGO funding with verifiable impact.
+- Funds released only upon verified proof of impact.
+- Withdrawal pattern prevents reentrancy and gas griefing.
+
