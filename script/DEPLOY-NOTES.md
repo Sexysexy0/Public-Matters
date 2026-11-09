@@ -559,3 +559,30 @@ Implementation limitations:
 - reasonHash is opaque; off-chain mapping needed for human-readable reasons.
 - Appeals are permissionless but rate-limited by one-open-appeal rule.
 
+
+## CapacityAllocationRegistry (2026-11-09)
+
+Contract: 0xc5F019bDfd3249Ee9536dF221e9176450c04570A
+Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+Deployment transaction: 0x3d4da2cf9ac70b83ce3639764cd9ff62e3972ac594dcc0bbf2aabbe736178884
+
+Deployment reported successful by forge create.
+Tests: 7 passed, 0 failed.
+Explorer source verification: submitted via forge verify-contract --watch.
+
+Access control:
+- Writes check the caller's operator status through OperatorPrivilegesV2.
+- No multisig registration required for this contract.
+- Self-registration is not required by the current implementation.
+
+Design:
+- Append-only commitment history per facility hash.
+- Append-only variance report history per facility hash.
+- Operator-gated writes; public reads.
+- No ETH transfer; pure data registry.
+
+Use case:
+- DRAM/HBM allocation transparency for memory manufacturers.
+- Capacity commitments (wafer capacity, HBM vs consumer split).
+- Variance reports (expected vs actual output, divergence in bps).
+
