@@ -484,3 +484,16 @@ All bound to OperatorPrivilegesV2 (0x1ec4a1fB4e...EF98).
    - AI can propose code upgrades, but human operators must execute them (prevents malicious injections).
 
 All bound to OperatorPrivilegesV2 (0x1ec4a1fB4e...EF98).
+
+## IT Service Request Registry (2026-11-09)
+
+ITServiceRequestRegistry: 0x9a8a5CAc32eCF1c88fb4C9DbFA8906b960334C70
+Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+
+Source-verified on Sepolia.
+Tracks IT incidents and service requests immutably.
+Operators can assign and resolve tickets with cryptographic proof.
+
+Multisig Registration:
+Proposal #3 executed on AIGovernanceMultisig (0xE696...c7F6).
+isOperator(0x9a8a...) == true.
