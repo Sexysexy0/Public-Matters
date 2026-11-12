@@ -65,7 +65,7 @@ contract DynamicFleetComplianceRegistry {
 
         // DYNAMIC CAP: Every 10,000 verified riders expands the cap by 50,000.
         // This removes arbitrary limits while ensuring compliance.
-        uint256 newCap = p.baseCap + (p.currentVerified / 10000) * 50000;
+        uint256 newCap = p.baseCap + (p.currentVerified * 50000) / 10000;
         
         emit RiderVerified(platformId, rider);
         emit CapExpanded(platformId, newCap);
@@ -82,6 +82,6 @@ contract DynamicFleetComplianceRegistry {
 
     function getEffectiveCap(bytes32 platformId) external view returns (uint256) {
         Platform memory p = platforms[platformId];
-        return p.baseCap + (p.currentVerified / 10000) * 50000;
+        return p.baseCap + (p.currentVerified * 50000) / 10000;
     }
 }
