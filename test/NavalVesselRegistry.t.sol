@@ -28,7 +28,7 @@ contract NavalVesselRegistryTest is Test {
         vm.stopPrank();
     }
 
-    function testSmallShipOnlyHasCargo() public {
+    function testSmallShipOnlyHasCargo() public view {
         NavalVesselRegistry.Room memory cargo = registry.getRoomStatus(SMALL_SHIP, NavalVesselRegistry.RoomType.CARGO_HOLD);
         assertTrue(cargo.unlocked);
 
@@ -36,7 +36,7 @@ contract NavalVesselRegistryTest is Test {
         assertFalse(bedroom.unlocked);
     }
 
-    function testLargeShipHasAllRooms() public {
+    function testLargeShipHasAllRooms() public view {
         NavalVesselRegistry.Room memory bedroom = registry.getRoomStatus(LARGE_SHIP, NavalVesselRegistry.RoomType.BEDROOM);
         NavalVesselRegistry.Room memory galley = registry.getRoomStatus(LARGE_SHIP, NavalVesselRegistry.RoomType.GALLEY);
         NavalVesselRegistry.Room memory armory = registry.getRoomStatus(LARGE_SHIP, NavalVesselRegistry.RoomType.ARMORY);

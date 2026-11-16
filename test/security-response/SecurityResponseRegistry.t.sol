@@ -21,7 +21,7 @@ contract SecurityResponseRegistryTest is Test {
         );
     }
 
-    function test_DeployerBecomesAdminAndFederation() public {
+    function test_DeployerBecomesAdminAndFederation() public view {
         assertEq(registry.admin(), deployer);
         assertEq(registry.federation(), deployer);
         assertEq(registry.totalActions(), 0);
@@ -138,7 +138,7 @@ contract SecurityResponseRegistryTest is Test {
         registry.getAction(99);
     }
 
-    function test_TotalActionsStartsAtZero() public {
+    function test_TotalActionsStartsAtZero() public view {
         assertEq(registry.totalActions(), 0);
     }
 }
