@@ -715,3 +715,12 @@ Use case:
 Limitation:
 - Matching formula is a simplified on-chain proxy (contributionCount-based),
   not exact Gitcoin-style quadratic formula (which requires off-chain indexer).
+## ReputationTimelockGovernor (Contract #4)
+- Network: Sepolia
+- Contract: 0x4ECe62D25006f6a789067bb5c38c6dd83dD1Ea22
+- Tx: 0xec484b68cce664e8171d89a50f5bc53ab16d6fe0a82c7e7a75720fce2db6b208
+- Deployer: 0x6bDf6D887038AB97957c2f57d05eDd0eb338589A
+- Constructor binding: OperatorPrivilegesV2 at 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98, timelock delay 3600s
+- Tests: 6 passed, 0 failed
+- Etherscan verification: Verified (GUID alhikwssalj1xcirfti8zt2mjcgcungpkyr7dy2cqmvmimabf2)
+- Sourcify job: b584e625-cd81-4631-b030-847b175d2fac
