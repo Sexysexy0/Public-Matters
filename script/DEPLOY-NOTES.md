@@ -724,3 +724,12 @@ Limitation:
 - Tests: 6 passed, 0 failed
 - Etherscan verification: Verified (GUID alhikwssalj1xcirfti8zt2mjcgcungpkyr7dy2cqmvmimabf2)
 - Sourcify job: b584e625-cd81-4631-b030-847b175d2fac
+## PublicProjectMilestoneEscrow (Contract #5)
+- Network: Sepolia
+- Contract: 0x620d31743ca4D209714070Ab3f0036aD987F7189
+- Tx: 0x0fcf61e384545a47005b6f39038acfdce8c7b9ca09a0a137d2c3c6a24efdf1e8
+- Deployer: 0x6bDf6D887038AB97957c2f57d05eDd0eb338589A
+- Constructor binding: OperatorPrivilegesV2 at 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+- Tests: 6 passed, 0 failed
+- Etherscan verification: Already verified
+- Sourcify job: b891bdc4-b8b2-4b7e-bb68-7022ec4ff601
