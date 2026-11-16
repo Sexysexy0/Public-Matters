@@ -688,3 +688,30 @@ Use case:
 - Public infrastructure project escrow with phase-based fund release.
 - Donor funds project, operator adds milestones, submits proof, verifies, and releases funds per milestone.
 - Pull-based withdrawal for donor; cancel refunds all unreleased funds.
+
+## QuadraticFundingTreasury (2026-11-16)
+
+Contract: 0xA48B9f782D905e83A9eD1995A25463FcB9b7F5f5
+Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+Deployment transaction: 0xf292ada3ba8936a5b56d5fc615687e118da3af0e653f1e9ec3651b8281ed8398
+
+Deployment reported successful by forge create.
+Tests: 6 passed, 0 failed.
+Explorer source verification:
+- Etherscan Sepolia: Pass - Verified (GUID: vm9jqh6hfnd96eqfi3jfzm2mqgnkvdet89aika3mg8jze9mwm8)
+- Sourcify: Submitted (Job ID: 14a74ea6-b1b7-4920-b3b2-7ccc28488eb9)
+
+Access control:
+- startRound and finalizeRound are operator-gated via OperatorPrivilegesV2.
+- registerProject and contribute are permissionless.
+- No multisig registration required for this contract.
+
+Use case:
+- Public goods funding pool with quadratic-style matching.
+- Matching pool funded by anyone; operator starts/finalizes rounds.
+- Project owners register, contributors donate, matching distributed per project.
+- Pull-based withdrawal for project owners; CEI pattern throughout.
+
+Limitation:
+- Matching formula is a simplified on-chain proxy (contributionCount-based),
+  not exact Gitcoin-style quadratic formula (which requires off-chain indexer).
