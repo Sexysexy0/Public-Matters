@@ -35,6 +35,8 @@ contract AutomatedBenefitsEscrowTest is Test {
         // 3. Verified Operator/Hospital approves instantly
         vm.prank(op);
         escrow.verifyAndRelease(CLAIM_ID, payable(memberWallet));
+        vm.prank(memberWallet);
+        escrow.withdraw();
 
         // 4. The member receives funds INSTANTLY. No runaround.
         assertEq(memberWallet.balance, 5 ether);
