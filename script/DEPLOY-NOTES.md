@@ -666,3 +666,25 @@ V2 improvements over V1:
 - pendingWithdrawals mapping (credit before finalize).
 - Donor and localOperator recorded at deposit time, not operator-specified at release/refund.
 
+
+## PublicProjectMilestoneEscrow (2026-11-16)
+
+Contract: 0x9d306f003F61e178CeFB5eC0d8eFF6331c6CfA23
+Constructor: OperatorPrivilegesV2 = 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+Deployment transaction: 0x098cfd92f99185de1603ff283ebaf09cb10bcad4114599a3f23fe7477bd89a56
+
+Deployment reported successful by forge create.
+Tests: 6 passed, 0 failed.
+Explorer source verification:
+- Etherscan Sepolia: Pass - Verified (GUID: sywmhhjht7v93yyntkmfb18kb52zj6mufxx74chbcynqn7aag7)
+- Sourcify: Submitted (Job ID: 512931d0-6757-4795-a6b7-b04c6268f654)
+
+Access control:
+- Writes check the caller's operator status through OperatorPrivilegesV2.
+- No multisig registration required for this contract.
+- Self-registration is not required by the current implementation.
+
+Use case:
+- Public infrastructure project escrow with phase-based fund release.
+- Donor funds project, operator adds milestones, submits proof, verifies, and releases funds per milestone.
+- Pull-based withdrawal for donor; cancel refunds all unreleased funds.
