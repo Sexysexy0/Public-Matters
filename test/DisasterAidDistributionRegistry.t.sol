@@ -20,80 +20,62 @@ contract DisasterAidDistributionRegistryTest is Test {
         opv = new MockOperatorPrivileges();
         registry = new DisasterAidDistributionRegistry(address(opv));
         opv.setOperator(operator, true);
-        vm.deal(address(this), 10 ether);
-        registry.fund{value: 5 ether}();
+        vm.deal(address(registry), 10 ether);
     }
 
-    function _leaf(address a) internal pure returns (bytes32) {
-        return keccak256(abi.encodePacked(a));
-    }
-
-    function test_FundPool() public view {
-        assertEq(registry.totalFunded(), 5 ether);
-    }
-
-    function test_SetMerkleRootAndClaim() public {
-        bytes32 leaf = _leaf(beneficiary);
-        bytes32 root = leaf; // single-leaf tree
+    function test_RegisterAid() public {
         vm.prank(operator);
-        registry.setMerkleRoot(root, 0.5 ether);
+        uint256 rid = registry.registerAid(beneficiary, 1 ether, "Flood relief");
+        (address ben, uint256 amt, , , , , DisasterAidDistributionRegistry.AidStatus status) = registry.records(rid);
+        assertEq(ben, beneficiary);
+        assertEq(amt, 1 ether);
+        assertEq(uint256(status), 0); // Registered
+    }
 
-        bytes32[] memory proof = new bytes32[](0);
-        bytes32 nullifier = keccak256("nullifier-1");
+    function test_VerifyAndClaim() public {
+        vm.prank(operator);
+        uint256 rid = registry.registerAid(beneficiary, 1 ether, "Flood relief");
+        vm.prank(operator);
+        registry.verifyAid(rid);
         vm.prank(beneficiary);
-        registry.claim(proof, nullifier);
+        registry.claimAid(rid);
+        (, , , , , , DisasterAidDistributionRegistry.AidStatus status) = registry.records(rid);
+        assertEq(uint256(status), 2); // Claimed
+        assertEq(beneficiary.balance, 1 ether);
+    }
 
-        assertEq(registry.pendingWithdrawals(beneficiary), 0.5 ether);
-        assertTrue(registry.claimedNullifiers(nullifier));
+    function test_ClaimBeforeVerifyReverts() public {
+        vm.prank(operator);
+        uint256 rid = registry.registerAid(beneficiary, 1 ether, "Test");
+        vm.prank(beneficiary);
+        vm.expectRevert();
+        registry.claimAid(rid);
     }
 
     function test_DoubleClaimReverts() public {
-        bytes32 leaf = _leaf(beneficiary);
         vm.prank(operator);
-        registry.setMerkleRoot(leaf, 0.5 ether);
-
-        bytes32[] memory proof = new bytes32[](0);
-        bytes32 nullifier = keccak256("nullifier-1");
+        uint256 rid = registry.registerAid(beneficiary, 1 ether, "Test");
+        vm.prank(operator);
+        registry.verifyAid(rid);
         vm.prank(beneficiary);
-        registry.claim(proof, nullifier);
-
+        registry.claimAid(rid);
         vm.prank(beneficiary);
         vm.expectRevert();
-        registry.claim(proof, nullifier);
+        registry.claimAid(rid);
     }
 
-    function test_InvalidProofReverts() public {
-        bytes32 wrongRoot = keccak256("wrong");
+    function test_CancelAid() public {
         vm.prank(operator);
-        registry.setMerkleRoot(wrongRoot, 0.5 ether);
+        uint256 rid = registry.registerAid(beneficiary, 1 ether, "Test");
+        vm.prank(operator);
+        registry.cancelAid(rid);
+        (, , , , , , DisasterAidDistributionRegistry.AidStatus status) = registry.records(rid);
+        assertEq(uint256(status), 3); // Cancelled
+    }
 
-        bytes32[] memory proof = new bytes32[](0);
-        bytes32 nullifier = keccak256("nullifier-1");
+    function test_NonOperatorReverts() public {
         vm.prank(beneficiary);
         vm.expectRevert();
-        registry.claim(proof, nullifier);
-    }
-
-    function test_NonOperatorCannotSetRoot() public {
-        vm.prank(address(0xDEAD));
-        vm.expectRevert();
-        registry.setMerkleRoot(keccak256("x"), 0.5 ether);
-    }
-
-    function test_WithdrawPullBased() public {
-        bytes32 leaf = _leaf(beneficiary);
-        vm.prank(operator);
-        registry.setMerkleRoot(leaf, 0.5 ether);
-
-        bytes32[] memory proof = new bytes32[](0);
-        bytes32 nullifier = keccak256("nullifier-1");
-        vm.prank(beneficiary);
-        registry.claim(proof, nullifier);
-
-        uint256 before = beneficiary.balance;
-        vm.prank(beneficiary);
-        registry.withdraw();
-        assertEq(beneficiary.balance, before + 0.5 ether);
-        assertEq(registry.pendingWithdrawals(beneficiary), 0);
+        registry.registerAid(beneficiary, 1 ether, "Test");
     }
 }
