@@ -733,3 +733,13 @@ Limitation:
 - Tests: 6 passed, 0 failed
 - Etherscan verification: Already verified
 - Sourcify job: b891bdc4-b8b2-4b7e-bb68-7022ec4ff601
+## DisasterAidDistributionRegistry (Contract #6)
+- Network: Sepolia
+- Contract: 0xf3e870fceCe07A9010800D125856e065D062b08e
+- Tx: 0xadf0206db72c7ad221c90303b9669564197444623945b0f05844cee8c0789e7d
+- Deployer: 0x6bDf6D887038AB97957c2f57d05eDd0eb338589A
+- Constructor binding: OperatorPrivilegesV2 at 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+- Tests: 6 passed, 0 failed
+- Commit: af065a8dd
+- Etherscan verification: Verified (GUID hhur6j8smtztuhz3fymzf6xkn32zij6jvwyan1mpd5tq5ewimt)
+- Sourcify job: 7b155e52-a641-496f-b133-20d207f3df5c
