@@ -32,12 +32,7 @@ contract AIContentProvenanceRegistry {
         privileges = OperatorPrivileges(_privileges);
     }
 
-    function registerGame(
-        bytes32 gameId,
-        bytes32 assetHash,
-        uint256 aiPercentage,
-        string calldata notes
-    ) external {
+    function registerGame(bytes32 gameId, bytes32 assetHash, uint256 aiPercentage, string calldata notes) external {
         require(games[gameId].assetHash == bytes32(0), "Game ID already registered");
         require(!assetUsed[assetHash], "Asset hash already registered by another game");
         require(aiPercentage <= 100, "Invalid AI percentage");
@@ -60,7 +55,7 @@ contract AIContentProvenanceRegistry {
         GameProvenance storage g = games[gameId];
         require(g.assetHash != bytes32(0), "Game not found");
         require(g.developer != msg.sender, "Verifier must differ from developer");
-        
+
         g.verified = status;
         g.verifier = msg.sender;
         emit ProvenanceVerified(gameId, msg.sender, status);

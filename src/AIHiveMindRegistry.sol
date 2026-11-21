@@ -39,11 +39,7 @@ contract AIHiveMindRegistry {
 
     function registerAgent(address agentAddress) external onlyOperator {
         require(!agents[agentAddress].isActive, "Agent already active");
-        agents[agentAddress] = Agent({
-            sharedKnowledgeHash: bytes32(0),
-            pendingUpgradeHash: bytes32(0),
-            isActive: true
-        });
+        agents[agentAddress] = Agent({sharedKnowledgeHash: bytes32(0), pendingUpgradeHash: bytes32(0), isActive: true});
         emit AgentRegistered(agentAddress);
     }
 
@@ -71,7 +67,7 @@ contract AIHiveMindRegistry {
     function executeUpgrade(address agentAddress) external onlyOperator {
         require(agents[agentAddress].isActive, "Agent not active");
         require(agents[agentAddress].pendingUpgradeHash != bytes32(0), "No upgrade proposed");
-        
+
         agents[agentAddress].pendingUpgradeHash = bytes32(0);
         emit UpgradeExecuted(agentAddress);
     }

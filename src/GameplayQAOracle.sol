@@ -10,7 +10,11 @@ import "./OperatorPrivileges.sol";
 contract GameplayQAOracle {
     OperatorPrivileges public immutable privileges;
 
-    enum BugStatus { OPEN, PATCHING, RESOLVED }
+    enum BugStatus {
+        OPEN,
+        PATCHING,
+        RESOLVED
+    }
 
     struct BugReport {
         bytes32 id;

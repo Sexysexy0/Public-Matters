@@ -71,10 +71,7 @@ contract CapacityAllocationRegistry {
     ) external onlyOperator {
         require(_facilityHash != bytes32(0), "Invalid facility hash");
         require(_waferCapacity > 0, "Invalid capacity");
-        require(
-            _hbmAllocationBps + _consumerAllocationBps <= 10000,
-            "Allocation exceeds 10000 bps"
-        );
+        require(_hbmAllocationBps + _consumerAllocationBps <= 10000, "Allocation exceeds 10000 bps");
 
         commitmentHistory[_facilityHash].push(
             CapacityCommitment({
@@ -90,21 +87,14 @@ contract CapacityAllocationRegistry {
         commitmentCount[_facilityHash]++;
 
         emit CapacityCommitted(
-            _facilityHash,
-            _waferCapacity,
-            _hbmAllocationBps,
-            _consumerAllocationBps,
-            _commitmentDate,
-            msg.sender
+            _facilityHash, _waferCapacity, _hbmAllocationBps, _consumerAllocationBps, _commitmentDate, msg.sender
         );
     }
 
-    function reportVariance(
-        bytes32 _facilityHash,
-        uint256 _expectedOutput,
-        uint256 _actualOutput,
-        uint256 _varianceBps
-    ) external onlyOperator {
+    function reportVariance(bytes32 _facilityHash, uint256 _expectedOutput, uint256 _actualOutput, uint256 _varianceBps)
+        external
+        onlyOperator
+    {
         require(_facilityHash != bytes32(0), "Invalid facility hash");
         require(_expectedOutput > 0, "Invalid expected output");
 
@@ -121,28 +111,20 @@ contract CapacityAllocationRegistry {
 
         varianceCount[_facilityHash]++;
 
-        emit VarianceReported(
-            _facilityHash,
-            _expectedOutput,
-            _actualOutput,
-            _varianceBps,
-            msg.sender
-        );
+        emit VarianceReported(_facilityHash, _expectedOutput, _actualOutput, _varianceBps, msg.sender);
     }
 
-    function getCommitmentVersion(
-        bytes32 _facilityHash,
-        uint256 _version
-    ) external view returns (CapacityCommitment memory) {
+    function getCommitmentVersion(bytes32 _facilityHash, uint256 _version)
+        external
+        view
+        returns (CapacityCommitment memory)
+    {
         require(_version >= 1, "Invalid version");
         require(_version <= commitmentHistory[_facilityHash].length, "Version not found");
         return commitmentHistory[_facilityHash][_version - 1];
     }
 
-    function getVarianceReport(
-        bytes32 _facilityHash,
-        uint256 _version
-    ) external view returns (VarianceReport memory) {
+    function getVarianceReport(bytes32 _facilityHash, uint256 _version) external view returns (VarianceReport memory) {
         require(_version >= 1, "Invalid version");
         require(_version <= varianceHistory[_facilityHash].length, "Version not found");
         return varianceHistory[_facilityHash][_version - 1];

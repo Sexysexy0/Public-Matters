@@ -35,7 +35,7 @@ contract AIContentProvenanceRegistryTest is Test {
         vm.prank(op);
         registry.verifyProvenance(gameId, true);
 
-        (, , , bool ver, , address verifier,) = registry.games(gameId);
+        (,,, bool ver,, address verifier,) = registry.games(gameId);
         assertTrue(ver);
         assertEq(verifier, op);
     }

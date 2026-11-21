@@ -11,13 +11,18 @@ import "./OperatorPrivileges.sol";
 contract MarriageRegistry {
     OperatorPrivileges public immutable privileges;
 
-    enum MarriageStatus { NONE, PROPOSED, MARRIED, DIVORCED }
+    enum MarriageStatus {
+        NONE,
+        PROPOSED,
+        MARRIED,
+        DIVORCED
+    }
 
     struct Marriage {
         bytes32 id;
         bytes32 proposerHash; // Kliff
-        bytes32 partnerHash;  // Damiane
-        bytes32 dowryHash;    // Assets transferred
+        bytes32 partnerHash; // Damiane
+        bytes32 dowryHash; // Assets transferred
         bool isQueen;
         MarriageStatus status;
         uint256 marriedAt;

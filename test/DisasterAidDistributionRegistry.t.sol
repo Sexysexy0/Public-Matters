@@ -6,8 +6,14 @@ import {DisasterAidDistributionRegistry} from "../contracts/DisasterAidDistribut
 
 contract MockOperatorPrivileges {
     mapping(address => bool) public ops;
-    function setOperator(address a, bool v) external { ops[a] = v; }
-    function isOperator(address a) external view returns (bool) { return ops[a]; }
+
+    function setOperator(address a, bool v) external {
+        ops[a] = v;
+    }
+
+    function isOperator(address a) external view returns (bool) {
+        return ops[a];
+    }
 }
 
 contract DisasterAidDistributionRegistryTest is Test {
@@ -26,7 +32,7 @@ contract DisasterAidDistributionRegistryTest is Test {
     function test_RegisterAid() public {
         vm.prank(operator);
         uint256 rid = registry.registerAid(beneficiary, 1 ether, "Flood relief");
-        (address ben, uint256 amt, , , , , DisasterAidDistributionRegistry.AidStatus status) = registry.records(rid);
+        (address ben, uint256 amt,,,,, DisasterAidDistributionRegistry.AidStatus status) = registry.records(rid);
         assertEq(ben, beneficiary);
         assertEq(amt, 1 ether);
         assertEq(uint256(status), 0); // Registered
@@ -39,7 +45,7 @@ contract DisasterAidDistributionRegistryTest is Test {
         registry.verifyAid(rid);
         vm.prank(beneficiary);
         registry.claimAid(rid);
-        (, , , , , , DisasterAidDistributionRegistry.AidStatus status) = registry.records(rid);
+        (,,,,,, DisasterAidDistributionRegistry.AidStatus status) = registry.records(rid);
         assertEq(uint256(status), 2); // Claimed
         assertEq(beneficiary.balance, 1 ether);
     }
@@ -69,7 +75,7 @@ contract DisasterAidDistributionRegistryTest is Test {
         uint256 rid = registry.registerAid(beneficiary, 1 ether, "Test");
         vm.prank(operator);
         registry.cancelAid(rid);
-        (, , , , , , DisasterAidDistributionRegistry.AidStatus status) = registry.records(rid);
+        (,,,,,, DisasterAidDistributionRegistry.AidStatus status) = registry.records(rid);
         assertEq(uint256(status), 3); // Cancelled
     }
 

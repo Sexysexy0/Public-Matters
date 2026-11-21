@@ -12,7 +12,12 @@ contract SocietalContributionRegistry {
     OperatorPrivileges public immutable privileges;
     CivicSovereigntyRegistry public immutable civic;
 
-    enum ContributionType { CAREGIVING, CIVIC_DUTY, SKILL_BUILDING, COMMUNITY_BUILDING }
+    enum ContributionType {
+        CAREGIVING,
+        CIVIC_DUTY,
+        SKILL_BUILDING,
+        COMMUNITY_BUILDING
+    }
 
     mapping(address => mapping(ContributionType => uint256)) public contributionPoints;
     mapping(address => uint256) public totalContributionScore;
@@ -35,12 +40,10 @@ contract SocietalContributionRegistry {
      * @notice Record a verifiable contribution to society.
      * @dev Only registered citizens in CivicSovereigntyRegistry can earn points.
      */
-    function recordContribution(
-        address citizen,
-        ContributionType cType,
-        uint256 points,
-        string calldata reason
-    ) external onlyOperator {
+    function recordContribution(address citizen, ContributionType cType, uint256 points, string calldata reason)
+        external
+        onlyOperator
+    {
         // Check if citizen is registered in CivicSovereigntyRegistry
         CivicSovereigntyRegistry.Citizen memory c = civic.getCitizen(citizen);
         require(c.isRegistered, "Citizen not registered");

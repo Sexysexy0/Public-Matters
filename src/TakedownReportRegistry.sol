@@ -48,7 +48,7 @@ contract TakedownReportRegistry {
         address reporter;
         address handler;
         address approver;
-        Status  status;
+        Status status;
         uint256 createdAt;
         uint256 updatedAt;
         uint256 filedAt;
@@ -74,28 +74,11 @@ contract TakedownReportRegistry {
         address reporter,
         bytes32 evidenceHash
     );
-    event StatusAdvanced(
-        bytes32 indexed id,
-        Status fromStatus,
-        Status toStatus,
-        address handler
-    );
-    event TakedownConfirmed(
-        bytes32 indexed id,
-        address approver,
-        bytes32 resolutionHash
-    );
-    event ReportDismissed(
-        bytes32 indexed id,
-        address handler,
-        bytes32 reasonHash
-    );
+    event StatusAdvanced(bytes32 indexed id, Status fromStatus, Status toStatus, address handler);
+    event TakedownConfirmed(bytes32 indexed id, address approver, bytes32 resolutionHash);
+    event ReportDismissed(bytes32 indexed id, address handler, bytes32 reasonHash);
     event ExternalFilingRecorded(
-        bytes32 indexed id,
-        bytes32 reportedToHash,
-        bytes32 caseNumberHash,
-        uint256 deadlineAt,
-        address handler
+        bytes32 indexed id, bytes32 reportedToHash, bytes32 caseNumberHash, uint256 deadlineAt, address handler
     );
 
     modifier onlyOperator() {
@@ -117,20 +100,16 @@ contract TakedownReportRegistry {
     // Filing — permissionless
     // ─────────────────────────────────────────────────────────────
 
-    function fileReport(
-        bytes32 subjectHash,
-        bytes32 targetHash,
-        bytes32 channelHash,
-        bytes32 evidenceHash
-    ) external returns (bytes32) {
+    function fileReport(bytes32 subjectHash, bytes32 targetHash, bytes32 channelHash, bytes32 evidenceHash)
+        external
+        returns (bytes32)
+    {
         require(subjectHash != bytes32(0), "subjectHash=0");
-        require(targetHash  != bytes32(0), "targetHash=0");
+        require(targetHash != bytes32(0), "targetHash=0");
         require(channelHash != bytes32(0), "channelHash=0");
 
-        bytes32 id = keccak256(abi.encode(
-            subjectHash, targetHash, channelHash,
-            msg.sender, block.timestamp, reportIds.length
-        ));
+        bytes32 id =
+            keccak256(abi.encode(subjectHash, targetHash, channelHash, msg.sender, block.timestamp, reportIds.length));
         require(reports[id].createdAt == 0, "Report exists");
 
         reports[id] = Report({
@@ -156,7 +135,7 @@ contract TakedownReportRegistry {
 
         reportsBySubjectStatus[subjectHash][uint8(Status.REPORTED)] += 1;
         reportsByChannelStatus[channelHash][uint8(Status.REPORTED)] += 1;
-        reportsByTargetStatus[targetHash][uint8(Status.REPORTED)]  += 1;
+        reportsByTargetStatus[targetHash][uint8(Status.REPORTED)] += 1;
         reportsByStatus[uint8(Status.REPORTED)] += 1;
         transitionsByMonth[_month()][uint8(Status.REPORTED)] += 1;
 
@@ -179,19 +158,14 @@ contract TakedownReportRegistry {
 
     function markAwaitingPlatform(bytes32 id) external onlyOperator reportExists(id) {
         Report storage r = reports[id];
-        require(
-            r.status == Status.REPORTED || r.status == Status.IN_PROGRESS,
-            "Cannot await platform from this state"
-        );
+        require(r.status == Status.REPORTED || r.status == Status.IN_PROGRESS, "Cannot await platform from this state");
         _advance(r, Status.AWAITING_PLATFORM, msg.sender);
     }
 
     function requestApproval(bytes32 id) external onlyOperator reportExists(id) {
         Report storage r = reports[id];
         require(
-            r.status == Status.REPORTED ||
-            r.status == Status.IN_PROGRESS ||
-            r.status == Status.AWAITING_PLATFORM,
+            r.status == Status.REPORTED || r.status == Status.IN_PROGRESS || r.status == Status.AWAITING_PLATFORM,
             "Cannot request approval from this state"
         );
         r.handler = msg.sender;
@@ -202,11 +176,7 @@ contract TakedownReportRegistry {
     // Resolution — requires independent operator
     // ─────────────────────────────────────────────────────────────
 
-    function confirmTakedown(bytes32 id, bytes32 resolutionHash)
-        external
-        onlyOperator
-        reportExists(id)
-    {
+    function confirmTakedown(bytes32 id, bytes32 resolutionHash) external onlyOperator reportExists(id) {
         Report storage r = reports[id];
         require(r.status == Status.AWAITING_APPROVAL, "Not awaiting approval");
         require(resolutionHash != bytes32(0), "resolutionHash=0");
@@ -219,17 +189,11 @@ contract TakedownReportRegistry {
         emit TakedownConfirmed(id, msg.sender, resolutionHash);
     }
 
-    function dismissReport(bytes32 id, bytes32 reasonHash)
-        external
-        onlyOperator
-        reportExists(id)
-    {
+    function dismissReport(bytes32 id, bytes32 reasonHash) external onlyOperator reportExists(id) {
         Report storage r = reports[id];
         require(
-            r.status == Status.REPORTED ||
-            r.status == Status.IN_PROGRESS ||
-            r.status == Status.AWAITING_PLATFORM ||
-            r.status == Status.AWAITING_APPROVAL,
+            r.status == Status.REPORTED || r.status == Status.IN_PROGRESS || r.status == Status.AWAITING_PLATFORM
+                || r.status == Status.AWAITING_APPROVAL,
             "Cannot dismiss from this state"
         );
         r.dismissalReason = reasonHash;
@@ -245,18 +209,14 @@ contract TakedownReportRegistry {
     /// @notice Record that the report has been filed with an external party
     ///         (registrar, platform, dispute-resolution body). Updates filing
     ///         metadata only; does not change status.
-    function recordExternalFiling(
-        bytes32 id,
-        bytes32 reportedToHash,
-        bytes32 caseNumberHash,
-        uint256 deadlineAt
-    ) external onlyOperator reportExists(id) {
+    function recordExternalFiling(bytes32 id, bytes32 reportedToHash, bytes32 caseNumberHash, uint256 deadlineAt)
+        external
+        onlyOperator
+        reportExists(id)
+    {
         require(reportedToHash != bytes32(0), "reportedToHash=0");
         Report storage r = reports[id];
-        require(
-            r.status != Status.TAKEN_DOWN && r.status != Status.DISMISSED,
-            "Cannot file externally after closure"
-        );
+        require(r.status != Status.TAKEN_DOWN && r.status != Status.DISMISSED, "Cannot file externally after closure");
         r.reportedToHash = reportedToHash;
         r.caseNumberHash = caseNumberHash;
         r.filedAt = block.timestamp;
@@ -288,25 +248,19 @@ contract TakedownReportRegistry {
         return reportIds.length;
     }
 
-    function getSubjectReport(bytes32 subjectHash)
-        external view returns (uint256[7] memory byStatus)
-    {
+    function getSubjectReport(bytes32 subjectHash) external view returns (uint256[7] memory byStatus) {
         for (uint8 i = 0; i < STATUS_COUNT; i++) {
             byStatus[i] = reportsBySubjectStatus[subjectHash][i];
         }
     }
 
-    function getChannelReport(bytes32 channelHash)
-        external view returns (uint256[7] memory byStatus)
-    {
+    function getChannelReport(bytes32 channelHash) external view returns (uint256[7] memory byStatus) {
         for (uint8 i = 0; i < STATUS_COUNT; i++) {
             byStatus[i] = reportsByChannelStatus[channelHash][i];
         }
     }
 
-    function getTargetReport(bytes32 targetHash)
-        external view returns (uint256[7] memory byStatus)
-    {
+    function getTargetReport(bytes32 targetHash) external view returns (uint256[7] memory byStatus) {
         for (uint8 i = 0; i < STATUS_COUNT; i++) {
             byStatus[i] = reportsByTargetStatus[targetHash][i];
         }
@@ -318,17 +272,13 @@ contract TakedownReportRegistry {
         }
     }
 
-    function getMonthReport(uint256 month)
-        external view returns (uint256[7] memory byStatus)
-    {
+    function getMonthReport(uint256 month) external view returns (uint256[7] memory byStatus) {
         for (uint8 i = 0; i < STATUS_COUNT; i++) {
             byStatus[i] = transitionsByMonth[month][i];
         }
     }
 
-    function getExternalPartyReport(bytes32 reportedToHash)
-        external view returns (uint256[7] memory byStatus)
-    {
+    function getExternalPartyReport(bytes32 reportedToHash) external view returns (uint256[7] memory byStatus) {
         for (uint256 i = 0; i < reportIds.length; i++) {
             Report storage r = reports[reportIds[i]];
             if (r.reportedToHash == reportedToHash) {
@@ -345,7 +295,7 @@ contract TakedownReportRegistry {
         Status from = r.status;
         reportsBySubjectStatus[r.subjectHash][uint8(from)] -= 1;
         reportsByChannelStatus[r.channelHash][uint8(from)] -= 1;
-        reportsByTargetStatus[r.targetHash][uint8(from)]  -= 1;
+        reportsByTargetStatus[r.targetHash][uint8(from)] -= 1;
         reportsByStatus[uint8(from)] -= 1;
 
         r.status = to;
@@ -354,7 +304,7 @@ contract TakedownReportRegistry {
 
         reportsBySubjectStatus[r.subjectHash][uint8(to)] += 1;
         reportsByChannelStatus[r.channelHash][uint8(to)] += 1;
-        reportsByTargetStatus[r.targetHash][uint8(to)]  += 1;
+        reportsByTargetStatus[r.targetHash][uint8(to)] += 1;
         reportsByStatus[uint8(to)] += 1;
         transitionsByMonth[_month()][uint8(to)] += 1;
 

@@ -5,7 +5,7 @@ import "./OperatorPrivileges.sol";
 
 /**
  * @title AgentPermissionsManager
- * @notice On-chain firewall for AI Agents. Restricts the financial/state 
+ * @notice On-chain firewall for AI Agents. Restricts the financial/state
  *         impact an agent can have over a specific timeframe.
  */
 contract AgentPermissionsManager {
@@ -90,7 +90,7 @@ contract AgentPermissionsManager {
     function getAgentStatus(address agent) external view returns (uint256 spent, uint256 remaining) {
         AgentLimits memory al = limits[agent];
         if (!al.isRegistered) return (0, 0);
-        
+
         uint256 currentSpent = al.currentDaySpent;
         if (block.timestamp >= al.lastResetTime + 24 hours) {
             currentSpent = 0;

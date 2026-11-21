@@ -15,9 +15,9 @@ contract DynamicFleetComplianceRegistry {
     struct Platform {
         bytes32 platformId;
         string name;
-        uint256 baseCap;           // e.g., 17,000
-        uint256 currentVerified;   // verified riders
-        uint256 complianceBond;    // deposited funds for penalties
+        uint256 baseCap; // e.g., 17,000
+        uint256 currentVerified; // verified riders
+        uint256 complianceBond; // deposited funds for penalties
         bool active;
     }
 
@@ -40,15 +40,13 @@ contract DynamicFleetComplianceRegistry {
         privileges = OperatorPrivileges(_privileges);
     }
 
-    function registerPlatform(bytes32 platformId, string calldata name, uint256 baseCap, uint256 bond) external onlyOperator {
+    function registerPlatform(bytes32 platformId, string calldata name, uint256 baseCap, uint256 bond)
+        external
+        onlyOperator
+    {
         require(platforms[platformId].baseCap == 0, "Platform exists");
         platforms[platformId] = Platform({
-            platformId: platformId,
-            name: name,
-            baseCap: baseCap,
-            currentVerified: 0,
-            complianceBond: bond,
-            active: true
+            platformId: platformId, name: name, baseCap: baseCap, currentVerified: 0, complianceBond: bond, active: true
         });
         emit PlatformRegistered(platformId, name, baseCap);
     }
@@ -66,7 +64,7 @@ contract DynamicFleetComplianceRegistry {
         // DYNAMIC CAP: Every 10,000 verified riders expands the cap by 50,000.
         // This removes arbitrary limits while ensuring compliance.
         uint256 newCap = p.baseCap + (p.currentVerified * 50000) / 10000;
-        
+
         emit RiderVerified(platformId, rider);
         emit CapExpanded(platformId, newCap);
     }

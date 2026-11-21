@@ -11,7 +11,13 @@ import "./OperatorPrivileges.sol";
 contract WorkerDeploymentRegistry {
     OperatorPrivileges public immutable privileges;
 
-    enum WorkerStatus { UNKNOWN, IDLE, WORKING, UNASSIGNED, QUEST_LOCKED }
+    enum WorkerStatus {
+        UNKNOWN,
+        IDLE,
+        WORKING,
+        UNASSIGNED,
+        QUEST_LOCKED
+    }
 
     struct Worker {
         bytes32 id;
@@ -24,7 +30,7 @@ contract WorkerDeploymentRegistry {
 
     mapping(bytes32 => Worker) public workers;
     mapping(bytes32 => bytes32[]) public workersByFacility; // FacilityHash => WorkerIds
-    mapping(bytes32 => uint256) public activeWorkerCount;   // FacilityHash => count
+    mapping(bytes32 => uint256) public activeWorkerCount; // FacilityHash => count
 
     event WorkerRegistered(bytes32 indexed workerId, bytes32 npcDataHash);
     event WorkerAssigned(bytes32 indexed workerId, bytes32 indexed facility);
@@ -67,7 +73,7 @@ contract WorkerDeploymentRegistry {
         w.currentFacility = facilityHash;
         w.status = WorkerStatus.WORKING;
         w.lastUpdated = block.timestamp;
-        
+
         activeWorkerCount[facilityHash]++;
         workersByFacility[facilityHash].push(workerId);
 
@@ -77,7 +83,7 @@ contract WorkerDeploymentRegistry {
     function unassignWorker(bytes32 workerId, bytes32 reasonHash) external onlyOperator {
         Worker storage w = workers[workerId];
         require(w.lastUpdated != 0, "Worker not found");
-        
+
         if (w.currentFacility != bytes32(0)) {
             activeWorkerCount[w.currentFacility]--;
         }

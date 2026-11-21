@@ -11,7 +11,12 @@ import "./OperatorPrivileges.sol";
 contract PropertyMaintenanceRegistry {
     OperatorPrivileges public immutable privileges;
 
-    enum ZoneStatus { CLEAN, DIRTY, VIOLATION, UNDER_REPAIR }
+    enum ZoneStatus {
+        CLEAN,
+        DIRTY,
+        VIOLATION,
+        UNDER_REPAIR
+    }
 
     struct Property {
         bytes32 id;
@@ -59,7 +64,7 @@ contract PropertyMaintenanceRegistry {
         Property storage p = properties[propertyId];
         require(p.lastCleaned != 0, "Property not found");
         require(!hasReported[propertyId][msg.sender], "Already reported");
-        
+
         hasReported[propertyId][msg.sender] = true;
         p.reportsCount++;
 
@@ -75,7 +80,7 @@ contract PropertyMaintenanceRegistry {
     function updateStatus(bytes32 propertyId, ZoneStatus newStatus, uint256 fine) external onlyOperator {
         Property storage p = properties[propertyId];
         require(p.lastCleaned != 0, "Property not found");
-        
+
         p.status = newStatus;
         p.fineAmount = fine;
         if (newStatus == ZoneStatus.CLEAN) {

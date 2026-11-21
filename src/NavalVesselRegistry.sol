@@ -11,8 +11,13 @@ import "./OperatorPrivileges.sol";
 contract NavalVesselRegistry {
     OperatorPrivileges public immutable privileges;
 
-    enum RoomType { BEDROOM, GALLEY, ARMORY, CARGO_HOLD }
-    
+    enum RoomType {
+        BEDROOM,
+        GALLEY,
+        ARMORY,
+        CARGO_HOLD
+    }
+
     struct Vessel {
         address owner;
         uint8 shipClass; // 0 = Small (no interior), 1 = Large (full interior)
@@ -28,7 +33,7 @@ contract NavalVesselRegistry {
     mapping(bytes32 => Vessel) public vessels;
     mapping(bytes32 => mapping(RoomType => Room)) public rooms;
     mapping(bytes32 => mapping(bytes32 => uint256)) public cargo; // shipId => itemHash => qty
-    
+
     event VesselRegistered(bytes32 indexed shipId, address indexed owner, uint8 shipClass);
     event RoomCustomized(bytes32 indexed shipId, RoomType roomType, bytes32 customizationHash);
     event PlayerRested(bytes32 indexed shipId, address indexed player);
@@ -61,8 +66,8 @@ contract NavalVesselRegistry {
 
     function registerVessel(bytes32 shipId, address owner, uint8 shipClass) external onlyOperator {
         require(!vessels[shipId].exists, "Ship exists");
-        vessels[shipId] = Vessel({ owner: owner, shipClass: shipClass, exists: true });
-        
+        vessels[shipId] = Vessel({owner: owner, shipClass: shipClass, exists: true});
+
         // Small ships (0) only have cargo. Large ships (1) get all rooms.
         if (shipClass >= 1) {
             rooms[shipId][RoomType.BEDROOM].unlocked = true;
@@ -76,9 +81,7 @@ contract NavalVesselRegistry {
 
     // ── Interior Customization ──
 
-    function customizeRoom(bytes32 shipId, RoomType rt, bytes32 customizationHash) 
-        external onlyOwner(shipId) 
-    {
+    function customizeRoom(bytes32 shipId, RoomType rt, bytes32 customizationHash) external onlyOwner(shipId) {
         require(rooms[shipId][rt].unlocked, "Room not unlocked");
         rooms[shipId][rt].customizationHash = customizationHash;
         emit RoomCustomized(shipId, rt, customizationHash);
@@ -87,38 +90,44 @@ contract NavalVesselRegistry {
     // ── Base Actions ──
 
     /// @notice Sleep on the existing beds.
-    function restInBedroom(bytes32 shipId) 
-        external onlyOwner(shipId) requireRoom(shipId, RoomType.BEDROOM) 
-    {
+    function restInBedroom(bytes32 shipId) external onlyOwner(shipId) requireRoom(shipId, RoomType.BEDROOM) {
         emit PlayerRested(shipId, msg.sender);
     }
 
     /// @notice Cook below deck.
-    function cookInGalley(bytes32 shipId, bytes32 recipeHash) 
-        external onlyOwner(shipId) requireRoom(shipId, RoomType.GALLEY) 
+    function cookInGalley(bytes32 shipId, bytes32 recipeHash)
+        external
+        onlyOwner(shipId)
+        requireRoom(shipId, RoomType.GALLEY)
     {
         emit MealCooked(shipId, recipeHash);
     }
 
     /// @notice Craft and refine gear.
-    function craftInArmory(bytes32 shipId, bytes32 gearHash) 
-        external onlyOwner(shipId) requireRoom(shipId, RoomType.ARMORY) 
+    function craftInArmory(bytes32 shipId, bytes32 gearHash)
+        external
+        onlyOwner(shipId)
+        requireRoom(shipId, RoomType.ARMORY)
     {
         emit GearCrafted(shipId, gearHash);
     }
 
     // ── Cargo Hold ──
 
-    function depositCargo(bytes32 shipId, bytes32 itemHash, uint256 amount) 
-        external onlyOwner(shipId) requireRoom(shipId, RoomType.CARGO_HOLD) 
+    function depositCargo(bytes32 shipId, bytes32 itemHash, uint256 amount)
+        external
+        onlyOwner(shipId)
+        requireRoom(shipId, RoomType.CARGO_HOLD)
     {
         require(amount > 0, "amount=0");
         cargo[shipId][itemHash] += amount;
         emit CargoDeposited(shipId, itemHash, amount);
     }
 
-    function withdrawCargo(bytes32 shipId, bytes32 itemHash, uint256 amount) 
-        external onlyOwner(shipId) requireRoom(shipId, RoomType.CARGO_HOLD) 
+    function withdrawCargo(bytes32 shipId, bytes32 itemHash, uint256 amount)
+        external
+        onlyOwner(shipId)
+        requireRoom(shipId, RoomType.CARGO_HOLD)
     {
         require(cargo[shipId][itemHash] >= amount, "Insufficient cargo");
         cargo[shipId][itemHash] -= amount;
@@ -130,7 +139,7 @@ contract NavalVesselRegistry {
     function getCargo(bytes32 shipId, bytes32 itemHash) external view returns (uint256) {
         return cargo[shipId][itemHash];
     }
-    
+
     function getRoomStatus(bytes32 shipId, RoomType rt) external view returns (Room memory) {
         return rooms[shipId][rt];
     }

@@ -52,7 +52,7 @@ contract LicenseRegistry {
     }
 
     /**
-     * @notice Section 2: Release & Amnesty. 
+     * @notice Section 2: Release & Amnesty.
      * Holder accepts the license, releasing past liabilities up to this point.
      */
     function acceptLicense(uint256 tokenId) external {
@@ -78,11 +78,7 @@ contract LicenseRegistry {
     function proposeAmendment(bytes32 newLicenseHash) external onlyCreator {
         amendmentCount++;
         amendments[amendmentCount] = AmendmentProposal({
-            newLicenseHash: newLicenseHash,
-            votesFor: 0,
-            votesAgainst: 0,
-            creatorApproved: true,
-            executed: false
+            newLicenseHash: newLicenseHash, votesFor: 0, votesAgainst: 0, creatorApproved: true, executed: false
         });
         emit AmendmentProposed(amendmentCount, newLicenseHash, msg.sender);
     }

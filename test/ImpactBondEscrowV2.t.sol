@@ -27,7 +27,14 @@ contract ImpactBondEscrowV2Test is Test {
         vm.prank(donor);
         escrow.createProject{value: 1 ether}(projectId, ngo);
 
-        (address donor_, address ngo_, uint256 totalDeposited, uint256 releasedAmount, bytes32 latestProofHash, bool active) = escrow.projects(projectId);
+        (
+            address donor_,
+            address ngo_,
+            uint256 totalDeposited,
+            uint256 releasedAmount,
+            bytes32 latestProofHash,
+            bool active
+        ) = escrow.projects(projectId);
 
         assertEq(donor_, donor);
         assertEq(ngo_, ngo);

@@ -14,8 +14,8 @@ contract ExtractivePermitRegistry {
     struct Permit {
         bytes32 companyHash;
         bytes32 locationHash;
-        bytes32 eccHash;        // Environmental Compliance Certificate hash
-        address issuer;         // The government official who signed it
+        bytes32 eccHash; // Environmental Compliance Certificate hash
+        address issuer; // The government official who signed it
         uint256 startDate;
         uint256 endDate;
         bool active;
@@ -23,7 +23,7 @@ contract ExtractivePermitRegistry {
 
     mapping(bytes32 => Permit) public permits;
     mapping(bytes32 => bytes32[]) public permitsByLocation;
-    
+
     event PermitIssued(bytes32 indexed permitId, bytes32 indexed companyHash, address indexed issuer, uint256 endDate);
     event PermitRevoked(bytes32 indexed permitId, address indexed revokedBy, string reason);
 
@@ -37,13 +37,10 @@ contract ExtractivePermitRegistry {
         privileges = OperatorPrivileges(_privileges);
     }
 
-    function issuePermit(
-        bytes32 permitId,
-        bytes32 companyHash,
-        bytes32 locationHash,
-        bytes32 eccHash,
-        uint256 duration
-    ) external onlyOperator {
+    function issuePermit(bytes32 permitId, bytes32 companyHash, bytes32 locationHash, bytes32 eccHash, uint256 duration)
+        external
+        onlyOperator
+    {
         require(permits[permitId].issuer == address(0), "Permit exists");
 
         permits[permitId] = Permit({

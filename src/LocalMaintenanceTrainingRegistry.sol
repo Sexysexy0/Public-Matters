@@ -12,7 +12,7 @@ contract LocalMaintenanceTrainingRegistry {
 
     struct Certification {
         bytes32 assetTypeHash; // e.g., "Water Well Pump"
-        address trainer;       // The certified trainer/instructor
+        address trainer; // The certified trainer/instructor
         uint256 issuedAt;
         bool valid;
     }
@@ -37,12 +37,8 @@ contract LocalMaintenanceTrainingRegistry {
      * @notice An operator registers themselves as a certified trainer for a specific asset.
      */
     function registerTrainer(bytes32 assetTypeHash) external onlyOperator {
-        certifications[msg.sender][assetTypeHash] = Certification({
-            assetTypeHash: assetTypeHash,
-            trainer: msg.sender,
-            issuedAt: block.timestamp,
-            valid: true
-        });
+        certifications[msg.sender][assetTypeHash] =
+            Certification({assetTypeHash: assetTypeHash, trainer: msg.sender, issuedAt: block.timestamp, valid: true});
         emit TrainerCertified(msg.sender, assetTypeHash);
     }
 
@@ -51,14 +47,10 @@ contract LocalMaintenanceTrainingRegistry {
      */
     function certifyLocalOperator(address localOperator, bytes32 assetTypeHash) external onlyOperator {
         require(certifications[msg.sender][assetTypeHash].valid, "Not a valid trainer for this asset");
-        
-        certifications[localOperator][assetTypeHash] = Certification({
-            assetTypeHash: assetTypeHash,
-            trainer: msg.sender,
-            issuedAt: block.timestamp,
-            valid: true
-        });
-        
+
+        certifications[localOperator][assetTypeHash] =
+            Certification({assetTypeHash: assetTypeHash, trainer: msg.sender, issuedAt: block.timestamp, valid: true});
+
         emit OperatorCertified(localOperator, assetTypeHash, msg.sender);
     }
 

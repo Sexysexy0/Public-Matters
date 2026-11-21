@@ -19,7 +19,7 @@ contract AuthenticityOracleTest is Test {
     function setUp() public {
         privileges = new OperatorPrivileges();
         privileges.addOperator(op);
-        
+
         oracle = new AuthenticityOracle(address(privileges));
     }
 

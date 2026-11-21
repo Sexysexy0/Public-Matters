@@ -41,10 +41,7 @@ contract EnvironmentalBondEscrowV2 is ReentrancyGuard {
         require(msg.value > 0, "Bond must be > 0");
         require(bonds[permitId].company == address(0), "Bond already exists");
 
-        bonds[permitId] = Bond({
-            amount: msg.value,
-            company: msg.sender
-        });
+        bonds[permitId] = Bond({amount: msg.value, company: msg.sender});
 
         emit BondDeposited(permitId, msg.sender, msg.value);
     }
@@ -70,7 +67,7 @@ contract EnvironmentalBondEscrowV2 is ReentrancyGuard {
         b.amount = 0;
 
         // communityFund ay immutable at trusted (multisig), push-based ok
-        (bool success, ) = payable(communityFund).call{value: amount}("");
+        (bool success,) = payable(communityFund).call{value: amount}("");
         require(success, "Forfeit failed");
 
         emit BondForfeited(permitId, communityFund, amount);
@@ -81,7 +78,7 @@ contract EnvironmentalBondEscrowV2 is ReentrancyGuard {
         require(amount > 0, "No funds to withdraw");
 
         pendingWithdrawals[msg.sender] = 0; // CEI: state bago call
-        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        (bool success,) = payable(msg.sender).call{value: amount}("");
         require(success, "Transfer failed");
 
         emit Withdrawal(msg.sender, amount);

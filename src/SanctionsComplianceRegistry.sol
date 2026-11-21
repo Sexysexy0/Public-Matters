@@ -11,9 +11,9 @@ contract SanctionsComplianceRegistry {
     OperatorPrivileges public immutable privileges;
 
     struct FlaggedAddress {
-        bytes32 addressHash;    // keccak256(address) for privacy on-chain
-        bytes32 reasonHash;     // e.g., "OFAC-SDN", "FinCEN-2026-MEXC"
-        address flaggedBy;      // The operator who flagged it
+        bytes32 addressHash; // keccak256(address) for privacy on-chain
+        bytes32 reasonHash; // e.g., "OFAC-SDN", "FinCEN-2026-MEXC"
+        address flaggedBy; // The operator who flagged it
         uint256 flaggedAt;
         bool isActive;
     }

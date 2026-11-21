@@ -8,7 +8,7 @@ contract HardwareAllocationRegistry {
 
     struct Batch {
         bytes32 batchId;
-        bytes32 itemHash;       // e.g., "Switch Cartridge 32GB"
+        bytes32 itemHash; // e.g., "Switch Cartridge 32GB"
         uint256 manufacturedQty;
         uint256 distributedQty;
         bytes32 regionHash;

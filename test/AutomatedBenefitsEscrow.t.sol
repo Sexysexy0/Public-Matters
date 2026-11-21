@@ -7,10 +7,10 @@ import "../src/AutomatedBenefitsEscrow.sol";
 contract AutomatedBenefitsEscrowTest is Test {
     OperatorPrivileges privileges;
     AutomatedBenefitsEscrow escrow;
-    
+
     address op = vm.addr(1); // Could be HR or Verified Hospital
     address memberWallet = vm.addr(2);
-    
+
     bytes32 constant MEMBER = keccak256("SSS-EMERVIN");
     bytes32 constant HOSPITAL = keccak256("PGH-Manila");
     bytes32 constant DIAGNOSIS = keccak256("Cancer-Stage-2-IPFS");

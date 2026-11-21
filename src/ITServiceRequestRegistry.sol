@@ -5,8 +5,16 @@ import "./OperatorPrivileges.sol";
 contract ITServiceRequestRegistry {
     OperatorPrivileges public immutable privileges;
 
-    enum TicketType { INCIDENT, SERVICE_REQUEST }
-    enum TicketStatus { OPEN, IN_PROGRESS, RESOLVED, CLOSED }
+    enum TicketType {
+        INCIDENT,
+        SERVICE_REQUEST
+    }
+    enum TicketStatus {
+        OPEN,
+        IN_PROGRESS,
+        RESOLVED,
+        CLOSED
+    }
 
     struct Ticket {
         bytes32 id;

@@ -6,13 +6,22 @@ import {ReputationTimelockGovernor} from "../contracts/ReputationTimelockGoverno
 
 contract MockOperatorPrivileges {
     mapping(address => bool) public ops;
-    function setOperator(address a, bool v) external { ops[a] = v; }
-    function isOperator(address a) external view returns (bool) { return ops[a]; }
+
+    function setOperator(address a, bool v) external {
+        ops[a] = v;
+    }
+
+    function isOperator(address a) external view returns (bool) {
+        return ops[a];
+    }
 }
 
 contract MockTarget {
     uint256 public lastValue;
-    function receiveValue(uint256 v) external payable { lastValue = v; }
+
+    function receiveValue(uint256 v) external payable {
+        lastValue = v;
+    }
 }
 
 contract ReputationTimelockGovernorTest is Test {
@@ -41,7 +50,9 @@ contract ReputationTimelockGovernorTest is Test {
 
     function test_ProposeVoteQueueExecute() public {
         vm.prank(operator1);
-        uint256 pid = governor.propose(address(target), 0, abi.encodeWithSelector(target.receiveValue.selector, 1 ether), "Fund target");
+        uint256 pid = governor.propose(
+            address(target), 0, abi.encodeWithSelector(target.receiveValue.selector, 1 ether), "Fund target"
+        );
         vm.prank(operator1);
         governor.vote(pid, true);
         vm.prank(operator2);
@@ -93,7 +104,7 @@ contract ReputationTimelockGovernorTest is Test {
         uint256 pid = governor.propose(address(target), 0, "", "Test");
         vm.prank(operator1);
         governor.cancel(pid);
-        (, , , , , , , ReputationTimelockGovernor.ProposalState state) = governor.proposals(pid);
+        (,,,,,,, ReputationTimelockGovernor.ProposalState state) = governor.proposals(pid);
         assertEq(uint256(state), 3); // Cancelled
     }
 }

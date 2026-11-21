@@ -22,7 +22,7 @@ contract GameplayMechanicsTest is Test {
     function setUp() public {
         privileges = new OperatorPrivileges();
         privileges.addOperator(op);
-        
+
         court = new RoyalCourtRegistry(address(privileges));
         marriage = new MarriageRegistry(address(privileges));
         qa = new GameplayQAOracle(address(privileges));
@@ -30,38 +30,38 @@ contract GameplayMechanicsTest is Test {
 
     function testDispatchMissionFromThrone() public {
         bytes32 petitionId = court.filePetition(keccak256("noble"), keccak256("Clear bandits"));
-        
+
         vm.prank(op);
         court.dispatchMission(petitionId, keccak256("damiane"));
 
         RoyalCourtRegistry.Petition memory p = court.getPetition(petitionId);
-        assertEq(uint(p.status), uint(RoyalCourtRegistry.MissionStatus.DISPATCHED));
+        assertEq(uint256(p.status), uint256(RoyalCourtRegistry.MissionStatus.DISPATCHED));
     }
 
     function testMarryDamianeAndCrownQueen() public {
         bytes32 marriageId = marriage.proposeMarriage(keccak256("kliff"), keccak256("damiane"), bytes32(0));
-        
+
         vm.prank(op);
         marriage.acceptMarriage(marriageId);
-        
+
         vm.prank(op);
         marriage.crownAsQueen(marriageId);
 
         MarriageRegistry.Marriage memory m = marriage.getMarriage(marriageId);
         assertTrue(m.isQueen);
-        assertEq(uint(m.status), uint(MarriageRegistry.MarriageStatus.MARRIED));
+        assertEq(uint256(m.status), uint256(MarriageRegistry.MarriageStatus.MARRIED));
     }
 
     function testPlayerReportsBoatBug() public {
         bytes32 bugId = qa.reportBug(keccak256("player"), keccak256("Boat flips mid-battle"));
-        
+
         GameplayQAOracle.BugReport memory b = qa.getBug(bugId);
-        assertEq(uint(b.status), uint(GameplayQAOracle.BugStatus.OPEN));
-        
+        assertEq(uint256(b.status), uint256(GameplayQAOracle.BugStatus.OPEN));
+
         vm.prank(op);
         qa.updateBugStatus(bugId, GameplayQAOracle.BugStatus.PATCHING);
-        
+
         b = qa.getBug(bugId);
-        assertEq(uint(b.status), uint(GameplayQAOracle.BugStatus.PATCHING));
+        assertEq(uint256(b.status), uint256(GameplayQAOracle.BugStatus.PATCHING));
     }
 }

@@ -19,7 +19,7 @@ contract SocietalContributionRegistryTest is Test {
     function setUp() public {
         privileges = new OperatorPrivileges();
         privileges.addOperator(op);
-        
+
         civic = new CivicSovereigntyRegistry(address(privileges));
         contribution = new SocietalContributionRegistry(address(privileges), address(civic));
     }
@@ -27,7 +27,9 @@ contract SocietalContributionRegistryTest is Test {
     function testUnregisteredCitizenCannotEarnPoints() public {
         vm.prank(op);
         vm.expectRevert("Citizen not registered");
-        contribution.recordContribution(citizen, SocietalContributionRegistry.ContributionType.CAREGIVING, 10, "Raised a child");
+        contribution.recordContribution(
+            citizen, SocietalContributionRegistry.ContributionType.CAREGIVING, 10, "Raised a child"
+        );
     }
 
     function testRegisteredCitizenEarnsPoints() public {
@@ -35,10 +37,14 @@ contract SocietalContributionRegistryTest is Test {
         civic.registerCitizen(ID_HASH, REGION);
 
         vm.prank(op);
-        contribution.recordContribution(citizen, SocietalContributionRegistry.ContributionType.CAREGIVING, 10, "Raised a child");
-        
+        contribution.recordContribution(
+            citizen, SocietalContributionRegistry.ContributionType.CAREGIVING, 10, "Raised a child"
+        );
+
         vm.prank(op);
-        contribution.recordContribution(citizen, SocietalContributionRegistry.ContributionType.CIVIC_DUTY, 5, "Community cleanup");
+        contribution.recordContribution(
+            citizen, SocietalContributionRegistry.ContributionType.CIVIC_DUTY, 5, "Community cleanup"
+        );
 
         assertEq(contribution.getScore(citizen), 15);
         assertEq(contribution.contributionPoints(citizen, SocietalContributionRegistry.ContributionType.CAREGIVING), 10);

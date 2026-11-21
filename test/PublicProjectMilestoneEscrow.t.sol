@@ -6,8 +6,14 @@ import {PublicProjectMilestoneEscrow} from "../contracts/PublicProjectMilestoneE
 
 contract MockOperatorPrivileges {
     mapping(address => bool) public ops;
-    function setOperator(address a, bool v) external { ops[a] = v; }
-    function isOperator(address a) external view returns (bool) { return ops[a]; }
+
+    function setOperator(address a, bool v) external {
+        ops[a] = v;
+    }
+
+    function isOperator(address a) external view returns (bool) {
+        return ops[a];
+    }
 }
 
 contract PublicProjectMilestoneEscrowTest is Test {
@@ -27,7 +33,7 @@ contract PublicProjectMilestoneEscrowTest is Test {
         vm.prank(donor);
         uint256 pid = escrow.createProject{value: 1 ether}();
         assertEq(pid, 0);
-        (address d, uint256 funded,, , ) = escrow.projects(pid);
+        (address d, uint256 funded,,,) = escrow.projects(pid);
         assertEq(d, donor);
         assertEq(funded, 1 ether);
     }
@@ -42,7 +48,7 @@ contract PublicProjectMilestoneEscrowTest is Test {
         escrow.submitProof(pid, 0, proof);
         vm.prank(operator);
         escrow.verifyAndRelease(pid, 0);
-        (, , uint256 released, , ) = escrow.projects(pid);
+        (,, uint256 released,,) = escrow.projects(pid);
         assertEq(released, 0.5 ether);
         assertEq(escrow.pendingWithdrawals(donor), 0.5 ether);
     }

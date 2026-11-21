@@ -9,13 +9,17 @@ import "./OperatorPrivileges.sol";
 contract AIVetoPowerRegistry {
     OperatorPrivileges public immutable privileges;
 
-    enum ActionStatus { PROPOSED, EXECUTED, VETOED }
+    enum ActionStatus {
+        PROPOSED,
+        EXECUTED,
+        VETOED
+    }
 
     struct VetoableAction {
         bytes32 actionId;
         address aiAgent;
         address target;
-        uint256 amount;         // 0 if non-financial (e.g., firing)
+        uint256 amount; // 0 if non-financial (e.g., firing)
         bytes32 reasonHash;
         ActionStatus status;
         address humanApprover;
@@ -44,13 +48,10 @@ contract AIVetoPowerRegistry {
     /**
      * @notice AI proposes an action. It does not execute it.
      */
-    function proposeAction(
-        bytes32 actionId,
-        address aiAgent,
-        address target,
-        uint256 amount,
-        bytes32 reasonHash
-    ) external onlyOperator {
+    function proposeAction(bytes32 actionId, address aiAgent, address target, uint256 amount, bytes32 reasonHash)
+        external
+        onlyOperator
+    {
         require(actions[actionId].proposedAt == 0, "Action exists");
 
         actions[actionId] = VetoableAction({

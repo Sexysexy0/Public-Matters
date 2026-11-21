@@ -15,7 +15,7 @@ contract AuthenticityOracle {
         address creator;
         bytes32 metadataHash; // IPFS hash or metadata
         uint256 timestamp;
-        bool verified;        // Operator verified (e.g., audited or physically verified)
+        bool verified; // Operator verified (e.g., audited or physically verified)
     }
 
     mapping(bytes32 => Work) public works;
@@ -42,12 +42,8 @@ contract AuthenticityOracle {
         require(contentHash != bytes32(0), "contentHash=0");
         require(works[contentHash].creator == address(0), "Work already registered");
 
-        works[contentHash] = Work({
-            creator: msg.sender,
-            metadataHash: metadataHash,
-            timestamp: block.timestamp,
-            verified: false
-        });
+        works[contentHash] =
+            Work({creator: msg.sender, metadataHash: metadataHash, timestamp: block.timestamp, verified: false});
 
         emit WorkRegistered(contentHash, msg.sender, metadataHash);
     }

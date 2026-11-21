@@ -26,18 +26,8 @@ contract ITServiceRequestRegistryTest is Test {
         vm.prank(op);
         registry.resolveTicket(ticketId, keccak256("Restarted Server"));
 
-        (
-            bytes32 _id,
-            ITServiceRequestRegistry.TicketType _tType,
-            ITServiceRequestRegistry.TicketStatus status,
-            address _requester,
-            address _assignedTo,
-            bytes32 _detailsHash,
-            bytes32 _resolutionHash,
-            uint256 _createdAt,
-            uint256 resolvedAt
-        ) = registry.tickets(ticketId);
-        assertEq(uint(status), uint(ITServiceRequestRegistry.TicketStatus.RESOLVED));
+        (,, ITServiceRequestRegistry.TicketStatus status,,,,,, uint256 resolvedAt) = registry.tickets(ticketId);
+        assertEq(uint256(status), uint256(ITServiceRequestRegistry.TicketStatus.RESOLVED));
         assertGt(resolvedAt, 0);
     }
 }

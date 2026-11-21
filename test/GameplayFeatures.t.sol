@@ -20,7 +20,7 @@ contract GameplayFeaturesTest is Test {
     function setUp() public {
         privileges = new OperatorPrivileges();
         privileges.addOperator(op);
-        
+
         autopilot = new ShipAutoPilotRegistry(address(privileges));
         barber = new BarberRegistry(address(privileges));
     }
@@ -28,7 +28,7 @@ contract GameplayFeaturesTest is Test {
     function testEngageAutoPilot() public {
         vm.prank(op);
         autopilot.setDestination(SHIP, DESTINATION);
-        
+
         ShipAutoPilotRegistry.AutoPilot memory ap = autopilot.getAutoPilot(SHIP);
         assertTrue(ap.isEngaged);
         assertEq(ap.destinationHash, DESTINATION);
@@ -39,7 +39,7 @@ contract GameplayFeaturesTest is Test {
         autopilot.setDestination(SHIP, DESTINATION);
         autopilot.disengageAutoPilot(SHIP);
         vm.stopPrank();
-        
+
         ShipAutoPilotRegistry.AutoPilot memory ap = autopilot.getAutoPilot(SHIP);
         assertFalse(ap.isEngaged);
     }
@@ -49,7 +49,7 @@ contract GameplayFeaturesTest is Test {
         barber.addHairStyle(STYLE, 50 ether);
         barber.applyHaircut(CHAR, STYLE);
         vm.stopPrank();
-        
+
         assertEq(barber.currentStyle(CHAR), STYLE);
     }
 }

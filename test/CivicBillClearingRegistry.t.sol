@@ -29,7 +29,7 @@ contract CivicBillClearingRegistryTest is Test {
         registry.registerBill(beneficiary, amount, billType);
 
         (uint256 id, address ben, uint256 amt, string memory bType, bool cleared, address clrBy) = registry.bills(1);
-        
+
         assertEq(id, 1);
         assertEq(ben, beneficiary);
         assertEq(amt, amount);
@@ -52,7 +52,7 @@ contract CivicBillClearingRegistryTest is Test {
 
         registry.clearBill{value: amount}(1);
 
-        (,,, , bool cleared, address clrBy) = registry.bills(1);
+        (,,,, bool cleared, address clrBy) = registry.bills(1);
         assertTrue(cleared);
         assertEq(clrBy, donor);
         assertEq(beneficiary.balance, beneficiaryBalanceBefore + amount);

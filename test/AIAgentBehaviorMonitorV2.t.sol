@@ -56,7 +56,7 @@ contract AIAgentBehaviorMonitorV2Test is Test {
     function testDormancy() public {
         vm.prank(op);
         monitor.registerAgent(agent, 3);
-        
+
         vm.warp(block.timestamp + 8 days); // Pass 7 day threshold
         assertTrue(monitor.checkDormancy(agent));
     }

@@ -40,7 +40,8 @@ contract MilestoneMaintenanceEscrowV2Test is Test {
         vm.prank(donor);
         escrow.depositFunds{value: 1 ether}(projectId, localOperator);
 
-        (uint256 balance, uint256 lastMaintenanceProof, bool isBroken, address donor_, address operator_) = escrow.escrows(projectId);
+        (uint256 balance, uint256 lastMaintenanceProof, bool isBroken, address donor_, address operator_) =
+            escrow.escrows(projectId);
         assertEq(balance, 1 ether);
         assertEq(donor_, donor);
         assertEq(operator_, localOperator);

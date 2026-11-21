@@ -88,7 +88,7 @@ contract ImpactBondEscrowV2 is ReentrancyGuard {
         require(amount > 0, "No funds to withdraw");
 
         pendingWithdrawals[msg.sender] = 0; // CEI: state bago call
-        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        (bool success,) = payable(msg.sender).call{value: amount}("");
         require(success, "Transfer failed");
 
         emit Withdrawal(msg.sender, amount);

@@ -8,14 +8,17 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract MockNFT is ERC721 {
     constructor() ERC721("Mock", "MOCK") {}
-    function mint(address to, uint256 tokenId) external { _mint(to, tokenId); }
+
+    function mint(address to, uint256 tokenId) external {
+        _mint(to, tokenId);
+    }
 }
 
 contract LicenseRegistryTest is Test {
     OperatorPrivileges privileges;
     LicenseRegistry registry;
     MockNFT nft;
-    
+
     address creator = vm.addr(1);
     address holder1 = vm.addr(2);
     address holder2 = vm.addr(3);
@@ -24,10 +27,10 @@ contract LicenseRegistryTest is Test {
     function setUp() public {
         privileges = new OperatorPrivileges();
         nft = new MockNFT();
-        
+
         vm.prank(creator);
         registry = new LicenseRegistry(address(privileges), address(nft), INITIAL_HASH);
-        
+
         nft.mint(holder1, 1);
         nft.mint(holder2, 2);
     }
@@ -46,7 +49,7 @@ contract LicenseRegistryTest is Test {
 
     function testAmendmentFlow() public {
         bytes32 newHash = keccak256("License V2");
-        
+
         // 1. Creator proposes
         vm.prank(creator);
         registry.proposeAmendment(newHash);
@@ -61,20 +64,20 @@ contract LicenseRegistryTest is Test {
         // Wait, 1 for, 1 against -> tie. Let's make holder 2 vote yes.
         // Re-run: change vote
     }
-    
+
     function testAmendmentExecuteMajority() public {
         bytes32 newHash = keccak256("License V2");
-        
+
         vm.prank(creator);
         registry.proposeAmendment(newHash);
 
         vm.prank(holder1);
-        registry.voteOnAmendment(1, 1, true); 
+        registry.voteOnAmendment(1, 1, true);
         vm.prank(holder2);
         registry.voteOnAmendment(1, 2, true); // Both vote yes
 
         registry.executeAmendment(1);
-        
+
         assertEq(registry.currentLicenseHash(), newHash);
     }
 }

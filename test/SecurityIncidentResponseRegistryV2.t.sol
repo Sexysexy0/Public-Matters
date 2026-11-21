@@ -24,7 +24,7 @@ contract SecurityIncidentResponseRegistryV2Test is Test {
         vm.prank(op);
         registry.updateStatus(id, SecurityIncidentResponseRegistryV2.IncidentStatus.RESOLVED);
 
-        (,,, SecurityIncidentResponseRegistryV2.IncidentStatus status,,, ) = registry.incidents(id);
+        (,,, SecurityIncidentResponseRegistryV2.IncidentStatus status,,,) = registry.incidents(id);
         assertEq(uint8(status), uint8(SecurityIncidentResponseRegistryV2.IncidentStatus.RESOLVED));
     }
 }

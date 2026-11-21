@@ -5,7 +5,7 @@ import "./OperatorPrivileges.sol";
 
 /**
  * @title AIAgentBehaviorMonitorV2
- * @notice Tracks agent activity and violations. Freezes agents that 
+ * @notice Tracks agent activity and violations. Freezes agents that
  *         repeatedly break rules, and flags agents that go dormant.
  */
 contract AIAgentBehaviorMonitorV2 {
@@ -14,7 +14,7 @@ contract AIAgentBehaviorMonitorV2 {
     struct Behavior {
         uint256 lastActionAt;
         uint256 violationCount;
-        uint256 maxViolations;     // Threshold before freeze
+        uint256 maxViolations; // Threshold before freeze
         bool frozen;
         bool registered;
     }
@@ -57,7 +57,7 @@ contract AIAgentBehaviorMonitorV2 {
         Behavior storage b = behaviors[agent];
         require(b.registered, "Not registered");
         require(!b.frozen, "Agent is frozen");
-        
+
         b.lastActionAt = block.timestamp;
         emit ActionRecorded(agent);
     }
@@ -66,7 +66,7 @@ contract AIAgentBehaviorMonitorV2 {
     function recordViolation(address agent, string calldata reason) external onlyOperator {
         Behavior storage b = behaviors[agent];
         require(b.registered, "Not registered");
-        
+
         b.violationCount++;
         emit ViolationRecorded(agent, reason, b.violationCount);
 

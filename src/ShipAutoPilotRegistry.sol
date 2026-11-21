@@ -4,16 +4,16 @@ import "./OperatorPrivileges.sol";
 
 contract ShipAutoPilotRegistry {
     OperatorPrivileges public immutable privileges;
-    
+
     struct AutoPilot {
         bytes32 shipId;
         bytes32 destinationHash;
         bool isEngaged;
         uint256 updatedAt;
     }
-    
+
     mapping(bytes32 => AutoPilot) public pilots;
-    
+
     event AutoPilotEngaged(bytes32 indexed shipId, bytes32 indexed destinationHash);
     event AutoPilotDisengaged(bytes32 indexed shipId);
 
@@ -28,12 +28,8 @@ contract ShipAutoPilotRegistry {
     }
 
     function setDestination(bytes32 shipId, bytes32 destinationHash) external onlyOperator {
-        pilots[shipId] = AutoPilot({
-            shipId: shipId,
-            destinationHash: destinationHash,
-            isEngaged: true,
-            updatedAt: block.timestamp
-        });
+        pilots[shipId] =
+            AutoPilot({shipId: shipId, destinationHash: destinationHash, isEngaged: true, updatedAt: block.timestamp});
         emit AutoPilotEngaged(shipId, destinationHash);
     }
 

@@ -4,7 +4,7 @@ import "./OperatorPrivileges.sol";
 
 contract AidProjectRegistry {
     OperatorPrivileges public immutable privileges;
-    
+
     struct Project {
         bytes32 id;
         bytes32 donorHash;
@@ -14,9 +14,9 @@ contract AidProjectRegistry {
         uint256 totalAid;
         bool active;
     }
-    
+
     mapping(bytes32 => Project) public projects;
-    
+
     event ProjectCreated(bytes32 indexed id, bytes32 indexed assetHash, address localOperator, uint256 totalAid);
     event ProjectClosed(bytes32 indexed id);
 

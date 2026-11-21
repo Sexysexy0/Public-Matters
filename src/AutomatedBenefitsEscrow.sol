@@ -11,15 +11,15 @@ contract AutomatedBenefitsEscrow {
     OperatorPrivileges public immutable privileges;
 
     struct Member {
-        bytes32 memberHash;      // Hashed SSS/Employee ID
+        bytes32 memberHash; // Hashed SSS/Employee ID
         uint256 totalContributed;
         bool isActive;
     }
 
     struct MedicalClaim {
         bytes32 memberHash;
-        bytes32 hospitalHash;    // Verified hospital/clinic
-        bytes32 diagnosisHash;   // IPFS hash of medical certificate
+        bytes32 hospitalHash; // Verified hospital/clinic
+        bytes32 diagnosisHash; // IPFS hash of medical certificate
         uint256 requestedAmount;
         bool released;
     }
@@ -49,11 +49,7 @@ contract AutomatedBenefitsEscrow {
         require(amount > 0, "No amount");
 
         if (!members[memberHash].isActive) {
-            members[memberHash] = Member({
-                memberHash: memberHash,
-                totalContributed: 0,
-                isActive: true
-            });
+            members[memberHash] = Member({memberHash: memberHash, totalContributed: 0, isActive: true});
         }
 
         members[memberHash].totalContributed += amount;
@@ -63,7 +59,13 @@ contract AutomatedBenefitsEscrow {
     /**
      * @notice Member files a claim. No SSS personnel needed to "receive" paperwork.
      */
-    function fileClaim(bytes32 claimId, bytes32 memberHash, bytes32 hospitalHash, bytes32 diagnosisHash, uint256 requestedAmount) external {
+    function fileClaim(
+        bytes32 claimId,
+        bytes32 memberHash,
+        bytes32 hospitalHash,
+        bytes32 diagnosisHash,
+        uint256 requestedAmount
+    ) external {
         require(members[memberHash].isActive, "Member not active");
         require(!claims[claimId].released, "Claim already released");
 
@@ -86,17 +88,34 @@ contract AutomatedBenefitsEscrow {
         return claims[claimId];
     }
 
-    function verifyAndRelease(bytes32 claimId, address payable memberWallet) external onlyOperator {
+    mapping(address => uint256) public pendingWithdrawals;
+    bool private locked;
+
+    modifier nonReentrant() {
+        require(!locked, "Reentrant call");
+        locked = true;
+        _;
+        locked = false;
+    }
+
+    function verifyAndRelease(bytes32 claimId, address memberWallet) external onlyOperator {
         MedicalClaim storage c = claims[claimId];
         require(!c.released, "Already released");
         require(c.requestedAmount > 0, "No claim amount");
         require(address(this).balance >= c.requestedAmount, "Insufficient escrow funds");
 
         c.released = true;
-
-        (bool success, ) = memberWallet.call{value: c.requestedAmount}("");
-        require(success, "Transfer failed");
+        pendingWithdrawals[memberWallet] += c.requestedAmount;
 
         emit BenefitsReleased(claimId, c.memberHash, c.requestedAmount);
+    }
+
+    function withdraw() external nonReentrant {
+        uint256 amount = pendingWithdrawals[msg.sender];
+        require(amount > 0, "Nothing to withdraw");
+        pendingWithdrawals[msg.sender] = 0;
+        // forge-lint: disable-next-line(reentrancy-eth)
+        (bool ok,) = msg.sender.call{value: amount}("");
+        require(ok, "Transfer failed");
     }
 }

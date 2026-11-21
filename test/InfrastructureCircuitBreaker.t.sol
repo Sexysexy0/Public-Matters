@@ -7,7 +7,7 @@ import "../contracts/InfrastructureCircuitBreaker.sol";
 contract InfrastructureCircuitBreakerTest is Test {
     OperatorPrivileges privileges;
     InfrastructureCircuitBreaker breaker;
-    
+
     address op = vm.addr(1);
     address stranger = vm.addr(2);
     bytes32 constant NODE_ID = keccak256("Node-Manila-01");

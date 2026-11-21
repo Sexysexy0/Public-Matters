@@ -4,16 +4,16 @@ import "./OperatorPrivileges.sol";
 
 contract BarberRegistry {
     OperatorPrivileges public immutable privileges;
-    
+
     struct HairStyle {
         bytes32 styleHash;
         uint256 price;
         bool available;
     }
-    
+
     mapping(bytes32 => HairStyle) public styles;
     mapping(bytes32 => bytes32) public currentStyle; // characterId => styleHash
-    
+
     event HairStyleAdded(bytes32 indexed styleHash, uint256 price);
     event HaircutApplied(bytes32 indexed characterId, bytes32 indexed styleHash);
 
@@ -29,11 +29,7 @@ contract BarberRegistry {
 
     function addHairStyle(bytes32 styleHash, uint256 price) external onlyOperator {
         require(!styles[styleHash].available, "Style exists");
-        styles[styleHash] = HairStyle({
-            styleHash: styleHash,
-            price: price,
-            available: true
-        });
+        styles[styleHash] = HairStyle({styleHash: styleHash, price: price, available: true});
         emit HairStyleAdded(styleHash, price);
     }
 

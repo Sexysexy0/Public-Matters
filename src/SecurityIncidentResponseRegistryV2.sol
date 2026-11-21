@@ -6,7 +6,12 @@ import "./OperatorPrivileges.sol";
 contract SecurityIncidentResponseRegistryV2 {
     OperatorPrivileges public immutable privileges;
 
-    enum IncidentStatus { REPORTED, INVESTIGATING, CONTAINED, RESOLVED }
+    enum IncidentStatus {
+        REPORTED,
+        INVESTIGATING,
+        CONTAINED,
+        RESOLVED
+    }
 
     struct Incident {
         bytes32 id;
@@ -52,7 +57,7 @@ contract SecurityIncidentResponseRegistryV2 {
         Incident storage inc = incidents[id];
         require(inc.reportedAt != 0, "Incident not found");
         require(inc.status != IncidentStatus.RESOLVED, "Incident already resolved");
-        
+
         inc.status = newStatus;
         if (newStatus == IncidentStatus.RESOLVED) {
             inc.resolvedAt = block.timestamp;

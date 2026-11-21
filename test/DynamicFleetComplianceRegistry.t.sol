@@ -27,7 +27,7 @@ contract DynamicFleetComplianceRegistryTest is Test {
 
         vm.prank(op);
         registry.verifyRider(PLATFORM, rider);
-        
+
         (,,, uint256 verified,,) = registry.platforms(PLATFORM);
         assertEq(verified, 1);
     }
@@ -39,7 +39,7 @@ contract DynamicFleetComplianceRegistryTest is Test {
             vm.prank(op);
             registry.verifyRider(PLATFORM, r);
         }
-        
+
         uint256 expandedCap = registry.getEffectiveCap(PLATFORM);
         // Base 17,000 + (10,000 / 10,000) * 50,000 = 67,000
         assertEq(expandedCap, 67000);

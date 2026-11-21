@@ -5,19 +5,24 @@ import "./OperatorPrivileges.sol";
 
 /**
  * @title RoyalCourtRegistry
- * @notice On-chain record of petitions from nobles/peasants and 
+ * @notice On-chain record of petitions from nobles/peasants and
  *         dispatch missions assigned from the Throne Room.
  */
 contract RoyalCourtRegistry {
     OperatorPrivileges public immutable privileges;
 
-    enum MissionStatus { PENDING, DISPATCHED, COMPLETED, FAILED }
+    enum MissionStatus {
+        PENDING,
+        DISPATCHED,
+        COMPLETED,
+        FAILED
+    }
 
     struct Petition {
         bytes32 id;
         bytes32 requesterHash; // Noble, vendor, or peasant
-        bytes32 requestHash;   // The actual issue or mission details
-        bytes32 assignedHero;  // e.g., Kliff or Damiane
+        bytes32 requestHash; // The actual issue or mission details
+        bytes32 assignedHero; // e.g., Kliff or Damiane
         MissionStatus status;
         uint256 timestamp;
     }

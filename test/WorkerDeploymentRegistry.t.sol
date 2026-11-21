@@ -35,7 +35,7 @@ contract WorkerDeploymentRegistryTest is Test {
         vm.stopPrank();
 
         // Still exists on-chain
-        (,,, , WorkerDeploymentRegistry.WorkerStatus status,) = registry.workers(W1);
+        (,,,, WorkerDeploymentRegistry.WorkerStatus status,) = registry.workers(W1);
         assertEq(uint8(status), uint8(WorkerDeploymentRegistry.WorkerStatus.UNASSIGNED));
         assertEq(registry.activeWorkerCount(F1), 0);
     }

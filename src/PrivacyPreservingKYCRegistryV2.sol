@@ -10,8 +10,18 @@ import "./OperatorPrivileges.sol";
 contract PrivacyPreservingKYCRegistryV2 {
     OperatorPrivileges public immutable privileges;
 
-    enum Status { None, Pending, Cleared, Flagged, Revoked }
-    enum AppealState { None, Open, Resolved }
+    enum Status {
+        None,
+        Pending,
+        Cleared,
+        Flagged,
+        Revoked
+    }
+    enum AppealState {
+        None,
+        Open,
+        Resolved
+    }
 
     struct Attestation {
         bytes32 subjectHash;
@@ -50,10 +60,7 @@ contract PrivacyPreservingKYCRegistryV2 {
     );
 
     event AppealOpened(
-        uint256 indexed appealId,
-        bytes32 indexed subjectHash,
-        address indexed appellant,
-        uint256 openedAt
+        uint256 indexed appealId, bytes32 indexed subjectHash, address indexed appellant, uint256 openedAt
     );
 
     event AppealResolved(
@@ -75,12 +82,10 @@ contract PrivacyPreservingKYCRegistryV2 {
         privileges = OperatorPrivileges(_privileges);
     }
 
-    function recordAttestation(
-        bytes32 _subjectHash,
-        bytes32 _zkProofHash,
-        Status _status,
-        bytes32 _reasonHash
-    ) external onlyOperator {
+    function recordAttestation(bytes32 _subjectHash, bytes32 _zkProofHash, Status _status, bytes32 _reasonHash)
+        external
+        onlyOperator
+    {
         require(_subjectHash != bytes32(0), "Invalid subject hash");
         require(_status != Status.None, "Invalid status");
 
@@ -99,15 +104,7 @@ contract PrivacyPreservingKYCRegistryV2 {
 
         uint256 version = attestationHistory[_subjectHash].length;
 
-        emit AttestationRecorded(
-            _subjectHash,
-            version,
-            _status,
-            _zkProofHash,
-            _reasonHash,
-            msg.sender,
-            block.timestamp
-        );
+        emit AttestationRecorded(_subjectHash, version, _status, _zkProofHash, _reasonHash, msg.sender, block.timestamp);
     }
 
     function appeal(bytes32 _subjectHash) external {
@@ -132,11 +129,7 @@ contract PrivacyPreservingKYCRegistryV2 {
         emit AppealOpened(appealId, _subjectHash, msg.sender, block.timestamp);
     }
 
-    function resolveAppeal(
-        uint256 _appealId,
-        Status _newStatus,
-        bytes32 _resolutionReasonHash
-    ) external onlyOperator {
+    function resolveAppeal(uint256 _appealId, Status _newStatus, bytes32 _resolutionReasonHash) external onlyOperator {
         require(_newStatus != Status.None, "Invalid status");
 
         Appeal storage appealRecord = appeals[_appealId];
@@ -150,19 +143,11 @@ contract PrivacyPreservingKYCRegistryV2 {
         openAppealId[appealRecord.subjectHash] = 0;
 
         emit AppealResolved(
-            _appealId,
-            appealRecord.subjectHash,
-            _newStatus,
-            _resolutionReasonHash,
-            msg.sender,
-            block.timestamp
+            _appealId, appealRecord.subjectHash, _newStatus, _resolutionReasonHash, msg.sender, block.timestamp
         );
     }
 
-    function getAttestationVersion(
-        bytes32 _subjectHash,
-        uint256 _version
-    ) external view returns (Attestation memory) {
+    function getAttestationVersion(bytes32 _subjectHash, uint256 _version) external view returns (Attestation memory) {
         require(_version >= 1, "Invalid version");
         require(_version <= attestationHistory[_subjectHash].length, "Version not found");
         return attestationHistory[_subjectHash][_version - 1];

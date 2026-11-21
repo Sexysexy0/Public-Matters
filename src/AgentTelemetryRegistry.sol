@@ -9,7 +9,7 @@ contract AgentTelemetryRegistry {
     struct TelemetryRecord {
         uint256 id;
         bytes32 agentHash;
-        string  status;
+        string status;
         bytes32 metricsHash;
         uint256 timestamp;
         address recordedBy;
@@ -20,11 +20,7 @@ contract AgentTelemetryRegistry {
     uint256 public totalRecords;
 
     event TelemetryRecorded(
-        uint256 indexed id,
-        bytes32 indexed agentHash,
-        string status,
-        bytes32 metricsHash,
-        address recordedBy
+        uint256 indexed id, bytes32 indexed agentHash, string status, bytes32 metricsHash, address recordedBy
     );
 
     modifier onlyOperator() {
@@ -37,11 +33,11 @@ contract AgentTelemetryRegistry {
         privileges = OperatorPrivileges(_privileges);
     }
 
-    function recordTelemetry(
-        bytes32 agentHash,
-        string calldata status,
-        bytes32 metricsHash
-    ) external onlyOperator returns (uint256) {
+    function recordTelemetry(bytes32 agentHash, string calldata status, bytes32 metricsHash)
+        external
+        onlyOperator
+        returns (uint256)
+    {
         require(agentHash != bytes32(0), "agentHash=0");
 
         totalRecords++;

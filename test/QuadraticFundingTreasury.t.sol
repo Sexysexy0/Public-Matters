@@ -6,8 +6,14 @@ import {QuadraticFundingTreasury} from "../contracts/QuadraticFundingTreasury.so
 
 contract MockOperatorPrivileges {
     mapping(address => bool) public ops;
-    function setOperator(address a, bool v) external { ops[a] = v; }
-    function isOperator(address a) external view returns (bool) { return ops[a]; }
+
+    function setOperator(address a, bool v) external {
+        ops[a] = v;
+    }
+
+    function isOperator(address a) external view returns (bool) {
+        return ops[a];
+    }
 }
 
 contract QuadraticFundingTreasuryTest is Test {
@@ -45,7 +51,7 @@ contract QuadraticFundingTreasuryTest is Test {
         vm.deal(contributor1, 1 ether);
         vm.prank(contributor1);
         treasury.contribute{value: 0.1 ether}(0, projectOwner);
-        (, , , uint256 totalContrib, ) = treasury.projects(0, projectOwner);
+        (,,, uint256 totalContrib,) = treasury.projects(0, projectOwner);
         assertEq(totalContrib, 0.1 ether);
     }
 

@@ -11,9 +11,9 @@ contract CivicSovereigntyRegistry {
     OperatorPrivileges public immutable privileges;
 
     struct Citizen {
-        bytes32 identityHash;   // keccak256(NationalID + salt) for privacy
-        bytes32 regionHash;     // Barangay/Municipality hash
-        uint256 civicScore;     // Starts at 100, goes up or down based on actions
+        bytes32 identityHash; // keccak256(NationalID + salt) for privacy
+        bytes32 regionHash; // Barangay/Municipality hash
+        uint256 civicScore; // Starts at 100, goes up or down based on actions
         bool isRegistered;
         uint256 registeredAt;
     }

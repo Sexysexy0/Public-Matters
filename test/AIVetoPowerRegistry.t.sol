@@ -19,7 +19,7 @@ contract AIVetoPowerRegistryTest is Test {
     function setUp() public {
         privileges = new OperatorPrivileges();
         privileges.addOperator(humanOp);
-        
+
         vetoRegistry = new AIVetoPowerRegistry(address(privileges));
     }
 
@@ -29,7 +29,7 @@ contract AIVetoPowerRegistryTest is Test {
 
         AIVetoPowerRegistry.VetoableAction memory a = vetoRegistry.getAction(ACTION_ID);
         assertEq(a.aiAgent, aiAgent);
-        assertEq(uint(a.status), uint(AIVetoPowerRegistry.ActionStatus.PROPOSED));
+        assertEq(uint256(a.status), uint256(AIVetoPowerRegistry.ActionStatus.PROPOSED));
     }
 
     function testHumanApprovesAction() public {
@@ -40,7 +40,7 @@ contract AIVetoPowerRegistryTest is Test {
         vetoRegistry.approveAndExecute(ACTION_ID);
 
         AIVetoPowerRegistry.VetoableAction memory a = vetoRegistry.getAction(ACTION_ID);
-        assertEq(uint(a.status), uint(AIVetoPowerRegistry.ActionStatus.EXECUTED));
+        assertEq(uint256(a.status), uint256(AIVetoPowerRegistry.ActionStatus.EXECUTED));
         assertEq(a.humanApprover, humanOp);
         assertEq(vetoRegistry.totalExecuted(), 1);
     }
@@ -53,7 +53,7 @@ contract AIVetoPowerRegistryTest is Test {
         vetoRegistry.vetoAction(ACTION_ID);
 
         AIVetoPowerRegistry.VetoableAction memory a = vetoRegistry.getAction(ACTION_ID);
-        assertEq(uint(a.status), uint(AIVetoPowerRegistry.ActionStatus.VETOED));
+        assertEq(uint256(a.status), uint256(AIVetoPowerRegistry.ActionStatus.VETOED));
         assertEq(vetoRegistry.totalVetoed(), 1);
     }
 
