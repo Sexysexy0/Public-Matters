@@ -752,3 +752,13 @@ Limitation:
 - Tests: 6 passed, 0 failed
 - Etherscan verification: Verified (GUID kruaj7gntwexpscxitf5tnhp2xfuj4yprinanltjiy6wugwebz)
 - Sourcify job: e76eb414-1eb9-4a3f-808d-b43876a8e498
+## ExecutiveManagementRegistry
+- Network: Sepolia
+- Contract: 0xA8c01f7716C21E72a63eaf8ac49966DD36e7C807
+- Tx: 0xc36bd32db13cf47acd6a75d754922597c7b926590be3e4eea2ac7e0fe97536c4
+- Deployer: 0x6bDf6D887038AB97957c2f57d05eDd0eb338589A
+- Constructor binding: OperatorPrivilegesV2 at 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+- Tests: 6 passed, 0 failed
+- Commit: a734731e8
+- Etherscan verification: Verified (GUID dt4cyaeaqmeadnunhdqczig4aeemjwtqdhhdnerjmjhkrnkwwv)
+- Sourcify job: aab6ec86-a73c-40a8-80b1-8ea4e7f9f95e
