@@ -743,3 +743,12 @@ Limitation:
 - Commit: af065a8dd
 - Etherscan verification: Verified (GUID hhur6j8smtztuhz3fymzf6xkn32zij6jvwyan1mpd5tq5ewimt)
 - Sourcify job: 7b155e52-a641-496f-b133-20d207f3df5c
+## GTACharacterRegistry
+- Network: Sepolia
+- Contract: 0x4e0d9AC530043B86cB3e87D93da827aC62CDB184
+- Tx: 0x3d9b0748c6ebdf3531b2000a711ba50cdc89fa590590ea25994962d3692e0187
+- Deployer: 0x6bDf6D887038AB97957c2f57d05eDd0eb338589A
+- Constructor binding: OperatorPrivilegesV2 at 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98, Governance at 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+- Tests: 6 passed, 0 failed
+- Etherscan verification: Verified (GUID kruaj7gntwexpscxitf5tnhp2xfuj4yprinanltjiy6wugwebz)
+- Sourcify job: e76eb414-1eb9-4a3f-808d-b43876a8e498
