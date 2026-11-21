@@ -762,3 +762,14 @@ Limitation:
 - Commit: a734731e8
 - Etherscan verification: Verified (GUID dt4cyaeaqmeadnunhdqczig4aeemjwtqdhhdnerjmjhkrnkwwv)
 - Sourcify job: aab6ec86-a73c-40a8-80b1-8ea4e7f9f95e
+
+## ImpactRevenueSharePool
+- Network: Sepolia
+- Contract: 0x9135023cEcF5b59C816631Bc17036E172091EeC6
+- Tx: 0x35432ea15b8c553fd74202a4023a9e84deaf29cabc906ce3e669808d0907fcfc
+- Deployer: 0x6bDf6D887038AB97957c2f57d05eDd0eb338589A
+- Constructor binding: OperatorPrivilegesV2 at 0x1ec4a1fB4e8D297DE39b3995Bcbbd8c5e7fcEF98
+- Tests: 6 passed, 0 failed
+- Commit: e5a1ef808
+- Etherscan verification: Verified (GUID tncf7zni8xxfkcyvatyluwdkfvwwkrg9y5k3iwabtbbnvb352j)
+- Sourcify job: 5ee25ddd-acb3-47ed-a4b0-201d41fe4889
